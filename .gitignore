@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.DS_Store
+
+# Downloaded data and model files stay local
+data/
+*.gguf
+*.safetensors
+
+# Per-answer raw outputs can get large; summaries (results/*.json) are committed
+results/raw/

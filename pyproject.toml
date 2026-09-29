@@ -1,0 +1,34 @@
+[project]
+name = "edge-grader"
+version = "0.1.0"
+description = "Small LLMs grading student short answers on edge devices: baseline, RAG, fine-tuning"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "datasets>=3.0",
+    "openai>=1.40",
+    "pandas>=2.2",
+    "scikit-learn>=1.5",
+]
+
+[project.scripts]
+edge-grader-baseline = "edge_grader.baseline:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
+# Added when those stages start (uv add --group rag ... / --group finetune ...):
+#   rag:      sentence-transformers, numpy, pymupdf
+#   finetune: runs on Kaggle/Colab with Unsloth, not on this machine
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/edge_grader"]
+
+[tool.ruff]
+line-length = 100
