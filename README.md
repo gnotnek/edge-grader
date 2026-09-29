@@ -34,12 +34,24 @@ First time on Kaggle? Follow [`docs/kaggle-setup.md`](docs/kaggle-setup.md). Oth
 
 ### On a lab board (accuracy + latency + energy)
 
-On the Pi 5 or Jetson, with `agentic-edge` deployed and the board idle:
+The code sits next to `agentic-edge` on each board, using the same ssh aliases:
+
+| | Pi 5 (`MITLAB-EDGE`) | Jetson (`MITLAB-JETSON`) |
+|---|---|---|
+| repo | `~/Research/edge-grader` | `~/research/edge-grader` |
+
+Deploy from the Mac, as agentic-edge does. `deploy.sh` rsyncs the committed files, so the boards need no GitHub access. It also installs uv on first use, runs `uv sync` and the tests on the board, and records the commit in `DEPLOYED.json`:
 
 ```bash
-git clone git@github.com:gnotnek/edge-grader.git && cd edge-grader
-curl -LsSf https://astral.sh/uv/install.sh | sh     # once per board, if uv is missing
-uv sync
+scripts/deploy.sh              # both boards (or: pi | jetson)
+scripts/fetch_results.sh       # later: pull results/board/ back here to commit
+```
+
+On the board, with `agentic-edge` deployed and the board idle:
+
+```bash
+ssh MITLAB-EDGE                              # or MITLAB-JETSON (~/research/...)
+cd ~/Research/edge-grader
 scripts/board_grade.sh e4b                  # test_ua, all 540 answers, with telemetry
 scripts/board_grade.sh e2b test_ud 200      # split and count are optional
 ```
@@ -50,8 +62,7 @@ scripts/board_grade.sh e2b test_ud 200      # split and count are optional
   - runs the grading inside `agentic-edge`'s `run_measured.sh`, so energy is recorded the same way as MMLU-Pro
   - **restores the board on exit**, even if the run fails
 - **Outputs:**
-  - grading results: `results/`
-  - telemetry: `run_measured.sh`'s usual output directory
+  - grading results and telemetry: `results/board/<run>/` on the board; fetch them with `scripts/fetch_results.sh`
 - **Run it directly** when the board is idle, rather than through the lab job queue. Queue jobs are measured by the queue's own `run_measured.sh` call, which writes telemetry into `agentic-edge`'s folders.
   - If you must use the queue, submit a `raw` job with `env MEASURE=0 <path>/edge-grader/scripts/board_grade.sh e4b`, then copy that job's telemetry folder into the run's `results/board/<run>/` folder.
 

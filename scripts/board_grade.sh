@@ -33,6 +33,8 @@ SPLIT="${2:-test_ua}"
 N="${3:-0}"
 MEASURE="${MEASURE:-1}"
 PORT="${PORT:-8080}"
+# deploy.sh installs uv here; non-interactive ssh shells do not have it on PATH.
+export PATH="$HOME/.local/bin:$PATH"
 
 if [ -f /etc/nv_tegra_release ]; then
   BOARD=jetson
@@ -65,7 +67,7 @@ SRVLOG=$RUN_DIR/server.log
 for f in "$LLAMA_SERVER" "$MODEL"; do
   [ -e "$f" ] || { echo "missing: $f" >&2; exit 1; }
 done
-command -v uv >/dev/null || { echo "uv not installed on this board (see README)" >&2; exit 1; }
+command -v uv >/dev/null || { echo "uv not installed on this board (run scripts/deploy.sh from the Mac)" >&2; exit 1; }
 [ "$MEASURE" = 0 ] || [ -x "$AE/run_measured.sh" ] || {
   echo "run_measured.sh not found in AE=$AE; set AE or use MEASURE=0" >&2; exit 1; }
 
