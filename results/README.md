@@ -6,6 +6,7 @@ The experiment record. **Everything here is committed**, so each run can be trac
 results/
   reference/   numbers copied from elsewhere, with their source
                agentic-edge-mmlupro-baseline.json   the lab's MMLU-Pro baseline (not re-run)
+               agentic-edge/                        the lab's device benchmarks, copied (see its README)
   kaggle/      accuracy runs on Kaggle GPUs (from notebooks/kaggle_baseline.ipynb)
   board/       runs on the Pi 5 / Jetson (from scripts/board_grade.sh), one folder per run:
     <model>-<board>-<split>-<stamp>/

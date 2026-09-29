@@ -50,6 +50,8 @@
 - [ ] Analysis: the gain per split, especially **unseen domains** (does fine-tuning transfer?)
 
 ### Stage 4: Edge cost + cloud reference (week 8)
+*Device rates (tok/s, power, J/token) are reused from `agentic-edge`, not re-measured: [`edge-benchmarks.md`](edge-benchmarks.md).*
+
 - [ ] Every version (baseline, RAG, fine-tuned, both) × E2B/E4B on the Pi 5 and the Jetson with `board_grade.sh`
 - [ ] RAG on the board: include embedding and retrieval time in the latency
 - [ ] Cloud reference: a cloud model with the same material, on the same splits (RQ5, the NotebookLM question)
@@ -71,3 +73,4 @@
 | Date | Change | Why |
 |---|---|---|
 | 2026-09-29 | Plan created; stage 1 Kaggle runs done | — |
+| 2026-09-29 | `agentic-edge` device benchmarks copied for stage 4 | Supervisor: reuse existing benchmarks to cut time |
