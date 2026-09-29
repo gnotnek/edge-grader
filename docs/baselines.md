@@ -4,7 +4,7 @@ Stage 1 has two baselines for the same untouched models:
 - **Subject knowledge:** MMLU-Pro, carried over from `agentic-edge`
 - **Grading:** SciEntsBank, measured in this project
 
-Machine-readable copy: [`../results/agentic-edge-mmlupro-baseline.json`](../results/agentic-edge-mmlupro-baseline.json).
+Machine-readable copy: [`../results/reference/agentic-edge-mmlupro-baseline.json`](../results/reference/agentic-edge-mmlupro-baseline.json).
 
 ## 1. MMLU-Pro (from `agentic-edge`)
 
@@ -48,4 +48,4 @@ Power is board DC draw summed over the rails, not wall power.
 | E2B | | | | | | |
 | E4B | | | | | | |
 
-Metric: accuracy and macro-F1, 3-way labels, thinking off. Fill this in from `results/baseline-*.json`.
+Metric: accuracy and macro-F1, 3-way labels, thinking off. Fill this in from `results/kaggle/` (accuracy) and `results/board/` (accuracy + cost).

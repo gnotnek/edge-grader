@@ -10,5 +10,5 @@ data/
 *.gguf
 *.safetensors
 
-# Per-answer raw outputs can get large; summaries (results/*.json) are committed
-results/raw/
+# results/ is the experiment record and is committed in full, including
+# per-answer raw/*.jsonl and board telemetry.
