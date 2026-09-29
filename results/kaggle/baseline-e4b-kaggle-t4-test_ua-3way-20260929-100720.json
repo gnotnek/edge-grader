@@ -1,0 +1,28 @@
+{
+  "stage": "baseline",
+  "label": "e4b-kaggle-t4",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "/tmp/models/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-86ea01d"
+  },
+  "split": "test_ua",
+  "scheme": "3way",
+  "n_requested": 0,
+  "seed": 0,
+  "time": "2026-09-29T10:07:20+00:00",
+  "metrics": {
+    "n": 540,
+    "accuracy": 0.6704,
+    "macro_f1": 0.6637,
+    "weighted_f1": 0.6582,
+    "unparsed": 0,
+    "errors": 0,
+    "median_latency_s": 0.1365,
+    "wall_s": 78.9,
+    "prompt_tokens": 89766,
+    "completion_tokens": 1180
+  }
+}

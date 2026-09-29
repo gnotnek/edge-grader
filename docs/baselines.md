@@ -41,11 +41,33 @@ Power is board DC draw summed over the rails, not wall power.
 
 ## 2. SciEntsBank grading (this project)
 
-*Not run yet.*
+**Setup:** 3-way labels, zero-shot prompt with the reference answer, thinking off, the same GGUF files and server flags as MMLU-Pro. Details and error analysis: [`../results/kaggle/README.md`](../results/kaggle/README.md).
 
-| Model | Board | test_ua | test_uq | test_ud | Median latency | J / answer |
-|---|---|---|---|---|---|---|
-| E2B | | | | | | |
-| E4B | | | | | | |
+### Accuracy (Kaggle T4, full splits, 2026-09-29)
 
-Metric: accuracy and macro-F1, 3-way labels, thinking off. Fill this in from `results/kaggle/` (accuracy) and `results/board/` (accuracy + cost).
+| Model | test_ua (540) | test_uq (733) | test_ud (4,562) |
+|---|---|---|---|
+| E2B | 55.2% / F1 0.518 | 59.8% / F1 0.553 | 60.3% / F1 0.570 |
+| E4B | **67.0%** / F1 0.664 | **67.5%** / F1 0.655 | **70.4%** / F1 0.705 |
+
+(Accuracy / macro-F1. 0 unparsed replies, 0 errors.)
+
+### Cost on the boards
+
+*Not run yet* (`scripts/board_grade.sh`).
+
+| Model | Board | Median latency | J / answer | Accuracy (check vs Kaggle) |
+|---|---|---|---|---|
+| E2B | Pi 5 | | | |
+| E2B | Jetson | | | |
+| E4B | Pi 5 | | | |
+| E4B | Jetson | | | |
+
+## 3. Side by side
+
+| Model | MMLU-Pro (Pi 5, n=300) | Grading accuracy (Kaggle, test_ud) |
+|---|---|---|
+| E2B | 51.7% | 60.3% |
+| E4B | 65.7% | 70.4% |
+
+The two tasks aren't directly comparable (10-way multiple choice vs 3-way labels), but the E2B → E4B gain is similar on both, about 10–14 points.
