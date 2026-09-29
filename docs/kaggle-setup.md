@@ -54,9 +54,12 @@ Keep the browser tab open. An interactive session stops after about 20 minutes i
 - **`accuracy` / `macro_f1`:** these are the first baseline numbers.
 
 ### 8. Save the results
-1. Right-hand panel → **Output** (the `/kaggle/working` folder) → `edge-grader/results/kaggle/`. Download the files.
-2. Copy them into `results/kaggle/` in your local clone, then commit and push:
+Kaggle's Output panel only downloads single files, so the notebook's last code cell zips `results/kaggle/` into `results-kaggle.zip`.
+1. Click the link it shows, or download `results-kaggle.zip` from the **Output** panel.
+2. Unzip it into your local clone, then commit and push:
    ```bash
+   cd ~/Developer/work/teep/edge-grader
+   unzip -o ~/Downloads/results-kaggle.zip -d results/kaggle
    git add results/kaggle && git commit -m "Kaggle baseline: e4b/e2b test_ua n=100" && git push
    ```
 
