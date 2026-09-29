@@ -10,7 +10,7 @@ Part of an internship at the NTUST MIT Lab. It builds on the lab's `agentic-edge
 
 | Stage | What | Status |
 |---|---|---|
-| 1. Baseline | Untouched model grades SciEntsBank answers; the lab's MMLU-Pro subset as a second baseline | in progress |
+| 1. Baseline | Untouched model grades SciEntsBank answers; the lab's MMLU-Pro subset as a second baseline | MMLU-Pro copied ([docs/baselines.md](docs/baselines.md)); grading not run |
 | 2. RAG | Retrieve course material (open textbooks) into the prompt | — |
 | 3. Fine-tuning | QLoRA on Kaggle/Colab, converted to GGUF | — |
 | 4. Edge cost | Latency and energy per answer on the Pi 5 / Jetson, for each stage | — |
@@ -50,6 +50,7 @@ Results:
 ```
 docs/
   research-outline.md   research questions, stages, supervisor feedback
+  baselines.md          stage-1 numbers, incl. agentic-edge MMLU-Pro
 src/edge_grader/
   data.py       SciEntsBank loader + 5/3/2-way label schemes
   grader.py     prompt, model call, label parsing

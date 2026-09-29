@@ -1,0 +1,41 @@
+{
+  "stage": "baseline",
+  "task": "mmlu_pro",
+  "source": "agentic-edge findings/RESULTS.md sections 7.1 and 7.2 (repo commit 12031f0, 2026-09-28)",
+  "copied": "2026-09-29",
+  "protocol": {
+    "harness": "lm-eval mmlu_pro",
+    "shots": "5-shot CoT",
+    "decoding": "greedy",
+    "max_gen_toks": 2048,
+    "subset": "3 x 100-question stratified subsets (s1/s2/s3), seed 20260918, n=300 per cell",
+    "models": "Gemma 4 E2B / E4B, Unsloth Q4_K_XL QAT GGUF",
+    "server": "llama-server -c 8192 --cache-ram 0 -rea off --reasoning-budget -1 (thinking off)",
+    "power": "board DC draw summed over PMIC/INA3221 rails, not wall power"
+  },
+  "thinking_off": {
+    "e2b": {
+      "pi5":    {"accuracy": 0.517, "energy_wh": 64.2, "wall_min": 552, "j_per_token": 1.15, "gen_tokens": 201600},
+      "jetson": {"accuracy": 0.527, "energy_wh": 25.6, "wall_min": 155, "j_per_token": 0.46, "gen_tokens": 198700}
+    },
+    "e4b": {
+      "pi5":    {"accuracy": 0.657, "energy_wh": 125.5, "wall_min": 1111, "j_per_token": 2.20, "gen_tokens": 205000},
+      "jetson": {"accuracy": 0.660, "energy_wh": 54.5, "wall_min": 313, "j_per_token": 0.96, "gen_tokens": 203200}
+    }
+  },
+  "thinking_on_budget_320": {
+    "e2b": {
+      "pi5":    {"accuracy": 0.500, "energy_wh": 79.8, "wall_min": 685, "j_per_token": 1.14},
+      "jetson": {"accuracy": 0.497, "energy_wh": 32.6, "wall_min": 196, "j_per_token": 0.46}
+    },
+    "e4b": {
+      "pi5":    {"accuracy": 0.663, "energy_wh": 151.2, "wall_min": 1332, "j_per_token": 2.18},
+      "jetson": {"accuracy": 0.667, "energy_wh": 67.5, "wall_min": 386, "j_per_token": 0.96}
+    }
+  },
+  "notes": [
+    "Pi 5 vs Jetson accuracy: no significant difference (McNemar p=0.71 pooled).",
+    "Thinking on (320-token budget): no significant accuracy change, +20-27% tokens/energy/time.",
+    "Energy and time are totals for 300 questions with long 5-shot CoT answers; compare J/token, not per-question cost, with grading runs."
+  ]
+}
