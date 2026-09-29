@@ -42,6 +42,8 @@ if [ -f /etc/nv_tegra_release ]; then
   LLAMA_SERVER="${LLAMA_SERVER:-$HOME/build/llama.cpp/build/bin/llama-server}"
   MODEL_DIR="${MODEL_DIR:-$HOME/research/models}"
   NGL=99
+  # ~/research is an exFAT SSD (no symlinks); deploy.sh puts the venv here.
+  export UV_PROJECT_ENVIRONMENT="${UV_PROJECT_ENVIRONMENT:-$HOME/venvs/edge-grader}"
 elif grep -qi raspberry /proc/device-tree/model 2>/dev/null; then
   BOARD=pi5
   AE="${AE:-$HOME/Research/agentic-edge/benchmark}"

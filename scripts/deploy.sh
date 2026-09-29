@@ -36,6 +36,9 @@ done
 # ~/Research on the Pi, ~/research on the Jetson.
 host_of() { case "$1" in pi) echo MITLAB-EDGE ;; jetson) echo MITLAB-JETSON ;; esac; }
 repo_of() { case "$1" in pi) echo Research/edge-grader ;; jetson) echo research/edge-grader ;; esac; }
+# The Jetson's ~/research is on an exFAT SSD, which has no symlinks, so its venv
+# lives on the root filesystem, like agentic-edge's ~/venvs/eval.
+venv_env() { case "$1" in jetson) echo 'export UV_PROJECT_ENVIRONMENT=$HOME/venvs/edge-grader;' ;; esac; }
 
 if [ -n "$(git status --porcelain)" ]; then
   if [ $DIRTY -eq 0 ]; then
@@ -70,7 +73,7 @@ for b in "${TARGETS[@]}"; do
   ssh "$H" "mkdir -p ~/$R" &&
     rsync -a --files-from="$LIST" ./ "$H:$R/" || { echo "   rsync failed" >&2; STATUS=1; continue; }
 
-  if ! ssh "$H" "cd ~/$R && ~/.local/bin/uv sync --frozen -q &&
+  if ! ssh "$H" "cd ~/$R && $(venv_env "$b") ~/.local/bin/uv sync --frozen -q &&
                  ~/.local/bin/uv run pytest -q > .deploy-tests.log 2>&1; rc=\$?;
                  tail -1 .deploy-tests.log | sed 's/^/   tests: /'; exit \$rc"; then
     echo "   TESTS FAILED on $b. Log: ~/$R/.deploy-tests.log" >&2
