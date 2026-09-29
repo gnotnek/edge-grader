@@ -30,7 +30,7 @@ There are three ways to run it. All use the lab's model files and `llama-server`
 
 ### On Kaggle (accuracy)
 
-Open [`notebooks/kaggle_baseline.ipynb`](notebooks/kaggle_baseline.ipynb) on Kaggle. Its first cell lists the setup: GPU on, Internet on, and a read-only `GITHUB_TOKEN` secret. It builds `llama-server` with CUDA, downloads the models, and grades. Start with `N = 100`, check that `unparsed` ≈ 0, then run the full splits.
+First time on Kaggle? Follow [`docs/kaggle-setup.md`](docs/kaggle-setup.md). Otherwise: open [`notebooks/kaggle_baseline.ipynb`](notebooks/kaggle_baseline.ipynb) on Kaggle. Its first cell lists the setup: GPU on, Internet on, and a read-only `GITHUB_TOKEN` secret. It builds `llama-server` with CUDA, downloads the models, and grades. Start with `N = 100`, check that `unparsed` ≈ 0, then run the full splits.
 
 ### On a lab board (accuracy + latency + energy)
 
