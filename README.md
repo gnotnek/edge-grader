@@ -4,7 +4,7 @@ Can a small LLM running on an edge device (Raspberry Pi 5, Jetson Orin Nano) gra
 
 Part of an internship at the NTUST MIT Lab. It builds on the lab's `agentic-edge` benchmark: same models (Gemma 4 E2B/E4B), same `llama-server` setup, and the same MMLU-Pro baseline as a comparison point. Background, decisions and literature are in the separate `research-ideation` notes.
 
-**Research questions, stages and supervisor feedback:** [`docs/research-outline.md`](docs/research-outline.md).
+**Research questions, stages and supervisor feedback:** [`docs/research-outline.md`](docs/research-outline.md). **Steps and timeline:** [`docs/plan.md`](docs/plan.md).
 
 ## Plan
 
@@ -86,6 +86,7 @@ The run stops straight away if no server answers. A failed request is recorded a
 ```
 docs/
   research-outline.md   research questions, stages, supervisor feedback
+  plan.md               step checklist and week-by-week timeline
   baselines.md          stage-1 numbers, incl. agentic-edge MMLU-Pro
 src/edge_grader/
   data.py       SciEntsBank loader + 5/3/2-way label schemes

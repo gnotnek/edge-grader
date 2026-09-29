@@ -31,9 +31,11 @@ Measure how well a **small LLM on an edge device** grades students' short answer
 | **1. Baseline** | (a) The lab's MMLU-Pro 100-question subset, for subject knowledge. (b) SciEntsBank grading with the untouched model, served by `llama-server` with thinking off | Two baseline numbers per model: MMLU-Pro done (E2B 51.7–52.7%, E4B 65.7–66.0%, see `baselines.md`) |
 | **2. RAG** | Chunk open textbooks (OpenStax / CK-12) matched to SciEntsBank topics; embed them with a small model; retrieve the top-k chunks into the grading prompt | Improvement over the baseline, per split |
 | **3. Fine-tuning** | QLoRA with Unsloth on Kaggle/Colab, trained on the SciEntsBank train split; convert to GGUF and serve like the others | Improvement over the baseline; RAG vs fine-tuning vs both |
-| **4. Edge cost** | Run every version through the lab job queue with `telemetry.py` | Accuracy vs latency and energy chart |
+| **4. Edge cost** | Run every version on the Pi 5 / Jetson with `scripts/board_grade.sh` (agentic-edge's `run_measured.sh` telemetry) | Accuracy vs latency and energy chart |
 
 **Rule:** don't start a stage until the one before it gives a number you trust.
+
+**Steps, checklist and week-by-week timeline:** [`plan.md`](plan.md).
 
 ## Datasets
 
