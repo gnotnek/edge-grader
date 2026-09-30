@@ -1,7 +1,11 @@
 import hashlib
 
-from edge_grader.rag.sources import fetch, load_manifest, local_path, wiki_filename
+from edge_grader.rag.sources import BENCHMARKS, fetch, load_manifest, local_path, wiki_filename
 
+MMLU_PRO_SUBJECTS = {
+    "biology", "business", "chemistry", "computer_science", "economics", "engineering", "health",
+    "history", "law", "math", "other", "philosophy", "physics", "psychology",
+}
 UNITS = {"EM", "FN", "II", "LF", "LP", "ME", "MS", "MX", "PS", "SE", "ST", "VB", "EV", "HB", "WA"}
 
 
@@ -13,6 +17,19 @@ def test_manifest_books_are_complete_and_unique():
         assert b["url"].startswith("https://")
         assert b["licence"] and b["page_url"]
     assert {b["lang"] for b in books} == {"en", "id"}
+
+
+def test_books_name_their_benchmark_and_mmlupro_covers_every_subject():
+    books = load_manifest()["books"]
+    assert {b["benchmark"] for b in books} == set(BENCHMARKS)
+    mmlu = [b for b in books if b["benchmark"] == "mmlupro"]
+    assert {s for b in mmlu for s in b["subjects"]} == MMLU_PRO_SUBJECTS
+    assert {b["lang"] for b in mmlu} == {"en", "id"}
+
+
+def test_fetch_only_one_benchmark_skips_the_others(tmp_path):
+    books = [{"id": "x", "lang": "en", "benchmark": "mmlupro", "url": "https://example.invalid/x.pdf"}]
+    assert fetch({"books": books}, tmp_path, only="scientsbank") == []
 
 
 def test_manifest_covers_every_scientsbank_unit():

@@ -11,7 +11,8 @@
       "licence": "CC BY-NC",
       "page_url": "https://emedia.uen.org/courses/utah-oer-textbooks-3rd-grade-seed",
       "url": "https://drive.usercontent.google.com/download?id=1PO8fXPReDCbeQDbu2oN383P59djBmAmV&export=download&confirm=t",
-      "sha256": "6a528ce5fb3cf507fa1d694cbd931b48dcd5df87389f6d9b7abdd829b3d0b938"
+      "sha256": "6a528ce5fb3cf507fa1d694cbd931b48dcd5df87389f6d9b7abdd829b3d0b938",
+      "benchmark": "scientsbank"
     },
     {
       "id": "en-utah-seed-g4",
@@ -23,7 +24,8 @@
       "licence": "CC BY-NC",
       "page_url": "https://emedia.uen.org/courses/utah-oer-textbooks-4th-grade-seed",
       "url": "https://drive.usercontent.google.com/download?id=1IzJ_C8G6np3QvhMsWXv_r-XYNM-sLpKg&export=download&confirm=t",
-      "sha256": "7ae3548092b20d8f0fb41e435757b45f39cc7ef7a7213be601064841d0109b15"
+      "sha256": "7ae3548092b20d8f0fb41e435757b45f39cc7ef7a7213be601064841d0109b15",
+      "benchmark": "scientsbank"
     },
     {
       "id": "en-utah-seed-g5",
@@ -35,7 +37,8 @@
       "licence": "CC BY-NC",
       "page_url": "https://emedia.uen.org/courses/utah-oer-textbooks-5th-grade-seed",
       "url": "https://drive.usercontent.google.com/download?id=1um7uXLBJg47pDzjrTJqmBYNCmdJLWv-k&export=download&confirm=t",
-      "sha256": "0ee7d47ef61b5ac2352d43de74b5a9e6c3c398e508ca6bbcb6db3fdf7047d62f"
+      "sha256": "0ee7d47ef61b5ac2352d43de74b5a9e6c3c398e508ca6bbcb6db3fdf7047d62f",
+      "benchmark": "scientsbank"
     },
     {
       "id": "en-utah-seed-g6",
@@ -47,7 +50,8 @@
       "licence": "CC BY-NC",
       "page_url": "https://emedia.uen.org/courses/utah-oer-textbooks-6th-grade-seed",
       "url": "https://drive.usercontent.google.com/download?id=1FF3LoJlkPu6ZFsVfJzEDdg3odl-79aer&export=download&confirm=t",
-      "sha256": "2c5afd019b858ad91b989c784c001022d2aa4ff5047aecd027549e6308c19552"
+      "sha256": "2c5afd019b858ad91b989c784c001022d2aa4ff5047aecd027549e6308c19552",
+      "benchmark": "scientsbank"
     },
     {
       "id": "en-utah-seed-g7",
@@ -59,7 +63,8 @@
       "licence": "CC BY-NC",
       "page_url": "https://emedia.uen.org/courses/utah-oer-textbooks-7th-grade-seed",
       "url": "https://drive.usercontent.google.com/download?id=1TxnztvBQFRFVHtbYP3pRRac3lt5CFwOu&export=download&confirm=t",
-      "sha256": "4dbeaacbc12c404c6a48b8773130efb22fe3eb3e3b74abd8335213c46b1919cb"
+      "sha256": "4dbeaacbc12c404c6a48b8773130efb22fe3eb3e3b74abd8335213c46b1919cb",
+      "benchmark": "scientsbank"
     },
     {
       "id": "en-utah-seed-g8",
@@ -71,7 +76,8 @@
       "licence": "CC BY-NC",
       "page_url": "https://emedia.uen.org/courses/utah-oer-textbooks-8th-grade-seed",
       "url": "https://drive.usercontent.google.com/download?id=1Cuq4WQwCF8H69qF8gFLTQkZwTpWVJw_K&export=download&confirm=t",
-      "sha256": "e6fb312f765dafbc57df05bb8f3d71b0bb689072398487c2ffd7d698a9a32071"
+      "sha256": "e6fb312f765dafbc57df05bb8f3d71b0bb689072398487c2ffd7d698a9a32071",
+      "benchmark": "scientsbank"
     },
     {
       "id": "id-ipas-kelas3",
@@ -84,7 +90,8 @@
       "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
       "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-dan-sosial-untuk-sdmi-kelas-iii-edisi-revisi",
       "url": "https://static.sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPAS_BS_KLS_III.pdf",
-      "sha256": "2df6ea081c03a4adbb005098c0e7423f673f2899684bb42dcb857bfa11e95163"
+      "sha256": "2df6ea081c03a4adbb005098c0e7423f673f2899684bb42dcb857bfa11e95163",
+      "benchmark": "scientsbank"
     },
     {
       "id": "id-ipas-kelas4",
@@ -97,7 +104,8 @@
       "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
       "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-dan-sosial-untuk-sd-mi-kelas-iv-edisi-revisi",
       "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPAS_BS_KLS_IV_Rev.pdf",
-      "sha256": "208f3e472dd58a8dfa905c774f0f0c2c5a93bcf948e93d284013383daf2351bb"
+      "sha256": "208f3e472dd58a8dfa905c774f0f0c2c5a93bcf948e93d284013383daf2351bb",
+      "benchmark": "scientsbank"
     },
     {
       "id": "id-ipas-kelas5",
@@ -110,7 +118,8 @@
       "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
       "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-dan-sosial-untuk-sd-mi-kelas-v-edisi-revisi",
       "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPAS_BS_KLS_V_Rev.pdf",
-      "sha256": "d54e2a5ee4504f01f839e1c13646318c6b2fec3f92c412615241b9667e7d71ed"
+      "sha256": "d54e2a5ee4504f01f839e1c13646318c6b2fec3f92c412615241b9667e7d71ed",
+      "benchmark": "scientsbank"
     },
     {
       "id": "id-ipas-kelas6",
@@ -123,7 +132,8 @@
       "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
       "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-dan-sosial-untuk-sdmi-kelas-vi-edisi-revisi",
       "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPAS_BS_KLS_VI_Rev.pdf",
-      "sha256": "a22e862bfbf0192eca043c2ad3c7666defcae0f50cfdbbeeb1ff9fb28d907397"
+      "sha256": "a22e862bfbf0192eca043c2ad3c7666defcae0f50cfdbbeeb1ff9fb28d907397",
+      "benchmark": "scientsbank"
     },
     {
       "id": "id-ipa-kelas7",
@@ -136,7 +146,8 @@
       "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
       "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-untuk-smp-mts-kelas-vii-edisi-revisi",
       "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPA_BS_KLS_VII_Rev.pdf",
-      "sha256": "5e2923ed8ff94b09e50fd2316745dfee7ad77f20619d2b3e1974755ba8217c42"
+      "sha256": "5e2923ed8ff94b09e50fd2316745dfee7ad77f20619d2b3e1974755ba8217c42",
+      "benchmark": "scientsbank"
     },
     {
       "id": "id-ipa-kelas8",
@@ -149,7 +160,8 @@
       "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
       "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-untuk-smp-mts-kelas-viii-edisi-revisi",
       "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPA_BS_KLS_VIII_Rev.pdf",
-      "sha256": "d1ec9c1c6d2d9a14f95cd775a9c626db3df11b55b8ceb5131de4bc4a230fee28"
+      "sha256": "d1ec9c1c6d2d9a14f95cd775a9c626db3df11b55b8ceb5131de4bc4a230fee28",
+      "benchmark": "scientsbank"
     },
     {
       "id": "id-ipa-kelas9",
@@ -162,7 +174,634 @@
       "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
       "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-untuk-smpmts-kelas-ix-edisi-revisi",
       "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPA_BS_KLS_IX_Rev.pdf",
-      "sha256": "c888ef46df63be72e049b8fcd6316ee1ae4a22871724739fda02f5df17dc0639"
+      "sha256": "c888ef46df63be72e049b8fcd6316ee1ae4a22871724739fda02f5df17dc0639",
+      "benchmark": "scientsbank"
+    },
+    {
+      "id": "en-openstax-calculus-volume-1",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "math"
+      ],
+      "title": "Calculus Volume 1",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/calculus-volume-1",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/calculus-volume-1_-_WEB.pdf",
+      "sha256": "7303513c1927b9b6d04d150502e769cc1821638a24c774e2f6bba82bf9875990"
+    },
+    {
+      "id": "en-openstax-calculus-volume-2",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "math"
+      ],
+      "title": "Calculus Volume 2",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/calculus-volume-2",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/calculus-volume-2_-_WEB.pdf",
+      "sha256": "f6ac06038088711766e5b664a8114c8fcb0b7b88cfb38e92bbaf56ba2df43f4a"
+    },
+    {
+      "id": "en-openstax-introductory-statistics-2e",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "math"
+      ],
+      "title": "Introductory Statistics 2e",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/introductory-statistics-2e",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/introductory-statistics-2e_-_WEB.pdf",
+      "sha256": "a79a953b75e570030c74ea6f700b8bd70f41dc8c01bf4e9618e6a0adba3a382a"
+    },
+    {
+      "id": "en-openstax-university-physics-volume-1",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "physics",
+        "engineering"
+      ],
+      "title": "University Physics Volume 1",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/university-physics-volume-1",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/university-physics-volume-1_-_WEB.pdf",
+      "sha256": "93652b69c43197d10dc83438b813b5f7515e61e7ea4336da8636ff902cb4aba8"
+    },
+    {
+      "id": "en-openstax-university-physics-volume-2",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "physics",
+        "engineering"
+      ],
+      "title": "University Physics Volume 2",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/university-physics-volume-2",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/university-physics-volume-2_-_WEB.pdf",
+      "sha256": "3f5d8d0e38ba663c84a036b54cf6087bc2836adca553cb7849f2c0e85e97a445"
+    },
+    {
+      "id": "en-openstax-university-physics-volume-3",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "physics",
+        "engineering"
+      ],
+      "title": "University Physics Volume 3",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/university-physics-volume-3",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/university-physics-volume-3_-_WEB.pdf",
+      "sha256": "311c6beb70bb9cc6073d40a6085d290a82afde2b38e9aaf672ccb6de0542541b"
+    },
+    {
+      "id": "en-openstax-chemistry-2e",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "chemistry"
+      ],
+      "title": "Chemistry 2e",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/chemistry-2e",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/chemistry-2e_-_WEB.pdf",
+      "sha256": "fd89db1b8a1fee06b8ad3e8982f4f4b34bde4e93654a4ce28b724f8c0efe98d6"
+    },
+    {
+      "id": "en-openstax-organic-chemistry",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "chemistry"
+      ],
+      "title": "Organic Chemistry: A Tenth Edition",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/organic-chemistry",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/organic-chemistry_-_WEB.pdf",
+      "sha256": "d57b7da43589eaf94de53a06bb17b20a856bbde57020e7a0ee4be312085001c4"
+    },
+    {
+      "id": "en-openstax-business-law-i-essentials-2e",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "law",
+        "business"
+      ],
+      "title": "Business Law I Essentials 2e",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/business-law-i-essentials-2e",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Business_Law_I_Essentials_2e_-_WEB.pdf",
+      "sha256": "6e7b5db71416d923ae0007154edad4288c98f8efcb2f93870fb6e4ab31baad4f"
+    },
+    {
+      "id": "en-openstax-introduction-intellectual-property",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "law"
+      ],
+      "title": "Introduction to Intellectual Property",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution License 4.0",
+      "page_url": "https://openstax.org/details/books/introduction-intellectual-property",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/introduction-intellectual-property_-_WEB.pdf",
+      "sha256": "1498509864d37cb63a6ccc11bab7c783f3d30b2ed37d808ef80c56fdb676378a"
+    },
+    {
+      "id": "en-openstax-american-government-4e",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "law"
+      ],
+      "title": "American Government 4e",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/american-government-4e",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/American_Government_4e_-_WEB_eM2Tuqh.pdf",
+      "sha256": "71e30f1c28a649dd72a6664a7add1462c0672df82b66d1bc282c4a47dd12e1be"
+    },
+    {
+      "id": "en-openstax-principles-management",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "other",
+        "business"
+      ],
+      "title": "Principles of Management",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/principles-management",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/principles-management_-_WEB.pdf",
+      "sha256": "59ea3ea149d631f57c26279d5ac71f588121ebc56c1a25eb6c76f011c9765b6d"
+    },
+    {
+      "id": "en-openstax-principles-marketing",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "other",
+        "business"
+      ],
+      "title": "Principles of Marketing",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/principles-marketing",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/principles-marketing_-_WEB.pdf",
+      "sha256": "7764b41cf778a8bb560f00ee3ed2c8c2d623575540c1b6702ed7429c745bcd31"
+    },
+    {
+      "id": "en-openstax-introduction-business-2e",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "business"
+      ],
+      "title": "Introduction to Business 2e",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/introduction-business-2e",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Introduction_to_Business_2e_-_WEB.pdf",
+      "sha256": "2001b3e30587ceea8f351b11cccb64f8f678860014617d5706a7e27d478ecdc2"
+    },
+    {
+      "id": "en-openstax-principles-financial-accounting",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "business"
+      ],
+      "title": "Principles of Accounting, Volume 1: Financial Accounting",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/principles-financial-accounting",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/principles-financial-accounting_-_WEB.pdf",
+      "sha256": "a98ed7dcb92eec2bd70f32b150aa4f1d3140ad78bb1477e86a31682ec5ac31e5"
+    },
+    {
+      "id": "en-openstax-principles-finance-2e",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "business"
+      ],
+      "title": "Principles of Finance 2e",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/principles-finance-2e",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Principles_of_Finance_2e_-_WEB_.pdf",
+      "sha256": "7d942df1aaf2fc3edcc7f681955cdabecdd0d4e4c754469f0bea159461a6ad79"
+    },
+    {
+      "id": "en-openstax-principles-economics-3e",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "economics"
+      ],
+      "title": "Principles of Economics 3e",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/principles-economics-3e",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/principles-economics-3e_-_WEB.pdf",
+      "sha256": "2d2e7549e13a1975965bfb14a577a3d7935173ff10ca2e1d953815560590a4eb"
+    },
+    {
+      "id": "en-openstax-anatomy-and-physiology-2e",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "health"
+      ],
+      "title": "Anatomy and Physiology 2e",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/anatomy-and-physiology-2e",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/anatomy-and-physiology-2e_-_WEB.pdf",
+      "sha256": "aa2e577b2083c343f4d57b38f00dd935dd2d98befdb38c0f368d72d636d0ff46"
+    },
+    {
+      "id": "en-openstax-psychology-2e",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "psychology"
+      ],
+      "title": "Psychology 2e",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/psychology-2e",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Psychology2e_WEB.pdf",
+      "sha256": "2f08113c78127bc684922ad6a819db22bd4705ce9fcf28a07f36a2041b1474e2"
+    },
+    {
+      "id": "en-openstax-biology-2e",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "biology"
+      ],
+      "title": "Biology 2e",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/biology-2e",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Biology-2e_-_WEB.pdf",
+      "sha256": "4d1f413fd779f114838cdaeab7859dcb2922ca7529230d3bfd7d36a77b4e27b6"
+    },
+    {
+      "id": "en-openstax-introduction-philosophy",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "philosophy"
+      ],
+      "title": "Introduction to Philosophy",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/introduction-philosophy",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Introduction_to_Philosophy-WEB.pdf",
+      "sha256": "ec94e28ddb86bfb6d7703a8487124501164caa79624791ad7eadb24efada96e5"
+    },
+    {
+      "id": "en-openstax-introduction-computer-science",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "computer_science"
+      ],
+      "title": "Introduction to Computer Science",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/introduction-computer-science",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Introduction_To_Computer_Science_-_WEB.pdf",
+      "sha256": "fd56aaf80c851e9f3b417745785ea5c832fc2911acfd2094a86f4c517fdf435a"
+    },
+    {
+      "id": "en-openstax-world-history-volume-1",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "history"
+      ],
+      "title": "World History, Volume 1: to 1500",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/world-history-volume-1",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/World_History_Volume_1-WEB.pdf",
+      "sha256": "227436a3d3951dc777f63a7e5d3329f2c095e2ccf5782ae192f22c40d831a4cf"
+    },
+    {
+      "id": "en-openstax-world-history-volume-2",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "history"
+      ],
+      "title": "World History, Volume 2: from 1400",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/world-history-volume-2",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/World_History_Volume_2-WEB.pdf",
+      "sha256": "57be7ba027ed9f66d9e4594493f56e6a9028bd72c166e62dcd07e72a5266f948"
+    },
+    {
+      "id": "en-openstax-us-history",
+      "lang": "en",
+      "benchmark": "mmlupro",
+      "subjects": [
+        "history"
+      ],
+      "title": "U.S. History",
+      "edition": "OpenStax, current web edition",
+      "publisher": "OpenStax, Rice University",
+      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+      "page_url": "https://openstax.org/details/books/us-history",
+      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/US_History_-_WEB.pdf",
+      "sha256": "b1330275566d9847623394ad29173f9a6f1c9f9270279e00cd5da2ac366ea5c8"
+    },
+    {
+      "id": "id-sma-biologi-kelas12",
+      "lang": "id",
+      "grade": 12,
+      "benchmark": "mmlupro",
+      "subjects": [
+        "biology",
+        "health"
+      ],
+      "title": "Biologi untuk SMA Kelas XII, Buku Siswa",
+      "edition": "Kurikulum Merdeka",
+      "publisher": "",
+      "isbn": "978-602-427-958-5",
+      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+      "page_url": "https://buku.kemendikdasmen.go.id/katalog/biologi-untuk-sma-kelas-xii",
+      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Biologi_BS_KLS_XII_Rev.pdf",
+      "sha256": "cf4b19d3e6abed8c5c376eeda51e356514b4080e5c4e967779afde60d12b3132"
+    },
+    {
+      "id": "id-sma-biologi-kelas11",
+      "lang": "id",
+      "grade": 11,
+      "benchmark": "mmlupro",
+      "subjects": [
+        "biology",
+        "health"
+      ],
+      "title": "Biologi untuk SMA/MA Kelas XI, Buku Siswa",
+      "edition": "Kurikulum Merdeka",
+      "publisher": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
+      "isbn": "978-602-427-893-9",
+      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+      "page_url": "https://buku.kemendikdasmen.go.id/katalog/biologi-untuk-smama-kelas-xi",
+      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Biologi-BS-KLS-XI.pdf",
+      "sha256": "72d3492ee1fefbc711d9fb20bbd70dcc8d41f69310def44e2261a0b579d60461"
+    },
+    {
+      "id": "id-sma-fisika-kelas12",
+      "lang": "id",
+      "grade": 12,
+      "benchmark": "mmlupro",
+      "subjects": [
+        "physics",
+        "engineering"
+      ],
+      "title": "Fisika untuk SMA/MA Kelas XII, Buku Siswa",
+      "edition": "Kurikulum Merdeka",
+      "publisher": "",
+      "isbn": "978-623-472-722-7",
+      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+      "page_url": "https://buku.kemendikdasmen.go.id/katalog/fisika-untuk-smama-kelas-xii",
+      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Fisika_BS_KLS_XII.pdf",
+      "sha256": "49dc10fcafcf13f2df6345b6a7706c8ed039145ea83f69bcea31bdf0fc2320b6"
+    },
+    {
+      "id": "id-sma-fisika-kelas11",
+      "lang": "id",
+      "grade": 11,
+      "benchmark": "mmlupro",
+      "subjects": [
+        "physics",
+        "engineering"
+      ],
+      "title": "Fisika untuk SMA/MA Kelas XI, Buku Siswa",
+      "edition": "Kurikulum Merdeka",
+      "publisher": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
+      "isbn": "978-623-472-721-0",
+      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+      "page_url": "https://buku.kemendikdasmen.go.id/katalog/fisika-untuk-smama-kelas-xi",
+      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Fisika-BS-KLS-XI.pdf",
+      "sha256": "88e3e464ef384b7933a86826a2cf010ee8f0cf7e97fab429f6dcd4be0aa65b1e"
+    },
+    {
+      "id": "id-sma-kimia-kelas12",
+      "lang": "id",
+      "grade": 12,
+      "benchmark": "mmlupro",
+      "subjects": [
+        "chemistry"
+      ],
+      "title": "Kimia untuk SMA/MA Kelas XII, Buku Siswa",
+      "edition": "Kurikulum Merdeka",
+      "publisher": "",
+      "isbn": "978-602-427-968-4",
+      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+      "page_url": "https://buku.kemendikdasmen.go.id/katalog/kimia-untuk-smama-kelas-xii",
+      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Kimia_BS_KLS_XII.pdf",
+      "sha256": "ef995b2f4898c2b7808cd4c1939247b92d98e2d0eae63abec54dec50ebeb7ffa"
+    },
+    {
+      "id": "id-sma-kimia-kelas11",
+      "lang": "id",
+      "grade": 11,
+      "benchmark": "mmlupro",
+      "subjects": [
+        "chemistry"
+      ],
+      "title": "Kimia untuk SMA/MA Kelas XI, Buku Siswa",
+      "edition": "Kurikulum Merdeka",
+      "publisher": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
+      "isbn": "978-602-427-923-3",
+      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+      "page_url": "https://buku.kemendikdasmen.go.id/katalog/kimia-untuk-smama-kelas-xi",
+      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Kimia-BS-KLS-XI.pdf",
+      "sha256": "a1b62b12e286da86dc0b11d4b370080536089d1ff15b0ed01438f28e181c238f"
+    },
+    {
+      "id": "id-sma-matematika-tl-kelas12",
+      "lang": "id",
+      "grade": 12,
+      "benchmark": "mmlupro",
+      "subjects": [
+        "math"
+      ],
+      "title": "Matematika Tingkat Lanjut untuk SMA/MA Kelas XII (Edisi Revisi), Buku Siswa",
+      "edition": "Kurikulum Merdeka, edisi revisi",
+      "publisher": "Pusat Perbukuan",
+      "isbn": "978-634-00-3296-3",
+      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+      "page_url": "https://buku.kemendikdasmen.go.id/katalog/matematika-tingkat-lanjut-untuk-smama-kelas-xii-edisi-revisi",
+      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Matematika_BS_XII_TL_Rev.pdf",
+      "sha256": "ac458f4296c120c84aff66036d379cde8729f09aeceae6a99ddbe072edbb54ac"
+    },
+    {
+      "id": "id-sma-matematika-tl-kelas11",
+      "lang": "id",
+      "grade": 11,
+      "benchmark": "mmlupro",
+      "subjects": [
+        "math"
+      ],
+      "title": "Matematika Tingkat Lanjut untuk SMA/MA Kelas XI (Edisi Revisi), Buku Siswa",
+      "edition": "Kurikulum Merdeka, edisi revisi",
+      "publisher": "Pusat Kurikulum dan Perbukuan",
+      "isbn": "978-623-388-335-1",
+      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+      "page_url": "https://buku.kemendikdasmen.go.id/katalog/matematika-tingkat-lanjut-untuk-sma-ma-kelas-xi-edisi-revisi",
+      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Matematika_BS_KLS_XI_TL_Rev.pdf",
+      "sha256": "4c77de3511011d574b33db7e6350be9c9984bd9321e632f05a2fd272a2ed9865"
+    },
+    {
+      "id": "id-sma-ekonomi-kelas11",
+      "lang": "id",
+      "grade": 11,
+      "benchmark": "mmlupro",
+      "subjects": [
+        "economics",
+        "business"
+      ],
+      "title": "Ekonomi untuk SMA/MA Kelas XI (Edisi Revisi), Buku Siswa",
+      "edition": "Kurikulum Merdeka, edisi revisi",
+      "publisher": "Pusat Kurikulum dan Perbukuan",
+      "isbn": "978-623-388-196-8",
+      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+      "page_url": "https://buku.kemendikdasmen.go.id/katalog/ekonomi-untuk-sma-ma-kelas-xi-edisi-revisi",
+      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Ekonomi_BS_KLS_XI_Rev_2.pdf",
+      "sha256": "0b2c6d51e60f87e2a08952c39fabb07d45dab463612899f71d591ff96f541361"
+    },
+    {
+      "id": "id-sma-ekonomi-kelas12",
+      "lang": "id",
+      "grade": 12,
+      "benchmark": "mmlupro",
+      "subjects": [
+        "economics",
+        "business"
+      ],
+      "title": "Ekonomi untuk SMA/MA Kelas XII, Buku Siswa",
+      "edition": "Kurikulum Merdeka",
+      "publisher": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
+      "isbn": "978-602-427-972-1",
+      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+      "page_url": "https://buku.kemendikdasmen.go.id/katalog/ekonomi-untuk-smama-kelas-xii",
+      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Ekonomi_BS_KLS_XII.pdf",
+      "sha256": "90e1626947087b4ceece21bf773575b050f9ea4f8cf63348d14be4d46fe34c49"
+    },
+    {
+      "id": "id-sma-sejarah-kelas11",
+      "lang": "id",
+      "grade": 11,
+      "benchmark": "mmlupro",
+      "subjects": [
+        "history"
+      ],
+      "title": "Sejarah untuk SMA/MA/SMK/MAK Kelas XI (Edisi Revisi), Buku Siswa",
+      "edition": "Kurikulum Merdeka, edisi revisi",
+      "publisher": "Pusat Perbukuan",
+      "isbn": "978-623-388-489-1",
+      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+      "page_url": "https://buku.kemendikdasmen.go.id/katalog/sejarah-untuk-smamasmkmak-kelas-xi-edisi-revisi",
+      "url": "https://static.sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Sejarah_BS_Kelas_XI_Rev.pdf",
+      "sha256": "71fa14d783576c4d6e1baa260a4fab5f035897e29935ef67f286f3edce65965d"
+    },
+    {
+      "id": "id-sma-sejarah-kelas12",
+      "lang": "id",
+      "grade": 12,
+      "benchmark": "mmlupro",
+      "subjects": [
+        "history"
+      ],
+      "title": "Sejarah untuk SMA/MA Kelas XII, Buku Siswa",
+      "edition": "Kurikulum Merdeka",
+      "publisher": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
+      "isbn": "978-602-427-965-3",
+      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+      "page_url": "https://buku.kemendikdasmen.go.id/katalog/sejarah-untuk-smama-kelas-xii",
+      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Sejarah_BS_KLS_XII.pdf",
+      "sha256": "13b558d3fc8cc77d5b6ab8885a3d15c94cf59e2255ea9a37e6e258e85b81bd4d"
+    },
+    {
+      "id": "id-sma-informatika-kelas11",
+      "lang": "id",
+      "grade": 11,
+      "benchmark": "mmlupro",
+      "subjects": [
+        "computer_science"
+      ],
+      "title": "Informatika untuk SMA/MA Kelas XI (Edisi Revisi), Buku Siswa",
+      "edition": "Kurikulum Merdeka, edisi revisi",
+      "publisher": "Pusat Perbukuan",
+      "isbn": "978-623-388-204-0",
+      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+      "page_url": "https://buku.kemendikdasmen.go.id/katalog/informatika-untuk-smama-kelas-xi-edisi-revisi",
+      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Informatika_BS_KLS_XI_Rev.pdf",
+      "sha256": "985a44240662f23917f0422c46a3f819b85522d66a8cc88e018e090699f38893"
+    },
+    {
+      "id": "id-sma-informatika-kelas12",
+      "lang": "id",
+      "grade": 12,
+      "benchmark": "mmlupro",
+      "subjects": [
+        "computer_science"
+      ],
+      "title": "Informatika untuk SMA/MA Kelas XII, Buku Siswa",
+      "edition": "Kurikulum Merdeka",
+      "publisher": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
+      "isbn": "978-602-427-948-6",
+      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+      "page_url": "https://buku.kemendikdasmen.go.id/katalog/informatika-untuk-smama-kelas-xii",
+      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Informatika_BS_KLS_XII.pdf",
+      "sha256": "f79e684e63f7a6573fe5bac36bfb221dedd034040d06e56973c20ec1fd72efed",
+      "note": "No text layer (0 words extracted from 248 pages); needs OCR before it can be used."
     }
   ],
   "wikipedia": {

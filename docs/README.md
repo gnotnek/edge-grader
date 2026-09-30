@@ -6,7 +6,7 @@
 |---|---|---|
 | *(top)* | What the project is and where it stands | [`research-outline.md`](research-outline.md): research questions, stages, fixed setup, supervisor feedback<br>[`plan.md`](plan.md): step checklist, week-by-week timeline, change log |
 | [`results/`](results/) | Numbers and what they mean, one page per stage | [`baselines.md`](results/baselines.md): stage 1, MMLU-Pro and SciEntsBank grading<br>[`edge-benchmarks.md`](results/edge-benchmarks.md): device rates reused from `agentic-edge` |
-| [`guides/`](guides/) | How to do things | [`kaggle-setup.md`](guides/kaggle-setup.md): running the grader on Kaggle<br>[`rag.md`](guides/rag.md): how RAG works and how to build it (stage 2)<br>[`rag-sources.md`](guides/rag-sources.md): the RAG material, English and Indonesian, and how to download it |
+| [`guides/`](guides/) | How to do things | [`kaggle-setup.md`](guides/kaggle-setup.md): running the grader on Kaggle<br>[`rag.md`](guides/rag.md): how RAG works and how to build it (stage 2)<br>[`rag-sources.md`](guides/rag-sources.md): the RAG material for SciEntsBank and MMLU-Pro, English and Indonesian, and how to download it |
 
 **Where new pages go:**
 - A stage's results → `results/<stage>.md` (e.g. `results/rag.md`). It links to the raw files in [`../results/`](../results/README.md), which are never hand-edited.

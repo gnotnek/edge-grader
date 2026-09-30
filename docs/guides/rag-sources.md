@@ -2,13 +2,21 @@
 
 *Gathered 2026-09-30. How the material is used: [`rag.md`](rag.md). The machine-readable list, with checksums and Wikipedia revision ids, is [`src/edge_grader/rag/sources.json`](../../src/edge_grader/rag/sources.json).*
 
+There is material for both baselines. Each book in `sources.json` names the benchmark it serves (`"benchmark"`):
+- **[SciEntsBank](#part-a-scientsbank)**: school science, grades 3–9
+- **[MMLU-Pro](#part-b-mmlu-pro)**: college subjects
+
 ## Get the files
 
 ```bash
-uv run --group rag python -m edge_grader.rag.sources
+uv run --group rag python -m edge_grader.rag.sources                     # everything
+uv run --group rag python -m edge_grader.rag.sources --only scientsbank  # ~550 MB
+uv run --group rag python -m edge_grader.rag.sources --only mmlupro      # ~3.5 GB
 ```
 
-This downloads everything into `data/rag/raw/<lang>/` (about 550 MB, git-ignored; ~10 minutes, mostly Wikipedia's rate limit) and checks each book against its pinned sha256. Files already there aren't downloaded again. `--pin` records the checksums and Wikipedia revisions after adding a source.
+This downloads into `data/rag/raw/<lang>/` (git-ignored) and checks each book against its pinned sha256. Files already there aren't downloaded again. `--pin` records the checksums and Wikipedia revisions after adding a source.
+
+# Part A: SciEntsBank
 
 ## What SciEntsBank needs
 
@@ -52,7 +60,8 @@ FOSS's own texts are copyrighted, so the corpus uses open material on the same t
 - **Where:** [SIBI](https://buku.kemendikdasmen.go.id). The catalogue API (`api.buku.cloudapp.web.id/api/catalogue/getPenggerakTextBooks`) gives the direct PDF links.
 - **Licence:** "Hak Cipta … Dilindungi Undang-Undang" (all rights reserved), but free to download and read. **Use them for research, and don't commit or redistribute the text.**
 - **Size:** 7 books, 1,650 pages, ~300k words
-- **Why the SMP books too:** they hold most of the human body, electricity, levers and mixtures material. IPAS SD mixes science with social studies.
+- **Why the SMP books too:** they hold most of the human body, electricity, levers and mixtures material.
+- **IPAS is science and social studies combined** (*Ilmu Pengetahuan Alam dan Sosial*), and runs from kelas III; kelas I–II have no IPAS. Roughly half of each IPAS book is social studies (history, economics, culture). The books are used whole for now, with no chapter filter (decided 2026-09-30).
 
 ### 3. Wikipedia, to fill the gaps (both languages)
 
@@ -105,3 +114,72 @@ Counted as book pages that mention at least two of a unit's keywords. This is a 
 | RAG-both | English | both | does more material help or add noise? |
 
 A fully Indonesian condition (questions and answers translated) would be a separate, larger piece of work.
+
+# Part B: MMLU-Pro
+
+## What MMLU-Pro needs
+
+The subject-knowledge baseline is the lab's MMLU-Pro subset: 3 × 100 questions (s1/s2/s3), stratified over MMLU-Pro's 14 subjects ([`../results/baselines.md`](../results/baselines.md)). Questions per subject, pooled over the 300:
+
+| Subject | Questions | Subject | Questions |
+|---|---|---|---|
+| math | 33 | economics | 21 |
+| physics | 33 | health | 21 |
+| chemistry | 27 | psychology | 21 |
+| law | 27 | biology | 18 |
+| engineering | 24 | philosophy | 12 |
+| other | 24 | computer science | 9 |
+| business | 21 | history | 9 |
+
+The questions are college level, so this material is too.
+
+*The subset files (`results/reference/agentic-edge/lm-eval/mmlupro_subset100_*_ids.json`) hold MMLU-Pro's global `question_id`s, even though their `method` text says "positions". lm-eval's positions are in the separate `*_samples.json` files.*
+
+## Sources
+
+### 4. English: OpenStax college textbooks
+
+- **Publisher:** OpenStax, Rice University; the current web editions
+- **Licence:** CC BY-NC-SA 4.0 (a few titles CC BY 4.0; each book's licence is in `sources.json`)
+- **Where:** [openstax.org](https://openstax.org). The CMS API (`openstax.org/apps/cms/api/v2/pages/?type=books.Book`) gives the PDF links.
+- **Size:** 25 books, 20,250 pages, ~8.0M words (~3.0 GB)
+
+| Subject | Books |
+|---|---|
+| math | Calculus Vol. 1 and 2, Introductory Statistics 2e |
+| physics, engineering | University Physics Vol. 1–3 |
+| chemistry | Chemistry 2e, Organic Chemistry |
+| law | Business Law I Essentials 2e, Introduction to Intellectual Property, American Government 4e |
+| business | Introduction to Business 2e, Principles of Financial Accounting, Principles of Finance 2e (plus Business Law, Management, Marketing) |
+| other | Principles of Management, Principles of Marketing |
+| economics | Principles of Economics 3e |
+| health | Anatomy and Physiology 2e |
+| psychology | Psychology 2e |
+| biology | Biology 2e |
+| philosophy | Introduction to Philosophy |
+| computer science | Introduction to Computer Science |
+| history | World History Vol. 1 and 2, U.S. History |
+
+### 5. Indonesian: Kurikulum Merdeka SMA subject books, kelas XI–XII
+
+- **Publisher:** Pusat Perbukuan, Kemendikdasmen (SIBI, same API and licence as source 2: all rights reserved, research use only)
+- **Books:** Biologi, Fisika, Kimia, Matematika Tingkat Lanjut, Ekonomi, Sejarah and Informatika, kelas XI and XII each
+- **Size:** 14 books, 3,680 pages, ~640k words (~430 MB)
+- **Level:** upper secondary, one step below MMLU-Pro. There are no Indonesian books for law, philosophy, psychology or engineering, and no health book beyond Biologi.
+- **Informatika kelas XII has no text layer:** 0 words extracted from 248 pages. It needs OCR before it can be used; `sources.json` flags it with a `note`.
+
+## Coverage and gaps
+
+- **Well covered:** math, physics, chemistry, biology, health, psychology, economics, business, philosophy, computer science and history each have a full college textbook.
+- **Engineering (24 questions):** OpenStax has no engineering textbook. University Physics covers circuits, thermodynamics and mechanics, which is only part of it.
+- **Law (27 questions):** MMLU-Pro's law questions are mostly US bar-exam style. The OpenStax books cover business law, intellectual property and government, not criminal law, torts or evidence, so expect little help here.
+- **Other (24 questions):** a mixed category; management and marketing cover only part of it.
+- **History:** MMLU-Pro history is mostly US and European. The Indonesian Sejarah books are about Indonesian history, so they won't help it.
+
+**Leakage check (2026-09-30):** none of the 300 subset questions shares a 12-word verbatim run with the OpenStax books. Retrieval can't simply hand the model a copied question and its answer.
+
+## Using RAG on MMLU-Pro
+
+- **The baseline protocol has to change.** The lab's baseline uses lm-eval's 5-shot CoT prompt. Adding retrieved passages needs a custom lm-eval task, or this project's own runner, so the RAG run is a new protocol. Report it next to the baseline, not as a drop-in replacement.
+- **Context length:** the longest baseline prompt is 2,362 tokens and the server runs with `-c 8192`, so 3 passages of ~300 tokens fit.
+- **Query:** search with the question text, not the answer options. The options would pull in passages for wrong answers.

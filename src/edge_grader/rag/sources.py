@@ -2,6 +2,10 @@
 
     uv run --group rag python -m edge_grader.rag.sources           # download what's missing
     uv run --group rag python -m edge_grader.rag.sources --pin     # also record what was fetched
+    uv run --group rag python -m edge_grader.rag.sources --only mmlupro   # one benchmark's material
+
+Each book serves one benchmark: "scientsbank" (school science) or "mmlupro" (college subjects).
+The Wikipedia topics are for SciEntsBank.
 
 Books go to data/rag/raw/<lang>/<id>.pdf and are checked against their pinned sha256.
 Wikipedia articles go to data/rag/raw/<lang>/wiki/<title>.txt; --pin records their revision ids.
@@ -17,6 +21,7 @@ from pathlib import Path
 
 MANIFEST = Path(__file__).with_name("sources.json")
 RAW_DIR = Path("data/rag/raw")
+BENCHMARKS = ("scientsbank", "mmlupro")
 # Some hosts refuse a default client user agent.
 HEADERS = {"User-Agent": "Mozilla/5.0 (edge-grader research; RAG corpus download)"}
 # Wikimedia throttles user agents without a contact URL (HTTP 429).
@@ -55,10 +60,12 @@ def download(url: str, dest: Path) -> None:
     part.rename(dest)
 
 
-def fetch(manifest: dict, raw_dir: Path = RAW_DIR) -> list[dict]:
+def fetch(manifest: dict, raw_dir: Path = RAW_DIR, only: str | None = None) -> list[dict]:
     """Download missing books and check every book's sha256. Returns one status row per book."""
     rows = []
     for book in manifest["books"]:
+        if only and book["benchmark"] != only:
+            continue
         path = local_path(book, raw_dir)
         if not path.exists():
             print(f"downloading {book['id']} ...", flush=True)
@@ -151,11 +158,12 @@ def fetch_wiki(manifest: dict, raw_dir: Path = RAW_DIR) -> dict:
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
     ap.add_argument("--pin", action="store_true", help="write sha256 of new files into sources.json")
+    ap.add_argument("--only", choices=BENCHMARKS, help="fetch one benchmark's material only")
     args = ap.parse_args(argv)
 
     manifest = load_manifest()
-    rows = fetch(manifest)
-    wiki = fetch_wiki(manifest)
+    rows = fetch(manifest, only=args.only)
+    wiki = fetch_wiki(manifest) if args.only in (None, "scientsbank") else manifest["wikipedia"]["pinned"]
     if args.pin:
         digests = {r["id"]: r["sha256"] for r in rows if r["status"] == "new"}
         for book in manifest["books"]:

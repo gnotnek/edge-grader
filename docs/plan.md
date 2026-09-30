@@ -36,12 +36,20 @@
 *How RAG works and how to build it: [`guides/rag.md`](guides/rag.md).*
 
 - [x] Choose course material that matches SciEntsBank's topics, English and Indonesian; note the licence: [`guides/rag-sources.md`](guides/rag-sources.md)
-- [ ] Extract and chunk the text (PyMuPDF); keep the source page for every chunk
-- [ ] Embed with a small model (e.g. bge-small or e5-small via sentence-transformers, or `llama-server --embedding` for the edge)
+- [x] Material for MMLU-Pro too (OpenStax + SMA books), so RAG can be tested on both baselines
+- [ ] OCR Informatika kelas XII (no text layer), or leave it out
+- [ ] Extract and chunk the text (PyMuPDF); keep the source page for every chunk; fix the broken ligatures in the Indonesian books
+- [ ] Embed with a small model: `bge-small-en-v1.5` for English, `multilingual-e5-small` for Indonesian (English questions); separate indexes per language and benchmark
 - [ ] Retrieval check: for about 30 questions, is the right passage in the top-k? Fix chunking before grading.
 - [ ] Add a `--rag` mode to the grader: the same prompt plus the top-k passages
-- [ ] Run on Kaggle: E2B + E4B, all splits
+- [ ] Run on Kaggle: E2B + E4B, all splits; conditions RAG-en, RAG-id, RAG-both
 - [ ] Analysis: did recall on *correct* answers improve (the baseline's main weakness)? And E2B's "contradictory" overuse?
+
+**MMLU-Pro with RAG** (same retrieval code, the OpenStax + SMA material):
+- [ ] A RAG runner for the 300-question subset: a custom lm-eval task, or this project's own runner. Query with the question only, not the options.
+- [ ] Re-run the no-RAG baseline through the same runner, so RAG vs no-RAG compares like with like. The lab's lm-eval numbers stay as the reference.
+- [ ] Run E2B + E4B: RAG-en and RAG-id
+- [ ] Analysis per subject; expect little help on engineering, law and "other" (thin material)
 
 ### Stage 3: Fine-tuning (weeks 6–7)
 - [ ] Unsloth QLoRA notebook on Kaggle; train on the SciEntsBank **train** split only
@@ -76,3 +84,4 @@
 |---|---|---|
 | 2026-09-29 | Plan created; stage 1 Kaggle runs done | — |
 | 2026-09-29 | `agentic-edge` device benchmarks copied for stage 4 | Supervisor: reuse existing benchmarks to cut time |
+| 2026-09-30 | RAG material gathered in English and Indonesian, for SciEntsBank and MMLU-Pro; MMLU-Pro RAG added to stage 2 | Test RAG on both baselines; IPAS books kept whole for now |
