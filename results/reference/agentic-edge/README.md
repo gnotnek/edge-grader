@@ -2,7 +2,7 @@
 
 *Source: `agentic-edge` repo, commit `12031f0` (2026-09-28), clean working tree. Copied 2026-09-29, not re-run. Don't edit these files; re-copy from a newer commit if they change.*
 
-The supervisor's call (2026-09-29): **reuse these device benchmarks rather than re-measure them**, to save time. The summary for this project is in [`../../../docs/edge-benchmarks.md`](../../../docs/edge-benchmarks.md).
+The supervisor's call (2026-09-29): **reuse these device benchmarks rather than re-measure them**, to save time. The summary for this project is in [`docs/results/edge-benchmarks.md`](../../../docs/results/edge-benchmarks.md).
 
 | Here | From `agentic-edge` | What |
 |---|---|---|

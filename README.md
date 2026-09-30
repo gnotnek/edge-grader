@@ -10,7 +10,7 @@ Part of an internship at the NTUST MIT Lab. It builds on the lab's `agentic-edge
 
 | Stage | What | Status |
 |---|---|---|
-| 1. Baseline | Untouched model grades SciEntsBank answers; the lab's MMLU-Pro subset as a second baseline | MMLU-Pro copied; grading done on Kaggle (E4B 67–70%, E2B 55–60%); board cost pending ([docs/baselines.md](docs/baselines.md)) |
+| 1. Baseline | Untouched model grades SciEntsBank answers; the lab's MMLU-Pro subset as a second baseline | MMLU-Pro copied; grading done on Kaggle (E4B 67–70%, E2B 55–60%); board cost pending ([docs/baselines.md](docs/results/baselines.md)) |
 | 2. RAG | Retrieve course material (open textbooks) into the prompt | — |
 | 3. Fine-tuning | QLoRA on Kaggle/Colab, converted to GGUF | — |
 | 4. Edge cost | Latency and energy per answer on the Pi 5 / Jetson, for each stage | — |
@@ -30,7 +30,7 @@ There are three ways to run it. All use the lab's model files and `llama-server`
 
 ### On Kaggle (accuracy)
 
-First time on Kaggle? Follow [`docs/kaggle-setup.md`](docs/kaggle-setup.md). Otherwise: open [`notebooks/kaggle_baseline.ipynb`](notebooks/kaggle_baseline.ipynb) on Kaggle. Its first cell lists the setup: GPU on, Internet on, and a read-only `GITHUB_TOKEN` secret. It builds `llama-server` with CUDA, downloads the models, and grades. Start with `N = 100`, check that `unparsed` ≈ 0, then run the full splits.
+First time on Kaggle? Follow [`docs/guides/kaggle-setup.md`](docs/guides/kaggle-setup.md). Otherwise: open [`notebooks/kaggle_baseline.ipynb`](notebooks/kaggle_baseline.ipynb) on Kaggle. Its first cell lists the setup: GPU on, Internet on, and a read-only `GITHUB_TOKEN` secret. It builds `llama-server` with CUDA, downloads the models, and grades. Start with `N = 100`, check that `unparsed` ≈ 0, then run the full splits.
 
 ### On a lab board (accuracy + latency + energy)
 
@@ -84,10 +84,11 @@ The run stops straight away if no server answers. A failed request is recorded a
 ## Layout
 
 ```
-docs/
+docs/                   index: docs/README.md
   research-outline.md   research questions, stages, supervisor feedback
   plan.md               step checklist and week-by-week timeline
-  baselines.md          stage-1 numbers, incl. agentic-edge MMLU-Pro
+  results/              numbers: baselines, edge benchmarks
+  guides/               how-tos: Kaggle setup, RAG pipeline
 src/edge_grader/
   data.py       SciEntsBank loader + 5/3/2-way label schemes
   grader.py     prompt, model call, label parsing

@@ -1,6 +1,6 @@
 # Edge benchmarks (from `agentic-edge`)
 
-*Source: `agentic-edge` commit `12031f0` (2026-09-28). Copied, not re-run. Raw files and a map of what came from where: [`../results/reference/agentic-edge/`](../results/reference/agentic-edge/README.md). Full write-up: [`RESULTS.md`](../results/reference/agentic-edge/docs/RESULTS.md).*
+*Source: `agentic-edge` commit `12031f0` (2026-09-28). Copied, not re-run. Raw files and a map of what came from where: [`../results/reference/agentic-edge/`](../../results/reference/agentic-edge/README.md). Full write-up: [`RESULTS.md`](../../results/reference/agentic-edge/docs/RESULTS.md).*
 
 **Why these are reused:** the supervisor asked (2026-09-29) to use the device benchmarks the lab already has instead of re-measuring them, to save time. They use the same models, GGUF files and `llama-server` flags as this project, so the device side carries over. The MMLU-Pro accuracy side is already in [`baselines.md`](baselines.md).
 

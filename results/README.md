@@ -19,5 +19,5 @@ results/
 ```
 
 **Rules:**
-- **Never hand-edit a result file.** If a run was wrong, keep it, and note why in the commit message or in `docs/baselines.md`.
+- **Never hand-edit a result file.** If a run was wrong, keep it, and note why in the commit message or in `docs/results/baselines.md`.
 - **Record the source commit** for anything copied from another repo.

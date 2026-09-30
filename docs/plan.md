@@ -23,16 +23,18 @@
 ## Steps
 
 ### Stage 1: Baseline (week 3)
-- [x] Copy the `agentic-edge` MMLU-Pro baseline, as the subject-knowledge reference: [`baselines.md`](baselines.md)
+- [x] Copy the `agentic-edge` MMLU-Pro baseline, as the subject-knowledge reference: [`results/baselines.md`](results/baselines.md)
 - [x] Grading harness: loader, prompt, parser, metrics, CLI, tests
 - [x] Kaggle pilot, 100 answers: 0 unparsed, 0 errors
 - [x] Kaggle full splits, E2B + E4B: [`results/kaggle/README.md`](../results/kaggle/README.md)
 - [ ] Board run on the Pi 5: `scripts/board_grade.sh e2b` and `e4b` (test_ua)
 - [ ] Board run on the Jetson: same
-- [ ] Fill in the cost table in `baselines.md`; check that board accuracy ≈ Kaggle accuracy
+- [ ] Fill in the cost table in `results/baselines.md`; check that board accuracy ≈ Kaggle accuracy
 - [ ] Supervisor: confirm dropping the robustness section (references already sent)
 
 ### Stage 2: RAG (weeks 4–5)
+*How RAG works and how to build it: [`guides/rag.md`](guides/rag.md).*
+
 - [ ] Choose course material that matches SciEntsBank's topics (OpenStax / CK-12 open textbooks); note the licence
 - [ ] Extract and chunk the text (PyMuPDF); keep the source page for every chunk
 - [ ] Embed with a small model (e.g. bge-small or e5-small via sentence-transformers, or `llama-server --embedding` for the edge)
@@ -50,7 +52,7 @@
 - [ ] Analysis: the gain per split, especially **unseen domains** (does fine-tuning transfer?)
 
 ### Stage 4: Edge cost + cloud reference (week 8)
-*Device rates (tok/s, power, J/token) are reused from `agentic-edge`, not re-measured: [`edge-benchmarks.md`](edge-benchmarks.md).*
+*Device rates (tok/s, power, J/token) are reused from `agentic-edge`, not re-measured: [`results/edge-benchmarks.md`](results/edge-benchmarks.md).*
 
 - [ ] Every version (baseline, RAG, fine-tuned, both) × E2B/E4B on the Pi 5 and the Jetson with `board_grade.sh`
 - [ ] RAG on the board: include embedding and retrieval time in the latency
