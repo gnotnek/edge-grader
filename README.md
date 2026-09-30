@@ -47,7 +47,7 @@ scripts/deploy.sh              # both boards (or: pi | jetson)
 scripts/fetch_results.sh       # later: pull results/board/ back here to commit
 ```
 
-On the board, with `agentic-edge` deployed and the board idle:
+Stage 1 board cost is **estimated**, not measured (`uv run edge-grader-cost results/kaggle/baseline-*.json`; see `docs/results/baselines.md`). A measured run is optional, to check the estimate. On the board, with `agentic-edge` deployed and the board idle:
 
 ```bash
 ssh MITLAB-EDGE                              # or MITLAB-JETSON (~/research/...)
@@ -94,6 +94,7 @@ src/edge_grader/
   grader.py     prompt, model call, label parsing
   metrics.py    accuracy, F1
   baseline.py   stage-1 CLI
+  cost.py       board cost estimate from agentic-edge rates (edge-grader-cost)
   rag/          stage 2: sources.json (RAG material, pinned) + sources.py (downloader)
 notebooks/
   kaggle_baseline.ipynb   stage 1 on a Kaggle GPU

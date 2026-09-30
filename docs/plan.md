@@ -8,7 +8,7 @@
 
 | Week | Dates | Stage | Goal | Checkpoint |
 |---|---|---|---|---|
-| 3 | Sep 28 – Oct 4 | 1. Baseline | Grading baseline on Kaggle ✅ and on the boards | Baseline table complete: accuracy + cost |
+| 3 | Sep 28 – Oct 4 | 1. Baseline | Grading baseline on Kaggle ✅; board cost estimated ✅ | Baseline table complete: accuracy + cost |
 | 4 | Oct 5 – 11 | 2. RAG | Course material chosen, retrieval pipeline built | Retrieval returns the right passage for most questions |
 | 5 | Oct 12 – 18 | 2. RAG | RAG grading runs, all splits, both models | RAG vs baseline table |
 | 6 | Oct 19 – 25 | 3. Fine-tuning | QLoRA pipeline on Kaggle; E2B trained and converted to GGUF | Fine-tuned E2B graded on test_ua |
@@ -27,9 +27,8 @@
 - [x] Grading harness: loader, prompt, parser, metrics, CLI, tests
 - [x] Kaggle pilot, 100 answers: 0 unparsed, 0 errors
 - [x] Kaggle full splits, E2B + E4B: [`results/kaggle/README.md`](../results/kaggle/README.md)
-- [ ] Board run on the Pi 5: `scripts/board_grade.sh e2b` and `e4b` (test_ua)
-- [ ] Board run on the Jetson: same
-- [ ] Fill in the cost table in `results/baselines.md`; check that board accuracy ≈ Kaggle accuracy
+- [x] Board cost for E2B + E4B on the Pi 5 and the Jetson, **estimated** from `agentic-edge`'s measured per-request rates and the Kaggle token counts (`uv run edge-grader-cost`), with no new board runs: [`results/baselines.md`](results/baselines.md#cost-on-the-boards-estimated-from-agentic-edge-not-measured)
+- [ ] Measured board check of the estimate and of board accuracy ≈ Kaggle: E2B + E4B, test_ua, on both boards. **Queued 2026-09-30** as raw jobs `edge-grader-{e2b,e4b}-test_ua`, after the running TurboQuant jobs. When done: `scripts/fetch_results.sh`, copy each job's telemetry from `~/Research/measured/edge-grader-*` (Jetson: `~/research/measured/`) into its `results/board/<run>/`, compare with the estimate
 - [ ] Supervisor: confirm dropping the robustness section (references already sent)
 
 ### Stage 2: RAG (weeks 4–5)
@@ -85,3 +84,4 @@
 | 2026-09-29 | Plan created; stage 1 Kaggle runs done | — |
 | 2026-09-29 | `agentic-edge` device benchmarks copied for stage 4 | Supervisor: reuse existing benchmarks to cut time |
 | 2026-09-30 | RAG material gathered in English and Indonesian, for SciEntsBank and MMLU-Pro; MMLU-Pro RAG added to stage 2 | Test RAG on both baselines; IPAS books kept whole for now |
+| 2026-09-30 | Stage-1 board runs replaced by a cost estimate from `agentic-edge`'s export; a measured run is now optional | Supervisor: reuse existing benchmarks. The export has per-request prefill and decode rates for both boards at grading-sized prompts |

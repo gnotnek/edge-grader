@@ -34,14 +34,23 @@
 | **Quantization** (E4B, Pi 5) | Q4_K_XL QAT is the smallest (3.93 GiB) and fastest; Q8_0 needs `--cache-ram 0` or it runs out of memory | RESULTS.md §4 |
 | **Engine** | llama.cpp ~6× faster decode and ~40× faster prefill than little-gemma on the Pi 5 | gemma4-pi5-benchmarks.md |
 
-## Using these for grading cost
+## Grading cost (estimated)
 
-A grading reply is a single label, so the workload is the opposite of MMLU-Pro: **short output, prompt-heavy**. The J per generated token above spreads prefill energy over ~700 generated tokens per question. Multiplying it by a grading reply's few tokens would underestimate the cost.
+A grading reply is a single label, so the workload is the opposite of MMLU-Pro: **short output, prompt-heavy**. The J per generated token above spreads prefill energy over ~700 generated tokens per question, so multiplying it by a grading reply's 2 tokens would badly underestimate the cost.
 
-Estimate cost per graded answer from the grading runs' own token counts instead:
+The export ([`experiment-full.json.gz`](../../results/reference/agentic-edge/export/README.md)) records, for every MMLU-Pro request on **both** boards, the prompt tokens processed, the prefill and decode time, and board power. llama-server reuses the cached 5-shot prefix, so the median request processed only ~180 new prompt tokens. That's about the size of a grading prompt (~155–166), so the rates are measured at the right scale. `src/edge_grader/cost.py` fits them per board and model, on the 253 requests with ≤ 600 prompt tokens:
 
-- **Latency per answer ≈ prompt tokens / prefill speed + output tokens / decode speed.** Pi 5 prefill with llama.cpp: E2B ~67–73 tok/s, E4B ~32–36 tok/s (Sep-14 engine comparison, older flags, so treat as approximate). **The Jetson's prefill speed was not measured.**
-- **Energy per answer ≈ mean board power × latency per answer.** Mean power comes from the table above.
+| | Prefill ms = fixed + per token | r² | Prefill speed at 160 tokens | Decode ms / token | Median power |
+|---|---|---|---|---|---|
+| E2B Pi 5 | 369 + 27.5 × tokens | 0.98 | ~33 tok/s | 142 | 7.1 W |
+| E2B Jetson | 111 + 1.78 × tokens | 0.96 | ~400 tok/s | 43 | 10.2 W |
+| E4B Pi 5 | 482 + 47.1 × tokens | 0.99 | ~20 tok/s | 291 | 6.9 W |
+| E4B Jetson | 207 + 3.07 × tokens | 0.97 | ~230 tok/s | 86 | 10.7 W |
+
+Then, for each graded answer: **latency = prefill(prompt tokens) + output tokens × decode ms**, and **energy = median power × latency**. The results per split are in [`baselines.md`](baselines.md#cost-on-the-boards-estimated-from-agentic-edge-not-measured).
+
+- **This replaces the older Pi 5 prefill figures** (E2B ~67–73, E4B ~32–36 tok/s). Those came from the Sep-14 engine comparison, run with different flags and longer prompts. With the current flags (`-t 3`) and prompts this short, prefill is about half that speed.
+- **The Jetson's prefill wasn't in the summary tables, but it is in the export.**
+- **Upper bound:** the fit is applied to the full grading prompt. Any prefix llama-server reuses between consecutive grading requests would make the real cost lower.
 - Kaggle T4 latency doesn't carry over to the boards.
-
-This gives a Pi 5 estimate without a board run. For the Jetson, or to check the estimate, one short run (e.g. `scripts/board_grade.sh e2b` on test_ua) is still the cheapest way to get a measured figure. Scale the other conditions from it.
+- To check the estimate, one short measured run (`scripts/board_grade.sh e2b test_ua`) is the cheapest option. It's optional.

@@ -52,16 +52,25 @@ Power is board DC draw summed over the rails, not wall power.
 
 (Accuracy / macro-F1. 0 unparsed replies, 0 errors.)
 
-### Cost on the boards
+### Cost on the boards (estimated from `agentic-edge`, not measured)
 
-*Not run yet* (`scripts/board_grade.sh`).
+*Per the supervisor (2026-09-29), no new board runs. The cost comes from agentic-edge's measured per-request rates (same GGUF files and flags), applied to each graded answer's own token counts from the Kaggle runs above. Method: [`edge-benchmarks.md`](edge-benchmarks.md#grading-cost-estimated). File: [`board-cost-estimate-20260930-051813.json`](../../results/estimates/board-cost-estimate-20260930-051813.json), made by `uv run edge-grader-cost results/kaggle/baseline-*.json`.*
 
-| Model | Board | Median latency | J / answer | Accuracy (check vs Kaggle) |
-|---|---|---|---|---|
-| E2B | Pi 5 | | | |
-| E2B | Jetson | | | |
-| E4B | Pi 5 | | | |
-| E4B | Jetson | | | |
+Unseen domains (test_ud, 4,562 answers; the other splits are within 7%):
+
+| Model | Board | Accuracy (Kaggle) | Median latency | J / answer | Wh / 1,000 answers | Hours / 1,000 answers |
+|---|---|---|---|---|---|---|
+| E2B | Pi 5 | 60.3% | 4.7 s | 35.5 | 9.9 | 1.4 |
+| E2B | Jetson | 60.3% | 0.48 s | 5.1 | 1.4 | 0.14 |
+| E4B | Pi 5 | 70.4% | 7.9 s | 58.5 | 16.2 | 2.3 |
+| E4B | Jetson | 70.4% | 0.83 s | 9.3 | 2.6 | 0.24 |
+
+- **Prompt-bound:** about 155–166 prompt tokens and 2–2.5 output tokens per answer. Prefill is about 93% of the latency on both boards.
+- **The Jetson is ~10× faster and ~6–7× less energy per answer** than the Pi 5. For MMLU-Pro that ratio was 3.4× and 2.3×. The gap grows here because the Jetson's GPU prefill is ~12× faster, and grading is almost all prefill.
+- **E4B on the Jetson beats E2B on the Pi 5 on both counts:** +10 points of accuracy for about a quarter of the energy. E4B costs 1.7–1.8× the energy of E2B on either board.
+- **Upper bound:** the estimate counts every prompt token, but llama-server reuses the prompt prefix it shares with the previous request (the instructions, and the question and reference answer when consecutive answers are to the same question). Measured cost should come out somewhat lower.
+- **Accuracy on the boards is assumed equal to Kaggle's:** same GGUF, same flags, greedy decoding. agentic-edge found no board difference on MMLU-Pro (McNemar p = 0.71), but CPU, CUDA and T4 kernels can still flip a few borderline labels. One short board run (`scripts/board_grade.sh e2b test_ua`) would check both the accuracy and the cost estimate. It's optional.
+- Power is board DC draw, not wall power.
 
 ## 3. Side by side
 

@@ -28,7 +28,7 @@ Measure how well a **small LLM on an edge device** grades students' short answer
 
 | Stage | What | Output |
 |---|---|---|
-| **1. Baseline** | (a) The lab's MMLU-Pro 100-question subset, for subject knowledge. (b) SciEntsBank grading with the untouched model, served by `llama-server` with thinking off | Two baseline numbers per model: MMLU-Pro done (E2B 51.7–52.7%, E4B 65.7–66.0%, see [`results/baselines.md`](results/baselines.md)) |
+| **1. Baseline** | (a) The lab's MMLU-Pro 100-question subset, for subject knowledge. (b) SciEntsBank grading with the untouched model, served by `llama-server` with thinking off | Done: MMLU-Pro (E2B 51.7–52.7%, E4B 65.7–66.0%), grading accuracy per split, and board cost estimated from `agentic-edge`'s rates. See [`results/baselines.md`](results/baselines.md) |
 | **2. RAG** | Chunk open textbooks (OpenStax / CK-12) matched to SciEntsBank topics; embed them with a small model; retrieve the top-k chunks into the grading prompt | Improvement over the baseline, per split |
 | **3. Fine-tuning** | QLoRA with Unsloth on Kaggle/Colab, trained on the SciEntsBank train split; convert to GGUF and serve like the others | Improvement over the baseline; RAG vs fine-tuning vs both |
 | **4. Edge cost** | Run every version on the Pi 5 / Jetson with `scripts/board_grade.sh` (agentic-edge's `run_measured.sh` telemetry) | Accuracy vs latency and energy chart |
@@ -76,6 +76,7 @@ Measure how well a **small LLM on an edge device** grades students' short answer
 | 2026-09-29 | NotebookLM comparison: "that's why we need to check by experimenting on it." | RQ5 |
 | 2026-09-29 | Asked for references on why robustness can be dropped and edge measurement made optional | Edge kept (stage 4). Robustness: references sent (arXiv 2606.03090, 2602.00979, 2601.08843, 2412.15275); waiting for reply. |
 | 2026-09-29 | For benchmarking, use what the lab already has to cut time | `agentic-edge`'s device benchmarks copied, not re-run: [`results/edge-benchmarks.md`](results/edge-benchmarks.md) |
+| 2026-09-30 | "Yeppp" to keeping edge measurement: latency and energy per answer on the Pi 5 / Jetson | Confirmed: stage 4 measures every version on the boards. Stage 1 board cost is estimated from `agentic-edge`, see [`results/baselines.md`](results/baselines.md) |
 
 ## Open questions
 
