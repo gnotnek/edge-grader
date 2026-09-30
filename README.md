@@ -94,6 +94,7 @@ src/edge_grader/
   grader.py     prompt, model call, label parsing
   metrics.py    accuracy, F1
   baseline.py   stage-1 CLI
+  rag/          stage 2: sources.json (RAG material, pinned) + sources.py (downloader)
 notebooks/
   kaggle_baseline.ipynb   stage 1 on a Kaggle GPU
 scripts/

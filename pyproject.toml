@@ -20,8 +20,11 @@ dev = [
     "pytest>=8.0",
     "ruff>=0.6",
 ]
+rag = [
+    "pymupdf>=1.28.2",
+]
 # Added when those stages start (uv add --group rag ... / --group finetune ...):
-#   rag:      sentence-transformers, numpy, pymupdf
+#   rag:      sentence-transformers, numpy (pymupdf added)
 #   finetune: runs on Kaggle/Colab with Unsloth, not on this machine
 
 [build-system]

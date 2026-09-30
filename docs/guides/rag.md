@@ -44,12 +44,12 @@ Steps 5–6 are about 20 lines of code. Most of the real work is in choosing the
 
 **4. Keep the baseline prompt unchanged.** With no passages, `build_prompt` must produce exactly the same text as today, so the stage-1 numbers stay comparable.
 
-## Choosing the material (the first decision)
+## The material
+
+**Chosen and downloaded (2026-09-30):** English and Indonesian school science textbooks, plus Wikipedia in both languages for the topics the books miss. Sources, licences, coverage per SciEntsBank unit, and how to download them: [`rag-sources.md`](rag-sources.md).
 
 - SciEntsBank comes from the FOSS elementary and middle-school science curriculum. FOSS is copyrighted, so its text can't be used.
-- **CK-12** is at a similar level and free to use (check its current licence, which has changed over the years), so it's probably a better fit than **OpenStax**, which is college-level.
-- It has to cover **every topic, including the test_ud domains** (unseen domains). Otherwise that split can't improve, and it's the most important one.
-- Note the source, the licence and the download date of every file.
+- The material has to cover **every topic, including the test_ud domains** (unseen domains). Otherwise that split can't improve, and it's the most important one.
 
 ## Build order
 
@@ -69,7 +69,7 @@ Each step can be tested on its own.
 | Chunk size | 250 words | Long enough to hold one idea, short enough to keep the prompt small |
 | Overlap | 50 words | An idea split at a boundary still appears whole in one chunk |
 | k | 3 | Test 1 and 5 later if there's time; each passage costs prefill time |
-| Embedding model | `bge-small-en-v1.5` | Small, fast on a CPU, good on English retrieval benchmarks |
+| Embedding model | `bge-small-en-v1.5` for the English corpus; `multilingual-e5-small` for the Indonesian one | Small and fast on a CPU. English questions against Indonesian passages need a multilingual model |
 | Query | Question text only | The student answer varies; the question decides the topic |
 
 Change one setting at a time, and only after the retrieval check (step 4).

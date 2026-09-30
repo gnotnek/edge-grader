@@ -35,7 +35,7 @@
 ### Stage 2: RAG (weeks 4–5)
 *How RAG works and how to build it: [`guides/rag.md`](guides/rag.md).*
 
-- [ ] Choose course material that matches SciEntsBank's topics (OpenStax / CK-12 open textbooks); note the licence
+- [x] Choose course material that matches SciEntsBank's topics, English and Indonesian; note the licence: [`guides/rag-sources.md`](guides/rag-sources.md)
 - [ ] Extract and chunk the text (PyMuPDF); keep the source page for every chunk
 - [ ] Embed with a small model (e.g. bge-small or e5-small via sentence-transformers, or `llama-server --embedding` for the edge)
 - [ ] Retrieval check: for about 30 questions, is the right passage in the top-k? Fix chunking before grading.
