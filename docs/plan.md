@@ -28,7 +28,7 @@
 - [x] Kaggle pilot, 100 answers: 0 unparsed, 0 errors
 - [x] Kaggle full splits, E2B + E4B: [`results/kaggle/README.md`](../results/kaggle/README.md)
 - [x] Board cost for E2B + E4B on the Pi 5 and the Jetson, **estimated** from `agentic-edge`'s measured per-request rates and the Kaggle token counts (`uv run edge-grader-cost`), with no new board runs: [`results/baselines.md`](results/baselines.md#cost-on-the-boards-estimated-from-agentic-edge-not-measured)
-- [ ] Measured board check of the estimate and of board accuracy ≈ Kaggle: E2B + E4B, test_ua, on both boards. **Queued 2026-09-30** as raw jobs `edge-grader-{e2b,e4b}-test_ua`, after the running TurboQuant jobs. When done: `scripts/fetch_results.sh`, copy each job's telemetry from `~/Research/measured/edge-grader-*` (Jetson: `~/research/measured/`) into its `results/board/<run>/`, compare with the estimate
+- [ ] Measured board check of the estimate and of board accuracy ≈ Kaggle: E2B + E4B, test_ua, on both boards. **Jetson done 2026-09-30** (pulled into `results/board/`; the queue shows "failed" only because no `.done` marker was written then). **Pi 5 queued 2026-10-01** (re-queued with the marker), after the TurboQuant jobs. When done: `scripts/fetch_results.sh`, copy each job's telemetry from `~/Research/measured/edge-grader-*` (Jetson: `~/research/measured/`) into its `results/board/<run>/`, compare with the estimate
 - [ ] Supervisor: confirm dropping the robustness section (references already sent)
 
 ### Stage 2: RAG (weeks 4–5)

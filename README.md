@@ -64,7 +64,9 @@ scripts/board_grade.sh e2b test_ud 200      # split and count are optional
 - **Outputs:**
   - grading results and telemetry: `results/board/<run>/` on the board; fetch them with `scripts/fetch_results.sh`
 - **Run it directly** when the board is idle, rather than through the lab job queue. Queue jobs are measured by the queue's own `run_measured.sh` call, which writes telemetry into `agentic-edge`'s folders.
-  - If you must use the queue, submit a `raw` job with `env MEASURE=0 <path>/edge-grader/scripts/board_grade.sh e4b`, then copy that job's telemetry folder into the run's `results/board/<run>/` folder.
+  - If you must use the queue, submit a `raw` job with label `<label>` and command `env MEASURE=0 <root>/edge-grader/scripts/board_grade.sh e4b && mkdir -p <root>/stdbench/<label> && touch <root>/stdbench/<label>/.done`, where `<root>` is `~/Research` on the Pi and `~/research` on the Jetson, written out in full. Then copy that job's telemetry folder (`<root>/measured/<label>-<stamp>/`) into the run's `results/board/<run>/` folder.
+    - **The `.done` part matters.** The queue counts a job as completed only if `stdbench/<label>/.done` exists; the exit code alone isn't enough. Without it, a successful run shows as "failed". The marker is written only if grading exits 0.
+    - **Use a new label for every run.** The queue refuses a label whose `stdbench/<label>` folder already exists.
 
 ### Anywhere else
 
