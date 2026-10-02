@@ -8,9 +8,12 @@ data/rag/chunks/<benchmark>-<lang>.jsonl, one chunk per line:
 {id, source, lang, benchmark, page_start, page_end, text}. data/ is git-ignored: the
 Indonesian books are all rights reserved, so their text must not be committed.
 
-Per book: text blocks from PyMuPDF -> drop image credits and the lines that repeat on
-many pages (running headers, footers) -> fix broken ligatures -> drop short blocks
-(captions, headings, list options, page numbers) -> 250-word chunks overlapping by 50.
+Per book: text blocks from PyMuPDF -> cut front and back matter (contents, glossary,
+bibliography, author profiles) -> drop image credits and the lines that repeat on many pages
+(running headers, footers) -> fix broken ligatures -> drop blocks that aren't course material:
+short ones (captions, headings, list options, page numbers), references, worksheet prompts, and
+ones mostly addressed to the student (questions, activity steps) -> 250-word chunks
+overlapping by 50.
 """
 
 import argparse
@@ -32,13 +35,36 @@ RECORD_DIR = Path("results/rag")
 # ligature vanished altogether ("Releksi") are rare and can't be told apart safely: left as is.
 LIGATURES = {"昀椀": "fi", "昀氀": "fl", "ٴ": "fi", "ٶ": "fi", "˪": "fi"}
 LIGATURE_RE = re.compile("|".join(map(re.escape, LIGATURES)))
-INVISIBLE_RE = re.compile("[\u200b-‍⁠﻿-]")
-BULLETS_RE = re.compile("[●•►▪■□◆◇○◦⦁∙]")
+INVISIBLE_RE = re.compile(r"[\u200b-\u200d\u2060\ufeff\ue000-\uf8ff]")  # incl. private use
+BULLETS_RE = re.compile(r"[\u25cf\u2022\u25ba\u25aa\u25a0\u25a1\u25c6\u25c7\u25cb\u25e6\u2981\u2219]")
 CREDIT_RE = re.compile(
     r"^\s*(image|images|photo|photos|picture|credit|credits|source|sumber|gambar \d)\b"
     r"|pixabay|shutterstock|wikimedia|unsplash|flickr|\bCC0\b|\bCC BY",
     re.IGNORECASE,
 )
+# Text that reads as course material for nobody: reference lists, the books' fixed worksheet
+# prompts ("What are you observing about this phenomenon?") and standards codes ("3.2.2 Analyze").
+CITATION_RE = re.compile(r"https?://|www\.|\bdiakses\b|\baccessed\b|retrieved from|\bdoi:|\bISBN\b",
+                         re.IGNORECASE)
+WORKSHEET_RE = re.compile(
+    r"pelajar pancasila|buku (tugas|catatan)|what are you (observing|wondering)|^\d\.\d\.\d\b",
+    re.IGNORECASE,
+)
+# A block is mostly addressed to the student (questions, activity steps) when at least half its
+# sentences are questions or start with a command. Specific verbs only: a loose pattern would
+# also catch "Jumlah ..." (amount) or "Work is ...".
+COMMANDS_ID = (
+    r"ayo|mari|(tulis|buat|cari|ambil|baca|isi|lakukan|perhatikan|jawab|gambar|susun|selidiki"
+    r"|diskusikan|sebutkan|jelaskan|amati|catat|ceritakan|tentukan|lengkapi|salin|pilih|hitung"
+    r"|uji|siapkan|gunakan|bandingkan|kumpulkan|simpulkan|rancang|coba|tanyakan|bayangkan"
+    r"|perkirakan|presentasikan|tuliskan|ulangi|identifikasi|analisislah)(lah)?"
+)
+COMMANDS_EN = (
+    r"explain|describe|write|draw|read|discuss|compare|identify|complete|circle|think|share"
+    r"|predict|create|observe|ask|develop|construct|obtain|evaluate|analyze|carry|try|find"
+    r"|choose|imagine|talk|make|look"
+)
+COMMAND_RE = re.compile(rf"^(\d+[.)]\s*|[a-z][.)]\s*)?({COMMANDS_ID}|{COMMANDS_EN})\b", re.IGNORECASE)
 MIN_BLOCK_WORDS = 8
 
 
@@ -58,8 +84,24 @@ def clean_text(text: str) -> str:
     return " ".join(text.split())
 
 
+def directive_share(text: str) -> float:
+    """Share of sentences that are questions or commands to the student."""
+    sentences = [s for s in re.split(r"(?<=[.?!])\s+", text) if len(s.split()) >= 2]
+    if not sentences:
+        return 0.0
+    return sum(s.rstrip().endswith("?") or bool(COMMAND_RE.match(s)) for s in sentences) / len(
+        sentences
+    )
+
+
 def keep_block(text: str) -> bool:
-    return len(text.split()) >= MIN_BLOCK_WORDS and not CREDIT_RE.search(text)
+    return (
+        len(text.split()) >= MIN_BLOCK_WORDS
+        and not CREDIT_RE.search(text)
+        and not CITATION_RE.search(text)
+        and not WORKSHEET_RE.search(text)
+        and directive_share(text) < 0.5
+    )
 
 
 def _line_key(line: str) -> str:
@@ -82,6 +124,32 @@ def drop_boilerplate(pages: list[Page], min_pages: int = 5, share: float = 0.1) 
                 blocks.append("\n".join(lines))
         out.append(Page(p.source, p.page, blocks))
     return out
+
+
+FRONT_RE = re.compile(
+    r"^\s*(kata pengantar|daftar isi|daftar gambar|daftar tabel|petunjuk penggunaan buku)\s*$",
+    re.IGNORECASE | re.MULTILINE,
+)
+BACK_RE = re.compile(
+    r"^\s*(daftar pustaka|glosarium|indeks"
+    r"|profil (penulis|penelaah|ilustrator|editor|desainer|pelaku perbukuan))\s*$",
+    re.IGNORECASE | re.MULTILINE,
+)
+
+
+def body_pages(pages: list[Page]) -> list[Page]:
+    """Cut the front matter (preface, contents, how to use the book) and the back matter
+    (glossary, bibliography, index, author profiles). Headings count only in the first 10% or
+    last 25% of the book, so a table of contents listing "Glosarium" doesn't cut it short."""
+    n = len(pages)
+    front, back = 0, n + 1
+    for p in pages:
+        text = "\n".join(p.blocks)
+        if p.page <= 0.1 * n and FRONT_RE.search(text):
+            front = p.page
+        if p.page >= 0.75 * n and back > n and BACK_RE.search(text):
+            back = p.page
+    return [p for p in pages if front < p.page < back]
 
 
 def pdf_pages(path: Path, source: str) -> list[Page]:
@@ -140,7 +208,7 @@ def build(benchmark: str, lang: str, raw_dir: Path = RAW_DIR, size: int = 250,
         path = local_path(book, raw_dir)
         if not path.exists():
             raise FileNotFoundError(f"{path} missing; run python -m edge_grader.rag.sources")
-        docs.append(drop_boilerplate(pdf_pages(path, book["id"])))
+        docs.append(drop_boilerplate(body_pages(pdf_pages(path, book["id"]))))
     if benchmark == "scientsbank":  # the Wikipedia topics fill SciEntsBank's gaps
         docs += [wiki_pages(f) for f in sorted((raw_dir / lang / "wiki").glob("*.txt"))]
     chunks = []

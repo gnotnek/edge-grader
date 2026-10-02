@@ -70,9 +70,16 @@ Each step can be tested on its own. Steps 1–5 are built (2026-10-02); the test
 
 **Extraction choices** (`corpus.py`):
 - Text comes from PyMuPDF's text blocks.
-- Dropped: image credits; lines that repeat on at least 10% of a book's pages (running headers and footers); blocks under 8 words (captions, headings, list options, page numbers).
+- **Pages cut:** the books' front matter (preface, contents, "how to use this book") and back matter (glossary, bibliography, index, author profiles).
+- **Lines dropped:** image credits, and lines that repeat on at least 10% of a book's pages (running headers and footers).
+- **Blocks dropped:**
+  - under 8 words (captions, headings, list options, page numbers)
+  - reference lists (URLs, "Diakses", ISBN, doi)
+  - the books' fixed worksheet prompts ("What are you observing about this phenomenon?", "buku tugas", "Pelajar Pancasila", standards codes like "3.2.2 Analyze…")
+  - blocks where at least half the sentences are questions or commands to the student (activity steps, end-of-chapter questions). The commands are a list of specific verbs ("Tulislah", "Diskusikan", "Explain"…), so ordinary sentences such as "Jumlah planet…" or "Work is done…" stay.
 - **Fixed:** the broken ligatures (`昀椀`, `ٴ`, `ٶ`, `˪` → fi; `昀氀` → fl).
 - **Not fixed:** words where the ligature vanished entirely ("Releksi"). There are only a few dozen, and they can't be told apart safely from real words.
+- **Why these filters (2026-10-02):** in the first retrieval round, the Indonesian top hits were often reference lists, activity steps and reflection prompts: about 13 of 30 sample questions had a useful passage in the top 3, against about 23 of 30 for English. The filters cut the Indonesian book chunks from 1,075 to 716 and the English ones from 576 to 514. As a side effect they also drop Wikipedia's reference lists. The first round's retrieval files are kept in git history (commit `efd521e`).
 - **Retrieval check uses train questions only.** test_ua shares those questions, but test_uq and test_ud questions are never shown, so the corpus isn't tuned on unseen questions.
 
 ## Starting settings

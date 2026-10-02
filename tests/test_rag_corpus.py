@@ -83,3 +83,41 @@ def test_wiki_pages_drop_section_headings(tmp_path):
     assert page.page is None
     assert all("==" not in b for b in page.blocks)
     assert len(page.blocks) == 2
+
+
+def test_directive_blocks_are_dropped_in_both_languages():
+    assert not keep_block("1. Apa saja benda langit yang ada di luar angkasa selain Bumi? "
+                          "2. Diskusikan bersama kelompok kalian. 3. Tulislah jawabanmu di sini.")
+    assert not keep_block("Analyze the graph and table to circle the answer. Explain your "
+                          "reasoning. What do you notice about the pattern?")
+    # Ordinary sentences whose first word only looks like a command stay.
+    assert keep_block("Jumlah planet di tata surya ada delapan. Masalah utama adalah cahaya "
+                      "matahari yang terhalang awan tebal.")
+    assert keep_block("Work is done when a force moves an object over a distance. Use of "
+                      "pulleys can reduce the force needed to lift a load.")
+
+
+def test_reference_lists_and_worksheet_prompts_are_dropped():
+    assert not keep_block("Cameron, Duncan. Soil Erosion and Degradation. Diakses 10 Maret 2024 "
+                          "dari https://www.fao.org/soils")
+    assert not keep_block("Observations & Wonderings What are you observing about this "
+                          "phenomenon? What are you wondering about this phenomenon?")
+    assert not keep_block("3.2.2 Analyze and interpret data to identify patterns of traits that "
+                          "plants and animals have inherited from parents.")
+    assert not keep_block("Terkait dimensi profil pelajar Pancasila yang kamu kembangkan selama "
+                          "mempelajari bab ini, tuliskan pengalamanmu.")
+
+
+def test_front_and_back_matter_pages_are_cut():
+    from edge_grader.rag.corpus import body_pages
+
+    text = "Sebuah paragraf panjang tentang energi dan cahaya matahari di bumi kita."
+    pages = [Page("b", i, [text]) for i in range(1, 41)]
+    pages[1].blocks.insert(0, "Kata Pengantar")
+    pages[2].blocks.insert(0, "Daftar Isi")
+    pages[35].blocks.insert(0, "Daftar Pustaka")
+    kept = [p.page for p in body_pages(pages)]
+    assert kept == list(range(4, 36))
+    # A heading listed in the table of contents early on doesn't cut the book.
+    pages[2].blocks.append("Glosarium")
+    assert [p.page for p in body_pages(pages)] == list(range(4, 36))
