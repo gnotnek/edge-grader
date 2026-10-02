@@ -1,0 +1,5552 @@
+{
+ "stage": "rag",
+ "kind": "retrieval",
+ "time": "2026-10-02T08:26:41+00:00",
+ "settings": {
+  "index": "data/rag/index/scientsbank-id.e5-small-multi",
+  "k": 5,
+  "query": "question text only",
+  "model": "e5-small-multi",
+  "hf_id": "intfloat/multilingual-e5-small",
+  "query_prefix": "query: ",
+  "passage_prefix": "passage: ",
+  "chunks": "data/rag/chunks/scientsbank-id.jsonl",
+  "chunks_sha256": "2626c966e2969b96b20b8b01e7d52de0db39ec1d7f930ecd0da66f40b4d1a1d7",
+  "n_chunks": 1505,
+  "dim": 384,
+  "time": "2026-10-02T08:26:12+00:00"
+ },
+ "questions": {
+  "EM.13": {
+   "splits": [
+    "test_uq"
+   ],
+   "hits": [
+    [
+     "wiki:Mineral:0",
+     0.8333
+    ],
+    [
+     "wiki:Gores_(mineralogi):0",
+     0.8231
+    ],
+    [
+     "wiki:Batu:0",
+     0.8203
+    ],
+    [
+     "wiki:Kilau_(mineralogi):1",
+     0.8103
+    ],
+    [
+     "wiki:Kilau_(mineralogi):0",
+     0.81
+    ]
+   ]
+  },
+  "EM.16b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas3:87",
+     0.8373
+    ],
+    [
+     "wiki:Skala_Mohs:1",
+     0.8282
+    ],
+    [
+     "wiki:Skala_Mohs:0",
+     0.8261
+    ],
+    [
+     "id-ipa-kelas7:11",
+     0.8233
+    ],
+    [
+     "id-ipas-kelas3:88",
+     0.8232
+    ]
+   ]
+  },
+  "EM.21a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Kelarutan:3",
+     0.8208
+    ],
+    [
+     "id-ipa-kelas7:43",
+     0.8151
+    ],
+    [
+     "id-ipas-kelas3:87",
+     0.8093
+    ],
+    [
+     "wiki:Skala_Mohs:1",
+     0.8092
+    ],
+    [
+     "id-ipa-kelas7:11",
+     0.8071
+    ]
+   ]
+  },
+  "EM.21b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Skala_Mohs:1",
+     0.8172
+    ],
+    [
+     "wiki:Gores_(mineralogi):0",
+     0.8126
+    ],
+    [
+     "id-ipa-kelas7:43",
+     0.8115
+    ],
+    [
+     "wiki:Kelarutan:3",
+     0.8109
+    ],
+    [
+     "id-ipa-kelas7:42",
+     0.8102
+    ]
+   ]
+  },
+  "EM.26": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Siklus_air:6",
+     0.8231
+    ],
+    [
+     "wiki:Kelarutan:0",
+     0.8139
+    ],
+    [
+     "id-ipa-kelas7:56",
+     0.8135
+    ],
+    [
+     "id-ipa-kelas7:55",
+     0.8104
+    ],
+    [
+     "wiki:Reaksi_kimia:9",
+     0.8082
+    ]
+   ]
+  },
+  "EM.27b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas3:84",
+     0.8236
+    ],
+    [
+     "id-ipas-kelas3:87",
+     0.8235
+    ],
+    [
+     "id-ipas-kelas3:88",
+     0.8222
+    ],
+    [
+     "id-ipa-kelas7:26",
+     0.8198
+    ],
+    [
+     "id-ipa-kelas7:43",
+     0.8145
+    ]
+   ]
+  },
+  "EM.33b": {
+   "splits": [
+    "test_uq"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:11",
+     0.8407
+    ],
+    [
+     "id-ipa-kelas9:136",
+     0.8305
+    ],
+    [
+     "wiki:Skala_Mohs:1",
+     0.8251
+    ],
+    [
+     "id-ipas-kelas5:101",
+     0.8236
+    ],
+    [
+     "id-ipas-kelas3:87",
+     0.8232
+    ]
+   ]
+  },
+  "EM.35": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Skala_Mohs:1",
+     0.8143
+    ],
+    [
+     "id-ipas-kelas5:101",
+     0.7961
+    ],
+    [
+     "id-ipa-kelas7:43",
+     0.7954
+    ],
+    [
+     "id-ipa-kelas7:11",
+     0.795
+    ],
+    [
+     "id-ipa-kelas9:110",
+     0.792
+    ]
+   ]
+  },
+  "EM.43b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas3:87",
+     0.8175
+    ],
+    [
+     "id-ipa-kelas7:43",
+     0.8149
+    ],
+    [
+     "id-ipa-kelas8:125",
+     0.814
+    ],
+    [
+     "id-ipa-kelas8:126",
+     0.8132
+    ],
+    [
+     "id-ipas-kelas3:84",
+     0.813
+    ]
+   ]
+  },
+  "EM.45b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:134",
+     0.8157
+    ],
+    [
+     "id-ipa-kelas8:126",
+     0.8133
+    ],
+    [
+     "id-ipa-kelas8:122",
+     0.8116
+    ],
+    [
+     "id-ipa-kelas7:43",
+     0.809
+    ],
+    [
+     "id-ipa-kelas8:141",
+     0.8082
+    ]
+   ]
+  },
+  "EM.45c": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas3:84",
+     0.8218
+    ],
+    [
+     "id-ipa-kelas7:43",
+     0.8196
+    ],
+    [
+     "wiki:Kristal:5",
+     0.8187
+    ],
+    [
+     "id-ipa-kelas8:126",
+     0.8142
+    ],
+    [
+     "id-ipa-kelas7:42",
+     0.8122
+    ]
+   ]
+  },
+  "EM.46": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:43",
+     0.8201
+    ],
+    [
+     "id-ipa-kelas8:133",
+     0.8137
+    ],
+    [
+     "wiki:Kelarutan:0",
+     0.8119
+    ],
+    [
+     "id-ipa-kelas7:50",
+     0.8117
+    ],
+    [
+     "id-ipas-kelas3:87",
+     0.8116
+    ]
+   ]
+  },
+  "EM.47": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:122",
+     0.8336
+    ],
+    [
+     "id-ipa-kelas8:135",
+     0.8247
+    ],
+    [
+     "id-ipa-kelas8:151",
+     0.8214
+    ],
+    [
+     "id-ipas-kelas6:114",
+     0.8191
+    ],
+    [
+     "id-ipa-kelas8:173",
+     0.8186
+    ]
+   ]
+  },
+  "EM.48b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:126",
+     0.8071
+    ],
+    [
+     "wiki:Reaksi_kimia:9",
+     0.8066
+    ],
+    [
+     "id-ipa-kelas8:122",
+     0.8061
+    ],
+    [
+     "wiki:Kelarutan:0",
+     0.8058
+    ],
+    [
+     "id-ipa-kelas7:43",
+     0.8054
+    ]
+   ]
+  },
+  "EV.11": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "wiki:Ekosistem:0",
+     0.8005
+    ],
+    [
+     "id-ipa-kelas7:131",
+     0.8001
+    ],
+    [
+     "wiki:Ekosistem:1",
+     0.7992
+    ],
+    [
+     "wiki:Ekosistem:3",
+     0.7949
+    ],
+    [
+     "wiki:Ekosistem:4",
+     0.7943
+    ]
+   ]
+  },
+  "EV.12b": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas5:45",
+     0.8484
+    ],
+    [
+     "id-ipa-kelas7:131",
+     0.8481
+    ],
+    [
+     "id-ipa-kelas9:27",
+     0.8471
+    ],
+    [
+     "id-ipa-kelas9:28",
+     0.8468
+    ],
+    [
+     "id-ipa-kelas7:130",
+     0.8455
+    ]
+   ]
+  },
+  "EV.21": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas3:87",
+     0.8272
+    ],
+    [
+     "id-ipa-kelas8:127",
+     0.826
+    ],
+    [
+     "id-ipa-kelas8:122",
+     0.8253
+    ],
+    [
+     "id-ipa-kelas8:126",
+     0.8236
+    ],
+    [
+     "id-ipa-kelas8:129",
+     0.8229
+    ]
+   ]
+  },
+  "EV.22a": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:25",
+     0.8252
+    ],
+    [
+     "id-ipa-kelas7:66",
+     0.8201
+    ],
+    [
+     "id-ipa-kelas8:151",
+     0.8155
+    ],
+    [
+     "id-ipa-kelas8:159",
+     0.8154
+    ],
+    [
+     "id-ipas-kelas5:45",
+     0.8154
+    ]
+   ]
+  },
+  "EV.25": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas5:40",
+     0.8116
+    ],
+    [
+     "id-ipas-kelas4:59",
+     0.805
+    ],
+    [
+     "wiki:Komponen_abiotik:3",
+     0.8047
+    ],
+    [
+     "id-ipas-kelas4:96",
+     0.8039
+    ],
+    [
+     "id-ipas-kelas4:97",
+     0.8034
+    ]
+   ]
+  },
+  "EV.35a": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:37",
+     0.814
+    ],
+    [
+     "id-ipa-kelas7:66",
+     0.8116
+    ],
+    [
+     "id-ipa-kelas7:25",
+     0.8085
+    ],
+    [
+     "id-ipas-kelas5:45",
+     0.8037
+    ],
+    [
+     "wiki:Percobaan:2",
+     0.803
+    ]
+   ]
+  },
+  "EV.8c": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas3:87",
+     0.8188
+    ],
+    [
+     "id-ipa-kelas7:66",
+     0.8176
+    ],
+    [
+     "id-ipa-kelas7:37",
+     0.808
+    ],
+    [
+     "id-ipa-kelas9:98",
+     0.8064
+    ],
+    [
+     "id-ipas-kelas6:21",
+     0.8046
+    ]
+   ]
+  },
+  "FN.17a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:58",
+     0.8322
+    ],
+    [
+     "id-ipa-kelas7:43",
+     0.8294
+    ],
+    [
+     "id-ipa-kelas7:50",
+     0.8215
+    ],
+    [
+     "wiki:Kelarutan:2",
+     0.8211
+    ],
+    [
+     "id-ipa-kelas7:26",
+     0.821
+    ]
+   ]
+  },
+  "FN.17c": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:43",
+     0.8347
+    ],
+    [
+     "id-ipa-kelas8:32",
+     0.8269
+    ],
+    [
+     "id-ipa-kelas7:26",
+     0.8239
+    ],
+    [
+     "wiki:Kelarutan:3",
+     0.8218
+    ],
+    [
+     "id-ipa-kelas8:126",
+     0.8209
+    ]
+   ]
+  },
+  "FN.19b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas6:13",
+     0.8347
+    ],
+    [
+     "id-ipa-kelas7:47",
+     0.8313
+    ],
+    [
+     "id-ipa-kelas8:35",
+     0.8303
+    ],
+    [
+     "id-ipa-kelas8:122",
+     0.8294
+    ],
+    [
+     "id-ipa-kelas8:129",
+     0.8281
+    ]
+   ]
+  },
+  "FN.20a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas6:12",
+     0.8162
+    ],
+    [
+     "id-ipas-kelas3:5",
+     0.8145
+    ],
+    [
+     "id-ipa-kelas9:26",
+     0.8145
+    ],
+    [
+     "id-ipa-kelas8:26",
+     0.8143
+    ],
+    [
+     "id-ipas-kelas3:8",
+     0.8131
+    ]
+   ]
+  },
+  "FN.20b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:59",
+     0.8297
+    ],
+    [
+     "id-ipa-kelas9:153",
+     0.8284
+    ],
+    [
+     "id-ipa-kelas9:98",
+     0.8282
+    ],
+    [
+     "id-ipa-kelas8:26",
+     0.8255
+    ],
+    [
+     "id-ipa-kelas7:60",
+     0.8248
+    ]
+   ]
+  },
+  "FN.24b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Lemak:10",
+     0.8233
+    ],
+    [
+     "id-ipa-kelas9:35",
+     0.8163
+    ],
+    [
+     "id-ipa-kelas9:54",
+     0.8162
+    ],
+    [
+     "id-ipa-kelas8:14",
+     0.8143
+    ],
+    [
+     "id-ipa-kelas7:37",
+     0.813
+    ]
+   ]
+  },
+  "FN.24c": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:35",
+     0.8248
+    ],
+    [
+     "id-ipa-kelas8:14",
+     0.8243
+    ],
+    [
+     "id-ipa-kelas8:32",
+     0.8241
+    ],
+    [
+     "id-ipa-kelas9:54",
+     0.823
+    ],
+    [
+     "id-ipa-kelas8:23",
+     0.8224
+    ]
+   ]
+  },
+  "FN.26b": {
+   "splits": [
+    "test_uq"
+   ],
+   "hits": [
+    [
+     "wiki:Kelarutan:3",
+     0.7918
+    ],
+    [
+     "id-ipa-kelas7:182",
+     0.7814
+    ],
+    [
+     "wiki:Kelarutan:4",
+     0.7803
+    ],
+    [
+     "wiki:Asam:3",
+     0.7792
+    ],
+    [
+     "id-ipa-kelas9:190",
+     0.7791
+    ]
+   ]
+  },
+  "FN.27a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:35",
+     0.8129
+    ],
+    [
+     "id-ipa-kelas9:189",
+     0.8086
+    ],
+    [
+     "id-ipa-kelas9:56",
+     0.8078
+    ],
+    [
+     "id-ipa-kelas8:175",
+     0.8072
+    ],
+    [
+     "id-ipa-kelas9:98",
+     0.8041
+    ]
+   ]
+  },
+  "FN.27b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:56",
+     0.8251
+    ],
+    [
+     "id-ipa-kelas9:35",
+     0.8188
+    ],
+    [
+     "id-ipa-kelas9:189",
+     0.8146
+    ],
+    [
+     "id-ipa-kelas9:13",
+     0.8136
+    ],
+    [
+     "id-ipa-kelas8:175",
+     0.8133
+    ]
+   ]
+  },
+  "HB.22a": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas3:10",
+     0.8194
+    ],
+    [
+     "id-ipa-kelas8:32",
+     0.8169
+    ],
+    [
+     "id-ipa-kelas9:28",
+     0.8159
+    ],
+    [
+     "id-ipa-kelas7:93",
+     0.8112
+    ],
+    [
+     "id-ipa-kelas9:38",
+     0.8103
+    ]
+   ]
+  },
+  "HB.24b1": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas4:30",
+     0.8051
+    ],
+    [
+     "id-ipas-kelas4:19",
+     0.7997
+    ],
+    [
+     "id-ipa-kelas7:93",
+     0.7996
+    ],
+    [
+     "id-ipa-kelas7:109",
+     0.7991
+    ],
+    [
+     "wiki:Tuas:1",
+     0.7958
+    ]
+   ]
+  },
+  "HB.24b2": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas4:30",
+     0.8057
+    ],
+    [
+     "id-ipas-kelas4:19",
+     0.8025
+    ],
+    [
+     "id-ipa-kelas7:93",
+     0.8016
+    ],
+    [
+     "id-ipa-kelas7:109",
+     0.7999
+    ],
+    [
+     "wiki:Tuas:1",
+     0.799
+    ]
+   ]
+  },
+  "HB.34": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "wiki:Tubuh_manusia:0",
+     0.8196
+    ],
+    [
+     "wiki:Tubuh_manusia:1",
+     0.8181
+    ],
+    [
+     "id-ipa-kelas9:92",
+     0.8136
+    ],
+    [
+     "id-ipas-kelas5:88",
+     0.813
+    ],
+    [
+     "wiki:Otot:8",
+     0.8114
+    ]
+   ]
+  },
+  "HB.35": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "wiki:Otot:7",
+     0.8197
+    ],
+    [
+     "wiki:Otot:0",
+     0.809
+    ],
+    [
+     "wiki:Tendon:0",
+     0.8075
+    ],
+    [
+     "wiki:Otot:8",
+     0.8054
+    ],
+    [
+     "wiki:Otot:6",
+     0.8042
+    ]
+   ]
+  },
+  "HB.42a": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas6:38",
+     0.7978
+    ],
+    [
+     "id-ipa-kelas8:35",
+     0.7953
+    ],
+    [
+     "id-ipas-kelas6:20",
+     0.7951
+    ],
+    [
+     "id-ipas-kelas6:5",
+     0.794
+    ],
+    [
+     "id-ipa-kelas9:16",
+     0.7928
+    ]
+   ]
+  },
+  "HB.42b": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas6:20",
+     0.788
+    ],
+    [
+     "id-ipas-kelas3:7",
+     0.7856
+    ],
+    [
+     "id-ipas-kelas3:87",
+     0.7846
+    ],
+    [
+     "id-ipas-kelas6:38",
+     0.7845
+    ],
+    [
+     "id-ipa-kelas8:35",
+     0.7845
+    ]
+   ]
+  },
+  "HB.43": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:93",
+     0.8435
+    ],
+    [
+     "id-ipas-kelas3:28",
+     0.8261
+    ],
+    [
+     "id-ipa-kelas9:21",
+     0.8255
+    ],
+    [
+     "id-ipa-kelas7:103",
+     0.8222
+    ],
+    [
+     "id-ipas-kelas5:101",
+     0.8216
+    ]
+   ]
+  },
+  "HB.46": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:114",
+     0.8013
+    ],
+    [
+     "wiki:Sendi:0",
+     0.8011
+    ],
+    [
+     "id-ipa-kelas7:106",
+     0.7994
+    ],
+    [
+     "wiki:Tulang:5",
+     0.795
+    ],
+    [
+     "wiki:Tendon:0",
+     0.7947
+    ]
+   ]
+  },
+  "HB.53a2": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:81",
+     0.8261
+    ],
+    [
+     "id-ipas-kelas3:5",
+     0.8204
+    ],
+    [
+     "id-ipas-kelas3:4",
+     0.815
+    ],
+    [
+     "id-ipas-kelas3:8",
+     0.8127
+    ],
+    [
+     "id-ipa-kelas8:169",
+     0.8119
+    ]
+   ]
+  },
+  "HB.53b": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:169",
+     0.8145
+    ],
+    [
+     "id-ipa-kelas8:173",
+     0.8132
+    ],
+    [
+     "id-ipa-kelas8:44",
+     0.8131
+    ],
+    [
+     "id-ipas-kelas3:4",
+     0.8087
+    ],
+    [
+     "id-ipa-kelas9:189",
+     0.8084
+    ]
+   ]
+  },
+  "HB.54a2": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas3:8",
+     0.8216
+    ],
+    [
+     "id-ipas-kelas3:5",
+     0.8206
+    ],
+    [
+     "id-ipas-kelas3:4",
+     0.8194
+    ],
+    [
+     "id-ipas-kelas3:28",
+     0.819
+    ],
+    [
+     "id-ipa-kelas8:107",
+     0.8154
+    ]
+   ]
+  },
+  "HB.59a": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "wiki:Adaptasi:3",
+     0.7979
+    ],
+    [
+     "id-ipa-kelas9:38",
+     0.7973
+    ],
+    [
+     "id-ipa-kelas9:28",
+     0.7917
+    ],
+    [
+     "id-ipa-kelas7:66",
+     0.7908
+    ],
+    [
+     "wiki:Reaksi_kimia:16",
+     0.7899
+    ]
+   ]
+  },
+  "HB.59b": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:114",
+     0.7833
+    ],
+    [
+     "id-ipa-kelas7:103",
+     0.7806
+    ],
+    [
+     "id-ipa-kelas7:58",
+     0.7798
+    ],
+    [
+     "id-ipas-kelas6:67",
+     0.7758
+    ],
+    [
+     "id-ipas-kelas5:33",
+     0.7753
+    ]
+   ]
+  },
+  "HB.60": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:101",
+     0.8064
+    ],
+    [
+     "wiki:Reaksi_kimia:16",
+     0.8062
+    ],
+    [
+     "id-ipa-kelas8:67",
+     0.8053
+    ],
+    [
+     "id-ipa-kelas8:66",
+     0.8045
+    ],
+    [
+     "id-ipa-kelas7:100",
+     0.8031
+    ]
+   ]
+  },
+  "HB.6a": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "wiki:Otot:8",
+     0.8349
+    ],
+    [
+     "wiki:Otot:0",
+     0.8238
+    ],
+    [
+     "wiki:Tendon:0",
+     0.8197
+    ],
+    [
+     "wiki:Otot:7",
+     0.8188
+    ],
+    [
+     "id-ipas-kelas6:19",
+     0.8143
+    ]
+   ]
+  },
+  "II.12b": {
+   "splits": [
+    "test_uq"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:125",
+     0.8497
+    ],
+    [
+     "id-ipa-kelas9:98",
+     0.8389
+    ],
+    [
+     "id-ipas-kelas4:59",
+     0.8386
+    ],
+    [
+     "id-ipas-kelas3:40",
+     0.8382
+    ],
+    [
+     "id-ipa-kelas7:118",
+     0.835
+    ]
+   ]
+  },
+  "II.13a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Sidik_jari:4",
+     0.8236
+    ],
+    [
+     "id-ipas-kelas3:8",
+     0.8208
+    ],
+    [
+     "id-ipa-kelas9:27",
+     0.8206
+    ],
+    [
+     "id-ipa-kelas7:69",
+     0.8203
+    ],
+    [
+     "id-ipa-kelas7:11",
+     0.8183
+    ]
+   ]
+  },
+  "II.13b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Sidik_jari:4",
+     0.8286
+    ],
+    [
+     "id-ipas-kelas3:8",
+     0.8216
+    ],
+    [
+     "wiki:Sidik_jari:5",
+     0.8196
+    ],
+    [
+     "id-ipa-kelas9:29",
+     0.8178
+    ],
+    [
+     "id-ipa-kelas9:27",
+     0.8175
+    ]
+   ]
+  },
+  "II.20b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:134",
+     0.8391
+    ],
+    [
+     "id-ipa-kelas7:54",
+     0.8239
+    ],
+    [
+     "id-ipas-kelas3:87",
+     0.8215
+    ],
+    [
+     "id-ipas-kelas5:24",
+     0.82
+    ],
+    [
+     "id-ipa-kelas8:133",
+     0.82
+    ]
+   ]
+  },
+  "II.24b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:66",
+     0.8202
+    ],
+    [
+     "id-ipa-kelas7:47",
+     0.8121
+    ],
+    [
+     "id-ipas-kelas5:43",
+     0.8057
+    ],
+    [
+     "id-ipa-kelas9:98",
+     0.8046
+    ],
+    [
+     "id-ipa-kelas7:120",
+     0.8043
+    ]
+   ]
+  },
+  "II.26": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:164",
+     0.8223
+    ],
+    [
+     "id-ipa-kelas8:174",
+     0.8207
+    ],
+    [
+     "id-ipas-kelas3:3",
+     0.8195
+    ],
+    [
+     "id-ipa-kelas8:173",
+     0.8188
+    ],
+    [
+     "id-ipas-kelas3:8",
+     0.8172
+    ]
+   ]
+  },
+  "II.38": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:112",
+     0.7993
+    ],
+    [
+     "id-ipa-kelas8:114",
+     0.7912
+    ],
+    [
+     "wiki:Bayang-bayang:0",
+     0.7837
+    ],
+    [
+     "wiki:Satuan:4",
+     0.782
+    ],
+    [
+     "id-ipa-kelas8:110",
+     0.7815
+    ]
+   ]
+  },
+  "LF.13a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Deposit_(geologi):0",
+     0.8458
+    ],
+    [
+     "wiki:Batu:3",
+     0.808
+    ],
+    [
+     "id-ipa-kelas8:173",
+     0.8055
+    ],
+    [
+     "wiki:Batu:2",
+     0.8053
+    ],
+    [
+     "wiki:Batu:1",
+     0.8049
+    ]
+   ]
+  },
+  "LF.13b": {
+   "splits": [
+    "test_uq"
+   ],
+   "hits": [
+    [
+     "wiki:Erosi:0",
+     0.8278
+    ],
+    [
+     "wiki:Erosi:3",
+     0.8247
+    ],
+    [
+     "id-ipa-kelas8:156",
+     0.8206
+    ],
+    [
+     "wiki:Erosi:2",
+     0.8204
+    ],
+    [
+     "wiki:Erosi:1",
+     0.819
+    ]
+   ]
+  },
+  "LF.18a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Siklus_air:5",
+     0.8115
+    ],
+    [
+     "wiki:Delta_sungai:1",
+     0.8028
+    ],
+    [
+     "wiki:Siklus_air:4",
+     0.8022
+    ],
+    [
+     "id-ipa-kelas7:56",
+     0.8018
+    ],
+    [
+     "id-ipas-kelas5:54",
+     0.8015
+    ]
+   ]
+  },
+  "LF.26a2": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas4:32",
+     0.819
+    ],
+    [
+     "id-ipas-kelas4:58",
+     0.8175
+    ],
+    [
+     "id-ipas-kelas4:40",
+     0.8167
+    ],
+    [
+     "id-ipas-kelas4:38",
+     0.8165
+    ],
+    [
+     "id-ipas-kelas5:24",
+     0.815
+    ]
+   ]
+  },
+  "LF.26b2": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas4:32",
+     0.8059
+    ],
+    [
+     "id-ipas-kelas4:35",
+     0.8003
+    ],
+    [
+     "id-ipa-kelas7:66",
+     0.7998
+    ],
+    [
+     "id-ipa-kelas7:37",
+     0.7976
+    ],
+    [
+     "id-ipas-kelas4:58",
+     0.7963
+    ]
+   ]
+  },
+  "LF.27a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:174",
+     0.8209
+    ],
+    [
+     "id-ipa-kelas8:104",
+     0.8194
+    ],
+    [
+     "id-ipa-kelas7:180",
+     0.8143
+    ],
+    [
+     "id-ipa-kelas8:105",
+     0.8143
+    ],
+    [
+     "id-ipa-kelas7:181",
+     0.8137
+    ]
+   ]
+  },
+  "LF.28a2": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas4:32",
+     0.8087
+    ],
+    [
+     "id-ipa-kelas9:29",
+     0.8021
+    ],
+    [
+     "id-ipa-kelas7:66",
+     0.8018
+    ],
+    [
+     "id-ipa-kelas9:25",
+     0.7971
+    ],
+    [
+     "id-ipa-kelas8:175",
+     0.7958
+    ]
+   ]
+  },
+  "LF.31b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:174",
+     0.8278
+    ],
+    [
+     "id-ipa-kelas7:181",
+     0.8258
+    ],
+    [
+     "id-ipa-kelas8:122",
+     0.8248
+    ],
+    [
+     "id-ipa-kelas7:56",
+     0.8237
+    ],
+    [
+     "id-ipas-kelas5:45",
+     0.8234
+    ]
+   ]
+  },
+  "LF.33b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Deposit_(geologi):0",
+     0.8245
+    ],
+    [
+     "id-ipas-kelas4:79",
+     0.818
+    ],
+    [
+     "id-ipas-kelas4:42",
+     0.8127
+    ],
+    [
+     "id-ipas-kelas4:68",
+     0.8123
+    ],
+    [
+     "wiki:Delta_sungai:8",
+     0.8123
+    ]
+   ]
+  },
+  "LF.34b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Sidik_jari:4",
+     0.8101
+    ],
+    [
+     "id-ipas-kelas5:54",
+     0.8047
+    ],
+    [
+     "id-ipas-kelas3:75",
+     0.803
+    ],
+    [
+     "wiki:Delta_sungai:1",
+     0.8024
+    ],
+    [
+     "wiki:Siklus_air:1",
+     0.8005
+    ]
+   ]
+  },
+  "LF.39": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas5:16",
+     0.8237
+    ],
+    [
+     "id-ipas-kelas5:45",
+     0.823
+    ],
+    [
+     "id-ipas-kelas5:101",
+     0.8176
+    ],
+    [
+     "id-ipas-kelas4:42",
+     0.8167
+    ],
+    [
+     "id-ipas-kelas4:36",
+     0.8156
+    ]
+   ]
+  },
+  "LF.6b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Erosi:3",
+     0.8253
+    ],
+    [
+     "id-ipa-kelas8:159",
+     0.8194
+    ],
+    [
+     "id-ipa-kelas8:140",
+     0.819
+    ],
+    [
+     "id-ipa-kelas9:182",
+     0.8187
+    ],
+    [
+     "id-ipa-kelas8:160",
+     0.8178
+    ]
+   ]
+  },
+  "LP.15c": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Pengukuran:9",
+     0.7996
+    ],
+    [
+     "id-ipa-kelas8:66",
+     0.7918
+    ],
+    [
+     "id-ipa-kelas8:67",
+     0.7896
+    ],
+    [
+     "id-ipa-kelas8:104",
+     0.7892
+    ],
+    [
+     "id-ipa-kelas8:68",
+     0.787
+    ]
+   ]
+  },
+  "LP.16c": {
+   "splits": [
+    "test_uq"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas5:101",
+     0.8244
+    ],
+    [
+     "id-ipa-kelas8:35",
+     0.8242
+    ],
+    [
+     "id-ipa-kelas9:29",
+     0.8222
+    ],
+    [
+     "id-ipa-kelas9:110",
+     0.8216
+    ],
+    [
+     "id-ipas-kelas4:56",
+     0.8208
+    ]
+   ]
+  },
+  "LP.16d": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:29",
+     0.8165
+    ],
+    [
+     "id-ipa-kelas9:115",
+     0.8165
+    ],
+    [
+     "id-ipas-kelas4:56",
+     0.812
+    ],
+    [
+     "id-ipa-kelas8:65",
+     0.8114
+    ],
+    [
+     "id-ipa-kelas7:141",
+     0.8109
+    ]
+   ]
+  },
+  "ME.10": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Baterai_listrik:7",
+     0.8235
+    ],
+    [
+     "wiki:Baterai_listrik:2",
+     0.8212
+    ],
+    [
+     "wiki:Baterai_listrik:3",
+     0.8208
+    ],
+    [
+     "id-ipa-kelas9:138",
+     0.812
+    ],
+    [
+     "id-ipa-kelas9:150",
+     0.8099
+    ]
+   ]
+  },
+  "ME.17a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:108",
+     0.817
+    ],
+    [
+     "id-ipa-kelas9:112",
+     0.8113
+    ],
+    [
+     "id-ipa-kelas7:103",
+     0.8098
+    ],
+    [
+     "id-ipas-kelas5:101",
+     0.8098
+    ],
+    [
+     "id-ipa-kelas7:93",
+     0.808
+    ]
+   ]
+  },
+  "ME.17b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:126",
+     0.8218
+    ],
+    [
+     "id-ipa-kelas9:108",
+     0.8211
+    ],
+    [
+     "id-ipa-kelas9:112",
+     0.8203
+    ],
+    [
+     "id-ipas-kelas5:101",
+     0.8161
+    ],
+    [
+     "id-ipas-kelas5:98",
+     0.8156
+    ]
+   ]
+  },
+  "ME.17c": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:108",
+     0.8139
+    ],
+    [
+     "id-ipa-kelas7:103",
+     0.8127
+    ],
+    [
+     "id-ipas-kelas5:101",
+     0.8107
+    ],
+    [
+     "id-ipas-kelas4:30",
+     0.8099
+    ],
+    [
+     "id-ipa-kelas7:93",
+     0.8096
+    ]
+   ]
+  },
+  "ME.17d": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:126",
+     0.8199
+    ],
+    [
+     "id-ipa-kelas9:108",
+     0.8163
+    ],
+    [
+     "id-ipa-kelas9:138",
+     0.8151
+    ],
+    [
+     "id-ipa-kelas9:112",
+     0.8141
+    ],
+    [
+     "wiki:Rangkaian_listrik:3",
+     0.8135
+    ]
+   ]
+  },
+  "ME.17e": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:138",
+     0.8072
+    ],
+    [
+     "wiki:Magnet:5",
+     0.8015
+    ],
+    [
+     "id-ipa-kelas9:126",
+     0.7993
+    ],
+    [
+     "id-ipa-kelas9:137",
+     0.7984
+    ],
+    [
+     "id-ipas-kelas3:60",
+     0.7982
+    ]
+   ]
+  },
+  "ME.27b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas4:27",
+     0.8185
+    ],
+    [
+     "id-ipas-kelas4:29",
+     0.8109
+    ],
+    [
+     "id-ipas-kelas4:26",
+     0.8074
+    ],
+    [
+     "id-ipa-kelas9:136",
+     0.8062
+    ],
+    [
+     "wiki:Magnet:4",
+     0.7996
+    ]
+   ]
+  },
+  "ME.28b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:142",
+     0.8343
+    ],
+    [
+     "id-ipa-kelas9:133",
+     0.8332
+    ],
+    [
+     "id-ipas-kelas4:26",
+     0.8299
+    ],
+    [
+     "id-ipas-kelas4:27",
+     0.8291
+    ],
+    [
+     "id-ipas-kelas4:29",
+     0.8284
+    ]
+   ]
+  },
+  "ME.30": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:114",
+     0.8165
+    ],
+    [
+     "id-ipa-kelas8:115",
+     0.8132
+    ],
+    [
+     "id-ipa-kelas7:106",
+     0.8129
+    ],
+    [
+     "id-ipa-kelas8:110",
+     0.8122
+    ],
+    [
+     "id-ipa-kelas9:106",
+     0.811
+    ]
+   ]
+  },
+  "ME.36": {
+   "splits": [
+    "test_uq"
+   ],
+   "hits": [
+    [
+     "wiki:Rangkaian_seri_dan_paralel:0",
+     0.823
+    ],
+    [
+     "id-ipa-kelas9:125",
+     0.8176
+    ],
+    [
+     "wiki:Rangkaian_listrik:2",
+     0.8145
+    ],
+    [
+     "wiki:Rangkaian_seri_dan_paralel:1",
+     0.8143
+    ],
+    [
+     "id-ipa-kelas9:124",
+     0.8141
+    ]
+   ]
+  },
+  "ME.38a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas5:94",
+     0.821
+    ],
+    [
+     "id-ipa-kelas8:112",
+     0.8196
+    ],
+    [
+     "id-ipa-kelas9:108",
+     0.8182
+    ],
+    [
+     "id-ipas-kelas5:101",
+     0.8163
+    ],
+    [
+     "id-ipas-kelas4:15",
+     0.8148
+    ]
+   ]
+  },
+  "ME.5b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas4:27",
+     0.8175
+    ],
+    [
+     "id-ipas-kelas4:26",
+     0.8115
+    ],
+    [
+     "id-ipa-kelas9:136",
+     0.8115
+    ],
+    [
+     "wiki:Magnet:2",
+     0.8043
+    ],
+    [
+     "id-ipas-kelas3:87",
+     0.803
+    ]
+   ]
+  },
+  "ME.65a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:13",
+     0.8296
+    ],
+    [
+     "id-ipa-kelas7:87",
+     0.8295
+    ],
+    [
+     "id-ipa-kelas9:115",
+     0.8271
+    ],
+    [
+     "wiki:Rangkaian_seri_dan_paralel:1",
+     0.8245
+    ],
+    [
+     "id-ipa-kelas9:116",
+     0.8211
+    ]
+   ]
+  },
+  "ME.65b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:87",
+     0.8246
+    ],
+    [
+     "wiki:Baterai_listrik:3",
+     0.816
+    ],
+    [
+     "wiki:Baterai_listrik:2",
+     0.8153
+    ],
+    [
+     "id-ipa-kelas9:13",
+     0.8148
+    ],
+    [
+     "id-ipa-kelas9:116",
+     0.8127
+    ]
+   ]
+  },
+  "ME.66a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:108",
+     0.7931
+    ],
+    [
+     "wiki:Insulator_listrik:5",
+     0.7914
+    ],
+    [
+     "wiki:Protein:14",
+     0.7911
+    ],
+    [
+     "id-ipa-kelas7:103",
+     0.7899
+    ],
+    [
+     "id-ipa-kelas9:112",
+     0.7894
+    ]
+   ]
+  },
+  "ME.66b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:112",
+     0.834
+    ],
+    [
+     "id-ipa-kelas9:108",
+     0.7999
+    ],
+    [
+     "id-ipa-kelas7:87",
+     0.7991
+    ],
+    [
+     "id-ipa-kelas9:125",
+     0.799
+    ],
+    [
+     "id-ipa-kelas9:111",
+     0.798
+    ]
+   ]
+  },
+  "ME.69b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas4:28",
+     0.8314
+    ],
+    [
+     "id-ipas-kelas4:27",
+     0.8314
+    ],
+    [
+     "wiki:Magnet:1",
+     0.8277
+    ],
+    [
+     "id-ipas-kelas4:26",
+     0.8256
+    ],
+    [
+     "id-ipas-kelas4:21",
+     0.8215
+    ]
+   ]
+  },
+  "ME.6b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:103",
+     0.8223
+    ],
+    [
+     "id-ipa-kelas9:106",
+     0.8222
+    ],
+    [
+     "id-ipa-kelas9:138",
+     0.8156
+    ],
+    [
+     "id-ipa-kelas7:106",
+     0.8156
+    ],
+    [
+     "id-ipa-kelas9:117",
+     0.814
+    ]
+   ]
+  },
+  "ME.72": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:106",
+     0.818
+    ],
+    [
+     "id-ipa-kelas9:124",
+     0.8129
+    ],
+    [
+     "id-ipa-kelas9:184",
+     0.8089
+    ],
+    [
+     "id-ipa-kelas9:147",
+     0.8085
+    ],
+    [
+     "id-ipas-kelas3:61",
+     0.8085
+    ]
+   ]
+  },
+  "ME.73": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas4:27",
+     0.8185
+    ],
+    [
+     "id-ipas-kelas4:26",
+     0.8158
+    ],
+    [
+     "id-ipas-kelas4:29",
+     0.81
+    ],
+    [
+     "wiki:Magnet:4",
+     0.8083
+    ],
+    [
+     "id-ipa-kelas9:136",
+     0.8073
+    ]
+   ]
+  },
+  "ME.74b": {
+   "splits": [
+    "test_uq"
+   ],
+   "hits": [
+    [
+     "wiki:Katrol:1",
+     0.8074
+    ],
+    [
+     "id-ipa-kelas7:103",
+     0.8032
+    ],
+    [
+     "id-ipa-kelas8:76",
+     0.7991
+    ],
+    [
+     "id-ipa-kelas8:75",
+     0.7988
+    ],
+    [
+     "id-ipa-kelas8:65",
+     0.7966
+    ]
+   ]
+  },
+  "ME.78b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas4:56",
+     0.821
+    ],
+    [
+     "id-ipa-kelas9:108",
+     0.8208
+    ],
+    [
+     "id-ipas-kelas5:94",
+     0.82
+    ],
+    [
+     "id-ipas-kelas5:101",
+     0.8178
+    ],
+    [
+     "id-ipa-kelas7:65",
+     0.817
+    ]
+   ]
+  },
+  "ME.79": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:136",
+     0.8412
+    ],
+    [
+     "id-ipas-kelas4:27",
+     0.8321
+    ],
+    [
+     "id-ipa-kelas9:142",
+     0.8226
+    ],
+    [
+     "id-ipas-kelas4:26",
+     0.8201
+    ],
+    [
+     "id-ipas-kelas4:28",
+     0.82
+    ]
+   ]
+  },
+  "ME.7a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Insulator_listrik:0",
+     0.8325
+    ],
+    [
+     "id-ipa-kelas9:130",
+     0.8285
+    ],
+    [
+     "id-ipas-kelas5:101",
+     0.8271
+    ],
+    [
+     "id-ipa-kelas9:110",
+     0.8262
+    ],
+    [
+     "wiki:Insulator_listrik:1",
+     0.8256
+    ]
+   ]
+  },
+  "ME.7b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Insulator_listrik:0",
+     0.8284
+    ],
+    [
+     "id-ipa-kelas9:110",
+     0.8263
+    ],
+    [
+     "id-ipa-kelas9:130",
+     0.8227
+    ],
+    [
+     "wiki:Insulator_listrik:1",
+     0.8201
+    ],
+    [
+     "id-ipas-kelas5:101",
+     0.8193
+    ]
+   ]
+  },
+  "MS.14b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas5:101",
+     0.8273
+    ],
+    [
+     "id-ipa-kelas7:43",
+     0.8262
+    ],
+    [
+     "id-ipa-kelas7:108",
+     0.8248
+    ],
+    [
+     "id-ipa-kelas7:42",
+     0.8219
+    ],
+    [
+     "id-ipa-kelas7:37",
+     0.8211
+    ]
+   ]
+  },
+  "MS.30b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas3:8",
+     0.8272
+    ],
+    [
+     "id-ipas-kelas3:84",
+     0.8237
+    ],
+    [
+     "id-ipa-kelas9:98",
+     0.823
+    ],
+    [
+     "id-ipa-kelas7:86",
+     0.8228
+    ],
+    [
+     "id-ipas-kelas5:101",
+     0.8227
+    ]
+   ]
+  },
+  "MS.39": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Pengukuran:2",
+     0.8426
+    ],
+    [
+     "wiki:Pengukuran:6",
+     0.8404
+    ],
+    [
+     "id-ipa-kelas7:28",
+     0.8375
+    ],
+    [
+     "wiki:Pengukuran:10",
+     0.8374
+    ],
+    [
+     "wiki:Pengukuran:3",
+     0.8338
+    ]
+   ]
+  },
+  "MS.43a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:59",
+     0.8204
+    ],
+    [
+     "id-ipa-kelas7:54",
+     0.8192
+    ],
+    [
+     "id-ipa-kelas7:42",
+     0.815
+    ],
+    [
+     "id-ipa-kelas9:98",
+     0.8141
+    ],
+    [
+     "id-ipa-kelas7:118",
+     0.8126
+    ]
+   ]
+  },
+  "MS.43b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:98",
+     0.8207
+    ],
+    [
+     "id-ipa-kelas7:11",
+     0.8202
+    ],
+    [
+     "id-ipa-kelas7:118",
+     0.8194
+    ],
+    [
+     "id-ipa-kelas7:8",
+     0.8172
+    ],
+    [
+     "id-ipa-kelas7:59",
+     0.8166
+    ]
+   ]
+  },
+  "MS.50a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:71",
+     0.8081
+    ],
+    [
+     "wiki:Termometer:0",
+     0.8079
+    ],
+    [
+     "id-ipa-kelas7:73",
+     0.7994
+    ],
+    [
+     "id-ipa-kelas7:28",
+     0.7984
+    ],
+    [
+     "id-ipas-kelas4:45",
+     0.7981
+    ]
+   ]
+  },
+  "MS.50b": {
+   "splits": [
+    "test_uq"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:28",
+     0.8399
+    ],
+    [
+     "id-ipa-kelas7:29",
+     0.8323
+    ],
+    [
+     "id-ipa-kelas7:71",
+     0.8301
+    ],
+    [
+     "id-ipa-kelas7:85",
+     0.8296
+    ],
+    [
+     "wiki:Pengukuran:2",
+     0.8273
+    ]
+   ]
+  },
+  "MS.64a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas3:8",
+     0.8366
+    ],
+    [
+     "id-ipas-kelas3:5",
+     0.8328
+    ],
+    [
+     "id-ipas-kelas3:7",
+     0.8293
+    ],
+    [
+     "id-ipa-kelas7:109",
+     0.8286
+    ],
+    [
+     "id-ipa-kelas7:103",
+     0.8279
+    ]
+   ]
+  },
+  "MX.1": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:122",
+     0.8357
+    ],
+    [
+     "id-ipa-kelas8:129",
+     0.8309
+    ],
+    [
+     "id-ipa-kelas7:43",
+     0.8231
+    ],
+    [
+     "id-ipa-kelas8:128",
+     0.8225
+    ],
+    [
+     "id-ipa-kelas8:126",
+     0.8207
+    ]
+   ]
+  },
+  "MX.10": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:58",
+     0.8232
+    ],
+    [
+     "id-ipa-kelas7:50",
+     0.8231
+    ],
+    [
+     "id-ipa-kelas7:43",
+     0.8138
+    ],
+    [
+     "id-ipa-kelas7:37",
+     0.8135
+    ],
+    [
+     "wiki:Reaksi_kimia:3",
+     0.8126
+    ]
+   ]
+  },
+  "MX.11a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:122",
+     0.8289
+    ],
+    [
+     "id-ipa-kelas9:10",
+     0.8247
+    ],
+    [
+     "id-ipa-kelas8:127",
+     0.8222
+    ],
+    [
+     "wiki:Kelarutan:2",
+     0.8207
+    ],
+    [
+     "id-ipa-kelas8:121",
+     0.8205
+    ]
+   ]
+  },
+  "MX.11b": {
+   "splits": [
+    "test_uq"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:10",
+     0.8274
+    ],
+    [
+     "wiki:Kelarutan:0",
+     0.8268
+    ],
+    [
+     "id-ipa-kelas8:128",
+     0.8263
+    ],
+    [
+     "id-ipa-kelas8:127",
+     0.8255
+    ],
+    [
+     "wiki:Konsentrasi:0",
+     0.8237
+    ]
+   ]
+  },
+  "MX.11c": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Konsentrasi:0",
+     0.8174
+    ],
+    [
+     "id-ipa-kelas8:122",
+     0.8167
+    ],
+    [
+     "id-ipa-kelas8:128",
+     0.8124
+    ],
+    [
+     "id-ipa-kelas8:129",
+     0.811
+    ],
+    [
+     "id-ipa-kelas8:127",
+     0.8107
+    ]
+   ]
+  },
+  "MX.11e": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:122",
+     0.8309
+    ],
+    [
+     "id-ipa-kelas8:131",
+     0.8279
+    ],
+    [
+     "id-ipas-kelas5:57",
+     0.8269
+    ],
+    [
+     "id-ipa-kelas8:135",
+     0.8266
+    ],
+    [
+     "id-ipa-kelas8:126",
+     0.8265
+    ]
+   ]
+  },
+  "MX.11f": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:122",
+     0.8268
+    ],
+    [
+     "id-ipa-kelas9:10",
+     0.823
+    ],
+    [
+     "id-ipa-kelas7:26",
+     0.8201
+    ],
+    [
+     "id-ipa-kelas8:126",
+     0.8194
+    ],
+    [
+     "id-ipas-kelas5:57",
+     0.8193
+    ]
+   ]
+  },
+  "MX.16a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Larutan:0",
+     0.8189
+    ],
+    [
+     "wiki:Konsentrasi:0",
+     0.8132
+    ],
+    [
+     "wiki:Kelarutan:0",
+     0.8092
+    ],
+    [
+     "id-ipa-kelas7:58",
+     0.8069
+    ],
+    [
+     "id-ipa-kelas9:115",
+     0.8068
+    ]
+   ]
+  },
+  "MX.18": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Kelarutan:0",
+     0.815
+    ],
+    [
+     "id-ipa-kelas7:50",
+     0.8148
+    ],
+    [
+     "id-ipa-kelas8:126",
+     0.8131
+    ],
+    [
+     "id-ipa-kelas8:122",
+     0.8109
+    ],
+    [
+     "id-ipa-kelas7:53",
+     0.8102
+    ]
+   ]
+  },
+  "MX.19": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:58",
+     0.8411
+    ],
+    [
+     "id-ipa-kelas7:56",
+     0.8363
+    ],
+    [
+     "wiki:Reaksi_kimia:9",
+     0.831
+    ],
+    [
+     "id-ipa-kelas7:50",
+     0.8307
+    ],
+    [
+     "id-ipa-kelas7:43",
+     0.8302
+    ]
+   ]
+  },
+  "MX.22a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Konsentrasi:0",
+     0.8319
+    ],
+    [
+     "wiki:Kelarutan:0",
+     0.8234
+    ],
+    [
+     "wiki:Larutan:0",
+     0.8211
+    ],
+    [
+     "id-ipa-kelas8:122",
+     0.8191
+    ],
+    [
+     "id-ipa-kelas8:127",
+     0.8124
+    ]
+   ]
+  },
+  "MX.24": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:50",
+     0.8365
+    ],
+    [
+     "id-ipa-kelas7:43",
+     0.8298
+    ],
+    [
+     "id-ipa-kelas7:58",
+     0.8257
+    ],
+    [
+     "id-ipa-kelas8:122",
+     0.8252
+    ],
+    [
+     "id-ipa-kelas8:126",
+     0.8234
+    ]
+   ]
+  },
+  "MX.36a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:58",
+     0.8278
+    ],
+    [
+     "id-ipa-kelas7:50",
+     0.8246
+    ],
+    [
+     "id-ipa-kelas7:47",
+     0.8219
+    ],
+    [
+     "id-ipa-kelas7:37",
+     0.8219
+    ],
+    [
+     "id-ipas-kelas6:33",
+     0.8198
+    ]
+   ]
+  },
+  "MX.36b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:58",
+     0.8289
+    ],
+    [
+     "id-ipa-kelas7:50",
+     0.8254
+    ],
+    [
+     "id-ipa-kelas7:37",
+     0.8232
+    ],
+    [
+     "id-ipa-kelas7:47",
+     0.8207
+    ],
+    [
+     "id-ipas-kelas6:33",
+     0.8183
+    ]
+   ]
+  },
+  "MX.41": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Kelarutan:0",
+     0.8252
+    ],
+    [
+     "id-ipa-kelas7:58",
+     0.8251
+    ],
+    [
+     "wiki:Reaksi_kimia:6",
+     0.8197
+    ],
+    [
+     "wiki:Konsentrasi:1",
+     0.8145
+    ],
+    [
+     "id-ipas-kelas3:87",
+     0.8136
+    ]
+   ]
+  },
+  "MX.42a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:122",
+     0.8304
+    ],
+    [
+     "id-ipa-kelas8:131",
+     0.8258
+    ],
+    [
+     "id-ipa-kelas8:133",
+     0.8254
+    ],
+    [
+     "id-ipa-kelas8:132",
+     0.8238
+    ],
+    [
+     "wiki:Kelarutan:2",
+     0.819
+    ]
+   ]
+  },
+  "MX.46b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:122",
+     0.8208
+    ],
+    [
+     "id-ipa-kelas8:129",
+     0.8184
+    ],
+    [
+     "id-ipa-kelas8:35",
+     0.8182
+    ],
+    [
+     "id-ipas-kelas4:56",
+     0.8133
+    ],
+    [
+     "id-ipa-kelas7:65",
+     0.8127
+    ]
+   ]
+  },
+  "MX.47b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:122",
+     0.8285
+    ],
+    [
+     "id-ipa-kelas8:129",
+     0.8277
+    ],
+    [
+     "id-ipa-kelas8:127",
+     0.8272
+    ],
+    [
+     "id-ipa-kelas9:10",
+     0.8244
+    ],
+    [
+     "id-ipa-kelas8:130",
+     0.8241
+    ]
+   ]
+  },
+  "MX.49": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:66",
+     0.8232
+    ],
+    [
+     "wiki:Larutan:0",
+     0.8151
+    ],
+    [
+     "id-ipa-kelas8:127",
+     0.8148
+    ],
+    [
+     "id-ipa-kelas8:128",
+     0.8136
+    ],
+    [
+     "wiki:Kelarutan:0",
+     0.8099
+    ]
+   ]
+  },
+  "MX.52b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:126",
+     0.8174
+    ],
+    [
+     "id-ipa-kelas7:16",
+     0.8157
+    ],
+    [
+     "wiki:Kelarutan:2",
+     0.8136
+    ],
+    [
+     "id-ipa-kelas8:127",
+     0.8115
+    ],
+    [
+     "id-ipa-kelas8:122",
+     0.8112
+    ]
+   ]
+  },
+  "MX.53": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:43",
+     0.8406
+    ],
+    [
+     "id-ipa-kelas8:122",
+     0.8318
+    ],
+    [
+     "id-ipa-kelas9:10",
+     0.8307
+    ],
+    [
+     "id-ipa-kelas7:26",
+     0.8278
+    ],
+    [
+     "id-ipa-kelas7:53",
+     0.8267
+    ]
+   ]
+  },
+  "PS.12": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:26",
+     0.8289
+    ],
+    [
+     "id-ipas-kelas5:104",
+     0.8261
+    ],
+    [
+     "id-ipa-kelas8:107",
+     0.8255
+    ],
+    [
+     "id-ipa-kelas9:25",
+     0.8236
+    ],
+    [
+     "id-ipa-kelas7:66",
+     0.8219
+    ]
+   ]
+  },
+  "PS.15b": {
+   "splits": [
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas5:106",
+     0.8247
+    ],
+    [
+     "id-ipas-kelas5:105",
+     0.8173
+    ],
+    [
+     "id-ipas-kelas5:107",
+     0.8168
+    ],
+    [
+     "id-ipas-kelas5:110",
+     0.8106
+    ],
+    [
+     "id-ipa-kelas8:101",
+     0.8102
+    ]
+   ]
+  },
+  "PS.15bp": {
+   "splits": [
+    "train"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas5:106",
+     0.8247
+    ],
+    [
+     "id-ipas-kelas5:105",
+     0.8173
+    ],
+    [
+     "id-ipas-kelas5:107",
+     0.8168
+    ],
+    [
+     "id-ipas-kelas5:110",
+     0.8106
+    ],
+    [
+     "id-ipa-kelas8:101",
+     0.8102
+    ]
+   ]
+  },
+  "PS.24a": {
+   "splits": [
+    "test_uq"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:107",
+     0.8187
+    ],
+    [
+     "id-ipa-kelas7:66",
+     0.8136
+    ],
+    [
+     "id-ipas-kelas5:105",
+     0.8133
+    ],
+    [
+     "id-ipas-kelas5:106",
+     0.8118
+    ],
+    [
+     "id-ipas-kelas5:107",
+     0.8073
+    ]
+   ]
+  },
+  "PS.26": {
+   "splits": [
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas5:110",
+     0.8013
+    ],
+    [
+     "id-ipa-kelas7:103",
+     0.7984
+    ],
+    [
+     "id-ipas-kelas5:102",
+     0.796
+    ],
+    [
+     "id-ipas-kelas5:114",
+     0.7928
+    ],
+    [
+     "wiki:Bunyi:3",
+     0.7927
+    ]
+   ]
+  },
+  "PS.26p": {
+   "splits": [
+    "train"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas5:110",
+     0.8013
+    ],
+    [
+     "id-ipa-kelas7:103",
+     0.7984
+    ],
+    [
+     "id-ipas-kelas5:102",
+     0.796
+    ],
+    [
+     "id-ipas-kelas5:114",
+     0.7928
+    ],
+    [
+     "wiki:Bunyi:3",
+     0.7927
+    ]
+   ]
+  },
+  "PS.2a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas5:107",
+     0.8058
+    ],
+    [
+     "id-ipa-kelas8:107",
+     0.803
+    ],
+    [
+     "id-ipas-kelas5:106",
+     0.8023
+    ],
+    [
+     "id-ipas-kelas5:104",
+     0.7985
+    ],
+    [
+     "id-ipas-kelas5:105",
+     0.7974
+    ]
+   ]
+  },
+  "PS.2b": {
+   "splits": [
+    "test_uq"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas5:107",
+     0.81
+    ],
+    [
+     "wiki:Bunyi:4",
+     0.8092
+    ],
+    [
+     "id-ipa-kelas8:107",
+     0.8062
+    ],
+    [
+     "id-ipa-kelas8:102",
+     0.805
+    ],
+    [
+     "id-ipas-kelas5:106",
+     0.8034
+    ]
+   ]
+  },
+  "PS.44": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:107",
+     0.8135
+    ],
+    [
+     "wiki:Bunyi:4",
+     0.8031
+    ],
+    [
+     "id-ipas-kelas5:104",
+     0.8012
+    ],
+    [
+     "id-ipas-kelas5:106",
+     0.7985
+    ],
+    [
+     "id-ipas-kelas5:116",
+     0.7969
+    ]
+   ]
+  },
+  "PS.45b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:58",
+     0.8083
+    ],
+    [
+     "id-ipa-kelas8:107",
+     0.8063
+    ],
+    [
+     "id-ipa-kelas9:153",
+     0.8045
+    ],
+    [
+     "id-ipa-kelas8:101",
+     0.8034
+    ],
+    [
+     "id-ipas-kelas5:106",
+     0.8033
+    ]
+   ]
+  },
+  "PS.46b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas5:116",
+     0.7757
+    ],
+    [
+     "id-ipas-kelas5:114",
+     0.7707
+    ],
+    [
+     "wiki:Bunyi:5",
+     0.7667
+    ],
+    [
+     "wiki:Energi_surya:3",
+     0.7644
+    ],
+    [
+     "wiki:Energi_surya:4",
+     0.7622
+    ]
+   ]
+  },
+  "PS.4a": {
+   "splits": [
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:102",
+     0.8124
+    ],
+    [
+     "id-ipa-kelas8:107",
+     0.8122
+    ],
+    [
+     "id-ipas-kelas5:105",
+     0.8086
+    ],
+    [
+     "id-ipas-kelas5:104",
+     0.8083
+    ],
+    [
+     "id-ipas-kelas5:107",
+     0.8056
+    ]
+   ]
+  },
+  "PS.4ap": {
+   "splits": [
+    "train"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:102",
+     0.8124
+    ],
+    [
+     "id-ipa-kelas8:107",
+     0.8122
+    ],
+    [
+     "id-ipas-kelas5:105",
+     0.8086
+    ],
+    [
+     "id-ipas-kelas5:104",
+     0.8083
+    ],
+    [
+     "id-ipas-kelas5:107",
+     0.8056
+    ]
+   ]
+  },
+  "PS.4b": {
+   "splits": [
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas5:105",
+     0.8144
+    ],
+    [
+     "id-ipa-kelas8:107",
+     0.8142
+    ],
+    [
+     "id-ipas-kelas5:104",
+     0.8124
+    ],
+    [
+     "id-ipa-kelas8:102",
+     0.8093
+    ],
+    [
+     "id-ipas-kelas5:106",
+     0.8087
+    ]
+   ]
+  },
+  "PS.4bp": {
+   "splits": [
+    "train"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas5:105",
+     0.8144
+    ],
+    [
+     "id-ipa-kelas8:107",
+     0.8142
+    ],
+    [
+     "id-ipas-kelas5:104",
+     0.8124
+    ],
+    [
+     "id-ipa-kelas8:102",
+     0.8093
+    ],
+    [
+     "id-ipas-kelas5:106",
+     0.8087
+    ]
+   ]
+  },
+  "PS.51a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas5:104",
+     0.8063
+    ],
+    [
+     "id-ipas-kelas5:103",
+     0.8003
+    ],
+    [
+     "id-ipa-kelas8:107",
+     0.7997
+    ],
+    [
+     "wiki:Bunyi:4",
+     0.7962
+    ],
+    [
+     "id-ipa-kelas8:102",
+     0.7957
+    ]
+   ]
+  },
+  "PS.51b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas5:104",
+     0.7984
+    ],
+    [
+     "id-ipa-kelas8:107",
+     0.7863
+    ],
+    [
+     "id-ipas-kelas3:19",
+     0.7859
+    ],
+    [
+     "wiki:Bunyi:4",
+     0.7856
+    ],
+    [
+     "id-ipa-kelas9:108",
+     0.7853
+    ]
+   ]
+  },
+  "SE.10": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas5:99",
+     0.8159
+    ],
+    [
+     "id-ipa-kelas9:166",
+     0.8138
+    ],
+    [
+     "id-ipa-kelas9:167",
+     0.8122
+    ],
+    [
+     "id-ipas-kelas5:101",
+     0.8108
+    ],
+    [
+     "id-ipa-kelas7:103",
+     0.8098
+    ]
+   ]
+  },
+  "SE.16b2": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:38",
+     0.8245
+    ],
+    [
+     "id-ipa-kelas7:37",
+     0.8243
+    ],
+    [
+     "id-ipa-kelas7:5",
+     0.8239
+    ],
+    [
+     "id-ipa-kelas7:84",
+     0.8232
+    ],
+    [
+     "id-ipa-kelas7:82",
+     0.8231
+    ]
+   ]
+  },
+  "SE.22a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:66",
+     0.8396
+    ],
+    [
+     "id-ipa-kelas7:35",
+     0.8351
+    ],
+    [
+     "id-ipa-kelas7:37",
+     0.8268
+    ],
+    [
+     "id-ipa-kelas9:166",
+     0.8266
+    ],
+    [
+     "id-ipa-kelas7:36",
+     0.825
+    ]
+   ]
+  },
+  "SE.22b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:35",
+     0.8386
+    ],
+    [
+     "id-ipa-kelas7:66",
+     0.8369
+    ],
+    [
+     "id-ipa-kelas7:36",
+     0.8317
+    ],
+    [
+     "id-ipa-kelas7:37",
+     0.8305
+    ],
+    [
+     "id-ipa-kelas9:166",
+     0.8287
+    ]
+   ]
+  },
+  "SE.22c": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:66",
+     0.8389
+    ],
+    [
+     "id-ipa-kelas7:35",
+     0.8368
+    ],
+    [
+     "id-ipa-kelas7:36",
+     0.8305
+    ],
+    [
+     "id-ipa-kelas7:37",
+     0.8271
+    ],
+    [
+     "id-ipa-kelas7:27",
+     0.8238
+    ]
+   ]
+  },
+  "SE.24a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas5:101",
+     0.7987
+    ],
+    [
+     "id-ipas-kelas3:76",
+     0.7958
+    ],
+    [
+     "id-ipas-kelas3:75",
+     0.7941
+    ],
+    [
+     "id-ipa-kelas7:93",
+     0.7939
+    ],
+    [
+     "id-ipas-kelas3:5",
+     0.7931
+    ]
+   ]
+  },
+  "SE.25a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:37",
+     0.8268
+    ],
+    [
+     "id-ipa-kelas7:38",
+     0.8191
+    ],
+    [
+     "id-ipa-kelas7:26",
+     0.8161
+    ],
+    [
+     "id-ipa-kelas7:131",
+     0.8159
+    ],
+    [
+     "id-ipa-kelas8:151",
+     0.8152
+    ]
+   ]
+  },
+  "SE.27b": {
+   "splits": [
+    "test_uq"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:4",
+     0.8069
+    ],
+    [
+     "id-ipa-kelas7:26",
+     0.803
+    ],
+    [
+     "id-ipa-kelas7:71",
+     0.8025
+    ],
+    [
+     "id-ipa-kelas7:36",
+     0.802
+    ],
+    [
+     "id-ipa-kelas7:85",
+     0.8019
+    ]
+   ]
+  },
+  "SE.31b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:66",
+     0.8054
+    ],
+    [
+     "id-ipa-kelas7:26",
+     0.8025
+    ],
+    [
+     "id-ipa-kelas7:84",
+     0.8018
+    ],
+    [
+     "id-ipa-kelas7:70",
+     0.8007
+    ],
+    [
+     "id-ipas-kelas4:43",
+     0.8
+    ]
+   ]
+  },
+  "SE.3c": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Bayang-bayang:0",
+     0.8012
+    ],
+    [
+     "wiki:Komponen_abiotik:3",
+     0.794
+    ],
+    [
+     "id-ipa-kelas8:148",
+     0.7932
+    ],
+    [
+     "id-ipas-kelas4:56",
+     0.7926
+    ],
+    [
+     "id-ipas-kelas4:115",
+     0.7917
+    ]
+   ]
+  },
+  "SE.44": {
+   "splits": [
+    "test_uq"
+   ],
+   "hits": [
+    [
+     "wiki:Pembuang_panas:0",
+     0.8259
+    ],
+    [
+     "wiki:Energi_surya:17",
+     0.8242
+    ],
+    [
+     "wiki:Energi_surya:8",
+     0.8199
+    ],
+    [
+     "id-ipa-kelas7:70",
+     0.8138
+    ],
+    [
+     "wiki:Energi_surya:9",
+     0.8122
+    ]
+   ]
+  },
+  "SE.45": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas5:94",
+     0.8323
+    ],
+    [
+     "wiki:Bayang-bayang:0",
+     0.8225
+    ],
+    [
+     "id-ipa-kelas8:113",
+     0.8219
+    ],
+    [
+     "id-ipa-kelas8:112",
+     0.8217
+    ],
+    [
+     "id-ipa-kelas8:114",
+     0.8213
+    ]
+   ]
+  },
+  "SE.46": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:38",
+     0.8224
+    ],
+    [
+     "id-ipa-kelas7:66",
+     0.8194
+    ],
+    [
+     "id-ipa-kelas7:71",
+     0.818
+    ],
+    [
+     "id-ipa-kelas9:166",
+     0.8136
+    ],
+    [
+     "id-ipa-kelas7:69",
+     0.8123
+    ]
+   ]
+  },
+  "SE.47b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas4:64",
+     0.8239
+    ],
+    [
+     "id-ipa-kelas9:150",
+     0.82
+    ],
+    [
+     "id-ipa-kelas8:135",
+     0.8188
+    ],
+    [
+     "id-ipa-kelas7:47",
+     0.8187
+    ],
+    [
+     "id-ipas-kelas4:16",
+     0.8184
+    ]
+   ]
+  },
+  "SE.48": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:52",
+     0.811
+    ],
+    [
+     "id-ipas-kelas4:16",
+     0.8065
+    ],
+    [
+     "id-ipa-kelas7:38",
+     0.8063
+    ],
+    [
+     "id-ipa-kelas7:75",
+     0.8055
+    ],
+    [
+     "id-ipa-kelas7:80",
+     0.8051
+    ]
+   ]
+  },
+  "SE.4a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Pembuang_panas:0",
+     0.8588
+    ],
+    [
+     "wiki:Energi_surya:12",
+     0.7773
+    ],
+    [
+     "id-ipa-kelas7:181",
+     0.7752
+    ],
+    [
+     "id-ipa-kelas7:70",
+     0.7724
+    ],
+    [
+     "wiki:Energi_surya:7",
+     0.7709
+    ]
+   ]
+  },
+  "SE.51b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:38",
+     0.8303
+    ],
+    [
+     "id-ipa-kelas7:26",
+     0.8166
+    ],
+    [
+     "id-ipas-kelas3:91",
+     0.8163
+    ],
+    [
+     "id-ipa-kelas7:55",
+     0.8158
+    ],
+    [
+     "id-ipa-kelas7:66",
+     0.8155
+    ]
+   ]
+  },
+  "ST.25b1": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Perkecambahan:2",
+     0.8304
+    ],
+    [
+     "wiki:Biji:2",
+     0.8277
+    ],
+    [
+     "wiki:Perkecambahan:1",
+     0.8271
+    ],
+    [
+     "wiki:Tumbuhan:9",
+     0.8258
+    ],
+    [
+     "wiki:Perkecambahan:3",
+     0.8238
+    ]
+   ]
+  },
+  "ST.25b2": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Perkecambahan:2",
+     0.8525
+    ],
+    [
+     "wiki:Perkecambahan:1",
+     0.8439
+    ],
+    [
+     "wiki:Perkecambahan:3",
+     0.8335
+    ],
+    [
+     "wiki:Biji:1",
+     0.8257
+    ],
+    [
+     "wiki:Tumbuhan:7",
+     0.8245
+    ]
+   ]
+  },
+  "ST.31b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Protein:13",
+     0.8042
+    ],
+    [
+     "wiki:Biji:2",
+     0.8027
+    ],
+    [
+     "wiki:Magnet:4",
+     0.8014
+    ],
+    [
+     "wiki:Protein:18",
+     0.8006
+    ],
+    [
+     "wiki:Tumbuhan:6",
+     0.7985
+    ]
+   ]
+  },
+  "ST.52a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Perkecambahan:0",
+     0.838
+    ],
+    [
+     "wiki:Perkecambahan:1",
+     0.8252
+    ],
+    [
+     "wiki:Perkecambahan:2",
+     0.8165
+    ],
+    [
+     "wiki:Tumbuhan:7",
+     0.8165
+    ],
+    [
+     "wiki:Akar:0",
+     0.8131
+    ]
+   ]
+  },
+  "ST.54b2": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Perkecambahan:1",
+     0.8396
+    ],
+    [
+     "wiki:Perkecambahan:2",
+     0.8379
+    ],
+    [
+     "wiki:Biji:1",
+     0.8182
+    ],
+    [
+     "wiki:Perkecambahan:3",
+     0.8168
+    ],
+    [
+     "id-ipa-kelas9:24",
+     0.8141
+    ]
+   ]
+  },
+  "ST.54b3": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Perkecambahan:1",
+     0.8369
+    ],
+    [
+     "id-ipa-kelas9:75",
+     0.8296
+    ],
+    [
+     "wiki:Akar:0",
+     0.8253
+    ],
+    [
+     "wiki:Perkecambahan:0",
+     0.8204
+    ],
+    [
+     "wiki:Lemak:1",
+     0.8197
+    ]
+   ]
+  },
+  "ST.58": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Biji:1",
+     0.81
+    ],
+    [
+     "id-ipa-kelas7:19",
+     0.8087
+    ],
+    [
+     "id-ipa-kelas7:20",
+     0.8077
+    ],
+    [
+     "id-ipa-kelas9:99",
+     0.8067
+    ],
+    [
+     "id-ipa-kelas7:125",
+     0.8061
+    ]
+   ]
+  },
+  "ST.59": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Habitat:6",
+     0.8224
+    ],
+    [
+     "wiki:Habitat:5",
+     0.8191
+    ],
+    [
+     "id-ipas-kelas5:35",
+     0.8137
+    ],
+    [
+     "id-ipas-kelas5:49",
+     0.8113
+    ],
+    [
+     "id-ipas-kelas5:40",
+     0.8086
+    ]
+   ]
+  },
+  "VB.1": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Percobaan:4",
+     0.8186
+    ],
+    [
+     "wiki:Percobaan:2",
+     0.8072
+    ],
+    [
+     "wiki:Percobaan:3",
+     0.8008
+    ],
+    [
+     "id-ipa-kelas7:22",
+     0.7996
+    ],
+    [
+     "id-ipa-kelas7:39",
+     0.794
+    ]
+   ]
+  },
+  "VB.12d": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:107",
+     0.8039
+    ],
+    [
+     "id-ipa-kelas9:24",
+     0.8025
+    ],
+    [
+     "id-ipa-kelas8:109",
+     0.7914
+    ],
+    [
+     "id-ipa-kelas8:103",
+     0.7882
+    ],
+    [
+     "wiki:Bunyi:4",
+     0.7864
+    ]
+   ]
+  },
+  "VB.15a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:67",
+     0.8078
+    ],
+    [
+     "id-ipa-kelas7:22",
+     0.8047
+    ],
+    [
+     "id-ipa-kelas7:109",
+     0.8014
+    ],
+    [
+     "id-ipas-kelas3:60",
+     0.7997
+    ],
+    [
+     "id-ipa-kelas7:93",
+     0.7992
+    ]
+   ]
+  },
+  "VB.15b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:98",
+     0.8154
+    ],
+    [
+     "id-ipa-kelas7:109",
+     0.8149
+    ],
+    [
+     "id-ipas-kelas4:30",
+     0.8142
+    ],
+    [
+     "id-ipa-kelas8:67",
+     0.8133
+    ],
+    [
+     "id-ipa-kelas7:93",
+     0.812
+    ]
+   ]
+  },
+  "VB.15c": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:98",
+     0.8124
+    ],
+    [
+     "id-ipas-kelas5:98",
+     0.812
+    ],
+    [
+     "id-ipa-kelas7:11",
+     0.809
+    ],
+    [
+     "id-ipa-kelas7:109",
+     0.8085
+    ],
+    [
+     "wiki:Percobaan:2",
+     0.8072
+    ]
+   ]
+  },
+  "VB.22c": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:175",
+     0.8022
+    ],
+    [
+     "id-ipas-kelas5:41",
+     0.8016
+    ],
+    [
+     "id-ipa-kelas8:174",
+     0.7979
+    ],
+    [
+     "id-ipa-kelas8:173",
+     0.7976
+    ],
+    [
+     "id-ipa-kelas9:98",
+     0.7966
+    ]
+   ]
+  },
+  "VB.29": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:26",
+     0.8106
+    ],
+    [
+     "wiki:Percobaan:4",
+     0.8093
+    ],
+    [
+     "id-ipa-kelas7:35",
+     0.8092
+    ],
+    [
+     "id-ipa-kelas7:29",
+     0.8089
+    ],
+    [
+     "wiki:Pengukuran:6",
+     0.8088
+    ]
+   ]
+  },
+  "VB.40a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:66",
+     0.8297
+    ],
+    [
+     "id-ipa-kelas7:26",
+     0.8258
+    ],
+    [
+     "id-ipa-kelas7:35",
+     0.8254
+    ],
+    [
+     "id-ipa-kelas7:39",
+     0.8218
+    ],
+    [
+     "id-ipa-kelas7:25",
+     0.8211
+    ]
+   ]
+  },
+  "VB.42": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:93",
+     0.8183
+    ],
+    [
+     "id-ipa-kelas7:99",
+     0.8122
+    ],
+    [
+     "id-ipa-kelas7:36",
+     0.8095
+    ],
+    [
+     "id-ipa-kelas8:103",
+     0.8073
+    ],
+    [
+     "id-ipa-kelas7:38",
+     0.8072
+    ]
+   ]
+  },
+  "VB.5a": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:29",
+     0.8032
+    ],
+    [
+     "wiki:Satuan:4",
+     0.8023
+    ],
+    [
+     "id-ipa-kelas7:131",
+     0.8021
+    ],
+    [
+     "id-ipa-kelas7:5",
+     0.8004
+    ],
+    [
+     "id-ipas-kelas4:16",
+     0.7991
+    ]
+   ]
+  },
+  "VB.5b": {
+   "splits": [
+    "train",
+    "test_ua"
+   ],
+   "hits": [
+    [
+     "wiki:Satuan:4",
+     0.817
+    ],
+    [
+     "id-ipa-kelas8:105",
+     0.8126
+    ],
+    [
+     "id-ipas-kelas4:16",
+     0.8117
+    ],
+    [
+     "id-ipa-kelas7:99",
+     0.8112
+    ],
+    [
+     "wiki:Massa:4",
+     0.8112
+    ]
+   ]
+  },
+  "VB.5c": {
+   "splits": [
+    "test_uq"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas4:115",
+     0.8253
+    ],
+    [
+     "id-ipa-kelas7:27",
+     0.8138
+    ],
+    [
+     "id-ipa-kelas7:38",
+     0.811
+    ],
+    [
+     "id-ipa-kelas8:109",
+     0.8079
+    ],
+    [
+     "id-ipa-kelas7:29",
+     0.8063
+    ]
+   ]
+  },
+  "WA.12a": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:64",
+     0.8178
+    ],
+    [
+     "id-ipa-kelas7:63",
+     0.8167
+    ],
+    [
+     "id-ipa-kelas8:130",
+     0.8135
+    ],
+    [
+     "id-ipa-kelas8:173",
+     0.8123
+    ],
+    [
+     "id-ipa-kelas8:174",
+     0.8107
+    ]
+   ]
+  },
+  "WA.12b": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:64",
+     0.8148
+    ],
+    [
+     "id-ipa-kelas7:63",
+     0.814
+    ],
+    [
+     "id-ipa-kelas8:130",
+     0.8137
+    ],
+    [
+     "id-ipa-kelas8:174",
+     0.8119
+    ],
+    [
+     "id-ipa-kelas8:129",
+     0.8109
+    ]
+   ]
+  },
+  "WA.12c": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:63",
+     0.8158
+    ],
+    [
+     "id-ipa-kelas7:64",
+     0.815
+    ],
+    [
+     "id-ipa-kelas8:130",
+     0.8136
+    ],
+    [
+     "id-ipa-kelas8:173",
+     0.8113
+    ],
+    [
+     "id-ipa-kelas7:71",
+     0.8103
+    ]
+   ]
+  },
+  "WA.15a": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:101",
+     0.8192
+    ],
+    [
+     "id-ipa-kelas9:108",
+     0.8189
+    ],
+    [
+     "id-ipas-kelas4:56",
+     0.8169
+    ],
+    [
+     "id-ipa-kelas8:129",
+     0.8159
+    ],
+    [
+     "id-ipa-kelas7:11",
+     0.815
+    ]
+   ]
+  },
+  "WA.15b": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:101",
+     0.8185
+    ],
+    [
+     "id-ipa-kelas9:108",
+     0.8169
+    ],
+    [
+     "id-ipa-kelas8:129",
+     0.8143
+    ],
+    [
+     "id-ipas-kelas4:56",
+     0.8143
+    ],
+    [
+     "id-ipa-kelas7:11",
+     0.8142
+    ]
+   ]
+  },
+  "WA.16b": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:52",
+     0.8081
+    ],
+    [
+     "wiki:Pembekuan:0",
+     0.8061
+    ],
+    [
+     "id-ipa-kelas7:76",
+     0.8061
+    ],
+    [
+     "id-ipa-kelas7:77",
+     0.804
+    ],
+    [
+     "id-ipa-kelas8:87",
+     0.8037
+    ]
+   ]
+  },
+  "WA.17b": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "wiki:Pembekuan:0",
+     0.8097
+    ],
+    [
+     "id-ipa-kelas7:55",
+     0.8072
+    ],
+    [
+     "id-ipa-kelas7:85",
+     0.8012
+    ],
+    [
+     "wiki:Termometer:0",
+     0.8008
+    ],
+    [
+     "id-ipa-kelas7:181",
+     0.7995
+    ]
+   ]
+  },
+  "WA.18": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:38",
+     0.8194
+    ],
+    [
+     "id-ipa-kelas7:58",
+     0.8179
+    ],
+    [
+     "id-ipa-kelas7:56",
+     0.8169
+    ],
+    [
+     "id-ipa-kelas7:85",
+     0.8123
+    ],
+    [
+     "id-ipa-kelas7:55",
+     0.8119
+    ]
+   ]
+  },
+  "WA.20a": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:11",
+     0.8069
+    ],
+    [
+     "id-ipa-kelas7:103",
+     0.8059
+    ],
+    [
+     "id-ipas-kelas6:26",
+     0.8044
+    ],
+    [
+     "id-ipa-kelas8:89",
+     0.804
+    ],
+    [
+     "id-ipas-kelas5:62",
+     0.8038
+    ]
+   ]
+  },
+  "WA.20b": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:11",
+     0.8069
+    ],
+    [
+     "id-ipa-kelas7:103",
+     0.8059
+    ],
+    [
+     "id-ipas-kelas6:26",
+     0.8044
+    ],
+    [
+     "id-ipa-kelas8:89",
+     0.804
+    ],
+    [
+     "id-ipas-kelas5:62",
+     0.8038
+    ]
+   ]
+  },
+  "WA.21": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:64",
+     0.8261
+    ],
+    [
+     "id-ipa-kelas7:38",
+     0.8232
+    ],
+    [
+     "id-ipas-kelas3:88",
+     0.8197
+    ],
+    [
+     "id-ipa-kelas8:32",
+     0.8187
+    ],
+    [
+     "id-ipa-kelas8:6",
+     0.8177
+    ]
+   ]
+  },
+  "WA.22": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:56",
+     0.8255
+    ],
+    [
+     "id-ipas-kelas5:55",
+     0.8253
+    ],
+    [
+     "wiki:Siklus_air:3",
+     0.824
+    ],
+    [
+     "wiki:Siklus_air:4",
+     0.8217
+    ],
+    [
+     "id-ipa-kelas7:50",
+     0.8207
+    ]
+   ]
+  },
+  "WA.24b": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipas-kelas4:56",
+     0.8156
+    ],
+    [
+     "id-ipa-kelas7:50",
+     0.8121
+    ],
+    [
+     "id-ipa-kelas8:101",
+     0.81
+    ],
+    [
+     "wiki:Delta_sungai:5",
+     0.8098
+    ],
+    [
+     "id-ipas-kelas5:55",
+     0.8083
+    ]
+   ]
+  },
+  "WA.29": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:71",
+     0.8071
+    ],
+    [
+     "id-ipa-kelas7:69",
+     0.8013
+    ],
+    [
+     "id-ipa-kelas7:26",
+     0.7997
+    ],
+    [
+     "id-ipas-kelas5:56",
+     0.7986
+    ],
+    [
+     "id-ipa-kelas7:4",
+     0.7986
+    ]
+   ]
+  },
+  "WA.30b": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:55",
+     0.8132
+    ],
+    [
+     "id-ipas-kelas4:16",
+     0.8097
+    ],
+    [
+     "id-ipas-kelas5:57",
+     0.8059
+    ],
+    [
+     "id-ipas-kelas4:56",
+     0.8052
+    ],
+    [
+     "id-ipa-kelas7:65",
+     0.8035
+    ]
+   ]
+  },
+  "WA.31": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:59",
+     0.829
+    ],
+    [
+     "id-ipa-kelas7:61",
+     0.8252
+    ],
+    [
+     "id-ipa-kelas7:60",
+     0.8243
+    ],
+    [
+     "id-ipa-kelas8:86",
+     0.8242
+    ],
+    [
+     "id-ipa-kelas7:42",
+     0.8225
+    ]
+   ]
+  },
+  "WA.32b": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas9:153",
+     0.8106
+    ],
+    [
+     "id-ipa-kelas7:66",
+     0.8097
+    ],
+    [
+     "id-ipa-kelas7:64",
+     0.8076
+    ],
+    [
+     "id-ipa-kelas7:47",
+     0.8075
+    ],
+    [
+     "id-ipa-kelas7:26",
+     0.8045
+    ]
+   ]
+  },
+  "WA.33b": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:32",
+     0.8135
+    ],
+    [
+     "id-ipas-kelas3:8",
+     0.8084
+    ],
+    [
+     "id-ipa-kelas7:85",
+     0.8082
+    ],
+    [
+     "id-ipa-kelas7:50",
+     0.8071
+    ],
+    [
+     "id-ipas-kelas3:88",
+     0.8047
+    ]
+   ]
+  },
+  "WA.50b": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:87",
+     0.8023
+    ],
+    [
+     "id-ipa-kelas7:26",
+     0.7974
+    ],
+    [
+     "id-ipa-kelas7:64",
+     0.7973
+    ],
+    [
+     "id-ipa-kelas8:122",
+     0.7972
+    ],
+    [
+     "id-ipa-kelas7:182",
+     0.7945
+    ]
+   ]
+  },
+  "WA.51": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:56",
+     0.8281
+    ],
+    [
+     "id-ipa-kelas7:55",
+     0.8222
+    ],
+    [
+     "id-ipa-kelas8:122",
+     0.8221
+    ],
+    [
+     "id-ipas-kelas4:56",
+     0.8188
+    ],
+    [
+     "id-ipa-kelas7:50",
+     0.8182
+    ]
+   ]
+  },
+  "WA.52a": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:84",
+     0.803
+    ],
+    [
+     "id-ipa-kelas7:49",
+     0.801
+    ],
+    [
+     "id-ipa-kelas8:93",
+     0.8004
+    ],
+    [
+     "id-ipa-kelas7:56",
+     0.7999
+    ],
+    [
+     "id-ipa-kelas7:85",
+     0.7998
+    ]
+   ]
+  },
+  "WA.52b": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas7:85",
+     0.8041
+    ],
+    [
+     "id-ipa-kelas7:84",
+     0.804
+    ],
+    [
+     "id-ipa-kelas8:93",
+     0.8028
+    ],
+    [
+     "id-ipa-kelas7:56",
+     0.802
+    ],
+    [
+     "id-ipa-kelas7:68",
+     0.7996
+    ]
+   ]
+  },
+  "WA.7b": {
+   "splits": [
+    "test_ud"
+   ],
+   "hits": [
+    [
+     "id-ipa-kelas8:122",
+     0.8188
+    ],
+    [
+     "id-ipa-kelas8:87",
+     0.8167
+    ],
+    [
+     "id-ipa-kelas7:38",
+     0.8158
+    ],
+    [
+     "id-ipas-kelas4:56",
+     0.813
+    ],
+    [
+     "id-ipa-kelas7:37",
+     0.8112
+    ]
+   ]
+  }
+ }
+}
