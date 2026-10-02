@@ -3,7 +3,7 @@ import json
 import numpy as np
 
 from edge_grader.data import question_id
-from edge_grader.rag.index import build, retrieve, top_k
+from edge_grader.rag.index import build, retrieve, top_k, with_ext
 
 VOCAB = ["lever", "fulcrum", "magnet", "iron", "plant", "sunlight", "water", "salt"]
 
@@ -36,9 +36,9 @@ def test_build_then_retrieve_finds_the_obvious_chunk(tmp_path):
     path.write_text("".join(json.dumps(c) + "\n" for c in chunks))
     base = build(path, "bge-small-en", fake_encode, out_dir=tmp_path / "index")
 
-    meta = json.loads(base.with_suffix(".json").read_text())
+    meta = json.loads(with_ext(base, ".json").read_text())
     assert meta["n_chunks"] == 3 and meta["dim"] == len(VOCAB)
-    assert np.load(base.with_suffix(".npy")).shape == (3, len(VOCAB))
+    assert np.load(with_ext(base, ".npy")).shape == (3, len(VOCAB))
 
     qs = {
         "LP.1": {"question": "Where is the fulcrum of this lever?", "splits": ["train"]},
@@ -64,3 +64,14 @@ def test_check_samples_train_questions_only_and_spreads_units():
     assert all(qs[q]["splits"][0] == "train" for q in picked)
     assert sorted({q.split(".")[0] for q in picked}) == ["EM", "LP", "ME"]
     assert [q.split(".")[0] for q in picked].count("EM") == 2
+
+
+def test_two_models_on_one_chunks_file_keep_separate_indexes(tmp_path):
+    chunks = tmp_path / "scientsbank-id.jsonl"
+    chunks.write_text(json.dumps({"id": "b:0", "text": "lever fulcrum"}) + "\n")
+    a = build(chunks, "e5-small-multi", fake_encode, out_dir=tmp_path / "index")
+    b = build(chunks, "e5-base-multi", fake_encode, out_dir=tmp_path / "index")
+    files = sorted(p.name for p in (tmp_path / "index").iterdir())
+    assert files == ["scientsbank-id.e5-base-multi.json", "scientsbank-id.e5-base-multi.npy",
+                     "scientsbank-id.e5-small-multi.json", "scientsbank-id.e5-small-multi.npy"]
+    assert a != b

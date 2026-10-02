@@ -1,7 +1,7 @@
 {
  "stage": "rag",
  "kind": "retrieval",
- "time": "2026-10-02T08:26:41+00:00",
+ "time": "2026-10-02T14:54:04+00:00",
  "settings": {
   "index": "data/rag/index/scientsbank-id.e5-small-multi",
   "k": 5,
@@ -11,10 +11,10 @@
   "query_prefix": "query: ",
   "passage_prefix": "passage: ",
   "chunks": "data/rag/chunks/scientsbank-id.jsonl",
-  "chunks_sha256": "2626c966e2969b96b20b8b01e7d52de0db39ec1d7f930ecd0da66f40b4d1a1d7",
-  "n_chunks": 1505,
+  "chunks_sha256": "384f46745cadc038b092fff7f7f44b263fa6a6a9684f35c0c4105aaae7cdfcc0",
+  "n_chunks": 1141,
   "dim": 384,
-  "time": "2026-10-02T08:26:12+00:00"
+  "time": "2026-10-02T14:53:25+00:00"
  },
  "questions": {
   "EM.13": {
@@ -28,7 +28,7 @@
     ],
     [
      "wiki:Gores_(mineralogi):0",
-     0.8231
+     0.8254
     ],
     [
      "wiki:Batu:0",
@@ -51,10 +51,6 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas3:87",
-     0.8373
-    ],
-    [
      "wiki:Skala_Mohs:1",
      0.8282
     ],
@@ -63,12 +59,16 @@
      0.8261
     ],
     [
-     "id-ipa-kelas7:11",
-     0.8233
+     "id-ipa-kelas7:24",
+     0.8197
     ],
     [
-     "id-ipas-kelas3:88",
-     0.8232
+     "wiki:Kelarutan:2",
+     0.8172
+    ],
+    [
+     "id-ipa-kelas7:14",
+     0.8172
     ]
    ]
   },
@@ -83,20 +83,20 @@
      0.8208
     ],
     [
-     "id-ipa-kelas7:43",
-     0.8151
+     "id-ipa-kelas7:24",
+     0.8099
     ],
     [
-     "id-ipas-kelas3:87",
-     0.8093
+     "id-ipa-kelas8:120",
+     0.8096
     ],
     [
      "wiki:Skala_Mohs:1",
      0.8092
     ],
     [
-     "id-ipa-kelas7:11",
-     0.8071
+     "id-ipa-kelas7:27",
+     0.8082
     ]
    ]
   },
@@ -112,19 +112,19 @@
     ],
     [
      "wiki:Gores_(mineralogi):0",
-     0.8126
+     0.8161
     ],
     [
-     "id-ipa-kelas7:43",
-     0.8115
+     "id-ipa-kelas8:120",
+     0.8148
     ],
     [
      "wiki:Kelarutan:3",
      0.8109
     ],
     [
-     "id-ipa-kelas7:42",
-     0.8102
+     "id-ipa-kelas7:27",
+     0.8107
     ]
    ]
   },
@@ -143,12 +143,12 @@
      0.8139
     ],
     [
-     "id-ipa-kelas7:56",
-     0.8135
+     "id-ipa-kelas7:33",
+     0.81
     ],
     [
-     "id-ipa-kelas7:55",
-     0.8104
+     "id-ipa-kelas7:38",
+     0.8088
     ],
     [
      "wiki:Reaksi_kimia:9",
@@ -163,24 +163,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas3:84",
-     0.8236
+     "wiki:Kelarutan:0",
+     0.8138
     ],
     [
-     "id-ipas-kelas3:87",
-     0.8235
+     "id-ipa-kelas7:33",
+     0.8137
     ],
     [
-     "id-ipas-kelas3:88",
-     0.8222
+     "id-ipa-kelas7:23",
+     0.8128
     ],
     [
-     "id-ipa-kelas7:26",
-     0.8198
+     "id-ipa-kelas7:27",
+     0.8108
     ],
     [
-     "id-ipa-kelas7:43",
-     0.8145
+     "id-ipas-kelas4:33",
+     0.8091
     ]
    ]
   },
@@ -190,24 +190,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:11",
-     0.8407
-    ],
-    [
-     "id-ipa-kelas9:136",
-     0.8305
-    ],
-    [
      "wiki:Skala_Mohs:1",
      0.8251
     ],
     [
-     "id-ipas-kelas5:101",
-     0.8236
+     "id-ipas-kelas6:66",
+     0.8216
     ],
     [
-     "id-ipas-kelas3:87",
-     0.8232
+     "id-ipa-kelas7:4",
+     0.8209
+    ],
+    [
+     "wiki:Skala_Mohs:0",
+     0.8201
+    ],
+    [
+     "id-ipa-kelas9:108",
+     0.8198
     ]
    ]
   },
@@ -222,20 +222,20 @@
      0.8143
     ],
     [
-     "id-ipas-kelas5:101",
-     0.7961
+     "id-ipa-kelas7:27",
+     0.7933
     ],
     [
-     "id-ipa-kelas7:43",
-     0.7954
+     "id-ipas-kelas5:71",
+     0.7929
     ],
     [
-     "id-ipa-kelas7:11",
-     0.795
+     "wiki:Percobaan:2",
+     0.7899
     ],
     [
-     "id-ipa-kelas9:110",
-     0.792
+     "id-ipa-kelas7:28",
+     0.7896
     ]
    ]
   },
@@ -246,24 +246,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas3:87",
-     0.8175
+     "id-ipa-kelas8:100",
+     0.8123
     ],
     [
-     "id-ipa-kelas7:43",
-     0.8149
+     "id-ipa-kelas7:12",
+     0.8112
     ],
     [
-     "id-ipa-kelas8:125",
-     0.814
+     "id-ipa-kelas7:27",
+     0.8105
     ],
     [
-     "id-ipa-kelas8:126",
-     0.8132
+     "id-ipa-kelas9:3",
+     0.8092
     ],
     [
-     "id-ipas-kelas3:84",
-     0.813
+     "id-ipa-kelas9:28",
+     0.8085
     ]
    ]
   },
@@ -274,24 +274,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:134",
-     0.8157
+     "id-ipa-kelas8:101",
+     0.8089
     ],
     [
-     "id-ipa-kelas8:126",
-     0.8133
+     "id-ipa-kelas8:108",
+     0.8084
     ],
     [
-     "id-ipa-kelas8:122",
-     0.8116
+     "id-ipa-kelas8:107",
+     0.8074
     ],
     [
-     "id-ipa-kelas7:43",
-     0.809
+     "id-ipa-kelas7:20",
+     0.8068
     ],
     [
-     "id-ipa-kelas8:141",
-     0.8082
+     "id-ipa-kelas8:102",
+     0.8065
     ]
    ]
   },
@@ -302,24 +302,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas3:84",
-     0.8218
-    ],
-    [
-     "id-ipa-kelas7:43",
-     0.8196
+     "id-ipa-kelas7:27",
+     0.8137
     ],
     [
      "wiki:Kristal:5",
-     0.8187
+     0.812
     ],
     [
-     "id-ipa-kelas8:126",
-     0.8142
+     "id-ipa-kelas8:101",
+     0.8113
     ],
     [
-     "id-ipa-kelas7:42",
-     0.8122
+     "wiki:Kristal:1",
+     0.8088
+    ],
+    [
+     "id-ipa-kelas9:3",
+     0.8087
     ]
    ]
   },
@@ -330,24 +330,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:43",
-     0.8201
+     "wiki:Gores_(mineralogi):0",
+     0.8211
     ],
     [
-     "id-ipa-kelas8:133",
-     0.8137
+     "id-ipa-kelas7:27",
+     0.8176
     ],
     [
-     "wiki:Kelarutan:0",
-     0.8119
+     "id-ipa-kelas8:107",
+     0.8172
     ],
     [
-     "id-ipa-kelas7:50",
-     0.8117
+     "id-ipa-kelas7:33",
+     0.816
     ],
     [
-     "id-ipas-kelas3:87",
-     0.8116
+     "id-ipa-kelas8:101",
+     0.8132
     ]
    ]
   },
@@ -358,24 +358,24 @@
    ],
    "hits": [
     [
+     "id-ipas-kelas6:0",
+     0.8201
+    ],
+    [
+     "id-ipa-kelas8:98",
+     0.8184
+    ],
+    [
+     "id-ipa-kelas9:78",
+     0.8179
+    ],
+    [
      "id-ipa-kelas8:122",
-     0.8336
+     0.8176
     ],
     [
-     "id-ipa-kelas8:135",
-     0.8247
-    ],
-    [
-     "id-ipa-kelas8:151",
-     0.8214
-    ],
-    [
-     "id-ipas-kelas6:114",
-     0.8191
-    ],
-    [
-     "id-ipa-kelas8:173",
-     0.8186
+     "id-ipa-kelas8:97",
+     0.8174
     ]
    ]
   },
@@ -386,24 +386,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:126",
-     0.8071
-    ],
-    [
      "wiki:Reaksi_kimia:9",
      0.8066
-    ],
-    [
-     "id-ipa-kelas8:122",
-     0.8061
     ],
     [
      "wiki:Kelarutan:0",
      0.8058
     ],
     [
-     "id-ipa-kelas7:43",
-     0.8054
+     "id-ipa-kelas9:3",
+     0.8047
+    ],
+    [
+     "id-ipa-kelas7:90",
+     0.8044
+    ],
+    [
+     "id-ipa-kelas8:101",
+     0.8042
     ]
    ]
   },
@@ -417,12 +417,12 @@
      0.8005
     ],
     [
-     "id-ipa-kelas7:131",
-     0.8001
-    ],
-    [
      "wiki:Ekosistem:1",
      0.7992
+    ],
+    [
+     "id-ipa-kelas7:102",
+     0.7962
     ],
     [
      "wiki:Ekosistem:3",
@@ -440,24 +440,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas5:45",
-     0.8484
+     "id-ipa-kelas7:101",
+     0.8532
     ],
     [
-     "id-ipa-kelas7:131",
+     "id-ipa-kelas8:113",
+     0.8493
+    ],
+    [
+     "id-ipa-kelas7:12",
      0.8481
     ],
     [
-     "id-ipa-kelas9:27",
-     0.8471
+     "id-ipa-kelas7:21",
+     0.8463
     ],
     [
-     "id-ipa-kelas9:28",
-     0.8468
-    ],
-    [
-     "id-ipa-kelas7:130",
-     0.8455
+     "id-ipa-kelas7:11",
+     0.8454
     ]
    ]
   },
@@ -467,24 +467,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas3:87",
-     0.8272
+     "id-ipa-kelas8:101",
+     0.8274
     ],
     [
-     "id-ipa-kelas8:127",
-     0.826
+     "id-ipa-kelas8:103",
+     0.8269
     ],
     [
-     "id-ipa-kelas8:122",
-     0.8253
+     "id-ipa-kelas8:102",
+     0.8257
     ],
     [
-     "id-ipa-kelas8:126",
-     0.8236
+     "id-ipa-kelas7:17",
+     0.8221
     ],
     [
-     "id-ipa-kelas8:129",
-     0.8229
+     "id-ipa-kelas9:3",
+     0.8193
     ]
    ]
   },
@@ -494,24 +494,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:25",
-     0.8252
+     "id-ipa-kelas7:10",
+     0.8204
     ],
     [
-     "id-ipa-kelas7:66",
-     0.8201
+     "id-ipa-kelas7:12",
+     0.817
     ],
     [
-     "id-ipa-kelas8:151",
-     0.8155
+     "id-ipa-kelas7:9",
+     0.8159
     ],
     [
-     "id-ipa-kelas8:159",
-     0.8154
+     "id-ipa-kelas8:122",
+     0.8125
     ],
     [
-     "id-ipas-kelas5:45",
-     0.8154
+     "id-ipas-kelas5:32",
+     0.8121
     ]
    ]
   },
@@ -521,24 +521,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas5:40",
-     0.8116
+     "id-ipas-kelas5:28",
+     0.8118
     ],
     [
-     "id-ipas-kelas4:59",
-     0.805
+     "id-ipas-kelas4:60",
+     0.8055
     ],
     [
-     "wiki:Komponen_abiotik:3",
-     0.8047
+     "wiki:Tumbuhan:10",
+     0.8014
     ],
     [
-     "id-ipas-kelas4:96",
-     0.8039
+     "id-ipa-kelas7:102",
+     0.801
     ],
     [
-     "id-ipas-kelas4:97",
-     0.8034
+     "id-ipas-kelas5:27",
+     0.7996
     ]
    ]
   },
@@ -548,24 +548,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:37",
-     0.814
-    ],
-    [
-     "id-ipa-kelas7:66",
-     0.8116
-    ],
-    [
-     "id-ipa-kelas7:25",
-     0.8085
-    ],
-    [
-     "id-ipas-kelas5:45",
-     0.8037
+     "id-ipa-kelas9:18",
+     0.806
     ],
     [
      "wiki:Percobaan:2",
      0.803
+    ],
+    [
+     "id-ipa-kelas7:9",
+     0.802
+    ],
+    [
+     "id-ipa-kelas7:10",
+     0.7997
+    ],
+    [
+     "id-ipa-kelas7:47",
+     0.7983
     ]
    ]
   },
@@ -575,24 +575,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas3:87",
-     0.8188
+     "id-ipa-kelas7:90",
+     0.8104
     ],
     [
-     "id-ipa-kelas7:66",
-     0.8176
+     "id-ipa-kelas7:47",
+     0.8104
     ],
     [
-     "id-ipa-kelas7:37",
-     0.808
+     "id-ipa-kelas7:23",
+     0.8057
     ],
     [
-     "id-ipa-kelas9:98",
-     0.8064
+     "id-ipa-kelas9:3",
+     0.8041
     ],
     [
-     "id-ipas-kelas6:21",
-     0.8046
+     "id-ipa-kelas9:37",
+     0.8037
     ]
    ]
   },
@@ -603,24 +603,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:58",
-     0.8322
-    ],
-    [
-     "id-ipa-kelas7:43",
-     0.8294
-    ],
-    [
-     "id-ipa-kelas7:50",
-     0.8215
+     "id-ipa-kelas7:40",
+     0.8283
     ],
     [
      "wiki:Kelarutan:2",
      0.8211
     ],
     [
-     "id-ipa-kelas7:26",
-     0.821
+     "id-ipa-kelas7:33",
+     0.8169
+    ],
+    [
+     "wiki:Kelarutan:1",
+     0.8149
+    ],
+    [
+     "wiki:Kelarutan:0",
+     0.8149
     ]
    ]
   },
@@ -631,24 +631,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:43",
-     0.8347
-    ],
-    [
-     "id-ipa-kelas8:32",
-     0.8269
-    ],
-    [
-     "id-ipa-kelas7:26",
-     0.8239
-    ],
-    [
      "wiki:Kelarutan:3",
      0.8218
     ],
     [
-     "id-ipa-kelas8:126",
-     0.8209
+     "id-ipa-kelas7:27",
+     0.8181
+    ],
+    [
+     "id-ipa-kelas8:101",
+     0.8174
+    ],
+    [
+     "wiki:Kelarutan:2",
+     0.816
+    ],
+    [
+     "id-ipa-kelas7:23",
+     0.8138
     ]
    ]
   },
@@ -659,24 +659,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas6:13",
-     0.8347
+     "id-ipas-kelas6:8",
+     0.8413
     ],
     [
-     "id-ipa-kelas7:47",
-     0.8313
+     "id-ipas-kelas6:7",
+     0.8388
     ],
     [
-     "id-ipa-kelas8:35",
-     0.8303
+     "id-ipa-kelas8:104",
+     0.8265
     ],
     [
-     "id-ipa-kelas8:122",
-     0.8294
+     "id-ipas-kelas6:9",
+     0.8264
     ],
     [
-     "id-ipa-kelas8:129",
-     0.8281
+     "id-ipas-kelas6:2",
+     0.8258
     ]
    ]
   },
@@ -687,24 +687,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas6:12",
-     0.8162
+     "id-ipas-kelas6:6",
+     0.8187
     ],
     [
-     "id-ipas-kelas3:5",
-     0.8145
+     "id-ipas-kelas6:7",
+     0.8167
     ],
     [
-     "id-ipa-kelas9:26",
-     0.8145
+     "wiki:Protein:19",
+     0.8122
     ],
     [
-     "id-ipa-kelas8:26",
-     0.8143
+     "id-ipa-kelas8:18",
+     0.8119
     ],
     [
-     "id-ipas-kelas3:8",
-     0.8131
+     "id-ipas-kelas6:8",
+     0.8108
     ]
    ]
   },
@@ -715,24 +715,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:59",
-     0.8297
+     "id-ipa-kelas7:41",
+     0.8267
     ],
     [
-     "id-ipa-kelas9:153",
-     0.8284
+     "id-ipas-kelas6:7",
+     0.8246
     ],
     [
-     "id-ipa-kelas9:98",
-     0.8282
+     "id-ipa-kelas9:77",
+     0.8234
     ],
     [
-     "id-ipa-kelas8:26",
-     0.8255
+     "wiki:Protein:19",
+     0.8219
     ],
     [
-     "id-ipa-kelas7:60",
-     0.8248
+     "id-ipa-kelas7:14",
+     0.8181
     ]
    ]
   },
@@ -747,20 +747,20 @@
      0.8233
     ],
     [
-     "id-ipa-kelas9:35",
-     0.8163
+     "id-ipas-kelas6:7",
+     0.8145
     ],
     [
-     "id-ipa-kelas9:54",
-     0.8162
+     "id-ipa-kelas7:23",
+     0.8145
     ],
     [
-     "id-ipa-kelas8:14",
-     0.8143
+     "id-ipa-kelas8:6",
+     0.8139
     ],
     [
-     "id-ipa-kelas7:37",
-     0.813
+     "id-ipa-kelas7:90",
+     0.8135
     ]
    ]
   },
@@ -771,24 +771,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:35",
-     0.8248
+     "id-ipas-kelas6:7",
+     0.8225
     ],
     [
-     "id-ipa-kelas8:14",
-     0.8243
-    ],
-    [
-     "id-ipa-kelas8:32",
-     0.8241
-    ],
-    [
-     "id-ipa-kelas9:54",
-     0.823
-    ],
-    [
-     "id-ipa-kelas8:23",
+     "id-ipa-kelas8:7",
      0.8224
+    ],
+    [
+     "wiki:Lemak:9",
+     0.8219
+    ],
+    [
+     "wiki:Lemak:10",
+     0.8217
+    ],
+    [
+     "id-ipa-kelas8:6",
+     0.8214
     ]
    ]
   },
@@ -802,10 +802,6 @@
      0.7918
     ],
     [
-     "id-ipa-kelas7:182",
-     0.7814
-    ],
-    [
      "wiki:Kelarutan:4",
      0.7803
     ],
@@ -814,8 +810,12 @@
      0.7792
     ],
     [
-     "id-ipa-kelas9:190",
-     0.7791
+     "wiki:Asam:0",
+     0.7757
+    ],
+    [
+     "wiki:Percobaan:1",
+     0.7751
     ]
    ]
   },
@@ -826,24 +826,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:35",
-     0.8129
+     "id-ipa-kelas9:34",
+     0.8083
     ],
     [
-     "id-ipa-kelas9:189",
-     0.8086
+     "id-ipa-kelas9:41",
+     0.8065
     ],
     [
-     "id-ipa-kelas9:56",
-     0.8078
+     "wiki:Kelarutan:3",
+     0.804
     ],
     [
-     "id-ipa-kelas8:175",
-     0.8072
+     "id-ipas-kelas6:7",
+     0.8017
     ],
     [
-     "id-ipa-kelas9:98",
-     0.8041
+     "id-ipa-kelas9:77",
+     0.7999
     ]
    ]
   },
@@ -854,24 +854,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:56",
-     0.8251
+     "id-ipa-kelas9:41",
+     0.8233
     ],
     [
-     "id-ipa-kelas9:35",
-     0.8188
-    ],
-    [
-     "id-ipa-kelas9:189",
+     "id-ipa-kelas9:34",
      0.8146
     ],
     [
-     "id-ipa-kelas9:13",
-     0.8136
+     "id-ipa-kelas9:33",
+     0.8131
     ],
     [
-     "id-ipa-kelas8:175",
-     0.8133
+     "id-ipa-kelas9:77",
+     0.812
+    ],
+    [
+     "id-ipas-kelas5:71",
+     0.8101
     ]
    ]
   },
@@ -881,24 +881,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas3:10",
-     0.8194
+     "id-ipa-kelas9:17",
+     0.8095
     ],
     [
-     "id-ipa-kelas8:32",
-     0.8169
+     "id-ipas-kelas3:4",
+     0.8082
     ],
     [
-     "id-ipa-kelas9:28",
-     0.8159
+     "id-ipa-kelas9:60",
+     0.8082
     ],
     [
-     "id-ipa-kelas7:93",
-     0.8112
+     "id-ipas-kelas3:5",
+     0.8066
     ],
     [
-     "id-ipa-kelas9:38",
-     0.8103
+     "id-ipa-kelas9:25",
+     0.8065
     ]
    ]
   },
@@ -908,24 +908,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas4:30",
-     0.8051
+     "id-ipas-kelas4:9",
+     0.8002
     ],
     [
-     "id-ipas-kelas4:19",
-     0.7997
-    ],
-    [
-     "id-ipa-kelas7:93",
+     "id-ipa-kelas7:82",
      0.7996
-    ],
-    [
-     "id-ipa-kelas7:109",
-     0.7991
     ],
     [
      "wiki:Tuas:1",
      0.7958
+    ],
+    [
+     "wiki:Tendon:0",
+     0.794
+    ],
+    [
+     "id-ipas-kelas6:18",
+     0.7912
     ]
    ]
   },
@@ -935,24 +935,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas4:30",
-     0.8057
+     "id-ipas-kelas4:9",
+     0.8033
     ],
     [
-     "id-ipas-kelas4:19",
+     "id-ipa-kelas7:82",
      0.8025
-    ],
-    [
-     "id-ipa-kelas7:93",
-     0.8016
-    ],
-    [
-     "id-ipa-kelas7:109",
-     0.7999
     ],
     [
      "wiki:Tuas:1",
      0.799
+    ],
+    [
+     "wiki:Tendon:0",
+     0.7961
+    ],
+    [
+     "id-ipas-kelas6:18",
+     0.7952
     ]
    ]
   },
@@ -966,20 +966,20 @@
      0.8196
     ],
     [
-     "wiki:Tubuh_manusia:1",
-     0.8181
-    ],
-    [
-     "id-ipa-kelas9:92",
-     0.8136
-    ],
-    [
-     "id-ipas-kelas5:88",
-     0.813
-    ],
-    [
      "wiki:Otot:8",
      0.8114
+    ],
+    [
+     "id-ipa-kelas8:2",
+     0.8091
+    ],
+    [
+     "id-ipa-kelas7:87",
+     0.8085
+    ],
+    [
+     "id-ipa-kelas8:32",
+     0.808
     ]
    ]
   },
@@ -1016,24 +1016,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas6:38",
-     0.7978
+     "id-ipas-kelas3:56",
+     0.7933
     ],
     [
-     "id-ipa-kelas8:35",
-     0.7953
+     "id-ipa-kelas9:8",
+     0.7906
     ],
     [
-     "id-ipas-kelas6:20",
-     0.7951
+     "id-ipas-kelas6:27",
+     0.7893
     ],
     [
-     "id-ipas-kelas6:5",
-     0.794
+     "id-ipa-kelas9:0",
+     0.7892
     ],
     [
-     "id-ipa-kelas9:16",
-     0.7928
+     "id-ipas-kelas3:0",
+     0.7877
     ]
    ]
   },
@@ -1043,24 +1043,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas6:20",
-     0.788
+     "id-ipas-kelas3:56",
+     0.7883
     ],
     [
-     "id-ipas-kelas3:7",
-     0.7856
+     "id-ipa-kelas9:8",
+     0.7809
     ],
     [
-     "id-ipas-kelas3:87",
-     0.7846
+     "id-ipas-kelas5:22",
+     0.7803
     ],
     [
-     "id-ipas-kelas6:38",
-     0.7845
+     "id-ipa-kelas9:121",
+     0.7793
     ],
     [
-     "id-ipa-kelas8:35",
-     0.7845
+     "id-ipa-kelas9:0",
+     0.7775
     ]
    ]
   },
@@ -1070,24 +1070,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:93",
-     0.8435
+     "id-ipa-kelas7:77",
+     0.8247
     ],
     [
-     "id-ipas-kelas3:28",
-     0.8261
+     "id-ipa-kelas9:18",
+     0.8234
     ],
     [
-     "id-ipa-kelas9:21",
-     0.8255
+     "id-ipa-kelas7:69",
+     0.8192
     ],
     [
-     "id-ipa-kelas7:103",
-     0.8222
+     "id-ipa-kelas7:85",
+     0.819
     ],
     [
-     "id-ipas-kelas5:101",
-     0.8216
+     "id-ipa-kelas7:72",
+     0.8188
     ]
    ]
   },
@@ -1097,16 +1097,8 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:114",
-     0.8013
-    ],
-    [
      "wiki:Sendi:0",
      0.8011
-    ],
-    [
-     "id-ipa-kelas7:106",
-     0.7994
     ],
     [
      "wiki:Tulang:5",
@@ -1115,6 +1107,14 @@
     [
      "wiki:Tendon:0",
      0.7947
+    ],
+    [
+     "id-ipa-kelas7:80",
+     0.7939
+    ],
+    [
+     "wiki:Katrol:0",
+     0.7914
     ]
    ]
   },
@@ -1124,24 +1124,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:81",
-     0.8261
+     "id-ipa-kelas7:59",
+     0.8154
     ],
     [
-     "id-ipas-kelas3:5",
-     0.8204
+     "id-ipa-kelas7:60",
+     0.8128
     ],
     [
-     "id-ipas-kelas3:4",
-     0.815
+     "id-ipa-kelas9:82",
+     0.8105
     ],
     [
-     "id-ipas-kelas3:8",
-     0.8127
+     "id-ipas-kelas3:0",
+     0.8091
     ],
     [
-     "id-ipa-kelas8:169",
-     0.8119
+     "id-ipa-kelas9:77",
+     0.8085
     ]
    ]
   },
@@ -1151,24 +1151,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:169",
-     0.8145
+     "wiki:Tulang:5",
+     0.8078
     ],
     [
-     "id-ipa-kelas8:173",
-     0.8132
+     "wiki:Protein:18",
+     0.8061
     ],
     [
-     "id-ipa-kelas8:44",
-     0.8131
+     "wiki:Lemak:1",
+     0.8025
     ],
     [
-     "id-ipas-kelas3:4",
-     0.8087
+     "id-ipa-kelas8:86",
+     0.8021
     ],
     [
-     "id-ipa-kelas9:189",
-     0.8084
+     "wiki:Otot:3",
+     0.8019
     ]
    ]
   },
@@ -1178,24 +1178,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas3:8",
-     0.8216
+     "id-ipas-kelas3:0",
+     0.8168
     ],
     [
-     "id-ipas-kelas3:5",
-     0.8206
-    ],
-    [
-     "id-ipas-kelas3:4",
-     0.8194
-    ],
-    [
-     "id-ipas-kelas3:28",
-     0.819
-    ],
-    [
-     "id-ipa-kelas8:107",
+     "id-ipas-kelas3:17",
      0.8154
+    ],
+    [
+     "id-ipa-kelas8:85",
+     0.8126
+    ],
+    [
+     "wiki:Sendi:1",
+     0.812
+    ],
+    [
+     "wiki:Sidik_jari:4",
+     0.8107
     ]
    ]
   },
@@ -1209,20 +1209,20 @@
      0.7979
     ],
     [
-     "id-ipa-kelas9:38",
-     0.7973
+     "id-ipa-kelas9:25",
+     0.7941
     ],
     [
-     "id-ipa-kelas9:28",
-     0.7917
-    ],
-    [
-     "id-ipa-kelas7:66",
-     0.7908
+     "id-ipa-kelas7:88",
+     0.7904
     ],
     [
      "wiki:Reaksi_kimia:16",
      0.7899
+    ],
+    [
+     "wiki:Percobaan:2",
+     0.7875
     ]
    ]
   },
@@ -1232,24 +1232,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:114",
-     0.7833
+     "id-ipa-kelas7:40",
+     0.7768
     ],
     [
-     "id-ipa-kelas7:103",
-     0.7806
-    ],
-    [
-     "id-ipa-kelas7:58",
-     0.7798
-    ],
-    [
-     "id-ipas-kelas6:67",
+     "id-ipas-kelas4:9",
      0.7758
     ],
     [
-     "id-ipas-kelas5:33",
-     0.7753
+     "id-ipa-kelas7:82",
+     0.7744
+    ],
+    [
+     "id-ipas-kelas5:22",
+     0.774
+    ],
+    [
+     "wiki:Adaptasi:3",
+     0.7739
     ]
    ]
   },
@@ -1259,24 +1259,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:101",
-     0.8064
+     "id-ipa-kelas7:76",
+     0.8096
+    ],
+    [
+     "id-ipa-kelas7:73",
+     0.8091
+    ],
+    [
+     "id-ipa-kelas8:51",
+     0.8081
     ],
     [
      "wiki:Reaksi_kimia:16",
      0.8062
     ],
     [
-     "id-ipa-kelas8:67",
-     0.8053
-    ],
-    [
-     "id-ipa-kelas8:66",
-     0.8045
-    ],
-    [
-     "id-ipa-kelas7:100",
-     0.8031
+     "id-ipa-kelas7:77",
+     0.8044
     ]
    ]
   },
@@ -1302,8 +1302,8 @@
      0.8188
     ],
     [
-     "id-ipas-kelas6:19",
-     0.8143
+     "wiki:Otot:4",
+     0.8141
     ]
    ]
   },
@@ -1313,24 +1313,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:125",
-     0.8497
+     "id-ipa-kelas7:97",
+     0.8339
     ],
     [
-     "id-ipa-kelas9:98",
-     0.8389
+     "id-ipa-kelas9:77",
+     0.8336
     ],
     [
-     "id-ipas-kelas4:59",
-     0.8386
+     "id-ipas-kelas4:36",
+     0.8285
     ],
     [
-     "id-ipas-kelas3:40",
-     0.8382
+     "id-ipa-kelas7:96",
+     0.8245
     ],
     [
-     "id-ipa-kelas7:118",
-     0.835
+     "id-ipa-kelas7:13",
+     0.8244
     ]
    ]
   },
@@ -1342,23 +1342,23 @@
    "hits": [
     [
      "wiki:Sidik_jari:4",
-     0.8236
+     0.8222
     ],
     [
-     "id-ipas-kelas3:8",
-     0.8208
+     "id-ipa-kelas7:49",
+     0.8186
     ],
     [
-     "id-ipa-kelas9:27",
-     0.8206
+     "wiki:Sidik_jari:5",
+     0.8186
     ],
     [
-     "id-ipa-kelas7:69",
-     0.8203
+     "id-ipa-kelas9:17",
+     0.8149
     ],
     [
-     "id-ipa-kelas7:11",
-     0.8183
+     "id-ipa-kelas8:89",
+     0.8129
     ]
    ]
   },
@@ -1370,23 +1370,23 @@
    "hits": [
     [
      "wiki:Sidik_jari:4",
-     0.8286
-    ],
-    [
-     "id-ipas-kelas3:8",
-     0.8216
+     0.829
     ],
     [
      "wiki:Sidik_jari:5",
-     0.8196
+     0.8205
     ],
     [
-     "id-ipa-kelas9:29",
-     0.8178
+     "id-ipa-kelas7:49",
+     0.8163
     ],
     [
-     "id-ipa-kelas9:27",
-     0.8175
+     "id-ipa-kelas9:17",
+     0.8131
+    ],
+    [
+     "wiki:Tulang:4",
+     0.813
     ]
    ]
   },
@@ -1397,24 +1397,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:134",
-     0.8391
+     "id-ipa-kelas8:108",
+     0.8243
     ],
     [
-     "id-ipa-kelas7:54",
-     0.8239
+     "id-ipa-kelas8:107",
+     0.821
     ],
     [
-     "id-ipas-kelas3:87",
-     0.8215
+     "id-ipa-kelas8:89",
+     0.8153
     ],
     [
-     "id-ipas-kelas5:24",
-     0.82
+     "id-ipa-kelas7:36",
+     0.8153
     ],
     [
-     "id-ipa-kelas8:133",
-     0.82
+     "id-ipas-kelas5:71",
+     0.8147
     ]
    ]
   },
@@ -1425,24 +1425,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:66",
-     0.8202
+     "id-ipa-kelas7:106",
+     0.8073
+    ],
+    [
+     "id-ipa-kelas7:60",
+     0.8059
+    ],
+    [
+     "id-ipa-kelas9:77",
+     0.8044
     ],
     [
      "id-ipa-kelas7:47",
-     0.8121
+     0.801
     ],
     [
-     "id-ipas-kelas5:43",
-     0.8057
-    ],
-    [
-     "id-ipa-kelas9:98",
-     0.8046
-    ],
-    [
-     "id-ipa-kelas7:120",
-     0.8043
+     "wiki:Protein:24",
+     0.8009
     ]
    ]
   },
@@ -1453,24 +1453,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:164",
-     0.8223
+     "id-ipa-kelas9:78",
+     0.8143
     ],
     [
-     "id-ipa-kelas8:174",
-     0.8207
+     "id-ipa-kelas9:129",
+     0.8142
     ],
     [
-     "id-ipas-kelas3:3",
-     0.8195
+     "id-ipa-kelas7:49",
+     0.8124
     ],
     [
-     "id-ipa-kelas8:173",
-     0.8188
+     "id-ipa-kelas8:85",
+     0.8119
     ],
     [
-     "id-ipas-kelas3:8",
-     0.8172
+     "id-ipas-kelas3:4",
+     0.8109
     ]
    ]
   },
@@ -1481,12 +1481,12 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:112",
-     0.7993
+     "id-ipa-kelas8:89",
+     0.797
     ],
     [
-     "id-ipa-kelas8:114",
-     0.7912
+     "id-ipa-kelas8:88",
+     0.7837
     ],
     [
      "wiki:Bayang-bayang:0",
@@ -1497,8 +1497,8 @@
      0.782
     ],
     [
-     "id-ipa-kelas8:110",
-     0.7815
+     "id-ipas-kelas4:19",
+     0.7809
     ]
    ]
   },
@@ -1517,16 +1517,16 @@
      0.808
     ],
     [
-     "id-ipa-kelas8:173",
-     0.8055
-    ],
-    [
      "wiki:Batu:2",
      0.8053
     ],
     [
      "wiki:Batu:1",
      0.8049
+    ],
+    [
+     "wiki:Erosi:2",
+     0.8043
     ]
    ]
   },
@@ -1544,16 +1544,16 @@
      0.8247
     ],
     [
-     "id-ipa-kelas8:156",
-     0.8206
-    ],
-    [
      "wiki:Erosi:2",
      0.8204
     ],
     [
      "wiki:Erosi:1",
      0.819
+    ],
+    [
+     "id-ipa-kelas8:127",
+     0.8114
     ]
    ]
   },
@@ -1576,12 +1576,12 @@
      0.8022
     ],
     [
-     "id-ipa-kelas7:56",
-     0.8018
+     "id-ipas-kelas5:38",
+     0.8009
     ],
     [
-     "id-ipas-kelas5:54",
-     0.8015
+     "wiki:Siklus_air:1",
+     0.8
     ]
    ]
   },
@@ -1592,24 +1592,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas4:32",
-     0.819
+     "id-ipas-kelas5:22",
+     0.8132
     ],
     [
-     "id-ipas-kelas4:58",
-     0.8175
+     "wiki:Peta_topografi:0",
+     0.8129
     ],
     [
-     "id-ipas-kelas4:40",
-     0.8167
+     "id-ipas-kelas4:26",
+     0.8107
     ],
     [
-     "id-ipas-kelas4:38",
-     0.8165
+     "id-ipa-kelas8:51",
+     0.8106
     ],
     [
-     "id-ipas-kelas5:24",
-     0.815
+     "id-ipas-kelas4:27",
+     0.8102
     ]
    ]
   },
@@ -1620,24 +1620,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas4:32",
-     0.8059
+     "id-ipas-kelas5:8",
+     0.8045
     ],
     [
-     "id-ipas-kelas4:35",
-     0.8003
+     "id-ipas-kelas4:27",
+     0.8002
     ],
     [
-     "id-ipa-kelas7:66",
-     0.7998
+     "id-ipas-kelas4:19",
+     0.7945
     ],
     [
-     "id-ipa-kelas7:37",
-     0.7976
+     "id-ipas-kelas4:20",
+     0.7944
     ],
     [
-     "id-ipas-kelas4:58",
-     0.7963
+     "id-ipa-kelas7:73",
+     0.7927
     ]
    ]
   },
@@ -1648,24 +1648,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:174",
-     0.8209
+     "wiki:Bunyi:4",
+     0.813
     ],
     [
-     "id-ipa-kelas8:104",
-     0.8194
+     "id-ipa-kelas8:83",
+     0.8115
     ],
     [
-     "id-ipa-kelas7:180",
-     0.8143
+     "id-ipa-kelas8:89",
+     0.8111
     ],
     [
-     "id-ipa-kelas8:105",
-     0.8143
+     "id-ipa-kelas7:33",
+     0.8104
     ],
     [
-     "id-ipa-kelas7:181",
-     0.8137
+     "id-ipa-kelas8:120",
+     0.8103
     ]
    ]
   },
@@ -1676,24 +1676,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas4:32",
-     0.8087
+     "id-ipas-kelas4:18",
+     0.7999
     ],
     [
-     "id-ipa-kelas9:29",
-     0.8021
+     "id-ipa-kelas8:86",
+     0.7906
     ],
     [
-     "id-ipa-kelas7:66",
-     0.8018
+     "id-ipa-kelas8:88",
+     0.7904
     ],
     [
-     "id-ipa-kelas9:25",
-     0.7971
+     "id-ipa-kelas8:109",
+     0.7903
     ],
     [
-     "id-ipa-kelas8:175",
-     0.7958
+     "id-ipas-kelas4:27",
+     0.7894
     ]
    ]
   },
@@ -1704,24 +1704,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:174",
-     0.8278
+     "wiki:Delta_sungai:7",
+     0.8222
     ],
     [
-     "id-ipa-kelas7:181",
-     0.8258
+     "id-ipa-kelas7:38",
+     0.8221
     ],
     [
-     "id-ipa-kelas8:122",
-     0.8248
+     "id-ipa-kelas8:80",
+     0.8216
     ],
     [
-     "id-ipa-kelas7:56",
-     0.8237
+     "wiki:Delta_sungai:5",
+     0.8191
     ],
     [
-     "id-ipas-kelas5:45",
-     0.8234
+     "id-ipas-kelas4:21",
+     0.8186
     ]
    ]
   },
@@ -1736,20 +1736,20 @@
      0.8245
     ],
     [
-     "id-ipas-kelas4:79",
-     0.818
+     "id-ipas-kelas4:39",
+     0.816
     ],
     [
-     "id-ipas-kelas4:42",
-     0.8127
-    ],
-    [
-     "id-ipas-kelas4:68",
-     0.8123
+     "id-ipa-kelas8:68",
+     0.8126
     ],
     [
      "wiki:Delta_sungai:8",
      0.8123
+    ],
+    [
+     "id-ipas-kelas5:38",
+     0.8114
     ]
    ]
   },
@@ -1761,23 +1761,23 @@
    "hits": [
     [
      "wiki:Sidik_jari:4",
-     0.8101
-    ],
-    [
-     "id-ipas-kelas5:54",
      0.8047
-    ],
-    [
-     "id-ipas-kelas3:75",
-     0.803
     ],
     [
      "wiki:Delta_sungai:1",
      0.8024
     ],
     [
+     "id-ipas-kelas5:38",
+     0.8018
+    ],
+    [
      "wiki:Siklus_air:1",
      0.8005
+    ],
+    [
+     "wiki:Siklus_air:5",
+     0.8001
     ]
    ]
   },
@@ -1788,24 +1788,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas5:16",
-     0.8237
+     "id-ipas-kelas5:32",
+     0.8209
     ],
     [
-     "id-ipas-kelas5:45",
-     0.823
+     "id-ipas-kelas5:22",
+     0.8105
     ],
     [
-     "id-ipas-kelas5:101",
-     0.8176
+     "id-ipa-kelas7:122",
+     0.81
     ],
     [
-     "id-ipas-kelas4:42",
-     0.8167
+     "id-ipas-kelas4:18",
+     0.8091
     ],
     [
-     "id-ipas-kelas4:36",
-     0.8156
+     "wiki:Peta_topografi:3",
+     0.8089
     ]
    ]
   },
@@ -1820,20 +1820,20 @@
      0.8253
     ],
     [
-     "id-ipa-kelas8:159",
-     0.8194
+     "id-ipa-kelas8:130",
+     0.8244
     ],
     [
-     "id-ipa-kelas8:140",
-     0.819
+     "id-ipas-kelas4:33",
+     0.8191
     ],
     [
-     "id-ipa-kelas9:182",
-     0.8187
+     "wiki:Erosi:2",
+     0.8173
     ],
     [
-     "id-ipa-kelas8:160",
-     0.8178
+     "id-ipa-kelas8:113",
+     0.8155
     ]
    ]
   },
@@ -1848,20 +1848,20 @@
      0.7996
     ],
     [
-     "id-ipa-kelas8:66",
-     0.7918
+     "id-ipa-kelas8:51",
+     0.7948
     ],
     [
-     "id-ipa-kelas8:67",
-     0.7896
+     "id-ipa-kelas8:52",
+     0.7898
     ],
     [
-     "id-ipa-kelas8:104",
-     0.7892
+     "id-ipa-kelas8:82",
+     0.7853
     ],
     [
-     "id-ipa-kelas8:68",
-     0.787
+     "wiki:Bunyi:4",
+     0.7834
     ]
    ]
   },
@@ -1871,24 +1871,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas5:101",
-     0.8244
+     "id-ipa-kelas8:2",
+     0.8231
     ],
     [
-     "id-ipa-kelas8:35",
-     0.8242
+     "id-ipa-kelas9:121",
+     0.8218
     ],
     [
-     "id-ipa-kelas9:29",
-     0.8222
+     "id-ipa-kelas9:18",
+     0.8217
     ],
     [
-     "id-ipa-kelas9:110",
-     0.8216
+     "id-ipa-kelas8:32",
+     0.8172
     ],
     [
-     "id-ipas-kelas4:56",
-     0.8208
+     "id-ipa-kelas7:84",
+     0.8171
     ]
    ]
   },
@@ -1899,24 +1899,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:29",
-     0.8165
+     "id-ipa-kelas9:18",
+     0.8157
     ],
     [
-     "id-ipa-kelas9:115",
-     0.8165
+     "id-ipa-kelas9:121",
+     0.8146
     ],
     [
-     "id-ipas-kelas4:56",
-     0.812
+     "id-ipas-kelas6:24",
+     0.8133
     ],
     [
-     "id-ipa-kelas8:65",
-     0.8114
+     "id-ipa-kelas9:90",
+     0.811
     ],
     [
-     "id-ipa-kelas7:141",
-     0.8109
+     "id-ipa-kelas8:2",
+     0.8092
     ]
    ]
   },
@@ -1939,12 +1939,12 @@
      0.8208
     ],
     [
-     "id-ipa-kelas9:138",
-     0.812
+     "id-ipa-kelas9:84",
+     0.8077
     ],
     [
-     "id-ipa-kelas9:150",
-     0.8099
+     "id-ipa-kelas9:94",
+     0.807
     ]
    ]
   },
@@ -1955,24 +1955,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:108",
-     0.817
+     "id-ipa-kelas9:94",
+     0.8151
     ],
     [
-     "id-ipa-kelas9:112",
-     0.8113
+     "id-ipas-kelas4:7",
+     0.8066
     ],
     [
-     "id-ipa-kelas7:103",
-     0.8098
+     "id-ipa-kelas9:98",
+     0.8061
     ],
     [
-     "id-ipas-kelas5:101",
-     0.8098
+     "id-ipa-kelas9:84",
+     0.8048
     ],
     [
-     "id-ipa-kelas7:93",
-     0.808
+     "id-ipa-kelas7:69",
+     0.8047
     ]
    ]
   },
@@ -1983,24 +1983,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:126",
-     0.8218
+     "id-ipa-kelas9:94",
+     0.8252
     ],
     [
-     "id-ipa-kelas9:108",
-     0.8211
+     "id-ipa-kelas9:98",
+     0.8138
     ],
     [
-     "id-ipa-kelas9:112",
-     0.8203
+     "id-ipa-kelas9:88",
+     0.8128
     ],
     [
-     "id-ipas-kelas5:101",
-     0.8161
+     "wiki:Rangkaian_listrik:3",
+     0.8108
     ],
     [
-     "id-ipas-kelas5:98",
-     0.8156
+     "id-ipa-kelas9:97",
+     0.8091
     ]
    ]
   },
@@ -2011,24 +2011,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:108",
-     0.8139
+     "id-ipa-kelas9:94",
+     0.8148
     ],
     [
-     "id-ipa-kelas7:103",
-     0.8127
+     "id-ipas-kelas4:7",
+     0.8065
     ],
     [
-     "id-ipas-kelas5:101",
-     0.8107
+     "id-ipa-kelas7:69",
+     0.8063
     ],
     [
-     "id-ipas-kelas4:30",
-     0.8099
+     "id-ipa-kelas9:98",
+     0.8061
     ],
     [
-     "id-ipa-kelas7:93",
-     0.8096
+     "wiki:Rangkaian_listrik:3",
+     0.8048
     ]
    ]
   },
@@ -2039,24 +2039,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:126",
-     0.8199
-    ],
-    [
-     "id-ipa-kelas9:108",
-     0.8163
-    ],
-    [
-     "id-ipa-kelas9:138",
-     0.8151
-    ],
-    [
-     "id-ipa-kelas9:112",
-     0.8141
+     "id-ipa-kelas9:94",
+     0.8269
     ],
     [
      "wiki:Rangkaian_listrik:3",
      0.8135
+    ],
+    [
+     "id-ipa-kelas9:98",
+     0.8095
+    ],
+    [
+     "id-ipa-kelas9:108",
+     0.807
+    ],
+    [
+     "id-ipa-kelas7:69",
+     0.8068
     ]
    ]
   },
@@ -2067,24 +2067,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:138",
-     0.8072
+     "id-ipa-kelas9:98",
+     0.8032
     ],
     [
      "wiki:Magnet:5",
      0.8015
     ],
     [
-     "id-ipa-kelas9:126",
-     0.7993
+     "id-ipa-kelas9:90",
+     0.7969
     ],
     [
-     "id-ipa-kelas9:137",
-     0.7984
+     "id-ipa-kelas9:88",
+     0.7964
     ],
     [
-     "id-ipas-kelas3:60",
-     0.7982
+     "wiki:Rangkaian_listrik:3",
+     0.794
     ]
    ]
   },
@@ -2095,24 +2095,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas4:27",
-     0.8185
+     "id-ipas-kelas4:16",
+     0.8031
     ],
     [
-     "id-ipas-kelas4:29",
-     0.8109
-    ],
-    [
-     "id-ipas-kelas4:26",
-     0.8074
-    ],
-    [
-     "id-ipa-kelas9:136",
-     0.8062
+     "id-ipas-kelas4:15",
+     0.8014
     ],
     [
      "wiki:Magnet:4",
      0.7996
+    ],
+    [
+     "id-ipa-kelas9:108",
+     0.7975
+    ],
+    [
+     "id-ipa-kelas9:88",
+     0.7973
     ]
    ]
   },
@@ -2123,24 +2123,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:142",
-     0.8343
+     "id-ipa-kelas9:106",
+     0.8257
     ],
     [
-     "id-ipa-kelas9:133",
-     0.8332
+     "id-ipa-kelas8:88",
+     0.8256
     ],
     [
-     "id-ipas-kelas4:26",
-     0.8299
+     "wiki:Magnet:1",
+     0.8248
     ],
     [
-     "id-ipas-kelas4:27",
-     0.8291
+     "wiki:Sidik_jari:4",
+     0.8243
     ],
     [
-     "id-ipas-kelas4:29",
-     0.8284
+     "id-ipas-kelas4:16",
+     0.821
     ]
    ]
   },
@@ -2151,24 +2151,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:114",
-     0.8165
+     "id-ipa-kelas8:91",
+     0.8207
     ],
     [
-     "id-ipa-kelas8:115",
-     0.8132
+     "id-ipa-kelas7:80",
+     0.814
     ],
     [
-     "id-ipa-kelas7:106",
-     0.8129
+     "id-ipa-kelas9:113",
+     0.8108
     ],
     [
-     "id-ipa-kelas8:110",
-     0.8122
+     "id-ipa-kelas8:88",
+     0.8106
     ],
     [
-     "id-ipa-kelas9:106",
-     0.811
+     "id-ipa-kelas9:84",
+     0.8088
     ]
    ]
   },
@@ -2182,8 +2182,8 @@
      0.823
     ],
     [
-     "id-ipa-kelas9:125",
-     0.8176
+     "id-ipa-kelas9:98",
+     0.816
     ],
     [
      "wiki:Rangkaian_listrik:2",
@@ -2194,8 +2194,8 @@
      0.8143
     ],
     [
-     "id-ipa-kelas9:124",
-     0.8141
+     "id-ipa-kelas9:99",
+     0.8116
     ]
    ]
   },
@@ -2206,24 +2206,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas5:94",
-     0.821
+     "id-ipa-kelas8:89",
+     0.8228
     ],
     [
-     "id-ipa-kelas8:112",
-     0.8196
+     "id-ipas-kelas5:69",
+     0.8155
     ],
     [
-     "id-ipa-kelas9:108",
-     0.8182
+     "id-ipa-kelas9:98",
+     0.8136
     ],
     [
-     "id-ipas-kelas5:101",
-     0.8163
+     "id-ipa-kelas9:84",
+     0.8123
     ],
     [
-     "id-ipas-kelas4:15",
-     0.8148
+     "id-ipa-kelas9:86",
+     0.8119
     ]
    ]
   },
@@ -2234,24 +2234,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas4:27",
-     0.8175
+     "id-ipa-kelas9:88",
+     0.8152
     ],
     [
-     "id-ipas-kelas4:26",
-     0.8115
-    ],
-    [
-     "id-ipa-kelas9:136",
-     0.8115
+     "id-ipas-kelas4:15",
+     0.8072
     ],
     [
      "wiki:Magnet:2",
      0.8043
     ],
     [
-     "id-ipas-kelas3:87",
-     0.803
+     "id-ipa-kelas7:77",
+     0.8018
+    ],
+    [
+     "id-ipas-kelas4:10",
+     0.8012
     ]
    ]
   },
@@ -2262,23 +2262,23 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:13",
-     0.8296
+     "id-ipa-kelas9:90",
+     0.8261
     ],
     [
-     "id-ipa-kelas7:87",
-     0.8295
-    ],
-    [
-     "id-ipa-kelas9:115",
-     0.8271
+     "id-ipa-kelas9:5",
+     0.8252
     ],
     [
      "wiki:Rangkaian_seri_dan_paralel:1",
      0.8245
     ],
     [
-     "id-ipa-kelas9:116",
+     "id-ipa-kelas9:98",
+     0.824
+    ],
+    [
+     "id-ipa-kelas7:64",
      0.8211
     ]
    ]
@@ -2290,10 +2290,6 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:87",
-     0.8246
-    ],
-    [
      "wiki:Baterai_listrik:3",
      0.816
     ],
@@ -2302,12 +2298,16 @@
      0.8153
     ],
     [
-     "id-ipa-kelas9:13",
-     0.8148
+     "id-ipa-kelas9:88",
+     0.8132
     ],
     [
-     "id-ipa-kelas9:116",
+     "id-ipa-kelas9:84",
      0.8127
+    ],
+    [
+     "wiki:Baterai_listrik:7",
+     0.8114
     ]
    ]
   },
@@ -2318,24 +2318,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:108",
-     0.7931
-    ],
-    [
      "wiki:Insulator_listrik:5",
-     0.7914
+     0.7943
     ],
     [
      "wiki:Protein:14",
      0.7911
     ],
     [
-     "id-ipa-kelas7:103",
-     0.7899
+     "wiki:Sakelar:0",
+     0.7889
     ],
     [
-     "id-ipa-kelas9:112",
-     0.7894
+     "id-ipa-kelas9:94",
+     0.786
+    ],
+    [
+     "id-ipas-kelas4:7",
+     0.7856
     ]
    ]
   },
@@ -2346,24 +2346,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:112",
-     0.834
+     "id-ipa-kelas9:88",
+     0.8102
     ],
     [
-     "id-ipa-kelas9:108",
-     0.7999
+     "id-ipa-kelas9:87",
+     0.8081
     ],
     [
-     "id-ipa-kelas7:87",
-     0.7991
+     "wiki:Protein:14",
+     0.7926
     ],
     [
-     "id-ipa-kelas9:125",
-     0.799
+     "id-ipa-kelas7:60",
+     0.7916
     ],
     [
-     "id-ipa-kelas9:111",
-     0.798
+     "id-ipa-kelas8:75",
+     0.7907
     ]
    ]
   },
@@ -2374,24 +2374,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas4:28",
-     0.8314
-    ],
-    [
-     "id-ipas-kelas4:27",
-     0.8314
+     "id-ipas-kelas4:15",
+     0.8327
     ],
     [
      "wiki:Magnet:1",
      0.8277
     ],
     [
-     "id-ipas-kelas4:26",
-     0.8256
+     "id-ipas-kelas4:10",
+     0.8224
     ],
     [
-     "id-ipas-kelas4:21",
-     0.8215
+     "id-ipas-kelas4:16",
+     0.821
+    ],
+    [
+     "id-ipa-kelas9:88",
+     0.8198
     ]
    ]
   },
@@ -2402,24 +2402,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:103",
-     0.8223
+     "id-ipa-kelas7:77",
+     0.8153
     ],
     [
-     "id-ipa-kelas9:106",
-     0.8222
+     "id-ipa-kelas9:103",
+     0.815
     ],
     [
-     "id-ipa-kelas9:138",
-     0.8156
+     "id-ipa-kelas9:94",
+     0.815
     ],
     [
-     "id-ipa-kelas7:106",
-     0.8156
+     "id-ipa-kelas9:98",
+     0.8135
     ],
     [
-     "id-ipa-kelas9:117",
-     0.814
+     "id-ipa-kelas9:97",
+     0.8129
     ]
    ]
   },
@@ -2430,24 +2430,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:106",
-     0.818
+     "id-ipa-kelas9:98",
+     0.8153
     ],
     [
-     "id-ipa-kelas9:124",
-     0.8129
+     "id-ipa-kelas9:94",
+     0.8067
     ],
     [
-     "id-ipa-kelas9:184",
-     0.8089
+     "id-ipa-kelas9:84",
+     0.8049
     ],
     [
-     "id-ipa-kelas9:147",
-     0.8085
+     "id-ipa-kelas9:83",
+     0.8046
     ],
     [
-     "id-ipas-kelas3:61",
-     0.8085
+     "id-ipa-kelas9:97",
+     0.8045
     ]
    ]
   },
@@ -2458,24 +2458,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas4:27",
-     0.8185
-    ],
-    [
-     "id-ipas-kelas4:26",
-     0.8158
-    ],
-    [
-     "id-ipas-kelas4:29",
-     0.81
-    ],
-    [
      "wiki:Magnet:4",
      0.8083
     ],
     [
-     "id-ipa-kelas9:136",
-     0.8073
+     "wiki:Elektromagnet:0",
+     0.8063
+    ],
+    [
+     "id-ipas-kelas4:16",
+     0.8044
+    ],
+    [
+     "id-ipa-kelas9:83",
+     0.802
+    ],
+    [
+     "id-ipas-kelas4:15",
+     0.8013
     ]
    ]
   },
@@ -2489,20 +2489,20 @@
      0.8074
     ],
     [
-     "id-ipa-kelas7:103",
-     0.8032
+     "id-ipa-kelas8:61",
+     0.7996
     ],
     [
-     "id-ipa-kelas8:76",
-     0.7991
+     "id-ipa-kelas8:59",
+     0.7955
     ],
     [
-     "id-ipa-kelas8:75",
-     0.7988
+     "id-ipa-kelas8:58",
+     0.7944
     ],
     [
-     "id-ipa-kelas8:65",
-     0.7966
+     "wiki:Tuas:1",
+     0.7942
     ]
    ]
   },
@@ -2513,24 +2513,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas4:56",
-     0.821
+     "id-ipa-kelas9:98",
+     0.8259
     ],
     [
-     "id-ipa-kelas9:108",
-     0.8208
+     "id-ipa-kelas9:84",
+     0.8214
     ],
     [
-     "id-ipas-kelas5:94",
-     0.82
+     "id-ipa-kelas9:97",
+     0.8177
     ],
     [
-     "id-ipas-kelas5:101",
-     0.8178
+     "wiki:Rangkaian_listrik:3",
+     0.8158
     ],
     [
-     "id-ipa-kelas7:65",
-     0.817
+     "id-ipa-kelas8:89",
+     0.8149
     ]
    ]
   },
@@ -2541,24 +2541,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:136",
-     0.8412
+     "id-ipa-kelas9:108",
+     0.8289
     ],
     [
-     "id-ipas-kelas4:27",
-     0.8321
-    ],
-    [
-     "id-ipa-kelas9:142",
-     0.8226
-    ],
-    [
-     "id-ipas-kelas4:26",
-     0.8201
-    ],
-    [
-     "id-ipas-kelas4:28",
+     "id-ipas-kelas4:15",
      0.82
+    ],
+    [
+     "id-ipas-kelas4:10",
+     0.8189
+    ],
+    [
+     "wiki:Magnet:1",
+     0.8155
+    ],
+    [
+     "id-ipas-kelas4:16",
+     0.8117
     ]
    ]
   },
@@ -2569,24 +2569,24 @@
    ],
    "hits": [
     [
+     "id-ipa-kelas9:86",
+     0.8333
+    ],
+    [
      "wiki:Insulator_listrik:0",
      0.8325
     ],
     [
-     "id-ipa-kelas9:130",
-     0.8285
-    ],
-    [
-     "id-ipas-kelas5:101",
-     0.8271
-    ],
-    [
-     "id-ipa-kelas9:110",
-     0.8262
-    ],
-    [
      "wiki:Insulator_listrik:1",
      0.8256
+    ],
+    [
+     "wiki:Rangkaian_listrik:12",
+     0.824
+    ],
+    [
+     "wiki:Insulator_listrik:5",
+     0.8239
     ]
    ]
   },
@@ -2601,20 +2601,20 @@
      0.8284
     ],
     [
-     "id-ipa-kelas9:110",
-     0.8263
-    ],
-    [
-     "id-ipa-kelas9:130",
-     0.8227
+     "id-ipa-kelas9:86",
+     0.8264
     ],
     [
      "wiki:Insulator_listrik:1",
      0.8201
     ],
     [
-     "id-ipas-kelas5:101",
-     0.8193
+     "id-ipa-kelas9:95",
+     0.8189
+    ],
+    [
+     "wiki:Rangkaian_listrik:5",
+     0.8168
     ]
    ]
   },
@@ -2625,24 +2625,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas5:101",
-     0.8273
+     "id-ipa-kelas7:27",
+     0.8305
     ],
     [
-     "id-ipa-kelas7:43",
-     0.8262
+     "id-ipas-kelas6:0",
+     0.8241
     ],
     [
-     "id-ipa-kelas7:108",
-     0.8248
+     "id-ipa-kelas7:82",
+     0.823
     ],
     [
-     "id-ipa-kelas7:42",
-     0.8219
+     "id-ipa-kelas8:73",
+     0.8193
     ],
     [
-     "id-ipa-kelas7:37",
-     0.8211
+     "id-ipa-kelas7:23",
+     0.8186
     ]
    ]
   },
@@ -2653,24 +2653,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas3:8",
-     0.8272
+     "id-ipas-kelas4:13",
+     0.8197
     ],
     [
-     "id-ipas-kelas3:84",
-     0.8237
+     "wiki:Pengukuran:6",
+     0.8187
     ],
     [
-     "id-ipa-kelas9:98",
-     0.823
+     "id-ipa-kelas7:21",
+     0.8176
     ],
     [
-     "id-ipa-kelas7:86",
-     0.8228
+     "id-ipa-kelas7:14",
+     0.8172
     ],
     [
-     "id-ipas-kelas5:101",
-     0.8227
+     "id-ipa-kelas7:17",
+     0.8166
     ]
    ]
   },
@@ -2689,16 +2689,16 @@
      0.8404
     ],
     [
-     "id-ipa-kelas7:28",
-     0.8375
-    ],
-    [
      "wiki:Pengukuran:10",
-     0.8374
+     0.8356
     ],
     [
      "wiki:Pengukuran:3",
      0.8338
+    ],
+    [
+     "id-ipa-kelas7:16",
+     0.8328
     ]
    ]
   },
@@ -2709,24 +2709,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:59",
-     0.8204
+     "id-ipa-kelas9:77",
+     0.8158
     ],
     [
-     "id-ipa-kelas7:54",
-     0.8192
-    ],
-    [
-     "id-ipa-kelas7:42",
-     0.815
-    ],
-    [
-     "id-ipa-kelas9:98",
-     0.8141
-    ],
-    [
-     "id-ipa-kelas7:118",
+     "id-ipa-kelas7:41",
      0.8126
+    ],
+    [
+     "id-ipas-kelas3:56",
+     0.8124
+    ],
+    [
+     "id-ipa-kelas9:89",
+     0.8097
+    ],
+    [
+     "id-ipa-kelas8:103",
+     0.8082
     ]
    ]
   },
@@ -2737,24 +2737,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:98",
-     0.8207
+     "id-ipa-kelas9:77",
+     0.8198
     ],
     [
-     "id-ipa-kelas7:11",
-     0.8202
+     "id-ipa-kelas7:91",
+     0.8163
     ],
     [
-     "id-ipa-kelas7:118",
-     0.8194
+     "id-ipa-kelas8:109",
+     0.8139
     ],
     [
-     "id-ipa-kelas7:8",
-     0.8172
+     "id-ipa-kelas7:1",
+     0.8132
     ],
     [
-     "id-ipa-kelas7:59",
-     0.8166
+     "id-ipas-kelas5:44",
+     0.8131
     ]
    ]
   },
@@ -2765,24 +2765,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:71",
-     0.8081
+     "id-ipa-kelas7:51",
+     0.8102
     ],
     [
      "wiki:Termometer:0",
-     0.8079
+     0.8071
     ],
     [
-     "id-ipa-kelas7:73",
-     0.7994
+     "id-ipa-kelas7:16",
+     0.8015
     ],
     [
-     "id-ipa-kelas7:28",
-     0.7984
+     "id-ipa-kelas7:52",
+     0.797
     ],
     [
-     "id-ipas-kelas4:45",
-     0.7981
+     "id-ipa-kelas7:57",
+     0.7954
     ]
    ]
   },
@@ -2792,24 +2792,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:28",
-     0.8399
+     "id-ipa-kelas7:16",
+     0.8393
     ],
     [
-     "id-ipa-kelas7:29",
-     0.8323
+     "id-ipa-kelas7:15",
+     0.8333
     ],
     [
-     "id-ipa-kelas7:71",
-     0.8301
-    ],
-    [
-     "id-ipa-kelas7:85",
-     0.8296
+     "id-ipa-kelas7:51",
+     0.8281
     ],
     [
      "wiki:Pengukuran:2",
      0.8273
+    ],
+    [
+     "wiki:Pengukuran:3",
+     0.8242
     ]
    ]
   },
@@ -2820,24 +2820,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas3:8",
-     0.8366
+     "id-ipa-kelas7:14",
+     0.827
     ],
     [
-     "id-ipas-kelas3:5",
-     0.8328
+     "id-ipa-kelas7:49",
+     0.8254
     ],
     [
-     "id-ipas-kelas3:7",
-     0.8293
+     "id-ipas-kelas3:3",
+     0.8251
     ],
     [
-     "id-ipa-kelas7:109",
-     0.8286
+     "id-ipa-kelas7:15",
+     0.8251
     ],
     [
-     "id-ipa-kelas7:103",
-     0.8279
+     "id-ipa-kelas7:78",
+     0.8236
     ]
    ]
   },
@@ -2848,24 +2848,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:122",
-     0.8357
+     "id-ipa-kelas8:103",
+     0.8315
     ],
     [
-     "id-ipa-kelas8:129",
-     0.8309
+     "id-ipa-kelas8:101",
+     0.8175
     ],
     [
-     "id-ipa-kelas7:43",
-     0.8231
+     "id-ipa-kelas7:41",
+     0.8174
     ],
     [
-     "id-ipa-kelas8:128",
-     0.8225
+     "id-ipa-kelas8:98",
+     0.816
     ],
     [
-     "id-ipa-kelas8:126",
-     0.8207
+     "id-ipa-kelas7:33",
+     0.8152
     ]
    ]
   },
@@ -2876,24 +2876,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:58",
-     0.8232
+     "id-ipa-kelas7:33",
+     0.8237
     ],
     [
-     "id-ipa-kelas7:50",
-     0.8231
+     "id-ipa-kelas7:40",
+     0.8214
     ],
     [
-     "id-ipa-kelas7:43",
-     0.8138
-    ],
-    [
-     "id-ipa-kelas7:37",
-     0.8135
+     "id-ipa-kelas7:39",
+     0.8127
     ],
     [
      "wiki:Reaksi_kimia:3",
      0.8126
+    ],
+    [
+     "wiki:Gores_(mineralogi):0",
+     0.8121
     ]
    ]
   },
@@ -2904,24 +2904,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:122",
-     0.8289
-    ],
-    [
-     "id-ipa-kelas9:10",
-     0.8247
-    ],
-    [
-     "id-ipa-kelas8:127",
-     0.8222
+     "id-ipa-kelas9:3",
+     0.8248
     ],
     [
      "wiki:Kelarutan:2",
      0.8207
     ],
     [
-     "id-ipa-kelas8:121",
-     0.8205
+     "id-ipa-kelas8:103",
+     0.8197
+    ],
+    [
+     "id-ipa-kelas8:101",
+     0.8195
+    ],
+    [
+     "id-ipa-kelas7:27",
+     0.818
     ]
    ]
   },
@@ -2931,24 +2931,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:10",
-     0.8274
+     "id-ipa-kelas9:3",
+     0.8286
     ],
     [
      "wiki:Kelarutan:0",
      0.8268
     ],
     [
-     "id-ipa-kelas8:128",
-     0.8263
-    ],
-    [
-     "id-ipa-kelas8:127",
-     0.8255
-    ],
-    [
      "wiki:Konsentrasi:0",
      0.8237
+    ],
+    [
+     "wiki:Larutan:0",
+     0.8231
+    ],
+    [
+     "id-ipa-kelas8:103",
+     0.8228
     ]
    ]
   },
@@ -2963,20 +2963,20 @@
      0.8174
     ],
     [
-     "id-ipa-kelas8:122",
-     0.8167
+     "id-ipa-kelas8:101",
+     0.8114
     ],
     [
-     "id-ipa-kelas8:128",
-     0.8124
+     "id-ipa-kelas7:44",
+     0.8103
     ],
     [
-     "id-ipa-kelas8:129",
-     0.811
+     "id-ipa-kelas8:103",
+     0.81
     ],
     [
-     "id-ipa-kelas8:127",
-     0.8107
+     "id-ipa-kelas9:3",
+     0.8097
     ]
    ]
   },
@@ -2987,24 +2987,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:122",
-     0.8309
+     "id-ipa-kelas8:105",
+     0.8287
     ],
     [
-     "id-ipa-kelas8:131",
-     0.8279
+     "id-ipas-kelas5:41",
+     0.8274
     ],
     [
-     "id-ipas-kelas5:57",
-     0.8269
+     "id-ipa-kelas8:101",
+     0.8256
     ],
     [
-     "id-ipa-kelas8:135",
-     0.8266
+     "wiki:Kelarutan:2",
+     0.8249
     ],
     [
-     "id-ipa-kelas8:126",
-     0.8265
+     "id-ipa-kelas9:3",
+     0.8239
     ]
    ]
   },
@@ -3015,24 +3015,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:122",
-     0.8268
+     "id-ipa-kelas9:3",
+     0.8216
     ],
     [
-     "id-ipa-kelas9:10",
-     0.823
+     "id-ipa-kelas7:27",
+     0.8191
     ],
     [
-     "id-ipa-kelas7:26",
-     0.8201
+     "id-ipa-kelas7:44",
+     0.8169
     ],
     [
-     "id-ipa-kelas8:126",
-     0.8194
+     "id-ipas-kelas5:41",
+     0.8165
     ],
     [
-     "id-ipas-kelas5:57",
-     0.8193
+     "id-ipa-kelas8:103",
+     0.8156
     ]
    ]
   },
@@ -3051,16 +3051,16 @@
      0.8132
     ],
     [
+     "id-ipa-kelas8:103",
+     0.8101
+    ],
+    [
      "wiki:Kelarutan:0",
      0.8092
     ],
     [
-     "id-ipa-kelas7:58",
-     0.8069
-    ],
-    [
-     "id-ipa-kelas9:115",
-     0.8068
+     "id-ipa-kelas8:102",
+     0.8066
     ]
    ]
   },
@@ -3071,24 +3071,24 @@
    ],
    "hits": [
     [
+     "id-ipa-kelas8:68",
+     0.8159
+    ],
+    [
      "wiki:Kelarutan:0",
      0.815
     ],
     [
-     "id-ipa-kelas7:50",
-     0.8148
+     "id-ipa-kelas8:89",
+     0.8133
     ],
     [
-     "id-ipa-kelas8:126",
-     0.8131
+     "id-ipa-kelas8:101",
+     0.8121
     ],
     [
-     "id-ipa-kelas8:122",
-     0.8109
-    ],
-    [
-     "id-ipa-kelas7:53",
-     0.8102
+     "id-ipa-kelas7:35",
+     0.8099
     ]
    ]
   },
@@ -3099,24 +3099,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:58",
-     0.8411
-    ],
-    [
-     "id-ipa-kelas7:56",
-     0.8363
+     "id-ipa-kelas7:40",
+     0.8351
     ],
     [
      "wiki:Reaksi_kimia:9",
      0.831
     ],
     [
-     "id-ipa-kelas7:50",
-     0.8307
+     "id-ipa-kelas7:39",
+     0.8293
     ],
     [
-     "id-ipa-kelas7:43",
-     0.8302
+     "id-ipa-kelas7:27",
+     0.828
+    ],
+    [
+     "id-ipa-kelas7:33",
+     0.8252
     ]
    ]
   },
@@ -3139,12 +3139,12 @@
      0.8211
     ],
     [
-     "id-ipa-kelas8:122",
-     0.8191
+     "id-ipa-kelas8:102",
+     0.8141
     ],
     [
-     "id-ipa-kelas8:127",
-     0.8124
+     "wiki:Campuran:0",
+     0.81
     ]
    ]
   },
@@ -3155,24 +3155,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:50",
-     0.8365
+     "id-ipa-kelas7:33",
+     0.8307
     ],
     [
-     "id-ipa-kelas7:43",
-     0.8298
+     "id-ipa-kelas7:27",
+     0.8259
     ],
     [
-     "id-ipa-kelas7:58",
-     0.8257
+     "id-ipa-kelas7:14",
+     0.8244
     ],
     [
-     "id-ipa-kelas8:122",
-     0.8252
+     "id-ipa-kelas7:40",
+     0.824
     ],
     [
-     "id-ipa-kelas8:126",
-     0.8234
+     "wiki:Larutan:0",
+     0.8215
     ]
    ]
   },
@@ -3183,24 +3183,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:58",
-     0.8278
+     "id-ipa-kelas7:23",
+     0.8271
     ],
     [
-     "id-ipa-kelas7:50",
-     0.8246
+     "id-ipa-kelas7:33",
+     0.8271
     ],
     [
-     "id-ipa-kelas7:47",
-     0.8219
+     "id-ipa-kelas7:40",
+     0.8253
     ],
     [
-     "id-ipa-kelas7:37",
-     0.8219
+     "id-ipa-kelas7:90",
+     0.8202
     ],
     [
-     "id-ipas-kelas6:33",
-     0.8198
+     "id-ipas-kelas4:33",
+     0.8194
     ]
    ]
   },
@@ -3211,24 +3211,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:58",
-     0.8289
+     "id-ipa-kelas7:33",
+     0.8281
     ],
     [
-     "id-ipa-kelas7:50",
-     0.8254
+     "id-ipa-kelas7:40",
+     0.8265
     ],
     [
-     "id-ipa-kelas7:37",
-     0.8232
+     "id-ipa-kelas7:23",
+     0.8257
     ],
     [
-     "id-ipa-kelas7:47",
-     0.8207
+     "id-ipas-kelas4:33",
+     0.819
     ],
     [
-     "id-ipas-kelas6:33",
-     0.8183
+     "id-ipa-kelas7:90",
+     0.8187
     ]
    ]
   },
@@ -3243,20 +3243,20 @@
      0.8252
     ],
     [
-     "id-ipa-kelas7:58",
-     0.8251
+     "id-ipa-kelas7:40",
+     0.825
+    ],
+    [
+     "id-ipa-kelas9:125",
+     0.8205
     ],
     [
      "wiki:Reaksi_kimia:6",
      0.8197
     ],
     [
-     "wiki:Konsentrasi:1",
+     "id-ipa-kelas7:27",
      0.8145
-    ],
-    [
-     "id-ipas-kelas3:87",
-     0.8136
     ]
    ]
   },
@@ -3267,20 +3267,20 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:122",
-     0.8304
+     "id-ipa-kelas8:106",
+     0.8271
     ],
     [
-     "id-ipa-kelas8:131",
-     0.8258
+     "id-ipa-kelas8:107",
+     0.8241
     ],
     [
-     "id-ipa-kelas8:133",
-     0.8254
+     "id-ipa-kelas8:105",
+     0.8223
     ],
     [
-     "id-ipa-kelas8:132",
-     0.8238
+     "id-ipa-kelas8:101",
+     0.8209
     ],
     [
      "wiki:Kelarutan:2",
@@ -3295,24 +3295,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:122",
-     0.8208
+     "id-ipa-kelas8:103",
+     0.8166
     ],
     [
-     "id-ipa-kelas8:129",
-     0.8184
+     "id-ipa-kelas7:90",
+     0.8123
     ],
     [
-     "id-ipa-kelas8:35",
-     0.8182
+     "id-ipas-kelas5:41",
+     0.8108
     ],
     [
-     "id-ipas-kelas4:56",
-     0.8133
+     "id-ipas-kelas3:56",
+     0.8105
     ],
     [
-     "id-ipa-kelas7:65",
-     0.8127
+     "id-ipa-kelas8:104",
+     0.8102
     ]
    ]
   },
@@ -3323,24 +3323,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:122",
-     0.8285
+     "id-ipa-kelas8:103",
+     0.8282
     ],
     [
-     "id-ipa-kelas8:129",
-     0.8277
+     "id-ipas-kelas5:41",
+     0.8262
     ],
     [
-     "id-ipa-kelas8:127",
-     0.8272
+     "id-ipa-kelas8:104",
+     0.824
     ],
     [
-     "id-ipa-kelas9:10",
-     0.8244
+     "id-ipa-kelas9:28",
+     0.8226
     ],
     [
-     "id-ipa-kelas8:130",
-     0.8241
+     "id-ipa-kelas9:3",
+     0.822
     ]
    ]
   },
@@ -3351,23 +3351,23 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:66",
-     0.8232
+     "id-ipa-kelas8:102",
+     0.8177
     ],
     [
      "wiki:Larutan:0",
      0.8151
     ],
     [
-     "id-ipa-kelas8:127",
-     0.8148
+     "id-ipa-kelas7:27",
+     0.8132
     ],
     [
-     "id-ipa-kelas8:128",
-     0.8136
+     "id-ipas-kelas5:41",
+     0.8114
     ],
     [
-     "wiki:Kelarutan:0",
+     "id-ipa-kelas7:47",
      0.8099
     ]
    ]
@@ -3379,24 +3379,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:126",
-     0.8174
-    ],
-    [
-     "id-ipa-kelas7:16",
-     0.8157
+     "id-ipa-kelas8:101",
+     0.8163
     ],
     [
      "wiki:Kelarutan:2",
      0.8136
     ],
     [
-     "id-ipa-kelas8:127",
-     0.8115
+     "id-ipa-kelas7:5",
+     0.8111
     ],
     [
-     "id-ipa-kelas8:122",
-     0.8112
+     "id-ipa-kelas7:27",
+     0.8088
+    ],
+    [
+     "wiki:Kelarutan:1",
+     0.8081
     ]
    ]
   },
@@ -3407,24 +3407,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:43",
-     0.8406
+     "id-ipa-kelas7:27",
+     0.8351
     ],
     [
-     "id-ipa-kelas8:122",
-     0.8318
+     "id-ipa-kelas9:3",
+     0.828
     ],
     [
-     "id-ipa-kelas9:10",
-     0.8307
+     "id-ipa-kelas7:33",
+     0.8263
     ],
     [
-     "id-ipa-kelas7:26",
-     0.8278
+     "id-ipa-kelas9:41",
+     0.8215
     ],
     [
-     "id-ipa-kelas7:53",
-     0.8267
+     "id-ipa-kelas8:101",
+     0.8202
     ]
    ]
   },
@@ -3435,24 +3435,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:26",
-     0.8289
-    ],
-    [
-     "id-ipas-kelas5:104",
-     0.8261
-    ],
-    [
-     "id-ipa-kelas8:107",
+     "id-ipas-kelas5:76",
      0.8255
     ],
     [
-     "id-ipa-kelas9:25",
-     0.8236
+     "id-ipa-kelas8:85",
+     0.8197
     ],
     [
-     "id-ipa-kelas7:66",
-     0.8219
+     "id-ipa-kelas9:14",
+     0.819
+    ],
+    [
+     "id-ipa-kelas7:60",
+     0.8168
+    ],
+    [
+     "id-ipa-kelas9:15",
+     0.8166
     ]
    ]
   },
@@ -3462,24 +3462,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas5:106",
-     0.8247
+     "id-ipas-kelas5:74",
+     0.8254
     ],
     [
-     "id-ipas-kelas5:105",
-     0.8173
+     "id-ipas-kelas5:75",
+     0.8161
     ],
     [
-     "id-ipas-kelas5:107",
-     0.8168
+     "id-ipas-kelas5:73",
+     0.8097
     ],
     [
-     "id-ipas-kelas5:110",
-     0.8106
+     "id-ipas-kelas5:77",
+     0.8084
     ],
     [
-     "id-ipa-kelas8:101",
-     0.8102
+     "id-ipa-kelas8:81",
+     0.8058
     ]
    ]
   },
@@ -3489,24 +3489,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas5:106",
-     0.8247
+     "id-ipas-kelas5:74",
+     0.8254
     ],
     [
-     "id-ipas-kelas5:105",
-     0.8173
+     "id-ipas-kelas5:75",
+     0.8161
     ],
     [
-     "id-ipas-kelas5:107",
-     0.8168
+     "id-ipas-kelas5:73",
+     0.8097
     ],
     [
-     "id-ipas-kelas5:110",
-     0.8106
+     "id-ipas-kelas5:77",
+     0.8084
     ],
     [
-     "id-ipa-kelas8:101",
-     0.8102
+     "id-ipa-kelas8:81",
+     0.8058
     ]
    ]
   },
@@ -3516,24 +3516,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:107",
-     0.8187
+     "id-ipas-kelas5:74",
+     0.8182
     ],
     [
-     "id-ipa-kelas7:66",
-     0.8136
+     "id-ipa-kelas8:73",
+     0.8093
     ],
     [
-     "id-ipas-kelas5:105",
-     0.8133
+     "id-ipas-kelas5:75",
+     0.8053
     ],
     [
-     "id-ipas-kelas5:106",
-     0.8118
+     "id-ipas-kelas5:73",
+     0.8049
     ],
     [
-     "id-ipas-kelas5:107",
-     0.8073
+     "id-ipa-kelas9:88",
+     0.8046
     ]
    ]
   },
@@ -3543,24 +3543,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas5:110",
-     0.8013
+     "id-ipas-kelas5:77",
+     0.7987
     ],
     [
-     "id-ipa-kelas7:103",
-     0.7984
-    ],
-    [
-     "id-ipas-kelas5:102",
-     0.796
-    ],
-    [
-     "id-ipas-kelas5:114",
-     0.7928
+     "id-ipas-kelas5:72",
+     0.7943
     ],
     [
      "wiki:Bunyi:3",
      0.7927
+    ],
+    [
+     "id-ipa-kelas7:82",
+     0.7914
+    ],
+    [
+     "id-ipas-kelas4:10",
+     0.7907
     ]
    ]
   },
@@ -3570,24 +3570,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas5:110",
-     0.8013
+     "id-ipas-kelas5:77",
+     0.7987
     ],
     [
-     "id-ipa-kelas7:103",
-     0.7984
-    ],
-    [
-     "id-ipas-kelas5:102",
-     0.796
-    ],
-    [
-     "id-ipas-kelas5:114",
-     0.7928
+     "id-ipas-kelas5:72",
+     0.7943
     ],
     [
      "wiki:Bunyi:3",
      0.7927
+    ],
+    [
+     "id-ipa-kelas7:82",
+     0.7914
+    ],
+    [
+     "id-ipas-kelas4:10",
+     0.7907
     ]
    ]
   },
@@ -3598,24 +3598,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas5:107",
-     0.8058
+     "id-ipas-kelas5:73",
+     0.8054
     ],
     [
-     "id-ipa-kelas8:107",
-     0.803
+     "id-ipas-kelas5:75",
+     0.8037
     ],
     [
-     "id-ipas-kelas5:106",
-     0.8023
+     "id-ipas-kelas5:74",
+     0.8015
     ],
     [
-     "id-ipas-kelas5:104",
-     0.7985
+     "id-ipa-kelas8:85",
+     0.7997
     ],
     [
-     "id-ipas-kelas5:105",
-     0.7974
+     "id-ipa-kelas8:86",
+     0.7979
     ]
    ]
   },
@@ -3625,24 +3625,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas5:107",
-     0.81
-    ],
-    [
      "wiki:Bunyi:4",
      0.8092
     ],
     [
-     "id-ipa-kelas8:107",
-     0.8062
+     "id-ipas-kelas5:75",
+     0.8079
     ],
     [
-     "id-ipa-kelas8:102",
-     0.805
+     "id-ipas-kelas5:74",
+     0.8061
     ],
     [
-     "id-ipas-kelas5:106",
-     0.8034
+     "id-ipa-kelas8:86",
+     0.8046
+    ],
+    [
+     "id-ipa-kelas8:81",
+     0.8044
     ]
    ]
   },
@@ -3653,24 +3653,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:107",
-     0.8135
+     "id-ipa-kelas8:85",
+     0.8036
     ],
     [
      "wiki:Bunyi:4",
      0.8031
     ],
     [
-     "id-ipas-kelas5:104",
-     0.8012
+     "id-ipas-kelas5:73",
+     0.7998
     ],
     [
-     "id-ipas-kelas5:106",
-     0.7985
+     "id-ipas-kelas5:74",
+     0.7988
     ],
     [
-     "id-ipas-kelas5:116",
-     0.7969
+     "id-ipa-kelas8:86",
+     0.7974
     ]
    ]
   },
@@ -3681,24 +3681,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:58",
-     0.8083
+     "id-ipas-kelas5:74",
+     0.8065
     ],
     [
-     "id-ipa-kelas8:107",
-     0.8063
+     "id-ipa-kelas7:40",
+     0.8056
     ],
     [
-     "id-ipa-kelas9:153",
-     0.8045
+     "id-ipas-kelas5:71",
+     0.8014
     ],
     [
-     "id-ipa-kelas8:101",
-     0.8034
+     "id-ipas-kelas5:72",
+     0.8014
     ],
     [
-     "id-ipas-kelas5:106",
-     0.8033
+     "id-ipa-kelas7:41",
+     0.7998
     ]
    ]
   },
@@ -3709,12 +3709,8 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas5:116",
-     0.7757
-    ],
-    [
-     "id-ipas-kelas5:114",
-     0.7707
+     "id-ipas-kelas5:80",
+     0.7781
     ],
     [
      "wiki:Bunyi:5",
@@ -3723,6 +3719,10 @@
     [
      "wiki:Energi_surya:3",
      0.7644
+    ],
+    [
+     "id-ipa-kelas8:84",
+     0.7628
     ],
     [
      "wiki:Energi_surya:4",
@@ -3736,24 +3736,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:102",
-     0.8124
+     "id-ipas-kelas5:74",
+     0.8089
     ],
     [
-     "id-ipa-kelas8:107",
-     0.8122
+     "id-ipas-kelas5:73",
+     0.8071
     ],
     [
-     "id-ipas-kelas5:105",
-     0.8086
+     "id-ipas-kelas5:78",
+     0.8068
     ],
     [
-     "id-ipas-kelas5:104",
-     0.8083
+     "id-ipas-kelas5:75",
+     0.8049
     ],
     [
-     "id-ipas-kelas5:107",
-     0.8056
+     "id-ipa-kelas8:85",
+     0.8037
     ]
    ]
   },
@@ -3763,24 +3763,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:102",
-     0.8124
+     "id-ipas-kelas5:74",
+     0.8089
     ],
     [
-     "id-ipa-kelas8:107",
-     0.8122
+     "id-ipas-kelas5:73",
+     0.8071
     ],
     [
-     "id-ipas-kelas5:105",
-     0.8086
+     "id-ipas-kelas5:78",
+     0.8068
     ],
     [
-     "id-ipas-kelas5:104",
-     0.8083
+     "id-ipas-kelas5:75",
+     0.8049
     ],
     [
-     "id-ipas-kelas5:107",
-     0.8056
+     "id-ipa-kelas8:85",
+     0.8037
     ]
    ]
   },
@@ -3790,24 +3790,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas5:105",
-     0.8144
+     "id-ipas-kelas5:74",
+     0.8132
     ],
     [
-     "id-ipa-kelas8:107",
-     0.8142
+     "id-ipas-kelas5:73",
+     0.809
     ],
     [
-     "id-ipas-kelas5:104",
-     0.8124
+     "id-ipa-kelas8:85",
+     0.8072
     ],
     [
-     "id-ipa-kelas8:102",
-     0.8093
+     "id-ipas-kelas5:78",
+     0.8055
     ],
     [
-     "id-ipas-kelas5:106",
-     0.8087
+     "id-ipas-kelas5:75",
+     0.8035
     ]
    ]
   },
@@ -3817,24 +3817,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas5:105",
-     0.8144
+     "id-ipas-kelas5:74",
+     0.8132
     ],
     [
-     "id-ipa-kelas8:107",
-     0.8142
+     "id-ipas-kelas5:73",
+     0.809
     ],
     [
-     "id-ipas-kelas5:104",
-     0.8124
+     "id-ipa-kelas8:85",
+     0.8072
     ],
     [
-     "id-ipa-kelas8:102",
-     0.8093
+     "id-ipas-kelas5:78",
+     0.8055
     ],
     [
-     "id-ipas-kelas5:106",
-     0.8087
+     "id-ipas-kelas5:75",
+     0.8035
     ]
    ]
   },
@@ -3845,24 +3845,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas5:104",
-     0.8063
-    ],
-    [
-     "id-ipas-kelas5:103",
-     0.8003
-    ],
-    [
-     "id-ipa-kelas8:107",
-     0.7997
+     "id-ipas-kelas5:76",
+     0.7971
     ],
     [
      "wiki:Bunyi:4",
      0.7962
     ],
     [
-     "id-ipa-kelas8:102",
-     0.7957
+     "id-ipa-kelas9:14",
+     0.7955
+    ],
+    [
+     "id-ipas-kelas5:73",
+     0.7943
+    ],
+    [
+     "id-ipa-kelas8:81",
+     0.7934
     ]
    ]
   },
@@ -3873,24 +3873,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas5:104",
-     0.7984
-    ],
-    [
-     "id-ipa-kelas8:107",
-     0.7863
-    ],
-    [
-     "id-ipas-kelas3:19",
-     0.7859
+     "id-ipa-kelas7:33",
+     0.7875
     ],
     [
      "wiki:Bunyi:4",
      0.7856
     ],
     [
-     "id-ipa-kelas9:108",
+     "id-ipa-kelas9:17",
      0.7853
+    ],
+    [
+     "id-ipas-kelas5:76",
+     0.7822
+    ],
+    [
+     "id-ipa-kelas9:14",
+     0.7821
     ]
    ]
   },
@@ -3901,24 +3901,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas5:99",
-     0.8159
+     "id-ipas-kelas5:71",
+     0.8102
     ],
     [
-     "id-ipa-kelas9:166",
-     0.8138
+     "id-ipas-kelas5:70",
+     0.8092
     ],
     [
-     "id-ipa-kelas9:167",
-     0.8122
+     "id-ipas-kelas5:69",
+     0.8053
     ],
     [
-     "id-ipas-kelas5:101",
-     0.8108
+     "id-ipas-kelas5:40",
+     0.805
     ],
     [
-     "id-ipa-kelas7:103",
-     0.8098
+     "id-ipas-kelas5:67",
+     0.8036
     ]
    ]
   },
@@ -3929,24 +3929,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:38",
-     0.8245
+     "id-ipa-kelas7:23",
+     0.8279
     ],
     [
-     "id-ipa-kelas7:37",
-     0.8243
+     "id-ipa-kelas7:62",
+     0.8278
     ],
     [
-     "id-ipa-kelas7:5",
-     0.8239
+     "id-ipa-kelas7:60",
+     0.8271
     ],
     [
-     "id-ipa-kelas7:84",
-     0.8232
+     "id-ipa-kelas7:53",
+     0.8223
     ],
     [
-     "id-ipa-kelas7:82",
-     0.8231
+     "id-ipas-kelas5:40",
+     0.8223
     ]
    ]
   },
@@ -3957,24 +3957,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:66",
-     0.8396
+     "id-ipa-kelas7:21",
+     0.8315
     ],
     [
-     "id-ipa-kelas7:35",
-     0.8351
+     "id-ipa-kelas7:23",
+     0.8277
     ],
     [
-     "id-ipa-kelas7:37",
-     0.8268
+     "id-ipa-kelas7:24",
+     0.8234
     ],
     [
-     "id-ipa-kelas9:166",
-     0.8266
+     "id-ipa-kelas7:14",
+     0.8213
     ],
     [
-     "id-ipa-kelas7:36",
-     0.825
+     "id-ipa-kelas7:47",
+     0.8211
     ]
    ]
   },
@@ -3985,24 +3985,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:35",
-     0.8386
+     "id-ipa-kelas7:21",
+     0.8343
     ],
     [
-     "id-ipa-kelas7:66",
-     0.8369
+     "id-ipa-kelas7:23",
+     0.8286
     ],
     [
-     "id-ipa-kelas7:36",
-     0.8317
+     "id-ipa-kelas7:47",
+     0.8253
     ],
     [
-     "id-ipa-kelas7:37",
-     0.8305
+     "id-ipa-kelas7:24",
+     0.8228
     ],
     [
-     "id-ipa-kelas9:166",
-     0.8287
+     "id-ipa-kelas9:121",
+     0.821
     ]
    ]
   },
@@ -4013,24 +4013,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:66",
-     0.8389
+     "id-ipa-kelas7:21",
+     0.8306
     ],
     [
-     "id-ipa-kelas7:35",
-     0.8368
+     "id-ipa-kelas9:121",
+     0.8253
     ],
     [
-     "id-ipa-kelas7:36",
-     0.8305
+     "id-ipa-kelas7:23",
+     0.8244
     ],
     [
-     "id-ipa-kelas7:37",
-     0.8271
+     "id-ipa-kelas7:14",
+     0.8243
     ],
     [
-     "id-ipa-kelas7:27",
-     0.8238
+     "id-ipa-kelas7:47",
+     0.8241
     ]
    ]
   },
@@ -4041,24 +4041,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas5:101",
-     0.7987
+     "id-ipas-kelas3:48",
+     0.7912
     ],
     [
-     "id-ipas-kelas3:76",
-     0.7958
+     "id-ipas-kelas5:71",
+     0.7888
     ],
     [
-     "id-ipas-kelas3:75",
-     0.7941
+     "id-ipas-kelas5:70",
+     0.7877
     ],
     [
-     "id-ipa-kelas7:93",
-     0.7939
+     "wiki:Sidik_jari:4",
+     0.787
     ],
     [
-     "id-ipas-kelas3:5",
-     0.7931
+     "id-ipas-kelas6:66",
+     0.7851
     ]
    ]
   },
@@ -4069,24 +4069,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:37",
-     0.8268
+     "id-ipa-kelas7:22",
+     0.8188
     ],
     [
-     "id-ipa-kelas7:38",
-     0.8191
+     "id-ipa-kelas7:23",
+     0.8151
     ],
     [
-     "id-ipa-kelas7:26",
-     0.8161
+     "id-ipas-kelas4:27",
+     0.8147
     ],
     [
-     "id-ipa-kelas7:131",
-     0.8159
+     "id-ipa-kelas7:24",
+     0.8135
     ],
     [
-     "id-ipa-kelas8:151",
-     0.8152
+     "id-ipas-kelas5:41",
+     0.8113
     ]
    ]
   },
@@ -4096,24 +4096,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:4",
-     0.8069
+     "id-ipa-kelas7:55",
+     0.8066
     ],
     [
-     "id-ipa-kelas7:26",
-     0.803
+     "id-ipa-kelas7:52",
+     0.8033
     ],
     [
-     "id-ipa-kelas7:71",
-     0.8025
+     "id-ipa-kelas7:51",
+     0.8028
     ],
     [
-     "id-ipa-kelas7:36",
-     0.802
+     "id-ipa-kelas7:22",
+     0.8001
     ],
     [
-     "id-ipa-kelas7:85",
-     0.8019
+     "id-ipa-kelas7:53",
+     0.7994
     ]
    ]
   },
@@ -4124,24 +4124,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:66",
-     0.8054
+     "id-ipa-kelas9:145",
+     0.809
     ],
     [
-     "id-ipa-kelas7:26",
-     0.8025
+     "id-ipas-kelas4:27",
+     0.8024
     ],
     [
-     "id-ipa-kelas7:84",
-     0.8018
+     "id-ipas-kelas5:26",
+     0.8006
     ],
     [
-     "id-ipa-kelas7:70",
-     0.8007
+     "id-ipas-kelas5:41",
+     0.8002
     ],
     [
-     "id-ipas-kelas4:43",
-     0.8
+     "id-ipa-kelas7:62",
+     0.7992
     ]
    ]
   },
@@ -4156,20 +4156,20 @@
      0.8012
     ],
     [
-     "wiki:Komponen_abiotik:3",
-     0.794
+     "id-ipa-kelas8:91",
+     0.7945
     ],
     [
-     "id-ipa-kelas8:148",
-     0.7932
+     "id-ipa-kelas8:119",
+     0.7937
     ],
     [
-     "id-ipas-kelas4:56",
-     0.7926
+     "id-ipa-kelas8:123",
+     0.792
     ],
     [
-     "id-ipas-kelas4:115",
-     0.7917
+     "id-ipa-kelas8:90",
+     0.7889
     ]
    ]
   },
@@ -4191,12 +4191,12 @@
      0.8199
     ],
     [
-     "id-ipa-kelas7:70",
-     0.8138
-    ],
-    [
      "wiki:Energi_surya:9",
      0.8122
+    ],
+    [
+     "wiki:Energi_surya:12",
+     0.8112
     ]
    ]
   },
@@ -4207,24 +4207,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas5:94",
-     0.8323
+     "id-ipas-kelas5:67",
+     0.8271
+    ],
+    [
+     "id-ipa-kelas8:90",
+     0.8237
     ],
     [
      "wiki:Bayang-bayang:0",
      0.8225
     ],
     [
-     "id-ipa-kelas8:113",
-     0.8219
+     "id-ipa-kelas7:72",
+     0.8197
     ],
     [
-     "id-ipa-kelas8:112",
-     0.8217
-    ],
-    [
-     "id-ipa-kelas8:114",
-     0.8213
+     "id-ipas-kelas5:69",
+     0.8193
     ]
    ]
   },
@@ -4235,24 +4235,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:38",
-     0.8224
+     "id-ipa-kelas7:23",
+     0.8148
     ],
     [
-     "id-ipa-kelas7:66",
-     0.8194
+     "id-ipa-kelas7:60",
+     0.8139
     ],
     [
-     "id-ipa-kelas7:71",
-     0.818
+     "id-ipa-kelas7:24",
+     0.8117
     ],
     [
-     "id-ipa-kelas9:166",
-     0.8136
+     "id-ipa-kelas7:49",
+     0.8102
     ],
     [
-     "id-ipa-kelas7:69",
-     0.8123
+     "id-ipas-kelas3:56",
+     0.8082
     ]
    ]
   },
@@ -4263,24 +4263,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas4:64",
-     0.8239
+     "id-ipas-kelas5:71",
+     0.8215
     ],
     [
-     "id-ipa-kelas9:150",
+     "id-ipa-kelas7:62",
      0.82
     ],
     [
-     "id-ipa-kelas8:135",
-     0.8188
+     "id-ipas-kelas4:39",
+     0.8155
     ],
     [
-     "id-ipa-kelas7:47",
-     0.8187
+     "id-ipa-kelas8:87",
+     0.8155
     ],
     [
-     "id-ipas-kelas4:16",
-     0.8184
+     "id-ipa-kelas7:77",
+     0.8141
     ]
    ]
   },
@@ -4291,24 +4291,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:52",
-     0.811
+     "id-ipa-kelas7:55",
+     0.8093
     ],
     [
-     "id-ipas-kelas4:16",
-     0.8065
+     "id-ipa-kelas7:62",
+     0.8059
     ],
     [
-     "id-ipa-kelas7:38",
-     0.8063
+     "id-ipa-kelas7:23",
+     0.8034
     ],
     [
-     "id-ipa-kelas7:75",
-     0.8055
+     "wiki:Energi_surya:12",
+     0.8031
     ],
     [
-     "id-ipa-kelas7:80",
-     0.8051
+     "id-ipas-kelas3:56",
+     0.8019
     ]
    ]
   },
@@ -4327,16 +4327,16 @@
      0.7773
     ],
     [
-     "id-ipa-kelas7:181",
-     0.7752
-    ],
-    [
-     "id-ipa-kelas7:70",
-     0.7724
-    ],
-    [
      "wiki:Energi_surya:7",
      0.7709
+    ],
+    [
+     "wiki:Termometer:0",
+     0.7701
+    ],
+    [
+     "id-ipa-kelas9:21",
+     0.7667
     ]
    ]
   },
@@ -4347,24 +4347,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:38",
-     0.8303
+     "id-ipa-kelas7:53",
+     0.8182
     ],
     [
-     "id-ipa-kelas7:26",
-     0.8166
+     "id-ipa-kelas7:23",
+     0.818
     ],
     [
-     "id-ipas-kelas3:91",
-     0.8163
+     "id-ipa-kelas7:52",
+     0.8177
+    ],
+    [
+     "id-ipas-kelas3:56",
+     0.8139
     ],
     [
      "id-ipa-kelas7:55",
-     0.8158
-    ],
-    [
-     "id-ipa-kelas7:66",
-     0.8155
+     0.8131
     ]
    ]
   },
@@ -4391,7 +4391,7 @@
      0.8258
     ],
     [
-     "wiki:Perkecambahan:3",
+     "id-ipa-kelas7:101",
      0.8238
     ]
    ]
@@ -4503,8 +4503,8 @@
      0.8168
     ],
     [
-     "id-ipa-kelas9:24",
-     0.8141
+     "wiki:Biji:2",
+     0.8137
     ]
    ]
   },
@@ -4519,8 +4519,8 @@
      0.8369
     ],
     [
-     "id-ipa-kelas9:75",
-     0.8296
+     "id-ipa-kelas9:58",
+     0.8272
     ],
     [
      "wiki:Akar:0",
@@ -4547,20 +4547,20 @@
      0.81
     ],
     [
-     "id-ipa-kelas7:19",
-     0.8087
+     "id-ipa-kelas9:77",
+     0.8085
     ],
     [
-     "id-ipa-kelas7:20",
-     0.8077
+     "id-ipa-kelas7:7",
+     0.8082
     ],
     [
-     "id-ipa-kelas9:99",
-     0.8067
+     "wiki:Tumbuhan:7",
+     0.806
     ],
     [
-     "id-ipa-kelas7:125",
-     0.8061
+     "id-ipa-kelas7:101",
+     0.8055
     ]
    ]
   },
@@ -4579,16 +4579,16 @@
      0.8191
     ],
     [
-     "id-ipas-kelas5:35",
-     0.8137
+     "id-ipas-kelas5:24",
+     0.8151
     ],
     [
-     "id-ipas-kelas5:49",
-     0.8113
+     "id-ipas-kelas5:36",
+     0.815
     ],
     [
-     "id-ipas-kelas5:40",
-     0.8086
+     "id-ipa-kelas7:112",
+     0.8073
     ]
    ]
   },
@@ -4611,12 +4611,12 @@
      0.8008
     ],
     [
-     "id-ipa-kelas7:22",
-     0.7996
+     "id-ipa-kelas7:9",
+     0.798
     ],
     [
-     "id-ipa-kelas7:39",
-     0.794
+     "wiki:Protein:23",
+     0.7901
     ]
    ]
   },
@@ -4627,24 +4627,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:107",
-     0.8039
+     "id-ipa-kelas8:85",
+     0.8004
     ],
     [
-     "id-ipa-kelas9:24",
-     0.8025
+     "id-ipa-kelas9:14",
+     0.7917
     ],
     [
-     "id-ipa-kelas8:109",
-     0.7914
-    ],
-    [
-     "id-ipa-kelas8:103",
-     0.7882
+     "id-ipa-kelas9:17",
+     0.7874
     ],
     [
      "wiki:Bunyi:4",
      0.7864
+    ],
+    [
+     "id-ipa-kelas8:87",
+     0.786
     ]
    ]
   },
@@ -4655,24 +4655,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:67",
-     0.8078
+     "id-ipa-kelas7:73",
+     0.8049
     ],
     [
-     "id-ipa-kelas7:22",
-     0.8047
+     "id-ipa-kelas7:21",
+     0.8019
     ],
     [
-     "id-ipa-kelas7:109",
-     0.8014
+     "id-ipa-kelas8:51",
+     0.7986
     ],
     [
-     "id-ipas-kelas3:60",
-     0.7997
+     "id-ipa-kelas7:77",
+     0.798
     ],
     [
-     "id-ipa-kelas7:93",
-     0.7992
+     "id-ipa-kelas7:10",
+     0.7974
     ]
    ]
   },
@@ -4683,24 +4683,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:98",
-     0.8154
+     "id-ipa-kelas7:73",
+     0.8152
     ],
     [
-     "id-ipa-kelas7:109",
-     0.8149
+     "id-ipa-kelas8:51",
+     0.8111
     ],
     [
-     "id-ipas-kelas4:30",
-     0.8142
+     "id-ipa-kelas9:77",
+     0.8102
     ],
     [
-     "id-ipa-kelas8:67",
-     0.8133
+     "id-ipas-kelas3:56",
+     0.8088
     ],
     [
-     "id-ipa-kelas7:93",
-     0.812
+     "id-ipa-kelas7:77",
+     0.8081
     ]
    ]
   },
@@ -4711,24 +4711,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:98",
-     0.8124
-    ],
-    [
-     "id-ipas-kelas5:98",
-     0.812
-    ],
-    [
-     "id-ipa-kelas7:11",
-     0.809
-    ],
-    [
-     "id-ipa-kelas7:109",
-     0.8085
+     "id-ipas-kelas6:18",
+     0.8084
     ],
     [
      "wiki:Percobaan:2",
      0.8072
+    ],
+    [
+     "id-ipas-kelas3:56",
+     0.8068
+    ],
+    [
+     "id-ipa-kelas7:77",
+     0.8066
+    ],
+    [
+     "id-ipa-kelas7:21",
+     0.8059
     ]
    ]
   },
@@ -4739,24 +4739,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:175",
-     0.8022
+     "id-ipas-kelas5:29",
+     0.795
     ],
     [
-     "id-ipas-kelas5:41",
-     0.8016
+     "id-ipas-kelas5:32",
+     0.7945
     ],
     [
-     "id-ipa-kelas8:174",
-     0.7979
+     "wiki:Tumbuhan:9",
+     0.7937
     ],
     [
-     "id-ipa-kelas8:173",
-     0.7976
+     "id-ipa-kelas9:77",
+     0.7928
     ],
     [
-     "id-ipa-kelas9:98",
-     0.7966
+     "wiki:Biji:1",
+     0.7902
     ]
    ]
   },
@@ -4767,24 +4767,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:26",
-     0.8106
-    ],
-    [
      "wiki:Percobaan:4",
      0.8093
     ],
     [
-     "id-ipa-kelas7:35",
-     0.8092
-    ],
-    [
-     "id-ipa-kelas7:29",
-     0.8089
-    ],
-    [
      "wiki:Pengukuran:6",
      0.8088
+    ],
+    [
+     "wiki:Pengukuran:2",
+     0.8074
+    ],
+    [
+     "id-ipa-kelas7:14",
+     0.8052
+    ],
+    [
+     "id-ipa-kelas7:21",
+     0.8018
     ]
    ]
   },
@@ -4795,24 +4795,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:66",
-     0.8297
+     "id-ipa-kelas7:21",
+     0.8266
     ],
     [
-     "id-ipa-kelas7:26",
-     0.8258
-    ],
-    [
-     "id-ipa-kelas7:35",
-     0.8254
-    ],
-    [
-     "id-ipa-kelas7:39",
-     0.8218
+     "id-ipa-kelas7:14",
+     0.8246
     ],
     [
      "id-ipa-kelas7:25",
-     0.8211
+     0.8205
+    ],
+    [
+     "id-ipa-kelas7:13",
+     0.8169
+    ],
+    [
+     "id-ipa-kelas7:24",
+     0.8168
     ]
    ]
   },
@@ -4823,24 +4823,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:93",
-     0.8183
+     "id-ipa-kelas7:73",
+     0.811
     ],
     [
-     "id-ipa-kelas7:99",
-     0.8122
+     "id-ipa-kelas7:21",
+     0.8108
     ],
     [
-     "id-ipa-kelas7:36",
-     0.8095
+     "id-ipa-kelas7:77",
+     0.8066
     ],
     [
-     "id-ipa-kelas8:103",
-     0.8073
+     "id-ipa-kelas8:74",
+     0.806
     ],
     [
-     "id-ipa-kelas7:38",
-     0.8072
+     "id-ipa-kelas7:69",
+     0.805
     ]
    ]
   },
@@ -4851,24 +4851,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:29",
-     0.8032
+     "id-ipa-kelas7:15",
+     0.8027
     ],
     [
      "wiki:Satuan:4",
      0.8023
     ],
     [
-     "id-ipa-kelas7:131",
-     0.8021
+     "id-ipas-kelas6:72",
+     0.8022
     ],
     [
-     "id-ipa-kelas7:5",
-     0.8004
+     "id-ipa-kelas8:82",
+     0.7974
     ],
     [
-     "id-ipas-kelas4:16",
-     0.7991
+     "id-ipa-kelas8:83",
+     0.7966
     ]
    ]
   },
@@ -4883,20 +4883,20 @@
      0.817
     ],
     [
-     "id-ipa-kelas8:105",
-     0.8126
-    ],
-    [
-     "id-ipas-kelas4:16",
-     0.8117
-    ],
-    [
-     "id-ipa-kelas7:99",
-     0.8112
+     "id-ipas-kelas5:69",
+     0.8113
     ],
     [
      "wiki:Massa:4",
      0.8112
+    ],
+    [
+     "id-ipa-kelas8:83",
+     0.8111
+    ],
+    [
+     "id-ipa-kelas7:73",
+     0.8104
     ]
    ]
   },
@@ -4906,24 +4906,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas4:115",
-     0.8253
+     "id-ipa-kelas7:138",
+     0.8098
     ],
     [
-     "id-ipa-kelas7:27",
-     0.8138
+     "id-ipa-kelas7:23",
+     0.8086
     ],
     [
-     "id-ipa-kelas7:38",
-     0.811
+     "wiki:Magnet:1",
+     0.8061
     ],
     [
-     "id-ipa-kelas8:109",
-     0.8079
+     "id-ipa-kelas7:15",
+     0.8053
     ],
     [
-     "id-ipa-kelas7:29",
-     0.8063
+     "id-ipa-kelas7:14",
+     0.8046
     ]
    ]
   },
@@ -4933,24 +4933,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:64",
-     0.8178
+     "id-ipa-kelas7:44",
+     0.8224
     ],
     [
-     "id-ipa-kelas7:63",
-     0.8167
+     "id-ipa-kelas7:45",
+     0.8173
     ],
     [
-     "id-ipa-kelas8:130",
-     0.8135
+     "id-ipa-kelas7:58",
+     0.8102
     ],
     [
-     "id-ipa-kelas8:173",
-     0.8123
+     "id-ipa-kelas8:104",
+     0.8085
     ],
     [
-     "id-ipa-kelas8:174",
-     0.8107
+     "id-ipa-kelas7:62",
+     0.8074
     ]
    ]
   },
@@ -4960,24 +4960,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:64",
-     0.8148
+     "id-ipa-kelas7:44",
+     0.8212
     ],
     [
-     "id-ipa-kelas7:63",
-     0.814
+     "id-ipa-kelas7:45",
+     0.8135
     ],
     [
-     "id-ipa-kelas8:130",
-     0.8137
+     "id-ipa-kelas7:58",
+     0.8098
     ],
     [
-     "id-ipa-kelas8:174",
-     0.8119
+     "id-ipa-kelas8:104",
+     0.8096
     ],
     [
-     "id-ipa-kelas8:129",
-     0.8109
+     "id-ipa-kelas8:101",
+     0.8059
     ]
    ]
   },
@@ -4987,24 +4987,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:63",
-     0.8158
+     "id-ipa-kelas7:44",
+     0.8192
     ],
     [
-     "id-ipa-kelas7:64",
-     0.815
+     "id-ipa-kelas7:45",
+     0.8139
     ],
     [
-     "id-ipa-kelas8:130",
-     0.8136
+     "id-ipa-kelas8:104",
+     0.8088
     ],
     [
-     "id-ipa-kelas8:173",
-     0.8113
+     "id-ipa-kelas7:58",
+     0.8079
     ],
     [
-     "id-ipa-kelas7:71",
-     0.8103
+     "wiki:Konsentrasi:1",
+     0.8062
     ]
    ]
   },
@@ -5014,24 +5014,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:101",
-     0.8192
+     "id-ipa-kelas8:68",
+     0.8188
     ],
     [
-     "id-ipa-kelas9:108",
-     0.8189
+     "id-ipa-kelas8:88",
+     0.8133
     ],
     [
-     "id-ipas-kelas4:56",
-     0.8169
+     "id-ipas-kelas3:56",
+     0.813
     ],
     [
-     "id-ipa-kelas8:129",
-     0.8159
+     "id-ipa-kelas9:19",
+     0.8096
     ],
     [
-     "id-ipa-kelas7:11",
-     0.815
+     "id-ipa-kelas8:122",
+     0.8075
     ]
    ]
   },
@@ -5041,24 +5041,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:101",
-     0.8185
+     "id-ipa-kelas8:68",
+     0.817
     ],
     [
-     "id-ipa-kelas9:108",
-     0.8169
+     "id-ipas-kelas3:56",
+     0.8134
     ],
     [
-     "id-ipa-kelas8:129",
-     0.8143
+     "id-ipa-kelas8:88",
+     0.8113
     ],
     [
-     "id-ipas-kelas4:56",
-     0.8143
+     "id-ipa-kelas9:19",
+     0.8081
     ],
     [
-     "id-ipa-kelas7:11",
-     0.8142
+     "wiki:Delta_sungai:8",
+     0.8073
     ]
    ]
   },
@@ -5068,24 +5068,24 @@
    ],
    "hits": [
     [
+     "id-ipa-kelas7:55",
+     0.8101
+    ],
+    [
      "id-ipa-kelas7:52",
-     0.8081
+     0.809
+    ],
+    [
+     "id-ipa-kelas7:54",
+     0.8066
     ],
     [
      "wiki:Pembekuan:0",
      0.8061
     ],
     [
-     "id-ipa-kelas7:76",
+     "id-ipa-kelas8:68",
      0.8061
-    ],
-    [
-     "id-ipa-kelas7:77",
-     0.804
-    ],
-    [
-     "id-ipa-kelas8:87",
-     0.8037
     ]
    ]
   },
@@ -5100,19 +5100,19 @@
     ],
     [
      "id-ipa-kelas7:55",
-     0.8072
+     0.8041
     ],
     [
-     "id-ipa-kelas7:85",
-     0.8012
+     "id-ipa-kelas7:52",
+     0.8023
+    ],
+    [
+     "id-ipa-kelas8:68",
+     0.8019
     ],
     [
      "wiki:Termometer:0",
      0.8008
-    ],
-    [
-     "id-ipa-kelas7:181",
-     0.7995
     ]
    ]
   },
@@ -5122,24 +5122,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:38",
-     0.8194
+     "id-ipa-kelas7:40",
+     0.8114
     ],
     [
-     "id-ipa-kelas7:58",
-     0.8179
+     "id-ipa-kelas7:23",
+     0.8113
     ],
     [
-     "id-ipa-kelas7:56",
-     0.8169
+     "id-ipa-kelas7:62",
+     0.8087
     ],
     [
-     "id-ipa-kelas7:85",
-     0.8123
+     "wiki:Siklus_air:4",
+     0.8074
     ],
     [
-     "id-ipa-kelas7:55",
-     0.8119
+     "id-ipa-kelas7:37",
+     0.8066
     ]
    ]
   },
@@ -5149,24 +5149,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:11",
-     0.8069
+     "id-ipa-kelas8:70",
+     0.8011
     ],
     [
-     "id-ipa-kelas7:103",
-     0.8059
+     "id-ipa-kelas7:84",
+     0.8007
     ],
     [
-     "id-ipas-kelas6:26",
-     0.8044
+     "id-ipas-kelas4:13",
+     0.8
     ],
     [
-     "id-ipa-kelas8:89",
-     0.804
+     "id-ipas-kelas5:40",
+     0.7975
     ],
     [
-     "id-ipas-kelas5:62",
-     0.8038
+     "id-ipa-kelas8:68",
+     0.7971
     ]
    ]
   },
@@ -5176,24 +5176,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:11",
-     0.8069
+     "id-ipa-kelas8:70",
+     0.8011
     ],
     [
-     "id-ipa-kelas7:103",
-     0.8059
+     "id-ipa-kelas7:84",
+     0.8007
     ],
     [
-     "id-ipas-kelas6:26",
-     0.8044
+     "id-ipas-kelas4:13",
+     0.8
     ],
     [
-     "id-ipa-kelas8:89",
-     0.804
+     "id-ipas-kelas5:40",
+     0.7975
     ],
     [
-     "id-ipas-kelas5:62",
-     0.8038
+     "id-ipa-kelas8:68",
+     0.7971
     ]
    ]
   },
@@ -5203,24 +5203,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:64",
-     0.8261
+     "id-ipa-kelas7:45",
+     0.8212
     ],
     [
-     "id-ipa-kelas7:38",
-     0.8232
+     "id-ipa-kelas8:22",
+     0.8175
     ],
     [
-     "id-ipas-kelas3:88",
-     0.8197
+     "id-ipas-kelas3:56",
+     0.8174
     ],
     [
-     "id-ipa-kelas8:32",
-     0.8187
+     "id-ipa-kelas7:77",
+     0.8166
     ],
     [
-     "id-ipa-kelas8:6",
-     0.8177
+     "id-ipa-kelas7:23",
+     0.8155
     ]
    ]
   },
@@ -5230,14 +5230,6 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:56",
-     0.8255
-    ],
-    [
-     "id-ipas-kelas5:55",
-     0.8253
-    ],
-    [
      "wiki:Siklus_air:3",
      0.824
     ],
@@ -5246,8 +5238,16 @@
      0.8217
     ],
     [
-     "id-ipa-kelas7:50",
-     0.8207
+     "id-ipas-kelas5:39",
+     0.8197
+    ],
+    [
+     "wiki:Siklus_air:6",
+     0.8136
+    ],
+    [
+     "wiki:Siklus_air:5",
+     0.8136
     ]
    ]
   },
@@ -5257,24 +5257,24 @@
    ],
    "hits": [
     [
-     "id-ipas-kelas4:56",
-     0.8156
-    ],
-    [
-     "id-ipa-kelas7:50",
-     0.8121
-    ],
-    [
-     "id-ipa-kelas8:101",
-     0.81
+     "id-ipa-kelas8:68",
+     0.8158
     ],
     [
      "wiki:Delta_sungai:5",
      0.8098
     ],
     [
-     "id-ipas-kelas5:55",
-     0.8083
+     "id-ipa-kelas7:38",
+     0.8085
+    ],
+    [
+     "wiki:Deposit_(geologi):0",
+     0.8075
+    ],
+    [
+     "id-ipa-kelas7:33",
+     0.8069
     ]
    ]
   },
@@ -5284,24 +5284,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:71",
-     0.8071
+     "id-ipa-kelas7:54",
+     0.8047
     ],
     [
-     "id-ipa-kelas7:69",
-     0.8013
+     "wiki:Termometer:0",
+     0.8018
     ],
     [
-     "id-ipa-kelas7:26",
-     0.7997
+     "id-ipa-kelas7:55",
+     0.8016
     ],
     [
-     "id-ipas-kelas5:56",
-     0.7986
+     "id-ipa-kelas7:57",
+     0.8009
     ],
     [
-     "id-ipa-kelas7:4",
-     0.7986
+     "id-ipa-kelas7:53",
+     0.7994
     ]
    ]
   },
@@ -5311,24 +5311,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:55",
-     0.8132
+     "id-ipas-kelas5:41",
+     0.8033
     ],
     [
-     "id-ipas-kelas4:16",
-     0.8097
+     "id-ipa-kelas8:68",
+     0.8024
     ],
     [
-     "id-ipas-kelas5:57",
-     0.8059
+     "id-ipa-kelas7:37",
+     0.8023
     ],
     [
-     "id-ipas-kelas4:56",
-     0.8052
+     "id-ipas-kelas5:40",
+     0.802
     ],
     [
-     "id-ipa-kelas7:65",
-     0.8035
+     "id-ipas-kelas6:0",
+     0.7974
     ]
    ]
   },
@@ -5338,24 +5338,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:59",
-     0.829
+     "id-ipa-kelas7:44",
+     0.8322
     ],
     [
-     "id-ipa-kelas7:61",
-     0.8252
+     "id-ipa-kelas7:41",
+     0.8274
     ],
     [
-     "id-ipa-kelas7:60",
-     0.8243
-    ],
-    [
-     "id-ipa-kelas8:86",
+     "id-ipa-kelas7:27",
      0.8242
     ],
     [
-     "id-ipa-kelas7:42",
-     0.8225
+     "id-ipa-kelas7:45",
+     0.8231
+    ],
+    [
+     "id-ipa-kelas8:72",
+     0.8223
     ]
    ]
   },
@@ -5365,24 +5365,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas9:153",
-     0.8106
+     "id-ipa-kelas7:27",
+     0.8065
     ],
     [
-     "id-ipa-kelas7:66",
-     0.8097
+     "id-ipa-kelas7:45",
+     0.8064
     ],
     [
-     "id-ipa-kelas7:64",
-     0.8076
+     "id-ipa-kelas7:44",
+     0.8031
     ],
     [
-     "id-ipa-kelas7:47",
-     0.8075
+     "id-ipas-kelas3:56",
+     0.8026
     ],
     [
-     "id-ipa-kelas7:26",
-     0.8045
+     "id-ipa-kelas9:28",
+     0.8016
     ]
    ]
   },
@@ -5392,24 +5392,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:32",
-     0.8135
+     "id-ipas-kelas3:56",
+     0.8106
     ],
     [
-     "id-ipas-kelas3:8",
-     0.8084
+     "id-ipas-kelas3:3",
+     0.8086
     ],
     [
-     "id-ipa-kelas7:85",
-     0.8082
+     "id-ipa-kelas8:22",
+     0.8083
     ],
     [
-     "id-ipa-kelas7:50",
-     0.8071
+     "id-ipa-kelas9:78",
+     0.8039
     ],
     [
-     "id-ipas-kelas3:88",
-     0.8047
+     "id-ipa-kelas7:33",
+     0.8038
     ]
    ]
   },
@@ -5419,24 +5419,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:87",
-     0.8023
+     "id-ipa-kelas8:68",
+     0.8086
     ],
     [
-     "id-ipa-kelas7:26",
-     0.7974
+     "id-ipa-kelas8:69",
+     0.7971
     ],
     [
-     "id-ipa-kelas7:64",
-     0.7973
+     "id-ipa-kelas7:45",
+     0.7969
     ],
     [
-     "id-ipa-kelas8:122",
-     0.7972
+     "wiki:Skala_Mohs:1",
+     0.7929
     ],
     [
-     "id-ipa-kelas7:182",
-     0.7945
+     "id-ipa-kelas8:109",
+     0.7902
     ]
    ]
   },
@@ -5446,24 +5446,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:56",
-     0.8281
+     "id-ipas-kelas3:56",
+     0.8251
     ],
     [
-     "id-ipa-kelas7:55",
-     0.8222
+     "id-ipa-kelas7:38",
+     0.8204
     ],
     [
-     "id-ipa-kelas8:122",
-     0.8221
+     "id-ipas-kelas5:41",
+     0.8196
     ],
     [
-     "id-ipas-kelas4:56",
+     "id-ipa-kelas7:37",
+     0.8194
+    ],
+    [
+     "id-ipa-kelas9:121",
      0.8188
-    ],
-    [
-     "id-ipa-kelas7:50",
-     0.8182
     ]
    ]
   },
@@ -5473,24 +5473,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:84",
-     0.803
+     "id-ipas-kelas3:56",
+     0.8073
     ],
     [
-     "id-ipa-kelas7:49",
-     0.801
+     "id-ipas-kelas3:55",
+     0.8013
     ],
     [
-     "id-ipa-kelas8:93",
-     0.8004
+     "id-ipa-kelas7:62",
+     0.8006
     ],
     [
-     "id-ipa-kelas7:56",
-     0.7999
-    ],
-    [
-     "id-ipa-kelas7:85",
+     "id-ipa-kelas7:29",
      0.7998
+    ],
+    [
+     "id-ipa-kelas7:32",
+     0.7993
     ]
    ]
   },
@@ -5500,24 +5500,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas7:85",
-     0.8041
+     "id-ipas-kelas3:56",
+     0.8105
     ],
     [
-     "id-ipa-kelas7:84",
-     0.804
+     "id-ipa-kelas7:62",
+     0.8038
     ],
     [
-     "id-ipa-kelas8:93",
-     0.8028
+     "id-ipas-kelas3:55",
+     0.7999
     ],
     [
-     "id-ipa-kelas7:56",
-     0.802
+     "wiki:Adaptasi:3",
+     0.7993
     ],
     [
-     "id-ipa-kelas7:68",
-     0.7996
+     "wiki:Siklus_air:4",
+     0.7976
     ]
    ]
   },
@@ -5527,24 +5527,24 @@
    ],
    "hits": [
     [
-     "id-ipa-kelas8:122",
-     0.8188
+     "id-ipa-kelas8:68",
+     0.8242
     ],
     [
-     "id-ipa-kelas8:87",
-     0.8167
+     "id-ipa-kelas8:69",
+     0.8076
     ],
     [
-     "id-ipa-kelas7:38",
-     0.8158
+     "id-ipa-kelas8:65",
+     0.8059
     ],
     [
-     "id-ipas-kelas4:56",
-     0.813
+     "id-ipa-kelas7:23",
+     0.8058
     ],
     [
-     "id-ipa-kelas7:37",
-     0.8112
+     "id-ipa-kelas7:25",
+     0.8051
     ]
    ]
   }

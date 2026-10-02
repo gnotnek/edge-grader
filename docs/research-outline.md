@@ -29,7 +29,7 @@ Measure how well a **small LLM on an edge device** grades students' short answer
 | Stage | What | Output |
 |---|---|---|
 | **1. Baseline** | (a) The lab's MMLU-Pro 100-question subset, for subject knowledge. (b) SciEntsBank grading with the untouched model, served by `llama-server` with thinking off | Done: MMLU-Pro (E2B 51.7–52.7%, E4B 65.7–66.0%), grading accuracy per split, and board cost estimated from `agentic-edge`'s rates. See [`results/baselines.md`](results/baselines.md) |
-| **2. RAG** | Chunk open textbooks (OpenStax / CK-12) matched to SciEntsBank topics; embed them with a small model; retrieve the top-k chunks into the grading prompt | Improvement over the baseline, per split |
+| **2. RAG** | Chunk open school-science material matched to SciEntsBank's topics (Utah OER textbooks + Wikipedia; Indonesian Kurikulum Merdeka books as an optional cross-lingual test); embed with a small model; retrieve the top 3 chunks per question into the grading prompt. Retrieval is done once per question, ahead of time | Improvement over the baseline, per split. Pipeline and retrieval check done: [`results/rag.md`](results/rag.md) |
 | **3. Fine-tuning** | QLoRA with Unsloth on Kaggle/Colab, trained on the SciEntsBank train split; convert to GGUF and serve like the others | Improvement over the baseline; RAG vs fine-tuning vs both |
 | **4. Edge cost** | Run every version on the Pi 5 / Jetson with `scripts/board_grade.sh` (agentic-edge's `run_measured.sh` telemetry) | Accuracy vs latency and energy chart |
 
@@ -77,6 +77,20 @@ Measure how well a **small LLM on an edge device** grades students' short answer
 | 2026-09-29 | Asked for references on why robustness can be dropped and edge measurement made optional | Edge kept (stage 4). Robustness: references sent (arXiv 2606.03090, 2602.00979, 2601.08843, 2412.15275); waiting for reply. |
 | 2026-09-29 | For benchmarking, use what the lab already has to cut time | `agentic-edge`'s device benchmarks copied, not re-run: [`results/edge-benchmarks.md`](results/edge-benchmarks.md) |
 | 2026-09-30 | "Yeppp" to keeping edge measurement: latency and energy per answer on the Pi 5 / Jetson | Confirmed: stage 4 measures every version on the boards. Stage 1 board cost is estimated from `agentic-edge`, see [`results/baselines.md`](results/baselines.md) |
+
+## Own decisions
+
+Decisions made while doing the work, not from the supervisor. Each has to serve a research question above; anything that doesn't is dropped or marked optional.
+
+| Date | Decision | Why | RQ |
+|---|---|---|---|
+| 2026-09-30 | Stage-1 board cost **estimated** from `agentic-edge`'s per-request rates, then checked with one measured run per board | Supervisor: reuse the lab's benchmarks. The Jetson check matched Kaggle accuracy, and the estimate was an upper bound (17–25% high) | RQ4 |
+| 2026-10-02 | RAG chunks built on the Mac and uploaded as a **private** Kaggle dataset, checked by sha256 | A fresh Wikipedia download could change the chunks; the Indonesian books may not be redistributed | RQ2 |
+| 2026-10-02 | Extraction drops front/back matter, references, worksheet prompts and student-directed text | Round-1 Indonesian retrieval returned bibliographies and activity steps | RQ2 |
+| 2026-10-02 | Small CPU-only models (embeddings) may run on the Mac; Gemma still runs on Kaggle or the boards | Owner's instruction; it saves a Kaggle round trip per retrieval change | — |
+| 2026-10-03 | **RAG-en is the main RAG condition**; RAG-id optional; RAG-both dropped | SciEntsBank is English, so RAG-en answers RQ2. The others add conditions without a research question; time goes to RQ3 and RQ4 | RQ2–4 |
+| 2026-10-03 | Embedding models: `bge-small-en-v1.5` (English), `bge-m3` (Indonesian); settings frozen | Best retrieval of the models tested on the train-question check ([`results/rag.md`](results/rag.md)); `bge-small` also fits next to Gemma on a Pi | RQ2, RQ4 |
+| 2026-10-03 | On the boards, retrieval counts as a one-off setup cost per question, reported separately from per-answer cost | A teacher's questions are known before grading, so passages can be prepared in advance | RQ4 |
 
 ## Open questions
 

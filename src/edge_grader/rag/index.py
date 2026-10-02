@@ -40,6 +40,16 @@ MODELS = {
         "query_prefix": "query: ",
         "passage_prefix": "passage: ",
     },
+    "e5-base-multi": {
+        "hf_id": "intfloat/multilingual-e5-base",
+        "query_prefix": "query: ",
+        "passage_prefix": "passage: ",
+    },
+    "bge-m3": {  # dense vectors only; no instruction prefix
+        "hf_id": "BAAI/bge-m3",
+        "query_prefix": "",
+        "passage_prefix": "",
+    },
 }
 
 Encode = Callable[[list[str], str], np.ndarray]  # (texts, "query" | "passage") -> unit vectors
@@ -75,12 +85,18 @@ def top_k(queries: np.ndarray, vectors: np.ndarray, k: int) -> list[list[tuple[i
     return [[(int(j), float(scores[i, j])) for j in row] for i, row in enumerate(best)]
 
 
+def with_ext(base: Path, ext: str) -> Path:
+    """base + ext. Not Path.with_suffix: the model name after the dot ("scientsbank-id.e5-base-multi")
+    would be taken as a suffix and replaced, so every model would share one file."""
+    return base.with_name(base.name + ext)
+
+
 def build(chunks_path: Path, model: str, encode: Encode, out_dir: Path = INDEX_DIR) -> Path:
     chunks = read_chunks(chunks_path)
     vectors = encode([c["text"] for c in chunks], "passage").astype(np.float32)
     base = out_dir / f"{chunks_path.stem}.{model}"
     out_dir.mkdir(parents=True, exist_ok=True)
-    np.save(base.with_suffix(".npy"), vectors)
+    np.save(with_ext(base, ".npy"), vectors)
     meta = {
         "model": model,
         **MODELS[model],
@@ -90,7 +106,7 @@ def build(chunks_path: Path, model: str, encode: Encode, out_dir: Path = INDEX_D
         "dim": int(vectors.shape[1]),
         "time": datetime.now(UTC).isoformat(timespec="seconds"),
     }
-    base.with_suffix(".json").write_text(json.dumps(meta, indent=2) + "\n")
+    with_ext(base, ".json").write_text(json.dumps(meta, indent=2) + "\n")
     return base
 
 
@@ -107,8 +123,8 @@ def questions(splits=SPLITS) -> dict[str, dict]:
 
 
 def retrieve(index: Path, qs: dict[str, dict], encode: Encode, k: int) -> dict:
-    meta = json.loads(index.with_suffix(".json").read_text())
-    vectors = np.load(index.with_suffix(".npy"))
+    meta = json.loads(with_ext(index, ".json").read_text())
+    vectors = np.load(with_ext(index, ".npy"))
     chunk_ids = [c["id"] for c in read_chunks(Path(meta["chunks"]))]
     keys = sorted(qs)
     hits = top_k(encode([qs[key]["question"] for key in keys], "query"), vectors, k)
@@ -141,7 +157,7 @@ def main(argv: list[str] | None = None) -> None:
         base = build(args.chunks, args.model, sentence_transformer(args.model))
         print(f"wrote {base}.npy and {base}.json")
         return
-    meta = json.loads(args.index.with_suffix(".json").read_text())
+    meta = json.loads(with_ext(args.index, ".json").read_text())
     if sha256_of(Path(meta["chunks"])) != meta["chunks_sha256"]:
         raise SystemExit(f"{meta['chunks']} changed since the index was built; rebuild it")
     result = retrieve(args.index, questions(), sentence_transformer(meta["model"]), args.k)

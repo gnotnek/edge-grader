@@ -109,9 +109,9 @@ Counted as book pages that mention at least two of a unit's keywords. This is a 
 
 | Condition | Question | Corpus | What it tests |
 |---|---|---|---|
-| RAG-en | English | English | the main RAG condition |
-| RAG-id | English | Indonesian | cross-lingual retrieval: does material in another language still help? |
-| RAG-both | English | both | does more material help or add noise? |
+| RAG-en | English | English | **the main RAG condition** |
+| RAG-id | English | Indonesian | cross-lingual retrieval: does material in another language still help? **Optional** (2026-10-03): run only if time allows |
+| ~~RAG-both~~ | English | both | **Dropped** (2026-10-03): it doesn't answer a research question |
 
 A fully Indonesian condition (questions and answers translated) would be a separate, larger piece of work.
 

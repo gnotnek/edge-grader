@@ -1,7 +1,7 @@
 {
  "stage": "rag",
  "kind": "retrieval",
- "time": "2026-10-02T08:17:24+00:00",
+ "time": "2026-10-02T14:53:45+00:00",
  "settings": {
   "index": "data/rag/index/scientsbank-en.bge-small-en",
   "k": 5,
@@ -11,10 +11,10 @@
   "query_prefix": "Represent this sentence for searching relevant passages: ",
   "passage_prefix": "",
   "chunks": "data/rag/chunks/scientsbank-en.jsonl",
-  "chunks_sha256": "e6f7b1034ffa5e949d7a9b16a7f4106df356f491c6b87be2955266e65e7ba7e1",
-  "n_chunks": 822,
+  "chunks_sha256": "0cbe223cb32d405a25a0f48491751eba5faf803b3ec7782645369928e7611e71",
+  "n_chunks": 755,
   "dim": 384,
-  "time": "2026-10-02T08:16:55+00:00"
+  "time": "2026-10-02T14:52:08+00:00"
  },
  "questions": {
   "EM.13": {
@@ -55,12 +55,12 @@
      0.7415
     ],
     [
-     "wiki:Streak_(mineralogy):0",
-     0.719
+     "wiki:Streak_(mineralogy):1",
+     0.7223
     ],
     [
-     "wiki:Streak_(mineralogy):1",
-     0.7111
+     "wiki:Streak_(mineralogy):0",
+     0.719
     ],
     [
      "wiki:Mineral:1",
@@ -80,7 +80,7 @@
    "hits": [
     [
      "wiki:Streak_(mineralogy):1",
-     0.7178
+     0.7244
     ],
     [
      "wiki:Streak_(mineralogy):0",
@@ -95,8 +95,8 @@
      0.684
     ],
     [
-     "en-utah-seed-g8:16",
-     0.6655
+     "en-utah-seed-g5:30",
+     0.6788
     ]
    ]
   },
@@ -108,7 +108,7 @@
    "hits": [
     [
      "wiki:Streak_(mineralogy):1",
-     0.7215
+     0.7285
     ],
     [
      "wiki:Streak_(mineralogy):0",
@@ -135,24 +135,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g5:32",
-     0.7629
-    ],
-    [
      "wiki:Crystal:0",
-     0.7431
+     0.7489
     ],
     [
-     "en-utah-seed-g5:31",
-     0.7214
-    ],
-    [
-     "wiki:Crystal:1",
-     0.7155
+     "en-utah-seed-g5:27",
+     0.7475
     ],
     [
      "wiki:Evaporation:0",
      0.7031
+    ],
+    [
+     "wiki:Freezing:1",
+     0.699
+    ],
+    [
+     "wiki:Water_cycle:0",
+     0.6912
     ]
    ]
   },
@@ -194,16 +194,16 @@
      0.7328
     ],
     [
-     "en-utah-seed-g8:16",
-     0.7155
-    ],
-    [
      "wiki:Streak_(mineralogy):0",
      0.7139
     ],
     [
      "wiki:Streak_(mineralogy):1",
-     0.6921
+     0.7132
+    ],
+    [
+     "en-utah-seed-g8:13",
+     0.6947
     ],
     [
      "wiki:Mineral:1",
@@ -218,24 +218,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g3:47",
-     0.6269
+     "en-utah-seed-g3:38",
+     0.612
     ],
     [
-     "en-utah-seed-g8:16",
-     0.6114
+     "en-utah-seed-g5:30",
+     0.6045
     ],
     [
-     "en-utah-seed-g3:58",
-     0.6029
+     "en-utah-seed-g8:18",
+     0.5948
     ],
     [
-     "en-utah-seed-g8:23",
-     0.6002
+     "en-utah-seed-g3:39",
+     0.5919
     ],
     [
-     "en-utah-seed-g6:53",
-     0.5959
+     "wiki:Mohs_scale_of_mineral_hardness:0",
+     0.5881
     ]
    ]
   },
@@ -250,20 +250,20 @@
      0.6631
     ],
     [
-     "en-utah-seed-g8:16",
-     0.6569
-    ],
-    [
-     "en-utah-seed-g4:27",
-     0.6514
-    ],
-    [
      "wiki:Mineral:2",
      0.6461
     ],
     [
-     "en-utah-seed-g8:19",
-     0.6417
+     "wiki:Mineral:1",
+     0.6406
+    ],
+    [
+     "wiki:Streak_(mineralogy):0",
+     0.6399
+    ],
+    [
+     "wiki:Weathering:1",
+     0.6381
     ]
    ]
   },
@@ -278,20 +278,20 @@
      0.703
     ],
     [
-     "en-utah-seed-g5:31",
-     0.6728
-    ],
-    [
-     "en-utah-seed-g5:30",
-     0.6721
+     "en-utah-seed-g5:27",
+     0.6745
     ],
     [
      "wiki:Weathering:1",
      0.6694
     ],
     [
-     "en-utah-seed-g5:32",
-     0.668
+     "en-utah-seed-g5:25",
+     0.6564
+    ],
+    [
+     "en-utah-seed-g5:17",
+     0.6441
     ]
    ]
   },
@@ -306,20 +306,20 @@
      0.6913
     ],
     [
-     "wiki:Crystal:1",
-     0.6834
-    ],
-    [
-     "en-utah-seed-g5:32",
-     0.6794
-    ],
-    [
-     "en-utah-seed-g8:16",
-     0.6781
+     "en-utah-seed-g5:27",
+     0.6858
     ],
     [
      "wiki:Crystal:0",
-     0.6776
+     0.6755
+    ],
+    [
+     "wiki:Rock_(geology):0",
+     0.6666
+    ],
+    [
+     "en-utah-seed-g8:16",
+     0.6644
     ]
    ]
   },
@@ -330,24 +330,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g5:32",
-     0.6861
-    ],
-    [
      "wiki:Weathering:2",
      0.6841
-    ],
-    [
-     "en-utah-seed-g6:41",
-     0.6774
     ],
     [
      "wiki:Streak_(mineralogy):0",
      0.6729
     ],
     [
-     "en-utah-seed-g5:35",
-     0.6719
+     "en-utah-seed-g5:30",
+     0.6726
+    ],
+    [
+     "en-utah-seed-g5:27",
+     0.666
+    ],
+    [
+     "en-utah-seed-g6:37",
+     0.6613
     ]
    ]
   },
@@ -358,10 +358,6 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g7:54",
-     0.691
-    ],
-    [
      "wiki:Weathering:1",
      0.6899
     ],
@@ -370,12 +366,16 @@
      0.6866
     ],
     [
-     "en-utah-seed-g5:6",
-     0.6827
+     "en-utah-seed-g5:33",
+     0.6788
     ],
     [
-     "en-utah-seed-g4:37",
-     0.6824
+     "en-utah-seed-g4:33",
+     0.6765
+    ],
+    [
+     "en-utah-seed-g5:34",
+     0.6749
     ]
    ]
   },
@@ -390,20 +390,20 @@
      0.7284
     ],
     [
-     "en-utah-seed-g5:32",
-     0.706
+     "en-utah-seed-g5:27",
+     0.6981
     ],
     [
      "wiki:Solubility:0",
      0.6871
     ],
     [
-     "en-utah-seed-g5:31",
-     0.6803
+     "wiki:Weathering:2",
+     0.6701
     ],
     [
      "wiki:Crystal:0",
-     0.6726
+     0.6683
     ]
    ]
   },
@@ -413,24 +413,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g6:101",
-     0.6744
-    ],
-    [
      "wiki:Abiotic_component:1",
      0.6606
     ],
     [
-     "en-utah-seed-g6:102",
-     0.6529
-    ],
-    [
-     "wiki:Natural_environment:14",
-     0.647
-    ],
-    [
      "en-utah-seed-g6:93",
-     0.6378
+     0.6415
+    ],
+    [
+     "en-utah-seed-g7:90",
+     0.6363
+    ],
+    [
+     "en-utah-seed-g6:87",
+     0.6354
+    ],
+    [
+     "en-utah-seed-g6:85",
+     0.6334
     ]
    ]
   },
@@ -440,24 +440,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g8:81",
-     0.6849
+     "en-utah-seed-g8:73",
+     0.7041
     ],
     [
-     "en-utah-seed-g5:43",
-     0.6743
+     "en-utah-seed-g5:37",
+     0.6573
+    ],
+    [
+     "en-utah-seed-g8:72",
+     0.6548
     ],
     [
      "wiki:Seed:2",
      0.6525
     ],
     [
-     "en-utah-seed-g8:80",
-     0.6475
-    ],
-    [
-     "en-utah-seed-g5:42",
-     0.6352
+     "en-utah-seed-g5:38",
+     0.6454
     ]
    ]
   },
@@ -467,24 +467,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g6:52",
-     0.6626
+     "en-utah-seed-g6:47",
+     0.6646
     ],
     [
-     "en-utah-seed-g6:92",
-     0.6311
+     "en-utah-seed-g4:16",
+     0.653
     ],
     [
-     "en-utah-seed-g6:51",
-     0.629
+     "en-utah-seed-g6:48",
+     0.6486
     ],
     [
-     "en-utah-seed-g8:87",
-     0.6254
+     "en-utah-seed-g6:84",
+     0.6295
     ],
     [
-     "en-utah-seed-g5:16",
-     0.6224
+     "en-utah-seed-g8:73",
+     0.6094
     ]
    ]
   },
@@ -494,20 +494,20 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g8:81",
-     0.7218
+     "en-utah-seed-g8:73",
+     0.7434
     ],
     [
-     "en-utah-seed-g5:43",
-     0.7043
+     "en-utah-seed-g5:38",
+     0.7026
     ],
     [
-     "en-utah-seed-g8:80",
-     0.6944
+     "en-utah-seed-g5:37",
+     0.6973
     ],
     [
-     "en-utah-seed-g3:32",
-     0.693
+     "en-utah-seed-g8:72",
+     0.6824
     ],
     [
      "wiki:Scientific_control:1",
@@ -521,24 +521,24 @@
    ],
    "hits": [
     [
-     "wiki:Natural_environment:5",
-     0.6581
+     "en-utah-seed-g4:7",
+     0.6676
     ],
     [
      "wiki:Root:1",
      0.6557
     ],
     [
-     "en-utah-seed-g4:9",
-     0.6542
+     "en-utah-seed-g4:17",
+     0.6487
+    ],
+    [
+     "wiki:Natural_environment:5",
+     0.6485
     ],
     [
      "wiki:River_delta:0",
      0.6475
-    ],
-    [
-     "en-utah-seed-g4:19",
-     0.6469
     ]
    ]
   },
@@ -548,24 +548,24 @@
    ],
    "hits": [
     [
+     "en-utah-seed-g8:73",
+     0.6678
+    ],
+    [
      "wiki:Scientific_control:1",
      0.6636
     ],
     [
-     "en-utah-seed-g3:32",
-     0.6537
+     "en-utah-seed-g7:102",
+     0.6442
     ],
     [
-     "en-utah-seed-g7:118",
-     0.6467
+     "en-utah-seed-g5:44",
+     0.6424
     ],
     [
-     "en-utah-seed-g7:104",
-     0.6398
-    ],
-    [
-     "en-utah-seed-g5:50",
-     0.6326
+     "en-utah-seed-g3:26",
+     0.6392
     ]
    ]
   },
@@ -575,24 +575,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g6:92",
-     0.6361
+     "en-utah-seed-g4:16",
+     0.6705
     ],
     [
-     "en-utah-seed-g6:52",
-     0.6226
+     "en-utah-seed-g6:48",
+     0.6182
     ],
     [
-     "en-utah-seed-g6:41",
-     0.6129
+     "en-utah-seed-g6:84",
+     0.6142
     ],
     [
-     "en-utah-seed-g6:91",
-     0.6128
+     "en-utah-seed-g4:17",
+     0.6117
     ],
     [
-     "en-utah-seed-g4:18",
-     0.6045
+     "en-utah-seed-g6:47",
+     0.6076
     ]
    ]
   },
@@ -603,24 +603,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g8:20",
-     0.7693
+     "en-utah-seed-g8:19",
+     0.7575
     ],
     [
-     "en-utah-seed-g5:34",
-     0.7246
+     "en-utah-seed-g8:16",
+     0.7572
     ],
     [
-     "en-utah-seed-g8:22",
-     0.7217
+     "en-utah-seed-g5:29",
+     0.7261
     ],
     [
-     "en-utah-seed-g8:21",
-     0.7049
+     "en-utah-seed-g8:17",
+     0.719
     ],
     [
-     "en-utah-seed-g5:38",
-     0.6965
+     "en-utah-seed-g8:18",
+     0.7017
     ]
    ]
   },
@@ -631,24 +631,24 @@
    ],
    "hits": [
     [
+     "en-utah-seed-g8:19",
+     0.7253
+    ],
+    [
+     "en-utah-seed-g8:16",
+     0.7145
+    ],
+    [
+     "en-utah-seed-g5:29",
+     0.7142
+    ],
+    [
+     "en-utah-seed-g5:33",
+     0.6834
+    ],
+    [
      "en-utah-seed-g5:34",
-     0.7118
-    ],
-    [
-     "en-utah-seed-g8:20",
-     0.7019
-    ],
-    [
-     "en-utah-seed-g5:38",
-     0.6848
-    ],
-    [
-     "en-utah-seed-g6:52",
-     0.6707
-    ],
-    [
-     "en-utah-seed-g5:39",
-     0.6687
+     0.6703
     ]
    ]
   },
@@ -659,6 +659,10 @@
    ],
    "hits": [
     [
+     "en-utah-seed-g8:77",
+     0.6418
+    ],
+    [
      "wiki:Carbohydrate:0",
      0.6268
     ],
@@ -667,16 +671,12 @@
      0.6241
     ],
     [
-     "en-utah-seed-g5:34",
+     "en-utah-seed-g5:29",
      0.6241
     ],
     [
-     "wiki:Nutrition:1",
-     0.6186
-    ],
-    [
-     "en-utah-seed-g5:38",
-     0.6184
+     "en-utah-seed-g8:19",
+     0.6225
     ]
    ]
   },
@@ -699,12 +699,12 @@
      0.6272
     ],
     [
-     "en-utah-seed-g6:52",
-     0.605
+     "en-utah-seed-g8:19",
+     0.6197
     ],
     [
-     "en-utah-seed-g6:46",
-     0.6002
+     "en-utah-seed-g6:48",
+     0.6128
     ]
    ]
   },
@@ -719,20 +719,20 @@
      0.6684
     ],
     [
-     "en-utah-seed-g6:52",
-     0.6605
+     "en-utah-seed-g8:19",
+     0.6628
     ],
     [
-     "wiki:Mass:1",
-     0.639
+     "en-utah-seed-g6:48",
+     0.6505
     ],
     [
-     "en-utah-seed-g8:24",
-     0.6384
+     "en-utah-seed-g8:73",
+     0.6433
     ],
     [
-     "en-utah-seed-g6:51",
-     0.6358
+     "en-utah-seed-g8:20",
+     0.6426
     ]
    ]
   },
@@ -743,24 +743,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g5:38",
-     0.6136
+     "en-utah-seed-g5:33",
+     0.6195
     ],
     [
      "wiki:Scientific_control:1",
      0.6089
     ],
     [
-     "en-utah-seed-g5:34",
-     0.6007
+     "en-utah-seed-g8:77",
+     0.6047
     ],
     [
      "wiki:Carbohydrate:1",
      0.6006
     ],
     [
-     "wiki:Carbohydrate:0",
-     0.5826
+     "en-utah-seed-g5:34",
+     0.5895
     ]
    ]
   },
@@ -771,6 +771,10 @@
    ],
    "hits": [
     [
+     "en-utah-seed-g8:77",
+     0.6438
+    ],
+    [
      "wiki:Scientific_control:1",
      0.6378
     ],
@@ -779,16 +783,12 @@
      0.623
     ],
     [
-     "en-utah-seed-g5:38",
-     0.6144
+     "en-utah-seed-g5:33",
+     0.6195
     ],
     [
-     "en-utah-seed-g5:34",
-     0.6101
-    ],
-    [
-     "en-utah-seed-g8:86",
-     0.6019
+     "en-utah-seed-g5:29",
+     0.6024
     ]
    ]
   },
@@ -798,24 +798,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g6:52",
-     0.6119
+     "en-utah-seed-g6:48",
+     0.5946
     ],
     [
      "wiki:Scientific_control:1",
      0.5789
     ],
     [
-     "en-utah-seed-g5:34",
-     0.5781
+     "en-utah-seed-g6:47",
+     0.5731
     ],
     [
-     "wiki:Experiment:1",
-     0.5658
+     "en-utah-seed-g8:20",
+     0.5696
     ],
     [
-     "wiki:Acid:1",
-     0.556
+     "en-utah-seed-g8:71",
+     0.5674
     ]
    ]
   },
@@ -826,10 +826,6 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g5:34",
-     0.64
-    ],
-    [
      "wiki:Vitamin:0",
      0.6377
     ],
@@ -838,8 +834,12 @@
      0.6359
     ],
     [
-     "en-utah-seed-g5:38",
-     0.6339
+     "en-utah-seed-g5:29",
+     0.6335
+    ],
+    [
+     "en-utah-seed-g5:33",
+     0.6275
     ],
     [
      "wiki:Streak_(mineralogy):0",
@@ -858,16 +858,16 @@
      0.6345
     ],
     [
-     "en-utah-seed-g5:34",
-     0.6314
+     "en-utah-seed-g5:29",
+     0.6283
     ],
     [
-     "en-utah-seed-g5:38",
-     0.6108
+     "en-utah-seed-g5:33",
+     0.6044
     ],
     [
-     "en-utah-seed-g8:24",
-     0.6086
+     "en-utah-seed-g8:20",
+     0.6029
     ],
     [
      "wiki:Chromatography:3",
@@ -881,24 +881,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:50",
-     0.6585
+     "en-utah-seed-g4:45",
+     0.6567
     ],
     [
-     "en-utah-seed-g4:51",
+     "en-utah-seed-g4:46",
+     0.6553
+    ],
+    [
+     "en-utah-seed-g3:39",
      0.648
     ],
     [
-     "en-utah-seed-g4:49",
-     0.6337
+     "en-utah-seed-g3:38",
+     0.6449
     ],
     [
-     "en-utah-seed-g8:44",
-     0.624
-    ],
-    [
-     "en-utah-seed-g8:23",
-     0.6225
+     "en-utah-seed-g4:40",
+     0.6426
     ]
    ]
   },
@@ -912,20 +912,20 @@
      0.6982
     ],
     [
+     "en-utah-seed-g4:43",
+     0.6292
+    ],
+    [
      "wiki:Tendon:0",
      0.6291
     ],
     [
-     "en-utah-seed-g3:48",
-     0.6256
+     "en-utah-seed-g4:40",
+     0.6218
     ],
     [
-     "en-utah-seed-g3:44",
-     0.6193
-    ],
-    [
-     "en-utah-seed-g4:43",
-     0.6066
+     "en-utah-seed-g3:35",
+     0.6122
     ]
    ]
   },
@@ -939,20 +939,20 @@
      0.6988
     ],
     [
+     "en-utah-seed-g4:43",
+     0.6318
+    ],
+    [
      "wiki:Tendon:0",
      0.6309
     ],
     [
-     "en-utah-seed-g3:48",
-     0.6248
+     "en-utah-seed-g4:40",
+     0.6233
     ],
     [
-     "en-utah-seed-g3:44",
-     0.6219
-    ],
-    [
-     "en-utah-seed-g4:43",
-     0.6121
+     "en-utah-seed-g3:35",
+     0.6163
     ]
    ]
   },
@@ -963,7 +963,7 @@
    "hits": [
     [
      "wiki:Human_skeleton:0",
-     0.7348
+     0.7349
     ],
     [
      "wiki:Bone:0",
@@ -974,8 +974,8 @@
      0.7063
     ],
     [
-     "en-utah-seed-g7:117",
-     0.6469
+     "en-utah-seed-g7:101",
+     0.66
     ],
     [
      "wiki:Human_body:0",
@@ -1005,8 +1005,8 @@
      0.631
     ],
     [
-     "en-utah-seed-g7:80",
-     0.6102
+     "en-utah-seed-g7:67",
+     0.615
     ]
    ]
   },
@@ -1017,23 +1017,23 @@
    "hits": [
     [
      "en-utah-seed-g6:47",
-     0.5913
+     0.5785
     ],
     [
-     "en-utah-seed-g5:33",
-     0.5844
+     "en-utah-seed-g6:43",
+     0.5781
     ],
     [
-     "en-utah-seed-g5:34",
-     0.5822
+     "en-utah-seed-g8:77",
+     0.5761
     ],
     [
-     "en-utah-seed-g7:9",
-     0.5817
+     "en-utah-seed-g8:74",
+     0.5701
     ],
     [
-     "wiki:Experiment:2",
-     0.5702
+     "en-utah-seed-g7:12",
+     0.5642
     ]
    ]
   },
@@ -1043,24 +1043,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g5:34",
-     0.5658
+     "en-utah-seed-g6:43",
+     0.5457
     ],
     [
      "en-utah-seed-g6:47",
-     0.5531
+     0.5423
     ],
     [
-     "en-utah-seed-g7:9",
-     0.5505
+     "en-utah-seed-g6:48",
+     0.5371
     ],
     [
-     "en-utah-seed-g5:33",
-     0.5432
+     "en-utah-seed-g6:42",
+     0.5328
     ],
     [
-     "en-utah-seed-g3:52",
-     0.5334
+     "en-utah-seed-g6:93",
+     0.5324
     ]
    ]
   },
@@ -1070,24 +1070,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g8:45",
-     0.7013
+     "en-utah-seed-g4:40",
+     0.6814
     ],
     [
-     "en-utah-seed-g7:14",
-     0.6844
+     "en-utah-seed-g8:47",
+     0.6769
     ],
     [
-     "en-utah-seed-g8:54",
-     0.6786
+     "en-utah-seed-g4:46",
+     0.6713
     ],
     [
-     "en-utah-seed-g8:51",
-     0.6733
+     "en-utah-seed-g8:39",
+     0.6689
     ],
     [
-     "en-utah-seed-g7:10",
-     0.6729
+     "en-utah-seed-g8:44",
+     0.6686
     ]
    ]
   },
@@ -1124,8 +1124,8 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g7:117",
-     0.6666
+     "en-utah-seed-g7:101",
+     0.6693
     ],
     [
      "wiki:Bone:0",
@@ -1136,12 +1136,12 @@
      0.6263
     ],
     [
-     "en-utah-seed-g7:116",
-     0.6246
+     "en-utah-seed-g4:26",
+     0.6258
     ],
     [
-     "en-utah-seed-g4:28",
-     0.6204
+     "wiki:Joint:0",
+     0.6186
     ]
    ]
   },
@@ -1167,8 +1167,8 @@
      0.6639
     ],
     [
-     "en-utah-seed-g7:117",
-     0.6363
+     "en-utah-seed-g7:101",
+     0.6478
     ]
    ]
   },
@@ -1178,8 +1178,8 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g7:117",
-     0.6639
+     "en-utah-seed-g7:101",
+     0.665
     ],
     [
      "wiki:Bone:0",
@@ -1190,12 +1190,12 @@
      0.6062
     ],
     [
-     "wiki:Tendon:0",
-     0.6013
+     "en-utah-seed-g4:26",
+     0.6039
     ],
     [
-     "en-utah-seed-g8:25",
-     0.5984
+     "wiki:Tendon:0",
+     0.6013
     ]
    ]
   },
@@ -1205,24 +1205,24 @@
    ],
    "hits": [
     [
-     "wiki:Experiment:2",
-     0.5917
+     "en-utah-seed-g3:25",
+     0.5729
     ],
     [
-     "en-utah-seed-g4:22",
-     0.5704
+     "en-utah-seed-g4:19",
+     0.5714
     ],
     [
-     "en-utah-seed-g4:43",
-     0.5649
+     "en-utah-seed-g4:47",
+     0.567
     ],
     [
-     "en-utah-seed-g3:53",
-     0.5634
+     "en-utah-seed-g4:15",
+     0.566
     ],
     [
-     "en-utah-seed-g4:21",
-     0.5607
+     "en-utah-seed-g4:18",
+     0.5635
     ]
    ]
   },
@@ -1232,24 +1232,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g3:47",
-     0.5473
+     "en-utah-seed-g3:38",
+     0.5521
     ],
     [
-     "en-utah-seed-g3:46",
-     0.5382
+     "en-utah-seed-g4:18",
+     0.5415
     ],
     [
-     "en-utah-seed-g3:53",
-     0.5379
+     "en-utah-seed-g4:42",
+     0.5353
     ],
     [
-     "en-utah-seed-g8:95",
-     0.5335
+     "en-utah-seed-g3:39",
+     0.5345
     ],
     [
-     "en-utah-seed-g7:9",
-     0.5275
+     "en-utah-seed-g4:19",
+     0.5296
     ]
    ]
   },
@@ -1259,24 +1259,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:45",
-     0.5733
+     "en-utah-seed-g4:42",
+     0.5669
+    ],
+    [
+     "en-utah-seed-g4:41",
+     0.552
+    ],
+    [
+     "en-utah-seed-g4:40",
+     0.5396
     ],
     [
      "en-utah-seed-g4:46",
-     0.5686
-    ],
-    [
-     "en-utah-seed-g8:45",
-     0.5619
-    ],
-    [
-     "en-utah-seed-g7:41",
-     0.5452
+     0.5384
     ],
     [
      "en-utah-seed-g4:43",
-     0.5442
+     0.5357
     ]
    ]
   },
@@ -1290,20 +1290,20 @@
      0.7976
     ],
     [
-     "en-utah-seed-g7:82",
-     0.7196
+     "en-utah-seed-g7:69",
+     0.7437
     ],
     [
-     "en-utah-seed-g7:80",
-     0.7143
+     "en-utah-seed-g7:67",
+     0.72
     ],
     [
      "wiki:Muscle:1",
      0.7114
     ],
     [
-     "wiki:Muscle:2",
-     0.6917
+     "en-utah-seed-g7:68",
+     0.6964
     ]
    ]
   },
@@ -1317,20 +1317,20 @@
      0.6975
     ],
     [
-     "en-utah-seed-g3:27",
-     0.6831
+     "en-utah-seed-g3:22",
+     0.6858
     ],
     [
-     "en-utah-seed-g3:26",
-     0.6798
+     "en-utah-seed-g7:66",
+     0.6819
     ],
     [
-     "en-utah-seed-g3:32",
-     0.6769
+     "wiki:Plant:1",
+     0.6564
     ],
     [
-     "en-utah-seed-g5:43",
-     0.661
+     "en-utah-seed-g3:21",
+     0.6503
     ]
    ]
   },
@@ -1345,20 +1345,20 @@
      0.6368
     ],
     [
-     "en-utah-seed-g3:26",
-     0.6173
+     "en-utah-seed-g3:21",
+     0.5869
     ],
     [
-     "en-utah-seed-g4:85",
-     0.5889
+     "en-utah-seed-g4:78",
+     0.5726
     ],
     [
-     "en-utah-seed-g7:71",
-     0.5675
+     "en-utah-seed-g4:79",
+     0.5636
     ],
     [
-     "en-utah-seed-g7:118",
-     0.5618
+     "en-utah-seed-g7:59",
+     0.5611
     ]
    ]
   },
@@ -1373,20 +1373,20 @@
      0.6391
     ],
     [
-     "en-utah-seed-g3:26",
-     0.6141
+     "en-utah-seed-g7:59",
+     0.6061
     ],
     [
-     "en-utah-seed-g4:85",
-     0.5962
+     "en-utah-seed-g3:21",
+     0.5966
     ],
     [
-     "en-utah-seed-g3:58",
-     0.5882
+     "en-utah-seed-g4:79",
+     0.5839
     ],
     [
-     "en-utah-seed-g7:71",
-     0.5847
+     "en-utah-seed-g4:78",
+     0.5812
     ]
    ]
   },
@@ -1401,20 +1401,20 @@
      0.7022
     ],
     [
-     "en-utah-seed-g8:23",
-     0.6866
+     "en-utah-seed-g8:20",
+     0.6911
     ],
     [
      "wiki:Chromatography:3",
      0.6855
     ],
     [
-     "en-utah-seed-g8:20",
-     0.6825
-    ],
-    [
      "wiki:Chromatography:2",
      0.6823
+    ],
+    [
+     "en-utah-seed-g5:29",
+     0.665
     ]
    ]
   },
@@ -1425,24 +1425,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g8:24",
-     0.6327
+     "en-utah-seed-g3:23",
+     0.6418
     ],
     [
-     "en-utah-seed-g3:28",
-     0.6271
+     "en-utah-seed-g3:22",
+     0.6185
     ],
     [
      "wiki:Chromatography:3",
      0.6159
     ],
     [
-     "en-utah-seed-g8:23",
-     0.615
+     "en-utah-seed-g8:21",
+     0.6144
     ],
     [
-     "en-utah-seed-g3:29",
-     0.603
+     "en-utah-seed-g3:21",
+     0.6103
     ]
    ]
   },
@@ -1453,24 +1453,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g8:24",
-     0.6662
-    ],
-    [
-     "en-utah-seed-g8:28",
-     0.6627
-    ],
-    [
-     "en-utah-seed-g8:25",
-     0.6611
-    ],
-    [
-     "en-utah-seed-g8:23",
-     0.6464
+     "en-utah-seed-g8:21",
+     0.6742
     ],
     [
      "en-utah-seed-g8:16",
-     0.6244
+     0.638
+    ],
+    [
+     "en-utah-seed-g8:20",
+     0.635
+    ],
+    [
+     "en-utah-seed-g8:25",
+     0.6302
+    ],
+    [
+     "en-utah-seed-g5:30",
+     0.6237
     ]
    ]
   },
@@ -1485,20 +1485,20 @@
      0.8117
     ],
     [
-     "en-utah-seed-g4:71",
-     0.7323
+     "en-utah-seed-g4:66",
+     0.7584
     ],
     [
-     "en-utah-seed-g4:72",
-     0.7239
-    ],
-    [
-     "wiki:Reflection_symmetry:2",
-     0.7189
+     "en-utah-seed-g4:65",
+     0.7317
     ],
     [
      "wiki:Reflection_symmetry:1",
      0.716
+    ],
+    [
+     "wiki:Reflection_symmetry:2",
+     0.7155
     ]
    ]
   },
@@ -1513,20 +1513,20 @@
      0.7831
     ],
     [
-     "en-utah-seed-g7:48",
-     0.7268
+     "en-utah-seed-g5:14",
+     0.7168
     ],
     [
-     "en-utah-seed-g5:17",
-     0.6996
-    ],
-    [
-     "en-utah-seed-g5:23",
-     0.685
+     "en-utah-seed-g7:44",
+     0.7005
     ],
     [
      "wiki:Erosion:0",
      0.684
+    ],
+    [
+     "en-utah-seed-g5:20",
+     0.6837
     ]
    ]
   },
@@ -1544,16 +1544,16 @@
      0.7785
     ],
     [
-     "en-utah-seed-g5:17",
-     0.7731
+     "en-utah-seed-g5:14",
+     0.7783
     ],
     [
-     "en-utah-seed-g5:19",
-     0.7522
+     "en-utah-seed-g5:15",
+     0.7357
     ],
     [
-     "en-utah-seed-g5:18",
-     0.7255
+     "en-utah-seed-g5:21",
+     0.7324
     ]
    ]
   },
@@ -1564,20 +1564,20 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g6:65",
-     0.7028
+     "en-utah-seed-g6:59",
+     0.7007
     ],
     [
-     "wiki:Natural_environment:4",
-     0.6719
+     "en-utah-seed-g7:35",
+     0.6947
     ],
     [
-     "en-utah-seed-g3:20",
-     0.6678
+     "en-utah-seed-g6:56",
+     0.6698
     ],
     [
-     "en-utah-seed-g6:62",
-     0.664
+     "en-utah-seed-g3:13",
+     0.6679
     ],
     [
      "wiki:Erosion:1",
@@ -1596,20 +1596,20 @@
      0.7453
     ],
     [
-     "en-utah-seed-g3:53",
-     0.6492
+     "en-utah-seed-g4:37",
+     0.6529
     ],
     [
-     "en-utah-seed-g4:42",
-     0.6163
+     "en-utah-seed-g4:68",
+     0.6338
     ],
     [
-     "en-utah-seed-g4:74",
-     0.6124
+     "en-utah-seed-g3:11",
+     0.6098
     ],
     [
-     "en-utah-seed-g6:96",
-     0.6067
+     "en-utah-seed-g6:48",
+     0.6077
     ]
    ]
   },
@@ -1625,19 +1625,19 @@
     ],
     [
      "wiki:Natural_environment:4",
-     0.6337
+     0.6275
     ],
     [
-     "en-utah-seed-g3:53",
-     0.6189
+     "en-utah-seed-g4:37",
+     0.6169
     ],
     [
-     "wiki:Metric_system:3",
-     0.5915
+     "wiki:Streak_(mineralogy):1",
+     0.6003
     ],
     [
-     "en-utah-seed-g5:20",
-     0.5891
+     "en-utah-seed-g3:44",
+     0.5988
     ]
    ]
   },
@@ -1652,20 +1652,20 @@
      0.6389
     ],
     [
-     "en-utah-seed-g8:50",
-     0.634
-    ],
-    [
-     "en-utah-seed-g4:66",
-     0.6279
-    ],
-    [
-     "en-utah-seed-g8:51",
-     0.6268
+     "en-utah-seed-g7:31",
+     0.6226
     ],
     [
      "wiki:Metric_system:8",
      0.6214
+    ],
+    [
+     "wiki:Topographic_map:0",
+     0.6178
+    ],
+    [
+     "en-utah-seed-g7:29",
+     0.6123
     ]
    ]
   },
@@ -1680,20 +1680,20 @@
      0.7151
     ],
     [
+     "en-utah-seed-g8:121",
+     0.6807
+    ],
+    [
+     "en-utah-seed-g5:23",
+     0.6799
+    ],
+    [
      "wiki:Natural_environment:4",
-     0.6726
+     0.6702
     ],
     [
-     "en-utah-seed-g5:28",
-     0.6627
-    ],
-    [
-     "en-utah-seed-g5:27",
-     0.656
-    ],
-    [
-     "en-utah-seed-g8:133",
-     0.6531
+     "en-utah-seed-g5:24",
+     0.6567
     ]
    ]
   },
@@ -1712,16 +1712,16 @@
      0.709
     ],
     [
-     "en-utah-seed-g7:38",
-     0.6666
+     "en-utah-seed-g6:56",
+     0.6591
     ],
     [
-     "en-utah-seed-g6:45",
-     0.6575
+     "en-utah-seed-g6:41",
+     0.6555
     ],
     [
-     "en-utah-seed-g6:62",
-     0.6512
+     "en-utah-seed-g4:33",
+     0.6535
     ]
    ]
   },
@@ -1736,8 +1736,12 @@
      0.7429
     ],
     [
-     "en-utah-seed-g4:37",
-     0.7248
+     "en-utah-seed-g4:33",
+     0.7278
+    ],
+    [
+     "en-utah-seed-g7:32",
+     0.7155
     ],
     [
      "wiki:River_delta:0",
@@ -1746,10 +1750,6 @@
     [
      "wiki:Erosion:1",
      0.7009
-    ],
-    [
-     "wiki:Erosion:0",
-     0.6932
     ]
    ]
   },
@@ -1760,24 +1760,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g6:65",
-     0.6223
+     "en-utah-seed-g5:16",
+     0.6142
     ],
     [
-     "en-utah-seed-g4:69",
-     0.621
+     "en-utah-seed-g5:10",
+     0.6077
     ],
     [
-     "wiki:Natural_environment:4",
+     "en-utah-seed-g6:59",
      0.6076
     ],
     [
-     "en-utah-seed-g6:78",
-     0.6073
+     "en-utah-seed-g4:63",
+     0.6029
     ],
     [
-     "en-utah-seed-g5:13",
-     0.6046
+     "en-utah-seed-g4:64",
+     0.6011
     ]
    ]
   },
@@ -1788,24 +1788,24 @@
    ],
    "hits": [
     [
+     "en-utah-seed-g3:39",
+     0.6112
+    ],
+    [
+     "en-utah-seed-g6:33",
+     0.5907
+    ],
+    [
      "wiki:Topographic_map:0",
      0.5868
     ],
     [
-     "en-utah-seed-g3:47",
-     0.576
+     "en-utah-seed-g3:11",
+     0.5592
     ],
     [
-     "en-utah-seed-g6:52",
-     0.5689
-    ],
-    [
-     "en-utah-seed-g6:21",
-     0.5643
-    ],
-    [
-     "en-utah-seed-g4:85",
-     0.5637
+     "en-utah-seed-g8:20",
+     0.5523
     ]
    ]
   },
@@ -1816,24 +1816,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g5:17",
-     0.73
+     "en-utah-seed-g5:23",
+     0.7369
     ],
     [
-     "en-utah-seed-g5:27",
-     0.7181
+     "en-utah-seed-g5:22",
+     0.7228
+    ],
+    [
+     "en-utah-seed-g5:25",
+     0.7187
     ],
     [
      "wiki:Erosion:0",
      0.7163
     ],
     [
-     "wiki:Erosion:2",
-     0.7099
-    ],
-    [
-     "en-utah-seed-g5:26",
-     0.7008
+     "en-utah-seed-g5:17",
+     0.716
     ]
    ]
   },
@@ -1848,20 +1848,20 @@
      0.683
     ],
     [
-     "en-utah-seed-g8:48",
-     0.6452
-    ],
-    [
      "wiki:Lever:1",
      0.6432
     ],
     [
-     "en-utah-seed-g3:44",
-     0.6403
+     "en-utah-seed-g3:36",
+     0.6422
     ],
     [
-     "en-utah-seed-g7:27",
-     0.6236
+     "en-utah-seed-g4:46",
+     0.6342
+    ],
+    [
+     "en-utah-seed-g7:21",
+     0.6168
     ]
    ]
   },
@@ -1875,20 +1875,20 @@
      0.7402
     ],
     [
-     "en-utah-seed-g5:24",
-     0.6685
+     "en-utah-seed-g3:37",
+     0.6567
     ],
     [
-     "en-utah-seed-g3:46",
-     0.6526
+     "en-utah-seed-g3:49",
+     0.6481
     ],
     [
-     "en-utah-seed-g3:58",
-     0.6503
+     "en-utah-seed-g5:25",
+     0.64
     ],
     [
-     "en-utah-seed-g3:45",
-     0.6489
+     "en-utah-seed-g3:48",
+     0.6334
     ]
    ]
   },
@@ -1903,20 +1903,20 @@
      0.7208
     ],
     [
-     "en-utah-seed-g5:24",
-     0.6357
+     "en-utah-seed-g3:37",
+     0.628
     ],
     [
-     "en-utah-seed-g3:46",
-     0.6248
+     "en-utah-seed-g3:49",
+     0.625
     ],
     [
-     "en-utah-seed-g3:45",
-     0.6221
+     "en-utah-seed-g5:25",
+     0.6168
     ],
     [
-     "en-utah-seed-g7:14",
-     0.6181
+     "en-utah-seed-g5:20",
+     0.6111
     ]
    ]
   },
@@ -1927,24 +1927,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g3:55",
-     0.6095
-    ],
-    [
-     "en-utah-seed-g7:21",
-     0.6017
-    ],
-    [
      "wiki:Battery:2",
      0.5997
     ],
     [
-     "en-utah-seed-g7:25",
-     0.5937
+     "en-utah-seed-g7:16",
+     0.5939
     ],
     [
      "wiki:Battery:3",
      0.5932
+    ],
+    [
+     "wiki:Battery:0",
+     0.5918
+    ],
+    [
+     "wiki:Battery:1",
+     0.5902
     ]
    ]
   },
@@ -1955,24 +1955,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:60",
-     0.686
+     "en-utah-seed-g4:55",
+     0.7187
+    ],
+    [
+     "en-utah-seed-g4:54",
+     0.685
     ],
     [
      "wiki:Series_and_parallel_circuits:0",
      0.6676
     ],
     [
+     "en-utah-seed-g3:38",
+     0.6544
+    ],
+    [
      "wiki:Switch:0",
      0.6533
-    ],
-    [
-     "en-utah-seed-g4:61",
-     0.6515
-    ],
-    [
-     "en-utah-seed-g4:52",
-     0.6493
     ]
    ]
   },
@@ -1983,24 +1983,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:60",
-     0.6971
+     "en-utah-seed-g4:55",
+     0.7158
+    ],
+    [
+     "en-utah-seed-g4:54",
+     0.6897
+    ],
+    [
+     "en-utah-seed-g4:58",
+     0.6777
     ],
     [
      "wiki:Series_and_parallel_circuits:0",
      0.6581
     ],
     [
-     "en-utah-seed-g4:52",
-     0.6515
-    ],
-    [
-     "en-utah-seed-g4:64",
-     0.6471
-    ],
-    [
-     "en-utah-seed-g4:61",
-     0.6462
+     "en-utah-seed-g4:47",
+     0.6451
     ]
    ]
   },
@@ -2011,24 +2011,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:60",
-     0.6816
+     "en-utah-seed-g4:55",
+     0.7149
+    ],
+    [
+     "en-utah-seed-g4:54",
+     0.6863
     ],
     [
      "wiki:Series_and_parallel_circuits:0",
      0.6652
     ],
     [
+     "en-utah-seed-g4:58",
+     0.6569
+    ],
+    [
      "wiki:Switch:0",
      0.6542
-    ],
-    [
-     "en-utah-seed-g4:52",
-     0.6503
-    ],
-    [
-     "en-utah-seed-g4:61",
-     0.6475
     ]
    ]
   },
@@ -2039,8 +2039,12 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:60",
-     0.6824
+     "en-utah-seed-g4:55",
+     0.6994
+    ],
+    [
+     "en-utah-seed-g4:54",
+     0.68
     ],
     [
      "wiki:Series_and_parallel_circuits:0",
@@ -2048,15 +2052,11 @@
     ],
     [
      "wiki:Electromagnet:1",
-     0.6611
+     0.6621
     ],
     [
-     "wiki:Battery:0",
-     0.643
-    ],
-    [
-     "en-utah-seed-g4:52",
-     0.6414
+     "en-utah-seed-g4:58",
+     0.653
     ]
    ]
   },
@@ -2071,20 +2071,20 @@
      0.6963
     ],
     [
-     "en-utah-seed-g4:60",
-     0.663
+     "en-utah-seed-g4:55",
+     0.6865
     ],
     [
-     "en-utah-seed-g4:61",
-     0.6462
+     "en-utah-seed-g4:54",
+     0.6622
     ],
     [
-     "en-utah-seed-g4:52",
-     0.6435
+     "en-utah-seed-g4:58",
+     0.6599
     ],
     [
-     "wiki:Switch:0",
-     0.643
+     "en-utah-seed-g4:47",
+     0.6465
     ]
    ]
   },
@@ -2095,24 +2095,24 @@
    ],
    "hits": [
     [
+     "en-utah-seed-g3:46",
+     0.6784
+    ],
+    [
      "wiki:Magnet:0",
      0.6607
     ],
     [
-     "en-utah-seed-g7:20",
-     0.6584
+     "en-utah-seed-g7:19",
+     0.6546
     ],
     [
-     "en-utah-seed-g3:58",
-     0.6417
+     "en-utah-seed-g7:16",
+     0.652
     ],
     [
-     "en-utah-seed-g3:59",
-     0.6362
-    ],
-    [
-     "en-utah-seed-g7:26",
-     0.636
+     "en-utah-seed-g7:17",
+     0.6345
     ]
    ]
   },
@@ -2127,20 +2127,20 @@
      0.7308
     ],
     [
-     "en-utah-seed-g3:53",
-     0.7035
+     "en-utah-seed-g3:46",
+     0.7256
     ],
     [
-     "en-utah-seed-g3:60",
-     0.6893
+     "en-utah-seed-g3:47",
+     0.7069
     ],
     [
-     "en-utah-seed-g3:58",
-     0.685
+     "en-utah-seed-g3:49",
+     0.6842
     ],
     [
-     "en-utah-seed-g7:20",
-     0.6816
+     "en-utah-seed-g3:50",
+     0.6786
     ]
    ]
   },
@@ -2151,24 +2151,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:50",
-     0.6568
+     "en-utah-seed-g4:45",
+     0.6596
+    ],
+    [
+     "en-utah-seed-g4:64",
+     0.6582
+    ],
+    [
+     "en-utah-seed-g7:12",
+     0.6519
+    ],
+    [
+     "en-utah-seed-g8:59",
+     0.6446
     ],
     [
      "wiki:Magnet:0",
      0.6428
-    ],
-    [
-     "en-utah-seed-g7:22",
-     0.6408
-    ],
-    [
-     "wiki:Frequency:0",
-     0.6338
-    ],
-    [
-     "wiki:Frequency:1",
-     0.6328
     ]
    ]
   },
@@ -2182,20 +2182,20 @@
      0.7496
     ],
     [
-     "en-utah-seed-g8:61",
-     0.6559
+     "en-utah-seed-g4:55",
+     0.6821
+    ],
+    [
+     "en-utah-seed-g4:58",
+     0.6632
     ],
     [
      "wiki:Electrical_network:2",
      0.6506
     ],
     [
-     "en-utah-seed-g4:60",
-     0.6496
-    ],
-    [
-     "en-utah-seed-g4:61",
-     0.6454
+     "en-utah-seed-g8:54",
+     0.6443
     ]
    ]
   },
@@ -2206,24 +2206,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:60",
-     0.6317
+     "en-utah-seed-g4:55",
+     0.6544
+    ],
+    [
+     "en-utah-seed-g4:58",
+     0.6242
+    ],
+    [
+     "en-utah-seed-g4:47",
+     0.6218
+    ],
+    [
+     "en-utah-seed-g4:64",
+     0.6172
     ],
     [
      "wiki:Series_and_parallel_circuits:0",
      0.6153
-    ],
-    [
-     "en-utah-seed-g4:52",
-     0.6122
-    ],
-    [
-     "en-utah-seed-g4:70",
-     0.6053
-    ],
-    [
-     "en-utah-seed-g4:53",
-     0.6043
     ]
    ]
   },
@@ -2234,24 +2234,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g7:21",
-     0.7433
+     "en-utah-seed-g3:46",
+     0.7507
     ],
     [
-     "en-utah-seed-g7:20",
-     0.7263
+     "en-utah-seed-g7:15",
+     0.7431
     ],
     [
-     "en-utah-seed-g7:19",
-     0.7156
+     "en-utah-seed-g3:48",
+     0.7397
     ],
     [
-     "en-utah-seed-g7:26",
-     0.7131
+     "en-utah-seed-g3:49",
+     0.7272
     ],
     [
-     "en-utah-seed-g3:58",
-     0.7111
+     "en-utah-seed-g7:16",
+     0.7179
     ]
    ]
   },
@@ -2262,24 +2262,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:61",
-     0.605
+     "en-utah-seed-g4:55",
+     0.6337
+    ],
+    [
+     "en-utah-seed-g4:58",
+     0.6122
     ],
     [
      "wiki:Series_and_parallel_circuits:0",
      0.6044
     ],
     [
+     "en-utah-seed-g8:26",
+     0.5914
+    ],
+    [
      "en-utah-seed-g8:30",
-     0.6006
-    ],
-    [
-     "en-utah-seed-g8:38",
-     0.5917
-    ],
-    [
-     "en-utah-seed-g4:60",
-     0.5877
+     0.5888
     ]
    ]
   },
@@ -2294,20 +2294,20 @@
      0.658
     ],
     [
+     "en-utah-seed-g4:55",
+     0.6501
+    ],
+    [
      "wiki:Battery:0",
      0.6489
     ],
     [
+     "en-utah-seed-g4:58",
+     0.6462
+    ],
+    [
      "wiki:Battery:2",
      0.6412
-    ],
-    [
-     "en-utah-seed-g4:60",
-     0.6298
-    ],
-    [
-     "en-utah-seed-g4:61",
-     0.6177
     ]
    ]
   },
@@ -2318,8 +2318,12 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:60",
-     0.651
+     "en-utah-seed-g4:47",
+     0.6622
+    ],
+    [
+     "en-utah-seed-g4:55",
+     0.6457
     ],
     [
      "wiki:Battery:2",
@@ -2330,12 +2334,8 @@
      0.6426
     ],
     [
-     "en-utah-seed-g3:58",
-     0.6423
-    ],
-    [
-     "en-utah-seed-g8:71",
-     0.6401
+     "en-utah-seed-g3:48",
+     0.6402
     ]
    ]
   },
@@ -2346,24 +2346,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g8:40",
-     0.6452
-    ],
-    [
      "wiki:Battery:2",
      0.6414
-    ],
-    [
-     "en-utah-seed-g4:60",
-     0.6399
     ],
     [
      "wiki:Electrical_network:2",
      0.6331
     ],
     [
+     "en-utah-seed-g7:16",
+     0.6274
+    ],
+    [
      "wiki:Electrical_network:0",
      0.6257
+    ],
+    [
+     "en-utah-seed-g7:19",
+     0.621
     ]
    ]
   },
@@ -2374,24 +2374,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g3:56",
-     0.7196
+     "en-utah-seed-g3:46",
+     0.7265
+    ],
+    [
+     "en-utah-seed-g7:15",
+     0.7102
     ],
     [
      "wiki:Magnet:0",
      0.7065
     ],
     [
-     "en-utah-seed-g7:21",
-     0.7038
+     "en-utah-seed-g3:47",
+     0.697
     ],
     [
-     "en-utah-seed-g7:20",
-     0.7019
-    ],
-    [
-     "en-utah-seed-g3:60",
-     0.6788
+     "en-utah-seed-g3:49",
+     0.6839
     ]
    ]
   },
@@ -2407,19 +2407,19 @@
     ],
     [
      "wiki:Electromagnet:1",
-     0.6252
+     0.6293
+    ],
+    [
+     "en-utah-seed-g4:55",
+     0.6083
     ],
     [
      "wiki:Electrical_network:0",
      0.6082
     ],
     [
-     "en-utah-seed-g4:60",
-     0.5933
-    ],
-    [
-     "wiki:Electrical_network:3",
-     0.5931
+     "en-utah-seed-g4:47",
+     0.6026
     ]
    ]
   },
@@ -2434,20 +2434,20 @@
      0.6827
     ],
     [
-     "en-utah-seed-g4:60",
-     0.6445
+     "en-utah-seed-g4:55",
+     0.6636
     ],
     [
-     "en-utah-seed-g4:61",
-     0.6263
+     "en-utah-seed-g4:58",
+     0.6585
     ],
     [
-     "en-utah-seed-g4:53",
-     0.6128
+     "en-utah-seed-g4:54",
+     0.6243
     ],
     [
-     "wiki:Electrical_network:2",
-     0.6072
+     "en-utah-seed-g4:48",
+     0.6115
     ]
    ]
   },
@@ -2458,24 +2458,24 @@
    ],
    "hits": [
     [
+     "en-utah-seed-g7:19",
+     0.7495
+    ],
+    [
      "wiki:Electromagnet:0",
      0.6746
     ],
     [
+     "en-utah-seed-g7:16",
+     0.6741
+    ],
+    [
      "wiki:Electromagnet:1",
-     0.6723
+     0.6716
     ],
     [
-     "en-utah-seed-g7:20",
-     0.6433
-    ],
-    [
-     "en-utah-seed-g7:26",
-     0.6393
-    ],
-    [
-     "en-utah-seed-g7:21",
-     0.6371
+     "en-utah-seed-g3:49",
+     0.6564
     ]
    ]
   },
@@ -2485,24 +2485,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g3:55",
-     0.6643
-    ],
-    [
      "wiki:Pulley:0",
      0.6594
+    ],
+    [
+     "en-utah-seed-g3:45",
+     0.6439
     ],
     [
      "wiki:Simple_machine:0",
      0.6296
     ],
     [
-     "en-utah-seed-g3:54",
-     0.6194
+     "en-utah-seed-g3:46",
+     0.6143
     ],
     [
-     "en-utah-seed-g3:46",
-     0.595
+     "en-utah-seed-g7:16",
+     0.6055
     ]
    ]
   },
@@ -2513,24 +2513,24 @@
    ],
    "hits": [
     [
+     "en-utah-seed-g4:55",
+     0.6808
+    ],
+    [
      "wiki:Series_and_parallel_circuits:0",
      0.6761
     ],
     [
-     "en-utah-seed-g4:60",
-     0.6448
+     "en-utah-seed-g4:58",
+     0.6669
     ],
     [
-     "en-utah-seed-g4:63",
-     0.6355
+     "en-utah-seed-g4:54",
+     0.6398
     ],
     [
      "wiki:Electromagnet:1",
-     0.6319
-    ],
-    [
-     "en-utah-seed-g4:53",
-     0.6272
+     0.6345
     ]
    ]
   },
@@ -2541,24 +2541,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g7:21",
-     0.7727
+     "en-utah-seed-g7:15",
+     0.7789
     ],
     [
-     "en-utah-seed-g7:20",
-     0.7681
+     "en-utah-seed-g3:48",
+     0.7786
     ],
     [
-     "en-utah-seed-g3:58",
-     0.741
+     "en-utah-seed-g3:46",
+     0.7669
     ],
     [
-     "en-utah-seed-g3:57",
-     0.7245
+     "en-utah-seed-g7:16",
+     0.7608
     ],
     [
-     "en-utah-seed-g7:19",
-     0.724
+     "en-utah-seed-g3:49",
+     0.7386
     ]
    ]
   },
@@ -2577,16 +2577,16 @@
      0.694
     ],
     [
-     "en-utah-seed-g3:59",
-     0.6816
+     "en-utah-seed-g4:47",
+     0.6753
     ],
     [
-     "en-utah-seed-g6:53",
-     0.6749
+     "en-utah-seed-g3:49",
+     0.6738
     ],
     [
-     "en-utah-seed-g8:40",
-     0.6707
+     "wiki:Electromagnet:1",
+     0.6583
     ]
    ]
   },
@@ -2605,16 +2605,16 @@
      0.6738
     ],
     [
-     "en-utah-seed-g6:53",
-     0.6667
+     "en-utah-seed-g3:49",
+     0.6564
     ],
     [
-     "en-utah-seed-g3:59",
-     0.6644
+     "en-utah-seed-g5:30",
+     0.656
     ],
     [
-     "en-utah-seed-g8:40",
-     0.6551
+     "en-utah-seed-g4:47",
+     0.6531
     ]
    ]
   },
@@ -2625,8 +2625,12 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g8:33",
-     0.7471
+     "en-utah-seed-g8:28",
+     0.7377
+    ],
+    [
+     "en-utah-seed-g8:29",
+     0.7217
     ],
     [
      "wiki:Mass:1",
@@ -2639,10 +2643,6 @@
     [
      "wiki:Weight:1",
      0.7111
-    ],
-    [
-     "wiki:Unit_of_measurement:3",
-     0.71
     ]
    ]
   },
@@ -2653,20 +2653,20 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g6:58",
-     0.6399
-    ],
-    [
-     "en-utah-seed-g3:47",
-     0.6337
-    ],
-    [
      "en-utah-seed-g6:53",
-     0.6314
+     0.6602
     ],
     [
-     "wiki:Measurement:1",
-     0.6311
+     "en-utah-seed-g3:38",
+     0.6352
+    ],
+    [
+     "en-utah-seed-g6:33",
+     0.633
+    ],
+    [
+     "en-utah-seed-g8:73",
+     0.6262
     ],
     [
      "wiki:Unit_of_measurement:0",
@@ -2685,12 +2685,8 @@
      0.8222
     ],
     [
-     "wiki:Measurement:1",
-     0.7794
-    ],
-    [
      "wiki:Measurement:0",
-     0.7512
+     0.7732
     ],
     [
      "wiki:Unit_of_measurement:0",
@@ -2699,6 +2695,10 @@
     [
      "wiki:Unit_of_measurement:1",
      0.7313
+    ],
+    [
+     "wiki:Metric_system:0",
+     0.7152
     ]
    ]
   },
@@ -2725,8 +2725,8 @@
      0.6577
     ],
     [
-     "en-utah-seed-g3:47",
-     0.6549
+     "en-utah-seed-g3:39",
+     0.6432
     ]
    ]
   },
@@ -2753,8 +2753,8 @@
      0.6547
     ],
     [
-     "en-utah-seed-g3:47",
-     0.6468
+     "en-utah-seed-g3:39",
+     0.6416
     ]
    ]
   },
@@ -2765,24 +2765,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g3:13",
-     0.6211
+     "en-utah-seed-g3:8",
+     0.6389
     ],
     [
-     "en-utah-seed-g3:10",
-     0.6139
+     "en-utah-seed-g3:9",
+     0.6278
     ],
     [
-     "en-utah-seed-g8:120",
-     0.6098
+     "en-utah-seed-g3:7",
+     0.62
     ],
     [
-     "en-utah-seed-g3:11",
-     0.6096
+     "wiki:Natural_environment:12",
+     0.6157
     ],
     [
-     "en-utah-seed-g8:119",
-     0.6041
+     "en-utah-seed-g8:109",
+     0.6048
     ]
    ]
   },
@@ -2791,10 +2791,6 @@
     "test_uq"
    ],
    "hits": [
-    [
-     "en-utah-seed-g3:13",
-     0.6983
-    ],
     [
      "wiki:Unit_of_measurement:0",
      0.6943
@@ -2808,8 +2804,12 @@
      0.6884
     ],
     [
-     "wiki:Measurement:1",
-     0.6883
+     "wiki:Metric_system:3",
+     0.6829
+    ],
+    [
+     "wiki:Unit_of_measurement:1",
+     0.6828
     ]
    ]
   },
@@ -2832,8 +2832,8 @@
      0.6422
     ],
     [
-     "en-utah-seed-g6:46",
-     0.638
+     "en-utah-seed-g6:32",
+     0.6378
     ],
     [
      "wiki:Metric_system:8",
@@ -2848,24 +2848,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g5:32",
-     0.6963
-    ],
-    [
-     "en-utah-seed-g5:31",
-     0.6772
+     "en-utah-seed-g5:27",
+     0.7001
     ],
     [
      "wiki:Weathering:2",
      0.6703
     ],
     [
-     "en-utah-seed-g5:30",
-     0.6631
+     "en-utah-seed-g7:32",
+     0.6411
     ],
     [
-     "en-utah-seed-g3:42",
-     0.6422
+     "en-utah-seed-g6:54",
+     0.6382
+    ],
+    [
+     "en-utah-seed-g5:25",
+     0.6381
     ]
    ]
   },
@@ -2876,24 +2876,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g8:20",
-     0.7149
-    ],
-    [
-     "en-utah-seed-g8:21",
-     0.7044
-    ],
-    [
-     "en-utah-seed-g8:19",
-     0.6988
+     "en-utah-seed-g8:16",
+     0.7174
     ],
     [
      "en-utah-seed-g8:17",
-     0.6952
+     0.7058
     ],
     [
-     "en-utah-seed-g8:35",
-     0.6858
+     "en-utah-seed-g8:14",
+     0.6923
+    ],
+    [
+     "en-utah-seed-g8:18",
+     0.6849
+    ],
+    [
+     "en-utah-seed-g8:31",
+     0.6831
     ]
    ]
   },
@@ -2904,24 +2904,24 @@
    ],
    "hits": [
     [
+     "en-utah-seed-g5:27",
+     0.727
+    ],
+    [
+     "en-utah-seed-g5:33",
+     0.7141
+    ],
+    [
+     "en-utah-seed-g6:47",
+     0.7133
+    ],
+    [
+     "en-utah-seed-g5:29",
+     0.706
+    ],
+    [
      "en-utah-seed-g5:32",
-     0.7135
-    ],
-    [
-     "en-utah-seed-g5:38",
-     0.7134
-    ],
-    [
-     "en-utah-seed-g5:31",
-     0.7127
-    ],
-    [
-     "en-utah-seed-g5:34",
-     0.7087
-    ],
-    [
-     "en-utah-seed-g6:51",
-     0.7086
+     0.7052
     ]
    ]
   },
@@ -2939,16 +2939,16 @@
      0.7486
     ],
     [
-     "en-utah-seed-g5:32",
-     0.7305
+     "en-utah-seed-g5:27",
+     0.7209
     ],
     [
-     "en-utah-seed-g6:41",
-     0.7156
+     "en-utah-seed-g5:31",
+     0.7112
     ],
     [
-     "en-utah-seed-g5:36",
-     0.7113
+     "en-utah-seed-g6:47",
+     0.703
     ]
    ]
   },
@@ -2959,16 +2959,16 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g6:51",
-     0.7289
-    ],
-    [
      "wiki:Mixture:0",
      0.7211
     ],
     [
-     "en-utah-seed-g5:38",
-     0.7078
+     "en-utah-seed-g5:33",
+     0.7103
+    ],
+    [
+     "en-utah-seed-g8:29",
+     0.7082
     ],
     [
      "wiki:Solubility:0",
@@ -2987,24 +2987,24 @@
    ],
    "hits": [
     [
+     "en-utah-seed-g5:27",
+     0.7418
+    ],
+    [
+     "en-utah-seed-g5:33",
+     0.7239
+    ],
+    [
+     "en-utah-seed-g5:29",
+     0.722
+    ],
+    [
      "en-utah-seed-g5:32",
-     0.7341
+     0.722
     ],
     [
-     "en-utah-seed-g5:31",
-     0.729
-    ],
-    [
-     "en-utah-seed-g5:34",
-     0.7266
-    ],
-    [
-     "en-utah-seed-g5:38",
-     0.7243
-    ],
-    [
-     "en-utah-seed-g5:36",
-     0.7071
+     "en-utah-seed-g6:47",
+     0.7114
     ]
    ]
   },
@@ -3015,24 +3015,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g6:51",
-     0.7186
+     "en-utah-seed-g6:47",
+     0.7216
     ],
     [
-     "en-utah-seed-g5:34",
-     0.717
+     "en-utah-seed-g5:33",
+     0.7172
     ],
     [
-     "en-utah-seed-g6:52",
-     0.7141
-    ],
-    [
-     "en-utah-seed-g5:38",
-     0.7137
+     "en-utah-seed-g5:29",
+     0.7146
     ],
     [
      "en-utah-seed-g5:32",
-     0.7083
+     0.7123
+    ],
+    [
+     "en-utah-seed-g5:27",
+     0.7085
     ]
    ]
   },
@@ -3047,20 +3047,20 @@
      0.6939
     ],
     [
-     "en-utah-seed-g5:30",
-     0.675
-    ],
-    [
      "wiki:Solubility:0",
      0.6479
     ],
     [
-     "en-utah-seed-g8:35",
-     0.6434
+     "en-utah-seed-g8:31",
+     0.6401
     ],
     [
-     "en-utah-seed-g5:16",
-     0.6426
+     "wiki:Concentration:0",
+     0.6373
+    ],
+    [
+     "wiki:Unit_of_measurement:3",
+     0.6344
     ]
    ]
   },
@@ -3075,20 +3075,20 @@
      0.775
     ],
     [
-     "en-utah-seed-g6:44",
-     0.7169
-    ],
-    [
-     "en-utah-seed-g5:30",
-     0.7156
-    ],
-    [
-     "en-utah-seed-g5:32",
-     0.7151
+     "en-utah-seed-g5:27",
+     0.7243
     ],
     [
      "wiki:Solubility:0",
      0.7137
+    ],
+    [
+     "en-utah-seed-g6:40",
+     0.712
+    ],
+    [
+     "en-utah-seed-g5:30",
+     0.7092
     ]
    ]
   },
@@ -3099,24 +3099,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g8:20",
-     0.7813
+     "en-utah-seed-g8:16",
+     0.7482
     ],
     [
-     "en-utah-seed-g8:22",
-     0.7418
+     "en-utah-seed-g8:18",
+     0.7268
     ],
     [
-     "en-utah-seed-g8:21",
-     0.7246
-    ],
-    [
-     "en-utah-seed-g8:36",
-     0.7175
+     "en-utah-seed-g8:17",
+     0.7171
     ],
     [
      "wiki:Chemical_reaction:0",
      0.7119
+    ],
+    [
+     "en-utah-seed-g8:19",
+     0.7082
     ]
    ]
   },
@@ -3143,8 +3143,8 @@
      0.7264
     ],
     [
-     "en-utah-seed-g5:30",
-     0.7128
+     "en-utah-seed-g8:6",
+     0.686
     ]
    ]
   },
@@ -3159,20 +3159,20 @@
      0.7661
     ],
     [
-     "en-utah-seed-g5:32",
-     0.7443
-    ],
-    [
-     "en-utah-seed-g6:41",
-     0.7386
+     "en-utah-seed-g5:27",
+     0.7552
     ],
     [
      "wiki:Freezing:0",
      0.7304
     ],
     [
-     "en-utah-seed-g6:44",
-     0.7281
+     "wiki:Solubility:0",
+     0.7264
+    ],
+    [
+     "en-utah-seed-g6:37",
+     0.7192
     ]
    ]
   },
@@ -3183,24 +3183,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g7:54",
-     0.6932
+     "en-utah-seed-g8:19",
+     0.6965
     ],
     [
-     "en-utah-seed-g8:36",
-     0.6894
+     "en-utah-seed-g8:31",
+     0.6959
     ],
     [
      "wiki:Experiment:0",
      0.6859
     ],
     [
-     "en-utah-seed-g5:39",
-     0.6781
+     "en-utah-seed-g5:26",
+     0.6836
     ],
     [
-     "en-utah-seed-g8:20",
-     0.6775
+     "en-utah-seed-g6:48",
+     0.6654
     ]
    ]
   },
@@ -3211,24 +3211,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g8:36",
-     0.7033
+     "en-utah-seed-g8:19",
+     0.7143
     ],
     [
-     "en-utah-seed-g8:20",
-     0.6974
+     "en-utah-seed-g8:31",
+     0.7079
     ],
     [
      "wiki:Experiment:0",
      0.6942
     ],
     [
-     "en-utah-seed-g7:54",
-     0.6913
+     "en-utah-seed-g5:26",
+     0.6886
     ],
     [
-     "en-utah-seed-g5:34",
-     0.6861
+     "en-utah-seed-g8:16",
+     0.6765
     ]
    ]
   },
@@ -3247,16 +3247,16 @@
      0.6912
     ],
     [
-     "en-utah-seed-g5:36",
-     0.6655
+     "en-utah-seed-g5:31",
+     0.6706
+    ],
+    [
+     "en-utah-seed-g8:29",
+     0.6476
     ],
     [
      "wiki:Metric_system:3",
      0.6475
-    ],
-    [
-     "en-utah-seed-g5:31",
-     0.6408
     ]
    ]
   },
@@ -3267,24 +3267,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g5:32",
-     0.7196
+     "en-utah-seed-g5:27",
+     0.7167
     ],
     [
-     "en-utah-seed-g8:23",
-     0.708
+     "en-utah-seed-g8:20",
+     0.7083
     ],
     [
-     "en-utah-seed-g5:39",
-     0.6988
+     "en-utah-seed-g5:29",
+     0.7002
     ],
     [
-     "en-utah-seed-g5:34",
-     0.6963
+     "en-utah-seed-g5:28",
+     0.6918
     ],
     [
-     "en-utah-seed-g8:35",
-     0.6916
+     "en-utah-seed-g6:39",
+     0.6903
     ]
    ]
   },
@@ -3299,20 +3299,20 @@
      0.7202
     ],
     [
-     "en-utah-seed-g5:30",
-     0.6989
+     "en-utah-seed-g8:29",
+     0.7041
     ],
     [
-     "en-utah-seed-g6:51",
-     0.696
+     "en-utah-seed-g6:47",
+     0.6962
+    ],
+    [
+     "en-utah-seed-g6:46",
+     0.6926
     ],
     [
      "wiki:Solubility:0",
      0.6793
-    ],
-    [
-     "en-utah-seed-g6:50",
-     0.6746
     ]
    ]
   },
@@ -3331,16 +3331,16 @@
      0.7116
     ],
     [
-     "en-utah-seed-g5:30",
-     0.6907
-    ],
-    [
      "wiki:Solubility:0",
      0.6782
     ],
     [
-     "en-utah-seed-g6:52",
-     0.6626
+     "wiki:Mixture:0",
+     0.6598
+    ],
+    [
+     "en-utah-seed-g6:47",
+     0.6545
     ]
    ]
   },
@@ -3363,12 +3363,12 @@
      0.6812
     ],
     [
-     "en-utah-seed-g5:30",
-     0.6792
-    ],
-    [
      "wiki:Mixture:0",
      0.6723
+    ],
+    [
+     "wiki:Unit_of_measurement:3",
+     0.6633
     ]
    ]
   },
@@ -3387,16 +3387,16 @@
      0.7066
     ],
     [
-     "en-utah-seed-g5:31",
-     0.695
+     "en-utah-seed-g5:27",
+     0.687
     ],
     [
-     "en-utah-seed-g5:32",
-     0.6918
+     "wiki:Weathering:2",
+     0.6843
     ],
     [
-     "en-utah-seed-g5:30",
-     0.6912
+     "wiki:Concentration:0",
+     0.6807
     ]
    ]
   },
@@ -3407,24 +3407,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g5:32",
-     0.7508
+     "en-utah-seed-g5:27",
+     0.7205
     ],
     [
-     "en-utah-seed-g5:30",
-     0.7264
+     "en-utah-seed-g5:34",
+     0.7122
+    ],
+    [
+     "wiki:Crystal:0",
+     0.7046
     ],
     [
      "en-utah-seed-g8:16",
-     0.7222
+     0.7026
     ],
     [
-     "en-utah-seed-g8:19",
-     0.7139
-    ],
-    [
-     "en-utah-seed-g5:31",
-     0.7076
+     "en-utah-seed-g5:30",
+     0.702
     ]
    ]
   },
@@ -3435,20 +3435,20 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g8:65",
-     0.6842
+     "en-utah-seed-g4:50",
+     0.6847
     ],
     [
-     "en-utah-seed-g4:55",
-     0.6703
+     "en-utah-seed-g4:47",
+     0.6704
     ],
     [
      "wiki:Vibration:0",
      0.6682
     ],
     [
-     "en-utah-seed-g8:66",
-     0.6408
+     "en-utah-seed-g8:58",
+     0.6647
     ],
     [
      "wiki:Sound:0",
@@ -3462,8 +3462,8 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:55",
-     0.7134
+     "en-utah-seed-g4:50",
+     0.6922
     ],
     [
      "wiki:Pitch_(music):0",
@@ -3478,8 +3478,8 @@
      0.6497
     ],
     [
-     "en-utah-seed-g8:65",
-     0.6449
+     "en-utah-seed-g6:61",
+     0.6445
     ]
    ]
   },
@@ -3489,8 +3489,8 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:55",
-     0.7134
+     "en-utah-seed-g4:50",
+     0.6922
     ],
     [
      "wiki:Pitch_(music):0",
@@ -3505,8 +3505,8 @@
      0.6497
     ],
     [
-     "en-utah-seed-g8:65",
-     0.6449
+     "en-utah-seed-g6:61",
+     0.6445
     ]
    ]
   },
@@ -3520,20 +3520,20 @@
      0.6912
     ],
     [
-     "en-utah-seed-g8:59",
-     0.6653
+     "en-utah-seed-g8:54",
+     0.6737
     ],
     [
-     "en-utah-seed-g8:60",
-     0.6578
+     "en-utah-seed-g8:52",
+     0.6668
     ],
     [
-     "en-utah-seed-g8:58",
-     0.6499
+     "en-utah-seed-g3:48",
+     0.6586
     ],
     [
-     "wiki:Pitch_(music):1",
-     0.6478
+     "en-utah-seed-g8:53",
+     0.6558
     ]
    ]
   },
@@ -3543,24 +3543,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g3:44",
-     0.644
+     "en-utah-seed-g4:50",
+     0.6441
     ],
     [
-     "en-utah-seed-g4:55",
-     0.64
+     "en-utah-seed-g3:38",
+     0.6422
     ],
     [
-     "en-utah-seed-g4:56",
-     0.6227
+     "en-utah-seed-g3:39",
+     0.6348
     ],
     [
-     "en-utah-seed-g6:53",
-     0.6206
+     "en-utah-seed-g4:47",
+     0.626
     ],
     [
-     "en-utah-seed-g3:47",
-     0.6167
+     "en-utah-seed-g8:63",
+     0.6134
     ]
    ]
   },
@@ -3570,24 +3570,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g3:44",
-     0.644
+     "en-utah-seed-g4:50",
+     0.6441
     ],
     [
-     "en-utah-seed-g4:55",
-     0.64
+     "en-utah-seed-g3:38",
+     0.6422
     ],
     [
-     "en-utah-seed-g4:56",
-     0.6227
+     "en-utah-seed-g3:39",
+     0.6348
     ],
     [
-     "en-utah-seed-g6:53",
-     0.6206
+     "en-utah-seed-g4:47",
+     0.626
     ],
     [
-     "en-utah-seed-g3:47",
-     0.6167
+     "en-utah-seed-g8:63",
+     0.6134
     ]
    ]
   },
@@ -3598,24 +3598,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:55",
-     0.6681
-    ],
-    [
-     "en-utah-seed-g8:54",
-     0.6471
+     "en-utah-seed-g4:50",
+     0.6843
     ],
     [
      "wiki:Sound:0",
      0.6444
     ],
     [
-     "en-utah-seed-g8:65",
-     0.6392
+     "en-utah-seed-g8:47",
+     0.6359
     ],
     [
-     "en-utah-seed-g4:51",
-     0.6354
+     "wiki:Vibration:0",
+     0.6328
+    ],
+    [
+     "en-utah-seed-g8:62",
+     0.6327
     ]
    ]
   },
@@ -3625,20 +3625,20 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:76",
-     0.6378
+     "en-utah-seed-g4:70",
+     0.634
     ],
     [
-     "en-utah-seed-g8:66",
-     0.62
+     "en-utah-seed-g4:50",
+     0.6309
     ],
     [
-     "en-utah-seed-g4:51",
-     0.6195
+     "en-utah-seed-g8:63",
+     0.6188
     ],
     [
-     "en-utah-seed-g4:55",
-     0.6163
+     "en-utah-seed-g8:62",
+     0.613
     ],
     [
      "wiki:Sound:0",
@@ -3653,12 +3653,12 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g8:60",
-     0.6847
+     "en-utah-seed-g8:58",
+     0.6685
     ],
     [
-     "en-utah-seed-g8:65",
-     0.6692
+     "en-utah-seed-g8:53",
+     0.6613
     ],
     [
      "wiki:Sound:0",
@@ -3669,8 +3669,8 @@
      0.6567
     ],
     [
-     "en-utah-seed-g8:66",
-     0.6552
+     "en-utah-seed-g8:57",
+     0.6453
     ]
    ]
   },
@@ -3681,24 +3681,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g8:71",
-     0.7187
+     "en-utah-seed-g8:63",
+     0.6988
     ],
     [
-     "en-utah-seed-g4:74",
-     0.6838
+     "en-utah-seed-g3:39",
+     0.669
     ],
     [
-     "en-utah-seed-g6:53",
-     0.6762
+     "en-utah-seed-g4:51",
+     0.6625
     ],
     [
-     "en-utah-seed-g8:24",
-     0.6521
+     "en-utah-seed-g4:68",
+     0.6552
     ],
     [
-     "en-utah-seed-g5:30",
-     0.6453
+     "en-utah-seed-g8:64",
+     0.6552
     ]
    ]
   },
@@ -3713,20 +3713,20 @@
      0.6749
     ],
     [
+     "en-utah-seed-g8:62",
+     0.6391
+    ],
+    [
      "wiki:Sound:1",
      0.6335
     ],
     [
-     "en-utah-seed-g8:71",
-     0.6259
+     "en-utah-seed-g8:61",
+     0.6298
     ],
     [
-     "en-utah-seed-g8:65",
-     0.622
-    ],
-    [
-     "en-utah-seed-g8:73",
-     0.6148
+     "en-utah-seed-g8:63",
+     0.6287
     ]
    ]
   },
@@ -3736,24 +3736,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g8:65",
-     0.6428
+     "en-utah-seed-g3:38",
+     0.6586
     ],
     [
-     "en-utah-seed-g4:51",
-     0.6358
+     "en-utah-seed-g4:50",
+     0.6542
     ],
     [
-     "en-utah-seed-g4:55",
-     0.6335
+     "en-utah-seed-g8:52",
+     0.6467
     ],
     [
-     "wiki:Sound:1",
-     0.6324
+     "en-utah-seed-g4:70",
+     0.6424
     ],
     [
-     "wiki:Pitch_(music):1",
-     0.6319
+     "en-utah-seed-g4:47",
+     0.6333
     ]
    ]
   },
@@ -3763,24 +3763,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g8:65",
-     0.6428
+     "en-utah-seed-g3:38",
+     0.6586
     ],
     [
-     "en-utah-seed-g4:51",
-     0.6358
+     "en-utah-seed-g4:50",
+     0.6542
     ],
     [
-     "en-utah-seed-g4:55",
-     0.6335
+     "en-utah-seed-g8:52",
+     0.6467
     ],
     [
-     "wiki:Sound:1",
-     0.6324
+     "en-utah-seed-g4:70",
+     0.6424
     ],
     [
-     "wiki:Pitch_(music):1",
-     0.6319
+     "en-utah-seed-g4:47",
+     0.6333
     ]
    ]
   },
@@ -3790,24 +3790,24 @@
    ],
    "hits": [
     [
+     "en-utah-seed-g4:70",
+     0.6452
+    ],
+    [
+     "en-utah-seed-g4:50",
+     0.6426
+    ],
+    [
+     "en-utah-seed-g3:38",
+     0.6389
+    ],
+    [
+     "en-utah-seed-g8:52",
+     0.6356
+    ],
+    [
      "wiki:Sound:1",
      0.6323
-    ],
-    [
-     "en-utah-seed-g4:55",
-     0.6315
-    ],
-    [
-     "wiki:Pitch_(music):1",
-     0.6264
-    ],
-    [
-     "en-utah-seed-g4:51",
-     0.625
-    ],
-    [
-     "wiki:Pitch_(music):0",
-     0.6249
     ]
    ]
   },
@@ -3817,24 +3817,24 @@
    ],
    "hits": [
     [
+     "en-utah-seed-g4:70",
+     0.6452
+    ],
+    [
+     "en-utah-seed-g4:50",
+     0.6426
+    ],
+    [
+     "en-utah-seed-g3:38",
+     0.6389
+    ],
+    [
+     "en-utah-seed-g8:52",
+     0.6356
+    ],
+    [
      "wiki:Sound:1",
      0.6323
-    ],
-    [
-     "en-utah-seed-g4:55",
-     0.6315
-    ],
-    [
-     "wiki:Pitch_(music):1",
-     0.6264
-    ],
-    [
-     "en-utah-seed-g4:51",
-     0.625
-    ],
-    [
-     "wiki:Pitch_(music):0",
-     0.6249
     ]
    ]
   },
@@ -3845,24 +3845,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:55",
-     0.6739
-    ],
-    [
-     "en-utah-seed-g8:65",
-     0.6499
+     "en-utah-seed-g4:50",
+     0.6808
     ],
     [
      "wiki:Pitch_(music):0",
      0.6339
     ],
     [
-     "en-utah-seed-g8:58",
-     0.6302
+     "en-utah-seed-g8:52",
+     0.6286
     ],
     [
-     "en-utah-seed-g8:66",
-     0.6147
+     "en-utah-seed-g4:51",
+     0.6242
+    ],
+    [
+     "en-utah-seed-g8:51",
+     0.6239
     ]
    ]
   },
@@ -3873,24 +3873,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:55",
-     0.6643
-    ],
-    [
-     "en-utah-seed-g8:65",
-     0.6478
+     "en-utah-seed-g4:50",
+     0.6668
     ],
     [
      "wiki:Pitch_(music):0",
      0.6455
     ],
     [
-     "en-utah-seed-g8:58",
-     0.6279
-    ],
-    [
      "wiki:Vibration:0",
      0.6185
+    ],
+    [
+     "en-utah-seed-g8:63",
+     0.6135
+    ],
+    [
+     "en-utah-seed-g8:52",
+     0.6134
     ]
    ]
   },
@@ -3901,24 +3901,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:85",
-     0.7168
+     "en-utah-seed-g4:78",
+     0.7345
     ],
     [
-     "en-utah-seed-g4:86",
-     0.6978
+     "en-utah-seed-g4:82",
+     0.6925
     ],
     [
-     "en-utah-seed-g4:89",
-     0.6842
+     "en-utah-seed-g4:79",
+     0.6873
     ],
     [
-     "en-utah-seed-g4:70",
-     0.6715
+     "en-utah-seed-g6:9",
+     0.6857
     ],
     [
-     "en-utah-seed-g6:10",
-     0.6602
+     "en-utah-seed-g8:55",
+     0.6736
     ]
    ]
   },
@@ -3929,24 +3929,24 @@
    ],
    "hits": [
     [
+     "en-utah-seed-g6:47",
+     0.7064
+    ],
+    [
      "wiki:Metric_system:3",
      0.7042
+    ],
+    [
+     "en-utah-seed-g6:46",
+     0.7006
     ],
     [
      "wiki:Heat:2",
      0.6952
     ],
     [
-     "en-utah-seed-g6:46",
-     0.6913
-    ],
-    [
-     "en-utah-seed-g6:50",
+     "en-utah-seed-g6:42",
      0.6843
-    ],
-    [
-     "en-utah-seed-g6:51",
-     0.6785
     ]
    ]
   },
@@ -3957,24 +3957,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g6:53",
-     0.692
-    ],
-    [
      "wiki:Solar_energy:2",
      0.6885
     ],
     [
-     "en-utah-seed-g6:55",
-     0.6568
+     "en-utah-seed-g6:48",
+     0.6669
     ],
     [
-     "en-utah-seed-g4:57",
+     "en-utah-seed-g6:47",
      0.656
     ],
     [
-     "en-utah-seed-g6:52",
-     0.6529
+     "wiki:Scientific_control:1",
+     0.6495
+    ],
+    [
+     "en-utah-seed-g8:36",
+     0.6489
     ]
    ]
   },
@@ -3989,20 +3989,20 @@
      0.6998
     ],
     [
-     "en-utah-seed-g6:53",
-     0.6829
+     "en-utah-seed-g6:48",
+     0.6637
     ],
     [
-     "en-utah-seed-g6:55",
-     0.6512
+     "en-utah-seed-g6:47",
+     0.6572
     ],
     [
-     "en-utah-seed-g4:57",
-     0.6471
+     "en-utah-seed-g4:56",
+     0.6501
     ],
     [
-     "en-utah-seed-g6:52",
-     0.6466
+     "wiki:Solar_energy:0",
+     0.6433
     ]
    ]
   },
@@ -4017,20 +4017,20 @@
      0.6938
     ],
     [
-     "en-utah-seed-g6:53",
-     0.6897
+     "en-utah-seed-g6:48",
+     0.6723
     ],
     [
-     "en-utah-seed-g8:40",
-     0.6634
+     "en-utah-seed-g8:36",
+     0.6597
     ],
     [
-     "en-utah-seed-g8:41",
-     0.6617
+     "en-utah-seed-g6:47",
+     0.6594
     ],
     [
-     "en-utah-seed-g6:55",
-     0.655
+     "en-utah-seed-g8:35",
+     0.6571
     ]
    ]
   },
@@ -4041,24 +4041,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:86",
-     0.6285
+     "en-utah-seed-g4:66",
+     0.6312
     ],
     [
-     "en-utah-seed-g3:47",
-     0.6152
+     "en-utah-seed-g4:79",
+     0.6191
     ],
     [
-     "en-utah-seed-g3:53",
-     0.6079
+     "en-utah-seed-g3:38",
+     0.6116
     ],
     [
-     "en-utah-seed-g4:70",
-     0.603
+     "en-utah-seed-g4:64",
+     0.6013
     ],
     [
-     "en-utah-seed-g6:20",
-     0.597
+     "en-utah-seed-g3:39",
+     0.5983
     ]
    ]
   },
@@ -4069,24 +4069,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g6:52",
-     0.7005
+     "en-utah-seed-g6:32",
+     0.706
     ],
     [
-     "en-utah-seed-g6:26",
-     0.6978
+     "en-utah-seed-g6:48",
+     0.7008
+    ],
+    [
+     "en-utah-seed-g3:11",
+     0.6988
     ],
     [
      "wiki:Metric_system:3",
      0.6946
     ],
     [
-     "en-utah-seed-g6:46",
-     0.6935
-    ],
-    [
-     "en-utah-seed-g6:20",
-     0.6911
+     "en-utah-seed-g6:47",
+     0.6918
     ]
    ]
   },
@@ -4104,16 +4104,16 @@
      0.6699
     ],
     [
-     "en-utah-seed-g6:50",
-     0.6624
+     "wiki:Heat:1",
+     0.647
     ],
     [
      "en-utah-seed-g6:46",
-     0.6476
+     0.6417
     ],
     [
-     "wiki:Heat:1",
-     0.647
+     "en-utah-seed-g6:42",
+     0.6327
     ]
    ]
   },
@@ -4124,24 +4124,24 @@
    ],
    "hits": [
     [
-     "wiki:Solar_energy:2",
-     0.6568
+     "en-utah-seed-g6:48",
+     0.6659
     ],
     [
-     "en-utah-seed-g6:53",
-     0.6545
+     "wiki:Solar_energy:2",
+     0.6568
     ],
     [
      "wiki:Heat:2",
      0.6493
     ],
     [
-     "en-utah-seed-g6:55",
-     0.6206
+     "en-utah-seed-g6:47",
+     0.6427
     ],
     [
-     "en-utah-seed-g4:57",
-     0.6155
+     "en-utah-seed-g8:33",
+     0.6248
     ]
    ]
   },
@@ -4156,20 +4156,20 @@
      0.733
     ],
     [
-     "en-utah-seed-g4:71",
-     0.6617
+     "en-utah-seed-g4:65",
+     0.6487
     ],
     [
-     "en-utah-seed-g4:14",
-     0.6506
+     "en-utah-seed-g4:12",
+     0.6457
     ],
     [
-     "en-utah-seed-g3:27",
-     0.6458
+     "en-utah-seed-g3:22",
+     0.6428
     ],
     [
-     "en-utah-seed-g4:13",
-     0.645
+     "en-utah-seed-g6:10",
+     0.6397
     ]
    ]
   },
@@ -4191,12 +4191,12 @@
      0.6776
     ],
     [
-     "en-utah-seed-g6:57",
-     0.666
+     "en-utah-seed-g4:56",
+     0.6726
     ],
     [
-     "en-utah-seed-g6:55",
-     0.6608
+     "en-utah-seed-g8:36",
+     0.6652
     ]
    ]
   },
@@ -4207,24 +4207,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:72",
-     0.6495
+     "en-utah-seed-g4:66",
+     0.6619
     ],
     [
-     "en-utah-seed-g4:86",
-     0.634
+     "en-utah-seed-g4:65",
+     0.6361
     ],
     [
-     "en-utah-seed-g6:73",
-     0.6236
+     "en-utah-seed-g4:78",
+     0.6234
     ],
     [
-     "en-utah-seed-g4:71",
+     "en-utah-seed-g6:66",
+     0.6218
+    ],
+    [
+     "en-utah-seed-g6:67",
      0.6216
-    ],
-    [
-     "wiki:Shadow:0",
-     0.6213
     ]
    ]
   },
@@ -4235,24 +4235,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g6:46",
-     0.6542
+     "en-utah-seed-g6:48",
+     0.6752
     ],
     [
-     "en-utah-seed-g6:53",
-     0.6438
+     "en-utah-seed-g6:42",
+     0.6547
     ],
     [
-     "en-utah-seed-g6:52",
-     0.6334
+     "en-utah-seed-g8:20",
+     0.6458
     ],
     [
-     "en-utah-seed-g8:24",
-     0.6288
+     "en-utah-seed-g3:39",
+     0.6407
     ],
     [
-     "en-utah-seed-g6:49",
-     0.6253
+     "en-utah-seed-g6:47",
+     0.6407
     ]
    ]
   },
@@ -4263,24 +4263,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g6:59",
-     0.6853
-    ],
-    [
-     "en-utah-seed-g6:57",
-     0.6632
-    ],
-    [
-     "en-utah-seed-g6:58",
-     0.6506
-    ],
-    [
      "en-utah-seed-g6:53",
-     0.64
+     0.6796
     ],
     [
-     "en-utah-seed-g7:33",
-     0.6371
+     "en-utah-seed-g6:48",
+     0.6752
+    ],
+    [
+     "en-utah-seed-g6:47",
+     0.6585
+    ],
+    [
+     "en-utah-seed-g6:52",
+     0.6516
+    ],
+    [
+     "en-utah-seed-g7:26",
+     0.6486
     ]
    ]
   },
@@ -4291,24 +4291,24 @@
    ],
    "hits": [
     [
+     "en-utah-seed-g5:34",
+     0.7133
+    ],
+    [
+     "en-utah-seed-g6:46",
+     0.708
+    ],
+    [
+     "en-utah-seed-g6:47",
+     0.7069
+    ],
+    [
      "wiki:Heat:2",
      0.7041
     ],
     [
-     "en-utah-seed-g6:50",
-     0.7018
-    ],
-    [
-     "en-utah-seed-g5:39",
-     0.6924
-    ],
-    [
-     "en-utah-seed-g6:51",
-     0.6922
-    ],
-    [
-     "en-utah-seed-g6:46",
-     0.6883
+     "en-utah-seed-g8:29",
+     0.7017
     ]
    ]
   },
@@ -4331,12 +4331,12 @@
      0.6221
     ],
     [
-     "wiki:Heat:1",
-     0.5914
+     "en-utah-seed-g6:45",
+     0.5944
     ],
     [
-     "en-utah-seed-g6:49",
-     0.5813
+     "wiki:Heat:1",
+     0.5914
     ]
    ]
   },
@@ -4347,24 +4347,24 @@
    ],
    "hits": [
     [
+     "en-utah-seed-g6:47",
+     0.7198
+    ],
+    [
      "wiki:Solar_energy:2",
      0.7094
     ],
     [
-     "en-utah-seed-g6:51",
-     0.7046
-    ],
-    [
-     "en-utah-seed-g6:50",
-     0.6924
+     "en-utah-seed-g6:46",
+     0.6886
     ],
     [
      "wiki:Heat:2",
      0.6787
     ],
     [
-     "wiki:Heat:1",
-     0.6764
+     "en-utah-seed-g6:48",
+     0.6768
     ]
    ]
   },
@@ -4391,8 +4391,8 @@
      0.6464
     ],
     [
-     "en-utah-seed-g5:42",
-     0.6348
+     "en-utah-seed-g7:56",
+     0.6393
     ]
    ]
   },
@@ -4431,10 +4431,6 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:18",
-     0.6144
-    ],
-    [
      "wiki:Adaptation:6",
      0.579
     ],
@@ -4443,12 +4439,16 @@
      0.5774
     ],
     [
-     "en-utah-seed-g3:34",
-     0.5739
+     "en-utah-seed-g6:95",
+     0.577
     ],
     [
-     "en-utah-seed-g4:12",
-     0.5717
+     "en-utah-seed-g4:15",
+     0.5757
+    ],
+    [
+     "en-utah-seed-g4:16",
+     0.5732
     ]
    ]
   },
@@ -4471,12 +4471,12 @@
      0.7186
     ],
     [
-     "en-utah-seed-g5:42",
-     0.7117
-    ],
-    [
      "wiki:Root:0",
      0.7001
+    ],
+    [
+     "wiki:Seed:2",
+     0.6965
     ]
    ]
   },
@@ -4495,16 +4495,16 @@
      0.6743
     ],
     [
+     "en-utah-seed-g7:61",
+     0.6731
+    ],
+    [
+     "en-utah-seed-g7:56",
+     0.67
+    ],
+    [
      "wiki:Plant:0",
      0.6683
-    ],
-    [
-     "en-utah-seed-g7:73",
-     0.662
-    ],
-    [
-     "wiki:Plant:2",
-     0.6601
     ]
    ]
   },
@@ -4519,20 +4519,20 @@
      0.7042
     ],
     [
-     "en-utah-seed-g7:73",
-     0.6637
+     "en-utah-seed-g7:61",
+     0.6854
+    ],
+    [
+     "en-utah-seed-g7:56",
+     0.6777
+    ],
+    [
+     "en-utah-seed-g7:102",
+     0.6691
     ],
     [
      "wiki:Plant:1",
      0.6627
-    ],
-    [
-     "en-utah-seed-g7:74",
-     0.6627
-    ],
-    [
-     "en-utah-seed-g7:118",
-     0.6561
     ]
    ]
   },
@@ -4551,16 +4551,16 @@
      0.6653
     ],
     [
-     "en-utah-seed-g3:25",
-     0.6502
+     "wiki:Seed:0",
+     0.6393
     ],
     [
-     "en-utah-seed-g3:32",
-     0.6489
+     "en-utah-seed-g6:88",
+     0.6363
     ],
     [
-     "en-utah-seed-g3:26",
-     0.641
+     "en-utah-seed-g5:35",
+     0.6358
     ]
    ]
   },
@@ -4571,24 +4571,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g3:36",
-     0.6793
+     "en-utah-seed-g3:29",
+     0.714
     ],
     [
-     "en-utah-seed-g5:50",
-     0.6763
+     "en-utah-seed-g5:44",
+     0.6759
     ],
     [
      "wiki:Habitat:0",
      0.666
     ],
     [
-     "en-utah-seed-g3:35",
-     0.6551
+     "en-utah-seed-g4:8",
+     0.651
     ],
     [
-     "en-utah-seed-g4:10",
-     0.6451
+     "en-utah-seed-g3:28",
+     0.6458
     ]
    ]
   },
@@ -4604,7 +4604,7 @@
     ],
     [
      "wiki:Experiment:1",
-     0.8069
+     0.8062
     ],
     [
      "wiki:Experiment:0",
@@ -4627,24 +4627,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:48",
-     0.6498
-    ],
-    [
-     "en-utah-seed-g8:49",
-     0.6234
-    ],
-    [
      "en-utah-seed-g4:43",
-     0.622
+     0.6485
+    ],
+    [
+     "en-utah-seed-g8:43",
+     0.6383
+    ],
+    [
+     "en-utah-seed-g4:41",
+     0.6201
     ],
     [
      "wiki:Pendulum:0",
      0.6178
     ],
     [
-     "en-utah-seed-g3:44",
-     0.6151
+     "en-utah-seed-g8:52",
+     0.6168
     ]
    ]
   },
@@ -4655,24 +4655,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:48",
-     0.6683
+     "en-utah-seed-g4:43",
+     0.6787
     ],
     [
-     "en-utah-seed-g4:47",
-     0.6341
+     "en-utah-seed-g4:46",
+     0.6115
     ],
     [
-     "en-utah-seed-g4:51",
-     0.6224
+     "en-utah-seed-g4:42",
+     0.6092
     ],
     [
-     "en-utah-seed-g3:47",
-     0.6054
+     "en-utah-seed-g3:48",
+     0.6087
     ],
     [
-     "en-utah-seed-g3:58",
-     0.6032
+     "en-utah-seed-g3:39",
+     0.6077
     ]
    ]
   },
@@ -4683,24 +4683,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:48",
-     0.7038
+     "en-utah-seed-g4:43",
+     0.7105
     ],
     [
-     "en-utah-seed-g4:47",
-     0.6597
+     "en-utah-seed-g4:42",
+     0.6425
     ],
     [
-     "en-utah-seed-g4:51",
-     0.6495
+     "en-utah-seed-g4:46",
+     0.6391
     ],
     [
-     "en-utah-seed-g8:45",
-     0.6239
+     "en-utah-seed-g4:41",
+     0.6362
     ],
     [
-     "en-utah-seed-g3:47",
-     0.6137
+     "en-utah-seed-g3:48",
+     0.6275
     ]
    ]
   },
@@ -4711,24 +4711,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:48",
-     0.6859
+     "en-utah-seed-g4:43",
+     0.6965
     ],
     [
-     "en-utah-seed-g4:47",
-     0.6536
+     "en-utah-seed-g4:46",
+     0.641
     ],
     [
-     "en-utah-seed-g4:51",
-     0.6504
+     "en-utah-seed-g3:39",
+     0.6392
     ],
     [
-     "en-utah-seed-g3:47",
-     0.6342
+     "en-utah-seed-g3:48",
+     0.63
     ],
     [
-     "en-utah-seed-g8:45",
-     0.6275
+     "en-utah-seed-g4:42",
+     0.6152
     ]
    ]
   },
@@ -4739,24 +4739,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g8:80",
-     0.6599
+     "en-utah-seed-g8:73",
+     0.6637
     ],
     [
-     "en-utah-seed-g8:81",
-     0.6427
+     "en-utah-seed-g8:72",
+     0.6518
     ],
     [
-     "en-utah-seed-g5:52",
-     0.6266
+     "en-utah-seed-g5:45",
+     0.6305
     ],
     [
-     "en-utah-seed-g5:51",
-     0.6232
+     "en-utah-seed-g5:35",
+     0.6236
     ],
     [
-     "wiki:Plant:1",
-     0.6122
+     "en-utah-seed-g5:38",
+     0.6234
     ]
    ]
   },
@@ -4772,7 +4772,7 @@
     ],
     [
      "wiki:Experiment:1",
-     0.7246
+     0.7235
     ],
     [
      "wiki:Experiment:0",
@@ -4783,8 +4783,8 @@
      0.6982
     ],
     [
-     "en-utah-seed-g3:8",
-     0.6765
+     "wiki:Scientific_control:9",
+     0.6756
     ]
    ]
   },
@@ -4803,16 +4803,16 @@
      0.6549
     ],
     [
-     "en-utah-seed-g8:44",
-     0.6416
-    ],
-    [
      "wiki:Unit_of_measurement:0",
      0.631
     ],
     [
      "wiki:Experiment:0",
      0.6288
+    ],
+    [
+     "wiki:Volume:1",
+     0.6249
     ]
    ]
   },
@@ -4823,24 +4823,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:51",
-     0.7056
-    ],
-    [
-     "en-utah-seed-g8:45",
-     0.6993
-    ],
-    [
-     "en-utah-seed-g4:48",
-     0.6949
+     "en-utah-seed-g4:46",
+     0.7164
     ],
     [
      "wiki:Frequency:1",
      0.686
     ],
     [
-     "en-utah-seed-g4:50",
-     0.6705
+     "en-utah-seed-g8:37",
+     0.6712
+    ],
+    [
+     "en-utah-seed-g8:39",
+     0.6655
+    ],
+    [
+     "en-utah-seed-g4:43",
+     0.6648
     ]
    ]
   },
@@ -4851,24 +4851,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g3:25",
-     0.6819
+     "en-utah-seed-g4:79",
+     0.6712
     ],
     [
-     "en-utah-seed-g4:85",
-     0.6556
+     "en-utah-seed-g4:78",
+     0.6606
     ],
     [
-     "en-utah-seed-g4:86",
-     0.645
+     "en-utah-seed-g3:17",
+     0.6489
     ],
     [
-     "en-utah-seed-g3:49",
-     0.6405
+     "en-utah-seed-g3:18",
+     0.6379
     ],
     [
-     "en-utah-seed-g6:11",
-     0.6391
+     "wiki:Frequency:0",
+     0.6344
     ]
    ]
   },
@@ -4879,24 +4879,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g6:28",
-     0.7053
+     "en-utah-seed-g4:78",
+     0.717
     ],
     [
      "wiki:Frequency:0",
      0.7019
     ],
     [
-     "en-utah-seed-g8:61",
-     0.6934
+     "en-utah-seed-g6:24",
+     0.6947
+    ],
+    [
+     "en-utah-seed-g4:79",
+     0.6918
     ],
     [
      "wiki:Frequency:1",
      0.6903
-    ],
-    [
-     "en-utah-seed-g4:81",
-     0.6824
     ]
    ]
   },
@@ -4914,12 +4914,12 @@
      0.6491
     ],
     [
-     "en-utah-seed-g3:53",
-     0.6407
+     "en-utah-seed-g8:113",
+     0.6408
     ],
     [
-     "en-utah-seed-g8:10",
-     0.6393
+     "en-utah-seed-g8:7",
+     0.637
     ],
     [
      "wiki:Metric_system:2",
@@ -4937,20 +4937,20 @@
      0.7119
     ],
     [
-     "en-utah-seed-g7:54",
-     0.7117
+     "en-utah-seed-g7:42",
+     0.6953
     ],
     [
-     "en-utah-seed-g7:52",
-     0.6889
+     "wiki:Volume:1",
+     0.6789
     ],
     [
-     "en-utah-seed-g7:48",
-     0.6832
+     "en-utah-seed-g6:38",
+     0.6727
     ],
     [
-     "en-utah-seed-g6:42",
-     0.6828
+     "en-utah-seed-g6:37",
+     0.6675
     ]
    ]
   },
@@ -4960,24 +4960,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g7:54",
-     0.7009
-    ],
-    [
      "wiki:Density:0",
      0.7004
     ],
     [
-     "en-utah-seed-g6:42",
-     0.6731
+     "en-utah-seed-g7:42",
+     0.6782
     ],
     [
-     "en-utah-seed-g7:48",
-     0.6718
+     "wiki:Volume:1",
+     0.669
     ],
     [
-     "en-utah-seed-g7:52",
-     0.6696
+     "en-utah-seed-g5:28",
+     0.6687
+    ],
+    [
+     "en-utah-seed-g6:37",
+     0.6672
     ]
    ]
   },
@@ -4987,24 +4987,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g7:54",
-     0.7053
-    ],
-    [
      "wiki:Density:0",
      0.702
     ],
     [
-     "en-utah-seed-g6:42",
-     0.6785
+     "en-utah-seed-g7:42",
+     0.6818
     ],
     [
-     "en-utah-seed-g7:48",
-     0.6746
+     "wiki:Volume:1",
+     0.6726
     ],
     [
-     "en-utah-seed-g7:52",
-     0.6745
+     "en-utah-seed-g6:38",
+     0.6679
+    ],
+    [
+     "en-utah-seed-g6:37",
+     0.6668
     ]
    ]
   },
@@ -5014,24 +5014,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g6:65",
-     0.6586
+     "en-utah-seed-g5:27",
+     0.6749
     ],
     [
-     "en-utah-seed-g4:68",
+     "en-utah-seed-g4:65",
+     0.653
+    ],
+    [
+     "en-utah-seed-g4:63",
      0.6503
     ],
     [
-     "en-utah-seed-g5:32",
-     0.6496
+     "en-utah-seed-g6:57",
+     0.6498
     ],
     [
-     "en-utah-seed-g4:69",
-     0.6465
-    ],
-    [
-     "en-utah-seed-g4:71",
-     0.6451
+     "en-utah-seed-g6:59",
+     0.6447
     ]
    ]
   },
@@ -5041,24 +5041,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g4:68",
-     0.6524
+     "en-utah-seed-g5:27",
+     0.6613
     ],
     [
-     "en-utah-seed-g4:69",
-     0.6455
+     "en-utah-seed-g4:63",
+     0.6487
     ],
     [
-     "en-utah-seed-g6:65",
-     0.635
+     "en-utah-seed-g4:65",
+     0.6418
     ],
     [
-     "en-utah-seed-g5:32",
-     0.6334
+     "en-utah-seed-g4:64",
+     0.6399
     ],
     [
-     "en-utah-seed-g4:71",
-     0.6326
+     "en-utah-seed-g6:57",
+     0.6369
     ]
    ]
   },
@@ -5068,24 +5068,24 @@
    ],
    "hits": [
     [
+     "en-utah-seed-g6:46",
+     0.7117
+    ],
+    [
      "wiki:Thermometer:0",
      0.7071
     ],
     [
-     "en-utah-seed-g6:50",
-     0.6999
+     "en-utah-seed-g6:47",
+     0.6888
     ],
     [
-     "en-utah-seed-g6:51",
-     0.671
+     "en-utah-seed-g6:45",
+     0.6749
     ],
     [
-     "en-utah-seed-g6:63",
-     0.6658
-    ],
-    [
-     "en-utah-seed-g6:49",
-     0.6603
+     "en-utah-seed-g6:39",
+     0.6635
     ]
    ]
   },
@@ -5094,6 +5094,10 @@
     "test_ud"
    ],
    "hits": [
+    [
+     "en-utah-seed-g6:47",
+     0.6848
+    ],
     [
      "wiki:Thermometer:0",
      0.6817
@@ -5107,12 +5111,8 @@
      0.6593
     ],
     [
-     "en-utah-seed-g6:43",
+     "en-utah-seed-g6:39",
      0.658
-    ],
-    [
-     "en-utah-seed-g6:52",
-     0.6546
     ]
    ]
   },
@@ -5126,8 +5126,8 @@
      0.8118
     ],
     [
-     "en-utah-seed-g6:45",
-     0.7386
+     "en-utah-seed-g6:41",
+     0.7514
     ],
     [
      "wiki:Condensation:0",
@@ -5149,24 +5149,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g7:19",
-     0.6601
+     "en-utah-seed-g8:20",
+     0.6634
     ],
     [
-     "en-utah-seed-g8:23",
-     0.646
+     "en-utah-seed-g6:57",
+     0.6388
     ],
     [
-     "en-utah-seed-g6:63",
-     0.644
+     "en-utah-seed-g6:54",
+     0.6316
     ],
     [
-     "en-utah-seed-g8:52",
-     0.6277
+     "en-utah-seed-g6:56",
+     0.6313
     ],
     [
-     "en-utah-seed-g8:24",
-     0.6218
+     "en-utah-seed-g7:15",
+     0.6302
     ]
    ]
   },
@@ -5176,24 +5176,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g7:19",
-     0.6601
+     "en-utah-seed-g8:20",
+     0.6634
     ],
     [
-     "en-utah-seed-g8:23",
-     0.646
+     "en-utah-seed-g6:57",
+     0.6388
     ],
     [
-     "en-utah-seed-g6:63",
-     0.644
+     "en-utah-seed-g6:54",
+     0.6316
     ],
     [
-     "en-utah-seed-g8:52",
-     0.6277
+     "en-utah-seed-g6:56",
+     0.6313
     ],
     [
-     "en-utah-seed-g8:24",
-     0.6218
+     "en-utah-seed-g7:15",
+     0.6302
     ]
    ]
   },
@@ -5207,20 +5207,20 @@
      0.6724
     ],
     [
-     "en-utah-seed-g6:53",
-     0.6477
+     "en-utah-seed-g6:47",
+     0.6635
     ],
     [
-     "en-utah-seed-g6:44",
-     0.6467
+     "en-utah-seed-g6:40",
+     0.6537
     ],
     [
      "wiki:Freezing:1",
      0.6465
     ],
     [
-     "en-utah-seed-g6:52",
-     0.6453
+     "en-utah-seed-g6:54",
+     0.6457
     ]
    ]
   },
@@ -5230,24 +5230,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g6:66",
-     0.7482
+     "en-utah-seed-g6:60",
+     0.7461
+    ],
+    [
+     "en-utah-seed-g6:41",
+     0.744
     ],
     [
      "wiki:Condensation:0",
      0.7379
     ],
     [
-     "en-utah-seed-g6:45",
-     0.731
-    ],
-    [
-     "en-utah-seed-g6:61",
-     0.7254
-    ],
-    [
      "wiki:Water_cycle:0",
      0.7229
+    ],
+    [
+     "en-utah-seed-g6:56",
+     0.7207
     ]
    ]
   },
@@ -5257,24 +5257,24 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g5:32",
-     0.6562
+     "en-utah-seed-g5:27",
+     0.6622
     ],
     [
-     "en-utah-seed-g6:61",
-     0.6542
+     "en-utah-seed-g6:55",
+     0.662
     ],
     [
-     "en-utah-seed-g5:31",
-     0.6494
+     "en-utah-seed-g6:57",
+     0.6536
     ],
     [
-     "en-utah-seed-g6:63",
-     0.648
+     "en-utah-seed-g6:54",
+     0.6526
     ],
     [
-     "en-utah-seed-g6:60",
-     0.6411
+     "en-utah-seed-g8:12",
+     0.6376
     ]
    ]
   },
@@ -5288,20 +5288,20 @@
      0.7
     ],
     [
-     "en-utah-seed-g6:42",
-     0.6643
+     "en-utah-seed-g6:39",
+     0.6691
     ],
     [
-     "en-utah-seed-g6:63",
-     0.6597
+     "en-utah-seed-g6:38",
+     0.6622
     ],
     [
-     "en-utah-seed-g6:43",
-     0.6519
+     "en-utah-seed-g6:47",
+     0.6557
     ],
     [
-     "en-utah-seed-g6:50",
-     0.6476
+     "en-utah-seed-g6:57",
+     0.6542
     ]
    ]
   },
@@ -5311,8 +5311,12 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g6:52",
-     0.7077
+     "en-utah-seed-g6:48",
+     0.7165
+    ],
+    [
+     "en-utah-seed-g6:47",
+     0.7047
     ],
     [
      "wiki:Freezing:0",
@@ -5323,12 +5327,8 @@
      0.6967
     ],
     [
-     "en-utah-seed-g6:44",
-     0.6945
-    ],
-    [
-     "wiki:Metric_system:3",
-     0.6658
+     "en-utah-seed-g6:40",
+     0.6951
     ]
    ]
   },
@@ -5365,12 +5365,16 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g5:32",
-     0.7017
+     "en-utah-seed-g6:47",
+     0.6979
     ],
     [
      "wiki:Evaporation:0",
      0.6836
+    ],
+    [
+     "en-utah-seed-g5:27",
+     0.6819
     ],
     [
      "wiki:Solubility:0",
@@ -5379,10 +5383,6 @@
     [
      "wiki:Solution_(chemistry):0",
      0.6728
-    ],
-    [
-     "en-utah-seed-g5:34",
-     0.6722
     ]
    ]
   },
@@ -5392,20 +5392,20 @@
    ],
    "hits": [
     [
-     "en-utah-seed-g5:32",
-     0.5961
-    ],
-    [
      "wiki:Evaporation:0",
      0.588
     ],
     [
-     "en-utah-seed-g6:45",
-     0.5778
+     "en-utah-seed-g6:41",
+     0.5872
     ],
     [
-     "en-utah-seed-g6:44",
-     0.5724
+     "en-utah-seed-g5:27",
+     0.575
+    ],
+    [
+     "en-utah-seed-g8:17",
+     0.5744
     ],
     [
      "wiki:Condensation:0",
@@ -5423,20 +5423,20 @@
      0.7059
     ],
     [
-     "en-utah-seed-g8:44",
-     0.6877
+     "en-utah-seed-g6:39",
+     0.6678
     ],
     [
-     "en-utah-seed-g6:43",
-     0.667
+     "en-utah-seed-g8:28",
+     0.6575
     ],
     [
-     "en-utah-seed-g8:32",
-     0.6565
+     "en-utah-seed-g7:39",
+     0.6543
     ],
     [
-     "en-utah-seed-g7:48",
-     0.6515
+     "en-utah-seed-g6:57",
+     0.6502
     ]
    ]
   },
@@ -5450,20 +5450,20 @@
      0.6923
     ],
     [
-     "en-utah-seed-g5:32",
-     0.6762
+     "en-utah-seed-g5:27",
+     0.6531
     ],
     [
-     "en-utah-seed-g6:45",
-     0.6556
+     "en-utah-seed-g8:20",
+     0.6489
     ],
     [
-     "en-utah-seed-g5:34",
-     0.6461
+     "en-utah-seed-g6:41",
+     0.6486
     ],
     [
-     "en-utah-seed-g8:35",
-     0.6406
+     "en-utah-seed-g6:40",
+     0.6383
     ]
    ]
   },
@@ -5474,23 +5474,23 @@
    "hits": [
     [
      "en-utah-seed-g6:66",
-     0.5629
+     0.5625
     ],
     [
-     "en-utah-seed-g6:72",
-     0.5553
-    ],
-    [
-     "en-utah-seed-g6:73",
-     0.5469
+     "en-utah-seed-g6:60",
+     0.5529
     ],
     [
      "en-utah-seed-g6:67",
-     0.5374
+     0.5493
     ],
     [
-     "en-utah-seed-g8:120",
-     0.5338
+     "en-utah-seed-g6:61",
+     0.5442
+    ],
+    [
+     "en-utah-seed-g6:41",
+     0.532
     ]
    ]
   },
@@ -5500,24 +5500,24 @@
    ],
    "hits": [
     [
+     "en-utah-seed-g6:60",
+     0.5981
+    ],
+    [
+     "en-utah-seed-g5:19",
+     0.5839
+    ],
+    [
      "en-utah-seed-g6:66",
-     0.6007
+     0.5816
     ],
     [
-     "en-utah-seed-g3:16",
-     0.5826
+     "en-utah-seed-g6:64",
+     0.5751
     ],
     [
-     "en-utah-seed-g6:72",
-     0.5773
-    ],
-    [
-     "en-utah-seed-g6:67",
-     0.5707
-    ],
-    [
-     "en-utah-seed-g6:73",
-     0.5663
+     "en-utah-seed-g3:13",
+     0.5749
     ]
    ]
   },
@@ -5531,20 +5531,20 @@
      0.6798
     ],
     [
-     "en-utah-seed-g7:48",
-     0.6642
+     "en-utah-seed-g7:42",
+     0.6574
     ],
     [
-     "en-utah-seed-g7:52",
-     0.6555
+     "en-utah-seed-g7:39",
+     0.6471
     ],
     [
-     "en-utah-seed-g7:49",
-     0.6431
+     "en-utah-seed-g6:39",
+     0.6374
     ],
     [
-     "en-utah-seed-g8:24",
-     0.6431
+     "en-utah-seed-g7:40",
+     0.632
     ]
    ]
   }

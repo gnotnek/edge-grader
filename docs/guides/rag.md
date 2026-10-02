@@ -59,10 +59,10 @@ Each step can be tested on its own. Steps 1–5 are built (2026-10-02); the test
 |---|---|---|
 | 1. Dependencies | | `rag` group (`pymupdf`, `numpy`) for the Mac; `embed` group (`sentence-transformers`, with torch) for Kaggle |
 | 2. Extract + chunk | **Mac** | `uv run --group rag python -m edge_grader.rag.corpus` → `data/rag/chunks/scientsbank-{en,id}.jsonl`, and the committed record `results/rag/chunks-scientsbank.json` (sha256, counts, settings). Code: `src/edge_grader/rag/corpus.py` |
-| 3. Embed + retrieve | **Kaggle**, [`notebooks/kaggle_rag_index.ipynb`](../../notebooks/kaggle_rag_index.ipynb) | `python -m edge_grader.rag.index build` / `retrieve` → `results/rag/retrieval-<index>-k5.json`: top-5 chunk ids and scores for all 200 question ids. Code: `src/edge_grader/rag/index.py` |
+| 3. Embed + retrieve | Mac for the small models (CPU-only models may run locally, 2026-10-02); Kaggle with a GPU for `bge-m3`: [`notebooks/kaggle_rag_index.ipynb`](../../notebooks/kaggle_rag_index.ipynb) | `python -m edge_grader.rag.index build` / `retrieve` → `results/rag/retrieval-<index>-k5.json`: top-5 chunk ids and scores for all 200 question ids. Code: `src/edge_grader/rag/index.py` |
 | 4. Retrieval check | **Mac** | `uv run --group rag python -m edge_grader.rag.check results/rag/retrieval-….json` → `data/rag/check/*.md`, 30 train questions × top 3 passages, to mark by hand |
 | 5. Grader | Kaggle | `edge-grader-baseline --rag results/rag/retrieval-….json --k 3`. Writes `rag-*.json` with the retrieval file, embedding model, k and chunks sha256. Without `--rag` the prompt is byte-for-byte the stage-1 prompt (a test pins it) |
-| 6. Run on Kaggle | Kaggle | Not built yet: add `--rag` runs to the baseline notebook after step 4 passes |
+| 6. Run on Kaggle | Kaggle | `notebooks/kaggle_baseline.ipynb`: set `RAG` to a retrieval file (and `K`). It copies in the chunks from the private dataset and checks their sha256 |
 
 **Why the chunks are built on the Mac and uploaded to Kaggle:** the Wikipedia downloader fetches the *current* article text; the pinned revision ids only report changes. A fresh download on Kaggle could give different chunks and ids. So the chunks are built once, here, uploaded to Kaggle as a **private** dataset (the Indonesian books are all rights reserved), and the notebook checks them against the committed sha256.
 
@@ -82,17 +82,18 @@ Each step can be tested on its own. Steps 1–5 are built (2026-10-02); the test
 - **Why these filters (2026-10-02):** in the first retrieval round, the Indonesian top hits were often reference lists, activity steps and reflection prompts: about 13 of 30 sample questions had a useful passage in the top 3, against about 23 of 30 for English. The filters cut the Indonesian book chunks from 1,075 to 716 and the English ones from 576 to 514. As a side effect they also drop Wikipedia's reference lists. The first round's retrieval files are kept in git history (commit `efd521e`).
 - **Retrieval check uses train questions only.** test_ua shares those questions, but test_uq and test_ud questions are never shown, so the corpus isn't tuned on unseen questions.
 
-## Starting settings
+## Settings (frozen 2026-10-03)
 
-| Setting | Start with | Why |
+| Setting | Value | Why |
 |---|---|---|
 | Chunk size | 250 words | Long enough to hold one idea, short enough to keep the prompt small |
 | Overlap | 50 words | An idea split at a boundary still appears whole in one chunk |
-| k | 3 | Test 1 and 5 later if there's time; each passage costs prefill time |
-| Embedding model | `bge-small-en-v1.5` for the English corpus; `multilingual-e5-small` for the Indonesian one | Small and fast on a CPU. English questions against Indonesian passages need a multilingual model |
+| k | 3 | Each passage costs prefill time on the boards |
+| Embedding model, English | `bge-small-en-v1.5` (33M) | Retrieved well (~22/30 sample questions) and is small enough for the boards |
+| Embedding model, Indonesian | `bge-m3` (568M) | English questions against Indonesian passages need a strong multilingual model. `multilingual-e5-small` and `-base` missed the cross-lingual matches (comparison in [`../results/rag.md`](../results/rag.md)) |
 | Query | Question text only | The student answer varies; the question decides the topic |
 
-Change one setting at a time, and only after the retrieval check (step 4).
+The settings were tuned only against the retrieval check (train questions). Don't change them after grading starts; see [`../results/rag.md`](../results/rag.md).
 
 ## When it doesn't work
 

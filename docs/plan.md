@@ -38,10 +38,12 @@
 - [x] Material for MMLU-Pro too (OpenStax + SMA books), so RAG can be tested on both baselines
 - [ ] OCR Informatika kelas XII (no text layer), or leave it out
 - [x] Extract and chunk the text (PyMuPDF); keep the source page for every chunk; fix the broken ligatures in the Indonesian books. SciEntsBank: 755 English chunks, 1,141 Indonesian after the noise filters (`results/rag/chunks-scientsbank.json`)
-- [ ] Embed with a small model: `bge-small-en-v1.5` for English, `multilingual-e5-small` for Indonesian (English questions); separate indexes per language and benchmark. Code and notebook ready (`notebooks/kaggle_rag_index.ipynb`); **to do:** upload the chunks as a private Kaggle dataset and run it
-- [ ] Retrieval check: for about 30 questions, is the right passage in the top-k? Fix chunking before grading. (`python -m edge_grader.rag.check`, train questions only.) Round 1 (2026-10-02): English ~23/30 useful in the top 3, Indonesian ~13/30, Indonesian hits full of reference lists and activity text. Extraction tightened; **round 2:** re-upload the chunks, re-run the notebook, mark both sheets
+- [x] Embed: `bge-small-en-v1.5` for English; for Indonesian, `multilingual-e5-small`, `-base` and `bge-m3` compared, `bge-m3` chosen. Separate indexes per language ([`results/rag.md`](results/rag.md))
+- [x] Retrieval check, first pass (Claude): round 1 English ~23/30, Indonesian ~13/30 → noise filters → round 2 English ~22 clear, Indonesian (`bge-m3`) ~17 clear. Settings frozen ([`results/rag.md`](results/rag.md))
+- [ ] Owner's own marking of the check sheets (`data/rag/check/`), to replace the first-pass counts
 - [x] Add a `--rag` mode to the grader: the same prompt plus the top-k passages (`--rag <retrieval file> --k 3`)
-- [ ] Run on Kaggle: E2B + E4B, all splits; conditions RAG-en, RAG-id, RAG-both
+- [ ] Re-upload the round-2 chunks to the private Kaggle dataset (New Version); the notebooks check them against the committed sha256
+- [ ] Run on Kaggle (`kaggle_baseline.ipynb` with `RAG` set): **RAG-en**, E2B + E4B, all splits. RAG-id (`bge-m3`) only if time allows. RAG-both dropped
 - [ ] Analysis: did recall on *correct* answers improve (the baseline's main weakness)? And E2B's "contradictory" overuse?
 
 **MMLU-Pro with RAG** (same retrieval code, the OpenStax + SMA material):
@@ -86,3 +88,4 @@
 | 2026-09-30 | RAG material gathered in English and Indonesian, for SciEntsBank and MMLU-Pro; MMLU-Pro RAG added to stage 2 | Test RAG on both baselines; IPAS books kept whole for now |
 | 2026-09-30 | Stage-1 board runs replaced by a cost estimate from `agentic-edge`'s export; a measured run is now optional | Supervisor: reuse existing benchmarks. The export has per-request prefill and decode rates for both boards at grading-sized prompts |
 | 2026-10-02 | Stage 2 started early, while the Pi 5 board check waits in the queue; RAG pipeline built (chunking, index, retrieval, `--rag`) | The Jetson run confirmed the stage-1 numbers, so stage 1 has a number we trust |
+| 2026-10-03 | RAG scope: **RAG-en is the main condition**; RAG-id optional, with `bge-m3`; **RAG-both dropped**; retrieval settings frozen | Only RAG-en is needed for RQ2. Time goes to fine-tuning (RQ3) and the boards (RQ4). `bge-m3` was the only model that retrieved Indonesian passages well enough for a fair test |
