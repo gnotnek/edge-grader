@@ -1,6 +1,10 @@
-"""Stage 1 baseline: an untouched model grades SciEntsBank answers.
+"""Grade SciEntsBank answers: the stage-1 baseline, or with retrieved course material (stage 2).
 
     uv run edge-grader-baseline --base-url http://127.0.0.1:8080/v1 --n 100
+    uv run edge-grader-baseline --rag results/rag/retrieval-<index>-k5.json --k 3 ...
+
+--rag takes a retrieval file from `python -m edge_grader.rag.index retrieve`; the passage text
+comes from the chunks file it names, which must be unchanged (sha256 checked).
 """
 
 import argparse
@@ -15,6 +19,7 @@ import httpx
 from openai import APIError, OpenAI
 
 from . import data, grader, metrics
+from .data import question_id
 
 
 def server_info(base_url: str) -> dict:
@@ -31,6 +36,33 @@ def server_info(base_url: str) -> dict:
     }
 
 
+def load_passages(retrieval_path: str, k: int) -> tuple[dict[str, list[tuple[str, str]]], dict]:
+    """question id -> its top-k (chunk id, text), and the settings to record."""
+    from .rag.index import read_chunks, sha256_of
+
+    retrieval = json.loads(Path(retrieval_path).read_text())
+    settings = retrieval["settings"]
+    chunks_path = Path(settings["chunks"])
+    if sha256_of(chunks_path) != settings["chunks_sha256"]:
+        sys.exit(f"{chunks_path} changed since retrieval; rebuild the chunks, index and retrieval")
+    if k > settings.get("k", k):
+        sys.exit(f"--k {k} is more than the {settings['k']} passages stored per question")
+    text = {c["id"]: c["text"] for c in read_chunks(chunks_path)}
+    by_question = {
+        q: [(cid, text[cid]) for cid, _ in v["hits"][:k]]
+        for q, v in retrieval["questions"].items()
+    }
+    recorded = {
+        "retrieval": retrieval_path,
+        "k": k,
+        "index": settings.get("index"),
+        "embedding_model": settings.get("hf_id", settings.get("model")),
+        "chunks": str(chunks_path),
+        "chunks_sha256": settings["chunks_sha256"],
+    }
+    return by_question, recorded
+
+
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
     ap.add_argument("--base-url", default="http://127.0.0.1:8080/v1", help="llama-server endpoint")
@@ -41,8 +73,12 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--n", type=int, default=100, help="number of answers (0 = whole split)")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--out", default="results/local", help="directory for this run's files")
+    ap.add_argument("--rag", default=None, help="retrieval file: add course material to the prompt")
+    ap.add_argument("--k", type=int, default=3, help="passages per prompt with --rag")
     args = ap.parse_args(argv)
 
+    passages, rag = load_passages(args.rag, args.k) if args.rag else ({}, None)
+    stage = "rag" if args.rag else "baseline"
     server = server_info(args.base_url)
     items = data.load(args.split, args.scheme, n=args.n or None, seed=args.seed)
     labels = data.labels_for(args.scheme)
@@ -51,8 +87,14 @@ def main(argv: list[str] | None = None) -> None:
     rows = []
     start = time.perf_counter()
     for i, item in enumerate(items, 1):
+        hits = passages.get(question_id(item.id), []) if rag else []
+        if rag and not hits:
+            sys.exit(f"no retrieved passages for question {question_id(item.id)}")
         try:
-            rows.append(grader.grade(client, args.model, item, labels))
+            row = grader.grade(client, args.model, item, labels, passages=[t for _, t in hits])
+            if rag:
+                row["passages"] = [cid for cid, _ in hits]
+            rows.append(row)
         except (APIError, httpx.HTTPError) as e:  # one failed request must not lose a long run
             rows.append({"id": item.id, "gold": item.label, "pred": None, "error": repr(e)})
         print(f"\r{i}/{len(items)}", end="", flush=True)
@@ -68,7 +110,7 @@ def main(argv: list[str] | None = None) -> None:
     summary["completion_tokens"] = sum(r["completion_tokens"] or 0 for r in ok)
     now = datetime.now(UTC)
     run = {
-        "stage": "baseline",
+        "stage": stage,
         "label": args.label or args.model,
         "model": args.model,
         "base_url": args.base_url,
@@ -80,9 +122,11 @@ def main(argv: list[str] | None = None) -> None:
         "time": now.isoformat(timespec="seconds"),
         "metrics": summary,
     }
+    if rag:
+        run["rag"] = rag
 
     stamp = now.strftime("%Y%m%d-%H%M%S")
-    name = f"baseline-{run['label']}-{args.split}-{args.scheme}-{stamp}"
+    name = f"{stage}-{run['label']}-{args.split}-{args.scheme}-{stamp}"
     out = Path(args.out)
     (out / "raw").mkdir(parents=True, exist_ok=True)
     (out / f"{name}.json").write_text(json.dumps(run, indent=2))

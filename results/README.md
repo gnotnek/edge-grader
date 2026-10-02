@@ -8,6 +8,8 @@ results/
                agentic-edge-mmlupro-baseline.json   the lab's MMLU-Pro baseline (not re-run)
                agentic-edge/                        the lab's device benchmarks, copied (see its README)
   kaggle/      accuracy runs on Kaggle GPUs (from notebooks/kaggle_baseline.ipynb)
+  rag/         stage 2: chunks-<benchmark>.json (what was chunked, sha256) and
+               retrieval-<index>-k<k>.json (top-k chunk ids per question; no text)
   estimates/   board cost estimated from agentic-edge's rates + a run's token counts
                (uv run edge-grader-cost results/kaggle/baseline-*.json)
   board/       runs on the Pi 5 / Jetson (from scripts/board_grade.sh), one folder per run:

@@ -15,10 +15,19 @@ LABEL_HELP = {
 }
 
 
-def build_prompt(item: Item, labels: list[str]) -> str:
+def build_prompt(item: Item, labels: list[str], passages: list[str] | None = None) -> str:
+    """The stage-1 prompt; with passages (RAG), course material goes before the question."""
     options = "\n".join(f"- {name}: {LABEL_HELP[name]}" for name in labels)
+    material = ""
+    if passages:
+        numbered = "\n".join(f"[{i}] {p}" for i, p in enumerate(passages, 1))
+        material = (
+            "Course material, for background only (the reference answer decides the grade):\n"
+            f"{numbered}\n\n"
+        )
     return (
         "You are grading a student's answer to a science question.\n\n"
+        f"{material}"
         f"Question: {item.question}\n"
         f"Reference answer: {item.reference_answer}\n"
         f"Student answer: {item.student_answer}\n\n"
@@ -39,8 +48,9 @@ def parse_label(text: str, labels: list[str]) -> str | None:
     return min(hits)[1] if hits else None
 
 
-def grade(client, model: str, item: Item, labels: list[str], max_tokens: int = 16) -> dict:
-    prompt = build_prompt(item, labels)
+def grade(client, model: str, item: Item, labels: list[str], max_tokens: int = 16,
+          passages: list[str] | None = None) -> dict:
+    prompt = build_prompt(item, labels, passages)
     start = time.perf_counter()
     resp = client.chat.completions.create(
         model=model,

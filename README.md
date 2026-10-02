@@ -97,9 +97,11 @@ src/edge_grader/
   metrics.py    accuracy, F1
   baseline.py   stage-1 CLI
   cost.py       board cost estimate from agentic-edge rates (edge-grader-cost)
-  rag/          stage 2: sources.json (RAG material, pinned) + sources.py (downloader)
+  rag/          stage 2: sources.json + sources.py (material, downloader), corpus.py (chunks),
+                index.py (embed, retrieve), check.py (retrieval check); see docs/guides/rag.md
 notebooks/
   kaggle_baseline.ipynb   stage 1 on a Kaggle GPU
+  kaggle_rag_index.ipynb  stage 2: embed the chunks and retrieve, on Kaggle
 scripts/
   board_grade.sh          stage 1 on the Pi 5 / Jetson, with telemetry
 tests/                    includes an end-to-end run against a fake llama-server

@@ -37,10 +37,10 @@
 - [x] Choose course material that matches SciEntsBank's topics, English and Indonesian; note the licence: [`guides/rag-sources.md`](guides/rag-sources.md)
 - [x] Material for MMLU-Pro too (OpenStax + SMA books), so RAG can be tested on both baselines
 - [ ] OCR Informatika kelas XII (no text layer), or leave it out
-- [ ] Extract and chunk the text (PyMuPDF); keep the source page for every chunk; fix the broken ligatures in the Indonesian books
-- [ ] Embed with a small model: `bge-small-en-v1.5` for English, `multilingual-e5-small` for Indonesian (English questions); separate indexes per language and benchmark
-- [ ] Retrieval check: for about 30 questions, is the right passage in the top-k? Fix chunking before grading.
-- [ ] Add a `--rag` mode to the grader: the same prompt plus the top-k passages
+- [x] Extract and chunk the text (PyMuPDF); keep the source page for every chunk; fix the broken ligatures in the Indonesian books. SciEntsBank: 822 English chunks, 1,505 Indonesian (`results/rag/chunks-scientsbank.json`)
+- [ ] Embed with a small model: `bge-small-en-v1.5` for English, `multilingual-e5-small` for Indonesian (English questions); separate indexes per language and benchmark. Code and notebook ready (`notebooks/kaggle_rag_index.ipynb`); **to do:** upload the chunks as a private Kaggle dataset and run it
+- [ ] Retrieval check: for about 30 questions, is the right passage in the top-k? Fix chunking before grading. (`python -m edge_grader.rag.check`, train questions only)
+- [x] Add a `--rag` mode to the grader: the same prompt plus the top-k passages (`--rag <retrieval file> --k 3`)
 - [ ] Run on Kaggle: E2B + E4B, all splits; conditions RAG-en, RAG-id, RAG-both
 - [ ] Analysis: did recall on *correct* answers improve (the baseline's main weakness)? And E2B's "contradictory" overuse?
 
@@ -85,3 +85,4 @@
 | 2026-09-29 | `agentic-edge` device benchmarks copied for stage 4 | Supervisor: reuse existing benchmarks to cut time |
 | 2026-09-30 | RAG material gathered in English and Indonesian, for SciEntsBank and MMLU-Pro; MMLU-Pro RAG added to stage 2 | Test RAG on both baselines; IPAS books kept whole for now |
 | 2026-09-30 | Stage-1 board runs replaced by a cost estimate from `agentic-edge`'s export; a measured run is now optional | Supervisor: reuse existing benchmarks. The export has per-request prefill and decode rates for both boards at grading-sized prompts |
+| 2026-10-02 | Stage 2 started early, while the Pi 5 board check waits in the queue; RAG pipeline built (chunking, index, retrieval, `--rag`) | The Jetson run confirmed the stage-1 numbers, so stage 1 has a number we trust |

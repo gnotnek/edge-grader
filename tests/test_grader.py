@@ -35,3 +35,32 @@ def test_unparsed_counts_as_wrong():
     s = score(["correct", "incorrect"], ["correct", None])
     assert s["accuracy"] == 0.5
     assert s["unparsed"] == 1
+
+
+BASELINE_PROMPT = (
+    "You are grading a student's answer to a science question.\n\n"
+    "Question: Why is the sky blue?\n"
+    "Reference answer: Scattering.\n"
+    "Student answer: Because of scattering.\n\n"
+    "Choose exactly one label:\n"
+    "- contradictory: contradicts the reference answer\n"
+    "- correct: a complete and correct answer\n"
+    "- incorrect: partially correct, incomplete, irrelevant, or off-topic\n\n"
+    "Reply with the label only."
+)
+
+
+def test_prompt_without_passages_is_the_stage_1_prompt():
+    # Stage-1 numbers stay comparable only if this text never changes.
+    item = Item("1", "Why is the sky blue?", "Scattering.", "Because of scattering.", "correct")
+    assert build_prompt(item, LABELS) == BASELINE_PROMPT
+    assert build_prompt(item, LABELS, passages=[]) == BASELINE_PROMPT
+
+
+def test_prompt_with_passages_numbers_them_and_keeps_the_instruction_last():
+    item = Item("1", "Why is the sky blue?", "Scattering.", "Because of scattering.", "correct")
+    prompt = build_prompt(item, LABELS, passages=["Light scatters off air.", "Blue scatters most."])
+    assert "[1] Light scatters off air.\n[2] Blue scatters most." in prompt
+    assert "the reference answer decides the grade" in prompt
+    assert prompt.index("[2]") < prompt.index("Question:")
+    assert prompt.endswith("Reply with the label only.")

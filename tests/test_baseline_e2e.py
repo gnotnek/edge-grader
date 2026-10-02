@@ -70,3 +70,53 @@ def test_baseline_writes_summary_and_raw(server, tmp_path, monkeypatch):
 def test_baseline_exits_when_no_server(tmp_path):
     with pytest.raises(SystemExit):
         baseline.main(["--base-url", "http://127.0.0.1:9/v1", "--out", str(tmp_path)])
+
+
+def test_rag_run_adds_passages_and_records_settings(server, tmp_path, monkeypatch):
+    monkeypatch.setattr(data, "load", lambda *a, **k: ITEMS)
+    chunks = tmp_path / "chunks.jsonl"
+    chunks.write_text("".join(
+        json.dumps({"id": f"b:{i}", "text": f"passage {i}"}) + "\n" for i in range(4)))
+    from edge_grader.rag.index import sha256_of
+
+    retrieval = tmp_path / "retrieval.json"
+    retrieval.write_text(json.dumps({
+        "settings": {"chunks": str(chunks), "chunks_sha256": sha256_of(chunks),
+                     "model": "bge-small-en", "k": 5},
+        "questions": {q: {"splits": ["test_ua"], "hits": [["b:2", 0.9], ["b:0", 0.8], ["b:1", 0.7]]}
+                      for q in "abc"},
+    }))
+    prompts = []
+    monkeypatch.setattr(baseline.grader, "build_prompt", _spy(baseline.grader.build_prompt, prompts))
+    baseline.main(["--base-url", server, "--label", "fake", "--out", str(tmp_path),
+                   "--rag", str(retrieval), "--k", "2"])
+
+    [summary_file] = tmp_path.glob("rag-fake-*.json")
+    run = json.loads(summary_file.read_text())
+    assert run["stage"] == "rag"
+    assert run["rag"]["k"] == 2 and run["rag"]["retrieval"] == str(retrieval)
+    assert run["metrics"]["n"] == 3
+    assert "[1] passage 2\n[2] passage 0\n" in prompts[0] and "[3]" not in prompts[0]
+    [raw_file] = (tmp_path / "raw").glob("rag-*.jsonl")
+    assert json.loads(raw_file.read_text().splitlines()[0])["passages"] == ["b:2", "b:0"]
+
+
+def test_rag_refuses_a_changed_chunks_file(tmp_path, server, monkeypatch):
+    monkeypatch.setattr(data, "load", lambda *a, **k: ITEMS)
+    chunks = tmp_path / "chunks.jsonl"
+    chunks.write_text(json.dumps({"id": "b:0", "text": "x"}) + "\n")
+    retrieval = tmp_path / "retrieval.json"
+    retrieval.write_text(json.dumps({
+        "settings": {"chunks": str(chunks), "chunks_sha256": "0" * 64},
+        "questions": {},
+    }))
+    with pytest.raises(SystemExit, match="changed"):
+        baseline.main(["--base-url", server, "--out", str(tmp_path), "--rag", str(retrieval)])
+
+
+def _spy(fn, seen):
+    def wrapped(*a, **k):
+        out = fn(*a, **k)
+        seen.append(out)
+        return out
+    return wrapped

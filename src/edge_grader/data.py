@@ -33,6 +33,11 @@ class Item:
     label: str  # in the chosen scheme
 
 
+def question_id(answer_id: str) -> str:
+    """'EM.45b.299.1' -> 'EM.45b': the unit and question parts of an answer id."""
+    return ".".join(answer_id.split(".")[:2])
+
+
 def labels_for(scheme: str) -> list[str]:
     return sorted(set(SCHEMES[scheme].values()))
 

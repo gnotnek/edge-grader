@@ -21,12 +21,16 @@ dev = [
     "pytest>=8.0",
     "ruff>=0.6",
 ]
+embed = [
+    "sentence-transformers>=6.1.0",
+]
 rag = [
+    "numpy>=2.4.6",
     "pymupdf>=1.28.2",
 ]
-# Added when those stages start (uv add --group rag ... / --group finetune ...):
-#   rag:      sentence-transformers, numpy (pymupdf added)
-#   finetune: runs on Kaggle/Colab with Unsloth, not on this machine
+# rag:   extract and chunk the material (runs on this Mac)
+# embed: the embedding model, with torch; build indexes on Kaggle (this Mac doesn't run models)
+# finetune (stage 3): runs on Kaggle/Colab with Unsloth, not on this machine
 
 [build-system]
 requires = ["hatchling"]
