@@ -42,6 +42,7 @@ if [ -f /etc/nv_tegra_release ]; then
   LLAMA_SERVER="${LLAMA_SERVER:-$HOME/build/llama.cpp/build/bin/llama-server}"
   MODEL_DIR="${MODEL_DIR:-$HOME/research/models}"
   NGL=99
+  THREADS=""
   # ~/research is an exFAT SSD (no symlinks); deploy.sh puts the venv here.
   export UV_PROJECT_ENVIRONMENT="${UV_PROJECT_ENVIRONMENT:-$HOME/venvs/edge-grader}"
 elif grep -qi raspberry /proc/device-tree/model 2>/dev/null; then
@@ -50,6 +51,9 @@ elif grep -qi raspberry /proc/device-tree/model 2>/dev/null; then
   LLAMA_SERVER="${LLAMA_SERVER:-/home/mitlab/llama.cpp/build/bin/llama-server}"
   MODEL_DIR="${MODEL_DIR:-/home/mitlab/models}"
   NGL=0
+  # Every agentic-edge Pi run serves with -t 3 (va-llm, std_mmlupro.sh); without
+  # it llama.cpp takes all 4 cores and the Pi's speed and energy stop matching.
+  THREADS="-t 3"
 else
   echo "not a Pi 5 or Jetson; on other machines start llama-server yourself and run" >&2
   echo "  uv run edge-grader-baseline --label <name> --split $SPLIT --n $N" >&2
@@ -102,9 +106,10 @@ sleep 2
 STAMP="python3 $AE/stamp.py"
 [ -f "$AE/stamp.py" ] || STAMP=cat
 
-# The agentic-edge baseline flags (baselines.json "mmlupro-baseline"): thinking off.
+# The agentic-edge baseline flags (baselines.json "mmlupro-baseline"): thinking off,
+# in the same order as the lab's command line.
 echo "$(date) starting llama-server on $BOARD: $(basename "$MODEL")"
-nohup sh -c "$LLAMA_SERVER -m $MODEL -c 8192 --host 127.0.0.1 --port $PORT -ngl $NGL \
+nohup sh -c "$LLAMA_SERVER -m $MODEL $THREADS -c 8192 --host 127.0.0.1 --port $PORT -ngl $NGL \
   -rea off --reasoning-budget -1 --cache-ram 0 2>&1 | $STAMP" \
   > "$SRVLOG" 2>&1 < /dev/null &
 for _ in $(seq 150); do curl -sf "localhost:$PORT/health" >/dev/null 2>&1 && break; sleep 2; done
