@@ -36,6 +36,8 @@
 
 ## Grading cost (estimated)
 
+> **Superseded by measurement (2026-10-05).** Board runs on test_ua came in 10–35% under this estimate, with the same Kaggle accuracy and a Pi/Jetson gap of 7.7–8.8× in latency and 7.0–7.8× in energy. Measured numbers and the reasons for the gap: [`baselines.md`](baselines.md#the-estimate-checked). The method is kept here because the test_uq and test_ud figures still rest on it.
+
 A grading reply is a single label, so the workload is the opposite of MMLU-Pro: **short output, prompt-heavy**. The J per generated token above spreads prefill energy over ~700 generated tokens per question, so multiplying it by a grading reply's 2 tokens would badly underestimate the cost.
 
 The export ([`experiment-full.json.gz`](../../results/reference/agentic-edge/export/README.md)) records, for every MMLU-Pro request on **both** boards, the prompt tokens processed, the prefill and decode time, and board power. llama-server reuses the cached 5-shot prefix, so the median request processed only ~180 new prompt tokens. That's about the size of a grading prompt (~155–166), so the rates are measured at the right scale. `src/edge_grader/cost.py` fits them per board and model, on the 253 requests with ≤ 600 prompt tokens:
@@ -51,6 +53,6 @@ Then, for each graded answer: **latency = prefill(prompt tokens) + output tokens
 
 - **This replaces the older Pi 5 prefill figures** (E2B ~67–73, E4B ~32–36 tok/s). Those came from the Sep-14 engine comparison, run with different flags and longer prompts. With the current flags (`-t 3`) and prompts this short, prefill is about half that speed.
 - **The Jetson's prefill wasn't in the summary tables, but it is in the export.**
-- **Upper bound:** the fit is applied to the full grading prompt. Any prefix llama-server reuses between consecutive grading requests would make the real cost lower.
+- **Upper bound, for a different reason than expected:** the fit is applied to the full grading prompt, and measurement showed no prefix reuse at all. The real cost is lower because the fitted MMLU-Pro requests attended over a ~2,000-token cached context, which slows prefill and decode; a grading request has ~165 tokens of context.
 - Kaggle T4 latency doesn't carry over to the boards.
-- To check the estimate, one short measured run (`scripts/board_grade.sh e2b test_ua`) is the cheapest option. It's optional.
+- Checked by measured runs on both boards (test_ua, E2B + E4B): see the note at the top of this section.

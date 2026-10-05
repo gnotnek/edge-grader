@@ -1,6 +1,6 @@
 # Plan: steps and timeline
 
-*Last updated 2026-09-29. Tick steps off as they're done, and move dates when reality changes, noting why at the bottom. The research questions and the reasoning for each stage are in [`research-outline.md`](research-outline.md).*
+*Last updated 2026-10-05. Tick steps off as they're done, and move dates when reality changes, noting why at the bottom. The research questions and the reasoning for each stage are in [`research-outline.md`](research-outline.md).*
 
 **Weeks are counted from the internship start**, taken as the week of 2026-09-14 (two weeks had passed by 2026-09-26). The internship ends around mid-December.
 
@@ -8,7 +8,7 @@
 
 | Week | Dates | Stage | Goal | Checkpoint |
 |---|---|---|---|---|
-| 3 | Sep 28 – Oct 4 | 1. Baseline | Grading baseline on Kaggle ✅; board cost estimated ✅ | Baseline table complete: accuracy + cost |
+| 3 | Sep 28 – Oct 4 | 1. Baseline | Grading baseline on Kaggle ✅; board cost estimated ✅, then measured ✅ | Baseline table complete: accuracy + cost ✅ |
 | 4 | Oct 5 – 11 | 2. RAG | Course material chosen, retrieval pipeline built | Retrieval returns the right passage for most questions |
 | 5 | Oct 12 – 18 | 2. RAG | RAG grading runs, all splits, both models | RAG vs baseline table |
 | 6 | Oct 19 – 25 | 3. Fine-tuning | QLoRA pipeline on Kaggle; E2B trained and converted to GGUF | Fine-tuned E2B graded on test_ua |
@@ -28,7 +28,7 @@
 - [x] Kaggle pilot, 100 answers: 0 unparsed, 0 errors
 - [x] Kaggle full splits, E2B + E4B: [`results/kaggle/README.md`](../results/kaggle/README.md)
 - [x] Board cost for E2B + E4B on the Pi 5 and the Jetson, **estimated** from `agentic-edge`'s measured per-request rates and the Kaggle token counts (`uv run edge-grader-cost`), with no new board runs: [`results/baselines.md`](results/baselines.md#cost-on-the-boards-estimated-from-agentic-edge-not-measured)
-- [ ] Measured board check of the estimate and of board accuracy ≈ Kaggle: E2B + E4B, test_ua, on both boards. **Jetson done 2026-09-30** (pulled into `results/board/`; the queue shows "failed" only because no `.done` marker was written then). **Pi 5 queued 2026-10-01** (re-queued with the marker), after the TurboQuant jobs. When done: `scripts/fetch_results.sh`, copy each job's telemetry from `~/Research/measured/edge-grader-*` (Jetson: `~/research/measured/`) into its `results/board/<run>/`, compare with the estimate
+- [x] Measured board check of the estimate and of board accuracy ≈ Kaggle: E2B + E4B, test_ua, on both boards (Jetson 2026-09-30, Pi 5 2026-10-04 at `-t 3`). Board accuracy = Kaggle (McNemar p ≥ 0.25); cost 10–35% under the estimate; Jetson 7.7–8.8× faster, 7.0–7.8× less energy per answer: [`results/baselines.md`](results/baselines.md#cost-on-the-boards-measured-test_ua) (`uv run edge-grader-board-check`)
 - [ ] Supervisor: confirm dropping the robustness section (references already sent)
 
 ### Stage 2: RAG (weeks 4–5)
@@ -89,3 +89,4 @@
 | 2026-09-30 | Stage-1 board runs replaced by a cost estimate from `agentic-edge`'s export; a measured run is now optional | Supervisor: reuse existing benchmarks. The export has per-request prefill and decode rates for both boards at grading-sized prompts |
 | 2026-10-02 | Stage 2 started early, while the Pi 5 board check waits in the queue; RAG pipeline built (chunking, index, retrieval, `--rag`) | The Jetson run confirmed the stage-1 numbers, so stage 1 has a number we trust |
 | 2026-10-03 | RAG scope: **RAG-en is the main condition**; RAG-id optional, with `bge-m3`; **RAG-both dropped**; retrieval settings frozen | Only RAG-en is needed for RQ2. Time goes to fine-tuning (RQ3) and the boards (RQ4). `bge-m3` was the only model that retrieved Indonesian passages well enough for a fair test |
+| 2026-10-05 | Stage 1 done: board cost **measured** on both boards (test_ua), replacing the estimate there; the Pi re-run at `-t 3` | The Pi's first pass used llama.cpp's default 4 threads, unlike every agentic-edge Pi run; grades were identical, speed 5–14% different. The estimate was 10–35% high, so measured numbers are quoted from now on |

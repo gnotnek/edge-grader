@@ -1,6 +1,6 @@
 # Research outline
 
-*Last updated 2026-09-29. The source of truth for what this project is trying to answer. Update it when the supervisor changes direction, and log the reason in the decisions table below.*
+*Last updated 2026-10-05. The source of truth for what this project is trying to answer. Update it when the supervisor changes direction, and log the reason in the decisions table below.*
 
 ## One-line summary
 
@@ -28,7 +28,7 @@ Measure how well a **small LLM on an edge device** grades students' short answer
 
 | Stage | What | Output |
 |---|---|---|
-| **1. Baseline** | (a) The lab's MMLU-Pro 100-question subset, for subject knowledge. (b) SciEntsBank grading with the untouched model, served by `llama-server` with thinking off | Done: MMLU-Pro (E2B 51.7–52.7%, E4B 65.7–66.0%), grading accuracy per split, and board cost estimated from `agentic-edge`'s rates. See [`results/baselines.md`](results/baselines.md) |
+| **1. Baseline** | (a) The lab's MMLU-Pro 100-question subset, for subject knowledge. (b) SciEntsBank grading with the untouched model, served by `llama-server` with thinking off | Done: MMLU-Pro (E2B 51.7–52.7%, E4B 65.7–66.0%), grading accuracy per split (equal on Kaggle and both boards), and board cost measured on test_ua: Jetson 4.0 / 7.1 J and Pi 5 27.8 / 55.6 J per answer (E2B / E4B). See [`results/baselines.md`](results/baselines.md) |
 | **2. RAG** | Chunk open school-science material matched to SciEntsBank's topics (Utah OER textbooks + Wikipedia; Indonesian Kurikulum Merdeka books as an optional cross-lingual test); embed with a small model; retrieve the top 3 chunks per question into the grading prompt. Retrieval is done once per question, ahead of time | Improvement over the baseline, per split. Pipeline and retrieval check done: [`results/rag.md`](results/rag.md) |
 | **3. Fine-tuning** | QLoRA with Unsloth on Kaggle/Colab, trained on the SciEntsBank train split; convert to GGUF and serve like the others | Improvement over the baseline; RAG vs fine-tuning vs both |
 | **4. Edge cost** | Run every version on the Pi 5 / Jetson with `scripts/board_grade.sh` (agentic-edge's `run_measured.sh` telemetry) | Accuracy vs latency and energy chart |
@@ -84,7 +84,7 @@ Decisions made while doing the work, not from the supervisor. Each has to serve 
 
 | Date | Decision | Why | RQ |
 |---|---|---|---|
-| 2026-09-30 | Stage-1 board cost **estimated** from `agentic-edge`'s per-request rates, then checked with one measured run per board | Supervisor: reuse the lab's benchmarks. The Jetson check matched Kaggle accuracy, and the estimate was an upper bound (17–25% high) | RQ4 |
+| 2026-09-30 | Stage-1 board cost **estimated** from `agentic-edge`'s per-request rates, then checked with one measured run per board | Supervisor: reuse the lab's benchmarks. Both boards matched Kaggle accuracy; the estimate was 10–35% high, so measured test_ua numbers replace it (2026-10-05) | RQ4 |
 | 2026-10-02 | RAG chunks built on the Mac and uploaded as a **private** Kaggle dataset, checked by sha256 | A fresh Wikipedia download could change the chunks; the Indonesian books may not be redistributed | RQ2 |
 | 2026-10-02 | Extraction drops front/back matter, references, worksheet prompts and student-directed text | Round-1 Indonesian retrieval returned bibliographies and activity steps | RQ2 |
 | 2026-10-02 | Small CPU-only models (embeddings) may run on the Mac; Gemma still runs on Kaggle or the boards | Owner's instruction; it saves a Kaggle round trip per retrieval change | — |

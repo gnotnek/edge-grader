@@ -10,7 +10,7 @@ Part of an internship at the NTUST MIT Lab. It builds on the lab's `agentic-edge
 
 | Stage | What | Status |
 |---|---|---|
-| 1. Baseline | Untouched model grades SciEntsBank answers; the lab's MMLU-Pro subset as a second baseline | MMLU-Pro copied; grading done on Kaggle (E4B 67–70%, E2B 55–60%); board cost pending ([docs/baselines.md](docs/results/baselines.md)) |
+| 1. Baseline | Untouched model grades SciEntsBank answers; the lab's MMLU-Pro subset as a second baseline | Done: MMLU-Pro copied; grading on Kaggle (E4B 67–70%, E2B 55–60%), same accuracy on both boards; cost measured on test_ua (Jetson 4–7 J, Pi 5 28–56 J per answer) ([docs/results/baselines.md](docs/results/baselines.md)) |
 | 2. RAG | Retrieve course material (open textbooks) into the prompt | — |
 | 3. Fine-tuning | QLoRA on Kaggle/Colab, converted to GGUF | — |
 | 4. Edge cost | Latency and energy per answer on the Pi 5 / Jetson, for each stage | — |
@@ -47,7 +47,7 @@ scripts/deploy.sh              # both boards (or: pi | jetson)
 scripts/fetch_results.sh       # later: pull results/board/ back here to commit
 ```
 
-Stage 1 board cost is **estimated**, not measured (`uv run edge-grader-cost results/kaggle/baseline-*.json`; see `docs/results/baselines.md`). A measured run is optional, to check the estimate. On the board, with `agentic-edge` deployed and the board idle:
+Stage 1 board cost is **measured** on test_ua, both boards (`docs/results/baselines.md`); the earlier estimate (`uv run edge-grader-cost`) is kept for the other splits. After fetching runs, `uv run edge-grader-board-check results/board/<run>/ ...` compares them with Kaggle and the estimate. On the board, with `agentic-edge` deployed and the board idle:
 
 ```bash
 ssh MITLAB-EDGE                              # or MITLAB-JETSON (~/research/...)
@@ -97,6 +97,7 @@ src/edge_grader/
   metrics.py    accuracy, F1
   baseline.py   stage-1 CLI
   cost.py       board cost estimate from agentic-edge rates (edge-grader-cost)
+  board_check.py  board runs vs Kaggle accuracy and the estimate (edge-grader-board-check)
   rag/          stage 2: sources.json + sources.py (material, downloader), corpus.py (chunks),
                 index.py (embed, retrieve), check.py (retrieval check); see docs/guides/rag.md
 notebooks/
