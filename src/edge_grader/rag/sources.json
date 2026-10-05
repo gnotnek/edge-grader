@@ -1,2187 +1,2169 @@
 {
-  "about": "RAG source material. Downloaded by `python -m edge_grader.rag.sources` into data/rag/raw/ (git-ignored). Books: sha256 pinned after the first download; a mismatch means the file changed upstream. Wikipedia: topics per SciEntsBank (FOSS) unit, English from Simple English Wikipedia (English Wikipedia if missing), Indonesian from the interlanguage link; `pinned` records the revision fetched.",
-  "books": [
-    {
-      "id": "en-utah-seed-g3",
-      "lang": "en",
-      "grade": 3,
-      "title": "Utah OER Textbooks: 3rd Grade SEEd",
-      "edition": "2025-2026 school year",
-      "publisher": "Utah State Board of Education (Utah OER Textbook Project)",
-      "licence": "CC BY-NC",
-      "page_url": "https://emedia.uen.org/courses/utah-oer-textbooks-3rd-grade-seed",
-      "url": "https://drive.usercontent.google.com/download?id=1PO8fXPReDCbeQDbu2oN383P59djBmAmV&export=download&confirm=t",
-      "sha256": "6a528ce5fb3cf507fa1d694cbd931b48dcd5df87389f6d9b7abdd829b3d0b938",
-      "benchmark": "scientsbank"
-    },
-    {
-      "id": "en-utah-seed-g4",
-      "lang": "en",
-      "grade": 4,
-      "title": "Utah OER Textbooks: 4th Grade SEEd",
-      "edition": "2025-2026 school year",
-      "publisher": "Utah State Board of Education (Utah OER Textbook Project)",
-      "licence": "CC BY-NC",
-      "page_url": "https://emedia.uen.org/courses/utah-oer-textbooks-4th-grade-seed",
-      "url": "https://drive.usercontent.google.com/download?id=1IzJ_C8G6np3QvhMsWXv_r-XYNM-sLpKg&export=download&confirm=t",
-      "sha256": "7ae3548092b20d8f0fb41e435757b45f39cc7ef7a7213be601064841d0109b15",
-      "benchmark": "scientsbank"
-    },
-    {
-      "id": "en-utah-seed-g5",
-      "lang": "en",
-      "grade": 5,
-      "title": "Utah OER Textbooks: 5th Grade SEEd",
-      "edition": "2025-2026 school year",
-      "publisher": "Utah State Board of Education (Utah OER Textbook Project)",
-      "licence": "CC BY-NC",
-      "page_url": "https://emedia.uen.org/courses/utah-oer-textbooks-5th-grade-seed",
-      "url": "https://drive.usercontent.google.com/download?id=1um7uXLBJg47pDzjrTJqmBYNCmdJLWv-k&export=download&confirm=t",
-      "sha256": "0ee7d47ef61b5ac2352d43de74b5a9e6c3c398e508ca6bbcb6db3fdf7047d62f",
-      "benchmark": "scientsbank"
-    },
-    {
-      "id": "en-utah-seed-g6",
-      "lang": "en",
-      "grade": 6,
-      "title": "Utah OER Textbooks: 6th Grade SEEd",
-      "edition": "2025-2026 school year",
-      "publisher": "Utah State Board of Education (Utah OER Textbook Project)",
-      "licence": "CC BY-NC",
-      "page_url": "https://emedia.uen.org/courses/utah-oer-textbooks-6th-grade-seed",
-      "url": "https://drive.usercontent.google.com/download?id=1FF3LoJlkPu6ZFsVfJzEDdg3odl-79aer&export=download&confirm=t",
-      "sha256": "2c5afd019b858ad91b989c784c001022d2aa4ff5047aecd027549e6308c19552",
-      "benchmark": "scientsbank"
-    },
-    {
-      "id": "en-utah-seed-g7",
-      "lang": "en",
-      "grade": 7,
-      "title": "Utah OER Textbooks: 7th Grade SEEd",
-      "edition": "2025-2026 school year",
-      "publisher": "Utah State Board of Education (Utah OER Textbook Project)",
-      "licence": "CC BY-NC",
-      "page_url": "https://emedia.uen.org/courses/utah-oer-textbooks-7th-grade-seed",
-      "url": "https://drive.usercontent.google.com/download?id=1TxnztvBQFRFVHtbYP3pRRac3lt5CFwOu&export=download&confirm=t",
-      "sha256": "4dbeaacbc12c404c6a48b8773130efb22fe3eb3e3b74abd8335213c46b1919cb",
-      "benchmark": "scientsbank"
-    },
-    {
-      "id": "en-utah-seed-g8",
-      "lang": "en",
-      "grade": 8,
-      "title": "Utah OER Textbooks: 8th Grade SEEd",
-      "edition": "2025-2026 school year",
-      "publisher": "Utah State Board of Education (Utah OER Textbook Project)",
-      "licence": "CC BY-NC",
-      "page_url": "https://emedia.uen.org/courses/utah-oer-textbooks-8th-grade-seed",
-      "url": "https://drive.usercontent.google.com/download?id=1Cuq4WQwCF8H69qF8gFLTQkZwTpWVJw_K&export=download&confirm=t",
-      "sha256": "e6fb312f765dafbc57df05bb8f3d71b0bb689072398487c2ffd7d698a9a32071",
-      "benchmark": "scientsbank"
-    },
-    {
-      "id": "id-ipas-kelas3",
-      "lang": "id",
-      "grade": 3,
-      "title": "Ilmu Pengetahuan Alam dan Sosial untuk SD/MI Kelas III (Edisi Revisi), Buku Siswa",
-      "edition": "Kurikulum Merdeka, edisi revisi, 2025",
-      "publisher": "Pusat Perbukuan, Kemendikdasmen",
-      "isbn": "978-634-00-2163-9",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-dan-sosial-untuk-sdmi-kelas-iii-edisi-revisi",
-      "url": "https://static.sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPAS_BS_KLS_III.pdf",
-      "sha256": "2df6ea081c03a4adbb005098c0e7423f673f2899684bb42dcb857bfa11e95163",
-      "benchmark": "scientsbank"
-    },
-    {
-      "id": "id-ipas-kelas4",
-      "lang": "id",
-      "grade": 4,
-      "title": "Ilmu Pengetahuan Alam dan Sosial untuk SD/MI Kelas IV (Edisi Revisi), Buku Siswa",
-      "edition": "Kurikulum Merdeka, edisi revisi, 2024",
-      "publisher": "Pusat Perbukuan, Kemendikdasmen",
-      "isbn": "978-623-118-445-0",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-dan-sosial-untuk-sd-mi-kelas-iv-edisi-revisi",
-      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPAS_BS_KLS_IV_Rev.pdf",
-      "sha256": "208f3e472dd58a8dfa905c774f0f0c2c5a93bcf948e93d284013383daf2351bb",
-      "benchmark": "scientsbank"
-    },
-    {
-      "id": "id-ipas-kelas5",
-      "lang": "id",
-      "grade": 5,
-      "title": "Ilmu Pengetahuan Alam dan Sosial untuk SD/MI Kelas V (Edisi Revisi), Buku Siswa",
-      "edition": "Kurikulum Merdeka, edisi revisi, 2024",
-      "publisher": "Pusat Perbukuan, Kemendikdasmen",
-      "isbn": "978-623-388-160-9",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-dan-sosial-untuk-sd-mi-kelas-v-edisi-revisi",
-      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPAS_BS_KLS_V_Rev.pdf",
-      "sha256": "d54e2a5ee4504f01f839e1c13646318c6b2fec3f92c412615241b9667e7d71ed",
-      "benchmark": "scientsbank"
-    },
-    {
-      "id": "id-ipas-kelas6",
-      "lang": "id",
-      "grade": 6,
-      "title": "Ilmu Pengetahuan Alam dan Sosial untuk SD/MI Kelas VI (Edisi Revisi), Buku Siswa",
-      "edition": "Kurikulum Merdeka, edisi revisi, 2025",
-      "publisher": "Pusat Perbukuan, Kemendikdasmen",
-      "isbn": "978-634-00-2164-6",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-dan-sosial-untuk-sdmi-kelas-vi-edisi-revisi",
-      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPAS_BS_KLS_VI_Rev.pdf",
-      "sha256": "a22e862bfbf0192eca043c2ad3c7666defcae0f50cfdbbeeb1ff9fb28d907397",
-      "benchmark": "scientsbank"
-    },
-    {
-      "id": "id-ipa-kelas7",
-      "lang": "id",
-      "grade": 7,
-      "title": "Ilmu Pengetahuan Alam untuk SMP/MTs Kelas VII (Edisi Revisi), Buku Siswa",
-      "edition": "Kurikulum Merdeka, edisi revisi, 2024",
-      "publisher": "Pusat Perbukuan, Kemendikdasmen",
-      "isbn": "978-623-118-457-3",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-untuk-smp-mts-kelas-vii-edisi-revisi",
-      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPA_BS_KLS_VII_Rev.pdf",
-      "sha256": "5e2923ed8ff94b09e50fd2316745dfee7ad77f20619d2b3e1974755ba8217c42",
-      "benchmark": "scientsbank"
-    },
-    {
-      "id": "id-ipa-kelas8",
-      "lang": "id",
-      "grade": 8,
-      "title": "Ilmu Pengetahuan Alam untuk SMP/MTs Kelas VIII (Edisi Revisi), Buku Siswa",
-      "edition": "Kurikulum Merdeka, edisi revisi, 2024",
-      "publisher": "Pusat Perbukuan, Kemendikdasmen",
-      "isbn": "978-623-388-560-7",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-untuk-smp-mts-kelas-viii-edisi-revisi",
-      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPA_BS_KLS_VIII_Rev.pdf",
-      "sha256": "d1ec9c1c6d2d9a14f95cd775a9c626db3df11b55b8ceb5131de4bc4a230fee28",
-      "benchmark": "scientsbank"
-    },
-    {
-      "id": "id-ipa-kelas9",
-      "lang": "id",
-      "grade": 9,
-      "title": "Ilmu Pengetahuan Alam untuk SMP/MTs Kelas IX (Edisi Revisi), Buku Siswa",
-      "edition": "Kurikulum Merdeka, edisi revisi",
-      "publisher": "Pusat Perbukuan, Kemendikdasmen",
-      "isbn": "978-634-00-2430-2",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-untuk-smpmts-kelas-ix-edisi-revisi",
-      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPA_BS_KLS_IX_Rev.pdf",
-      "sha256": "c888ef46df63be72e049b8fcd6316ee1ae4a22871724739fda02f5df17dc0639",
-      "benchmark": "scientsbank"
-    },
-    {
-      "id": "en-openstax-calculus-volume-1",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "math"
-      ],
-      "title": "Calculus Volume 1",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/calculus-volume-1",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/calculus-volume-1_-_WEB.pdf",
-      "sha256": "7303513c1927b9b6d04d150502e769cc1821638a24c774e2f6bba82bf9875990"
-    },
-    {
-      "id": "en-openstax-calculus-volume-2",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "math"
-      ],
-      "title": "Calculus Volume 2",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/calculus-volume-2",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/calculus-volume-2_-_WEB.pdf",
-      "sha256": "f6ac06038088711766e5b664a8114c8fcb0b7b88cfb38e92bbaf56ba2df43f4a"
-    },
-    {
-      "id": "en-openstax-introductory-statistics-2e",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "math"
-      ],
-      "title": "Introductory Statistics 2e",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/introductory-statistics-2e",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/introductory-statistics-2e_-_WEB.pdf",
-      "sha256": "a79a953b75e570030c74ea6f700b8bd70f41dc8c01bf4e9618e6a0adba3a382a"
-    },
-    {
-      "id": "en-openstax-university-physics-volume-1",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "physics",
-        "engineering"
-      ],
-      "title": "University Physics Volume 1",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/university-physics-volume-1",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/university-physics-volume-1_-_WEB.pdf",
-      "sha256": "93652b69c43197d10dc83438b813b5f7515e61e7ea4336da8636ff902cb4aba8"
-    },
-    {
-      "id": "en-openstax-university-physics-volume-2",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "physics",
-        "engineering"
-      ],
-      "title": "University Physics Volume 2",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/university-physics-volume-2",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/university-physics-volume-2_-_WEB.pdf",
-      "sha256": "3f5d8d0e38ba663c84a036b54cf6087bc2836adca553cb7849f2c0e85e97a445"
-    },
-    {
-      "id": "en-openstax-university-physics-volume-3",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "physics",
-        "engineering"
-      ],
-      "title": "University Physics Volume 3",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/university-physics-volume-3",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/university-physics-volume-3_-_WEB.pdf",
-      "sha256": "311c6beb70bb9cc6073d40a6085d290a82afde2b38e9aaf672ccb6de0542541b"
-    },
-    {
-      "id": "en-openstax-chemistry-2e",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "chemistry"
-      ],
-      "title": "Chemistry 2e",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/chemistry-2e",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/chemistry-2e_-_WEB.pdf",
-      "sha256": "fd89db1b8a1fee06b8ad3e8982f4f4b34bde4e93654a4ce28b724f8c0efe98d6"
-    },
-    {
-      "id": "en-openstax-organic-chemistry",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "chemistry"
-      ],
-      "title": "Organic Chemistry: A Tenth Edition",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/organic-chemistry",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/organic-chemistry_-_WEB.pdf",
-      "sha256": "d57b7da43589eaf94de53a06bb17b20a856bbde57020e7a0ee4be312085001c4"
-    },
-    {
-      "id": "en-openstax-business-law-i-essentials-2e",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "law",
-        "business"
-      ],
-      "title": "Business Law I Essentials 2e",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/business-law-i-essentials-2e",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Business_Law_I_Essentials_2e_-_WEB.pdf",
-      "sha256": "6e7b5db71416d923ae0007154edad4288c98f8efcb2f93870fb6e4ab31baad4f"
-    },
-    {
-      "id": "en-openstax-introduction-intellectual-property",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "law"
-      ],
-      "title": "Introduction to Intellectual Property",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution License 4.0",
-      "page_url": "https://openstax.org/details/books/introduction-intellectual-property",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/introduction-intellectual-property_-_WEB.pdf",
-      "sha256": "1498509864d37cb63a6ccc11bab7c783f3d30b2ed37d808ef80c56fdb676378a"
-    },
-    {
-      "id": "en-openstax-american-government-4e",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "law"
-      ],
-      "title": "American Government 4e",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/american-government-4e",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/American_Government_4e_-_WEB_eM2Tuqh.pdf",
-      "sha256": "71e30f1c28a649dd72a6664a7add1462c0672df82b66d1bc282c4a47dd12e1be"
-    },
-    {
-      "id": "en-openstax-principles-management",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "other",
-        "business"
-      ],
-      "title": "Principles of Management",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/principles-management",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/principles-management_-_WEB.pdf",
-      "sha256": "59ea3ea149d631f57c26279d5ac71f588121ebc56c1a25eb6c76f011c9765b6d"
-    },
-    {
-      "id": "en-openstax-principles-marketing",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "other",
-        "business"
-      ],
-      "title": "Principles of Marketing",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/principles-marketing",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/principles-marketing_-_WEB.pdf",
-      "sha256": "7764b41cf778a8bb560f00ee3ed2c8c2d623575540c1b6702ed7429c745bcd31"
-    },
-    {
-      "id": "en-openstax-introduction-business-2e",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "business"
-      ],
-      "title": "Introduction to Business 2e",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/introduction-business-2e",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Introduction_to_Business_2e_-_WEB.pdf",
-      "sha256": "2001b3e30587ceea8f351b11cccb64f8f678860014617d5706a7e27d478ecdc2"
-    },
-    {
-      "id": "en-openstax-principles-financial-accounting",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "business"
-      ],
-      "title": "Principles of Accounting, Volume 1: Financial Accounting",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/principles-financial-accounting",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/principles-financial-accounting_-_WEB.pdf",
-      "sha256": "a98ed7dcb92eec2bd70f32b150aa4f1d3140ad78bb1477e86a31682ec5ac31e5"
-    },
-    {
-      "id": "en-openstax-principles-finance-2e",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "business"
-      ],
-      "title": "Principles of Finance 2e",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/principles-finance-2e",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Principles_of_Finance_2e_-_WEB_.pdf",
-      "sha256": "7d942df1aaf2fc3edcc7f681955cdabecdd0d4e4c754469f0bea159461a6ad79"
-    },
-    {
-      "id": "en-openstax-principles-economics-3e",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "economics"
-      ],
-      "title": "Principles of Economics 3e",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/principles-economics-3e",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/principles-economics-3e_-_WEB.pdf",
-      "sha256": "2d2e7549e13a1975965bfb14a577a3d7935173ff10ca2e1d953815560590a4eb"
-    },
-    {
-      "id": "en-openstax-anatomy-and-physiology-2e",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "health"
-      ],
-      "title": "Anatomy and Physiology 2e",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/anatomy-and-physiology-2e",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/anatomy-and-physiology-2e_-_WEB.pdf",
-      "sha256": "aa2e577b2083c343f4d57b38f00dd935dd2d98befdb38c0f368d72d636d0ff46"
-    },
-    {
-      "id": "en-openstax-psychology-2e",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "psychology"
-      ],
-      "title": "Psychology 2e",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/psychology-2e",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Psychology2e_WEB.pdf",
-      "sha256": "2f08113c78127bc684922ad6a819db22bd4705ce9fcf28a07f36a2041b1474e2"
-    },
-    {
-      "id": "en-openstax-biology-2e",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "biology"
-      ],
-      "title": "Biology 2e",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/biology-2e",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Biology-2e_-_WEB.pdf",
-      "sha256": "4d1f413fd779f114838cdaeab7859dcb2922ca7529230d3bfd7d36a77b4e27b6"
-    },
-    {
-      "id": "en-openstax-introduction-philosophy",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "philosophy"
-      ],
-      "title": "Introduction to Philosophy",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/introduction-philosophy",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Introduction_to_Philosophy-WEB.pdf",
-      "sha256": "ec94e28ddb86bfb6d7703a8487124501164caa79624791ad7eadb24efada96e5"
-    },
-    {
-      "id": "en-openstax-introduction-computer-science",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "computer_science"
-      ],
-      "title": "Introduction to Computer Science",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/introduction-computer-science",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Introduction_To_Computer_Science_-_WEB.pdf",
-      "sha256": "fd56aaf80c851e9f3b417745785ea5c832fc2911acfd2094a86f4c517fdf435a"
-    },
-    {
-      "id": "en-openstax-world-history-volume-1",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "history"
-      ],
-      "title": "World History, Volume 1: to 1500",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/world-history-volume-1",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/World_History_Volume_1-WEB.pdf",
-      "sha256": "227436a3d3951dc777f63a7e5d3329f2c095e2ccf5782ae192f22c40d831a4cf"
-    },
-    {
-      "id": "en-openstax-world-history-volume-2",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "history"
-      ],
-      "title": "World History, Volume 2: from 1400",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/world-history-volume-2",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/World_History_Volume_2-WEB.pdf",
-      "sha256": "57be7ba027ed9f66d9e4594493f56e6a9028bd72c166e62dcd07e72a5266f948"
-    },
-    {
-      "id": "en-openstax-us-history",
-      "lang": "en",
-      "benchmark": "mmlupro",
-      "subjects": [
-        "history"
-      ],
-      "title": "U.S. History",
-      "edition": "OpenStax, current web edition",
-      "publisher": "OpenStax, Rice University",
-      "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
-      "page_url": "https://openstax.org/details/books/us-history",
-      "url": "https://assets.openstax.org/oscms-prodcms/media/documents/US_History_-_WEB.pdf",
-      "sha256": "b1330275566d9847623394ad29173f9a6f1c9f9270279e00cd5da2ac366ea5c8"
-    },
-    {
-      "id": "id-sma-biologi-kelas12",
-      "lang": "id",
-      "grade": 12,
-      "benchmark": "mmlupro",
-      "subjects": [
-        "biology",
-        "health"
-      ],
-      "title": "Biologi untuk SMA Kelas XII, Buku Siswa",
-      "edition": "Kurikulum Merdeka",
-      "publisher": "",
-      "isbn": "978-602-427-958-5",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/biologi-untuk-sma-kelas-xii",
-      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Biologi_BS_KLS_XII_Rev.pdf",
-      "sha256": "cf4b19d3e6abed8c5c376eeda51e356514b4080e5c4e967779afde60d12b3132"
-    },
-    {
-      "id": "id-sma-biologi-kelas11",
-      "lang": "id",
-      "grade": 11,
-      "benchmark": "mmlupro",
-      "subjects": [
-        "biology",
-        "health"
-      ],
-      "title": "Biologi untuk SMA/MA Kelas XI, Buku Siswa",
-      "edition": "Kurikulum Merdeka",
-      "publisher": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
-      "isbn": "978-602-427-893-9",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/biologi-untuk-smama-kelas-xi",
-      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Biologi-BS-KLS-XI.pdf",
-      "sha256": "72d3492ee1fefbc711d9fb20bbd70dcc8d41f69310def44e2261a0b579d60461"
-    },
-    {
-      "id": "id-sma-fisika-kelas12",
-      "lang": "id",
-      "grade": 12,
-      "benchmark": "mmlupro",
-      "subjects": [
-        "physics",
-        "engineering"
-      ],
-      "title": "Fisika untuk SMA/MA Kelas XII, Buku Siswa",
-      "edition": "Kurikulum Merdeka",
-      "publisher": "",
-      "isbn": "978-623-472-722-7",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/fisika-untuk-smama-kelas-xii",
-      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Fisika_BS_KLS_XII.pdf",
-      "sha256": "49dc10fcafcf13f2df6345b6a7706c8ed039145ea83f69bcea31bdf0fc2320b6"
-    },
-    {
-      "id": "id-sma-fisika-kelas11",
-      "lang": "id",
-      "grade": 11,
-      "benchmark": "mmlupro",
-      "subjects": [
-        "physics",
-        "engineering"
-      ],
-      "title": "Fisika untuk SMA/MA Kelas XI, Buku Siswa",
-      "edition": "Kurikulum Merdeka",
-      "publisher": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
-      "isbn": "978-623-472-721-0",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/fisika-untuk-smama-kelas-xi",
-      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Fisika-BS-KLS-XI.pdf",
-      "sha256": "88e3e464ef384b7933a86826a2cf010ee8f0cf7e97fab429f6dcd4be0aa65b1e"
-    },
-    {
-      "id": "id-sma-kimia-kelas12",
-      "lang": "id",
-      "grade": 12,
-      "benchmark": "mmlupro",
-      "subjects": [
-        "chemistry"
-      ],
-      "title": "Kimia untuk SMA/MA Kelas XII, Buku Siswa",
-      "edition": "Kurikulum Merdeka",
-      "publisher": "",
-      "isbn": "978-602-427-968-4",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/kimia-untuk-smama-kelas-xii",
-      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Kimia_BS_KLS_XII.pdf",
-      "sha256": "ef995b2f4898c2b7808cd4c1939247b92d98e2d0eae63abec54dec50ebeb7ffa"
-    },
-    {
-      "id": "id-sma-kimia-kelas11",
-      "lang": "id",
-      "grade": 11,
-      "benchmark": "mmlupro",
-      "subjects": [
-        "chemistry"
-      ],
-      "title": "Kimia untuk SMA/MA Kelas XI, Buku Siswa",
-      "edition": "Kurikulum Merdeka",
-      "publisher": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
-      "isbn": "978-602-427-923-3",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/kimia-untuk-smama-kelas-xi",
-      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Kimia-BS-KLS-XI.pdf",
-      "sha256": "a1b62b12e286da86dc0b11d4b370080536089d1ff15b0ed01438f28e181c238f"
-    },
-    {
-      "id": "id-sma-matematika-tl-kelas12",
-      "lang": "id",
-      "grade": 12,
-      "benchmark": "mmlupro",
-      "subjects": [
-        "math"
-      ],
-      "title": "Matematika Tingkat Lanjut untuk SMA/MA Kelas XII (Edisi Revisi), Buku Siswa",
-      "edition": "Kurikulum Merdeka, edisi revisi",
-      "publisher": "Pusat Perbukuan",
-      "isbn": "978-634-00-3296-3",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/matematika-tingkat-lanjut-untuk-smama-kelas-xii-edisi-revisi",
-      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Matematika_BS_XII_TL_Rev.pdf",
-      "sha256": "ac458f4296c120c84aff66036d379cde8729f09aeceae6a99ddbe072edbb54ac"
-    },
-    {
-      "id": "id-sma-matematika-tl-kelas11",
-      "lang": "id",
-      "grade": 11,
-      "benchmark": "mmlupro",
-      "subjects": [
-        "math"
-      ],
-      "title": "Matematika Tingkat Lanjut untuk SMA/MA Kelas XI (Edisi Revisi), Buku Siswa",
-      "edition": "Kurikulum Merdeka, edisi revisi",
-      "publisher": "Pusat Kurikulum dan Perbukuan",
-      "isbn": "978-623-388-335-1",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/matematika-tingkat-lanjut-untuk-sma-ma-kelas-xi-edisi-revisi",
-      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Matematika_BS_KLS_XI_TL_Rev.pdf",
-      "sha256": "4c77de3511011d574b33db7e6350be9c9984bd9321e632f05a2fd272a2ed9865"
-    },
-    {
-      "id": "id-sma-ekonomi-kelas11",
-      "lang": "id",
-      "grade": 11,
-      "benchmark": "mmlupro",
-      "subjects": [
-        "economics",
-        "business"
-      ],
-      "title": "Ekonomi untuk SMA/MA Kelas XI (Edisi Revisi), Buku Siswa",
-      "edition": "Kurikulum Merdeka, edisi revisi",
-      "publisher": "Pusat Kurikulum dan Perbukuan",
-      "isbn": "978-623-388-196-8",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/ekonomi-untuk-sma-ma-kelas-xi-edisi-revisi",
-      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Ekonomi_BS_KLS_XI_Rev_2.pdf",
-      "sha256": "0b2c6d51e60f87e2a08952c39fabb07d45dab463612899f71d591ff96f541361"
-    },
-    {
-      "id": "id-sma-ekonomi-kelas12",
-      "lang": "id",
-      "grade": 12,
-      "benchmark": "mmlupro",
-      "subjects": [
-        "economics",
-        "business"
-      ],
-      "title": "Ekonomi untuk SMA/MA Kelas XII, Buku Siswa",
-      "edition": "Kurikulum Merdeka",
-      "publisher": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
-      "isbn": "978-602-427-972-1",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/ekonomi-untuk-smama-kelas-xii",
-      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Ekonomi_BS_KLS_XII.pdf",
-      "sha256": "90e1626947087b4ceece21bf773575b050f9ea4f8cf63348d14be4d46fe34c49"
-    },
-    {
-      "id": "id-sma-sejarah-kelas11",
-      "lang": "id",
-      "grade": 11,
-      "benchmark": "mmlupro",
-      "subjects": [
-        "history"
-      ],
-      "title": "Sejarah untuk SMA/MA/SMK/MAK Kelas XI (Edisi Revisi), Buku Siswa",
-      "edition": "Kurikulum Merdeka, edisi revisi",
-      "publisher": "Pusat Perbukuan",
-      "isbn": "978-623-388-489-1",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/sejarah-untuk-smamasmkmak-kelas-xi-edisi-revisi",
-      "url": "https://static.sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Sejarah_BS_Kelas_XI_Rev.pdf",
-      "sha256": "71fa14d783576c4d6e1baa260a4fab5f035897e29935ef67f286f3edce65965d"
-    },
-    {
-      "id": "id-sma-sejarah-kelas12",
-      "lang": "id",
-      "grade": 12,
-      "benchmark": "mmlupro",
-      "subjects": [
-        "history"
-      ],
-      "title": "Sejarah untuk SMA/MA Kelas XII, Buku Siswa",
-      "edition": "Kurikulum Merdeka",
-      "publisher": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
-      "isbn": "978-602-427-965-3",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/sejarah-untuk-smama-kelas-xii",
-      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Sejarah_BS_KLS_XII.pdf",
-      "sha256": "13b558d3fc8cc77d5b6ab8885a3d15c94cf59e2255ea9a37e6e258e85b81bd4d"
-    },
-    {
-      "id": "id-sma-informatika-kelas11",
-      "lang": "id",
-      "grade": 11,
-      "benchmark": "mmlupro",
-      "subjects": [
-        "computer_science"
-      ],
-      "title": "Informatika untuk SMA/MA Kelas XI (Edisi Revisi), Buku Siswa",
-      "edition": "Kurikulum Merdeka, edisi revisi",
-      "publisher": "Pusat Perbukuan",
-      "isbn": "978-623-388-204-0",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/informatika-untuk-smama-kelas-xi-edisi-revisi",
-      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Informatika_BS_KLS_XI_Rev.pdf",
-      "sha256": "985a44240662f23917f0422c46a3f819b85522d66a8cc88e018e090699f38893"
-    },
-    {
-      "id": "id-sma-informatika-kelas12",
-      "lang": "id",
-      "grade": 12,
-      "benchmark": "mmlupro",
-      "subjects": [
-        "computer_science"
-      ],
-      "title": "Informatika untuk SMA/MA Kelas XII, Buku Siswa",
-      "edition": "Kurikulum Merdeka",
-      "publisher": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
-      "isbn": "978-602-427-948-6",
-      "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
-      "page_url": "https://buku.kemendikdasmen.go.id/katalog/informatika-untuk-smama-kelas-xii",
-      "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Informatika_BS_KLS_XII.pdf",
-      "sha256": "f79e684e63f7a6573fe5bac36bfb221dedd034040d06e56973c20ec1fd72efed",
-      "note": "No text layer (0 words extracted from 248 pages); needs OCR before it can be used."
-    }
-  ],
-  "wikipedia": {
-    "licence": "CC BY-SA 4.0",
-    "sites": {
-      "en": [
-        "simple.wikipedia.org",
-        "en.wikipedia.org"
-      ],
-      "id": [
-        "id.wikipedia.org"
-      ]
-    },
-    "topics": {
-      "EM": [
-        "Rock (geology)",
-        "Mineral",
-        "Mohs scale of mineral hardness",
-        "Streak (mineralogy)",
-        "Lustre (mineralogy)",
-        "Crystal"
-      ],
-      "FN": [
-        "Nutrition",
-        "Nutrient",
-        "Protein",
-        "Carbohydrate",
-        "Fat",
-        "Vitamin",
-        "Starch",
-        "Acid"
-      ],
-      "II": [
-        "Chromatography",
-        "Reflection symmetry",
-        "Fingerprint",
-        "Invention"
-      ],
-      "LF": [
-        "Erosion",
-        "Deposition (geology)",
-        "River delta",
-        "Weathering",
-        "Landform",
-        "Topographic map"
-      ],
-      "LP": [
-        "Lever",
-        "Pulley",
-        "Simple machine",
-        "Mechanical advantage"
-      ],
-      "ME": [
-        "Electrical network",
-        "Series and parallel circuits",
-        "Magnet",
-        "Electromagnet",
-        "Electrical conductor",
-        "Insulator (electricity)",
-        "Battery (electricity)",
-        "Switch"
-      ],
-      "MS": [
-        "Measurement",
-        "Unit of measurement",
-        "Metric system",
-        "Thermometer",
-        "Volume",
-        "Mass",
-        "Weight"
-      ],
-      "MX": [
-        "Mixture",
-        "Solution (chemistry)",
-        "Solubility",
-        "Evaporation",
-        "Concentration",
-        "Chemical reaction"
-      ],
-      "PS": [
-        "Sound",
-        "Vibration",
-        "Pitch (music)",
-        "Loudness",
-        "Frequency"
-      ],
-      "SE": [
-        "Solar energy",
-        "Shadow",
-        "Heat",
-        "Heat sink",
-        "Absorption (electromagnetic radiation)"
-      ],
-      "ST": [
-        "Seed",
-        "Germination",
-        "Root",
-        "Biological life cycle",
-        "Adaptation",
-        "Plant"
-      ],
-      "VB": [
-        "Experiment",
-        "Scientific control",
-        "Dependent and independent variables",
-        "Pendulum"
-      ],
-      "EV": [
-        "Ecosystem",
-        "Habitat",
-        "Environment (biophysical)",
-        "Abiotic component",
-        "Tolerance (ecology)"
-      ],
-      "HB": [
-        "Human body",
-        "Muscle",
-        "Bone",
-        "Human skeleton",
-        "Joint",
-        "Tendon"
-      ],
-      "WA": [
-        "Water cycle",
-        "Evaporation",
-        "Condensation",
-        "Thermal expansion",
-        "Freezing",
-        "Density"
-      ]
-    },
-    "pinned": {
-      "Rock (geology)": {
-        "units": [
-          "EM"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Rock (geology)",
-          "revid": 10732274
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Batu",
-          "revid": 29964798
-        }
-      },
-      "Mineral": {
-        "units": [
-          "EM"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Mineral",
-          "revid": 9698148
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Mineral",
-          "revid": 29759227
-        }
-      },
-      "Mohs scale of mineral hardness": {
-        "units": [
-          "EM"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Mohs scale of mineral hardness",
-          "revid": 10961630
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Skala Mohs",
-          "revid": 29909591
-        }
-      },
-      "Streak (mineralogy)": {
-        "units": [
-          "EM"
-        ],
-        "en": {
-          "site": "en.wikipedia.org",
-          "title": "Streak (mineralogy)",
-          "revid": 1357289488
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Gores (mineralogi)",
-          "revid": 25432982
-        }
-      },
-      "Lustre (mineralogy)": {
-        "units": [
-          "EM"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Luster (mineralogy)",
-          "revid": 5709944
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Kilau (mineralogi)",
-          "revid": 29464016
-        }
-      },
-      "Crystal": {
-        "units": [
-          "EM"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Crystal",
-          "revid": 10794932
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Kristal",
-          "revid": 29929200
-        }
-      },
-      "Nutrition": {
-        "units": [
-          "FN"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Nutrition",
-          "revid": 10901140
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Nutrisi",
-          "revid": 29860164
-        }
-      },
-      "Nutrient": {
-        "units": [
-          "FN"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Nutrient",
-          "revid": 10541391
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Nutrien",
-          "revid": 29907462
-        }
-      },
-      "Protein": {
-        "units": [
-          "FN"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Protein",
-          "revid": 10878431
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Protein",
-          "revid": 29962979
-        }
-      },
-      "Carbohydrate": {
-        "units": [
-          "FN"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Carbohydrate",
-          "revid": 10710254
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Karbohidrat",
-          "revid": 29964468
-        }
-      },
-      "Fat": {
-        "units": [
-          "FN"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Fat",
-          "revid": 10802738
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Lemak",
-          "revid": 29906125
-        }
-      },
-      "Vitamin": {
-        "units": [
-          "FN"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Vitamin",
-          "revid": 10835360
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Vitamin",
-          "revid": 29893118
-        }
-      },
-      "Starch": {
-        "units": [
-          "FN"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Starch",
-          "revid": 10182808
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Amilum",
-          "revid": 27977307
-        }
-      },
-      "Acid": {
-        "units": [
-          "FN"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Acid",
-          "revid": 10355002
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Asam",
-          "revid": 29758499
-        }
-      },
-      "Chromatography": {
-        "units": [
-          "II"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Chromatography",
-          "revid": 10347960
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Kromatografi",
-          "revid": 28681292
-        }
-      },
-      "Reflection symmetry": {
-        "units": [
-          "II"
-        ],
-        "en": {
-          "site": "en.wikipedia.org",
-          "title": "Reflection symmetry",
-          "revid": 1377035004
-        },
-        "id": null
-      },
-      "Fingerprint": {
-        "units": [
-          "II"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Fingerprint",
-          "revid": 10725998
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Sidik jari",
-          "revid": 29510247
-        }
-      },
-      "Invention": {
-        "units": [
-          "II"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Invention",
-          "revid": 10542905
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Reka cipta",
-          "revid": 28706447
-        }
-      },
-      "Erosion": {
-        "units": [
-          "LF"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Erosion",
-          "revid": 10939292
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Erosi",
-          "revid": 28947676
-        }
-      },
-      "Deposition (geology)": {
-        "units": [
-          "LF"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Deposition (geology)",
-          "revid": 6945924
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Deposit (geologi)",
-          "revid": 28745874
-        }
-      },
-      "River delta": {
-        "units": [
-          "LF"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "River delta",
-          "revid": 10207271
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Delta sungai",
-          "revid": 29995230
-        }
-      },
-      "Weathering": {
-        "units": [
-          "LF"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Weathering",
-          "revid": 10206787
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Pelapukan",
-          "revid": 28947675
-        }
-      },
-      "Landform": {
-        "units": [
-          "LF"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Landform",
-          "revid": 10044634
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Bentuk lahan",
-          "revid": 27320189
-        }
-      },
-      "Topographic map": {
-        "units": [
-          "LF"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Topographic map",
-          "revid": 9716860
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Peta topografi",
-          "revid": 29889530
-        }
-      },
-      "Lever": {
-        "units": [
-          "LP"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Lever",
-          "revid": 10068195
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Tuas",
-          "revid": 29151411
-        }
-      },
-      "Pulley": {
-        "units": [
-          "LP"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Pulley",
-          "revid": 9515677
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Katrol",
-          "revid": 29920287
-        }
-      },
-      "Simple machine": {
-        "units": [
-          "LP"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Simple machine",
-          "revid": 10270818
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Pesawat sederhana",
-          "revid": 29908372
-        }
-      },
-      "Mechanical advantage": {
-        "units": [
-          "LP"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Mechanical advantage",
-          "revid": 9456440
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Keuntungan mekanis",
-          "revid": 21968455
-        }
-      },
-      "Electrical network": {
-        "units": [
-          "ME"
-        ],
-        "en": {
-          "site": "en.wikipedia.org",
-          "title": "Electrical network",
-          "revid": 1356851024
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Rangkaian listrik",
-          "revid": 28294564
-        }
-      },
-      "Series and parallel circuits": {
-        "units": [
-          "ME"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Series and parallel circuits",
-          "revid": 10966853
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Rangkaian seri dan paralel",
-          "revid": 28592955
-        }
-      },
-      "Magnet": {
-        "units": [
-          "ME"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Magnet",
-          "revid": 11012823
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Magnet",
-          "revid": 29759143
-        }
-      },
-      "Electromagnet": {
-        "units": [
-          "ME"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Electromagnet",
-          "revid": 10795506
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Elektromagnet",
-          "revid": 20913260
-        }
-      },
-      "Electrical conductor": {
-        "units": [
-          "ME"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Electrical conductor",
-          "revid": 10227881
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Penghantar listrik",
-          "revid": 28059978
-        }
-      },
-      "Insulator (electricity)": {
-        "units": [
-          "ME"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Insulator (electricity)",
-          "revid": 10290353
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Insulator listrik",
-          "revid": 29972798
-        }
-      },
-      "Battery (electricity)": {
-        "units": [
-          "ME"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Battery",
-          "revid": 10970964
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Baterai listrik",
-          "revid": 29486190
-        }
-      },
-      "Switch": {
-        "units": [
-          "ME"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Switch",
-          "revid": 8411361
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Sakelar",
-          "revid": 28073514
-        }
-      },
-      "Measurement": {
-        "units": [
-          "MS"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Measurement",
-          "revid": 10859731
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Pengukuran",
-          "revid": 29759337
-        }
-      },
-      "Unit of measurement": {
-        "units": [
-          "MS"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Unit of measurement",
-          "revid": 10795347
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Satuan",
-          "revid": 29433405
-        }
-      },
-      "Metric system": {
-        "units": [
-          "MS"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Metric system",
-          "revid": 11005077
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Sistem metrik",
-          "revid": 29880098
-        }
-      },
-      "Thermometer": {
-        "units": [
-          "MS"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Thermometer",
-          "revid": 10970327
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Termometer",
-          "revid": 29964725
-        }
-      },
-      "Volume": {
-        "units": [
-          "MS"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Volume",
-          "revid": 10870822
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Volume",
-          "revid": 28094677
-        }
-      },
-      "Mass": {
-        "units": [
-          "MS"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Mass",
-          "revid": 10964282
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Massa",
-          "revid": 29759180
-        }
-      },
-      "Weight": {
-        "units": [
-          "MS"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Weight",
-          "revid": 10757715
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Berat",
-          "revid": 26502037
-        }
-      },
-      "Mixture": {
-        "units": [
-          "MX"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Mixture",
-          "revid": 10423695
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Campuran",
-          "revid": 25661058
-        }
-      },
-      "Solution (chemistry)": {
-        "units": [
-          "MX"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Solution (chemistry)",
-          "revid": 10997032
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Larutan",
-          "revid": 28451988
-        }
-      },
-      "Solubility": {
-        "units": [
-          "MX"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Solubility",
-          "revid": 10354818
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Kelarutan",
-          "revid": 29841990
-        }
-      },
-      "Evaporation": {
-        "units": [
-          "MX",
-          "WA"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Evaporation",
-          "revid": 10014572
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Penguapan",
-          "revid": 29265030
-        }
-      },
-      "Concentration": {
-        "units": [
-          "MX"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Concentration",
-          "revid": 10855153
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Konsentrasi",
-          "revid": 28033990
-        }
-      },
-      "Chemical reaction": {
-        "units": [
-          "MX"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Chemical reaction",
-          "revid": 10682850
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Reaksi kimia",
-          "revid": 29579355
-        }
-      },
-      "Sound": {
-        "units": [
-          "PS"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Sound",
-          "revid": 10921598
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Bunyi",
-          "revid": 29918610
-        }
-      },
-      "Vibration": {
-        "units": [
-          "PS"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Vibration",
-          "revid": 10373121
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Getaran",
-          "revid": 29902612
-        }
-      },
-      "Pitch (music)": {
-        "units": [
-          "PS"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Pitch (music)",
-          "revid": 10365855
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Tala",
-          "revid": 29258565
-        }
-      },
-      "Loudness": {
-        "units": [
-          "PS"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Loudness",
-          "revid": 8244824
-        },
-        "id": null
-      },
-      "Frequency": {
-        "units": [
-          "PS"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Frequency",
-          "revid": 10912347
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Frekuensi",
-          "revid": 29902088
-        }
-      },
-      "Solar energy": {
-        "units": [
-          "SE"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Solar energy",
-          "revid": 11011943
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Energi surya",
-          "revid": 29988241
-        }
-      },
-      "Shadow": {
-        "units": [
-          "SE"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Shadow",
-          "revid": 10866028
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Bayang-bayang",
-          "revid": 27985479
-        }
-      },
-      "Heat": {
-        "units": [
-          "SE"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Heat",
-          "revid": 11013545
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Panas",
-          "revid": 29922953
-        }
-      },
-      "Heat sink": {
-        "units": [
-          "SE"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Heat sink",
-          "revid": 8949854
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Pembuang panas",
-          "revid": 28059029
-        }
-      },
-      "Absorption (electromagnetic radiation)": {
-        "units": [
-          "SE"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Absorption (electromagnetic radiation)",
-          "revid": 9884909
-        },
-        "id": null
-      },
-      "Seed": {
-        "units": [
-          "ST"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Seed",
-          "revid": 11007695
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Biji",
-          "revid": 29167632
-        }
-      },
-      "Germination": {
-        "units": [
-          "ST"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Germination",
-          "revid": 9427110
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Perkecambahan",
-          "revid": 28119984
-        }
-      },
-      "Root": {
-        "units": [
-          "ST"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Root",
-          "revid": 10795304
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Akar",
-          "revid": 29984790
-        }
-      },
-      "Biological life cycle": {
-        "units": [
-          "ST"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Life cycle",
-          "revid": 9202256
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Daur hidup organisme",
-          "revid": 27553838
-        }
-      },
-      "Adaptation": {
-        "units": [
-          "ST"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Adaptation",
-          "revid": 10795578
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Adaptasi",
-          "revid": 29520276
-        }
-      },
-      "Plant": {
-        "units": [
-          "ST"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Plant",
-          "revid": 10939710
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Tumbuhan",
-          "revid": 30001873
-        }
-      },
-      "Experiment": {
-        "units": [
-          "VB"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Experiment",
-          "revid": 9574766
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Percobaan",
-          "revid": 29239707
-        }
-      },
-      "Scientific control": {
-        "units": [
-          "VB"
-        ],
-        "en": {
-          "site": "en.wikipedia.org",
-          "title": "Scientific control",
-          "revid": 1375480330
-        },
-        "id": null
-      },
-      "Dependent and independent variables": {
-        "units": [
-          "VB"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Dependent and independent variables",
-          "revid": 9916587
-        },
-        "id": null
-      },
-      "Pendulum": {
-        "units": [
-          "VB"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Pendulum",
-          "revid": 10232283
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Bandul",
-          "revid": 27592654
-        }
-      },
-      "Ecosystem": {
-        "units": [
-          "EV"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Ecosystem",
-          "revid": 10856182
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Ekosistem",
-          "revid": 29901504
-        }
-      },
-      "Habitat": {
-        "units": [
-          "EV"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Habitat",
-          "revid": 10949249
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Habitat",
-          "revid": 29828732
-        }
-      },
-      "Environment (biophysical)": {
-        "units": [
-          "EV"
-        ],
-        "en": {
-          "site": "en.wikipedia.org",
-          "title": "Natural environment",
-          "revid": 1375688565
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Lingkungan hidup",
-          "revid": 28548839
-        }
-      },
-      "Abiotic component": {
-        "units": [
-          "EV"
-        ],
-        "en": {
-          "site": "en.wikipedia.org",
-          "title": "Abiotic component",
-          "revid": 1366353347
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Komponen abiotik",
-          "revid": 29844855
-        }
-      },
-      "Tolerance (ecology)": {
-        "units": [
-          "EV"
-        ],
-        "en": null,
-        "id": null
-      },
-      "Human body": {
-        "units": [
-          "HB"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Human body",
-          "revid": 10829875
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Tubuh manusia",
-          "revid": 28741516
-        }
-      },
-      "Muscle": {
-        "units": [
-          "HB"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Muscle",
-          "revid": 10021110
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Otot",
-          "revid": 29964451
-        }
-      },
-      "Bone": {
-        "units": [
-          "HB"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Bone",
-          "revid": 10227720
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Tulang",
-          "revid": 29890454
-        }
-      },
-      "Human skeleton": {
-        "units": [
-          "HB"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Human skeleton",
-          "revid": 10373967
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Rangka manusia",
-          "revid": 25819425
-        }
-      },
-      "Joint": {
-        "units": [
-          "HB"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Joint",
-          "revid": 10935679
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Sendi",
-          "revid": 29965367
-        }
-      },
-      "Tendon": {
-        "units": [
-          "HB"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Tendon",
-          "revid": 10024361
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Tendon",
-          "revid": 28085831
-        }
-      },
-      "Water cycle": {
-        "units": [
-          "WA"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Water cycle",
-          "revid": 10959718
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Siklus air",
-          "revid": 29448868
-        }
-      },
-      "Condensation": {
-        "units": [
-          "WA"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Condensation",
-          "revid": 10677143
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Kondensasi",
-          "revid": 28033662
-        }
-      },
-      "Thermal expansion": {
-        "units": [
-          "WA"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Thermal expansion",
-          "revid": 10805412
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Pemuaian",
-          "revid": 27848488
-        }
-      },
-      "Freezing": {
-        "units": [
-          "WA"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Freezing",
-          "revid": 10406489
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Pembekuan",
-          "revid": 28058897
-        }
-      },
-      "Density": {
-        "units": [
-          "WA"
-        ],
-        "en": {
-          "site": "simple.wikipedia.org",
-          "title": "Density",
-          "revid": 10675462
-        },
-        "id": {
-          "site": "id.wikipedia.org",
-          "title": "Massa jenis",
-          "revid": 28043399
-        }
-      }
-    }
+ "about": "RAG source material. Downloaded by `python -m edge_grader.rag.sources` into data/rag/raw/ (git-ignored). Books: sha256 pinned after the first download; a mismatch means the file changed upstream. Wikipedia: topics per SciEntsBank (FOSS) unit, English from Simple English Wikipedia (English Wikipedia if missing), Indonesian from the interlanguage link; `pinned` records the revision fetched.",
+ "books": [
+  {
+   "id": "en-utah-seed-g3",
+   "lang": "en",
+   "grade": 3,
+   "title": "Utah OER Textbooks: 3rd Grade SEEd",
+   "edition": "2025-2026 school year",
+   "publisher": "Utah State Board of Education (Utah OER Textbook Project)",
+   "licence": "CC BY-NC",
+   "page_url": "https://emedia.uen.org/courses/utah-oer-textbooks-3rd-grade-seed",
+   "url": "https://drive.usercontent.google.com/download?id=1PO8fXPReDCbeQDbu2oN383P59djBmAmV&export=download&confirm=t",
+   "sha256": "6a528ce5fb3cf507fa1d694cbd931b48dcd5df87389f6d9b7abdd829b3d0b938",
+   "benchmark": "scientsbank"
+  },
+  {
+   "id": "en-utah-seed-g4",
+   "lang": "en",
+   "grade": 4,
+   "title": "Utah OER Textbooks: 4th Grade SEEd",
+   "edition": "2025-2026 school year",
+   "publisher": "Utah State Board of Education (Utah OER Textbook Project)",
+   "licence": "CC BY-NC",
+   "page_url": "https://emedia.uen.org/courses/utah-oer-textbooks-4th-grade-seed",
+   "url": "https://drive.usercontent.google.com/download?id=1IzJ_C8G6np3QvhMsWXv_r-XYNM-sLpKg&export=download&confirm=t",
+   "sha256": "7ae3548092b20d8f0fb41e435757b45f39cc7ef7a7213be601064841d0109b15",
+   "benchmark": "scientsbank"
+  },
+  {
+   "id": "en-utah-seed-g5",
+   "lang": "en",
+   "grade": 5,
+   "title": "Utah OER Textbooks: 5th Grade SEEd",
+   "edition": "2025-2026 school year",
+   "publisher": "Utah State Board of Education (Utah OER Textbook Project)",
+   "licence": "CC BY-NC",
+   "page_url": "https://emedia.uen.org/courses/utah-oer-textbooks-5th-grade-seed",
+   "url": "https://drive.usercontent.google.com/download?id=1um7uXLBJg47pDzjrTJqmBYNCmdJLWv-k&export=download&confirm=t",
+   "sha256": "0ee7d47ef61b5ac2352d43de74b5a9e6c3c398e508ca6bbcb6db3fdf7047d62f",
+   "benchmark": "scientsbank"
+  },
+  {
+   "id": "en-utah-seed-g6",
+   "lang": "en",
+   "grade": 6,
+   "title": "Utah OER Textbooks: 6th Grade SEEd",
+   "edition": "2025-2026 school year",
+   "publisher": "Utah State Board of Education (Utah OER Textbook Project)",
+   "licence": "CC BY-NC",
+   "page_url": "https://emedia.uen.org/courses/utah-oer-textbooks-6th-grade-seed",
+   "url": "https://drive.usercontent.google.com/download?id=1FF3LoJlkPu6ZFsVfJzEDdg3odl-79aer&export=download&confirm=t",
+   "sha256": "2c5afd019b858ad91b989c784c001022d2aa4ff5047aecd027549e6308c19552",
+   "benchmark": "scientsbank"
+  },
+  {
+   "id": "en-utah-seed-g7",
+   "lang": "en",
+   "grade": 7,
+   "title": "Utah OER Textbooks: 7th Grade SEEd",
+   "edition": "2025-2026 school year",
+   "publisher": "Utah State Board of Education (Utah OER Textbook Project)",
+   "licence": "CC BY-NC",
+   "page_url": "https://emedia.uen.org/courses/utah-oer-textbooks-7th-grade-seed",
+   "url": "https://drive.usercontent.google.com/download?id=1TxnztvBQFRFVHtbYP3pRRac3lt5CFwOu&export=download&confirm=t",
+   "sha256": "4dbeaacbc12c404c6a48b8773130efb22fe3eb3e3b74abd8335213c46b1919cb",
+   "benchmark": "scientsbank"
+  },
+  {
+   "id": "en-utah-seed-g8",
+   "lang": "en",
+   "grade": 8,
+   "title": "Utah OER Textbooks: 8th Grade SEEd",
+   "edition": "2025-2026 school year",
+   "publisher": "Utah State Board of Education (Utah OER Textbook Project)",
+   "licence": "CC BY-NC",
+   "page_url": "https://emedia.uen.org/courses/utah-oer-textbooks-8th-grade-seed",
+   "url": "https://drive.usercontent.google.com/download?id=1Cuq4WQwCF8H69qF8gFLTQkZwTpWVJw_K&export=download&confirm=t",
+   "sha256": "e6fb312f765dafbc57df05bb8f3d71b0bb689072398487c2ffd7d698a9a32071",
+   "benchmark": "scientsbank"
+  },
+  {
+   "id": "id-ipas-kelas3",
+   "lang": "id",
+   "grade": 3,
+   "title": "Ilmu Pengetahuan Alam dan Sosial untuk SD/MI Kelas III (Edisi Revisi), Buku Siswa",
+   "edition": "Kurikulum Merdeka, edisi revisi, 2025",
+   "publisher": "Pusat Perbukuan, Kemendikdasmen",
+   "isbn": "978-634-00-2163-9",
+   "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+   "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-dan-sosial-untuk-sdmi-kelas-iii-edisi-revisi",
+   "url": "https://static.sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPAS_BS_KLS_III.pdf",
+   "sha256": "2df6ea081c03a4adbb005098c0e7423f673f2899684bb42dcb857bfa11e95163",
+   "benchmark": "scientsbank"
+  },
+  {
+   "id": "id-ipas-kelas4",
+   "lang": "id",
+   "grade": 4,
+   "title": "Ilmu Pengetahuan Alam dan Sosial untuk SD/MI Kelas IV (Edisi Revisi), Buku Siswa",
+   "edition": "Kurikulum Merdeka, edisi revisi, 2024",
+   "publisher": "Pusat Perbukuan, Kemendikdasmen",
+   "isbn": "978-623-118-445-0",
+   "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+   "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-dan-sosial-untuk-sd-mi-kelas-iv-edisi-revisi",
+   "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPAS_BS_KLS_IV_Rev.pdf",
+   "sha256": "208f3e472dd58a8dfa905c774f0f0c2c5a93bcf948e93d284013383daf2351bb",
+   "benchmark": "scientsbank"
+  },
+  {
+   "id": "id-ipas-kelas5",
+   "lang": "id",
+   "grade": 5,
+   "title": "Ilmu Pengetahuan Alam dan Sosial untuk SD/MI Kelas V (Edisi Revisi), Buku Siswa",
+   "edition": "Kurikulum Merdeka, edisi revisi, 2024",
+   "publisher": "Pusat Perbukuan, Kemendikdasmen",
+   "isbn": "978-623-388-160-9",
+   "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+   "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-dan-sosial-untuk-sd-mi-kelas-v-edisi-revisi",
+   "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPAS_BS_KLS_V_Rev.pdf",
+   "sha256": "d54e2a5ee4504f01f839e1c13646318c6b2fec3f92c412615241b9667e7d71ed",
+   "benchmark": "scientsbank"
+  },
+  {
+   "id": "id-ipas-kelas6",
+   "lang": "id",
+   "grade": 6,
+   "title": "Ilmu Pengetahuan Alam dan Sosial untuk SD/MI Kelas VI (Edisi Revisi), Buku Siswa",
+   "edition": "Kurikulum Merdeka, edisi revisi, 2025",
+   "publisher": "Pusat Perbukuan, Kemendikdasmen",
+   "isbn": "978-634-00-2164-6",
+   "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+   "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-dan-sosial-untuk-sdmi-kelas-vi-edisi-revisi",
+   "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPAS_BS_KLS_VI_Rev.pdf",
+   "sha256": "a22e862bfbf0192eca043c2ad3c7666defcae0f50cfdbbeeb1ff9fb28d907397",
+   "benchmark": "scientsbank"
+  },
+  {
+   "id": "id-ipa-kelas7",
+   "lang": "id",
+   "grade": 7,
+   "title": "Ilmu Pengetahuan Alam untuk SMP/MTs Kelas VII (Edisi Revisi), Buku Siswa",
+   "edition": "Kurikulum Merdeka, edisi revisi, 2024",
+   "publisher": "Pusat Perbukuan, Kemendikdasmen",
+   "isbn": "978-623-118-457-3",
+   "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+   "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-untuk-smp-mts-kelas-vii-edisi-revisi",
+   "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPA_BS_KLS_VII_Rev.pdf",
+   "sha256": "5e2923ed8ff94b09e50fd2316745dfee7ad77f20619d2b3e1974755ba8217c42",
+   "benchmark": "scientsbank"
+  },
+  {
+   "id": "id-ipa-kelas8",
+   "lang": "id",
+   "grade": 8,
+   "title": "Ilmu Pengetahuan Alam untuk SMP/MTs Kelas VIII (Edisi Revisi), Buku Siswa",
+   "edition": "Kurikulum Merdeka, edisi revisi, 2024",
+   "publisher": "Pusat Perbukuan, Kemendikdasmen",
+   "isbn": "978-623-388-560-7",
+   "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+   "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-untuk-smp-mts-kelas-viii-edisi-revisi",
+   "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPA_BS_KLS_VIII_Rev.pdf",
+   "sha256": "d1ec9c1c6d2d9a14f95cd775a9c626db3df11b55b8ceb5131de4bc4a230fee28",
+   "benchmark": "scientsbank"
+  },
+  {
+   "id": "id-ipa-kelas9",
+   "lang": "id",
+   "grade": 9,
+   "title": "Ilmu Pengetahuan Alam untuk SMP/MTs Kelas IX (Edisi Revisi), Buku Siswa",
+   "edition": "Kurikulum Merdeka, edisi revisi",
+   "publisher": "Pusat Perbukuan, Kemendikdasmen",
+   "isbn": "978-634-00-2430-2",
+   "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+   "page_url": "https://buku.kemendikdasmen.go.id/katalog/ilmu-pengetahuan-alam-untuk-smpmts-kelas-ix-edisi-revisi",
+   "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/IPA_BS_KLS_IX_Rev.pdf",
+   "sha256": "c888ef46df63be72e049b8fcd6316ee1ae4a22871724739fda02f5df17dc0639",
+   "benchmark": "scientsbank"
+  },
+  {
+   "id": "en-openstax-calculus-volume-1",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "math"
+   ],
+   "title": "Calculus Volume 1",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/calculus-volume-1",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/calculus-volume-1_-_WEB.pdf",
+   "sha256": "7303513c1927b9b6d04d150502e769cc1821638a24c774e2f6bba82bf9875990"
+  },
+  {
+   "id": "en-openstax-calculus-volume-2",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "math"
+   ],
+   "title": "Calculus Volume 2",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/calculus-volume-2",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/calculus-volume-2_-_WEB.pdf",
+   "sha256": "f6ac06038088711766e5b664a8114c8fcb0b7b88cfb38e92bbaf56ba2df43f4a"
+  },
+  {
+   "id": "en-openstax-introductory-statistics-2e",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "math"
+   ],
+   "title": "Introductory Statistics 2e",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/introductory-statistics-2e",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/introductory-statistics-2e_-_WEB.pdf",
+   "sha256": "a79a953b75e570030c74ea6f700b8bd70f41dc8c01bf4e9618e6a0adba3a382a"
+  },
+  {
+   "id": "en-openstax-university-physics-volume-1",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "physics",
+    "engineering"
+   ],
+   "title": "University Physics Volume 1",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/university-physics-volume-1",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/university-physics-volume-1_-_WEB.pdf",
+   "sha256": "93652b69c43197d10dc83438b813b5f7515e61e7ea4336da8636ff902cb4aba8"
+  },
+  {
+   "id": "en-openstax-university-physics-volume-2",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "physics",
+    "engineering"
+   ],
+   "title": "University Physics Volume 2",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/university-physics-volume-2",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/university-physics-volume-2_-_WEB.pdf",
+   "sha256": "3f5d8d0e38ba663c84a036b54cf6087bc2836adca553cb7849f2c0e85e97a445"
+  },
+  {
+   "id": "en-openstax-university-physics-volume-3",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "physics",
+    "engineering"
+   ],
+   "title": "University Physics Volume 3",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/university-physics-volume-3",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/university-physics-volume-3_-_WEB.pdf",
+   "sha256": "311c6beb70bb9cc6073d40a6085d290a82afde2b38e9aaf672ccb6de0542541b"
+  },
+  {
+   "id": "en-openstax-chemistry-2e",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "chemistry"
+   ],
+   "title": "Chemistry 2e",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/chemistry-2e",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/chemistry-2e_-_WEB.pdf",
+   "sha256": "fd89db1b8a1fee06b8ad3e8982f4f4b34bde4e93654a4ce28b724f8c0efe98d6"
+  },
+  {
+   "id": "en-openstax-organic-chemistry",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "chemistry"
+   ],
+   "title": "Organic Chemistry: A Tenth Edition",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/organic-chemistry",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/organic-chemistry_-_WEB.pdf",
+   "sha256": "d57b7da43589eaf94de53a06bb17b20a856bbde57020e7a0ee4be312085001c4"
+  },
+  {
+   "id": "en-openstax-business-law-i-essentials-2e",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "law",
+    "business"
+   ],
+   "title": "Business Law I Essentials 2e",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/business-law-i-essentials-2e",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Business_Law_I_Essentials_2e_-_WEB.pdf",
+   "sha256": "6e7b5db71416d923ae0007154edad4288c98f8efcb2f93870fb6e4ab31baad4f"
+  },
+  {
+   "id": "en-openstax-introduction-intellectual-property",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "law"
+   ],
+   "title": "Introduction to Intellectual Property",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution License 4.0",
+   "page_url": "https://openstax.org/details/books/introduction-intellectual-property",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/introduction-intellectual-property_-_WEB.pdf",
+   "sha256": "1498509864d37cb63a6ccc11bab7c783f3d30b2ed37d808ef80c56fdb676378a"
+  },
+  {
+   "id": "en-openstax-american-government-4e",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "law"
+   ],
+   "title": "American Government 4e",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/american-government-4e",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/American_Government_4e_-_WEB_eM2Tuqh.pdf",
+   "sha256": "71e30f1c28a649dd72a6664a7add1462c0672df82b66d1bc282c4a47dd12e1be"
+  },
+  {
+   "id": "en-openstax-principles-management",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "other",
+    "business"
+   ],
+   "title": "Principles of Management",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/principles-management",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/principles-management_-_WEB.pdf",
+   "sha256": "59ea3ea149d631f57c26279d5ac71f588121ebc56c1a25eb6c76f011c9765b6d"
+  },
+  {
+   "id": "en-openstax-principles-marketing",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "other",
+    "business"
+   ],
+   "title": "Principles of Marketing",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/principles-marketing",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/principles-marketing_-_WEB.pdf",
+   "sha256": "7764b41cf778a8bb560f00ee3ed2c8c2d623575540c1b6702ed7429c745bcd31"
+  },
+  {
+   "id": "en-openstax-introduction-business-2e",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "business"
+   ],
+   "title": "Introduction to Business 2e",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/introduction-business-2e",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Introduction_to_Business_2e_-_WEB.pdf",
+   "sha256": "2001b3e30587ceea8f351b11cccb64f8f678860014617d5706a7e27d478ecdc2"
+  },
+  {
+   "id": "en-openstax-principles-financial-accounting",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "business"
+   ],
+   "title": "Principles of Accounting, Volume 1: Financial Accounting",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/principles-financial-accounting",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/principles-financial-accounting_-_WEB.pdf",
+   "sha256": "a98ed7dcb92eec2bd70f32b150aa4f1d3140ad78bb1477e86a31682ec5ac31e5"
+  },
+  {
+   "id": "en-openstax-principles-finance-2e",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "business"
+   ],
+   "title": "Principles of Finance 2e",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/principles-finance-2e",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Principles_of_Finance_2e_-_WEB_.pdf",
+   "sha256": "7d942df1aaf2fc3edcc7f681955cdabecdd0d4e4c754469f0bea159461a6ad79"
+  },
+  {
+   "id": "en-openstax-principles-economics-3e",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "economics"
+   ],
+   "title": "Principles of Economics 3e",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/principles-economics-3e",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/principles-economics-3e_-_WEB.pdf",
+   "sha256": "2d2e7549e13a1975965bfb14a577a3d7935173ff10ca2e1d953815560590a4eb"
+  },
+  {
+   "id": "en-openstax-anatomy-and-physiology-2e",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "health"
+   ],
+   "title": "Anatomy and Physiology 2e",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/anatomy-and-physiology-2e",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/anatomy-and-physiology-2e_-_WEB.pdf",
+   "sha256": "aa2e577b2083c343f4d57b38f00dd935dd2d98befdb38c0f368d72d636d0ff46"
+  },
+  {
+   "id": "en-openstax-psychology-2e",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "psychology"
+   ],
+   "title": "Psychology 2e",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/psychology-2e",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Psychology2e_WEB.pdf",
+   "sha256": "2f08113c78127bc684922ad6a819db22bd4705ce9fcf28a07f36a2041b1474e2"
+  },
+  {
+   "id": "en-openstax-biology-2e",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "biology"
+   ],
+   "title": "Biology 2e",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/biology-2e",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Biology-2e_-_WEB.pdf",
+   "sha256": "4d1f413fd779f114838cdaeab7859dcb2922ca7529230d3bfd7d36a77b4e27b6"
+  },
+  {
+   "id": "en-openstax-introduction-philosophy",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "philosophy"
+   ],
+   "title": "Introduction to Philosophy",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/introduction-philosophy",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Introduction_to_Philosophy-WEB.pdf",
+   "sha256": "ec94e28ddb86bfb6d7703a8487124501164caa79624791ad7eadb24efada96e5"
+  },
+  {
+   "id": "en-openstax-introduction-computer-science",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "computer_science"
+   ],
+   "title": "Introduction to Computer Science",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/introduction-computer-science",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/Introduction_To_Computer_Science_-_WEB.pdf",
+   "sha256": "fd56aaf80c851e9f3b417745785ea5c832fc2911acfd2094a86f4c517fdf435a"
+  },
+  {
+   "id": "en-openstax-world-history-volume-1",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "history"
+   ],
+   "title": "World History, Volume 1: to 1500",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/world-history-volume-1",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/World_History_Volume_1-WEB.pdf",
+   "sha256": "227436a3d3951dc777f63a7e5d3329f2c095e2ccf5782ae192f22c40d831a4cf"
+  },
+  {
+   "id": "en-openstax-world-history-volume-2",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "history"
+   ],
+   "title": "World History, Volume 2: from 1400",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/world-history-volume-2",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/World_History_Volume_2-WEB.pdf",
+   "sha256": "57be7ba027ed9f66d9e4594493f56e6a9028bd72c166e62dcd07e72a5266f948"
+  },
+  {
+   "id": "en-openstax-us-history",
+   "lang": "en",
+   "benchmark": "mmlupro",
+   "subjects": [
+    "history"
+   ],
+   "title": "U.S. History",
+   "edition": "OpenStax, current web edition",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/us-history",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/US_History_-_WEB.pdf",
+   "sha256": "b1330275566d9847623394ad29173f9a6f1c9f9270279e00cd5da2ac366ea5c8"
+  },
+  {
+   "id": "id-sma-biologi-kelas12",
+   "lang": "id",
+   "grade": 12,
+   "benchmark": "mmlupro",
+   "subjects": [
+    "biology",
+    "health"
+   ],
+   "title": "Biologi untuk SMA Kelas XII, Buku Siswa",
+   "edition": "Kurikulum Merdeka",
+   "publisher": "",
+   "isbn": "978-602-427-958-5",
+   "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+   "page_url": "https://buku.kemendikdasmen.go.id/katalog/biologi-untuk-sma-kelas-xii",
+   "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Biologi_BS_KLS_XII_Rev.pdf",
+   "sha256": "cf4b19d3e6abed8c5c376eeda51e356514b4080e5c4e967779afde60d12b3132"
+  },
+  {
+   "id": "id-sma-biologi-kelas11",
+   "lang": "id",
+   "grade": 11,
+   "benchmark": "mmlupro",
+   "subjects": [
+    "biology",
+    "health"
+   ],
+   "title": "Biologi untuk SMA/MA Kelas XI, Buku Siswa",
+   "edition": "Kurikulum Merdeka",
+   "publisher": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
+   "isbn": "978-602-427-893-9",
+   "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+   "page_url": "https://buku.kemendikdasmen.go.id/katalog/biologi-untuk-smama-kelas-xi",
+   "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Biologi-BS-KLS-XI.pdf",
+   "sha256": "72d3492ee1fefbc711d9fb20bbd70dcc8d41f69310def44e2261a0b579d60461"
+  },
+  {
+   "id": "id-sma-fisika-kelas12",
+   "lang": "id",
+   "grade": 12,
+   "benchmark": "mmlupro",
+   "subjects": [
+    "physics",
+    "engineering"
+   ],
+   "title": "Fisika untuk SMA/MA Kelas XII, Buku Siswa",
+   "edition": "Kurikulum Merdeka",
+   "publisher": "",
+   "isbn": "978-623-472-722-7",
+   "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+   "page_url": "https://buku.kemendikdasmen.go.id/katalog/fisika-untuk-smama-kelas-xii",
+   "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Fisika_BS_KLS_XII.pdf",
+   "sha256": "49dc10fcafcf13f2df6345b6a7706c8ed039145ea83f69bcea31bdf0fc2320b6"
+  },
+  {
+   "id": "id-sma-fisika-kelas11",
+   "lang": "id",
+   "grade": 11,
+   "benchmark": "mmlupro",
+   "subjects": [
+    "physics",
+    "engineering"
+   ],
+   "title": "Fisika untuk SMA/MA Kelas XI, Buku Siswa",
+   "edition": "Kurikulum Merdeka",
+   "publisher": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
+   "isbn": "978-623-472-721-0",
+   "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+   "page_url": "https://buku.kemendikdasmen.go.id/katalog/fisika-untuk-smama-kelas-xi",
+   "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Fisika-BS-KLS-XI.pdf",
+   "sha256": "88e3e464ef384b7933a86826a2cf010ee8f0cf7e97fab429f6dcd4be0aa65b1e"
+  },
+  {
+   "id": "id-sma-kimia-kelas12",
+   "lang": "id",
+   "grade": 12,
+   "benchmark": "mmlupro",
+   "subjects": [
+    "chemistry"
+   ],
+   "title": "Kimia untuk SMA/MA Kelas XII, Buku Siswa",
+   "edition": "Kurikulum Merdeka",
+   "publisher": "",
+   "isbn": "978-602-427-968-4",
+   "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+   "page_url": "https://buku.kemendikdasmen.go.id/katalog/kimia-untuk-smama-kelas-xii",
+   "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Kimia_BS_KLS_XII.pdf",
+   "sha256": "ef995b2f4898c2b7808cd4c1939247b92d98e2d0eae63abec54dec50ebeb7ffa"
+  },
+  {
+   "id": "id-sma-kimia-kelas11",
+   "lang": "id",
+   "grade": 11,
+   "benchmark": "mmlupro",
+   "subjects": [
+    "chemistry"
+   ],
+   "title": "Kimia untuk SMA/MA Kelas XI, Buku Siswa",
+   "edition": "Kurikulum Merdeka",
+   "publisher": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
+   "isbn": "978-602-427-923-3",
+   "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+   "page_url": "https://buku.kemendikdasmen.go.id/katalog/kimia-untuk-smama-kelas-xi",
+   "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Kimia-BS-KLS-XI.pdf",
+   "sha256": "a1b62b12e286da86dc0b11d4b370080536089d1ff15b0ed01438f28e181c238f"
+  },
+  {
+   "id": "id-sma-matematika-tl-kelas12",
+   "lang": "id",
+   "grade": 12,
+   "benchmark": "mmlupro",
+   "subjects": [
+    "math"
+   ],
+   "title": "Matematika Tingkat Lanjut untuk SMA/MA Kelas XII (Edisi Revisi), Buku Siswa",
+   "edition": "Kurikulum Merdeka, edisi revisi",
+   "publisher": "Pusat Perbukuan",
+   "isbn": "978-634-00-3296-3",
+   "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+   "page_url": "https://buku.kemendikdasmen.go.id/katalog/matematika-tingkat-lanjut-untuk-smama-kelas-xii-edisi-revisi",
+   "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Matematika_BS_XII_TL_Rev.pdf",
+   "sha256": "ac458f4296c120c84aff66036d379cde8729f09aeceae6a99ddbe072edbb54ac"
+  },
+  {
+   "id": "id-sma-matematika-tl-kelas11",
+   "lang": "id",
+   "grade": 11,
+   "benchmark": "mmlupro",
+   "subjects": [
+    "math"
+   ],
+   "title": "Matematika Tingkat Lanjut untuk SMA/MA Kelas XI (Edisi Revisi), Buku Siswa",
+   "edition": "Kurikulum Merdeka, edisi revisi",
+   "publisher": "Pusat Kurikulum dan Perbukuan",
+   "isbn": "978-623-388-335-1",
+   "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+   "page_url": "https://buku.kemendikdasmen.go.id/katalog/matematika-tingkat-lanjut-untuk-sma-ma-kelas-xi-edisi-revisi",
+   "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Matematika_BS_KLS_XI_TL_Rev.pdf",
+   "sha256": "4c77de3511011d574b33db7e6350be9c9984bd9321e632f05a2fd272a2ed9865"
+  },
+  {
+   "id": "id-sma-ekonomi-kelas11",
+   "lang": "id",
+   "grade": 11,
+   "benchmark": "mmlupro",
+   "subjects": [
+    "economics",
+    "business"
+   ],
+   "title": "Ekonomi untuk SMA/MA Kelas XI (Edisi Revisi), Buku Siswa",
+   "edition": "Kurikulum Merdeka, edisi revisi",
+   "publisher": "Pusat Kurikulum dan Perbukuan",
+   "isbn": "978-623-388-196-8",
+   "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+   "page_url": "https://buku.kemendikdasmen.go.id/katalog/ekonomi-untuk-sma-ma-kelas-xi-edisi-revisi",
+   "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Ekonomi_BS_KLS_XI_Rev_2.pdf",
+   "sha256": "0b2c6d51e60f87e2a08952c39fabb07d45dab463612899f71d591ff96f541361"
+  },
+  {
+   "id": "id-sma-ekonomi-kelas12",
+   "lang": "id",
+   "grade": 12,
+   "benchmark": "mmlupro",
+   "subjects": [
+    "economics",
+    "business"
+   ],
+   "title": "Ekonomi untuk SMA/MA Kelas XII, Buku Siswa",
+   "edition": "Kurikulum Merdeka",
+   "publisher": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
+   "isbn": "978-602-427-972-1",
+   "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+   "page_url": "https://buku.kemendikdasmen.go.id/katalog/ekonomi-untuk-smama-kelas-xii",
+   "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Ekonomi_BS_KLS_XII.pdf",
+   "sha256": "90e1626947087b4ceece21bf773575b050f9ea4f8cf63348d14be4d46fe34c49"
+  },
+  {
+   "id": "id-sma-sejarah-kelas11",
+   "lang": "id",
+   "grade": 11,
+   "benchmark": "mmlupro",
+   "subjects": [
+    "history"
+   ],
+   "title": "Sejarah untuk SMA/MA/SMK/MAK Kelas XI (Edisi Revisi), Buku Siswa",
+   "edition": "Kurikulum Merdeka, edisi revisi",
+   "publisher": "Pusat Perbukuan",
+   "isbn": "978-623-388-489-1",
+   "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+   "page_url": "https://buku.kemendikdasmen.go.id/katalog/sejarah-untuk-smamasmkmak-kelas-xi-edisi-revisi",
+   "url": "https://static.sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Sejarah_BS_Kelas_XI_Rev.pdf",
+   "sha256": "71fa14d783576c4d6e1baa260a4fab5f035897e29935ef67f286f3edce65965d"
+  },
+  {
+   "id": "id-sma-sejarah-kelas12",
+   "lang": "id",
+   "grade": 12,
+   "benchmark": "mmlupro",
+   "subjects": [
+    "history"
+   ],
+   "title": "Sejarah untuk SMA/MA Kelas XII, Buku Siswa",
+   "edition": "Kurikulum Merdeka",
+   "publisher": "Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi",
+   "isbn": "978-602-427-965-3",
+   "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+   "page_url": "https://buku.kemendikdasmen.go.id/katalog/sejarah-untuk-smama-kelas-xii",
+   "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Sejarah_BS_KLS_XII.pdf",
+   "sha256": "13b558d3fc8cc77d5b6ab8885a3d15c94cf59e2255ea9a37e6e258e85b81bd4d"
+  },
+  {
+   "id": "id-sma-informatika-kelas11",
+   "lang": "id",
+   "grade": 11,
+   "benchmark": "mmlupro",
+   "subjects": [
+    "computer_science"
+   ],
+   "title": "Informatika untuk SMA/MA Kelas XI (Edisi Revisi), Buku Siswa",
+   "edition": "Kurikulum Merdeka, edisi revisi",
+   "publisher": "Pusat Perbukuan",
+   "isbn": "978-623-388-204-0",
+   "licence": "Hak Cipta Kemendikbudristek/Kemendikdasmen, Dilindungi Undang-Undang (all rights reserved); free to download and read on SIBI. Use for research, don't redistribute the text.",
+   "page_url": "https://buku.kemendikdasmen.go.id/katalog/informatika-untuk-smama-kelas-xi-edisi-revisi",
+   "url": "https://static-sc.cloudapp.web.id/content/pdf/bukuteks/kurikulum21/Informatika_BS_KLS_XI_Rev.pdf",
+   "sha256": "985a44240662f23917f0422c46a3f819b85522d66a8cc88e018e090699f38893"
   }
+ ],
+ "wikipedia": {
+  "licence": "CC BY-SA 4.0",
+  "sites": {
+   "en": [
+    "simple.wikipedia.org",
+    "en.wikipedia.org"
+   ],
+   "id": [
+    "id.wikipedia.org"
+   ]
+  },
+  "topics": {
+   "EM": [
+    "Rock (geology)",
+    "Mineral",
+    "Mohs scale of mineral hardness",
+    "Streak (mineralogy)",
+    "Lustre (mineralogy)",
+    "Crystal"
+   ],
+   "FN": [
+    "Nutrition",
+    "Nutrient",
+    "Protein",
+    "Carbohydrate",
+    "Fat",
+    "Vitamin",
+    "Starch",
+    "Acid"
+   ],
+   "II": [
+    "Chromatography",
+    "Reflection symmetry",
+    "Fingerprint",
+    "Invention"
+   ],
+   "LF": [
+    "Erosion",
+    "Deposition (geology)",
+    "River delta",
+    "Weathering",
+    "Landform",
+    "Topographic map"
+   ],
+   "LP": [
+    "Lever",
+    "Pulley",
+    "Simple machine",
+    "Mechanical advantage"
+   ],
+   "ME": [
+    "Electrical network",
+    "Series and parallel circuits",
+    "Magnet",
+    "Electromagnet",
+    "Electrical conductor",
+    "Insulator (electricity)",
+    "Battery (electricity)",
+    "Switch"
+   ],
+   "MS": [
+    "Measurement",
+    "Unit of measurement",
+    "Metric system",
+    "Thermometer",
+    "Volume",
+    "Mass",
+    "Weight"
+   ],
+   "MX": [
+    "Mixture",
+    "Solution (chemistry)",
+    "Solubility",
+    "Evaporation",
+    "Concentration",
+    "Chemical reaction"
+   ],
+   "PS": [
+    "Sound",
+    "Vibration",
+    "Pitch (music)",
+    "Loudness",
+    "Frequency"
+   ],
+   "SE": [
+    "Solar energy",
+    "Shadow",
+    "Heat",
+    "Heat sink",
+    "Absorption (electromagnetic radiation)"
+   ],
+   "ST": [
+    "Seed",
+    "Germination",
+    "Root",
+    "Biological life cycle",
+    "Adaptation",
+    "Plant"
+   ],
+   "VB": [
+    "Experiment",
+    "Scientific control",
+    "Dependent and independent variables",
+    "Pendulum"
+   ],
+   "EV": [
+    "Ecosystem",
+    "Habitat",
+    "Environment (biophysical)",
+    "Abiotic component",
+    "Tolerance (ecology)"
+   ],
+   "HB": [
+    "Human body",
+    "Muscle",
+    "Bone",
+    "Human skeleton",
+    "Joint",
+    "Tendon"
+   ],
+   "WA": [
+    "Water cycle",
+    "Evaporation",
+    "Condensation",
+    "Thermal expansion",
+    "Freezing",
+    "Density"
+   ]
+  },
+  "pinned": {
+   "Rock (geology)": {
+    "units": [
+     "EM"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Rock (geology)",
+     "revid": 10732274
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Batu",
+     "revid": 29964798
+    }
+   },
+   "Mineral": {
+    "units": [
+     "EM"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Mineral",
+     "revid": 9698148
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Mineral",
+     "revid": 29759227
+    }
+   },
+   "Mohs scale of mineral hardness": {
+    "units": [
+     "EM"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Mohs scale of mineral hardness",
+     "revid": 10961630
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Skala Mohs",
+     "revid": 29909591
+    }
+   },
+   "Streak (mineralogy)": {
+    "units": [
+     "EM"
+    ],
+    "en": {
+     "site": "en.wikipedia.org",
+     "title": "Streak (mineralogy)",
+     "revid": 1357289488
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Gores (mineralogi)",
+     "revid": 25432982
+    }
+   },
+   "Lustre (mineralogy)": {
+    "units": [
+     "EM"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Luster (mineralogy)",
+     "revid": 5709944
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Kilau (mineralogi)",
+     "revid": 29464016
+    }
+   },
+   "Crystal": {
+    "units": [
+     "EM"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Crystal",
+     "revid": 10794932
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Kristal",
+     "revid": 29929200
+    }
+   },
+   "Nutrition": {
+    "units": [
+     "FN"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Nutrition",
+     "revid": 10901140
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Nutrisi",
+     "revid": 29860164
+    }
+   },
+   "Nutrient": {
+    "units": [
+     "FN"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Nutrient",
+     "revid": 10541391
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Nutrien",
+     "revid": 29907462
+    }
+   },
+   "Protein": {
+    "units": [
+     "FN"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Protein",
+     "revid": 10878431
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Protein",
+     "revid": 29962979
+    }
+   },
+   "Carbohydrate": {
+    "units": [
+     "FN"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Carbohydrate",
+     "revid": 10710254
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Karbohidrat",
+     "revid": 29964468
+    }
+   },
+   "Fat": {
+    "units": [
+     "FN"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Fat",
+     "revid": 10802738
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Lemak",
+     "revid": 29906125
+    }
+   },
+   "Vitamin": {
+    "units": [
+     "FN"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Vitamin",
+     "revid": 10835360
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Vitamin",
+     "revid": 29893118
+    }
+   },
+   "Starch": {
+    "units": [
+     "FN"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Starch",
+     "revid": 10182808
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Amilum",
+     "revid": 27977307
+    }
+   },
+   "Acid": {
+    "units": [
+     "FN"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Acid",
+     "revid": 10355002
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Asam",
+     "revid": 29758499
+    }
+   },
+   "Chromatography": {
+    "units": [
+     "II"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Chromatography",
+     "revid": 10347960
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Kromatografi",
+     "revid": 28681292
+    }
+   },
+   "Reflection symmetry": {
+    "units": [
+     "II"
+    ],
+    "en": {
+     "site": "en.wikipedia.org",
+     "title": "Reflection symmetry",
+     "revid": 1377035004
+    },
+    "id": null
+   },
+   "Fingerprint": {
+    "units": [
+     "II"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Fingerprint",
+     "revid": 10725998
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Sidik jari",
+     "revid": 29510247
+    }
+   },
+   "Invention": {
+    "units": [
+     "II"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Invention",
+     "revid": 10542905
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Reka cipta",
+     "revid": 28706447
+    }
+   },
+   "Erosion": {
+    "units": [
+     "LF"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Erosion",
+     "revid": 10939292
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Erosi",
+     "revid": 28947676
+    }
+   },
+   "Deposition (geology)": {
+    "units": [
+     "LF"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Deposition (geology)",
+     "revid": 6945924
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Deposit (geologi)",
+     "revid": 28745874
+    }
+   },
+   "River delta": {
+    "units": [
+     "LF"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "River delta",
+     "revid": 10207271
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Delta sungai",
+     "revid": 29995230
+    }
+   },
+   "Weathering": {
+    "units": [
+     "LF"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Weathering",
+     "revid": 10206787
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Pelapukan",
+     "revid": 28947675
+    }
+   },
+   "Landform": {
+    "units": [
+     "LF"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Landform",
+     "revid": 10044634
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Bentuk lahan",
+     "revid": 27320189
+    }
+   },
+   "Topographic map": {
+    "units": [
+     "LF"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Topographic map",
+     "revid": 9716860
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Peta topografi",
+     "revid": 29889530
+    }
+   },
+   "Lever": {
+    "units": [
+     "LP"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Lever",
+     "revid": 10068195
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Tuas",
+     "revid": 29151411
+    }
+   },
+   "Pulley": {
+    "units": [
+     "LP"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Pulley",
+     "revid": 9515677
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Katrol",
+     "revid": 29920287
+    }
+   },
+   "Simple machine": {
+    "units": [
+     "LP"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Simple machine",
+     "revid": 10270818
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Pesawat sederhana",
+     "revid": 29908372
+    }
+   },
+   "Mechanical advantage": {
+    "units": [
+     "LP"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Mechanical advantage",
+     "revid": 9456440
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Keuntungan mekanis",
+     "revid": 21968455
+    }
+   },
+   "Electrical network": {
+    "units": [
+     "ME"
+    ],
+    "en": {
+     "site": "en.wikipedia.org",
+     "title": "Electrical network",
+     "revid": 1356851024
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Rangkaian listrik",
+     "revid": 28294564
+    }
+   },
+   "Series and parallel circuits": {
+    "units": [
+     "ME"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Series and parallel circuits",
+     "revid": 10966853
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Rangkaian seri dan paralel",
+     "revid": 28592955
+    }
+   },
+   "Magnet": {
+    "units": [
+     "ME"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Magnet",
+     "revid": 11012823
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Magnet",
+     "revid": 29759143
+    }
+   },
+   "Electromagnet": {
+    "units": [
+     "ME"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Electromagnet",
+     "revid": 10795506
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Elektromagnet",
+     "revid": 20913260
+    }
+   },
+   "Electrical conductor": {
+    "units": [
+     "ME"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Electrical conductor",
+     "revid": 10227881
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Penghantar listrik",
+     "revid": 28059978
+    }
+   },
+   "Insulator (electricity)": {
+    "units": [
+     "ME"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Insulator (electricity)",
+     "revid": 10290353
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Insulator listrik",
+     "revid": 29972798
+    }
+   },
+   "Battery (electricity)": {
+    "units": [
+     "ME"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Battery",
+     "revid": 10970964
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Baterai listrik",
+     "revid": 29486190
+    }
+   },
+   "Switch": {
+    "units": [
+     "ME"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Switch",
+     "revid": 8411361
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Sakelar",
+     "revid": 28073514
+    }
+   },
+   "Measurement": {
+    "units": [
+     "MS"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Measurement",
+     "revid": 10859731
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Pengukuran",
+     "revid": 29759337
+    }
+   },
+   "Unit of measurement": {
+    "units": [
+     "MS"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Unit of measurement",
+     "revid": 10795347
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Satuan",
+     "revid": 29433405
+    }
+   },
+   "Metric system": {
+    "units": [
+     "MS"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Metric system",
+     "revid": 11005077
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Sistem metrik",
+     "revid": 29880098
+    }
+   },
+   "Thermometer": {
+    "units": [
+     "MS"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Thermometer",
+     "revid": 10970327
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Termometer",
+     "revid": 29964725
+    }
+   },
+   "Volume": {
+    "units": [
+     "MS"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Volume",
+     "revid": 10870822
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Volume",
+     "revid": 28094677
+    }
+   },
+   "Mass": {
+    "units": [
+     "MS"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Mass",
+     "revid": 10964282
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Massa",
+     "revid": 29759180
+    }
+   },
+   "Weight": {
+    "units": [
+     "MS"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Weight",
+     "revid": 10757715
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Berat",
+     "revid": 26502037
+    }
+   },
+   "Mixture": {
+    "units": [
+     "MX"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Mixture",
+     "revid": 10423695
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Campuran",
+     "revid": 25661058
+    }
+   },
+   "Solution (chemistry)": {
+    "units": [
+     "MX"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Solution (chemistry)",
+     "revid": 10997032
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Larutan",
+     "revid": 28451988
+    }
+   },
+   "Solubility": {
+    "units": [
+     "MX"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Solubility",
+     "revid": 10354818
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Kelarutan",
+     "revid": 29841990
+    }
+   },
+   "Evaporation": {
+    "units": [
+     "MX",
+     "WA"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Evaporation",
+     "revid": 10014572
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Penguapan",
+     "revid": 29265030
+    }
+   },
+   "Concentration": {
+    "units": [
+     "MX"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Concentration",
+     "revid": 10855153
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Konsentrasi",
+     "revid": 28033990
+    }
+   },
+   "Chemical reaction": {
+    "units": [
+     "MX"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Chemical reaction",
+     "revid": 10682850
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Reaksi kimia",
+     "revid": 29579355
+    }
+   },
+   "Sound": {
+    "units": [
+     "PS"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Sound",
+     "revid": 10921598
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Bunyi",
+     "revid": 29918610
+    }
+   },
+   "Vibration": {
+    "units": [
+     "PS"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Vibration",
+     "revid": 10373121
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Getaran",
+     "revid": 29902612
+    }
+   },
+   "Pitch (music)": {
+    "units": [
+     "PS"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Pitch (music)",
+     "revid": 10365855
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Tala",
+     "revid": 29258565
+    }
+   },
+   "Loudness": {
+    "units": [
+     "PS"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Loudness",
+     "revid": 8244824
+    },
+    "id": null
+   },
+   "Frequency": {
+    "units": [
+     "PS"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Frequency",
+     "revid": 10912347
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Frekuensi",
+     "revid": 29902088
+    }
+   },
+   "Solar energy": {
+    "units": [
+     "SE"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Solar energy",
+     "revid": 11011943
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Energi surya",
+     "revid": 29988241
+    }
+   },
+   "Shadow": {
+    "units": [
+     "SE"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Shadow",
+     "revid": 10866028
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Bayang-bayang",
+     "revid": 27985479
+    }
+   },
+   "Heat": {
+    "units": [
+     "SE"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Heat",
+     "revid": 11013545
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Panas",
+     "revid": 29922953
+    }
+   },
+   "Heat sink": {
+    "units": [
+     "SE"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Heat sink",
+     "revid": 8949854
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Pembuang panas",
+     "revid": 28059029
+    }
+   },
+   "Absorption (electromagnetic radiation)": {
+    "units": [
+     "SE"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Absorption (electromagnetic radiation)",
+     "revid": 9884909
+    },
+    "id": null
+   },
+   "Seed": {
+    "units": [
+     "ST"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Seed",
+     "revid": 11007695
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Biji",
+     "revid": 29167632
+    }
+   },
+   "Germination": {
+    "units": [
+     "ST"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Germination",
+     "revid": 9427110
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Perkecambahan",
+     "revid": 28119984
+    }
+   },
+   "Root": {
+    "units": [
+     "ST"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Root",
+     "revid": 10795304
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Akar",
+     "revid": 29984790
+    }
+   },
+   "Biological life cycle": {
+    "units": [
+     "ST"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Life cycle",
+     "revid": 9202256
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Daur hidup organisme",
+     "revid": 27553838
+    }
+   },
+   "Adaptation": {
+    "units": [
+     "ST"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Adaptation",
+     "revid": 10795578
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Adaptasi",
+     "revid": 29520276
+    }
+   },
+   "Plant": {
+    "units": [
+     "ST"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Plant",
+     "revid": 10939710
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Tumbuhan",
+     "revid": 30001873
+    }
+   },
+   "Experiment": {
+    "units": [
+     "VB"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Experiment",
+     "revid": 9574766
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Percobaan",
+     "revid": 29239707
+    }
+   },
+   "Scientific control": {
+    "units": [
+     "VB"
+    ],
+    "en": {
+     "site": "en.wikipedia.org",
+     "title": "Scientific control",
+     "revid": 1375480330
+    },
+    "id": null
+   },
+   "Dependent and independent variables": {
+    "units": [
+     "VB"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Dependent and independent variables",
+     "revid": 9916587
+    },
+    "id": null
+   },
+   "Pendulum": {
+    "units": [
+     "VB"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Pendulum",
+     "revid": 10232283
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Bandul",
+     "revid": 27592654
+    }
+   },
+   "Ecosystem": {
+    "units": [
+     "EV"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Ecosystem",
+     "revid": 10856182
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Ekosistem",
+     "revid": 29901504
+    }
+   },
+   "Habitat": {
+    "units": [
+     "EV"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Habitat",
+     "revid": 10949249
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Habitat",
+     "revid": 29828732
+    }
+   },
+   "Environment (biophysical)": {
+    "units": [
+     "EV"
+    ],
+    "en": {
+     "site": "en.wikipedia.org",
+     "title": "Natural environment",
+     "revid": 1375688565
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Lingkungan hidup",
+     "revid": 28548839
+    }
+   },
+   "Abiotic component": {
+    "units": [
+     "EV"
+    ],
+    "en": {
+     "site": "en.wikipedia.org",
+     "title": "Abiotic component",
+     "revid": 1366353347
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Komponen abiotik",
+     "revid": 29844855
+    }
+   },
+   "Tolerance (ecology)": {
+    "units": [
+     "EV"
+    ],
+    "en": null,
+    "id": null
+   },
+   "Human body": {
+    "units": [
+     "HB"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Human body",
+     "revid": 10829875
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Tubuh manusia",
+     "revid": 28741516
+    }
+   },
+   "Muscle": {
+    "units": [
+     "HB"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Muscle",
+     "revid": 10021110
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Otot",
+     "revid": 29964451
+    }
+   },
+   "Bone": {
+    "units": [
+     "HB"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Bone",
+     "revid": 10227720
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Tulang",
+     "revid": 29890454
+    }
+   },
+   "Human skeleton": {
+    "units": [
+     "HB"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Human skeleton",
+     "revid": 10373967
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Rangka manusia",
+     "revid": 25819425
+    }
+   },
+   "Joint": {
+    "units": [
+     "HB"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Joint",
+     "revid": 10935679
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Sendi",
+     "revid": 29965367
+    }
+   },
+   "Tendon": {
+    "units": [
+     "HB"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Tendon",
+     "revid": 10024361
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Tendon",
+     "revid": 28085831
+    }
+   },
+   "Water cycle": {
+    "units": [
+     "WA"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Water cycle",
+     "revid": 10959718
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Siklus air",
+     "revid": 29448868
+    }
+   },
+   "Condensation": {
+    "units": [
+     "WA"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Condensation",
+     "revid": 10677143
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Kondensasi",
+     "revid": 28033662
+    }
+   },
+   "Thermal expansion": {
+    "units": [
+     "WA"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Thermal expansion",
+     "revid": 10805412
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Pemuaian",
+     "revid": 27848488
+    }
+   },
+   "Freezing": {
+    "units": [
+     "WA"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Freezing",
+     "revid": 10406489
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Pembekuan",
+     "revid": 28058897
+    }
+   },
+   "Density": {
+    "units": [
+     "WA"
+    ],
+    "en": {
+     "site": "simple.wikipedia.org",
+     "title": "Density",
+     "revid": 10675462
+    },
+    "id": {
+     "site": "id.wikipedia.org",
+     "title": "Massa jenis",
+     "revid": 28043399
+    }
+   }
+  }
+ }
 }

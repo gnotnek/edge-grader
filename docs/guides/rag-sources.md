@@ -163,10 +163,10 @@ The questions are college level, so this material is too.
 ### 5. Indonesian: Kurikulum Merdeka SMA subject books, kelas XI–XII
 
 - **Publisher:** Pusat Perbukuan, Kemendikdasmen (SIBI, same API and licence as source 2: all rights reserved, research use only)
-- **Books:** Biologi, Fisika, Kimia, Matematika Tingkat Lanjut, Ekonomi, Sejarah and Informatika, kelas XI and XII each
-- **Size:** 14 books, 3,680 pages, ~640k words (~430 MB)
+- **Books:** Biologi, Fisika, Kimia, Matematika Tingkat Lanjut, Ekonomi and Sejarah, kelas XI and XII each, plus Informatika kelas XI
+- **Size:** 13 books, 3,432 pages, ~640k words (~332 MB)
 - **Level:** upper secondary, one step below MMLU-Pro. There are no Indonesian books for law, philosophy, psychology or engineering, and no health book beyond Biologi.
-- **Informatika kelas XII has no text layer:** 0 words extracted from 248 pages. It needs OCR before it can be used; `sources.json` flags it with a `note`.
+- **Informatika kelas XII is dropped (2026-10-05):** the PDF has no text layer (0 words from 248 pages) and OCR wasn't feasible. It was the only Indonesian kelas XII computer-science book; Informatika kelas XI and the English OpenStax *Introduction to Computer Science* still cover the subject (9 of the 300 MMLU-Pro questions).
 
 ## Coverage and gaps
 

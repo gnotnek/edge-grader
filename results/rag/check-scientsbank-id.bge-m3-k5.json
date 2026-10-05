@@ -1,0 +1,381 @@
+{
+ "stage": "rag",
+ "kind": "retrieval-check",
+ "time": "2026-10-05T05:46:46+00:00",
+ "settings": {
+  "retrieval": "results/rag/retrieval-scientsbank-id.bge-m3-k5.json",
+  "sheet": "data/rag/check/retrieval-scientsbank-id.bge-m3-k5.md",
+  "marked_by": "owner",
+  "split": "train questions only",
+  "useful": "would help a teacher grade answers to the question"
+ },
+ "questions": {
+  "EM.16b": {
+   "passages": [
+    "wiki:Skala_Mohs:1",
+    "wiki:Skala_Mohs:0",
+    "wiki:Gores_(mineralogi):0"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "EM.43b": {
+   "passages": [
+    "id-ipa-kelas8:126",
+    "id-ipa-kelas8:122",
+    "id-ipa-kelas7:25"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "EM.48b": {
+   "passages": [
+    "id-ipa-kelas8:104",
+    "id-ipa-kelas8:13",
+    "wiki:Kelarutan:0"
+   ],
+   "useful": [
+    true,
+    false,
+    true
+   ]
+  },
+  "FN.19b": {
+   "passages": [
+    "id-ipas-kelas6:8",
+    "id-ipa-kelas9:23",
+    "id-ipas-kelas6:7"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "FN.27a": {
+   "passages": [
+    "wiki:Lemak:9",
+    "id-ipa-kelas9:41",
+    "wiki:Vitamin:12"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "FN.27b": {
+   "passages": [
+    "wiki:Lemak:9",
+    "id-ipa-kelas9:41",
+    "wiki:Vitamin:0"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "II.13a": {
+   "passages": [
+    "wiki:Sidik_jari:3",
+    "wiki:Sidik_jari:4",
+    "wiki:Sidik_jari:0"
+   ],
+   "useful": [
+    false,
+    true,
+    true
+   ]
+  },
+  "II.20b": {
+   "passages": [
+    "id-ipa-kelas8:108",
+    "id-ipa-kelas8:104",
+    "id-ipas-kelas5:71"
+   ],
+   "useful": [
+    false,
+    true,
+    false
+   ]
+  },
+  "II.26": {
+   "passages": [
+    "id-ipas-kelas4:13",
+    "id-ipas-kelas4:9",
+    "id-ipas-kelas4:24"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "LF.18a": {
+   "passages": [
+    "wiki:Siklus_air:5",
+    "wiki:Siklus_air:3",
+    "id-ipas-kelas5:38"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "LF.33b": {
+   "passages": [
+    "wiki:Deposit_(geologi):0",
+    "wiki:Delta_sungai:0",
+    "id-ipas-kelas5:41"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "LF.34b": {
+   "passages": [
+    "id-ipas-kelas5:38",
+    "wiki:Siklus_air:5",
+    "id-ipa-kelas8:50"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "LP.15c": {
+   "passages": [
+    "id-ipa-kelas8:61",
+    "id-ipa-kelas8:51",
+    "id-ipa-kelas8:79"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "LP.16d": {
+   "passages": [
+    "wiki:Katrol:1",
+    "id-ipa-kelas8:59",
+    "wiki:Tuas:1"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "ME.17a": {
+   "passages": [
+    "id-ipa-kelas9:97",
+    "id-ipa-kelas9:103",
+    "id-ipas-kelas3:39"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "ME.30": {
+   "passages": [
+    "id-ipa-kelas7:80",
+    "wiki:Elektromagnet:0",
+    "id-ipas-kelas4:10"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "ME.6b": {
+   "passages": [
+    "id-ipa-kelas7:80",
+    "id-ipa-kelas9:112",
+    "id-ipa-kelas9:113"
+   ],
+   "useful": [
+    true,
+    true,
+    false
+   ]
+  },
+  "MS.39": {
+   "passages": [
+    "wiki:Satuan:0",
+    "wiki:Pengukuran:2",
+    "wiki:Pengukuran:4"
+   ],
+   "useful": [
+    true,
+    true,
+    true
+   ]
+  },
+  "MS.43a": {
+   "passages": [
+    "id-ipa-kelas7:41",
+    "id-ipa-kelas7:45",
+    "wiki:Berat:0"
+   ],
+   "useful": [
+    true,
+    false,
+    true
+   ]
+  },
+  "MS.43b": {
+   "passages": [
+    "id-ipa-kelas7:41",
+    "id-ipa-kelas7:45",
+    "id-ipa-kelas7:20"
+   ],
+   "useful": [
+    true,
+    false,
+    true
+   ]
+  },
+  "MX.11c": {
+   "passages": [
+    "id-ipa-kelas8:105",
+    "id-ipa-kelas8:98",
+    "id-ipa-kelas8:104"
+   ],
+   "useful": [
+    true,
+    true,
+    false
+   ]
+  },
+  "MX.49": {
+   "passages": [
+    "id-ipa-kelas8:105",
+    "wiki:Konsentrasi:0",
+    "id-ipa-kelas8:104"
+   ],
+   "useful": [
+    true,
+    true,
+    false
+   ]
+  },
+  "PS.15bp": {
+   "passages": [
+    "id-ipas-kelas5:74",
+    "id-ipas-kelas5:75",
+    "id-ipas-kelas5:77"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "PS.4ap": {
+   "passages": [
+    "id-ipas-kelas5:74",
+    "id-ipas-kelas5:75",
+    "id-ipa-kelas9:14"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "SE.3c": {
+   "passages": [
+    "wiki:Bayang-bayang:0",
+    "id-ipas-kelas5:69",
+    "id-ipas-kelas5:70"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "SE.48": {
+   "passages": [
+    "id-ipa-kelas7:49",
+    "id-ipa-kelas7:57",
+    "id-ipas-kelas5:41"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "ST.54b2": {
+   "passages": [
+    "wiki:Perkecambahan:2",
+    "wiki:Perkecambahan:3",
+    "id-ipa-kelas8:36"
+   ],
+   "useful": [
+    true,
+    true,
+    false
+   ]
+  },
+  "ST.59": {
+   "passages": [
+    "wiki:Habitat:5",
+    "wiki:Habitat:6",
+    "wiki:Habitat:4"
+   ],
+   "useful": [
+    true,
+    true,
+    true
+   ]
+  },
+  "VB.12d": {
+   "passages": [
+    "wiki:Frekuensi:0",
+    "id-ipa-kelas8:82",
+    "id-ipa-kelas8:87"
+   ],
+   "useful": [
+    true,
+    true,
+    false
+   ]
+  },
+  "VB.15c": {
+   "passages": [
+    "id-ipa-kelas7:77",
+    "id-ipa-kelas7:84",
+    "id-ipa-kelas8:51"
+   ],
+   "useful": [
+    false,
+    false,
+    true
+   ]
+  }
+ },
+ "summary": {
+  "questions": 30,
+  "top1_useful": 27,
+  "any_useful": 30,
+  "passages_useful": 43,
+  "passages_total": 90
+ }
+}

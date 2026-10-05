@@ -91,6 +91,8 @@ Decisions made while doing the work, not from the supervisor. Each has to serve 
 | 2026-10-03 | **RAG-en is the main RAG condition**; RAG-id optional; RAG-both dropped | SciEntsBank is English, so RAG-en answers RQ2. The others add conditions without a research question; time goes to RQ3 and RQ4 | RQ2–4 |
 | 2026-10-03 | Embedding models: `bge-small-en-v1.5` (English), `bge-m3` (Indonesian); settings frozen | Best retrieval of the models tested on the train-question check ([`results/rag.md`](results/rag.md)); `bge-small` also fits next to Gemma on a Pi | RQ2, RQ4 |
 | 2026-10-03 | On the boards, retrieval counts as a one-off setup cost per question, reported separately from per-answer cost | A teacher's questions are known before grading, so passages can be prepared in advance | RQ4 |
+| 2026-10-05 | Drop Informatika kelas XII from the MMLU-Pro material | No text layer and OCR wasn't feasible. Computer science is 9 of 300 MMLU-Pro questions and stays covered by Informatika XI and OpenStax | RQ2 (MMLU-Pro RAG) |
+| 2026-10-05 | Retrieval check passed on the owner's marking: useful passage in the top 3 for 29/30 (English) and 30/30 (Indonesian) train questions; go ahead with RAG grading | The gate set in `guides/rag.md` before any grading run | RQ2 |
 
 ## Open questions
 

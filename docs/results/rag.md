@@ -14,7 +14,20 @@
 
 30 train questions (spread over the 12 train units), top 3 passages each. test_ua shares these questions, but test_uq and test_ud questions are never looked at. **"Useful" means the passage would help a teacher grade answers to the question.**
 
-**These counts are a first pass by Claude**, reading the first ~20 words of each passage, not a careful marking. Replace them with the owner's own marking of `data/rag/check/*.md` before quoting them.
+### Owner's marking (2026-10-05): the numbers to quote
+
+| Index | Top passage useful | Any of top 3 useful | Useful passages |
+|---|---|---|---|
+| **RAG-en**, `bge-small-en` | **27 / 30** | **29 / 30** | 33 / 90 (37%) |
+| **RAG-id**, `bge-m3` | **27 / 30** | **30 / 30** | 43 / 90 (48%) |
+
+- **Both pass the gate:** almost every sample question gets a useful passage in its top 3. The English miss is SE.48 (surface area and temperature change).
+- **Files:** [`check-scientsbank-en.bge-small-en-k5.json`](../../results/rag/check-scientsbank-en.bge-small-en-k5.json) and [`check-scientsbank-id.bge-m3-k5.json`](../../results/rag/check-scientsbank-id.bge-m3-k5.json). They hold the ticks per passage, with chunk ids and no text. They're made by `python -m edge_grader.rag.check <retrieval file> --score`.
+- **Only these two were marked.** The other models weren't, so the comparison below rests on Claude's first pass.
+
+### Model comparison: Claude's first pass
+
+Read from the first ~20 words of each passage, stricter than the owner's marking above. Use it only to compare models with each other, not as the retrieval quality.
 
 | Round | Chunks | Index | Clear | Partial | Miss |
 |---|---|---|---|---|---|

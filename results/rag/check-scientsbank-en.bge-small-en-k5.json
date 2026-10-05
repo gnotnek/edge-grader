@@ -1,0 +1,381 @@
+{
+ "stage": "rag",
+ "kind": "retrieval-check",
+ "time": "2026-10-05T05:46:45+00:00",
+ "settings": {
+  "retrieval": "results/rag/retrieval-scientsbank-en.bge-small-en-k5.json",
+  "sheet": "data/rag/check/retrieval-scientsbank-en.bge-small-en-k5.md",
+  "marked_by": "owner",
+  "split": "train questions only",
+  "useful": "would help a teacher grade answers to the question"
+ },
+ "questions": {
+  "EM.16b": {
+   "passages": [
+    "wiki:Mohs_scale_of_mineral_hardness:0",
+    "wiki:Streak_(mineralogy):1",
+    "wiki:Streak_(mineralogy):0"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "EM.43b": {
+   "passages": [
+    "wiki:Weathering:2",
+    "wiki:Mineral:2",
+    "wiki:Mineral:1"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "EM.48b": {
+   "passages": [
+    "wiki:Solution_(chemistry):0",
+    "en-utah-seed-g5:27",
+    "wiki:Solubility:0"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "FN.19b": {
+   "passages": [
+    "en-utah-seed-g8:77",
+    "wiki:Carbohydrate:0",
+    "wiki:Starch:0"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "FN.27a": {
+   "passages": [
+    "wiki:Vitamin:0",
+    "wiki:Vitamin:1",
+    "en-utah-seed-g5:29"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "FN.27b": {
+   "passages": [
+    "wiki:Scientific_control:1",
+    "en-utah-seed-g5:29",
+    "en-utah-seed-g5:33"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "II.13a": {
+   "passages": [
+    "wiki:Fingerprint:0",
+    "en-utah-seed-g3:21",
+    "en-utah-seed-g4:78"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "II.20b": {
+   "passages": [
+    "wiki:Chromatography:0",
+    "en-utah-seed-g8:20",
+    "wiki:Chromatography:3"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "II.26": {
+   "passages": [
+    "en-utah-seed-g8:21",
+    "en-utah-seed-g8:16",
+    "en-utah-seed-g8:20"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "LF.18a": {
+   "passages": [
+    "en-utah-seed-g6:59",
+    "en-utah-seed-g7:35",
+    "en-utah-seed-g6:56"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "LF.33b": {
+   "passages": [
+    "wiki:Deposition_(geology):0",
+    "en-utah-seed-g4:33",
+    "en-utah-seed-g7:32"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "LF.34b": {
+   "passages": [
+    "en-utah-seed-g5:16",
+    "en-utah-seed-g5:10",
+    "en-utah-seed-g6:59"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "LP.15c": {
+   "passages": [
+    "wiki:Lever:0",
+    "wiki:Lever:1",
+    "en-utah-seed-g3:36"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "LP.16d": {
+   "passages": [
+    "wiki:Pulley:0",
+    "en-utah-seed-g3:37",
+    "en-utah-seed-g3:49"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "ME.17a": {
+   "passages": [
+    "en-utah-seed-g4:55",
+    "en-utah-seed-g4:54",
+    "wiki:Series_and_parallel_circuits:0"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "ME.30": {
+   "passages": [
+    "en-utah-seed-g4:45",
+    "en-utah-seed-g4:64",
+    "en-utah-seed-g7:12"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "ME.6b": {
+   "passages": [
+    "wiki:Series_and_parallel_circuits:0",
+    "wiki:Electromagnet:1",
+    "en-utah-seed-g4:55"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "MS.39": {
+   "passages": [
+    "wiki:Unit_of_measurement:2",
+    "wiki:Measurement:0",
+    "wiki:Unit_of_measurement:0"
+   ],
+   "useful": [
+    true,
+    true,
+    true
+   ]
+  },
+  "MS.43a": {
+   "passages": [
+    "wiki:Weight:1",
+    "wiki:Weight:0",
+    "wiki:Mass:1"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "MS.43b": {
+   "passages": [
+    "wiki:Weight:1",
+    "wiki:Weight:0",
+    "wiki:Mass:1"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "MX.11c": {
+   "passages": [
+    "wiki:Mixture:0",
+    "en-utah-seed-g5:33",
+    "en-utah-seed-g8:29"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "MX.49": {
+   "passages": [
+    "wiki:Concentration:0",
+    "wiki:Solution_(chemistry):0",
+    "wiki:Solubility:0"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "PS.15bp": {
+   "passages": [
+    "en-utah-seed-g4:50",
+    "wiki:Pitch_(music):0",
+    "wiki:Sound:0"
+   ],
+   "useful": [
+    true,
+    true,
+    false
+   ]
+  },
+  "PS.4ap": {
+   "passages": [
+    "en-utah-seed-g3:38",
+    "en-utah-seed-g4:50",
+    "en-utah-seed-g8:52"
+   ],
+   "useful": [
+    true,
+    true,
+    false
+   ]
+  },
+  "SE.3c": {
+   "passages": [
+    "wiki:Shadow:0",
+    "en-utah-seed-g4:65",
+    "en-utah-seed-g4:12"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "SE.48": {
+   "passages": [
+    "en-utah-seed-g5:34",
+    "en-utah-seed-g6:46",
+    "en-utah-seed-g6:47"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "ST.54b2": {
+   "passages": [
+    "wiki:Seed:0",
+    "wiki:Plant:1",
+    "en-utah-seed-g7:61"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "ST.59": {
+   "passages": [
+    "en-utah-seed-g3:29",
+    "en-utah-seed-g5:44",
+    "wiki:Habitat:0"
+   ],
+   "useful": [
+    false,
+    false,
+    true
+   ]
+  },
+  "VB.12d": {
+   "passages": [
+    "en-utah-seed-g4:43",
+    "en-utah-seed-g8:43",
+    "en-utah-seed-g4:41"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "VB.15c": {
+   "passages": [
+    "en-utah-seed-g4:43",
+    "en-utah-seed-g4:46",
+    "en-utah-seed-g3:39"
+   ],
+   "useful": [
+    false,
+    true,
+    false
+   ]
+  }
+ },
+ "summary": {
+  "questions": 30,
+  "top1_useful": 27,
+  "any_useful": 29,
+  "passages_useful": 33,
+  "passages_total": 90
+ }
+}

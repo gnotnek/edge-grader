@@ -36,11 +36,11 @@
 
 - [x] Choose course material that matches SciEntsBank's topics, English and Indonesian; note the licence: [`guides/rag-sources.md`](guides/rag-sources.md)
 - [x] Material for MMLU-Pro too (OpenStax + SMA books), so RAG can be tested on both baselines
-- [ ] OCR Informatika kelas XII (no text layer), or leave it out
+- [x] Informatika kelas XII: **dropped** (2026-10-05). No text layer, and OCR wasn't feasible
 - [x] Extract and chunk the text (PyMuPDF); keep the source page for every chunk; fix the broken ligatures in the Indonesian books. SciEntsBank: 755 English chunks, 1,141 Indonesian after the noise filters (`results/rag/chunks-scientsbank.json`)
 - [x] Embed: `bge-small-en-v1.5` for English; for Indonesian, `multilingual-e5-small`, `-base` and `bge-m3` compared, `bge-m3` chosen. Separate indexes per language ([`results/rag.md`](results/rag.md))
 - [x] Retrieval check, first pass (Claude): round 1 English ~23/30, Indonesian ~13/30 → noise filters → round 2 English ~22 clear, Indonesian (`bge-m3`) ~17 clear. Settings frozen ([`results/rag.md`](results/rag.md))
-- [ ] Owner's own marking of the check sheets (`data/rag/check/`), to replace the first-pass counts
+- [x] Owner's marking (2026-10-05): a useful passage in the top 3 for 29/30 (English) and 30/30 (Indonesian) train questions. Gate passed
 - [x] Add a `--rag` mode to the grader: the same prompt plus the top-k passages (`--rag <retrieval file> --k 3`)
 - [ ] Re-upload the round-2 chunks to the private Kaggle dataset (New Version); the notebooks check them against the committed sha256
 - [ ] Run on Kaggle (`kaggle_baseline.ipynb` with `RAG` set): **RAG-en**, E2B + E4B, all splits. RAG-id (`bge-m3`) only if time allows. RAG-both dropped
@@ -90,3 +90,4 @@
 | 2026-10-02 | Stage 2 started early, while the Pi 5 board check waits in the queue; RAG pipeline built (chunking, index, retrieval, `--rag`) | The Jetson run confirmed the stage-1 numbers, so stage 1 has a number we trust |
 | 2026-10-03 | RAG scope: **RAG-en is the main condition**; RAG-id optional, with `bge-m3`; **RAG-both dropped**; retrieval settings frozen | Only RAG-en is needed for RQ2. Time goes to fine-tuning (RQ3) and the boards (RQ4). `bge-m3` was the only model that retrieved Indonesian passages well enough for a fair test |
 | 2026-10-05 | Stage 1 done: board cost **measured** on both boards (test_ua), replacing the estimate there; the Pi re-run at `-t 3` | The Pi's first pass used llama.cpp's default 4 threads, unlike every agentic-edge Pi run; grades were identical, speed 5–14% different. The estimate was 10–35% high, so measured numbers are quoted from now on |
+| 2026-10-05 | Informatika kelas XII dropped; retrieval check passed on the owner's marking | No text layer and OCR not feasible; 29/30 and 30/30 questions get a useful passage |

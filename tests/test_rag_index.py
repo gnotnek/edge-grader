@@ -75,3 +75,28 @@ def test_two_models_on_one_chunks_file_keep_separate_indexes(tmp_path):
     assert files == ["scientsbank-id.e5-base-multi.json", "scientsbank-id.e5-base-multi.npy",
                      "scientsbank-id.e5-small-multi.json", "scientsbank-id.e5-small-multi.npy"]
     assert a != b
+
+
+def test_score_sheet_counts_ticks_and_keeps_no_text():
+    from edge_grader.rag.check import score_sheet
+
+    sheet = """# Retrieval check: x
+
+## EM.1: Why is topaz hard?
+
+- [x] **1.** `wiki:Mohs:0` (0.742) Mohs scale is ordered by hardness …
+- [ ] **2.** `wiki:Streak:1` (0.722) generally made of unglazed porcelain …
+- [X] **3.** `book:3` (0.700) some text …
+
+## LP.2: Where is the fulcrum?
+
+- [ ] **1.** `book:9` (0.600) unrelated …
+- [ ] **2.** `book:8` (0.590) unrelated …
+- [ ] **3.** `book:7` (0.580) unrelated …
+"""
+    out = score_sheet(sheet)
+    assert out["questions"]["EM.1"] == {"passages": ["wiki:Mohs:0", "wiki:Streak:1", "book:3"],
+                                        "useful": [True, False, True]}
+    assert out["summary"] == {"questions": 2, "top1_useful": 1, "any_useful": 1,
+                              "passages_useful": 2, "passages_total": 6}
+    assert "Mohs scale is ordered" not in json.dumps(out)
