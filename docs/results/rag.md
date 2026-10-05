@@ -72,6 +72,36 @@ A teacher's questions are known before grading, so passages are retrieved **once
 | `results/rag/retrieval-scientsbank-id.e5-{small,base}-multi-k5.json` | The model comparison above; not used for grading |
 | Round 1 retrieval files | Git history, commit `efd521e` |
 
-## Grading results
+## Grading results: RAG-en (Kaggle T4, 2026-10-05)
 
-*Not run yet. Next: `notebooks/kaggle_baseline.ipynb` with `RAG` set, E2B + E4B, all three splits.*
+Same models, prompt, splits and server flags as the stage-1 baseline, plus the top 3 English passages per question. Files: `results/kaggle/rag-*-en-k3-*.json` and `raw/`. The two 100-answer test runs (`…-071301`, `…-071359`) are kept, like the stage-1 pilots.
+
+| Model | Split | n | Accuracy, baseline → RAG | Macro-F1 | Paired flips (better / worse) | McNemar p |
+|---|---|---|---|---|---|---|
+| E2B | test_ua | 540 | 55.2% → 53.3% (−1.9) | 0.518 → 0.510 | 60 / 70 | 0.43 |
+| E2B | test_uq | 733 | 59.8% → 56.9% (−2.9) | 0.553 → 0.537 | 69 / 90 | 0.11 |
+| E2B | test_ud | 4,562 | 60.3% → 55.1% (**−5.1**) | 0.570 → 0.516 | 373 / 606 | **<0.001** |
+| E4B | test_ua | 540 | 67.0% → 65.6% (−1.5) | 0.664 → 0.633 | 31 / 39 | 0.40 |
+| E4B | test_uq | 733 | 67.5% → 70.4% (+2.9) | 0.655 → 0.659 | 64 / 43 | 0.053 |
+| E4B | test_ud | 4,562 | 70.4% → 70.7% (+0.3) | 0.705 → 0.698 | 267 / 254 | 0.60 |
+
+Recall per class, baseline → RAG:
+
+| Model | Split | correct | contradictory | incorrect |
+|---|---|---|---|---|
+| E2B | test_ua | 0.44 → **0.58** | 0.66 → 0.76 | 0.63 → 0.44 |
+| E2B | test_uq | 0.48 → **0.60** | 0.78 → 0.81 | 0.66 → 0.50 |
+| E2B | test_ud | 0.60 → **0.71** | 0.79 → 0.83 | 0.57 → 0.37 |
+| E4B | test_ua | 0.45 → **0.53** | 0.64 → 0.66 | 0.88 → 0.78 |
+| E4B | test_uq | 0.41 → **0.52** | 0.67 → 0.67 | 0.90 → 0.86 |
+| E4B | test_ud | 0.57 → **0.59** | 0.69 → 0.77 | 0.82 → 0.79 |
+
+**What it shows:**
+1. **RAG doesn't improve overall grading.** E4B is unchanged (no split significant; test_uq +2.9 is borderline). E2B gets worse, significantly so on unseen domains (−5.1 points).
+2. **It does fix the baseline's main weakness, recognising correct answers:** recall on *correct* rises on every split, by up to 14 points (E2B test_ua).
+3. **But it buys that by grading more leniently,** not by grading better. Recall on *incorrect* falls on every split, by up to 20 points (E2B test_ud). E2B's "contradictory" overuse also gets worse: 1,105 → 1,522 on test_ud. The passages move the model's threshold rather than sharpening its judgement.
+4. **For a model that's already lenient-prone, that's a net loss (E2B); for the strict E4B, it roughly cancels out.**
+5. **Cost:** the prompt grows from ~160 to ~1,035 tokens per answer, about 6.3×. On the boards, where grading is almost all prefill, that means roughly 6× the time and energy per answer. Measuring it is stage 4.
+6. **0 errors**, and only 3 and 4 unparsed replies (E2B test_uq and test_ud) out of 5,835.
+
+**Caveat, not yet controlled: a different llama.cpp build.** These runs used llama.cpp `a3a1c47`; the stage-1 baseline used `86ea01d`. Kaggle clones the latest llama.cpp each session. On the Jetson, a different build changed 6% of E2B's labels and 1% of E4B's, with no change in accuracy, so the build probably doesn't explain a 5-point drop. It isn't ruled out, though. The notebook is now pinned to `a3a1c47`, and a no-RAG baseline re-run on it is planned, which makes the comparison exact.

@@ -1,0 +1,36 @@
+{
+  "stage": "rag",
+  "label": "e2b-kaggle-t4-en-k3",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "/tmp/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a3a1c47"
+  },
+  "split": "test_uq",
+  "scheme": "3way",
+  "n_requested": 0,
+  "seed": 0,
+  "time": "2026-10-05T07:38:08+00:00",
+  "metrics": {
+    "n": 733,
+    "accuracy": 0.5689,
+    "macro_f1": 0.5373,
+    "weighted_f1": 0.6056,
+    "unparsed": 3,
+    "errors": 0,
+    "median_latency_s": 0.084,
+    "wall_s": 71.1,
+    "prompt_tokens": 761532,
+    "completion_tokens": 1955
+  },
+  "rag": {
+    "retrieval": "results/rag/retrieval-scientsbank-en.bge-small-en-k5.json",
+    "k": 3,
+    "index": "data/rag/index/scientsbank-en.bge-small-en",
+    "embedding_model": "BAAI/bge-small-en-v1.5",
+    "chunks": "data/rag/chunks/scientsbank-en.jsonl",
+    "chunks_sha256": "0cbe223cb32d405a25a0f48491751eba5faf803b3ec7782645369928e7611e71"
+  }
+}

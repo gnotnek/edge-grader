@@ -42,8 +42,11 @@
 - [x] Retrieval check, first pass (Claude): round 1 English ~23/30, Indonesian ~13/30 → noise filters → round 2 English ~22 clear, Indonesian (`bge-m3`) ~17 clear. Settings frozen ([`results/rag.md`](results/rag.md))
 - [x] Owner's marking (2026-10-05): a useful passage in the top 3 for 29/30 (English) and 30/30 (Indonesian) train questions. Gate passed
 - [x] Add a `--rag` mode to the grader: the same prompt plus the top-k passages (`--rag <retrieval file> --k 3`)
-- [ ] Re-upload the round-2 chunks to the private Kaggle dataset (New Version); the notebooks check them against the committed sha256
-- [ ] Run on Kaggle (`kaggle_baseline.ipynb` with `RAG` set): **RAG-en**, E2B + E4B, all splits. RAG-id (`bge-m3`) only if time allows. RAG-both dropped
+- [x] Re-upload the round-2 chunks to the private Kaggle dataset (New Version); the notebooks check them against the committed sha256
+- [x] Run on Kaggle: **RAG-en**, E2B + E4B, all splits (2026-10-05). No overall gain: E4B flat, E2B −2 to −5 points; recall on correct up on every split, recall on incorrect down ([`results/rag.md`](results/rag.md#grading-results-rag-en-kaggle-t4-2026-10-05))
+- [x] Pin llama.cpp to `a3a1c47` in `kaggle_baseline.ipynb` (2026-10-05)
+- [ ] Re-run the no-RAG baseline on the pinned build (E2B + E4B, all splits), so RAG vs no-RAG differs only in the passages
+- [ ] RAG-id (`bge-m3`) only if time allows. RAG-both dropped
 - [ ] Analysis: did recall on *correct* answers improve (the baseline's main weakness)? And E2B's "contradictory" overuse?
 
 **MMLU-Pro with RAG** (same retrieval code, the OpenStax + SMA material):
@@ -91,3 +94,4 @@
 | 2026-10-03 | RAG scope: **RAG-en is the main condition**; RAG-id optional, with `bge-m3`; **RAG-both dropped**; retrieval settings frozen | Only RAG-en is needed for RQ2. Time goes to fine-tuning (RQ3) and the boards (RQ4). `bge-m3` was the only model that retrieved Indonesian passages well enough for a fair test |
 | 2026-10-05 | Stage 1 done: board cost **measured** on both boards (test_ua), replacing the estimate there; the Pi re-run at `-t 3` | The Pi's first pass used llama.cpp's default 4 threads, unlike every agentic-edge Pi run; grades were identical, speed 5–14% different. The estimate was 10–35% high, so measured numbers are quoted from now on |
 | 2026-10-05 | Informatika kelas XII dropped; retrieval check passed on the owner's marking | No text layer and OCR not feasible; 29/30 and 30/30 questions get a useful passage |
+| 2026-10-05 | RAG-en run: no overall gain; llama.cpp pinned to `a3a1c47`; baseline re-run on that build added | The RAG and baseline runs used different llama.cpp builds, so the comparison wasn't clean |
