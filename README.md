@@ -63,10 +63,10 @@ scripts/board_grade.sh e2b test_ud 200      # split and count are optional
   - **restores the board on exit**, even if the run fails
 - **Outputs:**
   - grading results and telemetry: `results/board/<run>/` on the board; fetch them with `scripts/fetch_results.sh`
-- **Run it directly** when the board is idle, rather than through the lab job queue. Queue jobs are measured by the queue's own `run_measured.sh` call, which writes telemetry into `agentic-edge`'s folders.
-  - If you must use the queue, submit a `raw` job with label `<label>` and command `env MEASURE=0 <root>/edge-grader/scripts/board_grade.sh e4b && mkdir -p <root>/stdbench/<label> && touch <root>/stdbench/<label>/.done`, where `<root>` is `~/Research` on the Pi and `~/research` on the Jetson, written out in full. Then copy that job's telemetry folder (`<root>/measured/<label>-<stamp>/`) into the run's `results/board/<run>/` folder.
-    - **The `.done` part matters.** The queue counts a job as completed only if `stdbench/<label>/.done` exists; the exit code alone isn't enough. Without it, a successful run shows as "failed". The marker is written only if grading exits 0.
-    - **Use a new label for every run.** The queue refuses a label whose `stdbench/<label>` folder already exists.
+- **Run it directly on the board, never through the lab's job queue.** edge-grader is a separate project; its runs must not mix with `agentic-edge`'s data. A queue job is wrapped in the queue's own `run_measured.sh`, which writes telemetry into `agentic-edge`'s `measured/` and needs a marker in its `stdbench/`, so the run ends up in the lab's results and on its dashboard.
+  - The script refuses to run from the queue (or under any `run_measured.sh` but its own), and refuses to write telemetry outside this repo's `results/`.
+  - It refuses to start while an `agentic-edge` run has the board (one job per board), so check the lab's queue first. The lab's queue in turn waits while this script runs.
+  - Runs from before 2026-10-05 that went through the queue were moved out of `agentic-edge`'s folders on the boards to `<root>/external/edge-grader/` (`~/Research` on the Pi, `~/research` on the Jetson). Their telemetry is already committed under `results/board/`.
 
 ### Anywhere else
 

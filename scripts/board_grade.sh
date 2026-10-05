@@ -5,9 +5,12 @@
 #
 #   scripts/board_grade.sh e4b                  # test_ua, all 540 answers, measured
 #   scripts/board_grade.sh e2b test_ud 200      # 200 answers of unseen domains
-#   MEASURE=0 scripts/board_grade.sh e4b        # no telemetry (e.g. a quick check,
-#                                               #   or a job-queue "raw" job, which
-#                                               #   already wraps in run_measured.sh)
+#   MEASURE=0 scripts/board_grade.sh e4b        # no telemetry (a quick check)
+#
+# Run it directly on an idle board, never through agentic-edge's job queue:
+# this project's runs must not land in the lab's measured/ or stdbench/. It
+# refuses if started from the queue (or any run_measured.sh), and refuses to
+# start while an agentic-edge run has the board.
 #
 # Env overrides: AE (agentic-edge/benchmark dir), LLAMA_SERVER, MODEL_DIR, PORT.
 #
@@ -68,6 +71,63 @@ esac
 # The outer call picks the run directory and hands it to the inner call.
 RUN_DIR="${EG_RUN_DIR:-$HERE/results/board/$MODEL_KEY-$BOARD-$SPLIT-$(date +%Y%m%d-%H%M%S)}"
 SRVLOG=$RUN_DIR/server.log
+
+# This project's runs are not agentic-edge's. A job in agentic-edge's queue is
+# wrapped in the queue's own run_measured.sh, which writes telemetry into the
+# lab's measured/ and needs a marker in its stdbench/, so the run lands in the
+# lab's data and on its dashboard. The outer call refuses if anything above it
+# is the queue runner or a run_measured.sh; the inner call is ours only if its
+# telemetry root is inside this repo's results/.
+under_lab_run() {
+  local pid=$PPID cmd
+  while [ -n "$pid" ] && [ "$pid" -gt 1 ]; do
+    cmd=$(tr '\0' ' ' < "/proc/$pid/cmdline" 2>/dev/null)
+    case "$cmd" in *queue_runner.py*|*run_measured.sh*) echo "$cmd"; return 0 ;; esac
+    pid=$(ps -o ppid= -p "$pid" 2>/dev/null | tr -d ' ')
+  done
+  return 1
+}
+if [ -z "${EG_INNER:-}" ]; then
+  if LAB=$(under_lab_run); then
+    echo "refusing: started from agentic-edge's queue or run_measured.sh ($LAB)" >&2
+    echo "edge-grader runs stay out of agentic-edge's data; run this script directly on the board" >&2
+    exit 1
+  fi
+elif [ "$MEASURE" = 1 ]; then
+  case "${MEASURED_ROOT:-}" in
+    "$HERE"/results/*) ;;
+    *) echo "refusing: telemetry would go to '${MEASURED_ROOT:-agentic-edge measured/}', not $HERE/results" >&2
+       exit 1 ;;
+  esac
+fi
+case "$RUN_DIR" in
+  "$HERE"/results/*) ;;
+  *) echo "refusing: run directory $RUN_DIR is outside $HERE/results" >&2; exit 1 ;;
+esac
+
+# One job per board (agentic-edge AGENTS §4.9): a second run spoils both runs'
+# telemetry, and on the Jetson this script kills any llama-server. So wait for
+# the lab's run to finish rather than share the board with it. The Pi's va-llm
+# server is the deployed one, which this script stops and restores. The lab's
+# queue in turn waits while this run's run_measured.sh is alive.
+board_busy() {
+  local found="" deployed pid
+  pgrep -f "[l]m_eval" >/dev/null && found="$found lm_eval"
+  pgrep -f "[r]un_measured" >/dev/null && found="$found run_measured.sh"
+  pgrep -f "[r]un-cuda-i8 -m" >/dev/null && found="$found little-gemma"
+  deployed=$(systemctl show -p MainPID --value va-llm 2>/dev/null)
+  for pid in $(pgrep -f "[l]lama-server"); do
+    [ "$pid" = "$deployed" ] || { found="$found llama-server"; break; }
+  done
+  echo "${found# }"
+}
+if [ -z "${EG_INNER:-}" ]; then
+  BUSY=$(board_busy)
+  if [ -n "$BUSY" ]; then
+    echo "refusing: the board is busy ($BUSY); wait for that run to finish" >&2
+    exit 1
+  fi
+fi
 
 # Fail before touching the board if anything is missing.
 for f in "$LLAMA_SERVER" "$MODEL"; do

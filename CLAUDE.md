@@ -5,5 +5,6 @@ Research code: small LLMs grading student short answers on edge devices (baselin
 - **Python via uv only:** `uv sync`, `uv run pytest`, `uv run ruff check .`, and `uv add <pkg>` for new dependencies. Never pip.
 - **The owner's Mac (8 GB) doesn't run models.** Inference runs on Kaggle/Colab or the lab's Pi 5 / Jetson through `llama-server`. This machine is for code, tests and analysis.
 - **Keep runs comparable with `../agentic-edge`:** same models, same `llama-server` flags, thinking off unless the run is a thinking condition.
+- **Keep runs separate from `../agentic-edge`:** comparable, not mixed. Board runs go through `scripts/board_grade.sh` directly, never through agentic-edge's job queue, and nothing is written into its `measured/`, `stdbench/` or `findings/`. The script enforces this.
 - **Every run writes a summary JSON to `results/`** with its settings. Don't hand-edit results.
 - **SciEntsBank metrics are accuracy and F1, not QWK:** the labels are categories.
