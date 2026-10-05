@@ -50,6 +50,8 @@ Power is board DC draw summed over the rails, not wall power.
 | E2B | 55.2% / F1 0.518 | 59.8% / F1 0.553 | 60.3% / F1 0.570 |
 | E4B | **67.0%** / F1 0.664 | **67.5%** / F1 0.655 | **70.4%** / F1 0.705 |
 
+Re-run 2026-10-05 on llama.cpp `a3a1c47` (the RAG build): same accuracy, with E2B giving identical labels and E4B within 0.4 points ([build check](rag.md#build-check-baseline-re-run-on-a3a1c47)).
+
 (Accuracy / macro-F1. 0 unparsed replies, 0 errors.)
 
 ### Cost on the boards (measured, test_ua)

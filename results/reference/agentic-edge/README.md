@@ -16,5 +16,6 @@ The supervisor's call (2026-09-29): **reuse these device benchmarks rather than 
 | `own-suite/` | `benchmark/results/`, `findings/e_classifier_on_bfcl.json` | Own 10-case suite: architectures A–E, MTP × thinking, E4B quantization sweep (Pi 5) |
 | `telemetry-sample/` | `findings/measured/` | One `run_measured.sh` output folder, as a format example |
 | `early-engine-benchmarks/` | `findings/early-engine-benchmarks/` | Raw Sep-14 scratch output behind `gemma4-pi5-benchmarks.md` |
+| `mmlupro-correct-per-question.json` | the dashboard's `/api/compare` (added 2026-10-05, not from commit `12031f0`) | MMLU-Pro baseline, both boards, s1–s3: right or wrong per `question_id`. For pairing `edge-grader-mmlupro` runs with the lab's; its accuracies match the lab's (Pi 51.7 / 65.7%, Jetson 52.7 / 66.0%) |
 
 Not copied: `findings/viz/` (HTML views, regenerable), the per-sample lm-eval `.jsonl` files, and archived failed runs.

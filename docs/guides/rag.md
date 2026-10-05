@@ -95,6 +95,35 @@ Each step can be tested on its own. Steps 1–5 are built (2026-10-02); the test
 
 The settings were tuned only against the retrieval check (train questions). Don't change them after grading starts; see [`../results/rag.md`](../results/rag.md).
 
+## MMLU-Pro (the second baseline)
+
+The same pipeline, pointed at the lab's 300-question MMLU-Pro subset and the OpenStax + SMA books ([`rag-sources.md`](rag-sources.md#part-b-mmlu-pro)). What differs from SciEntsBank:
+
+| | SciEntsBank | MMLU-Pro |
+|---|---|---|
+| Runner | `edge-grader-baseline` (one short prompt per answer) | `edge-grader-mmlupro`: lm-eval's `mmlu_pro` chat messages, 5 worked examples, chain of thought up to 2,048 tokens |
+| Without RAG | the stage-1 prompt, unchanged | **the lab's lm-eval prompt, byte for byte** (`tests/test_mmlupro.py`, from prompts recorded on the lab's runs), so "no RAG" here is the lab baseline |
+| Where passages go | before the question, in the one user message | before the question, in the **last** user message only; the worked examples stay as they are |
+| Query | the question text | the question text, **never the options** (they'd give the answer away to the retriever) |
+| Retrieved for | every question of every split | the 300 test questions, plus the 70 validation questions for the check |
+| Retrieval check | 30 train questions | 30 **validation** questions (the worked-example pool, never scored), over the 14 subjects |
+| Chunks, English | 755 | 32,016 (25 OpenStax books, cut to their chapters by the PDFs' bookmarks) |
+
+**Commands** (Mac, then Kaggle):
+
+```bash
+uv run --group rag python -m edge_grader.rag.corpus --benchmark mmlupro          # Mac: chunks, en + id
+# upload data/rag/chunks/mmlupro-{en,id}.jsonl to the private Kaggle chunks dataset (New Version)
+# Kaggle, kaggle_rag_index.ipynb: INDEXES = [("mmlupro-en", "bge-small-en")]   -> results-rag.zip
+uv run --group rag python -m edge_grader.rag.check results/rag/retrieval-mmlupro-en.bge-small-en-k5.json
+# mark data/rag/check/*.md, then --score; then kaggle_baseline.ipynb: TASK = "mmlupro",
+# RAG = None, then RAG = "results/rag/retrieval-mmlupro-en.bge-small-en-k5.json"
+```
+
+**Both indexes are built on Kaggle.** `bge-small-en` runs on a CPU, but 32,016 chunks is ~40× SciEntsBank's, and on the owner's 8 GB Mac it swapped too hard to finish in reasonable time (2026-10-05). On a T4 it takes a minute or two.
+
+**Settings:** the frozen SciEntsBank ones (250-word chunks, 50 overlap, k = 3, `bge-small-en-v1.5` / `bge-m3`). k = 3 adds roughly 1,000 tokens to a prompt that is already ~1,500–2,400, well inside the 8,192 context with the 2,048-token answer budget.
+
 ## When it doesn't work
 
 | Symptom | Likely cause |

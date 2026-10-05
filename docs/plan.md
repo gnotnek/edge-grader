@@ -9,8 +9,8 @@
 | Week | Dates | Stage | Goal | Checkpoint |
 |---|---|---|---|---|
 | 3 | Sep 28 – Oct 4 | 1. Baseline | Grading baseline on Kaggle ✅; board cost estimated ✅, then measured ✅ | Baseline table complete: accuracy + cost ✅ |
-| 4 | Oct 5 – 11 | 2. RAG | Course material chosen, retrieval pipeline built | Retrieval returns the right passage for most questions |
-| 5 | Oct 12 – 18 | 2. RAG | RAG grading runs, all splits, both models | RAG vs baseline table |
+| 4 | Oct 5 – 11 | 2. RAG | SciEntsBank RAG-en graded, all splits, both models ✅; baseline re-run on the pinned build ✅; MMLU-Pro runner and retrieval | RAG vs baseline table (SciEntsBank) ✅ |
+| 5 | Oct 12 – 18 | 2. RAG | MMLU-Pro: no-RAG and RAG-en on Kaggle, per-subject analysis; RAG-id if time allows. Start the stage-3 notebook alongside | RAG vs baseline table (MMLU-Pro) |
 | 6 | Oct 19 – 25 | 3. Fine-tuning | QLoRA pipeline on Kaggle; E2B trained and converted to GGUF | Fine-tuned E2B graded on test_ua |
 | 7 | Oct 26 – Nov 1 | 3. Fine-tuning | E4B fine-tuned; RAG + fine-tuning combined | Baseline vs RAG vs fine-tuning vs both, per split |
 | 8 | Nov 2 – 8 | 4. Edge cost + cloud | All versions on the Pi 5 / Jetson; cloud reference (RQ5) | Accuracy vs energy chart |
@@ -34,6 +34,7 @@
 ### Stage 2: RAG (weeks 4–5)
 *How RAG works and how to build it: [`guides/rag.md`](guides/rag.md).*
 
+**SciEntsBank** (the main condition for RQ2: done)
 - [x] Choose course material that matches SciEntsBank's topics, English and Indonesian; note the licence: [`guides/rag-sources.md`](guides/rag-sources.md)
 - [x] Material for MMLU-Pro too (OpenStax + SMA books), so RAG can be tested on both baselines
 - [x] Informatika kelas XII: **dropped** (2026-10-05). No text layer, and OCR wasn't feasible
@@ -45,15 +46,20 @@
 - [x] Re-upload the round-2 chunks to the private Kaggle dataset (New Version); the notebooks check them against the committed sha256
 - [x] Run on Kaggle: **RAG-en**, E2B + E4B, all splits (2026-10-05). No overall gain: E4B flat, E2B −2 to −5 points; recall on correct up on every split, recall on incorrect down ([`results/rag.md`](results/rag.md#grading-results-rag-en-kaggle-t4-2026-10-05))
 - [x] Pin llama.cpp to `a3a1c47` in `kaggle_baseline.ipynb` (2026-10-05)
-- [ ] Re-run the no-RAG baseline on the pinned build (E2B + E4B, all splits), so RAG vs no-RAG differs only in the passages
-- [ ] RAG-id (`bge-m3`) only if time allows. RAG-both dropped
-- [ ] Analysis: did recall on *correct* answers improve (the baseline's main weakness)? And E2B's "contradictory" overuse?
+- [x] Re-run the no-RAG baseline on the pinned build (E2B + E4B, all splits; Kaggle, 2026-10-05). Same accuracy: E2B identical labels, E4B ≤1.3% of labels changed, no split significant. The RAG table now uses it as the baseline ([build check](results/rag.md#build-check-baseline-re-run-on-a3a1c47)). The boards weren't re-run: each uses one fixed build (Pi `661643e`, Jetson `a894dae`), and stage 4 runs the baseline again next to RAG
+- [x] Analysis: recall on *correct* rose on every split (up to +14 points), but recall on *incorrect* fell (up to −20) and E2B's "contradictory" overuse grew (1,105 → 1,522 on test_ud). RAG makes grading more lenient, not better ([`results/rag.md`](results/rag.md#grading-results-rag-en-kaggle-t4-2026-10-05))
+- [x] RAG-id (`bge-m3`), E2B + E4B, all splits, pinned build (Kaggle, 2026-10-05). Worse than RAG-en on 5 of 6 rows; E2B −4.6 / −7.4 (test_uq / test_ud) and E4B −4.2 (test_ud), all significant ([`results/rag.md`](results/rag.md#grading-results-rag-id-kaggle-t4-2026-10-05)). RAG-both dropped
 
-**MMLU-Pro with RAG** (same retrieval code, the OpenStax + SMA material):
-- [ ] A RAG runner for the 300-question subset: a custom lm-eval task, or this project's own runner. Query with the question only, not the options.
-- [ ] Re-run the no-RAG baseline through the same runner, so RAG vs no-RAG compares like with like. The lab's lm-eval numbers stay as the reference.
-- [ ] Run E2B + E4B: RAG-en and RAG-id
-- [ ] Analysis per subject; expect little help on engineering, law and "other" (thin material)
+**MMLU-Pro** (the subject-knowledge baseline; same retrieval code, OpenStax + SMA material)
+- [x] Runner, this project's own (`edge-grader-mmlupro`): without RAG it sends lm-eval's `mmlu_pro` chat messages byte for byte (checked against all 200 prompts recorded from the lab's s1 runs; a test pins one per subject), the same 2,048-token budget and stop string, and reads the answer with lm-eval's own pattern (agrees on all 200 recorded replies). With `--rag`, passages go in front of the question; the five worked examples are unchanged. Query: the question only, not the options
+- [x] Chunks: OpenStax cut to its chapters by the PDFs' bookmarks (front matter, answer keys, appendices and indexes out); 32,016 English chunks, 1,670 Indonesian (`results/rag/chunks-mmlupro.json`). SciEntsBank chunks unchanged (same sha256)
+- [ ] Upload `mmlupro-en.jsonl` and `mmlupro-id.jsonl` to the private Kaggle chunks dataset (New Version)
+- [ ] English index (`bge-small-en`) and retrieval for the 300 test + 70 validation questions: `kaggle_rag_index.ipynb` (32,016 chunks swapped the 8 GB Mac too hard)
+- [ ] Retrieval check on 30 **validation** questions (the worked-example pool, never scored), spread over the 14 subjects; owner marks. Gate before grading, as for SciEntsBank
+- [ ] Kaggle: no-RAG through the runner, E2B + E4B, s1–s3 (`TASK = "mmlupro"`). Should land within noise of the lab's lm-eval numbers (E2B 51.7–52.7%, E4B 65.7–66.0%); paired against the lab where its per-question answers exist
+- [ ] Kaggle: RAG-en, E2B + E4B, s1–s3
+- [ ] RAG-id: `mmlupro-id` index with `bge-m3` on Kaggle (`kaggle_rag_index.ipynb`), then grade. Optional, like SciEntsBank's
+- [ ] Analysis per subject, paired McNemar; expect little help on engineering, law and "other" (thin material)
 
 ### Stage 3: Fine-tuning (weeks 6–7)
 - [ ] Unsloth QLoRA notebook on Kaggle; train on the SciEntsBank **train** split only
@@ -95,3 +101,5 @@
 | 2026-10-05 | Stage 1 done: board cost **measured** on both boards (test_ua), replacing the estimate there; the Pi re-run at `-t 3` | The Pi's first pass used llama.cpp's default 4 threads, unlike every agentic-edge Pi run; grades were identical, speed 5–14% different. The estimate was 10–35% high, so measured numbers are quoted from now on |
 | 2026-10-05 | Informatika kelas XII dropped; retrieval check passed on the owner's marking | No text layer and OCR not feasible; 29/30 and 30/30 questions get a useful passage |
 | 2026-10-05 | RAG-en run: no overall gain; llama.cpp pinned to `a3a1c47`; baseline re-run on that build added | The RAG and baseline runs used different llama.cpp builds, so the comparison wasn't clean |
+| 2026-10-05 | Baseline re-run done (same accuracy, RAG results stand); stage 2 rearranged: SciEntsBank done in week 4, MMLU-Pro RAG moves to week 5, stage-3 notebook can start alongside | SciEntsBank's RAG-en, the condition RQ2 needs, finished a week early; MMLU-Pro only needs Kaggle time once its retrieval passes the check |
+| 2026-10-05 | RAG-id run (optional condition) done: worse than RAG-en, significant drops on unseen domains for both models | The run was cheap once RAG-en was set up, and it answers the cross-lingual question |

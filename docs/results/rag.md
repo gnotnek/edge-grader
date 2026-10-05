@@ -76,14 +76,16 @@ A teacher's questions are known before grading, so passages are retrieved **once
 
 Same models, prompt, splits and server flags as the stage-1 baseline, plus the top 3 English passages per question. Files: `results/kaggle/rag-*-en-k3-*.json` and `raw/`. The two 100-answer test runs (`…-071301`, `…-071359`) are kept, like the stage-1 pilots.
 
+The baseline column is the **no-RAG re-run on the same llama.cpp build** (`a3a1c47`, `results/kaggle/baseline-*-20261005-*`), so each row differs only in the passages. See [the build check](#build-check-baseline-re-run-on-a3a1c47) below.
+
 | Model | Split | n | Accuracy, baseline → RAG | Macro-F1 | Paired flips (better / worse) | McNemar p |
 |---|---|---|---|---|---|---|
 | E2B | test_ua | 540 | 55.2% → 53.3% (−1.9) | 0.518 → 0.510 | 60 / 70 | 0.43 |
 | E2B | test_uq | 733 | 59.8% → 56.9% (−2.9) | 0.553 → 0.537 | 69 / 90 | 0.11 |
 | E2B | test_ud | 4,562 | 60.3% → 55.1% (**−5.1**) | 0.570 → 0.516 | 373 / 606 | **<0.001** |
-| E4B | test_ua | 540 | 67.0% → 65.6% (−1.5) | 0.664 → 0.633 | 31 / 39 | 0.40 |
-| E4B | test_uq | 733 | 67.5% → 70.4% (+2.9) | 0.655 → 0.659 | 64 / 43 | 0.053 |
-| E4B | test_ud | 4,562 | 70.4% → 70.7% (+0.3) | 0.705 → 0.698 | 267 / 254 | 0.60 |
+| E4B | test_ua | 540 | 66.7% → 65.6% (−1.1) | 0.661 → 0.633 | 31 / 37 | 0.54 |
+| E4B | test_uq | 733 | 67.5% → 70.4% (+2.9) | 0.653 → 0.659 | 66 / 45 | 0.057 |
+| E4B | test_ud | 4,562 | 70.4% → 70.7% (+0.3) | 0.705 → 0.698 | 260 / 247 | 0.59 |
 
 Recall per class, baseline → RAG:
 
@@ -93,8 +95,8 @@ Recall per class, baseline → RAG:
 | E2B | test_uq | 0.48 → **0.60** | 0.78 → 0.81 | 0.66 → 0.50 |
 | E2B | test_ud | 0.60 → **0.71** | 0.79 → 0.83 | 0.57 → 0.37 |
 | E4B | test_ua | 0.45 → **0.53** | 0.64 → 0.66 | 0.88 → 0.78 |
-| E4B | test_uq | 0.41 → **0.52** | 0.67 → 0.67 | 0.90 → 0.86 |
-| E4B | test_ud | 0.57 → **0.59** | 0.69 → 0.77 | 0.82 → 0.79 |
+| E4B | test_uq | 0.40 → **0.52** | 0.67 → 0.67 | 0.90 → 0.86 |
+| E4B | test_ud | 0.57 → **0.59** | 0.70 → 0.77 | 0.82 → 0.79 |
 
 **What it shows:**
 1. **RAG doesn't improve overall grading.** E4B is unchanged (no split significant; test_uq +2.9 is borderline). E2B gets worse, significantly so on unseen domains (−5.1 points).
@@ -104,4 +106,52 @@ Recall per class, baseline → RAG:
 5. **Cost:** the prompt grows from ~160 to ~1,035 tokens per answer, about 6.3×. On the boards, where grading is almost all prefill, that means roughly 6× the time and energy per answer. Measuring it is stage 4.
 6. **0 errors**, and only 3 and 4 unparsed replies (E2B test_uq and test_ud) out of 5,835.
 
-**Caveat, not yet controlled: a different llama.cpp build.** These runs used llama.cpp `a3a1c47`; the stage-1 baseline used `86ea01d`. Kaggle clones the latest llama.cpp each session. On the Jetson, a different build changed 6% of E2B's labels and 1% of E4B's, with no change in accuracy, so the build probably doesn't explain a 5-point drop. It isn't ruled out, though. The notebook is now pinned to `a3a1c47`, and a no-RAG baseline re-run on it is planned, which makes the comparison exact.
+### Build check: baseline re-run on `a3a1c47`
+
+The RAG runs used llama.cpp `a3a1c47`; the original stage-1 baseline used `86ea01d`, because Kaggle cloned the latest llama.cpp each session. The notebook is now pinned to `a3a1c47`, and the no-RAG baseline was re-run on it (Kaggle T4, 2026-10-05, all six full splits). Paired against the original, answer by answer:
+
+| Model | Split | n | Accuracy, `86ea01d` → `a3a1c47` | Same label | Flips (old only / new only right) | McNemar p |
+|---|---|---|---|---|---|---|
+| E2B | test_ua | 540 | 55.2% → 55.2% | 100% | 0 / 0 | 1.00 |
+| E2B | test_uq | 733 | 59.8% → 59.8% | 100% | 0 / 0 | 1.00 |
+| E2B | test_ud | 4,562 | 60.3% → 60.3% | 100% | 0 / 0 | 1.00 |
+| E4B | test_ua | 540 | 67.0% → 66.7% | 99.3% | 3 / 1 | 0.62 |
+| E4B | test_uq | 733 | 67.5% → 67.5% | 98.8% | 4 / 4 | 1.00 |
+| E4B | test_ud | 4,562 | 70.4% → 70.4% | 98.7% | 26 / 26 | 1.00 |
+
+- **The build doesn't move accuracy.** E2B gives the identical label on every one of 5,835 answers; E4B changes 0.7–1.3% of its labels, and those changes cancel out.
+- **So the RAG results stand as measured.** E2B's −5.1 points on test_ud is the passages, not the build. The table above now uses the re-run as its baseline; against it no E4B row changes by more than 0.4 points, and no conclusion changes.
+- **Kaggle latency moved more than accuracy** (E4B median 0.14 → 0.16–0.19 s): T4 sessions vary. That's another reason latency comes from the boards, not Kaggle.
+
+## Grading results: RAG-id (Kaggle T4, 2026-10-05)
+
+The same run with the top 3 **Indonesian** passages (`bge-m3`), on the pinned build `a3a1c47`, against the no-RAG re-run on that build. Files: `results/kaggle/rag-*-id-k3-*.json` and `raw/`. 0 errors and 0 unparsed replies out of 5,835 per model: English instructions with Indonesian passages didn't break the label-only replies.
+
+| Model | Split | n | No RAG | RAG-en | RAG-id | RAG-id flips vs no RAG (better / worse) | McNemar p |
+|---|---|---|---|---|---|---|---|
+| E2B | test_ua | 540 | 55.2% | 53.3% | 52.6% (−2.6) | 65 / 79 | 0.28 |
+| E2B | test_uq | 733 | 59.8% | 56.9% | 55.1% (**−4.6**) | 77 / 111 | **0.016** |
+| E2B | test_ud | 4,562 | 60.3% | 55.1% | 52.9% (**−7.4**) | 309 / 646 | **<0.001** |
+| E4B | test_ua | 540 | 66.7% | 65.6% | 65.6% (−1.1) | 43 / 49 | 0.60 |
+| E4B | test_uq | 733 | 67.5% | 70.4% | 69.9% (+2.4) | 64 / 47 | 0.13 |
+| E4B | test_ud | 4,562 | 70.4% | 70.7% | 66.2% (**−4.2**) | 208 / 399 | **<0.001** |
+
+Recall per class (correct / contradictory / incorrect):
+
+| Model | Split | No RAG | RAG-en | RAG-id |
+|---|---|---|---|---|
+| E2B | test_ua | 0.44 / 0.66 / 0.63 | 0.58 / 0.76 / 0.44 | 0.58 / 0.88 / 0.39 |
+| E2B | test_uq | 0.48 / 0.78 / 0.66 | 0.60 / 0.81 / 0.50 | 0.64 / 0.88 / 0.42 |
+| E2B | test_ud | 0.60 / 0.79 / 0.57 | 0.71 / 0.83 / 0.37 | 0.69 / 0.83 / 0.34 |
+| E4B | test_ua | 0.45 / 0.64 / 0.88 | 0.53 / 0.66 / 0.78 | 0.56 / 0.76 / 0.72 |
+| E4B | test_uq | 0.40 / 0.67 / 0.90 | 0.52 / 0.67 / 0.86 | 0.58 / 0.72 / 0.79 |
+| E4B | test_ud | 0.57 / 0.70 / 0.82 | 0.59 / 0.77 / 0.79 | 0.60 / 0.81 / 0.69 |
+
+**What it shows:**
+1. **Indonesian material hurts more than English.** RAG-id is below RAG-en on 5 of 6 rows, and it also pulls E4B down significantly on unseen domains (−4.2), where RAG-en left E4B unchanged.
+2. **The same mechanism, stronger:** recall on *correct* rises (up to +18 points, E4B test_uq), and recall on *incorrect* falls further than with RAG-en (E4B test_ud 0.82 → 0.69). "Contradictory" is used even more.
+3. **This is despite good retrieval.** By the owner's marking, Indonesian retrieval was as good as English (a useful passage in the top 3 for 30/30 sample questions). So the loss isn't about bad passages. Material in another language seems to be harder for these small models to use, or more distracting.
+4. **Cost:** prompts grow to ~1,250–1,300 tokens per answer, about 8× the no-RAG prompt (Indonesian takes more tokens per word), against 6.3× for RAG-en.
+
+**For RQ2:** adding course material, in either language, doesn't improve these small graders. It shifts them toward lenient grading, and it costs 6–8× the prompt length. The language result (English material helps more than, or hurts less than, Indonesian) is the secondary finding RAG-id was for.
+

@@ -93,7 +93,7 @@ Decisions made while doing the work, not from the supervisor. Each has to serve 
 | 2026-10-03 | On the boards, retrieval counts as a one-off setup cost per question, reported separately from per-answer cost | A teacher's questions are known before grading, so passages can be prepared in advance | RQ4 |
 | 2026-10-05 | Drop Informatika kelas XII from the MMLU-Pro material | No text layer and OCR wasn't feasible. Computer science is 9 of 300 MMLU-Pro questions and stays covered by Informatika XI and OpenStax | RQ2 (MMLU-Pro RAG) |
 | 2026-10-05 | Retrieval check passed on the owner's marking: useful passage in the top 3 for 29/30 (English) and 30/30 (Indonesian) train questions; go ahead with RAG grading | The gate set in `guides/rag.md` before any grading run | RQ2 |
-| 2026-10-05 | Pin llama.cpp to `a3a1c47` in the Kaggle notebook, and re-run the no-RAG baseline on it | Unpinned, Kaggle used whatever build was newest that day: the baseline ran on `86ea01d`, RAG-en on `a3a1c47`. Comparisons must differ only in the condition | RQ2, RQ3 |
+| 2026-10-05 | Pin llama.cpp to `a3a1c47` in the Kaggle notebook, and re-run the no-RAG baseline on it | Unpinned, Kaggle used whatever build was newest that day: the baseline ran on `86ea01d`, RAG-en on `a3a1c47`. Comparisons must differ only in the condition. Done the same day: same accuracy on both builds, so the RAG results stand ([build check](results/rag.md#build-check-baseline-re-run-on-a3a1c47)) | RQ2, RQ3 |
 
 ## Open questions
 

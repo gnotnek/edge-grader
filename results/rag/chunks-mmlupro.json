@@ -1,0 +1,65 @@
+{
+ "stage": "rag",
+ "kind": "chunks",
+ "time": "2026-10-05T10:29:21+00:00",
+ "settings": {
+  "benchmark": "mmlupro",
+  "size_words": 250,
+  "overlap_words": 50,
+  "min_block_words": 8
+ },
+ "files": {
+  "mmlupro-en.jsonl": {
+   "sha256": "fda933ea9b0eac677a0b40c7b1b4e1a52c84ab212433a649f30fe18f89ac4fb7",
+   "chunks": 32016,
+   "words": 8001176,
+   "per_source": {
+    "en-openstax-american-government-4e": 1415,
+    "en-openstax-anatomy-and-physiology-2e": 2561,
+    "en-openstax-biology-2e": 2736,
+    "en-openstax-business-law-i-essentials-2e": 229,
+    "en-openstax-calculus-volume-1": 611,
+    "en-openstax-calculus-volume-2": 537,
+    "en-openstax-chemistry-2e": 1591,
+    "en-openstax-introduction-business-2e": 1174,
+    "en-openstax-introduction-computer-science": 1620,
+    "en-openstax-introduction-intellectual-property": 333,
+    "en-openstax-introduction-philosophy": 891,
+    "en-openstax-introductory-statistics-2e": 967,
+    "en-openstax-organic-chemistry": 1174,
+    "en-openstax-principles-economics-3e": 1769,
+    "en-openstax-principles-finance-2e": 1102,
+    "en-openstax-principles-financial-accounting": 1444,
+    "en-openstax-principles-management": 1149,
+    "en-openstax-principles-marketing": 1191,
+    "en-openstax-psychology-2e": 1306,
+    "en-openstax-university-physics-volume-1": 1449,
+    "en-openstax-university-physics-volume-2": 1090,
+    "en-openstax-university-physics-volume-3": 865,
+    "en-openstax-us-history": 1978,
+    "en-openstax-world-history-volume-1": 1449,
+    "en-openstax-world-history-volume-2": 1385
+   }
+  },
+  "mmlupro-id.jsonl": {
+   "sha256": "27b81bb3da92428f7a4a962cd12319754b0df1bd33825ca7383f42bb25c201e7",
+   "chunks": 1670,
+   "words": 416432,
+   "per_source": {
+    "id-sma-biologi-kelas11": 132,
+    "id-sma-biologi-kelas12": 168,
+    "id-sma-ekonomi-kelas11": 75,
+    "id-sma-ekonomi-kelas12": 62,
+    "id-sma-fisika-kelas11": 103,
+    "id-sma-fisika-kelas12": 134,
+    "id-sma-informatika-kelas11": 157,
+    "id-sma-kimia-kelas11": 137,
+    "id-sma-kimia-kelas12": 94,
+    "id-sma-matematika-tl-kelas11": 186,
+    "id-sma-matematika-tl-kelas12": 217,
+    "id-sma-sejarah-kelas11": 113,
+    "id-sma-sejarah-kelas12": 92
+   }
+  }
+ }
+}

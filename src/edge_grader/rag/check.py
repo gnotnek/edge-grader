@@ -3,9 +3,10 @@
     uv run --group rag python -m edge_grader.rag.check results/rag/retrieval-<index>-k5.json
     uv run --group rag python -m edge_grader.rag.check results/rag/retrieval-<index>-k5.json --score
 
-Samples only questions from the train split (test_ua shares them), never test_uq or test_ud
-questions, so the check can't tune the corpus on unseen questions. Spreads the sample over the
-units. Writes data/rag/check/<retrieval>.md: each passage gets a box to tick if it would help a
+Samples only questions the evaluation never scores, so the check can't tune the corpus on them:
+SciEntsBank's train split (test_ua shares those questions, test_uq and test_ud never), spread
+over the units; MMLU-Pro's validation split (the worked-example pool, disjoint from the test
+questions), spread over the subjects. Writes data/rag/check/<retrieval>.md: each passage gets a box to tick if it would help a
 teacher grade the question. data/ is git-ignored because the passages quote the books.
 
 --score reads the marked sheet back and writes results/rag/check-<retrieval>.json: the chunk ids
@@ -25,14 +26,18 @@ from .index import read_chunks, sha256_of
 CHECK_DIR = Path("data/rag/check")
 RESULTS_DIR = Path("results/rag")
 PASSAGE_RE = re.compile(r"^- \[(.)\] \*\*\d+\.\*\* `([^`]+)`")
+CHECK_SPLIT = {"scientsbank": "train", "mmlupro": "validation"}
+USEFUL = {"scientsbank": "would help a teacher grade answers to the question",
+          "mmlupro": "holds knowledge that helps answer the question"}
 
 
-def sample_questions(questions: dict[str, dict], n: int, seed: int = 0) -> list[str]:
-    """Round-robin over units, train questions only."""
+def sample_questions(questions: dict[str, dict], n: int, seed: int = 0,
+                     split: str = "train") -> list[str]:
+    """Round-robin over units (SciEntsBank) or subjects (MMLU-Pro), one split only."""
     by_unit = defaultdict(list)
     for q, v in sorted(questions.items()):
-        if "train" in v["splits"]:
-            by_unit[q.split(".")[0]].append(q)
+        if split in v["splits"]:
+            by_unit[v.get("subject", q.split(".")[0])].append(q)
     rng = random.Random(seed)
     for qs in by_unit.values():
         rng.shuffle(qs)
@@ -50,8 +55,9 @@ def report(retrieval: dict, texts: dict[str, str], question_text: dict[str, str]
     lines = [
         f"# Retrieval check: {Path(s['index']).name}",
         "",
-        f"Model `{s.get('hf_id', s['model'])}`, top {show} of {s['k']}, {len(picked)} train questions.",
-        "Tick a box if the passage would help a teacher grade answers to the question.",
+        (f"Model `{s.get('hf_id', s['model'])}`, top {show} of {s['k']}, {len(picked)} questions"
+         f" ({CHECK_SPLIT[s.get('benchmark', 'scientsbank')]} only)."),
+        f"Tick a box if the passage {USEFUL[s.get('benchmark', 'scientsbank')]}.",
         "",
     ]
     for q in picked:
@@ -96,6 +102,8 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--marked-by", default="owner", help="who ticked the boxes (recorded)")
     args = ap.parse_args(argv)
 
+    benchmark = json.loads(args.retrieval.read_text())["settings"].get("benchmark", "scientsbank")
+    split = CHECK_SPLIT[benchmark]
     if args.score:
         sheet = CHECK_DIR / f"{args.retrieval.stem}.md"
         scored = score_sheet(sheet.read_text())
@@ -105,8 +113,8 @@ def main(argv: list[str] | None = None) -> None:
             "kind": "retrieval-check",
             "time": datetime.now(UTC).isoformat(timespec="seconds"),
             "settings": {"retrieval": str(args.retrieval), "sheet": str(sheet),
-                         "marked_by": args.marked_by, "split": "train questions only",
-                         "useful": "would help a teacher grade answers to the question"},
+                         "marked_by": args.marked_by, "split": f"{split} questions only",
+                         "useful": USEFUL[benchmark]},
             **scored,
         }, indent=1) + "\n")
         print(f"wrote {out}: {scored['summary']}")
@@ -118,10 +126,15 @@ def main(argv: list[str] | None = None) -> None:
         raise SystemExit(f"local {chunks_path} differs from the one retrieval used; rebuild it with "
                          "python -m edge_grader.rag.corpus from the same sources")
     texts = {c["id"]: c["text"] for c in read_chunks(chunks_path)}
-    from .. import data
+    if benchmark == "mmlupro":
+        from ..mmlupro import questions as mmlupro_questions
 
-    question_text = {data.question_id(i.id): i.question for i in data.load("train")}
-    picked = sample_questions(retrieval["questions"], args.n, args.seed)
+        question_text = {q: v["question"] for q, v in mmlupro_questions().items()}
+    else:
+        from .. import data
+
+        question_text = {data.question_id(i.id): i.question for i in data.load("train")}
+    picked = sample_questions(retrieval["questions"], args.n, args.seed, split)
     CHECK_DIR.mkdir(parents=True, exist_ok=True)
     out = CHECK_DIR / f"{args.retrieval.stem}.md"
     out.write_text(report(retrieval, texts, question_text, picked, args.show))

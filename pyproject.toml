@@ -17,6 +17,7 @@ dependencies = [
 edge-grader-baseline = "edge_grader.baseline:main"
 edge-grader-cost = "edge_grader.cost:main"
 edge-grader-board-check = "edge_grader.board_check:main"
+edge-grader-mmlupro = "edge_grader.mmlupro:main"
 
 [dependency-groups]
 dev = [

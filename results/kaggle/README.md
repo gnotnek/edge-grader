@@ -1,7 +1,9 @@
 # Kaggle runs: grading on a Kaggle GPU
 
 - **`baseline-*`:** the stage-1 baseline, 2026-09-29. Described on this page.
+- **`baseline-*-20261005-*`:** the same baseline re-run on llama.cpp `a3a1c47`, the build the RAG runs used. Same accuracy: E2B gives identical labels, E4B changes ≤1.3% of them with no significant difference. Comparison: [`docs/results/rag.md`](../../docs/results/rag.md#build-check-baseline-re-run-on-a3a1c47). It is the baseline every later stage compares against.
 - **`rag-*-en-k3-*`:** stage 2, RAG-en (top 3 English passages), 2026-10-05, llama.cpp build `a3a1c47`. Results and analysis: [`docs/results/rag.md`](../../docs/results/rag.md#grading-results-rag-en-kaggle-t4-2026-10-05). The runs at `071301` and `071359` are the 100-answer test runs.
+- **`rag-*-id-k3-*`:** stage 2, RAG-id (top 3 Indonesian passages, `bge-m3`), 2026-10-05, build `a3a1c47`. Full splits only. Results: [`docs/results/rag.md`](../../docs/results/rag.md#grading-results-rag-id-kaggle-t4-2026-10-05).
 
 # Stage-1 grading baseline
 

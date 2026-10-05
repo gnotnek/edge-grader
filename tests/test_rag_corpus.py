@@ -121,3 +121,15 @@ def test_front_and_back_matter_pages_are_cut():
     # A heading listed in the table of contents early on doesn't cut the book.
     pages[2].blocks.append("Glosarium")
     assert [p.page for p in body_pages(pages)] == list(range(4, 36))
+
+
+def test_openstax_body_runs_from_chapter_one_to_the_back_matter():
+    from edge_grader.rag.corpus import toc_body
+
+    toc = [[1, "Contents", 7], [1, "Preface", 13], [1, "Chapter 1 Units", 17], [2, "1.1 Scope", 18],
+           [1, "Chapter 2 Vectors", 41], [1, "Appendix A Units", 875], [1, "Answer Key", 895],
+           [1, "Index", 955], [1, "UniversityPhysics", 1]]
+    assert toc_body(toc) == (17, 874)
+    assert toc_body([[1, "Preface", 9], [1, "Unit 1 Setting", 24], [1, "References", 567]]) == (24, 566)
+    assert toc_body([[1, "Chapter 1 A", 5], [1, "Chapter 2 B", 40]]) == (5, 40)  # no back matter
+    assert toc_body([[1, "Bab 1", 5]]) is None

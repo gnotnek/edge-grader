@@ -1,4 +1,4 @@
-"""Embed the chunks and retrieve passages for every SciEntsBank question (rag.md steps 3-5).
+"""Embed the chunks and retrieve passages for every benchmark question (rag.md steps 3-5).
 
 Runs on Kaggle: this Mac doesn't run models (CLAUDE.md).
 
@@ -6,10 +6,14 @@ Runs on Kaggle: this Mac doesn't run models (CLAUDE.md).
         --chunks data/rag/chunks/scientsbank-en.jsonl --model bge-small-en
     uv run --group rag --group embed python -m edge_grader.rag.index retrieve \\
         --index data/rag/index/scientsbank-en.bge-small-en
+    uv run --group rag --group embed python -m edge_grader.rag.index retrieve \\
+        --index data/rag/index/mmlupro-en.bge-small-en --benchmark mmlupro
 
 build writes <index>.npy (unit vectors, one row per chunk) and <index>.json (settings).
 retrieve searches with the question text only and writes the top-k chunk ids and scores per
-question to results/rag/retrieval-<index>-k<k>.json. That file holds ids, never text, so it can
+question to results/rag/retrieval-<index>-k<k>.json. SciEntsBank: every question of every split,
+keyed like "EM.45b". MMLU-Pro: the lab's 300 subset questions and the 70 validation questions
+(for the retrieval check), keyed by question_id; the options are never part of the query. That file holds ids, never text, so it can
 be committed; the grader looks the text up in the chunks file, whose sha256 it checks.
 """
 
@@ -122,7 +126,8 @@ def questions(splits=SPLITS) -> dict[str, dict]:
     return out
 
 
-def retrieve(index: Path, qs: dict[str, dict], encode: Encode, k: int) -> dict:
+def retrieve(index: Path, qs: dict[str, dict], encode: Encode, k: int,
+             benchmark: str = "scientsbank") -> dict:
     meta = json.loads(with_ext(index, ".json").read_text())
     vectors = np.load(with_ext(index, ".npy"))
     chunk_ids = [c["id"] for c in read_chunks(Path(meta["chunks"]))]
@@ -132,9 +137,11 @@ def retrieve(index: Path, qs: dict[str, dict], encode: Encode, k: int) -> dict:
         "stage": "rag",
         "kind": "retrieval",
         "time": datetime.now(UTC).isoformat(timespec="seconds"),
-        "settings": {"index": str(index), "k": k, "query": "question text only", **meta},
+        "settings": {"index": str(index), "k": k, "query": "question text only",
+                     "benchmark": benchmark, **meta},
         "questions": {
             key: {"splits": qs[key]["splits"],
+                  **({"subject": qs[key]["subject"]} if "subject" in qs[key] else {}),
                   "hits": [[chunk_ids[j], round(s, 4)] for j, s in row]}
             for key, row in zip(keys, hits)
         },
@@ -147,8 +154,9 @@ def main(argv: list[str] | None = None) -> None:
     b = sub.add_parser("build", help="embed a chunks file")
     b.add_argument("--chunks", type=Path, required=True)
     b.add_argument("--model", choices=list(MODELS), required=True)
-    r = sub.add_parser("retrieve", help="top-k chunks for every SciEntsBank question")
+    r = sub.add_parser("retrieve", help="top-k chunks for every question of a benchmark")
     r.add_argument("--index", type=Path, required=True, help="index path without extension")
+    r.add_argument("--benchmark", default="scientsbank", choices=["scientsbank", "mmlupro"])
     r.add_argument("--k", type=int, default=5, help="stored per question; grade with --k <= this")
     r.add_argument("--out", type=Path, default=RESULTS_DIR)
     args = ap.parse_args(argv)
@@ -160,7 +168,13 @@ def main(argv: list[str] | None = None) -> None:
     meta = json.loads(with_ext(args.index, ".json").read_text())
     if sha256_of(Path(meta["chunks"])) != meta["chunks_sha256"]:
         raise SystemExit(f"{meta['chunks']} changed since the index was built; rebuild it")
-    result = retrieve(args.index, questions(), sentence_transformer(meta["model"]), args.k)
+    if args.benchmark == "mmlupro":
+        from ..mmlupro import questions as mmlupro_questions
+
+        qs = mmlupro_questions()
+    else:
+        qs = questions()
+    result = retrieve(args.index, qs, sentence_transformer(meta["model"]), args.k, args.benchmark)
     args.out.mkdir(parents=True, exist_ok=True)
     path = args.out / f"retrieval-{args.index.name}-k{args.k}.json"
     path.write_text(json.dumps(result, indent=1) + "\n")

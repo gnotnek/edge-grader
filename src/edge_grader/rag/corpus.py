@@ -9,7 +9,8 @@ data/rag/chunks/<benchmark>-<lang>.jsonl, one chunk per line:
 Indonesian books are all rights reserved, so their text must not be committed.
 
 Per book: text blocks from PyMuPDF -> cut front and back matter (contents, glossary,
-bibliography, author profiles) -> drop image credits and the lines that repeat on many pages
+bibliography, author profiles; for OpenStax, everything outside Chapter 1 .. the first appendix,
+answer key, reference list or index, by the PDF's bookmarks) -> drop image credits and the lines that repeat on many pages
 (running headers, footers) -> fix broken ligatures -> drop blocks that aren't course material:
 short ones (captions, headings, list options, page numbers), references, worksheet prompts, and
 ones mostly addressed to the student (questions, activity steps) -> 250-word chunks
@@ -152,6 +153,36 @@ def body_pages(pages: list[Page]) -> list[Page]:
     return [p for p in pages if front < p.page < back]
 
 
+# OpenStax books carry a bookmark outline: Contents, Preface, Chapter 1 ... Chapter N (or Unit),
+# then Appendix, Answer Key, References, Index. Their headings don't match the Indonesian
+# patterns above, so for them the outline sets the body. It isn't used for the other books, so
+# their chunks (and the sha256s the Kaggle notebooks check) don't change.
+CHAPTER_RE = re.compile(r"^(chapter|unit)\s+\d", re.IGNORECASE)
+BACK_TOC_RE = re.compile(r"^(appendix|answer key|references|index)\b", re.IGNORECASE)
+
+
+def toc_body(toc: list[list]) -> tuple[int, int] | None:
+    """First and last body page from a PDF's top-level bookmarks: the first chapter (or unit)
+    up to the page before the first appendix, answer key, reference list or index."""
+    top = [(title.strip(), page) for level, title, page, *_ in toc if level == 1]
+    starts = [page for title, page in top if CHAPTER_RE.match(title)]
+    if not starts:
+        return None
+    first = min(starts)
+    backs = [page for title, page in top if BACK_TOC_RE.match(title) and page > first]
+    return first, (min(backs) - 1 if backs else max(page for _, page in top))
+
+
+def openstax_body(path: Path, pages: list[Page]) -> list[Page]:
+    import pymupdf
+
+    with pymupdf.open(path) as doc:
+        span = toc_body(doc.get_toc())
+    if span is None:
+        raise ValueError(f"{path}: no chapter bookmarks; can't find the body")
+    return [p for p in pages if span[0] <= p.page <= span[1]]
+
+
 def pdf_pages(path: Path, source: str) -> list[Page]:
     import pymupdf
 
@@ -208,7 +239,9 @@ def build(benchmark: str, lang: str, raw_dir: Path = RAW_DIR, size: int = 250,
         path = local_path(book, raw_dir)
         if not path.exists():
             raise FileNotFoundError(f"{path} missing; run python -m edge_grader.rag.sources")
-        docs.append(drop_boilerplate(body_pages(pdf_pages(path, book["id"]))))
+        pages = pdf_pages(path, book["id"])
+        body = openstax_body(path, pages) if book["id"].startswith("en-openstax-") else body_pages(pages)
+        docs.append(drop_boilerplate(body))
     if benchmark == "scientsbank":  # the Wikipedia topics fill SciEntsBank's gaps
         docs += [wiki_pages(f) for f in sorted((raw_dir / lang / "wiki").glob("*.txt"))]
     chunks = []
