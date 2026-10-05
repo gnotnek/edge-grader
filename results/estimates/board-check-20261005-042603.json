@@ -1,0 +1,211 @@
+{
+  "stage": "baseline",
+  "kind": "board-check",
+  "time": "2026-10-05T04:26:03+00:00",
+  "settings": {
+    "estimate": "results/estimates/board-cost-estimate-20260930-051813.json",
+    "method": "energy = trapezoid of telemetry power_w over the grading window (first request start to last request end, from server.log); board DC draw, not wall power. Prefill fit: prompt_ms = a + b*prompt tokens processed, every request. Accuracy: same-grade count and exact McNemar on correctness, same answer ids."
+  },
+  "runs": [
+    {
+      "run": "e2b-jetson-test_ua-20260930-224702",
+      "model": "e2b",
+      "board": "jetson",
+      "split": "test_ua",
+      "threads": null,
+      "server_args": "/home/ari/build/llama.cpp/build/bin/llama-server -m /home/ari/research/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf -c 8192 --host 127.0.0.1 --port 8080 -ngl 99 -rea off --reasoning-budget -1 --cache-ram 0",
+      "n": 540,
+      "accuracy": 0.5519,
+      "macro_f1": 0.5221,
+      "unparsed": 0,
+      "errors": 0,
+      "requests_in_log": 540,
+      "median_latency_s": 0.42,
+      "grading_window_s": 234.6,
+      "mean_w": 9.1,
+      "idle_w": 4.59,
+      "j_per_answer": 3.95,
+      "j_per_answer_above_idle": 1.96,
+      "wh_per_1000_answers": 1.1,
+      "mean_prompt_tokens_processed": 165.2,
+      "mean_prompt_tokens_sent": 166.2,
+      "prefill_fixed_ms": 111.2,
+      "prefill_ms_per_token": 1.39,
+      "decode_ms_per_token": 24.8,
+      "estimate": {
+        "median_latency_s": 0.5,
+        "j_per_answer": 5.28,
+        "measured_over_estimate_latency": 0.84,
+        "measured_over_estimate_energy": 0.75
+      },
+      "vs_kaggle": {
+        "kaggle_run": "baseline-e2b-kaggle-t4-test_ua-3way-20260929-102126.json",
+        "kaggle_accuracy": 0.5519,
+        "n": 540,
+        "same_grade": 507,
+        "mcnemar": {
+          "only_first_right": 15,
+          "only_second_right": 15,
+          "p": 1.0
+        }
+      }
+    },
+    {
+      "run": "e2b-pi5-test_ua-20261004-225353",
+      "model": "e2b",
+      "board": "pi",
+      "split": "test_ua",
+      "threads": 3,
+      "server_args": "/home/mitlab/llama.cpp/build/bin/llama-server -m /home/mitlab/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf -t 3 -c 8192 --host 127.0.0.1 --port 8080 -ngl 0 -rea off --reasoning-budget -1 --cache-ram 0",
+      "n": 540,
+      "accuracy": 0.5574,
+      "macro_f1": 0.5259,
+      "unparsed": 0,
+      "errors": 0,
+      "requests_in_log": 540,
+      "median_latency_s": 3.22,
+      "grading_window_s": 1890.5,
+      "mean_w": 7.94,
+      "idle_w": 1.76,
+      "j_per_answer": 27.78,
+      "j_per_answer_above_idle": 21.62,
+      "wh_per_1000_answers": 7.72,
+      "mean_prompt_tokens_processed": 165.2,
+      "mean_prompt_tokens_sent": 166.2,
+      "prefill_fixed_ms": -222.8,
+      "prefill_ms_per_token": 21.34,
+      "decode_ms_per_token": 62.0,
+      "estimate": {
+        "median_latency_s": 4.98,
+        "j_per_answer": 37.65,
+        "measured_over_estimate_latency": 0.65,
+        "measured_over_estimate_energy": 0.74
+      },
+      "vs_kaggle": {
+        "kaggle_run": "baseline-e2b-kaggle-t4-test_ua-3way-20260929-102126.json",
+        "kaggle_accuracy": 0.5519,
+        "n": 540,
+        "same_grade": 519,
+        "mcnemar": {
+          "only_first_right": 11,
+          "only_second_right": 8,
+          "p": 0.648
+        }
+      }
+    },
+    {
+      "run": "e4b-jetson-test_ua-20260930-225337",
+      "model": "e4b",
+      "board": "jetson",
+      "split": "test_ua",
+      "threads": null,
+      "server_args": "/home/ari/build/llama.cpp/build/bin/llama-server -m /home/ari/research/models/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf -c 8192 --host 127.0.0.1 --port 8080 -ngl 99 -rea off --reasoning-budget -1 --cache-ram 0",
+      "n": 540,
+      "accuracy": 0.6667,
+      "macro_f1": 0.6576,
+      "unparsed": 0,
+      "errors": 0,
+      "requests_in_log": 540,
+      "median_latency_s": 0.72,
+      "grading_window_s": 396.8,
+      "mean_w": 9.69,
+      "idle_w": 4.61,
+      "j_per_answer": 7.12,
+      "j_per_answer_above_idle": 3.73,
+      "wh_per_1000_answers": 1.98,
+      "mean_prompt_tokens_processed": 165.2,
+      "mean_prompt_tokens_sent": 166.2,
+      "prefill_fixed_ms": 191.2,
+      "prefill_ms_per_token": 2.543,
+      "decode_ms_per_token": 45.9,
+      "estimate": {
+        "median_latency_s": 0.87,
+        "j_per_answer": 9.72,
+        "measured_over_estimate_latency": 0.83,
+        "measured_over_estimate_energy": 0.73
+      },
+      "vs_kaggle": {
+        "kaggle_run": "baseline-e4b-kaggle-t4-test_ua-3way-20260929-100720.json",
+        "kaggle_accuracy": 0.6704,
+        "n": 540,
+        "same_grade": 534,
+        "mcnemar": {
+          "only_first_right": 2,
+          "only_second_right": 4,
+          "p": 0.688
+        }
+      }
+    },
+    {
+      "run": "e4b-pi5-test_ua-20261004-232640",
+      "model": "e4b",
+      "board": "pi",
+      "split": "test_ua",
+      "threads": 3,
+      "server_args": "/home/mitlab/llama.cpp/build/bin/llama-server -m /home/mitlab/models/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf -t 3 -c 8192 --host 127.0.0.1 --port 8080 -ngl 0 -rea off --reasoning-budget -1 --cache-ram 0",
+      "n": 540,
+      "accuracy": 0.6648,
+      "macro_f1": 0.6586,
+      "unparsed": 0,
+      "errors": 0,
+      "requests_in_log": 540,
+      "median_latency_s": 6.33,
+      "grading_window_s": 3686.2,
+      "mean_w": 8.15,
+      "idle_w": 2.12,
+      "j_per_answer": 55.65,
+      "j_per_answer_above_idle": 41.18,
+      "wh_per_1000_answers": 15.46,
+      "mean_prompt_tokens_processed": 165.2,
+      "mean_prompt_tokens_sent": 166.2,
+      "prefill_fixed_ms": -255.9,
+      "prefill_ms_per_token": 40.952,
+      "decode_ms_per_token": 129.0,
+      "estimate": {
+        "median_latency_s": 8.41,
+        "j_per_answer": 62.01,
+        "measured_over_estimate_latency": 0.75,
+        "measured_over_estimate_energy": 0.9
+      },
+      "vs_kaggle": {
+        "kaggle_run": "baseline-e4b-kaggle-t4-test_ua-3way-20260929-100720.json",
+        "kaggle_accuracy": 0.6704,
+        "n": 540,
+        "same_grade": 537,
+        "mcnemar": {
+          "only_first_right": 0,
+          "only_second_right": 3,
+          "p": 0.25
+        }
+      }
+    }
+  ],
+  "board_pairs": [
+    {
+      "first": "e2b-pi5-test_ua-20261004-225353",
+      "second": "e2b-jetson-test_ua-20260930-224702",
+      "latency_ratio": 7.7,
+      "energy_ratio": 7.0,
+      "n": 540,
+      "same_grade": 516,
+      "mcnemar": {
+        "only_first_right": 11,
+        "only_second_right": 8,
+        "p": 0.648
+      }
+    },
+    {
+      "first": "e4b-pi5-test_ua-20261004-232640",
+      "second": "e4b-jetson-test_ua-20260930-225337",
+      "latency_ratio": 8.8,
+      "energy_ratio": 7.8,
+      "n": 540,
+      "same_grade": 537,
+      "mcnemar": {
+        "only_first_right": 1,
+        "only_second_right": 2,
+        "p": 1.0
+      }
+    }
+  ]
+}
