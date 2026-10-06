@@ -103,3 +103,4 @@
 | 2026-10-05 | RAG-en run: no overall gain; llama.cpp pinned to `a3a1c47`; baseline re-run on that build added | The RAG and baseline runs used different llama.cpp builds, so the comparison wasn't clean |
 | 2026-10-05 | Baseline re-run done (same accuracy, RAG results stand); stage 2 rearranged: SciEntsBank done in week 4, MMLU-Pro RAG moves to week 5, stage-3 notebook can start alongside | SciEntsBank's RAG-en, the condition RQ2 needs, finished a week early; MMLU-Pro only needs Kaggle time once its retrieval passes the check |
 | 2026-10-05 | RAG-id run (optional condition) done: worse than RAG-en, significant drops on unseen domains for both models | The run was cheap once RAG-en was set up, and it answers the cross-lingual question |
+| 2026-10-06 | MMLU-Pro retrieval check 15/30; go ahead with no-RAG and RAG-en anyway, analysed by subject coverage | Supervisor-requested comparison; the per-subject split turns weak retrieval into a testable contrast |
