@@ -1,7 +1,7 @@
 {
  "stage": "rag",
  "kind": "retrieval-check",
- "time": "2026-10-05T05:46:45+00:00",
+ "time": "2026-10-06T07:15:50+00:00",
  "settings": {
   "retrieval": "results/rag/retrieval-scientsbank-en.bge-small-en-k5.json",
   "sheet": "data/rag/check/retrieval-scientsbank-en.bge-small-en-k5.md",
@@ -17,7 +17,7 @@
     "wiki:Streak_(mineralogy):0"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -41,7 +41,7 @@
     "wiki:Solubility:0"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -53,8 +53,8 @@
     "wiki:Starch:0"
    ],
    "useful": [
-    true,
     false,
+    true,
     false
    ]
   },
@@ -65,7 +65,7 @@
     "en-utah-seed-g5:29"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -77,7 +77,7 @@
     "en-utah-seed-g5:33"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -113,7 +113,7 @@
     "en-utah-seed-g8:20"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -125,7 +125,7 @@
     "en-utah-seed-g6:56"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -149,7 +149,7 @@
     "en-utah-seed-g6:59"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -161,7 +161,7 @@
     "en-utah-seed-g3:36"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -197,7 +197,7 @@
     "en-utah-seed-g7:12"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -209,7 +209,7 @@
     "en-utah-seed-g4:55"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -233,7 +233,7 @@
     "wiki:Mass:1"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -245,7 +245,7 @@
     "wiki:Mass:1"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -282,7 +282,7 @@
    ],
    "useful": [
     true,
-    true,
+    false,
     false
    ]
   },
@@ -294,7 +294,7 @@
    ],
    "useful": [
     true,
-    true,
+    false,
     false
    ]
   },
@@ -329,7 +329,7 @@
     "en-utah-seed-g7:61"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -373,9 +373,9 @@
  },
  "summary": {
   "questions": 30,
-  "top1_useful": 27,
-  "any_useful": 29,
-  "passages_useful": 33,
+  "top1_useful": 13,
+  "any_useful": 16,
+  "passages_useful": 18,
   "passages_total": 90
  }
 }

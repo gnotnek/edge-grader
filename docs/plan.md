@@ -41,7 +41,7 @@
 - [x] Extract and chunk the text (PyMuPDF); keep the source page for every chunk; fix the broken ligatures in the Indonesian books. SciEntsBank: 755 English chunks, 1,141 Indonesian after the noise filters (`results/rag/chunks-scientsbank.json`)
 - [x] Embed: `bge-small-en-v1.5` for English; for Indonesian, `multilingual-e5-small`, `-base` and `bge-m3` compared, `bge-m3` chosen. Separate indexes per language ([`results/rag.md`](results/rag.md))
 - [x] Retrieval check, first pass (Claude): round 1 English ~23/30, Indonesian ~13/30 → noise filters → round 2 English ~22 clear, Indonesian (`bge-m3`) ~17 clear. Settings frozen ([`results/rag.md`](results/rag.md))
-- [x] Owner's marking (2026-10-05): a useful passage in the top 3 for 29/30 (English) and 30/30 (Indonesian) train questions. Gate passed
+- [x] Owner's marking, re-marked 2026-10-06 (the first pass ticked every question): a useful passage in the top 3 for **16/30** (English) and **18/30** (Indonesian) train questions. The gate wasn't really met; grading had already run on the frozen settings
 - [x] Add a `--rag` mode to the grader: the same prompt plus the top-k passages (`--rag <retrieval file> --k 3`)
 - [x] Re-upload the round-2 chunks to the private Kaggle dataset (New Version); the notebooks check them against the committed sha256
 - [x] Run on Kaggle: **RAG-en**, E2B + E4B, all splits (2026-10-05). No overall gain: E4B flat, E2B −2 to −5 points; recall on correct up on every split, recall on incorrect down ([`results/rag.md`](results/rag.md#grading-results-rag-en-kaggle-t4-2026-10-05))
@@ -104,3 +104,4 @@
 | 2026-10-05 | Baseline re-run done (same accuracy, RAG results stand); stage 2 rearranged: SciEntsBank done in week 4, MMLU-Pro RAG moves to week 5, stage-3 notebook can start alongside | SciEntsBank's RAG-en, the condition RQ2 needs, finished a week early; MMLU-Pro only needs Kaggle time once its retrieval passes the check |
 | 2026-10-05 | RAG-id run (optional condition) done: worse than RAG-en, significant drops on unseen domains for both models | The run was cheap once RAG-en was set up, and it answers the cross-lingual question |
 | 2026-10-06 | MMLU-Pro retrieval check 15/30; go ahead with no-RAG and RAG-en anyway, analysed by subject coverage | Supervisor-requested comparison; the per-subject split turns weak retrieval into a testable contrast |
+| 2026-10-06 | SciEntsBank retrieval check re-marked: 29/30 → 16/30 (English), 30/30 → 18/30 (Indonesian) | The first marking ticked something for every question by mistake. RAG results stand; their interpretation now notes that only about half the questions got useful material |

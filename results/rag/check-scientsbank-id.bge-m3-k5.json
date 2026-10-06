@@ -1,7 +1,7 @@
 {
  "stage": "rag",
  "kind": "retrieval-check",
- "time": "2026-10-05T05:46:46+00:00",
+ "time": "2026-10-06T07:15:50+00:00",
  "settings": {
   "retrieval": "results/rag/retrieval-scientsbank-id.bge-m3-k5.json",
   "sheet": "data/rag/check/retrieval-scientsbank-id.bge-m3-k5.md",
@@ -17,7 +17,7 @@
     "wiki:Gores_(mineralogi):0"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -29,7 +29,7 @@
     "id-ipa-kelas7:25"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -41,7 +41,7 @@
     "wiki:Kelarutan:0"
    ],
    "useful": [
-    true,
+    false,
     false,
     true
    ]
@@ -53,7 +53,7 @@
     "id-ipas-kelas6:7"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -65,7 +65,7 @@
     "wiki:Vitamin:12"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -77,7 +77,7 @@
     "wiki:Vitamin:0"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -91,7 +91,7 @@
    "useful": [
     false,
     true,
-    true
+    false
    ]
   },
   "II.20b": {
@@ -102,7 +102,7 @@
    ],
    "useful": [
     false,
-    true,
+    false,
     false
    ]
   },
@@ -173,7 +173,7 @@
     "wiki:Tuas:1"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -185,7 +185,7 @@
     "id-ipas-kelas3:39"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -197,7 +197,7 @@
     "id-ipas-kelas4:10"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -209,8 +209,8 @@
     "id-ipa-kelas9:113"
    ],
    "useful": [
-    true,
-    true,
+    false,
+    false,
     false
    ]
   },
@@ -223,7 +223,7 @@
    "useful": [
     true,
     true,
-    true
+    false
    ]
   },
   "MS.43a": {
@@ -235,7 +235,7 @@
    "useful": [
     true,
     false,
-    true
+    false
    ]
   },
   "MS.43b": {
@@ -247,7 +247,7 @@
    "useful": [
     true,
     false,
-    true
+    false
    ]
   },
   "MX.11c": {
@@ -257,8 +257,8 @@
     "id-ipa-kelas8:104"
    ],
    "useful": [
-    true,
-    true,
+    false,
+    false,
     false
    ]
   },
@@ -269,7 +269,7 @@
     "id-ipa-kelas8:104"
    ],
    "useful": [
-    true,
+    false,
     true,
     false
    ]
@@ -281,9 +281,9 @@
     "id-ipas-kelas5:77"
    ],
    "useful": [
-    true,
     false,
-    false
+    false,
+    true
    ]
   },
   "PS.4ap": {
@@ -293,7 +293,7 @@
     "id-ipa-kelas9:14"
    ],
    "useful": [
-    true,
+    false,
     false,
     false
    ]
@@ -330,7 +330,7 @@
    ],
    "useful": [
     true,
-    true,
+    false,
     false
    ]
   },
@@ -354,7 +354,7 @@
    ],
    "useful": [
     true,
-    true,
+    false,
     false
    ]
   },
@@ -373,9 +373,9 @@
  },
  "summary": {
   "questions": 30,
-  "top1_useful": 27,
-  "any_useful": 30,
-  "passages_useful": 43,
+  "top1_useful": 13,
+  "any_useful": 18,
+  "passages_useful": 21,
   "passages_total": 90
  }
 }
