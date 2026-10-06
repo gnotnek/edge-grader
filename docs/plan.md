@@ -53,9 +53,9 @@
 **MMLU-Pro** (the subject-knowledge baseline; same retrieval code, OpenStax + SMA material)
 - [x] Runner, this project's own (`edge-grader-mmlupro`): without RAG it sends lm-eval's `mmlu_pro` chat messages byte for byte (checked against all 200 prompts recorded from the lab's s1 runs; a test pins one per subject), the same 2,048-token budget and stop string, and reads the answer with lm-eval's own pattern (agrees on all 200 recorded replies). With `--rag`, passages go in front of the question; the five worked examples are unchanged. Query: the question only, not the options
 - [x] Chunks: OpenStax cut to its chapters by the PDFs' bookmarks (front matter, answer keys, appendices and indexes out); 32,016 English chunks, 1,670 Indonesian (`results/rag/chunks-mmlupro.json`). SciEntsBank chunks unchanged (same sha256)
-- [ ] Upload `mmlupro-en.jsonl` and `mmlupro-id.jsonl` to the private Kaggle chunks dataset (New Version)
-- [ ] English index (`bge-small-en`) and retrieval for the 300 test + 70 validation questions: `kaggle_rag_index.ipynb` (32,016 chunks swapped the 8 GB Mac too hard)
-- [ ] Retrieval check on 30 **validation** questions (the worked-example pool, never scored), spread over the 14 subjects; owner marks. Gate before grading, as for SciEntsBank
+- [x] Upload `mmlupro-en.jsonl` and `mmlupro-id.jsonl` to the private Kaggle chunks dataset (New Version)
+- [x] English index (`bge-small-en`) and retrieval for the 300 test + 70 validation questions, on Kaggle (2026-10-06)
+- [x] Retrieval check on 30 **validation** questions, owner's marking (2026-10-06): a useful passage for **15/30**. Biology, chemistry, history all; law, "other", computer science none ([`results/rag.md`](results/rag.md#mmlu-pro-retrieval-check-owners-marking-2026-10-06))
 - [ ] Kaggle: no-RAG through the runner, E2B + E4B, s1–s3 (`TASK = "mmlupro"`). Should land within noise of the lab's lm-eval numbers (E2B 51.7–52.7%, E4B 65.7–66.0%); paired against the lab where its per-question answers exist
 - [ ] Kaggle: RAG-en, E2B + E4B, s1–s3
 - [ ] RAG-id: `mmlupro-id` index with `bge-m3` on Kaggle (`kaggle_rag_index.ipynb`), then grade. Optional, like SciEntsBank's

@@ -155,3 +155,24 @@ Recall per class (correct / contradictory / incorrect):
 
 **For RQ2:** adding course material, in either language, doesn't improve these small graders. It shifts them toward lenient grading, and it costs 6–8× the prompt length. The language result (English material helps more than, or hurts less than, Indonesian) is the secondary finding RAG-id was for.
 
+## MMLU-Pro: retrieval check (owner's marking, 2026-10-06)
+
+`bge-small-en` over the 32,016 English chunks (OpenStax, cut to chapters), the top 3 passages for 30 **validation** questions (the worked-example pool, never scored), spread over the 14 subjects. A tick means the passage holds knowledge that helps answer the question. File: [`check-mmlupro-en.bge-small-en-k5.json`](../../results/rag/check-mmlupro-en.bge-small-en-k5.json); retrieval for all 370 questions: `results/rag/retrieval-mmlupro-en.bge-small-en-k5.json`.
+
+| | SciEntsBank, English | **MMLU-Pro, English** |
+|---|---|---|
+| A useful passage in the top 3 | 29 / 30 | **15 / 30** |
+| Top passage useful | 27 / 30 | 15 / 30 |
+| Useful passages | 33 / 90 | 19 / 90 |
+
+| Subjects | Questions with a useful passage |
+|---|---|
+| biology, chemistry, history | all (7 / 7) |
+| physics, math, economics, engineering, philosophy, health, psychology | half (1 of 2 each) |
+| business | 1 / 3 |
+| **law, other, computer science** | **none (0 / 6)** |
+
+- **Retrieval works where a matching textbook exists and fails where the material is thin.** The plan predicted the thin subjects: OpenStax has no bar-exam law, "other" is a mixed category, and computer science lost Informatika XII.
+- **All or nothing:** whenever any of the three passages helps, the top one does. The index either finds the topic or misses it entirely.
+- **Much weaker than SciEntsBank (15/30 against 29/30).** Expect RAG-en to help, if at all, only in the well-covered subjects. Report the results per subject, split into well- and poorly-covered groups by this check.
+

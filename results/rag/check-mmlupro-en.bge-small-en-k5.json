@@ -1,0 +1,381 @@
+{
+ "stage": "rag",
+ "kind": "retrieval-check",
+ "time": "2026-10-06T06:54:40+00:00",
+ "settings": {
+  "retrieval": "results/rag/retrieval-mmlupro-en.bge-small-en-k5.json",
+  "sheet": "data/rag/check/retrieval-mmlupro-en.bge-small-en-k5.md",
+  "marked_by": "owner",
+  "split": "validation questions only",
+  "useful": "holds knowledge that helps answer the question"
+ },
+ "questions": {
+  "13": {
+   "passages": [
+    "en-openstax-university-physics-volume-3:216",
+    "en-openstax-university-physics-volume-3:197",
+    "en-openstax-university-physics-volume-3:198"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "14": {
+   "passages": [
+    "en-openstax-university-physics-volume-2:1060",
+    "en-openstax-university-physics-volume-2:646",
+    "en-openstax-university-physics-volume-2:1085"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "17": {
+   "passages": [
+    "en-openstax-principles-management:544",
+    "en-openstax-introduction-business-2e:464",
+    "en-openstax-principles-management:202"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "18": {
+   "passages": [
+    "en-openstax-american-government-4e:710",
+    "en-openstax-american-government-4e:712",
+    "en-openstax-american-government-4e:625"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "19": {
+   "passages": [
+    "en-openstax-principles-marketing:218",
+    "en-openstax-principles-marketing:219",
+    "en-openstax-principles-marketing:220"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "21": {
+   "passages": [
+    "en-openstax-biology-2e:912",
+    "en-openstax-biology-2e:917",
+    "en-openstax-biology-2e:914"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "23": {
+   "passages": [
+    "en-openstax-biology-2e:810",
+    "en-openstax-biology-2e:814",
+    "en-openstax-biology-2e:817"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "24": {
+   "passages": [
+    "en-openstax-anatomy-and-physiology-2e:210",
+    "en-openstax-biology-2e:489",
+    "en-openstax-biology-2e:467"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "25": {
+   "passages": [
+    "en-openstax-organic-chemistry:507",
+    "en-openstax-organic-chemistry:501",
+    "en-openstax-organic-chemistry:516"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "27": {
+   "passages": [
+    "en-openstax-organic-chemistry:789",
+    "en-openstax-organic-chemistry:807",
+    "en-openstax-chemistry-2e:1354"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "3": {
+   "passages": [
+    "en-openstax-calculus-volume-2:287",
+    "en-openstax-calculus-volume-2:286",
+    "en-openstax-calculus-volume-2:291"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "30": {
+   "passages": [
+    "en-openstax-introduction-computer-science:415",
+    "en-openstax-introduction-computer-science:416",
+    "en-openstax-introduction-computer-science:442"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "32": {
+   "passages": [
+    "en-openstax-introduction-computer-science:1568",
+    "en-openstax-introduction-computer-science:787",
+    "en-openstax-introduction-computer-science:1493"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "37": {
+   "passages": [
+    "en-openstax-introductory-statistics-2e:621",
+    "en-openstax-introductory-statistics-2e:624",
+    "en-openstax-introductory-statistics-2e:622"
+   ],
+   "useful": [
+    true,
+    true,
+    false
+   ]
+  },
+  "38": {
+   "passages": [
+    "en-openstax-principles-economics-3e:1528",
+    "en-openstax-american-government-4e:1319",
+    "en-openstax-american-government-4e:1333"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "4": {
+   "passages": [
+    "en-openstax-introductory-statistics-2e:948",
+    "en-openstax-introductory-statistics-2e:374",
+    "en-openstax-introductory-statistics-2e:240"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "42": {
+   "passages": [
+    "en-openstax-university-physics-volume-2:725",
+    "en-openstax-business-law-i-essentials-2e:105",
+    "en-openstax-business-law-i-essentials-2e:104"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "43": {
+   "passages": [
+    "en-openstax-university-physics-volume-2:823",
+    "en-openstax-university-physics-volume-2:860",
+    "en-openstax-university-physics-volume-2:826"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "48": {
+   "passages": [
+    "en-openstax-introduction-philosophy:609",
+    "en-openstax-introduction-philosophy:611",
+    "en-openstax-introduction-philosophy:665"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "49": {
+   "passages": [
+    "en-openstax-world-history-volume-1:278",
+    "en-openstax-american-government-4e:233",
+    "en-openstax-world-history-volume-1:273"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "5": {
+   "passages": [
+    "en-openstax-biology-2e:2063",
+    "en-openstax-anatomy-and-physiology-2e:1364",
+    "en-openstax-anatomy-and-physiology-2e:1426"
+   ],
+   "useful": [
+    true,
+    true,
+    true
+   ]
+  },
+  "50": {
+   "passages": [
+    "en-openstax-psychology-2e:1202",
+    "en-openstax-world-history-volume-2:1341",
+    "en-openstax-biology-2e:1011"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "53": {
+   "passages": [
+    "en-openstax-biology-2e:1008",
+    "en-openstax-anatomy-and-physiology-2e:2401",
+    "en-openstax-psychology-2e:1086"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "55": {
+   "passages": [
+    "en-openstax-world-history-volume-2:982",
+    "en-openstax-world-history-volume-2:1261",
+    "en-openstax-world-history-volume-2:471"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "57": {
+   "passages": [
+    "en-openstax-world-history-volume-2:676",
+    "en-openstax-world-history-volume-2:471",
+    "en-openstax-world-history-volume-2:1201"
+   ],
+   "useful": [
+    true,
+    true,
+    false
+   ]
+  },
+  "61": {
+   "passages": [
+    "en-openstax-principles-management:575",
+    "en-openstax-principles-marketing:901",
+    "en-openstax-principles-marketing:221"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "64": {
+   "passages": [
+    "en-openstax-principles-management:302",
+    "en-openstax-principles-management:292",
+    "en-openstax-principles-management:291"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "65": {
+   "passages": [
+    "en-openstax-american-government-4e:1123",
+    "en-openstax-american-government-4e:961",
+    "en-openstax-introduction-philosophy:361"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "69": {
+   "passages": [
+    "en-openstax-american-government-4e:138",
+    "en-openstax-business-law-i-essentials-2e:60",
+    "en-openstax-business-law-i-essentials-2e:67"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "9": {
+   "passages": [
+    "en-openstax-biology-2e:1463",
+    "en-openstax-biology-2e:2563",
+    "en-openstax-biology-2e:1424"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  }
+ },
+ "summary": {
+  "questions": 30,
+  "top1_useful": 15,
+  "any_useful": 15,
+  "passages_useful": 19,
+  "passages_total": 90
+ }
+}
