@@ -1,0 +1,101 @@
+{
+  "stage": "rag",
+  "benchmark": "mmlupro",
+  "label": "e4b-kaggle-t4-en-k3",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "/tmp/models/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a3a1c47"
+  },
+  "subset": "s1",
+  "n_requested": 0,
+  "generation": {
+    "max_tokens": 2048,
+    "temperature": 0,
+    "stop": [
+      "Question:"
+    ],
+    "shots": 5,
+    "prompt": "lm-eval mmlu_pro chat messages"
+  },
+  "time": "2026-10-06T12:32:16+00:00",
+  "metrics": {
+    "n": 100,
+    "accuracy": 0.64,
+    "no_answer": 11,
+    "hit_token_cap": 11,
+    "errors": 0,
+    "median_latency_s": 12.501000000000001,
+    "wall_s": 1586.6,
+    "prompt_tokens": 242676,
+    "completion_tokens": 74012,
+    "per_subject": {
+      "biology": {
+        "n": 6,
+        "correct": 4
+      },
+      "business": {
+        "n": 7,
+        "correct": 6
+      },
+      "chemistry": {
+        "n": 9,
+        "correct": 5
+      },
+      "computer science": {
+        "n": 3,
+        "correct": 2
+      },
+      "economics": {
+        "n": 7,
+        "correct": 5
+      },
+      "engineering": {
+        "n": 8,
+        "correct": 5
+      },
+      "health": {
+        "n": 7,
+        "correct": 5
+      },
+      "history": {
+        "n": 3,
+        "correct": 3
+      },
+      "law": {
+        "n": 9,
+        "correct": 4
+      },
+      "math": {
+        "n": 11,
+        "correct": 10
+      },
+      "other": {
+        "n": 8,
+        "correct": 4
+      },
+      "philosophy": {
+        "n": 4,
+        "correct": 0
+      },
+      "physics": {
+        "n": 11,
+        "correct": 7
+      },
+      "psychology": {
+        "n": 7,
+        "correct": 4
+      }
+    }
+  },
+  "rag": {
+    "retrieval": "results/rag/retrieval-mmlupro-en.bge-small-en-k5.json",
+    "k": 3,
+    "index": "data/rag/index/mmlupro-en.bge-small-en",
+    "embedding_model": "BAAI/bge-small-en-v1.5",
+    "chunks": "data/rag/chunks/mmlupro-en.jsonl",
+    "chunks_sha256": "fda933ea9b0eac677a0b40c7b1b4e1a52c84ab212433a649f30fe18f89ac4fb7"
+  }
+}

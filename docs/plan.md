@@ -56,10 +56,10 @@
 - [x] Upload `mmlupro-en.jsonl` and `mmlupro-id.jsonl` to the private Kaggle chunks dataset (New Version)
 - [x] English index (`bge-small-en`) and retrieval for the 300 test + 70 validation questions, on Kaggle (2026-10-06)
 - [x] Retrieval check on 30 **validation** questions, owner's marking (2026-10-06): a useful passage for **15/30**. Biology, chemistry, history all; law, "other", computer science none ([`results/rag.md`](results/rag.md#mmlu-pro-retrieval-check-owners-marking-2026-10-06))
-- [ ] Kaggle: no-RAG through the runner, E2B + E4B, s1–s3 (`TASK = "mmlupro"`). Should land within noise of the lab's lm-eval numbers (E2B 51.7–52.7%, E4B 65.7–66.0%); paired against the lab where its per-question answers exist
-- [ ] Kaggle: RAG-en, E2B + E4B, s1–s3
-- [ ] RAG-id: `mmlupro-id` index with `bge-m3` on Kaggle (`kaggle_rag_index.ipynb`), then grade. Optional, like SciEntsBank's
-- [ ] Analysis per subject, paired McNemar; expect little help on engineering, law and "other" (thin material)
+- [x] Kaggle: no-RAG through the runner, E2B + E4B, s1–s3 (2026-10-06): E2B 51.3%, E4B 65.3%, no significant difference from the lab on either board (87–92% same right/wrong per question)
+- [x] Kaggle: RAG-en, E2B + E4B, s1–s3 (2026-10-06): E2B 52.0% (+0.7), E4B 63.3% (−2.0), neither significant
+- [x] RAG-id: `mmlupro-id` index with `bge-m3` built on Kaggle (2026-10-07); retrieval check **0/30**, so **not graded** ([`results/rag.md`](results/rag.md#mmlu-pro-rag-id-retrieval-check-failed-not-graded-2026-10-07))
+- [x] Analysis per subject, paired McNemar: well-covered subjects trend up (+3.7 / +5.6), uncovered ones trend down for E4B (−5.0); nothing significant. More answers hit the token cap with RAG ([`results/rag.md`](results/rag.md#mmlu-pro-grading-results-kaggle-t4-2026-10-06))
 
 ### Stage 3: Fine-tuning (weeks 6–7)
 - [ ] Unsloth QLoRA notebook on Kaggle; train on the SciEntsBank **train** split only
@@ -105,3 +105,5 @@
 | 2026-10-05 | RAG-id run (optional condition) done: worse than RAG-en, significant drops on unseen domains for both models | The run was cheap once RAG-en was set up, and it answers the cross-lingual question |
 | 2026-10-06 | MMLU-Pro retrieval check 15/30; go ahead with no-RAG and RAG-en anyway, analysed by subject coverage | Supervisor-requested comparison; the per-subject split turns weak retrieval into a testable contrast |
 | 2026-10-06 | SciEntsBank retrieval check re-marked: 29/30 → 16/30 (English), 30/30 → 18/30 (Indonesian) | The first marking ticked something for every question by mistake. RAG results stand; their interpretation now notes that only about half the questions got useful material |
+| 2026-10-06 | MMLU-Pro no-RAG and RAG-en done: runner matches the lab; RAG no significant change; stage 2 core complete (MMLU-Pro RAG-id remains optional) | Both benchmarks give the same answer to RQ2 |
+| 2026-10-07 | MMLU-Pro RAG-id dropped after its retrieval check scored 0/30; stage 2 complete | The Indonesian SMA material has nothing usable for college-level questions, so grading would measure only distraction |

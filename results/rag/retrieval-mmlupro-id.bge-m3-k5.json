@@ -1,0 +1,10382 @@
+{
+ "stage": "rag",
+ "kind": "retrieval",
+ "time": "2026-10-07T05:09:45+00:00",
+ "settings": {
+  "index": "data/rag/index/mmlupro-id.bge-m3",
+  "k": 5,
+  "query": "question text only",
+  "benchmark": "mmlupro",
+  "model": "bge-m3",
+  "hf_id": "BAAI/bge-m3",
+  "query_prefix": "",
+  "passage_prefix": "",
+  "chunks": "data/rag/chunks/mmlupro-id.jsonl",
+  "chunks_sha256": "27b81bb3da92428f7a4a962cd12319754b0df1bd33825ca7383f42bb25c201e7",
+  "n_chunks": 1670,
+  "dim": 1024,
+  "time": "2026-10-07T05:09:17+00:00"
+ },
+ "questions": {
+  "0": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:54",
+     0.4718
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:25",
+     0.4697
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:33",
+     0.4656
+    ],
+    [
+     "id-sma-kimia-kelas11:15",
+     0.4585
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:34",
+     0.4578
+    ]
+   ]
+  },
+  "1": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:48",
+     0.4914
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:54",
+     0.4866
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:52",
+     0.4866
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:55",
+     0.4823
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:45",
+     0.4755
+    ]
+   ]
+  },
+  "10": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:71",
+     0.5683
+    ],
+    [
+     "id-sma-fisika-kelas11:67",
+     0.5594
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:32",
+     0.5359
+    ],
+    [
+     "id-sma-fisika-kelas12:70",
+     0.5285
+    ],
+    [
+     "id-sma-fisika-kelas11:64",
+     0.51
+    ]
+   ]
+  },
+  "10037": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:6",
+     0.6078
+    ],
+    [
+     "id-sma-fisika-kelas12:7",
+     0.6068
+    ],
+    [
+     "id-sma-fisika-kelas12:2",
+     0.5571
+    ],
+    [
+     "id-sma-fisika-kelas11:43",
+     0.5501
+    ],
+    [
+     "id-sma-fisika-kelas11:27",
+     0.5497
+    ]
+   ]
+  },
+  "10046": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:76",
+     0.5777
+    ],
+    [
+     "id-sma-fisika-kelas11:77",
+     0.5495
+    ],
+    [
+     "id-sma-fisika-kelas11:78",
+     0.5462
+    ],
+    [
+     "id-sma-fisika-kelas12:23",
+     0.5446
+    ],
+    [
+     "id-sma-fisika-kelas11:83",
+     0.5442
+    ]
+   ]
+  },
+  "10084": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:18",
+     0.5145
+    ],
+    [
+     "id-sma-fisika-kelas11:64",
+     0.5127
+    ],
+    [
+     "id-sma-kimia-kelas12:29",
+     0.512
+    ],
+    [
+     "id-sma-fisika-kelas11:68",
+     0.5098
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:176",
+     0.5073
+    ]
+   ]
+  },
+  "1009": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas12:51",
+     0.5157
+    ],
+    [
+     "id-sma-ekonomi-kelas12:50",
+     0.4997
+    ],
+    [
+     "id-sma-ekonomi-kelas12:60",
+     0.4982
+    ],
+    [
+     "id-sma-biologi-kelas12:50",
+     0.4868
+    ],
+    [
+     "id-sma-ekonomi-kelas12:22",
+     0.4812
+    ]
+   ]
+  },
+  "10152": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:25",
+     0.5361
+    ],
+    [
+     "id-sma-fisika-kelas11:29",
+     0.5299
+    ],
+    [
+     "id-sma-fisika-kelas11:38",
+     0.5236
+    ],
+    [
+     "id-sma-fisika-kelas12:90",
+     0.523
+    ],
+    [
+     "id-sma-fisika-kelas11:27",
+     0.5223
+    ]
+   ]
+  },
+  "10162": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:23",
+     0.5193
+    ],
+    [
+     "id-sma-fisika-kelas11:43",
+     0.512
+    ],
+    [
+     "id-sma-fisika-kelas11:39",
+     0.5047
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:122",
+     0.4895
+    ],
+    [
+     "id-sma-fisika-kelas11:21",
+     0.4835
+    ]
+   ]
+  },
+  "10232": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:13",
+     0.5735
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:81",
+     0.5728
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:122",
+     0.5673
+    ],
+    [
+     "id-sma-fisika-kelas11:15",
+     0.5614
+    ],
+    [
+     "id-sma-fisika-kelas11:16",
+     0.5575
+    ]
+   ]
+  },
+  "1029": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:14",
+     0.3949
+    ],
+    [
+     "id-sma-biologi-kelas11:88",
+     0.3878
+    ],
+    [
+     "id-sma-biologi-kelas11:87",
+     0.3878
+    ],
+    [
+     "id-sma-ekonomi-kelas11:66",
+     0.3863
+    ],
+    [
+     "id-sma-biologi-kelas11:96",
+     0.3855
+    ]
+   ]
+  },
+  "10306": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:59",
+     0.4811
+    ],
+    [
+     "id-sma-kimia-kelas12:51",
+     0.479
+    ],
+    [
+     "id-sma-kimia-kelas12:52",
+     0.4701
+    ],
+    [
+     "id-sma-kimia-kelas12:27",
+     0.4606
+    ],
+    [
+     "id-sma-kimia-kelas11:114",
+     0.4547
+    ]
+   ]
+  },
+  "10350": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:84",
+     0.5286
+    ],
+    [
+     "id-sma-fisika-kelas11:67",
+     0.5254
+    ],
+    [
+     "id-sma-biologi-kelas12:31",
+     0.5151
+    ],
+    [
+     "id-sma-fisika-kelas11:65",
+     0.5148
+    ],
+    [
+     "id-sma-fisika-kelas11:82",
+     0.5093
+    ]
+   ]
+  },
+  "1040": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:49",
+     0.4014
+    ],
+    [
+     "id-sma-biologi-kelas11:46",
+     0.3925
+    ],
+    [
+     "id-sma-fisika-kelas12:72",
+     0.3812
+    ],
+    [
+     "id-sma-ekonomi-kelas12:59",
+     0.3787
+    ],
+    [
+     "id-sma-fisika-kelas12:25",
+     0.3765
+    ]
+   ]
+  },
+  "10452": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "computer science",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:128",
+     0.4934
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:60",
+     0.479
+    ],
+    [
+     "id-sma-ekonomi-kelas11:13",
+     0.4779
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:65",
+     0.4771
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:96",
+     0.4768
+    ]
+   ]
+  },
+  "10454": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "computer science",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:102",
+     0.5512
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:103",
+     0.5511
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:110",
+     0.5492
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:104",
+     0.547
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:105",
+     0.5467
+    ]
+   ]
+  },
+  "10478": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "computer science",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:144",
+     0.4542
+    ],
+    [
+     "id-sma-informatika-kelas11:59",
+     0.4521
+    ],
+    [
+     "id-sma-informatika-kelas11:118",
+     0.4479
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:108",
+     0.4431
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:27",
+     0.4427
+    ]
+   ]
+  },
+  "10555": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "computer science",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:111",
+     0.5908
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:100",
+     0.5864
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:121",
+     0.5826
+    ],
+    [
+     "id-sma-informatika-kelas11:77",
+     0.5819
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:119",
+     0.5806
+    ]
+   ]
+  },
+  "10616": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "computer science",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:144",
+     0.5256
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:48",
+     0.5243
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:143",
+     0.5134
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:189",
+     0.5096
+    ],
+    [
+     "id-sma-informatika-kelas11:77",
+     0.509
+    ]
+   ]
+  },
+  "10636": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "computer science",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:147",
+     0.4686
+    ],
+    [
+     "id-sma-informatika-kelas11:19",
+     0.4638
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:5",
+     0.4616
+    ],
+    [
+     "id-sma-informatika-kelas11:6",
+     0.4607
+    ],
+    [
+     "id-sma-informatika-kelas11:25",
+     0.4584
+    ]
+   ]
+  },
+  "10671": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "computer science",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:131",
+     0.4317
+    ],
+    [
+     "id-sma-informatika-kelas11:20",
+     0.4279
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:175",
+     0.4187
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:193",
+     0.4179
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:182",
+     0.4173
+    ]
+   ]
+  },
+  "10681": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "computer science",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:80",
+     0.5732
+    ],
+    [
+     "id-sma-informatika-kelas11:41",
+     0.5582
+    ],
+    [
+     "id-sma-informatika-kelas11:81",
+     0.5535
+    ],
+    [
+     "id-sma-informatika-kelas11:34",
+     0.5526
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:6",
+     0.5483
+    ]
+   ]
+  },
+  "10705": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "computer science",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:105",
+     0.568
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:176",
+     0.5559
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:25",
+     0.554
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:122",
+     0.5526
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:179",
+     0.5504
+    ]
+   ]
+  },
+  "1079": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:23",
+     0.4757
+    ],
+    [
+     "id-sma-fisika-kelas11:10",
+     0.4683
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:89",
+     0.4597
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:92",
+     0.4568
+    ],
+    [
+     "id-sma-informatika-kelas11:84",
+     0.4552
+    ]
+   ]
+  },
+  "10792": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "philosophy",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:108",
+     0.3902
+    ],
+    [
+     "id-sma-biologi-kelas12:128",
+     0.3896
+    ],
+    [
+     "id-sma-biologi-kelas12:109",
+     0.3842
+    ],
+    [
+     "id-sma-biologi-kelas12:127",
+     0.376
+    ],
+    [
+     "id-sma-biologi-kelas11:15",
+     0.374
+    ]
+   ]
+  },
+  "10882": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "philosophy",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:26",
+     0.4107
+    ],
+    [
+     "id-sma-informatika-kelas11:20",
+     0.3949
+    ],
+    [
+     "id-sma-informatika-kelas11:70",
+     0.3884
+    ],
+    [
+     "id-sma-biologi-kelas12:136",
+     0.3791
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:58",
+     0.3788
+    ]
+   ]
+  },
+  "10927": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "philosophy",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:9",
+     0.4783
+    ],
+    [
+     "id-sma-informatika-kelas11:14",
+     0.4729
+    ],
+    [
+     "id-sma-informatika-kelas11:8",
+     0.4709
+    ],
+    [
+     "id-sma-informatika-kelas11:15",
+     0.4576
+    ],
+    [
+     "id-sma-informatika-kelas11:26",
+     0.4563
+    ]
+   ]
+  },
+  "10929": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "philosophy",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas11:17",
+     0.4611
+    ],
+    [
+     "id-sma-biologi-kelas12:160",
+     0.4431
+    ],
+    [
+     "id-sma-informatika-kelas11:8",
+     0.4414
+    ],
+    [
+     "id-sma-biologi-kelas12:128",
+     0.4403
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:188",
+     0.4371
+    ]
+   ]
+  },
+  "11": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:71",
+     0.4874
+    ],
+    [
+     "id-sma-fisika-kelas12:93",
+     0.4848
+    ],
+    [
+     "id-sma-fisika-kelas12:63",
+     0.4832
+    ],
+    [
+     "id-sma-fisika-kelas12:101",
+     0.4784
+    ],
+    [
+     "id-sma-biologi-kelas12:99",
+     0.4701
+    ]
+   ]
+  },
+  "11005": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "philosophy",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:23",
+     0.4239
+    ],
+    [
+     "id-sma-sejarah-kelas12:44",
+     0.4128
+    ],
+    [
+     "id-sma-sejarah-kelas12:64",
+     0.4106
+    ],
+    [
+     "id-sma-informatika-kelas11:140",
+     0.4079
+    ],
+    [
+     "id-sma-sejarah-kelas12:38",
+     0.407
+    ]
+   ]
+  },
+  "11009": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "philosophy",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:90",
+     0.5039
+    ],
+    [
+     "id-sma-biologi-kelas12:128",
+     0.4996
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:53",
+     0.4996
+    ],
+    [
+     "id-sma-biologi-kelas12:28",
+     0.4991
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:185",
+     0.4947
+    ]
+   ]
+  },
+  "11076": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "philosophy",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:89",
+     0.503
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:21",
+     0.4804
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:90",
+     0.4748
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:150",
+     0.4699
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:122",
+     0.4641
+    ]
+   ]
+  },
+  "11089": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "philosophy",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:160",
+     0.3811
+    ],
+    [
+     "id-sma-biologi-kelas12:159",
+     0.3787
+    ],
+    [
+     "id-sma-biologi-kelas12:108",
+     0.3707
+    ],
+    [
+     "id-sma-biologi-kelas12:100",
+     0.3546
+    ],
+    [
+     "id-sma-biologi-kelas12:107",
+     0.352
+    ]
+   ]
+  },
+  "11101": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "philosophy",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:194",
+     0.4458
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:26",
+     0.4414
+    ],
+    [
+     "id-sma-fisika-kelas12:93",
+     0.4395
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:1",
+     0.4391
+    ],
+    [
+     "id-sma-biologi-kelas12:128",
+     0.4371
+    ]
+   ]
+  },
+  "11117": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "philosophy",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:11",
+     0.3893
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:130",
+     0.3845
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:59",
+     0.3802
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:129",
+     0.3745
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:58",
+     0.3718
+    ]
+   ]
+  },
+  "11156": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "philosophy",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas12:75",
+     0.4397
+    ],
+    [
+     "id-sma-biologi-kelas12:159",
+     0.4117
+    ],
+    [
+     "id-sma-informatika-kelas11:25",
+     0.3972
+    ],
+    [
+     "id-sma-informatika-kelas11:40",
+     0.393
+    ],
+    [
+     "id-sma-sejarah-kelas12:68",
+     0.3803
+    ]
+   ]
+  },
+  "11247": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "philosophy",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:131",
+     0.4126
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:150",
+     0.4103
+    ],
+    [
+     "id-sma-biologi-kelas12:28",
+     0.4045
+    ],
+    [
+     "id-sma-biologi-kelas12:31",
+     0.4022
+    ],
+    [
+     "id-sma-biologi-kelas12:127",
+     0.4015
+    ]
+   ]
+  },
+  "11289": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:6",
+     0.5389
+    ],
+    [
+     "id-sma-fisika-kelas12:2",
+     0.5165
+    ],
+    [
+     "id-sma-fisika-kelas12:7",
+     0.5135
+    ],
+    [
+     "id-sma-fisika-kelas11:18",
+     0.5103
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:150",
+     0.498
+    ]
+   ]
+  },
+  "11351": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:19",
+     0.5108
+    ],
+    [
+     "id-sma-fisika-kelas12:59",
+     0.4898
+    ],
+    [
+     "id-sma-fisika-kelas12:56",
+     0.4855
+    ],
+    [
+     "id-sma-fisika-kelas12:16",
+     0.4845
+    ],
+    [
+     "id-sma-fisika-kelas12:14",
+     0.4806
+    ]
+   ]
+  },
+  "11371": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:84",
+     0.64
+    ],
+    [
+     "id-sma-kimia-kelas11:87",
+     0.6291
+    ],
+    [
+     "id-sma-kimia-kelas11:88",
+     0.6087
+    ],
+    [
+     "id-sma-fisika-kelas11:80",
+     0.5971
+    ],
+    [
+     "id-sma-fisika-kelas11:83",
+     0.5959
+    ]
+   ]
+  },
+  "11388": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:23",
+     0.5513
+    ],
+    [
+     "id-sma-fisika-kelas12:22",
+     0.5266
+    ],
+    [
+     "id-sma-fisika-kelas12:24",
+     0.5252
+    ],
+    [
+     "id-sma-fisika-kelas12:7",
+     0.5212
+    ],
+    [
+     "id-sma-fisika-kelas12:42",
+     0.5176
+    ]
+   ]
+  },
+  "11390": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:11",
+     0.5378
+    ],
+    [
+     "id-sma-fisika-kelas12:59",
+     0.5279
+    ],
+    [
+     "id-sma-fisika-kelas12:22",
+     0.527
+    ],
+    [
+     "id-sma-fisika-kelas12:52",
+     0.5241
+    ],
+    [
+     "id-sma-fisika-kelas12:10",
+     0.5072
+    ]
+   ]
+  },
+  "11516": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:129",
+     0.6032
+    ],
+    [
+     "id-sma-fisika-kelas11:89",
+     0.585
+    ],
+    [
+     "id-sma-fisika-kelas11:102",
+     0.5843
+    ],
+    [
+     "id-sma-fisika-kelas11:101",
+     0.5788
+    ],
+    [
+     "id-sma-fisika-kelas11:90",
+     0.5745
+    ]
+   ]
+  },
+  "11526": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:86",
+     0.5407
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:122",
+     0.5326
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:88",
+     0.5317
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:116",
+     0.5279
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:149",
+     0.5259
+    ]
+   ]
+  },
+  "11571": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:61",
+     0.5733
+    ],
+    [
+     "id-sma-informatika-kelas11:140",
+     0.568
+    ],
+    [
+     "id-sma-fisika-kelas11:57",
+     0.5555
+    ],
+    [
+     "id-sma-fisika-kelas11:63",
+     0.5528
+    ],
+    [
+     "id-sma-fisika-kelas12:69",
+     0.5488
+    ]
+   ]
+  },
+  "11622": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:43",
+     0.5642
+    ],
+    [
+     "id-sma-fisika-kelas12:19",
+     0.5404
+    ],
+    [
+     "id-sma-fisika-kelas11:42",
+     0.5336
+    ],
+    [
+     "id-sma-fisika-kelas11:76",
+     0.529
+    ],
+    [
+     "id-sma-kimia-kelas12:27",
+     0.5224
+    ]
+   ]
+  },
+  "11659": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:68",
+     0.4664
+    ],
+    [
+     "id-sma-fisika-kelas12:79",
+     0.4606
+    ],
+    [
+     "id-sma-fisika-kelas12:17",
+     0.4489
+    ],
+    [
+     "id-sma-fisika-kelas12:64",
+     0.4377
+    ],
+    [
+     "id-sma-fisika-kelas12:21",
+     0.4308
+    ]
+   ]
+  },
+  "11723": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:84",
+     0.5951
+    ],
+    [
+     "id-sma-fisika-kelas11:82",
+     0.595
+    ],
+    [
+     "id-sma-fisika-kelas11:72",
+     0.5925
+    ],
+    [
+     "id-sma-fisika-kelas11:80",
+     0.5866
+    ],
+    [
+     "id-sma-fisika-kelas11:81",
+     0.584
+    ]
+   ]
+  },
+  "11772": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:19",
+     0.5928
+    ],
+    [
+     "id-sma-fisika-kelas12:22",
+     0.5641
+    ],
+    [
+     "id-sma-fisika-kelas12:18",
+     0.5583
+    ],
+    [
+     "id-sma-fisika-kelas12:25",
+     0.5445
+    ],
+    [
+     "id-sma-fisika-kelas12:55",
+     0.5341
+    ]
+   ]
+  },
+  "11774": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:24",
+     0.5826
+    ],
+    [
+     "id-sma-fisika-kelas12:51",
+     0.5712
+    ],
+    [
+     "id-sma-fisika-kelas12:49",
+     0.5693
+    ],
+    [
+     "id-sma-fisika-kelas12:42",
+     0.5641
+    ],
+    [
+     "id-sma-fisika-kelas12:57",
+     0.5639
+    ]
+   ]
+  },
+  "11793": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:72",
+     0.5251
+    ],
+    [
+     "id-sma-fisika-kelas11:43",
+     0.5124
+    ],
+    [
+     "id-sma-fisika-kelas11:76",
+     0.5109
+    ],
+    [
+     "id-sma-fisika-kelas11:80",
+     0.4981
+    ],
+    [
+     "id-sma-fisika-kelas11:35",
+     0.4959
+    ]
+   ]
+  },
+  "11805": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:140",
+     0.6713
+    ],
+    [
+     "id-sma-informatika-kelas11:138",
+     0.5676
+    ],
+    [
+     "id-sma-informatika-kelas11:143",
+     0.5426
+    ],
+    [
+     "id-sma-informatika-kelas11:148",
+     0.5413
+    ],
+    [
+     "id-sma-fisika-kelas12:58",
+     0.5372
+    ]
+   ]
+  },
+  "11809": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:143",
+     0.6015
+    ],
+    [
+     "id-sma-fisika-kelas11:56",
+     0.5569
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:122",
+     0.5554
+    ],
+    [
+     "id-sma-fisika-kelas12:57",
+     0.5521
+    ],
+    [
+     "id-sma-informatika-kelas11:142",
+     0.5507
+    ]
+   ]
+  },
+  "11833": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:42",
+     0.6405
+    ],
+    [
+     "id-sma-fisika-kelas12:54",
+     0.5903
+    ],
+    [
+     "id-sma-fisika-kelas12:22",
+     0.5878
+    ],
+    [
+     "id-sma-fisika-kelas12:57",
+     0.5873
+    ],
+    [
+     "id-sma-fisika-kelas12:52",
+     0.5864
+    ]
+   ]
+  },
+  "11846": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:123",
+     0.491
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:90",
+     0.4857
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:122",
+     0.4844
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:112",
+     0.4817
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:135",
+     0.4782
+    ]
+   ]
+  },
+  "11856": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:160",
+     0.5078
+    ],
+    [
+     "id-sma-fisika-kelas11:42",
+     0.5053
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:32",
+     0.501
+    ],
+    [
+     "id-sma-fisika-kelas11:43",
+     0.5004
+    ],
+    [
+     "id-sma-fisika-kelas11:48",
+     0.4951
+    ]
+   ]
+  },
+  "11860": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:69",
+     0.5435
+    ],
+    [
+     "id-sma-fisika-kelas12:19",
+     0.512
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:1",
+     0.4973
+    ],
+    [
+     "id-sma-biologi-kelas11:92",
+     0.4925
+    ],
+    [
+     "id-sma-fisika-kelas12:18",
+     0.4818
+    ]
+   ]
+  },
+  "11971": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:88",
+     0.6644
+    ],
+    [
+     "id-sma-kimia-kelas11:129",
+     0.6494
+    ],
+    [
+     "id-sma-fisika-kelas11:43",
+     0.6322
+    ],
+    [
+     "id-sma-kimia-kelas11:128",
+     0.6065
+    ],
+    [
+     "id-sma-fisika-kelas11:85",
+     0.6051
+    ]
+   ]
+  },
+  "12": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:70",
+     0.5782
+    ],
+    [
+     "id-sma-fisika-kelas12:71",
+     0.5632
+    ],
+    [
+     "id-sma-fisika-kelas11:67",
+     0.5548
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:32",
+     0.537
+    ],
+    [
+     "id-sma-fisika-kelas11:65",
+     0.5341
+    ]
+   ]
+  },
+  "1208": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:147",
+     0.4956
+    ],
+    [
+     "id-sma-informatika-kelas11:8",
+     0.4905
+    ],
+    [
+     "id-sma-informatika-kelas11:9",
+     0.4901
+    ],
+    [
+     "id-sma-biologi-kelas12:128",
+     0.4748
+    ],
+    [
+     "id-sma-informatika-kelas11:15",
+     0.4738
+    ]
+   ]
+  },
+  "12107": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:77",
+     0.5981
+    ],
+    [
+     "id-sma-fisika-kelas11:43",
+     0.5903
+    ],
+    [
+     "id-sma-fisika-kelas11:78",
+     0.5808
+    ],
+    [
+     "id-sma-fisika-kelas11:74",
+     0.5759
+    ],
+    [
+     "id-sma-fisika-kelas11:46",
+     0.5731
+    ]
+   ]
+  },
+  "12140": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:21",
+     0.4786
+    ],
+    [
+     "id-sma-fisika-kelas12:16",
+     0.4759
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:118",
+     0.4682
+    ],
+    [
+     "id-sma-fisika-kelas12:7",
+     0.4625
+    ],
+    [
+     "id-sma-fisika-kelas12:23",
+     0.4623
+    ]
+   ]
+  },
+  "12180": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:72",
+     0.5254
+    ],
+    [
+     "id-sma-kimia-kelas12:23",
+     0.5047
+    ],
+    [
+     "id-sma-kimia-kelas12:59",
+     0.5031
+    ],
+    [
+     "id-sma-kimia-kelas11:80",
+     0.5016
+    ],
+    [
+     "id-sma-kimia-kelas12:71",
+     0.4997
+    ]
+   ]
+  },
+  "1247": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:95",
+     0.4826
+    ],
+    [
+     "id-sma-biologi-kelas11:84",
+     0.4659
+    ],
+    [
+     "id-sma-fisika-kelas11:13",
+     0.4632
+    ],
+    [
+     "id-sma-biologi-kelas11:88",
+     0.4627
+    ],
+    [
+     "id-sma-fisika-kelas11:64",
+     0.4618
+    ]
+   ]
+  },
+  "1253": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas12:21",
+     0.4382
+    ],
+    [
+     "id-sma-biologi-kelas12:160",
+     0.433
+    ],
+    [
+     "id-sma-ekonomi-kelas12:16",
+     0.4259
+    ],
+    [
+     "id-sma-ekonomi-kelas12:15",
+     0.4217
+    ],
+    [
+     "id-sma-informatika-kelas11:10",
+     0.4166
+    ]
+   ]
+  },
+  "126": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas12:16",
+     0.5867
+    ],
+    [
+     "id-sma-ekonomi-kelas11:49",
+     0.5717
+    ],
+    [
+     "id-sma-ekonomi-kelas12:15",
+     0.5414
+    ],
+    [
+     "id-sma-ekonomi-kelas11:32",
+     0.5409
+    ],
+    [
+     "id-sma-ekonomi-kelas12:25",
+     0.533
+    ]
+   ]
+  },
+  "1267": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:16",
+     0.5141
+    ],
+    [
+     "id-sma-fisika-kelas11:64",
+     0.4939
+    ],
+    [
+     "id-sma-kimia-kelas12:68",
+     0.4916
+    ],
+    [
+     "id-sma-kimia-kelas12:80",
+     0.4896
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:5",
+     0.4844
+    ]
+   ]
+  },
+  "1278": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:10",
+     0.4725
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:188",
+     0.4631
+    ],
+    [
+     "id-sma-informatika-kelas11:9",
+     0.4625
+    ],
+    [
+     "id-sma-ekonomi-kelas12:15",
+     0.461
+    ],
+    [
+     "id-sma-fisika-kelas11:70",
+     0.4528
+    ]
+   ]
+  },
+  "13": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-kimia-kelas12:29",
+     0.5542
+    ],
+    [
+     "id-sma-fisika-kelas11:64",
+     0.5138
+    ],
+    [
+     "id-sma-fisika-kelas12:64",
+     0.5105
+    ],
+    [
+     "id-sma-kimia-kelas11:17",
+     0.5044
+    ],
+    [
+     "id-sma-kimia-kelas11:39",
+     0.5023
+    ]
+   ]
+  },
+  "1328": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas11:101",
+     0.4783
+    ],
+    [
+     "id-sma-sejarah-kelas11:104",
+     0.4566
+    ],
+    [
+     "id-sma-sejarah-kelas12:57",
+     0.4564
+    ],
+    [
+     "id-sma-kimia-kelas11:60",
+     0.4523
+    ],
+    [
+     "id-sma-kimia-kelas11:65",
+     0.4497
+    ]
+   ]
+  },
+  "1331": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:58",
+     0.4549
+    ],
+    [
+     "id-sma-informatika-kelas11:8",
+     0.4504
+    ],
+    [
+     "id-sma-informatika-kelas11:37",
+     0.4471
+    ],
+    [
+     "id-sma-informatika-kelas11:25",
+     0.4429
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:209",
+     0.4414
+    ]
+   ]
+  },
+  "1335": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas11:101",
+     0.4197
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:174",
+     0.4174
+    ],
+    [
+     "id-sma-sejarah-kelas12:13",
+     0.4136
+    ],
+    [
+     "id-sma-ekonomi-kelas11:35",
+     0.4125
+    ],
+    [
+     "id-sma-ekonomi-kelas12:59",
+     0.4012
+    ]
+   ]
+  },
+  "135": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:199",
+     0.5429
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:195",
+     0.5207
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:80",
+     0.5199
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:186",
+     0.5197
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:196",
+     0.5195
+    ]
+   ]
+  },
+  "1369": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:114",
+     0.4118
+    ],
+    [
+     "id-sma-sejarah-kelas11:22",
+     0.4026
+    ],
+    [
+     "id-sma-sejarah-kelas11:21",
+     0.3996
+    ],
+    [
+     "id-sma-sejarah-kelas11:23",
+     0.3991
+    ],
+    [
+     "id-sma-informatika-kelas11:95",
+     0.3968
+    ]
+   ]
+  },
+  "1391": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:127",
+     0.4557
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:128",
+     0.4416
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:44",
+     0.4399
+    ],
+    [
+     "id-sma-ekonomi-kelas12:53",
+     0.4372
+    ],
+    [
+     "id-sma-ekonomi-kelas12:58",
+     0.4365
+    ]
+   ]
+  },
+  "14": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:73",
+     0.5726
+    ],
+    [
+     "id-sma-fisika-kelas12:48",
+     0.5145
+    ],
+    [
+     "id-sma-fisika-kelas12:42",
+     0.5111
+    ],
+    [
+     "id-sma-fisika-kelas12:24",
+     0.511
+    ],
+    [
+     "id-sma-fisika-kelas12:49",
+     0.5079
+    ]
+   ]
+  },
+  "1412": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas11:27",
+     0.4312
+    ],
+    [
+     "id-sma-ekonomi-kelas11:32",
+     0.425
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:18",
+     0.4212
+    ],
+    [
+     "id-sma-ekonomi-kelas12:60",
+     0.4175
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:100",
+     0.4134
+    ]
+   ]
+  },
+  "1413": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:10",
+     0.444
+    ],
+    [
+     "id-sma-sejarah-kelas11:36",
+     0.4324
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:71",
+     0.4226
+    ],
+    [
+     "id-sma-informatika-kelas11:84",
+     0.4178
+    ],
+    [
+     "id-sma-biologi-kelas12:107",
+     0.4071
+    ]
+   ]
+  },
+  "1439": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:10",
+     0.4253
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:181",
+     0.4206
+    ],
+    [
+     "id-sma-biologi-kelas11:95",
+     0.4106
+    ],
+    [
+     "id-sma-biologi-kelas11:94",
+     0.4085
+    ],
+    [
+     "id-sma-fisika-kelas11:14",
+     0.4058
+    ]
+   ]
+  },
+  "1441": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:67",
+     0.4295
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:161",
+     0.4255
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:127",
+     0.4169
+    ],
+    [
+     "id-sma-informatika-kelas11:151",
+     0.4097
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:159",
+     0.4087
+    ]
+   ]
+  },
+  "1495": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas11:22",
+     0.4492
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:125",
+     0.4412
+    ],
+    [
+     "id-sma-biologi-kelas12:94",
+     0.4242
+    ],
+    [
+     "id-sma-sejarah-kelas11:23",
+     0.4215
+    ],
+    [
+     "id-sma-biologi-kelas12:159",
+     0.4202
+    ]
+   ]
+  },
+  "15": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas12:16",
+     0.5072
+    ],
+    [
+     "id-sma-ekonomi-kelas12:9",
+     0.5028
+    ],
+    [
+     "id-sma-ekonomi-kelas11:55",
+     0.49
+    ],
+    [
+     "id-sma-ekonomi-kelas11:66",
+     0.4878
+    ],
+    [
+     "id-sma-biologi-kelas12:165",
+     0.4814
+    ]
+   ]
+  },
+  "1525": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:20",
+     0.3802
+    ],
+    [
+     "id-sma-sejarah-kelas11:24",
+     0.3796
+    ],
+    [
+     "id-sma-informatika-kelas11:23",
+     0.378
+    ],
+    [
+     "id-sma-ekonomi-kelas11:27",
+     0.3732
+    ],
+    [
+     "id-sma-biologi-kelas12:160",
+     0.3679
+    ]
+   ]
+  },
+  "16": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:32",
+     0.508
+    ],
+    [
+     "id-sma-informatika-kelas11:26",
+     0.5026
+    ],
+    [
+     "id-sma-informatika-kelas11:52",
+     0.4994
+    ],
+    [
+     "id-sma-informatika-kelas11:40",
+     0.4936
+    ],
+    [
+     "id-sma-ekonomi-kelas11:53",
+     0.493
+    ]
+   ]
+  },
+  "17": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas12:53",
+     0.5027
+    ],
+    [
+     "id-sma-sejarah-kelas12:40",
+     0.4937
+    ],
+    [
+     "id-sma-sejarah-kelas12:0",
+     0.4911
+    ],
+    [
+     "id-sma-sejarah-kelas12:39",
+     0.4824
+    ],
+    [
+     "id-sma-sejarah-kelas12:79",
+     0.4775
+    ]
+   ]
+  },
+  "1740": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas12:16",
+     0.4561
+    ],
+    [
+     "id-sma-sejarah-kelas11:24",
+     0.4445
+    ],
+    [
+     "id-sma-ekonomi-kelas11:74",
+     0.4363
+    ],
+    [
+     "id-sma-sejarah-kelas11:36",
+     0.4247
+    ],
+    [
+     "id-sma-sejarah-kelas11:23",
+     0.4215
+    ]
+   ]
+  },
+  "1757": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:127",
+     0.4423
+    ],
+    [
+     "id-sma-biologi-kelas12:130",
+     0.4417
+    ],
+    [
+     "id-sma-biologi-kelas12:128",
+     0.4329
+    ],
+    [
+     "id-sma-biologi-kelas11:124",
+     0.4247
+    ],
+    [
+     "id-sma-biologi-kelas12:108",
+     0.4241
+    ]
+   ]
+  },
+  "1761": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:160",
+     0.4673
+    ],
+    [
+     "id-sma-fisika-kelas11:51",
+     0.4369
+    ],
+    [
+     "id-sma-fisika-kelas11:47",
+     0.43
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:111",
+     0.4235
+    ],
+    [
+     "id-sma-kimia-kelas12:5",
+     0.4211
+    ]
+   ]
+  },
+  "18": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:130",
+     0.5982
+    ],
+    [
+     "id-sma-informatika-kelas11:136",
+     0.5947
+    ],
+    [
+     "id-sma-informatika-kelas11:137",
+     0.5824
+    ],
+    [
+     "id-sma-informatika-kelas11:11",
+     0.5594
+    ],
+    [
+     "id-sma-informatika-kelas11:13",
+     0.5562
+    ]
+   ]
+  },
+  "19": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:40",
+     0.5274
+    ],
+    [
+     "id-sma-ekonomi-kelas11:27",
+     0.5105
+    ],
+    [
+     "id-sma-informatika-kelas11:39",
+     0.4831
+    ],
+    [
+     "id-sma-informatika-kelas11:37",
+     0.4802
+    ],
+    [
+     "id-sma-ekonomi-kelas12:49",
+     0.4784
+    ]
+   ]
+  },
+  "1932": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas12:81",
+     0.4127
+    ],
+    [
+     "id-sma-biologi-kelas12:68",
+     0.3878
+    ],
+    [
+     "id-sma-biologi-kelas12:114",
+     0.3831
+    ],
+    [
+     "id-sma-biologi-kelas11:84",
+     0.3823
+    ],
+    [
+     "id-sma-informatika-kelas11:23",
+     0.3771
+    ]
+   ]
+  },
+  "1937": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:21",
+     0.4626
+    ],
+    [
+     "id-sma-informatika-kelas11:20",
+     0.4267
+    ],
+    [
+     "id-sma-informatika-kelas11:23",
+     0.414
+    ],
+    [
+     "id-sma-informatika-kelas11:22",
+     0.4067
+    ],
+    [
+     "id-sma-sejarah-kelas11:51",
+     0.3745
+    ]
+   ]
+  },
+  "1988": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:102",
+     0.4519
+    ],
+    [
+     "id-sma-biologi-kelas12:64",
+     0.4392
+    ],
+    [
+     "id-sma-biologi-kelas11:85",
+     0.4321
+    ],
+    [
+     "id-sma-biologi-kelas12:113",
+     0.4311
+    ],
+    [
+     "id-sma-biologi-kelas11:26",
+     0.4268
+    ]
+   ]
+  },
+  "2": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:212",
+     0.4887
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:22",
+     0.4735
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:39",
+     0.4602
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:58",
+     0.4526
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:53",
+     0.4491
+    ]
+   ]
+  },
+  "20": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:129",
+     0.4941
+    ],
+    [
+     "id-sma-biologi-kelas12:128",
+     0.4796
+    ],
+    [
+     "id-sma-biologi-kelas12:105",
+     0.4767
+    ],
+    [
+     "id-sma-biologi-kelas12:120",
+     0.476
+    ],
+    [
+     "id-sma-biologi-kelas12:94",
+     0.4739
+    ]
+   ]
+  },
+  "202": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas12:1",
+     0.374
+    ],
+    [
+     "id-sma-biologi-kelas12:109",
+     0.3716
+    ],
+    [
+     "id-sma-biologi-kelas12:102",
+     0.3702
+    ],
+    [
+     "id-sma-biologi-kelas12:108",
+     0.3644
+    ],
+    [
+     "id-sma-sejarah-kelas12:0",
+     0.3625
+    ]
+   ]
+  },
+  "2036": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:89",
+     0.4992
+    ],
+    [
+     "id-sma-biologi-kelas11:84",
+     0.4976
+    ],
+    [
+     "id-sma-biologi-kelas11:88",
+     0.4954
+    ],
+    [
+     "id-sma-biologi-kelas11:78",
+     0.4755
+    ],
+    [
+     "id-sma-fisika-kelas11:40",
+     0.4607
+    ]
+   ]
+  },
+  "21": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:113",
+     0.5807
+    ],
+    [
+     "id-sma-biologi-kelas12:114",
+     0.5385
+    ],
+    [
+     "id-sma-biologi-kelas12:131",
+     0.5077
+    ],
+    [
+     "id-sma-biologi-kelas12:130",
+     0.4953
+    ],
+    [
+     "id-sma-biologi-kelas12:112",
+     0.4688
+    ]
+   ]
+  },
+  "2146": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:112",
+     0.4392
+    ],
+    [
+     "id-sma-ekonomi-kelas11:39",
+     0.4318
+    ],
+    [
+     "id-sma-ekonomi-kelas11:34",
+     0.429
+    ],
+    [
+     "id-sma-informatika-kelas11:42",
+     0.4288
+    ],
+    [
+     "id-sma-ekonomi-kelas12:6",
+     0.4243
+    ]
+   ]
+  },
+  "2148": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:91",
+     0.4629
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:46",
+     0.4522
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:108",
+     0.4506
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:211",
+     0.4408
+    ],
+    [
+     "id-sma-kimia-kelas12:4",
+     0.4371
+    ]
+   ]
+  },
+  "2178": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:129",
+     0.4732
+    ],
+    [
+     "id-sma-biologi-kelas12:100",
+     0.4608
+    ],
+    [
+     "id-sma-biologi-kelas12:121",
+     0.4602
+    ],
+    [
+     "id-sma-biologi-kelas11:119",
+     0.4497
+    ],
+    [
+     "id-sma-biologi-kelas11:131",
+     0.4484
+    ]
+   ]
+  },
+  "22": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:3",
+     0.5413
+    ],
+    [
+     "id-sma-biologi-kelas12:8",
+     0.5269
+    ],
+    [
+     "id-sma-biologi-kelas12:7",
+     0.5067
+    ],
+    [
+     "id-sma-biologi-kelas12:28",
+     0.4977
+    ],
+    [
+     "id-sma-biologi-kelas12:84",
+     0.4831
+    ]
+   ]
+  },
+  "2200": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:97",
+     0.4838
+    ],
+    [
+     "id-sma-biologi-kelas11:99",
+     0.481
+    ],
+    [
+     "id-sma-biologi-kelas12:128",
+     0.4714
+    ],
+    [
+     "id-sma-biologi-kelas12:109",
+     0.4683
+    ],
+    [
+     "id-sma-sejarah-kelas12:51",
+     0.4682
+    ]
+   ]
+  },
+  "2204": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:49",
+     0.4599
+    ],
+    [
+     "id-sma-biologi-kelas11:117",
+     0.4462
+    ],
+    [
+     "id-sma-biologi-kelas11:97",
+     0.436
+    ],
+    [
+     "id-sma-biologi-kelas11:70",
+     0.4333
+    ],
+    [
+     "id-sma-biologi-kelas11:36",
+     0.4262
+    ]
+   ]
+  },
+  "2277": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:73",
+     0.4258
+    ],
+    [
+     "id-sma-biologi-kelas11:117",
+     0.4246
+    ],
+    [
+     "id-sma-biologi-kelas11:88",
+     0.4053
+    ],
+    [
+     "id-sma-biologi-kelas11:123",
+     0.4012
+    ],
+    [
+     "id-sma-biologi-kelas12:122",
+     0.3965
+    ]
+   ]
+  },
+  "23": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:40",
+     0.547
+    ],
+    [
+     "id-sma-biologi-kelas12:83",
+     0.5048
+    ],
+    [
+     "id-sma-biologi-kelas12:41",
+     0.5038
+    ],
+    [
+     "id-sma-biologi-kelas12:155",
+     0.5025
+    ],
+    [
+     "id-sma-biologi-kelas12:39",
+     0.5021
+    ]
+   ]
+  },
+  "2301": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:84",
+     0.4788
+    ],
+    [
+     "id-sma-biologi-kelas12:128",
+     0.4732
+    ],
+    [
+     "id-sma-informatika-kelas11:97",
+     0.4617
+    ],
+    [
+     "id-sma-biologi-kelas12:120",
+     0.4616
+    ],
+    [
+     "id-sma-biologi-kelas11:85",
+     0.461
+    ]
+   ]
+  },
+  "2306": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:26",
+     0.4905
+    ],
+    [
+     "id-sma-biologi-kelas11:96",
+     0.4891
+    ],
+    [
+     "id-sma-biologi-kelas11:84",
+     0.4761
+    ],
+    [
+     "id-sma-informatika-kelas11:114",
+     0.4688
+    ],
+    [
+     "id-sma-biologi-kelas11:97",
+     0.4643
+    ]
+   ]
+  },
+  "231": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:162",
+     0.4884
+    ],
+    [
+     "id-sma-ekonomi-kelas11:71",
+     0.4726
+    ],
+    [
+     "id-sma-ekonomi-kelas11:74",
+     0.466
+    ],
+    [
+     "id-sma-ekonomi-kelas11:55",
+     0.4644
+    ],
+    [
+     "id-sma-ekonomi-kelas11:57",
+     0.4583
+    ]
+   ]
+  },
+  "2363": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:84",
+     0.4996
+    ],
+    [
+     "id-sma-biologi-kelas11:48",
+     0.4933
+    ],
+    [
+     "id-sma-biologi-kelas11:96",
+     0.4864
+    ],
+    [
+     "id-sma-biologi-kelas11:70",
+     0.4839
+    ],
+    [
+     "id-sma-biologi-kelas11:89",
+     0.4787
+    ]
+   ]
+  },
+  "24": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:5",
+     0.4634
+    ],
+    [
+     "id-sma-biologi-kelas11:10",
+     0.4473
+    ],
+    [
+     "id-sma-biologi-kelas12:85",
+     0.4462
+    ],
+    [
+     "id-sma-biologi-kelas12:58",
+     0.4455
+    ],
+    [
+     "id-sma-biologi-kelas11:16",
+     0.4436
+    ]
+   ]
+  },
+  "2404": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:108",
+     0.4322
+    ],
+    [
+     "id-sma-biologi-kelas12:109",
+     0.4319
+    ],
+    [
+     "id-sma-biologi-kelas12:108",
+     0.4266
+    ],
+    [
+     "id-sma-biologi-kelas12:128",
+     0.4225
+    ],
+    [
+     "id-sma-biologi-kelas12:26",
+     0.4219
+    ]
+   ]
+  },
+  "2413": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:109",
+     0.4804
+    ],
+    [
+     "id-sma-biologi-kelas12:128",
+     0.4752
+    ],
+    [
+     "id-sma-biologi-kelas12:108",
+     0.4734
+    ],
+    [
+     "id-sma-biologi-kelas12:36",
+     0.464
+    ],
+    [
+     "id-sma-fisika-kelas12:90",
+     0.4606
+    ]
+   ]
+  },
+  "2423": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:128",
+     0.6097
+    ],
+    [
+     "id-sma-biologi-kelas12:127",
+     0.5819
+    ],
+    [
+     "id-sma-biologi-kelas12:129",
+     0.5712
+    ],
+    [
+     "id-sma-biologi-kelas12:112",
+     0.5674
+    ],
+    [
+     "id-sma-biologi-kelas12:131",
+     0.5667
+    ]
+   ]
+  },
+  "25": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:53",
+     0.511
+    ],
+    [
+     "id-sma-kimia-kelas11:37",
+     0.5086
+    ],
+    [
+     "id-sma-kimia-kelas12:0",
+     0.5083
+    ],
+    [
+     "id-sma-kimia-kelas11:52",
+     0.5054
+    ],
+    [
+     "id-sma-kimia-kelas12:50",
+     0.5038
+    ]
+   ]
+  },
+  "2500": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas11:41",
+     0.4896
+    ],
+    [
+     "id-sma-ekonomi-kelas11:34",
+     0.4673
+    ],
+    [
+     "id-sma-ekonomi-kelas11:33",
+     0.4614
+    ],
+    [
+     "id-sma-ekonomi-kelas11:35",
+     0.4574
+    ],
+    [
+     "id-sma-ekonomi-kelas11:32",
+     0.4523
+    ]
+   ]
+  },
+  "2570": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:63",
+     0.5282
+    ],
+    [
+     "id-sma-fisika-kelas11:58",
+     0.5273
+    ],
+    [
+     "id-sma-biologi-kelas11:84",
+     0.5254
+    ],
+    [
+     "id-sma-biologi-kelas11:96",
+     0.521
+    ],
+    [
+     "id-sma-informatika-kelas11:136",
+     0.5121
+    ]
+   ]
+  },
+  "26": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:15",
+     0.4653
+    ],
+    [
+     "id-sma-kimia-kelas11:26",
+     0.455
+    ],
+    [
+     "id-sma-kimia-kelas11:102",
+     0.4473
+    ],
+    [
+     "id-sma-kimia-kelas11:46",
+     0.4471
+    ],
+    [
+     "id-sma-kimia-kelas11:14",
+     0.4397
+    ]
+   ]
+  },
+  "2639": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas11:36",
+     0.4317
+    ],
+    [
+     "id-sma-biologi-kelas11:47",
+     0.419
+    ],
+    [
+     "id-sma-biologi-kelas11:98",
+     0.4124
+    ],
+    [
+     "id-sma-biologi-kelas11:31",
+     0.4113
+    ],
+    [
+     "id-sma-ekonomi-kelas11:26",
+     0.4076
+    ]
+   ]
+  },
+  "2640": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:9",
+     0.4785
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:169",
+     0.4463
+    ],
+    [
+     "id-sma-informatika-kelas11:41",
+     0.4427
+    ],
+    [
+     "id-sma-biologi-kelas12:128",
+     0.4421
+    ],
+    [
+     "id-sma-biologi-kelas12:92",
+     0.4415
+    ]
+   ]
+  },
+  "2657": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:189",
+     0.472
+    ],
+    [
+     "id-sma-biologi-kelas12:32",
+     0.471
+    ],
+    [
+     "id-sma-kimia-kelas11:109",
+     0.4698
+    ],
+    [
+     "id-sma-kimia-kelas11:103",
+     0.4666
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:192",
+     0.4621
+    ]
+   ]
+  },
+  "27": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas12:5",
+     0.5129
+    ],
+    [
+     "id-sma-kimia-kelas12:8",
+     0.484
+    ],
+    [
+     "id-sma-kimia-kelas12:6",
+     0.4764
+    ],
+    [
+     "id-sma-kimia-kelas12:7",
+     0.4707
+    ],
+    [
+     "id-sma-kimia-kelas12:1",
+     0.4652
+    ]
+   ]
+  },
+  "2743": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:75",
+     0.5471
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:2",
+     0.539
+    ],
+    [
+     "id-sma-informatika-kelas11:52",
+     0.5301
+    ],
+    [
+     "id-sma-informatika-kelas11:79",
+     0.5279
+    ],
+    [
+     "id-sma-informatika-kelas11:45",
+     0.5219
+    ]
+   ]
+  },
+  "2745": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:92",
+     0.4501
+    ],
+    [
+     "id-sma-fisika-kelas12:98",
+     0.4482
+    ],
+    [
+     "id-sma-fisika-kelas11:23",
+     0.4482
+    ],
+    [
+     "id-sma-fisika-kelas12:89",
+     0.4437
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:125",
+     0.4426
+    ]
+   ]
+  },
+  "28": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas12:10",
+     0.5332
+    ],
+    [
+     "id-sma-kimia-kelas12:11",
+     0.5118
+    ],
+    [
+     "id-sma-kimia-kelas11:51",
+     0.5079
+    ],
+    [
+     "id-sma-kimia-kelas12:1",
+     0.5077
+    ],
+    [
+     "id-sma-kimia-kelas12:16",
+     0.5065
+    ]
+   ]
+  },
+  "2857": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:40",
+     0.5459
+    ],
+    [
+     "id-sma-biologi-kelas12:38",
+     0.5347
+    ],
+    [
+     "id-sma-biologi-kelas12:80",
+     0.5331
+    ],
+    [
+     "id-sma-biologi-kelas12:39",
+     0.5184
+    ],
+    [
+     "id-sma-biologi-kelas12:58",
+     0.5183
+    ]
+   ]
+  },
+  "29": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas12:11",
+     0.6478
+    ],
+    [
+     "id-sma-kimia-kelas12:16",
+     0.635
+    ],
+    [
+     "id-sma-kimia-kelas12:13",
+     0.635
+    ],
+    [
+     "id-sma-kimia-kelas12:18",
+     0.6336
+    ],
+    [
+     "id-sma-kimia-kelas12:15",
+     0.6308
+    ]
+   ]
+  },
+  "2907": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:160",
+     0.5187
+    ],
+    [
+     "id-sma-biologi-kelas12:114",
+     0.513
+    ],
+    [
+     "id-sma-biologi-kelas12:112",
+     0.512
+    ],
+    [
+     "id-sma-biologi-kelas12:69",
+     0.5041
+    ],
+    [
+     "id-sma-biologi-kelas12:113",
+     0.5027
+    ]
+   ]
+  },
+  "2938": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:6",
+     0.545
+    ],
+    [
+     "id-sma-kimia-kelas12:10",
+     0.5438
+    ],
+    [
+     "id-sma-biologi-kelas12:3",
+     0.5402
+    ],
+    [
+     "id-sma-kimia-kelas12:15",
+     0.5354
+    ],
+    [
+     "id-sma-kimia-kelas12:31",
+     0.5295
+    ]
+   ]
+  },
+  "2949": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:28",
+     0.529
+    ],
+    [
+     "id-sma-biologi-kelas12:97",
+     0.5192
+    ],
+    [
+     "id-sma-biologi-kelas12:24",
+     0.5141
+    ],
+    [
+     "id-sma-biologi-kelas12:28",
+     0.508
+    ],
+    [
+     "id-sma-biologi-kelas12:71",
+     0.5069
+    ]
+   ]
+  },
+  "2963": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:133",
+     0.5684
+    ],
+    [
+     "id-sma-biologi-kelas11:114",
+     0.5468
+    ],
+    [
+     "id-sma-biologi-kelas12:167",
+     0.5155
+    ],
+    [
+     "id-sma-biologi-kelas11:17",
+     0.5071
+    ],
+    [
+     "id-sma-biologi-kelas11:129",
+     0.5065
+    ]
+   ]
+  },
+  "3": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:105",
+     0.58
+    ],
+    [
+     "id-sma-kimia-kelas11:108",
+     0.5657
+    ],
+    [
+     "id-sma-kimia-kelas12:16",
+     0.5402
+    ],
+    [
+     "id-sma-kimia-kelas11:118",
+     0.5375
+    ],
+    [
+     "id-sma-kimia-kelas11:111",
+     0.5363
+    ]
+   ]
+  },
+  "30": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "computer science",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:67",
+     0.563
+    ],
+    [
+     "id-sma-fisika-kelas12:82",
+     0.5599
+    ],
+    [
+     "id-sma-fisika-kelas12:83",
+     0.558
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:126",
+     0.554
+    ],
+    [
+     "id-sma-informatika-kelas11:69",
+     0.5534
+    ]
+   ]
+  },
+  "3097": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:34",
+     0.6593
+    ],
+    [
+     "id-sma-biologi-kelas11:35",
+     0.6276
+    ],
+    [
+     "id-sma-biologi-kelas11:31",
+     0.6229
+    ],
+    [
+     "id-sma-biologi-kelas12:1",
+     0.6019
+    ],
+    [
+     "id-sma-biologi-kelas11:38",
+     0.6016
+    ]
+   ]
+  },
+  "31": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "computer science",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:76",
+     0.5737
+    ],
+    [
+     "id-sma-informatika-kelas11:75",
+     0.5626
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:14",
+     0.5615
+    ],
+    [
+     "id-sma-informatika-kelas11:80",
+     0.5579
+    ],
+    [
+     "id-sma-informatika-kelas11:77",
+     0.5549
+    ]
+   ]
+  },
+  "3123": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:11",
+     0.5011
+    ],
+    [
+     "id-sma-biologi-kelas11:10",
+     0.4954
+    ],
+    [
+     "id-sma-biologi-kelas11:120",
+     0.4917
+    ],
+    [
+     "id-sma-biologi-kelas11:15",
+     0.4782
+    ],
+    [
+     "id-sma-biologi-kelas12:88",
+     0.4777
+    ]
+   ]
+  },
+  "3157": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:2",
+     0.646
+    ],
+    [
+     "id-sma-biologi-kelas12:120",
+     0.5857
+    ],
+    [
+     "id-sma-biologi-kelas12:119",
+     0.5849
+    ],
+    [
+     "id-sma-biologi-kelas12:121",
+     0.5671
+    ],
+    [
+     "id-sma-biologi-kelas12:94",
+     0.5643
+    ]
+   ]
+  },
+  "3170": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:121",
+     0.5177
+    ],
+    [
+     "id-sma-biologi-kelas12:120",
+     0.4992
+    ],
+    [
+     "id-sma-biologi-kelas11:41",
+     0.471
+    ],
+    [
+     "id-sma-biologi-kelas12:32",
+     0.4631
+    ],
+    [
+     "id-sma-biologi-kelas12:129",
+     0.4629
+    ]
+   ]
+  },
+  "32": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "computer science",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:152",
+     0.5087
+    ],
+    [
+     "id-sma-informatika-kelas11:150",
+     0.4826
+    ],
+    [
+     "id-sma-informatika-kelas11:151",
+     0.4654
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:30",
+     0.4572
+    ],
+    [
+     "id-sma-informatika-kelas11:140",
+     0.4562
+    ]
+   ]
+  },
+  "322": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:210",
+     0.4831
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:196",
+     0.4757
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:11",
+     0.4754
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:15",
+     0.4741
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:186",
+     0.4713
+    ]
+   ]
+  },
+  "3235": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:181",
+     0.5586
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:209",
+     0.5553
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:208",
+     0.553
+    ],
+    [
+     "id-sma-informatika-kelas11:93",
+     0.5439
+    ],
+    [
+     "id-sma-informatika-kelas11:94",
+     0.5401
+    ]
+   ]
+  },
+  "3250": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:89",
+     0.5665
+    ],
+    [
+     "id-sma-biologi-kelas11:87",
+     0.5567
+    ],
+    [
+     "id-sma-biologi-kelas11:85",
+     0.5446
+    ],
+    [
+     "id-sma-biologi-kelas11:93",
+     0.544
+    ],
+    [
+     "id-sma-biologi-kelas11:75",
+     0.5376
+    ]
+   ]
+  },
+  "3280": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:19",
+     0.5683
+    ],
+    [
+     "id-sma-biologi-kelas11:9",
+     0.5242
+    ],
+    [
+     "id-sma-biologi-kelas12:59",
+     0.5198
+    ],
+    [
+     "id-sma-biologi-kelas11:12",
+     0.5183
+    ],
+    [
+     "id-sma-biologi-kelas12:121",
+     0.5165
+    ]
+   ]
+  },
+  "33": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "computer science",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:153",
+     0.5858
+    ],
+    [
+     "id-sma-informatika-kelas11:154",
+     0.5466
+    ],
+    [
+     "id-sma-informatika-kelas11:147",
+     0.5421
+    ],
+    [
+     "id-sma-informatika-kelas11:129",
+     0.5404
+    ],
+    [
+     "id-sma-informatika-kelas11:2",
+     0.5321
+    ]
+   ]
+  },
+  "34": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "computer science",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:192",
+     0.5361
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:186",
+     0.5326
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:172",
+     0.5267
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:210",
+     0.5144
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:184",
+     0.5143
+    ]
+   ]
+  },
+  "3417": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:118",
+     0.6109
+    ],
+    [
+     "id-sma-biologi-kelas12:121",
+     0.5591
+    ],
+    [
+     "id-sma-biologi-kelas12:92",
+     0.5533
+    ],
+    [
+     "id-sma-biologi-kelas12:103",
+     0.547
+    ],
+    [
+     "id-sma-biologi-kelas12:94",
+     0.5463
+    ]
+   ]
+  },
+  "3430": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:8",
+     0.6068
+    ],
+    [
+     "id-sma-biologi-kelas12:9",
+     0.59
+    ],
+    [
+     "id-sma-kimia-kelas12:86",
+     0.5879
+    ],
+    [
+     "id-sma-biologi-kelas12:52",
+     0.5734
+    ],
+    [
+     "id-sma-biologi-kelas12:3",
+     0.558
+    ]
+   ]
+  },
+  "3441": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:57",
+     0.5458
+    ],
+    [
+     "id-sma-biologi-kelas12:58",
+     0.5001
+    ],
+    [
+     "id-sma-biologi-kelas12:60",
+     0.4999
+    ],
+    [
+     "id-sma-biologi-kelas12:61",
+     0.4949
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:55",
+     0.4915
+    ]
+   ]
+  },
+  "3463": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:66",
+     0.6525
+    ],
+    [
+     "id-sma-biologi-kelas12:70",
+     0.621
+    ],
+    [
+     "id-sma-biologi-kelas12:73",
+     0.6162
+    ],
+    [
+     "id-sma-biologi-kelas12:65",
+     0.6141
+    ],
+    [
+     "id-sma-biologi-kelas12:72",
+     0.6006
+    ]
+   ]
+  },
+  "3467": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:78",
+     0.5362
+    ],
+    [
+     "id-sma-biologi-kelas12:89",
+     0.5354
+    ],
+    [
+     "id-sma-biologi-kelas12:77",
+     0.5218
+    ],
+    [
+     "id-sma-biologi-kelas12:65",
+     0.5103
+    ],
+    [
+     "id-sma-biologi-kelas12:36",
+     0.5039
+    ]
+   ]
+  },
+  "3485": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "biology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:124",
+     0.5863
+    ],
+    [
+     "id-sma-biologi-kelas12:110",
+     0.5758
+    ],
+    [
+     "id-sma-biologi-kelas12:119",
+     0.5753
+    ],
+    [
+     "id-sma-biologi-kelas11:124",
+     0.5729
+    ],
+    [
+     "id-sma-biologi-kelas12:107",
+     0.5721
+    ]
+   ]
+  },
+  "35": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:92",
+     0.5135
+    ],
+    [
+     "id-sma-biologi-kelas11:84",
+     0.4979
+    ],
+    [
+     "id-sma-fisika-kelas11:31",
+     0.4922
+    ],
+    [
+     "id-sma-fisika-kelas11:30",
+     0.4902
+    ],
+    [
+     "id-sma-kimia-kelas11:120",
+     0.488
+    ]
+   ]
+  },
+  "3533": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:88",
+     0.5174
+    ],
+    [
+     "id-sma-informatika-kelas11:65",
+     0.5116
+    ],
+    [
+     "id-sma-informatika-kelas11:70",
+     0.5073
+    ],
+    [
+     "id-sma-informatika-kelas11:69",
+     0.5046
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:26",
+     0.5033
+    ]
+   ]
+  },
+  "3572": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:105",
+     0.5184
+    ],
+    [
+     "id-sma-kimia-kelas11:118",
+     0.5132
+    ],
+    [
+     "id-sma-kimia-kelas11:106",
+     0.5092
+    ],
+    [
+     "id-sma-kimia-kelas11:107",
+     0.5026
+    ],
+    [
+     "id-sma-kimia-kelas11:59",
+     0.4979
+    ]
+   ]
+  },
+  "3574": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:59",
+     0.5521
+    ],
+    [
+     "id-sma-fisika-kelas12:121",
+     0.535
+    ],
+    [
+     "id-sma-biologi-kelas12:100",
+     0.5119
+    ],
+    [
+     "id-sma-fisika-kelas12:128",
+     0.5091
+    ],
+    [
+     "id-sma-kimia-kelas11:58",
+     0.5079
+    ]
+   ]
+  },
+  "359": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas12:25",
+     0.5204
+    ],
+    [
+     "id-sma-ekonomi-kelas12:49",
+     0.5153
+    ],
+    [
+     "id-sma-ekonomi-kelas12:50",
+     0.5122
+    ],
+    [
+     "id-sma-ekonomi-kelas12:15",
+     0.5067
+    ],
+    [
+     "id-sma-ekonomi-kelas11:10",
+     0.5066
+    ]
+   ]
+  },
+  "36": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:130",
+     0.5269
+    ],
+    [
+     "id-sma-fisika-kelas11:59",
+     0.5126
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:131",
+     0.5125
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:92",
+     0.5111
+    ],
+    [
+     "id-sma-fisika-kelas11:34",
+     0.5058
+    ]
+   ]
+  },
+  "3600": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:89",
+     0.5211
+    ],
+    [
+     "id-sma-kimia-kelas11:88",
+     0.5203
+    ],
+    [
+     "id-sma-kimia-kelas12:18",
+     0.5146
+    ],
+    [
+     "id-sma-kimia-kelas11:93",
+     0.5099
+    ],
+    [
+     "id-sma-kimia-kelas11:114",
+     0.5095
+    ]
+   ]
+  },
+  "3621": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:62",
+     0.551
+    ],
+    [
+     "id-sma-fisika-kelas11:36",
+     0.5293
+    ],
+    [
+     "id-sma-fisika-kelas11:35",
+     0.529
+    ],
+    [
+     "id-sma-kimia-kelas11:87",
+     0.5262
+    ],
+    [
+     "id-sma-fisika-kelas12:106",
+     0.5261
+    ]
+   ]
+  },
+  "3671": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:51",
+     0.6129
+    ],
+    [
+     "id-sma-kimia-kelas12:18",
+     0.5696
+    ],
+    [
+     "id-sma-kimia-kelas11:50",
+     0.5694
+    ],
+    [
+     "id-sma-fisika-kelas11:95",
+     0.5594
+    ],
+    [
+     "id-sma-kimia-kelas11:128",
+     0.5571
+    ]
+   ]
+  },
+  "37": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:210",
+     0.5574
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:211",
+     0.5521
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:209",
+     0.534
+    ],
+    [
+     "id-sma-kimia-kelas11:59",
+     0.5234
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:205",
+     0.5213
+    ]
+   ]
+  },
+  "3719": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:33",
+     0.5582
+    ],
+    [
+     "id-sma-kimia-kelas11:29",
+     0.5302
+    ],
+    [
+     "id-sma-kimia-kelas11:30",
+     0.5242
+    ],
+    [
+     "id-sma-kimia-kelas11:26",
+     0.519
+    ],
+    [
+     "id-sma-kimia-kelas12:0",
+     0.5152
+    ]
+   ]
+  },
+  "3728": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:53",
+     0.5975
+    ],
+    [
+     "id-sma-kimia-kelas11:52",
+     0.5854
+    ],
+    [
+     "id-sma-kimia-kelas11:35",
+     0.5799
+    ],
+    [
+     "id-sma-kimia-kelas11:59",
+     0.5745
+    ],
+    [
+     "id-sma-fisika-kelas12:116",
+     0.5647
+    ]
+   ]
+  },
+  "3752": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas12:21",
+     0.5939
+    ],
+    [
+     "id-sma-kimia-kelas12:22",
+     0.5803
+    ],
+    [
+     "id-sma-kimia-kelas12:23",
+     0.5793
+    ],
+    [
+     "id-sma-kimia-kelas12:9",
+     0.5769
+    ],
+    [
+     "id-sma-kimia-kelas12:11",
+     0.5624
+    ]
+   ]
+  },
+  "3783": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:80",
+     0.5793
+    ],
+    [
+     "id-sma-fisika-kelas11:77",
+     0.5785
+    ],
+    [
+     "id-sma-fisika-kelas11:84",
+     0.5726
+    ],
+    [
+     "id-sma-kimia-kelas11:87",
+     0.5606
+    ],
+    [
+     "id-sma-fisika-kelas11:82",
+     0.5605
+    ]
+   ]
+  },
+  "3791": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas12:48",
+     0.5847
+    ],
+    [
+     "id-sma-kimia-kelas11:18",
+     0.5816
+    ],
+    [
+     "id-sma-kimia-kelas12:49",
+     0.5598
+    ],
+    [
+     "id-sma-fisika-kelas11:76",
+     0.5473
+    ],
+    [
+     "id-sma-kimia-kelas12:56",
+     0.5454
+    ]
+   ]
+  },
+  "38": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas11:70",
+     0.5585
+    ],
+    [
+     "id-sma-ekonomi-kelas11:69",
+     0.5376
+    ],
+    [
+     "id-sma-ekonomi-kelas11:68",
+     0.5158
+    ],
+    [
+     "id-sma-ekonomi-kelas11:72",
+     0.5147
+    ],
+    [
+     "id-sma-ekonomi-kelas11:60",
+     0.5037
+    ]
+   ]
+  },
+  "39": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:56",
+     0.4669
+    ],
+    [
+     "id-sma-kimia-kelas11:62",
+     0.458
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:170",
+     0.449
+    ],
+    [
+     "id-sma-kimia-kelas11:110",
+     0.4463
+    ],
+    [
+     "id-sma-kimia-kelas12:32",
+     0.4458
+    ]
+   ]
+  },
+  "3917": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:72",
+     0.6093
+    ],
+    [
+     "id-sma-kimia-kelas11:80",
+     0.606
+    ],
+    [
+     "id-sma-kimia-kelas12:59",
+     0.592
+    ],
+    [
+     "id-sma-kimia-kelas11:79",
+     0.5755
+    ],
+    [
+     "id-sma-kimia-kelas11:68",
+     0.5443
+    ]
+   ]
+  },
+  "3922": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:42",
+     0.5834
+    ],
+    [
+     "id-sma-fisika-kelas11:43",
+     0.5662
+    ],
+    [
+     "id-sma-kimia-kelas11:129",
+     0.5615
+    ],
+    [
+     "id-sma-kimia-kelas11:128",
+     0.5599
+    ],
+    [
+     "id-sma-kimia-kelas12:27",
+     0.5596
+    ]
+   ]
+  },
+  "3973": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:119",
+     0.543
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:14",
+     0.5213
+    ],
+    [
+     "id-sma-kimia-kelas11:108",
+     0.5124
+    ],
+    [
+     "id-sma-kimia-kelas11:136",
+     0.5083
+    ],
+    [
+     "id-sma-kimia-kelas11:111",
+     0.5061
+    ]
+   ]
+  },
+  "4": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:171",
+     0.4901
+    ],
+    [
+     "id-sma-informatika-kelas11:66",
+     0.4871
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:1",
+     0.4769
+    ],
+    [
+     "id-sma-biologi-kelas11:47",
+     0.4639
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:174",
+     0.4585
+    ]
+   ]
+  },
+  "40": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:7",
+     0.5538
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:118",
+     0.5407
+    ],
+    [
+     "id-sma-fisika-kelas12:5",
+     0.5374
+    ],
+    [
+     "id-sma-fisika-kelas12:2",
+     0.5372
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:160",
+     0.5371
+    ]
+   ]
+  },
+  "4055": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:43",
+     0.5849
+    ],
+    [
+     "id-sma-fisika-kelas11:46",
+     0.5715
+    ],
+    [
+     "id-sma-kimia-kelas11:114",
+     0.5681
+    ],
+    [
+     "id-sma-kimia-kelas11:128",
+     0.5591
+    ],
+    [
+     "id-sma-fisika-kelas11:42",
+     0.5578
+    ]
+   ]
+  },
+  "406": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas11:37",
+     0.5395
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:127",
+     0.5113
+    ],
+    [
+     "id-sma-ekonomi-kelas11:39",
+     0.5093
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:11",
+     0.506
+    ],
+    [
+     "id-sma-ekonomi-kelas11:38",
+     0.496
+    ]
+   ]
+  },
+  "41": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:31",
+     0.5887
+    ],
+    [
+     "id-sma-fisika-kelas12:48",
+     0.5762
+    ],
+    [
+     "id-sma-fisika-kelas12:47",
+     0.5554
+    ],
+    [
+     "id-sma-fisika-kelas11:80",
+     0.5483
+    ],
+    [
+     "id-sma-fisika-kelas11:22",
+     0.5477
+    ]
+   ]
+  },
+  "4140": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas12:18",
+     0.5929
+    ],
+    [
+     "id-sma-kimia-kelas11:111",
+     0.5858
+    ],
+    [
+     "id-sma-kimia-kelas12:12",
+     0.585
+    ],
+    [
+     "id-sma-kimia-kelas12:9",
+     0.5646
+    ],
+    [
+     "id-sma-kimia-kelas11:107",
+     0.556
+    ]
+   ]
+  },
+  "4188": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas12:22",
+     0.6024
+    ],
+    [
+     "id-sma-kimia-kelas12:9",
+     0.5871
+    ],
+    [
+     "id-sma-kimia-kelas11:128",
+     0.5821
+    ],
+    [
+     "id-sma-kimia-kelas12:12",
+     0.5784
+    ],
+    [
+     "id-sma-kimia-kelas11:59",
+     0.5745
+    ]
+   ]
+  },
+  "42": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:85",
+     0.3827
+    ],
+    [
+     "id-sma-fisika-kelas12:18",
+     0.3765
+    ],
+    [
+     "id-sma-fisika-kelas12:19",
+     0.3738
+    ],
+    [
+     "id-sma-fisika-kelas12:86",
+     0.3733
+    ],
+    [
+     "id-sma-sejarah-kelas11:81",
+     0.3661
+    ]
+   ]
+  },
+  "4219": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:2",
+     0.5061
+    ],
+    [
+     "id-sma-fisika-kelas11:64",
+     0.5019
+    ],
+    [
+     "id-sma-fisika-kelas12:68",
+     0.4908
+    ],
+    [
+     "id-sma-fisika-kelas12:96",
+     0.4817
+    ],
+    [
+     "id-sma-fisika-kelas12:64",
+     0.473
+    ]
+   ]
+  },
+  "4288": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas12:13",
+     0.583
+    ],
+    [
+     "id-sma-kimia-kelas12:10",
+     0.5711
+    ],
+    [
+     "id-sma-kimia-kelas12:22",
+     0.5569
+    ],
+    [
+     "id-sma-kimia-kelas11:15",
+     0.5439
+    ],
+    [
+     "id-sma-kimia-kelas12:12",
+     0.5393
+    ]
+   ]
+  },
+  "43": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:31",
+     0.6064
+    ],
+    [
+     "id-sma-fisika-kelas12:5",
+     0.5813
+    ],
+    [
+     "id-sma-fisika-kelas12:7",
+     0.5777
+    ],
+    [
+     "id-sma-fisika-kelas12:24",
+     0.5768
+    ],
+    [
+     "id-sma-fisika-kelas12:2",
+     0.564
+    ]
+   ]
+  },
+  "4325": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:121",
+     0.6187
+    ],
+    [
+     "id-sma-kimia-kelas11:5",
+     0.562
+    ],
+    [
+     "id-sma-fisika-kelas12:127",
+     0.5614
+    ],
+    [
+     "id-sma-fisika-kelas12:128",
+     0.5447
+    ],
+    [
+     "id-sma-fisika-kelas12:120",
+     0.5367
+    ]
+   ]
+  },
+  "433": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas11:57",
+     0.4982
+    ],
+    [
+     "id-sma-ekonomi-kelas11:55",
+     0.498
+    ],
+    [
+     "id-sma-ekonomi-kelas11:64",
+     0.4834
+    ],
+    [
+     "id-sma-ekonomi-kelas12:42",
+     0.4826
+    ],
+    [
+     "id-sma-ekonomi-kelas11:48",
+     0.4814
+    ]
+   ]
+  },
+  "434": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas11:55",
+     0.4084
+    ],
+    [
+     "id-sma-ekonomi-kelas12:28",
+     0.392
+    ],
+    [
+     "id-sma-ekonomi-kelas12:50",
+     0.3868
+    ],
+    [
+     "id-sma-ekonomi-kelas11:57",
+     0.3807
+    ],
+    [
+     "id-sma-sejarah-kelas12:44",
+     0.3797
+    ]
+   ]
+  },
+  "435": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas12:15",
+     0.5247
+    ],
+    [
+     "id-sma-ekonomi-kelas11:55",
+     0.5142
+    ],
+    [
+     "id-sma-ekonomi-kelas12:23",
+     0.5046
+    ],
+    [
+     "id-sma-ekonomi-kelas12:16",
+     0.4955
+    ],
+    [
+     "id-sma-ekonomi-kelas12:42",
+     0.4933
+    ]
+   ]
+  },
+  "4352": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:83",
+     0.5622
+    ],
+    [
+     "id-sma-kimia-kelas11:84",
+     0.5393
+    ],
+    [
+     "id-sma-fisika-kelas11:77",
+     0.5375
+    ],
+    [
+     "id-sma-fisika-kelas11:97",
+     0.5357
+    ],
+    [
+     "id-sma-kimia-kelas11:91",
+     0.5351
+    ]
+   ]
+  },
+  "44": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "engineering",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:55",
+     0.5474
+    ],
+    [
+     "id-sma-fisika-kelas12:56",
+     0.5446
+    ],
+    [
+     "id-sma-fisika-kelas12:20",
+     0.5062
+    ],
+    [
+     "id-sma-fisika-kelas12:54",
+     0.4965
+    ],
+    [
+     "id-sma-fisika-kelas12:19",
+     0.486
+    ]
+   ]
+  },
+  "440": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:6",
+     0.5112
+    ],
+    [
+     "id-sma-informatika-kelas11:137",
+     0.4866
+    ],
+    [
+     "id-sma-informatika-kelas11:45",
+     0.4818
+    ],
+    [
+     "id-sma-informatika-kelas11:124",
+     0.4791
+    ],
+    [
+     "id-sma-informatika-kelas11:130",
+     0.4766
+    ]
+   ]
+  },
+  "4429": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:6",
+     0.564
+    ],
+    [
+     "id-sma-kimia-kelas11:5",
+     0.5482
+    ],
+    [
+     "id-sma-fisika-kelas12:116",
+     0.5259
+    ],
+    [
+     "id-sma-kimia-kelas11:37",
+     0.514
+    ],
+    [
+     "id-sma-fisika-kelas12:117",
+     0.5076
+    ]
+   ]
+  },
+  "45": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "philosophy",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:120",
+     0.415
+    ],
+    [
+     "id-sma-biologi-kelas12:107",
+     0.4142
+    ],
+    [
+     "id-sma-biologi-kelas12:129",
+     0.4056
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:162",
+     0.4045
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:58",
+     0.404
+    ]
+   ]
+  },
+  "4515": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas12:51",
+     0.5266
+    ],
+    [
+     "id-sma-kimia-kelas12:49",
+     0.4989
+    ],
+    [
+     "id-sma-kimia-kelas12:48",
+     0.4826
+    ],
+    [
+     "id-sma-kimia-kelas12:50",
+     0.4758
+    ],
+    [
+     "id-sma-kimia-kelas11:73",
+     0.4624
+    ]
+   ]
+  },
+  "4568": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:87",
+     0.5972
+    ],
+    [
+     "id-sma-kimia-kelas11:94",
+     0.5896
+    ],
+    [
+     "id-sma-kimia-kelas11:99",
+     0.5884
+    ],
+    [
+     "id-sma-kimia-kelas11:91",
+     0.5877
+    ],
+    [
+     "id-sma-fisika-kelas11:93",
+     0.562
+    ]
+   ]
+  },
+  "4599": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:6",
+     0.5761
+    ],
+    [
+     "id-sma-kimia-kelas11:5",
+     0.5608
+    ],
+    [
+     "id-sma-kimia-kelas11:22",
+     0.5492
+    ],
+    [
+     "id-sma-fisika-kelas12:120",
+     0.5362
+    ],
+    [
+     "id-sma-kimia-kelas11:15",
+     0.5226
+    ]
+   ]
+  },
+  "46": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "philosophy",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:103",
+     0.445
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:118",
+     0.4447
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:46",
+     0.4389
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:119",
+     0.437
+    ],
+    [
+     "id-sma-fisika-kelas11:9",
+     0.4355
+    ]
+   ]
+  },
+  "4646": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:74",
+     0.6645
+    ],
+    [
+     "id-sma-fisika-kelas11:77",
+     0.6354
+    ],
+    [
+     "id-sma-fisika-kelas11:72",
+     0.6101
+    ],
+    [
+     "id-sma-fisika-kelas11:75",
+     0.6038
+    ],
+    [
+     "id-sma-fisika-kelas11:76",
+     0.5981
+    ]
+   ]
+  },
+  "4661": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "chemistry",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:89",
+     0.6138
+    ],
+    [
+     "id-sma-kimia-kelas11:128",
+     0.5895
+    ],
+    [
+     "id-sma-kimia-kelas11:51",
+     0.5878
+    ],
+    [
+     "id-sma-kimia-kelas11:127",
+     0.5805
+    ],
+    [
+     "id-sma-kimia-kelas11:85",
+     0.5777
+    ]
+   ]
+  },
+  "4674": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "history",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:119",
+     0.508
+    ],
+    [
+     "id-sma-biologi-kelas12:129",
+     0.4853
+    ],
+    [
+     "id-sma-biologi-kelas12:109",
+     0.4821
+    ],
+    [
+     "id-sma-biologi-kelas12:121",
+     0.4779
+    ],
+    [
+     "id-sma-biologi-kelas12:128",
+     0.4722
+    ]
+   ]
+  },
+  "47": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "philosophy",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:101",
+     0.4943
+    ],
+    [
+     "id-sma-informatika-kelas11:9",
+     0.4893
+    ],
+    [
+     "id-sma-biologi-kelas11:1",
+     0.4877
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:0",
+     0.4776
+    ],
+    [
+     "id-sma-biologi-kelas12:94",
+     0.4754
+    ]
+   ]
+  },
+  "4727": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "history",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas12:40",
+     0.4376
+    ],
+    [
+     "id-sma-sejarah-kelas12:45",
+     0.4325
+    ],
+    [
+     "id-sma-sejarah-kelas11:89",
+     0.4299
+    ],
+    [
+     "id-sma-sejarah-kelas11:36",
+     0.4294
+    ],
+    [
+     "id-sma-sejarah-kelas11:6",
+     0.4293
+    ]
+   ]
+  },
+  "4750": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "history",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:107",
+     0.4243
+    ],
+    [
+     "id-sma-informatika-kelas11:10",
+     0.4199
+    ],
+    [
+     "id-sma-sejarah-kelas11:34",
+     0.4148
+    ],
+    [
+     "id-sma-sejarah-kelas11:35",
+     0.3986
+    ],
+    [
+     "id-sma-informatika-kelas11:9",
+     0.3948
+    ]
+   ]
+  },
+  "48": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "philosophy",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:65",
+     0.4893
+    ],
+    [
+     "id-sma-ekonomi-kelas11:43",
+     0.4845
+    ],
+    [
+     "id-sma-ekonomi-kelas11:55",
+     0.481
+    ],
+    [
+     "id-sma-ekonomi-kelas11:42",
+     0.4765
+    ],
+    [
+     "id-sma-informatika-kelas11:70",
+     0.4619
+    ]
+   ]
+  },
+  "4807": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "history",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:128",
+     0.485
+    ],
+    [
+     "id-sma-biologi-kelas12:127",
+     0.4708
+    ],
+    [
+     "id-sma-ekonomi-kelas11:10",
+     0.4665
+    ],
+    [
+     "id-sma-sejarah-kelas12:38",
+     0.4614
+    ],
+    [
+     "id-sma-sejarah-kelas11:64",
+     0.4588
+    ]
+   ]
+  },
+  "4865": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "history",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:118",
+     0.4734
+    ],
+    [
+     "id-sma-biologi-kelas12:94",
+     0.4393
+    ],
+    [
+     "id-sma-biologi-kelas12:129",
+     0.4366
+    ],
+    [
+     "id-sma-biologi-kelas12:103",
+     0.4337
+    ],
+    [
+     "id-sma-biologi-kelas12:134",
+     0.4275
+    ]
+   ]
+  },
+  "4869": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "history",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:107",
+     0.4512
+    ],
+    [
+     "id-sma-biologi-kelas12:103",
+     0.4419
+    ],
+    [
+     "id-sma-informatika-kelas11:10",
+     0.4375
+    ],
+    [
+     "id-sma-biologi-kelas12:118",
+     0.4325
+    ],
+    [
+     "id-sma-biologi-kelas12:102",
+     0.4315
+    ]
+   ]
+  },
+  "489": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:216",
+     0.4471
+    ],
+    [
+     "id-sma-ekonomi-kelas12:53",
+     0.4459
+    ],
+    [
+     "id-sma-ekonomi-kelas12:58",
+     0.4363
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:215",
+     0.4362
+    ],
+    [
+     "id-sma-ekonomi-kelas12:57",
+     0.4352
+    ]
+   ]
+  },
+  "49": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "philosophy",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:33",
+     0.4205
+    ],
+    [
+     "id-sma-biologi-kelas12:50",
+     0.3866
+    ],
+    [
+     "id-sma-biologi-kelas12:70",
+     0.3844
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:215",
+     0.3819
+    ],
+    [
+     "id-sma-sejarah-kelas11:99",
+     0.3818
+    ]
+   ]
+  },
+  "4954": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "history",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas11:34",
+     0.4131
+    ],
+    [
+     "id-sma-biologi-kelas12:127",
+     0.4046
+    ],
+    [
+     "id-sma-informatika-kelas11:10",
+     0.401
+    ],
+    [
+     "id-sma-biologi-kelas12:92",
+     0.3894
+    ],
+    [
+     "id-sma-biologi-kelas12:128",
+     0.3864
+    ]
+   ]
+  },
+  "4991": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "history",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas12:81",
+     0.4704
+    ],
+    [
+     "id-sma-sejarah-kelas12:51",
+     0.4657
+    ],
+    [
+     "id-sma-sejarah-kelas12:71",
+     0.4585
+    ],
+    [
+     "id-sma-sejarah-kelas12:62",
+     0.4504
+    ],
+    [
+     "id-sma-informatika-kelas11:24",
+     0.4442
+    ]
+   ]
+  },
+  "5": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:111",
+     0.4732
+    ],
+    [
+     "id-sma-biologi-kelas11:110",
+     0.4293
+    ],
+    [
+     "id-sma-biologi-kelas11:114",
+     0.4196
+    ],
+    [
+     "id-sma-biologi-kelas11:109",
+     0.416
+    ],
+    [
+     "id-sma-biologi-kelas11:31",
+     0.4146
+    ]
+   ]
+  },
+  "50": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:73",
+     0.5471
+    ],
+    [
+     "id-sma-biologi-kelas12:153",
+     0.4907
+    ],
+    [
+     "id-sma-biologi-kelas11:68",
+     0.4709
+    ],
+    [
+     "id-sma-biologi-kelas11:72",
+     0.4709
+    ],
+    [
+     "id-sma-biologi-kelas12:157",
+     0.4647
+    ]
+   ]
+  },
+  "5029": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "history",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas11:34",
+     0.5136
+    ],
+    [
+     "id-sma-sejarah-kelas11:1",
+     0.5004
+    ],
+    [
+     "id-sma-sejarah-kelas11:9",
+     0.4913
+    ],
+    [
+     "id-sma-sejarah-kelas11:0",
+     0.4903
+    ],
+    [
+     "id-sma-sejarah-kelas11:3",
+     0.4876
+    ]
+   ]
+  },
+  "5091": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas12:60",
+     0.4616
+    ],
+    [
+     "id-sma-sejarah-kelas12:80",
+     0.4456
+    ],
+    [
+     "id-sma-sejarah-kelas12:75",
+     0.442
+    ],
+    [
+     "id-sma-ekonomi-kelas12:44",
+     0.4406
+    ],
+    [
+     "id-sma-sejarah-kelas12:7",
+     0.4386
+    ]
+   ]
+  },
+  "51": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:164",
+     0.4247
+    ],
+    [
+     "id-sma-biologi-kelas12:142",
+     0.4175
+    ],
+    [
+     "id-sma-biologi-kelas12:146",
+     0.4175
+    ],
+    [
+     "id-sma-biologi-kelas12:131",
+     0.4155
+    ],
+    [
+     "id-sma-biologi-kelas12:129",
+     0.4118
+    ]
+   ]
+  },
+  "5147": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas12:39",
+     0.4804
+    ],
+    [
+     "id-sma-sejarah-kelas12:37",
+     0.4569
+    ],
+    [
+     "id-sma-sejarah-kelas12:0",
+     0.4495
+    ],
+    [
+     "id-sma-informatika-kelas11:154",
+     0.4421
+    ],
+    [
+     "id-sma-sejarah-kelas12:38",
+     0.4411
+    ]
+   ]
+  },
+  "516": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:183",
+     0.445
+    ],
+    [
+     "id-sma-ekonomi-kelas11:74",
+     0.4386
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:1",
+     0.4376
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:162",
+     0.4364
+    ],
+    [
+     "id-sma-ekonomi-kelas11:71",
+     0.4239
+    ]
+   ]
+  },
+  "5175": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:98",
+     0.3267
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:21",
+     0.324
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:92",
+     0.3214
+    ],
+    [
+     "id-sma-sejarah-kelas12:32",
+     0.321
+    ],
+    [
+     "id-sma-sejarah-kelas11:96",
+     0.32
+    ]
+   ]
+  },
+  "52": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas12:81",
+     0.4072
+    ],
+    [
+     "id-sma-informatika-kelas11:23",
+     0.4039
+    ],
+    [
+     "id-sma-informatika-kelas11:22",
+     0.3953
+    ],
+    [
+     "id-sma-sejarah-kelas12:5",
+     0.3932
+    ],
+    [
+     "id-sma-informatika-kelas11:20",
+     0.3888
+    ]
+   ]
+  },
+  "5247": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:143",
+     0.4326
+    ],
+    [
+     "id-sma-biologi-kelas11:39",
+     0.4217
+    ],
+    [
+     "id-sma-kimia-kelas11:47",
+     0.4174
+    ],
+    [
+     "id-sma-biologi-kelas12:162",
+     0.398
+    ],
+    [
+     "id-sma-biologi-kelas11:40",
+     0.39
+    ]
+   ]
+  },
+  "5251": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:125",
+     0.5002
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:132",
+     0.4125
+    ],
+    [
+     "id-sma-biologi-kelas12:122",
+     0.4027
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:124",
+     0.4019
+    ],
+    [
+     "id-sma-kimia-kelas11:39",
+     0.4009
+    ]
+   ]
+  },
+  "53": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:58",
+     0.4796
+    ],
+    [
+     "id-sma-biologi-kelas11:70",
+     0.4686
+    ],
+    [
+     "id-sma-biologi-kelas11:115",
+     0.4664
+    ],
+    [
+     "id-sma-biologi-kelas11:114",
+     0.46
+    ],
+    [
+     "id-sma-biologi-kelas11:49",
+     0.4384
+    ]
+   ]
+  },
+  "531": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:159",
+     0.4564
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:215",
+     0.4541
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:192",
+     0.4519
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:209",
+     0.447
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:216",
+     0.4462
+    ]
+   ]
+  },
+  "5382": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:113",
+     0.5262
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:68",
+     0.5229
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:120",
+     0.5195
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:62",
+     0.5154
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:121",
+     0.5139
+    ]
+   ]
+  },
+  "5388": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas12:33",
+     0.3056
+    ],
+    [
+     "id-sma-sejarah-kelas11:57",
+     0.3038
+    ],
+    [
+     "id-sma-sejarah-kelas12:32",
+     0.3032
+    ],
+    [
+     "id-sma-sejarah-kelas11:42",
+     0.2979
+    ],
+    [
+     "id-sma-sejarah-kelas12:62",
+     0.2876
+    ]
+   ]
+  },
+  "54": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas12:12",
+     0.331
+    ],
+    [
+     "id-sma-sejarah-kelas11:85",
+     0.3294
+    ],
+    [
+     "id-sma-sejarah-kelas12:32",
+     0.3108
+    ],
+    [
+     "id-sma-sejarah-kelas12:31",
+     0.3101
+    ],
+    [
+     "id-sma-sejarah-kelas12:47",
+     0.3097
+    ]
+   ]
+  },
+  "5462": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas12:64",
+     0.4009
+    ],
+    [
+     "id-sma-sejarah-kelas12:41",
+     0.3932
+    ],
+    [
+     "id-sma-sejarah-kelas11:32",
+     0.3801
+    ],
+    [
+     "id-sma-biologi-kelas11:123",
+     0.3688
+    ],
+    [
+     "id-sma-sejarah-kelas11:40",
+     0.365
+    ]
+   ]
+  },
+  "5489": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas12:38",
+     0.4853
+    ],
+    [
+     "id-sma-sejarah-kelas12:51",
+     0.4825
+    ],
+    [
+     "id-sma-sejarah-kelas12:37",
+     0.4409
+    ],
+    [
+     "id-sma-sejarah-kelas11:57",
+     0.4398
+    ],
+    [
+     "id-sma-sejarah-kelas12:75",
+     0.4286
+    ]
+   ]
+  },
+  "55": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "history",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas12:75",
+     0.4535
+    ],
+    [
+     "id-sma-sejarah-kelas12:71",
+     0.4354
+    ],
+    [
+     "id-sma-sejarah-kelas12:62",
+     0.4284
+    ],
+    [
+     "id-sma-sejarah-kelas12:51",
+     0.4262
+    ],
+    [
+     "id-sma-sejarah-kelas11:64",
+     0.4209
+    ]
+   ]
+  },
+  "5525": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:123",
+     0.5312
+    ],
+    [
+     "id-sma-biologi-kelas11:116",
+     0.5047
+    ],
+    [
+     "id-sma-biologi-kelas11:117",
+     0.5034
+    ],
+    [
+     "id-sma-biologi-kelas11:119",
+     0.5008
+    ],
+    [
+     "id-sma-biologi-kelas11:102",
+     0.4981
+    ]
+   ]
+  },
+  "5531": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas12:44",
+     0.4377
+    ],
+    [
+     "id-sma-biologi-kelas12:161",
+     0.4125
+    ],
+    [
+     "id-sma-biologi-kelas11:117",
+     0.4082
+    ],
+    [
+     "id-sma-ekonomi-kelas11:67",
+     0.4053
+    ],
+    [
+     "id-sma-ekonomi-kelas11:71",
+     0.4046
+    ]
+   ]
+  },
+  "56": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "history",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas12:62",
+     0.4809
+    ],
+    [
+     "id-sma-sejarah-kelas12:51",
+     0.4796
+    ],
+    [
+     "id-sma-sejarah-kelas12:81",
+     0.4715
+    ],
+    [
+     "id-sma-sejarah-kelas12:74",
+     0.468
+    ],
+    [
+     "id-sma-informatika-kelas11:8",
+     0.4634
+    ]
+   ]
+  },
+  "5623": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas11:79",
+     0.3582
+    ],
+    [
+     "id-sma-biologi-kelas11:115",
+     0.3312
+    ],
+    [
+     "id-sma-biologi-kelas11:114",
+     0.3266
+    ],
+    [
+     "id-sma-informatika-kelas11:66",
+     0.3224
+    ],
+    [
+     "id-sma-biologi-kelas11:122",
+     0.3223
+    ]
+   ]
+  },
+  "5644": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas12:58",
+     0.5115
+    ],
+    [
+     "id-sma-ekonomi-kelas12:61",
+     0.5043
+    ],
+    [
+     "id-sma-ekonomi-kelas12:59",
+     0.5024
+    ],
+    [
+     "id-sma-ekonomi-kelas12:53",
+     0.5017
+    ],
+    [
+     "id-sma-ekonomi-kelas12:60",
+     0.5009
+    ]
+   ]
+  },
+  "5661": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:24",
+     0.4202
+    ],
+    [
+     "id-sma-sejarah-kelas11:65",
+     0.4162
+    ],
+    [
+     "id-sma-sejarah-kelas11:89",
+     0.4094
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:5",
+     0.4077
+    ],
+    [
+     "id-sma-sejarah-kelas12:34",
+     0.4055
+    ]
+   ]
+  },
+  "5662": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas12:16",
+     0.582
+    ],
+    [
+     "id-sma-ekonomi-kelas12:21",
+     0.5596
+    ],
+    [
+     "id-sma-ekonomi-kelas12:22",
+     0.5478
+    ],
+    [
+     "id-sma-ekonomi-kelas11:10",
+     0.5407
+    ],
+    [
+     "id-sma-ekonomi-kelas12:27",
+     0.5365
+    ]
+   ]
+  },
+  "57": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "history",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas11:10",
+     0.4888
+    ],
+    [
+     "id-sma-sejarah-kelas12:37",
+     0.4789
+    ],
+    [
+     "id-sma-sejarah-kelas12:53",
+     0.4507
+    ],
+    [
+     "id-sma-ekonomi-kelas11:11",
+     0.4443
+    ],
+    [
+     "id-sma-sejarah-kelas12:71",
+     0.4415
+    ]
+   ]
+  },
+  "5707": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas12:56",
+     0.4728
+    ],
+    [
+     "id-sma-ekonomi-kelas12:50",
+     0.4567
+    ],
+    [
+     "id-sma-ekonomi-kelas12:51",
+     0.4561
+    ],
+    [
+     "id-sma-informatika-kelas11:15",
+     0.453
+    ],
+    [
+     "id-sma-informatika-kelas11:31",
+     0.4488
+    ]
+   ]
+  },
+  "5771": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:25",
+     0.5198
+    ],
+    [
+     "id-sma-informatika-kelas11:39",
+     0.507
+    ],
+    [
+     "id-sma-informatika-kelas11:40",
+     0.5022
+    ],
+    [
+     "id-sma-informatika-kelas11:0",
+     0.4938
+    ],
+    [
+     "id-sma-informatika-kelas11:50",
+     0.4927
+    ]
+   ]
+  },
+  "5785": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas12:50",
+     0.435
+    ],
+    [
+     "id-sma-ekonomi-kelas11:50",
+     0.4332
+    ],
+    [
+     "id-sma-ekonomi-kelas11:10",
+     0.431
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:74",
+     0.4257
+    ],
+    [
+     "id-sma-biologi-kelas11:124",
+     0.4171
+    ]
+   ]
+  },
+  "58": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "history",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:98",
+     0.4841
+    ],
+    [
+     "id-sma-biologi-kelas11:79",
+     0.4576
+    ],
+    [
+     "id-sma-biologi-kelas11:94",
+     0.4543
+    ],
+    [
+     "id-sma-biologi-kelas11:84",
+     0.454
+    ],
+    [
+     "id-sma-biologi-kelas11:108",
+     0.4472
+    ]
+   ]
+  },
+  "5898": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:37",
+     0.5234
+    ],
+    [
+     "id-sma-ekonomi-kelas11:35",
+     0.5163
+    ],
+    [
+     "id-sma-biologi-kelas11:0",
+     0.5129
+    ],
+    [
+     "id-sma-informatika-kelas11:49",
+     0.5085
+    ],
+    [
+     "id-sma-informatika-kelas11:46",
+     0.5061
+    ]
+   ]
+  },
+  "59": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "history",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:119",
+     0.4891
+    ],
+    [
+     "id-sma-biologi-kelas12:129",
+     0.4872
+    ],
+    [
+     "id-sma-biologi-kelas12:95",
+     0.4851
+    ],
+    [
+     "id-sma-biologi-kelas12:121",
+     0.4668
+    ],
+    [
+     "id-sma-biologi-kelas12:104",
+     0.4667
+    ]
+   ]
+  },
+  "5905": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:119",
+     0.3775
+    ],
+    [
+     "id-sma-biologi-kelas12:129",
+     0.3759
+    ],
+    [
+     "id-sma-biologi-kelas12:118",
+     0.3538
+    ],
+    [
+     "id-sma-fisika-kelas11:96",
+     0.3511
+    ],
+    [
+     "id-sma-biologi-kelas11:89",
+     0.3509
+    ]
+   ]
+  },
+  "5945": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:8",
+     0.4338
+    ],
+    [
+     "id-sma-informatika-kelas11:40",
+     0.4071
+    ],
+    [
+     "id-sma-biologi-kelas11:9",
+     0.407
+    ],
+    [
+     "id-sma-biologi-kelas11:7",
+     0.4031
+    ],
+    [
+     "id-sma-fisika-kelas12:74",
+     0.402
+    ]
+   ]
+  },
+  "5970": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas12:39",
+     0.4373
+    ],
+    [
+     "id-sma-sejarah-kelas12:38",
+     0.4351
+    ],
+    [
+     "id-sma-sejarah-kelas12:37",
+     0.4319
+    ],
+    [
+     "id-sma-sejarah-kelas11:38",
+     0.4241
+    ],
+    [
+     "id-sma-sejarah-kelas12:7",
+     0.4185
+    ]
+   ]
+  },
+  "5990": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas12:61",
+     0.4808
+    ],
+    [
+     "id-sma-ekonomi-kelas12:54",
+     0.4771
+    ],
+    [
+     "id-sma-ekonomi-kelas12:59",
+     0.4731
+    ],
+    [
+     "id-sma-ekonomi-kelas11:5",
+     0.4673
+    ],
+    [
+     "id-sma-ekonomi-kelas12:60",
+     0.4647
+    ]
+   ]
+  },
+  "5993": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "other",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas12:91",
+     0.3807
+    ],
+    [
+     "id-sma-biologi-kelas12:114",
+     0.3795
+    ],
+    [
+     "id-sma-sejarah-kelas11:21",
+     0.3771
+    ],
+    [
+     "id-sma-biologi-kelas12:115",
+     0.3715
+    ],
+    [
+     "id-sma-ekonomi-kelas12:18",
+     0.3706
+    ]
+   ]
+  },
+  "6": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:61",
+     0.4704
+    ],
+    [
+     "id-sma-biologi-kelas12:44",
+     0.4569
+    ],
+    [
+     "id-sma-biologi-kelas12:100",
+     0.4535
+    ],
+    [
+     "id-sma-biologi-kelas12:62",
+     0.4396
+    ],
+    [
+     "id-sma-biologi-kelas12:121",
+     0.4369
+    ]
+   ]
+  },
+  "60": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:85",
+     0.4506
+    ],
+    [
+     "id-sma-informatika-kelas11:116",
+     0.4373
+    ],
+    [
+     "id-sma-informatika-kelas11:155",
+     0.437
+    ],
+    [
+     "id-sma-informatika-kelas11:1",
+     0.4282
+    ],
+    [
+     "id-sma-informatika-kelas11:52",
+     0.427
+    ]
+   ]
+  },
+  "6014": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:47",
+     0.4725
+    ],
+    [
+     "id-sma-biologi-kelas11:98",
+     0.4618
+    ],
+    [
+     "id-sma-biologi-kelas11:88",
+     0.4616
+    ],
+    [
+     "id-sma-biologi-kelas11:79",
+     0.4557
+    ],
+    [
+     "id-sma-sejarah-kelas11:34",
+     0.4302
+    ]
+   ]
+  },
+  "6038": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:84",
+     0.5428
+    ],
+    [
+     "id-sma-biologi-kelas11:98",
+     0.5074
+    ],
+    [
+     "id-sma-biologi-kelas11:96",
+     0.5069
+    ],
+    [
+     "id-sma-biologi-kelas11:97",
+     0.5029
+    ],
+    [
+     "id-sma-biologi-kelas11:95",
+     0.4924
+    ]
+   ]
+  },
+  "6085": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:55",
+     0.5257
+    ],
+    [
+     "id-sma-biologi-kelas11:94",
+     0.5221
+    ],
+    [
+     "id-sma-biologi-kelas11:95",
+     0.5139
+    ],
+    [
+     "id-sma-fisika-kelas12:20",
+     0.513
+    ],
+    [
+     "id-sma-biologi-kelas11:56",
+     0.501
+    ]
+   ]
+  },
+  "61": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:9",
+     0.4709
+    ],
+    [
+     "id-sma-informatika-kelas11:41",
+     0.4549
+    ],
+    [
+     "id-sma-informatika-kelas11:10",
+     0.4481
+    ],
+    [
+     "id-sma-informatika-kelas11:28",
+     0.4434
+    ],
+    [
+     "id-sma-informatika-kelas11:60",
+     0.4409
+    ]
+   ]
+  },
+  "6135": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:70",
+     0.4161
+    ],
+    [
+     "id-sma-biologi-kelas11:118",
+     0.3961
+    ],
+    [
+     "id-sma-biologi-kelas11:69",
+     0.3889
+    ],
+    [
+     "id-sma-biologi-kelas11:117",
+     0.3811
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:200",
+     0.3627
+    ]
+   ]
+  },
+  "6157": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:125",
+     0.4693
+    ],
+    [
+     "id-sma-biologi-kelas12:161",
+     0.4524
+    ],
+    [
+     "id-sma-biologi-kelas11:116",
+     0.4508
+    ],
+    [
+     "id-sma-biologi-kelas11:99",
+     0.4471
+    ],
+    [
+     "id-sma-biologi-kelas12:80",
+     0.438
+    ]
+   ]
+  },
+  "6162": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:125",
+     0.5109
+    ],
+    [
+     "id-sma-biologi-kelas12:76",
+     0.4937
+    ],
+    [
+     "id-sma-biologi-kelas12:78",
+     0.4878
+    ],
+    [
+     "id-sma-biologi-kelas12:69",
+     0.4803
+    ],
+    [
+     "id-sma-biologi-kelas12:77",
+     0.4653
+    ]
+   ]
+  },
+  "6163": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:125",
+     0.5045
+    ],
+    [
+     "id-sma-biologi-kelas12:69",
+     0.49
+    ],
+    [
+     "id-sma-biologi-kelas12:63",
+     0.4872
+    ],
+    [
+     "id-sma-biologi-kelas12:89",
+     0.4826
+    ],
+    [
+     "id-sma-biologi-kelas12:78",
+     0.468
+    ]
+   ]
+  },
+  "62": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas12:64",
+     0.4649
+    ],
+    [
+     "id-sma-informatika-kelas11:40",
+     0.4514
+    ],
+    [
+     "id-sma-ekonomi-kelas11:30",
+     0.4493
+    ],
+    [
+     "id-sma-sejarah-kelas11:31",
+     0.4402
+    ],
+    [
+     "id-sma-sejarah-kelas12:50",
+     0.4401
+    ]
+   ]
+  },
+  "6209": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:46",
+     0.5287
+    ],
+    [
+     "id-sma-biologi-kelas11:45",
+     0.5192
+    ],
+    [
+     "id-sma-biologi-kelas11:44",
+     0.5146
+    ],
+    [
+     "id-sma-biologi-kelas11:95",
+     0.507
+    ],
+    [
+     "id-sma-biologi-kelas11:47",
+     0.505
+    ]
+   ]
+  },
+  "6220": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:98",
+     0.4926
+    ],
+    [
+     "id-sma-biologi-kelas11:97",
+     0.4729
+    ],
+    [
+     "id-sma-biologi-kelas12:78",
+     0.4302
+    ],
+    [
+     "id-sma-biologi-kelas12:77",
+     0.4291
+    ],
+    [
+     "id-sma-biologi-kelas11:48",
+     0.425
+    ]
+   ]
+  },
+  "6233": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:88",
+     0.5159
+    ],
+    [
+     "id-sma-biologi-kelas11:96",
+     0.5067
+    ],
+    [
+     "id-sma-biologi-kelas11:47",
+     0.4996
+    ],
+    [
+     "id-sma-biologi-kelas11:84",
+     0.4977
+    ],
+    [
+     "id-sma-biologi-kelas11:78",
+     0.4974
+    ]
+   ]
+  },
+  "6254": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:90",
+     0.5329
+    ],
+    [
+     "id-sma-biologi-kelas12:78",
+     0.5183
+    ],
+    [
+     "id-sma-biologi-kelas11:94",
+     0.5051
+    ],
+    [
+     "id-sma-biologi-kelas11:73",
+     0.4991
+    ],
+    [
+     "id-sma-biologi-kelas11:102",
+     0.4944
+    ]
+   ]
+  },
+  "6272": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:10",
+     0.5237
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:11",
+     0.5208
+    ],
+    [
+     "id-sma-biologi-kelas12:29",
+     0.5027
+    ],
+    [
+     "id-sma-kimia-kelas11:55",
+     0.4974
+    ],
+    [
+     "id-sma-biologi-kelas12:28",
+     0.4956
+    ]
+   ]
+  },
+  "63": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:39",
+     0.4906
+    ],
+    [
+     "id-sma-biologi-kelas11:26",
+     0.4776
+    ],
+    [
+     "id-sma-informatika-kelas11:38",
+     0.4775
+    ],
+    [
+     "id-sma-ekonomi-kelas11:44",
+     0.4728
+    ],
+    [
+     "id-sma-biologi-kelas12:124",
+     0.4649
+    ]
+   ]
+  },
+  "6380": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:1",
+     0.4861
+    ],
+    [
+     "id-sma-biologi-kelas11:72",
+     0.4798
+    ],
+    [
+     "id-sma-biologi-kelas11:39",
+     0.4568
+    ],
+    [
+     "id-sma-biologi-kelas11:40",
+     0.4346
+    ],
+    [
+     "id-sma-kimia-kelas11:116",
+     0.4313
+    ]
+   ]
+  },
+  "64": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "psychology",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:25",
+     0.4682
+    ],
+    [
+     "id-sma-sejarah-kelas12:38",
+     0.4632
+    ],
+    [
+     "id-sma-informatika-kelas11:38",
+     0.4628
+    ],
+    [
+     "id-sma-sejarah-kelas11:2",
+     0.46
+    ],
+    [
+     "id-sma-ekonomi-kelas12:7",
+     0.4546
+    ]
+   ]
+  },
+  "6469": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:41",
+     0.462
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:103",
+     0.4568
+    ],
+    [
+     "id-sma-informatika-kelas11:8",
+     0.4505
+    ],
+    [
+     "id-sma-biologi-kelas12:69",
+     0.449
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:202",
+     0.4466
+    ]
+   ]
+  },
+  "65": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas12:25",
+     0.4143
+    ],
+    [
+     "id-sma-sejarah-kelas11:18",
+     0.4092
+    ],
+    [
+     "id-sma-sejarah-kelas12:3",
+     0.4036
+    ],
+    [
+     "id-sma-ekonomi-kelas11:53",
+     0.3986
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:181",
+     0.3971
+    ]
+   ]
+  },
+  "6515": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:10",
+     0.5827
+    ],
+    [
+     "id-sma-biologi-kelas12:144",
+     0.5567
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:11",
+     0.5504
+    ],
+    [
+     "id-sma-kimia-kelas12:87",
+     0.5183
+    ],
+    [
+     "id-sma-biologi-kelas11:93",
+     0.5094
+    ]
+   ]
+  },
+  "653": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas12:53",
+     0.4616
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:65",
+     0.4605
+    ],
+    [
+     "id-sma-ekonomi-kelas11:67",
+     0.4592
+    ],
+    [
+     "id-sma-ekonomi-kelas12:57",
+     0.454
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:168",
+     0.4529
+    ]
+   ]
+  },
+  "6576": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:16",
+     0.5377
+    ],
+    [
+     "id-sma-biologi-kelas11:39",
+     0.533
+    ],
+    [
+     "id-sma-biologi-kelas12:52",
+     0.5199
+    ],
+    [
+     "id-sma-biologi-kelas11:40",
+     0.4972
+    ],
+    [
+     "id-sma-biologi-kelas12:1",
+     0.4963
+    ]
+   ]
+  },
+  "6595": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:45",
+     0.4855
+    ],
+    [
+     "id-sma-biologi-kelas11:95",
+     0.471
+    ],
+    [
+     "id-sma-biologi-kelas11:114",
+     0.4664
+    ],
+    [
+     "id-sma-biologi-kelas11:116",
+     0.458
+    ],
+    [
+     "id-sma-biologi-kelas11:46",
+     0.457
+    ]
+   ]
+  },
+  "66": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas11:65",
+     0.5321
+    ],
+    [
+     "id-sma-ekonomi-kelas11:66",
+     0.5244
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:182",
+     0.5035
+    ],
+    [
+     "id-sma-ekonomi-kelas12:42",
+     0.5003
+    ],
+    [
+     "id-sma-ekonomi-kelas12:47",
+     0.4993
+    ]
+   ]
+  },
+  "6619": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:44",
+     0.4869
+    ],
+    [
+     "id-sma-biologi-kelas11:70",
+     0.4713
+    ],
+    [
+     "id-sma-biologi-kelas11:48",
+     0.4643
+    ],
+    [
+     "id-sma-biologi-kelas11:16",
+     0.4593
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:200",
+     0.4581
+    ]
+   ]
+  },
+  "6653": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:82",
+     0.5429
+    ],
+    [
+     "id-sma-biologi-kelas12:156",
+     0.5093
+    ],
+    [
+     "id-sma-biologi-kelas12:125",
+     0.4978
+    ],
+    [
+     "id-sma-biologi-kelas12:80",
+     0.4939
+    ],
+    [
+     "id-sma-biologi-kelas12:112",
+     0.4855
+    ]
+   ]
+  },
+  "6668": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:40",
+     0.555
+    ],
+    [
+     "id-sma-biologi-kelas11:46",
+     0.5384
+    ],
+    [
+     "id-sma-biologi-kelas11:14",
+     0.5381
+    ],
+    [
+     "id-sma-kimia-kelas12:84",
+     0.5378
+    ],
+    [
+     "id-sma-kimia-kelas12:85",
+     0.5344
+    ]
+   ]
+  },
+  "67": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:128",
+     0.4975
+    ],
+    [
+     "id-sma-informatika-kelas11:32",
+     0.4955
+    ],
+    [
+     "id-sma-informatika-kelas11:26",
+     0.4848
+    ],
+    [
+     "id-sma-informatika-kelas11:25",
+     0.471
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:103",
+     0.4493
+    ]
+   ]
+  },
+  "6756": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:131",
+     0.5284
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:208",
+     0.5242
+    ],
+    [
+     "id-sma-biologi-kelas11:118",
+     0.5139
+    ],
+    [
+     "id-sma-biologi-kelas12:90",
+     0.5059
+    ],
+    [
+     "id-sma-biologi-kelas11:117",
+     0.5022
+    ]
+   ]
+  },
+  "68": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:90",
+     0.4379
+    ],
+    [
+     "id-sma-biologi-kelas12:123",
+     0.4208
+    ],
+    [
+     "id-sma-kimia-kelas11:123",
+     0.4088
+    ],
+    [
+     "id-sma-biologi-kelas12:108",
+     0.3992
+    ],
+    [
+     "id-sma-fisika-kelas12:89",
+     0.3947
+    ]
+   ]
+  },
+  "6851": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas11:55",
+     0.5584
+    ],
+    [
+     "id-sma-ekonomi-kelas11:54",
+     0.5382
+    ],
+    [
+     "id-sma-ekonomi-kelas12:46",
+     0.5325
+    ],
+    [
+     "id-sma-ekonomi-kelas11:53",
+     0.5299
+    ],
+    [
+     "id-sma-ekonomi-kelas12:20",
+     0.5247
+    ]
+   ]
+  },
+  "69": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:81",
+     0.4301
+    ],
+    [
+     "id-sma-fisika-kelas12:132",
+     0.4227
+    ],
+    [
+     "id-sma-ekonomi-kelas11:32",
+     0.4158
+    ],
+    [
+     "id-sma-biologi-kelas12:159",
+     0.412
+    ],
+    [
+     "id-sma-biologi-kelas11:45",
+     0.411
+    ]
+   ]
+  },
+  "6955": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas11:3",
+     0.5953
+    ],
+    [
+     "id-sma-ekonomi-kelas11:5",
+     0.5726
+    ],
+    [
+     "id-sma-ekonomi-kelas12:23",
+     0.5556
+    ],
+    [
+     "id-sma-ekonomi-kelas12:29",
+     0.5553
+    ],
+    [
+     "id-sma-ekonomi-kelas12:2",
+     0.5442
+    ]
+   ]
+  },
+  "6997": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas12:38",
+     0.4382
+    ],
+    [
+     "id-sma-sejarah-kelas11:89",
+     0.4044
+    ],
+    [
+     "id-sma-sejarah-kelas12:50",
+     0.3999
+    ],
+    [
+     "id-sma-sejarah-kelas12:51",
+     0.3979
+    ],
+    [
+     "id-sma-sejarah-kelas12:37",
+     0.3942
+    ]
+   ]
+  },
+  "7": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:107",
+     0.5103
+    ],
+    [
+     "id-sma-biologi-kelas11:109",
+     0.5102
+    ],
+    [
+     "id-sma-biologi-kelas12:74",
+     0.4992
+    ],
+    [
+     "id-sma-biologi-kelas12:78",
+     0.4967
+    ],
+    [
+     "id-sma-biologi-kelas11:111",
+     0.4904
+    ]
+   ]
+  },
+  "7057": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas12:20",
+     0.5058
+    ],
+    [
+     "id-sma-ekonomi-kelas11:53",
+     0.4964
+    ],
+    [
+     "id-sma-ekonomi-kelas12:26",
+     0.4854
+    ],
+    [
+     "id-sma-ekonomi-kelas12:28",
+     0.4812
+    ],
+    [
+     "id-sma-kimia-kelas11:57",
+     0.4805
+    ]
+   ]
+  },
+  "7070": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas11:3",
+     0.5273
+    ],
+    [
+     "id-sma-ekonomi-kelas11:5",
+     0.5124
+    ],
+    [
+     "id-sma-informatika-kelas11:61",
+     0.4812
+    ],
+    [
+     "id-sma-ekonomi-kelas11:13",
+     0.48
+    ],
+    [
+     "id-sma-ekonomi-kelas11:4",
+     0.4762
+    ]
+   ]
+  },
+  "7104": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas11:55",
+     0.5675
+    ],
+    [
+     "id-sma-ekonomi-kelas11:42",
+     0.5644
+    ],
+    [
+     "id-sma-ekonomi-kelas11:5",
+     0.5599
+    ],
+    [
+     "id-sma-ekonomi-kelas11:46",
+     0.5506
+    ],
+    [
+     "id-sma-ekonomi-kelas11:52",
+     0.5461
+    ]
+   ]
+  },
+  "7126": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:95",
+     0.5231
+    ],
+    [
+     "id-sma-biologi-kelas12:124",
+     0.5106
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:169",
+     0.5074
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:174",
+     0.5074
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:85",
+     0.5069
+    ]
+   ]
+  },
+  "7167": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas11:32",
+     0.5963
+    ],
+    [
+     "id-sma-ekonomi-kelas11:31",
+     0.5755
+    ],
+    [
+     "id-sma-ekonomi-kelas11:54",
+     0.5645
+    ],
+    [
+     "id-sma-ekonomi-kelas11:33",
+     0.5623
+    ],
+    [
+     "id-sma-sejarah-kelas12:75",
+     0.5484
+    ]
+   ]
+  },
+  "720": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas12:53",
+     0.4802
+    ],
+    [
+     "id-sma-ekonomi-kelas12:61",
+     0.4796
+    ],
+    [
+     "id-sma-ekonomi-kelas12:57",
+     0.461
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:159",
+     0.4581
+    ],
+    [
+     "id-sma-ekonomi-kelas12:59",
+     0.4562
+    ]
+   ]
+  },
+  "7331": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas12:20",
+     0.411
+    ],
+    [
+     "id-sma-ekonomi-kelas11:9",
+     0.3953
+    ],
+    [
+     "id-sma-sejarah-kelas11:42",
+     0.3911
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:130",
+     0.3839
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:139",
+     0.3803
+    ]
+   ]
+  },
+  "7346": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:189",
+     0.5274
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:192",
+     0.5228
+    ],
+    [
+     "id-sma-informatika-kelas11:67",
+     0.514
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:208",
+     0.5131
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:159",
+     0.5108
+    ]
+   ]
+  },
+  "7393": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas11:42",
+     0.5085
+    ],
+    [
+     "id-sma-ekonomi-kelas11:55",
+     0.5075
+    ],
+    [
+     "id-sma-ekonomi-kelas12:6",
+     0.5057
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:175",
+     0.5048
+    ],
+    [
+     "id-sma-informatika-kelas11:69",
+     0.4928
+    ]
+   ]
+  },
+  "7406": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas11:43",
+     0.5644
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:175",
+     0.5422
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:122",
+     0.5299
+    ],
+    [
+     "id-sma-fisika-kelas11:14",
+     0.5277
+    ],
+    [
+     "id-sma-ekonomi-kelas11:42",
+     0.5157
+    ]
+   ]
+  },
+  "7422": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:25",
+     0.4496
+    ],
+    [
+     "id-sma-biologi-kelas12:32",
+     0.4437
+    ],
+    [
+     "id-sma-biologi-kelas12:31",
+     0.4412
+    ],
+    [
+     "id-sma-fisika-kelas12:107",
+     0.4388
+    ],
+    [
+     "id-sma-fisika-kelas12:68",
+     0.4265
+    ]
+   ]
+  },
+  "7460": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas12:46",
+     0.6077
+    ],
+    [
+     "id-sma-ekonomi-kelas11:72",
+     0.5667
+    ],
+    [
+     "id-sma-ekonomi-kelas11:71",
+     0.562
+    ],
+    [
+     "id-sma-ekonomi-kelas12:45",
+     0.5597
+    ],
+    [
+     "id-sma-ekonomi-kelas11:70",
+     0.5579
+    ]
+   ]
+  },
+  "7485": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas11:3",
+     0.4895
+    ],
+    [
+     "id-sma-ekonomi-kelas12:24",
+     0.4809
+    ],
+    [
+     "id-sma-ekonomi-kelas11:55",
+     0.4798
+    ],
+    [
+     "id-sma-ekonomi-kelas11:8",
+     0.4794
+    ],
+    [
+     "id-sma-ekonomi-kelas11:10",
+     0.4762
+    ]
+   ]
+  },
+  "752": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas12:53",
+     0.5006
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:159",
+     0.496
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:188",
+     0.4935
+    ],
+    [
+     "id-sma-ekonomi-kelas12:20",
+     0.4861
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:139",
+     0.486
+    ]
+   ]
+  },
+  "7523": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas12:16",
+     0.629
+    ],
+    [
+     "id-sma-ekonomi-kelas12:17",
+     0.5841
+    ],
+    [
+     "id-sma-ekonomi-kelas11:10",
+     0.5811
+    ],
+    [
+     "id-sma-ekonomi-kelas12:21",
+     0.5782
+    ],
+    [
+     "id-sma-ekonomi-kelas12:20",
+     0.562
+    ]
+   ]
+  },
+  "7544": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas11:5",
+     0.4967
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:208",
+     0.4944
+    ],
+    [
+     "id-sma-ekonomi-kelas12:31",
+     0.493
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:162",
+     0.4861
+    ],
+    [
+     "id-sma-ekonomi-kelas11:53",
+     0.4858
+    ]
+   ]
+  },
+  "7565": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-ekonomi-kelas11:54",
+     0.6028
+    ],
+    [
+     "id-sma-ekonomi-kelas11:3",
+     0.5859
+    ],
+    [
+     "id-sma-ekonomi-kelas12:1",
+     0.5673
+    ],
+    [
+     "id-sma-ekonomi-kelas11:55",
+     0.5633
+    ],
+    [
+     "id-sma-ekonomi-kelas11:19",
+     0.563
+    ]
+   ]
+  },
+  "7568": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:82",
+     0.5679
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:29",
+     0.5136
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:104",
+     0.5105
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:125",
+     0.5044
+    ],
+    [
+     "id-sma-fisika-kelas11:7",
+     0.5038
+    ]
+   ]
+  },
+  "7620": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:162",
+     0.5208
+    ],
+    [
+     "id-sma-biologi-kelas12:146",
+     0.4905
+    ],
+    [
+     "id-sma-biologi-kelas12:163",
+     0.4828
+    ],
+    [
+     "id-sma-biologi-kelas12:132",
+     0.4778
+    ],
+    [
+     "id-sma-biologi-kelas12:145",
+     0.4767
+    ]
+   ]
+  },
+  "7672": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "economics",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:170",
+     0.47
+    ],
+    [
+     "id-sma-sejarah-kelas12:38",
+     0.4563
+    ],
+    [
+     "id-sma-ekonomi-kelas12:25",
+     0.4407
+    ],
+    [
+     "id-sma-sejarah-kelas11:17",
+     0.4292
+    ],
+    [
+     "id-sma-sejarah-kelas12:39",
+     0.426
+    ]
+   ]
+  },
+  "7703": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:209",
+     0.5824
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:208",
+     0.5808
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:210",
+     0.51
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:211",
+     0.5043
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:192",
+     0.4835
+    ]
+   ]
+  },
+  "7720": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:122",
+     0.4355
+    ],
+    [
+     "id-sma-informatika-kelas11:66",
+     0.4284
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:21",
+     0.4221
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:80",
+     0.4216
+    ],
+    [
+     "id-sma-kimia-kelas11:114",
+     0.419
+    ]
+   ]
+  },
+  "7743": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:211",
+     0.5312
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:209",
+     0.5181
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:139",
+     0.5111
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:210",
+     0.4966
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:208",
+     0.4928
+    ]
+   ]
+  },
+  "7762": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:66",
+     0.5045
+    ],
+    [
+     "id-sma-biologi-kelas12:67",
+     0.4713
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:43",
+     0.4609
+    ],
+    [
+     "id-sma-biologi-kelas12:46",
+     0.4599
+    ],
+    [
+     "id-sma-informatika-kelas11:63",
+     0.4579
+    ]
+   ]
+  },
+  "7781": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:210",
+     0.5323
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:212",
+     0.5238
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:213",
+     0.5227
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:205",
+     0.5113
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:214",
+     0.5101
+    ]
+   ]
+  },
+  "7790": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:46",
+     0.5048
+    ],
+    [
+     "id-sma-biologi-kelas12:73",
+     0.5022
+    ],
+    [
+     "id-sma-biologi-kelas12:60",
+     0.4985
+    ],
+    [
+     "id-sma-kimia-kelas11:36",
+     0.496
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:33",
+     0.495
+    ]
+   ]
+  },
+  "7805": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:209",
+     0.5959
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:208",
+     0.5634
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:210",
+     0.5181
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:189",
+     0.4838
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:211",
+     0.4824
+    ]
+   ]
+  },
+  "7807": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:212",
+     0.4254
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:214",
+     0.4254
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:112",
+     0.4198
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:213",
+     0.4193
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:48",
+     0.416
+    ]
+   ]
+  },
+  "7844": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:20",
+     0.5617
+    ],
+    [
+     "id-sma-fisika-kelas11:21",
+     0.5558
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:156",
+     0.5242
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:94",
+     0.5171
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:122",
+     0.5162
+    ]
+   ]
+  },
+  "7867": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:101",
+     0.4829
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:205",
+     0.4821
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:133",
+     0.4776
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:213",
+     0.4706
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:214",
+     0.4683
+    ]
+   ]
+  },
+  "7968": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:77",
+     0.4718
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:75",
+     0.4597
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:212",
+     0.457
+    ],
+    [
+     "id-sma-biologi-kelas12:113",
+     0.4561
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:143",
+     0.4517
+    ]
+   ]
+  },
+  "8": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:200",
+     0.4918
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:199",
+     0.4866
+    ],
+    [
+     "id-sma-biologi-kelas12:161",
+     0.483
+    ],
+    [
+     "id-sma-biologi-kelas11:47",
+     0.4673
+    ],
+    [
+     "id-sma-biologi-kelas11:56",
+     0.4618
+    ]
+   ]
+  },
+  "8024": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:26",
+     0.4533
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:11",
+     0.4457
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:123",
+     0.4372
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:12",
+     0.4367
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:53",
+     0.4362
+    ]
+   ]
+  },
+  "8030": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:71",
+     0.4903
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:72",
+     0.4677
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:47",
+     0.4668
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:91",
+     0.4656
+    ],
+    [
+     "id-sma-informatika-kelas11:71",
+     0.4625
+    ]
+   ]
+  },
+  "8067": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:215",
+     0.4941
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:212",
+     0.4689
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:186",
+     0.4607
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:62",
+     0.4564
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:196",
+     0.4545
+    ]
+   ]
+  },
+  "8074": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:121",
+     0.5285
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:88",
+     0.5093
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:90",
+     0.4967
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:91",
+     0.4964
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:120",
+     0.4861
+    ]
+   ]
+  },
+  "8143": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:38",
+     0.4292
+    ],
+    [
+     "id-sma-informatika-kelas11:67",
+     0.4241
+    ],
+    [
+     "id-sma-informatika-kelas11:66",
+     0.4184
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:72",
+     0.4174
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:28",
+     0.4172
+    ]
+   ]
+  },
+  "8149": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:66",
+     0.5151
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:28",
+     0.445
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:20",
+     0.4333
+    ],
+    [
+     "id-sma-informatika-kelas11:65",
+     0.4322
+    ],
+    [
+     "id-sma-biologi-kelas12:23",
+     0.4307
+    ]
+   ]
+  },
+  "820": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:48",
+     0.5341
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:15",
+     0.532
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:216",
+     0.5308
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:179",
+     0.5277
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:51",
+     0.5271
+    ]
+   ]
+  },
+  "8251": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:12",
+     0.5116
+    ],
+    [
+     "id-sma-fisika-kelas11:16",
+     0.4868
+    ],
+    [
+     "id-sma-fisika-kelas11:79",
+     0.4763
+    ],
+    [
+     "id-sma-fisika-kelas11:11",
+     0.4659
+    ],
+    [
+     "id-sma-biologi-kelas11:41",
+     0.4619
+    ]
+   ]
+  },
+  "8255": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:14",
+     0.5004
+    ],
+    [
+     "id-sma-biologi-kelas11:27",
+     0.5001
+    ],
+    [
+     "id-sma-fisika-kelas11:16",
+     0.4954
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:81",
+     0.492
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:122",
+     0.4859
+    ]
+   ]
+  },
+  "830": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:90",
+     0.4475
+    ],
+    [
+     "id-sma-ekonomi-kelas11:43",
+     0.4416
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:129",
+     0.4336
+    ],
+    [
+     "id-sma-sejarah-kelas12:38",
+     0.4336
+    ],
+    [
+     "id-sma-biologi-kelas12:159",
+     0.4327
+    ]
+   ]
+  },
+  "833": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:159",
+     0.4933
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:162",
+     0.4843
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:208",
+     0.4842
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:131",
+     0.4813
+    ],
+    [
+     "id-sma-ekonomi-kelas11:56",
+     0.4804
+    ]
+   ]
+  },
+  "8550": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:205",
+     0.527
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:209",
+     0.5095
+    ],
+    [
+     "id-sma-kimia-kelas12:33",
+     0.5027
+    ],
+    [
+     "id-sma-kimia-kelas12:12",
+     0.5007
+    ],
+    [
+     "id-sma-kimia-kelas12:16",
+     0.4998
+    ]
+   ]
+  },
+  "8595": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:193",
+     0.5132
+    ],
+    [
+     "id-sma-informatika-kelas11:0",
+     0.4895
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:122",
+     0.4855
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:159",
+     0.4851
+    ],
+    [
+     "id-sma-fisika-kelas11:12",
+     0.4849
+    ]
+   ]
+  },
+  "8603": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:92",
+     0.5366
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:89",
+     0.5317
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:94",
+     0.5213
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:88",
+     0.5178
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:90",
+     0.5172
+    ]
+   ]
+  },
+  "8672": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-kimia-kelas12:12",
+     0.485
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:160",
+     0.4709
+    ],
+    [
+     "id-sma-kimia-kelas12:31",
+     0.4665
+    ],
+    [
+     "id-sma-kimia-kelas12:15",
+     0.4647
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:211",
+     0.4585
+    ]
+   ]
+  },
+  "8692": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:38",
+     0.5028
+    ],
+    [
+     "id-sma-biologi-kelas11:42",
+     0.5024
+    ],
+    [
+     "id-sma-kimia-kelas11:114",
+     0.4891
+    ],
+    [
+     "id-sma-fisika-kelas11:27",
+     0.4882
+    ],
+    [
+     "id-sma-fisika-kelas11:69",
+     0.4829
+    ]
+   ]
+  },
+  "8728": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:66",
+     0.5316
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:88",
+     0.5249
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:90",
+     0.497
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:20",
+     0.4936
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:122",
+     0.4912
+    ]
+   ]
+  },
+  "8731": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:70",
+     0.4708
+    ],
+    [
+     "id-sma-kimia-kelas11:39",
+     0.4545
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:98",
+     0.454
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:197",
+     0.4518
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:133",
+     0.4494
+    ]
+   ]
+  },
+  "8777": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:41",
+     0.4752
+    ],
+    [
+     "id-sma-fisika-kelas12:40",
+     0.4395
+    ],
+    [
+     "id-sma-fisika-kelas12:49",
+     0.4264
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:23",
+     0.4259
+    ],
+    [
+     "id-sma-fisika-kelas12:45",
+     0.4141
+    ]
+   ]
+  },
+  "8793": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:162",
+     0.4789
+    ],
+    [
+     "id-sma-sejarah-kelas12:72",
+     0.4627
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:11",
+     0.4608
+    ],
+    [
+     "id-sma-ekonomi-kelas11:49",
+     0.4333
+    ],
+    [
+     "id-sma-ekonomi-kelas11:50",
+     0.4321
+    ]
+   ]
+  },
+  "8828": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:40",
+     0.5476
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:42",
+     0.5442
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:2",
+     0.5436
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:86",
+     0.5408
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:103",
+     0.5378
+    ]
+   ]
+  },
+  "8835": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-informatika-kelas11:66",
+     0.5105
+    ],
+    [
+     "id-sma-informatika-kelas11:63",
+     0.5046
+    ],
+    [
+     "id-sma-biologi-kelas12:50",
+     0.504
+    ],
+    [
+     "id-sma-kimia-kelas11:12",
+     0.5009
+    ],
+    [
+     "id-sma-informatika-kelas11:71",
+     0.4992
+    ]
+   ]
+  },
+  "8843": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:60",
+     0.5532
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:57",
+     0.5448
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:141",
+     0.5405
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:143",
+     0.54
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:45",
+     0.5388
+    ]
+   ]
+  },
+  "8873": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:120",
+     0.5326
+    ],
+    [
+     "id-sma-biologi-kelas12:69",
+     0.5066
+    ],
+    [
+     "id-sma-biologi-kelas12:121",
+     0.4992
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:33",
+     0.4977
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:41",
+     0.4931
+    ]
+   ]
+  },
+  "8971": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "math",
+   "hits": [
+    [
+     "id-sma-kimia-kelas12:87",
+     0.496
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:41",
+     0.4906
+    ],
+    [
+     "id-sma-kimia-kelas11:14",
+     0.4894
+    ],
+    [
+     "id-sma-biologi-kelas11:29",
+     0.4872
+    ],
+    [
+     "id-sma-kimia-kelas12:62",
+     0.4856
+    ]
+   ]
+  },
+  "9": {
+   "splits": [
+    "validation"
+   ],
+   "subject": "health",
+   "hits": [
+    [
+     "id-sma-biologi-kelas11:114",
+     0.4889
+    ],
+    [
+     "id-sma-biologi-kelas11:36",
+     0.4353
+    ],
+    [
+     "id-sma-biologi-kelas12:107",
+     0.4319
+    ],
+    [
+     "id-sma-biologi-kelas11:48",
+     0.4303
+    ],
+    [
+     "id-sma-biologi-kelas11:94",
+     0.4287
+    ]
+   ]
+  },
+  "9094": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:49",
+     0.5036
+    ],
+    [
+     "id-sma-fisika-kelas11:15",
+     0.489
+    ],
+    [
+     "id-sma-fisika-kelas11:22",
+     0.4843
+    ],
+    [
+     "id-sma-fisika-kelas12:37",
+     0.4831
+    ],
+    [
+     "id-sma-fisika-kelas11:32",
+     0.4781
+    ]
+   ]
+  },
+  "91": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "business",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:212",
+     0.446
+    ],
+    [
+     "id-sma-informatika-kelas11:29",
+     0.4339
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:104",
+     0.4282
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:214",
+     0.4277
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:213",
+     0.4232
+    ]
+   ]
+  },
+  "9122": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:77",
+     0.5259
+    ],
+    [
+     "id-sma-fisika-kelas11:76",
+     0.5192
+    ],
+    [
+     "id-sma-fisika-kelas11:75",
+     0.5036
+    ],
+    [
+     "id-sma-fisika-kelas11:78",
+     0.5015
+    ],
+    [
+     "id-sma-fisika-kelas11:25",
+     0.4991
+    ]
+   ]
+  },
+  "9125": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-kimia-kelas12:55",
+     0.5176
+    ],
+    [
+     "id-sma-fisika-kelas12:108",
+     0.5162
+    ],
+    [
+     "id-sma-fisika-kelas12:107",
+     0.5092
+    ],
+    [
+     "id-sma-biologi-kelas11:93",
+     0.5057
+    ],
+    [
+     "id-sma-fisika-kelas12:3",
+     0.5037
+    ]
+   ]
+  },
+  "9176": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:101",
+     0.5228
+    ],
+    [
+     "id-sma-kimia-kelas11:99",
+     0.5192
+    ],
+    [
+     "id-sma-kimia-kelas11:31",
+     0.5148
+    ],
+    [
+     "id-sma-kimia-kelas11:102",
+     0.5147
+    ],
+    [
+     "id-sma-fisika-kelas11:81",
+     0.5145
+    ]
+   ]
+  },
+  "9177": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:74",
+     0.6205
+    ],
+    [
+     "id-sma-fisika-kelas11:77",
+     0.6072
+    ],
+    [
+     "id-sma-fisika-kelas11:43",
+     0.5983
+    ],
+    [
+     "id-sma-kimia-kelas11:99",
+     0.5903
+    ],
+    [
+     "id-sma-fisika-kelas11:93",
+     0.5872
+    ]
+   ]
+  },
+  "9206": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas12:32",
+     0.512
+    ],
+    [
+     "id-sma-fisika-kelas12:100",
+     0.4889
+    ],
+    [
+     "id-sma-fisika-kelas12:99",
+     0.4832
+    ],
+    [
+     "id-sma-fisika-kelas12:101",
+     0.475
+    ],
+    [
+     "id-sma-fisika-kelas12:71",
+     0.4706
+    ]
+   ]
+  },
+  "9209": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:63",
+     0.6129
+    ],
+    [
+     "id-sma-fisika-kelas12:72",
+     0.5691
+    ],
+    [
+     "id-sma-fisika-kelas12:62",
+     0.5652
+    ],
+    [
+     "id-sma-fisika-kelas12:65",
+     0.5475
+    ],
+    [
+     "id-sma-fisika-kelas12:67",
+     0.5403
+    ]
+   ]
+  },
+  "9213": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:21",
+     0.6273
+    ],
+    [
+     "id-sma-fisika-kelas12:22",
+     0.6026
+    ],
+    [
+     "id-sma-fisika-kelas12:42",
+     0.5871
+    ],
+    [
+     "id-sma-fisika-kelas12:41",
+     0.5682
+    ],
+    [
+     "id-sma-fisika-kelas12:82",
+     0.5645
+    ]
+   ]
+  },
+  "9288": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:25",
+     0.5552
+    ],
+    [
+     "id-sma-fisika-kelas11:32",
+     0.5535
+    ],
+    [
+     "id-sma-fisika-kelas11:23",
+     0.5406
+    ],
+    [
+     "id-sma-fisika-kelas11:38",
+     0.5405
+    ],
+    [
+     "id-sma-fisika-kelas11:29",
+     0.5256
+    ]
+   ]
+  },
+  "9291": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-kimia-kelas12:44",
+     0.5175
+    ],
+    [
+     "id-sma-kimia-kelas12:42",
+     0.5146
+    ],
+    [
+     "id-sma-fisika-kelas12:19",
+     0.5137
+    ],
+    [
+     "id-sma-kimia-kelas12:48",
+     0.5118
+    ],
+    [
+     "id-sma-kimia-kelas12:47",
+     0.5108
+    ]
+   ]
+  },
+  "9397": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-kimia-kelas11:113",
+     0.5523
+    ],
+    [
+     "id-sma-kimia-kelas12:16",
+     0.5514
+    ],
+    [
+     "id-sma-fisika-kelas11:43",
+     0.5406
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:183",
+     0.5208
+    ],
+    [
+     "id-sma-kimia-kelas11:90",
+     0.5178
+    ]
+   ]
+  },
+  "9427": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:99",
+     0.5319
+    ],
+    [
+     "id-sma-fisika-kelas11:100",
+     0.5277
+    ],
+    [
+     "id-sma-fisika-kelas11:101",
+     0.5069
+    ],
+    [
+     "id-sma-fisika-kelas11:94",
+     0.5022
+    ],
+    [
+     "id-sma-biologi-kelas12:29",
+     0.5017
+    ]
+   ]
+  },
+  "943": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-sejarah-kelas11:36",
+     0.4315
+    ],
+    [
+     "id-sma-biologi-kelas12:34",
+     0.4263
+    ],
+    [
+     "id-sma-ekonomi-kelas12:16",
+     0.4207
+    ],
+    [
+     "id-sma-ekonomi-kelas12:15",
+     0.4173
+    ],
+    [
+     "id-sma-ekonomi-kelas12:26",
+     0.4156
+    ]
+   ]
+  },
+  "9450": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:34",
+     0.5814
+    ],
+    [
+     "id-sma-fisika-kelas11:35",
+     0.5626
+    ],
+    [
+     "id-sma-fisika-kelas11:33",
+     0.5486
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:122",
+     0.5232
+    ],
+    [
+     "id-sma-fisika-kelas11:36",
+     0.5089
+    ]
+   ]
+  },
+  "9546": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:27",
+     0.5994
+    ],
+    [
+     "id-sma-fisika-kelas12:61",
+     0.5811
+    ],
+    [
+     "id-sma-fisika-kelas12:45",
+     0.5767
+    ],
+    [
+     "id-sma-fisika-kelas12:34",
+     0.5705
+    ],
+    [
+     "id-sma-fisika-kelas12:41",
+     0.5688
+    ]
+   ]
+  },
+  "9674": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:67",
+     0.511
+    ],
+    [
+     "id-sma-fisika-kelas11:66",
+     0.5057
+    ],
+    [
+     "id-sma-kimia-kelas12:81",
+     0.5051
+    ],
+    [
+     "id-sma-biologi-kelas12:23",
+     0.5036
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:151",
+     0.5003
+    ]
+   ]
+  },
+  "9686": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:10",
+     0.6377
+    ],
+    [
+     "id-sma-fisika-kelas12:11",
+     0.6365
+    ],
+    [
+     "id-sma-fisika-kelas12:13",
+     0.5901
+    ],
+    [
+     "id-sma-fisika-kelas12:12",
+     0.5874
+    ],
+    [
+     "id-sma-fisika-kelas12:81",
+     0.5856
+    ]
+   ]
+  },
+  "9687": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:72",
+     0.5827
+    ],
+    [
+     "id-sma-kimia-kelas11:35",
+     0.5624
+    ],
+    [
+     "id-sma-fisika-kelas12:65",
+     0.5596
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:33",
+     0.5515
+    ],
+    [
+     "id-sma-fisika-kelas12:28",
+     0.5481
+    ]
+   ]
+  },
+  "9798": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:101",
+     0.5405
+    ],
+    [
+     "id-sma-fisika-kelas12:6",
+     0.5371
+    ],
+    [
+     "id-sma-fisika-kelas11:10",
+     0.5339
+    ],
+    [
+     "id-sma-fisika-kelas11:27",
+     0.5334
+    ],
+    [
+     "id-sma-fisika-kelas11:20",
+     0.5329
+    ]
+   ]
+  },
+  "9805": {
+   "splits": [
+    "s2"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:6",
+     0.5418
+    ],
+    [
+     "id-sma-fisika-kelas11:27",
+     0.4888
+    ],
+    [
+     "id-sma-fisika-kelas11:43",
+     0.487
+    ],
+    [
+     "id-sma-fisika-kelas12:2",
+     0.4868
+    ],
+    [
+     "id-sma-fisika-kelas11:29",
+     0.4842
+    ]
+   ]
+  },
+  "9874": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:123",
+     0.5182
+    ],
+    [
+     "id-sma-biologi-kelas12:119",
+     0.5138
+    ],
+    [
+     "id-sma-fisika-kelas11:93",
+     0.5106
+    ],
+    [
+     "id-sma-fisika-kelas11:86",
+     0.4899
+    ],
+    [
+     "id-sma-sejarah-kelas12:87",
+     0.4888
+    ]
+   ]
+  },
+  "990": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "law",
+   "hits": [
+    [
+     "id-sma-biologi-kelas12:114",
+     0.4328
+    ],
+    [
+     "id-sma-fisika-kelas11:48",
+     0.4324
+    ],
+    [
+     "id-sma-informatika-kelas11:70",
+     0.4307
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:175",
+     0.4209
+    ],
+    [
+     "id-sma-ekonomi-kelas12:38",
+     0.4204
+    ]
+   ]
+  },
+  "9936": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:24",
+     0.5102
+    ],
+    [
+     "id-sma-fisika-kelas11:43",
+     0.4723
+    ],
+    [
+     "id-sma-fisika-kelas11:35",
+     0.4706
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:114",
+     0.4697
+    ],
+    [
+     "id-sma-fisika-kelas11:44",
+     0.4679
+    ]
+   ]
+  },
+  "9939": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:35",
+     0.5596
+    ],
+    [
+     "id-sma-fisika-kelas11:29",
+     0.5588
+    ],
+    [
+     "id-sma-fisika-kelas11:37",
+     0.5467
+    ],
+    [
+     "id-sma-fisika-kelas11:25",
+     0.5424
+    ],
+    [
+     "id-sma-fisika-kelas11:36",
+     0.536
+    ]
+   ]
+  },
+  "9967": {
+   "splits": [
+    "s3"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas12:47",
+     0.4714
+    ],
+    [
+     "id-sma-matematika-tl-kelas12:166",
+     0.4705
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:177",
+     0.4694
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:94",
+     0.4614
+    ],
+    [
+     "id-sma-fisika-kelas11:69",
+     0.4591
+    ]
+   ]
+  },
+  "9969": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-matematika-tl-kelas11:138",
+     0.6153
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:134",
+     0.6118
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:146",
+     0.5884
+    ],
+    [
+     "id-sma-matematika-tl-kelas11:139",
+     0.5866
+    ],
+    [
+     "id-sma-fisika-kelas11:66",
+     0.5742
+    ]
+   ]
+  },
+  "9978": {
+   "splits": [
+    "s1"
+   ],
+   "subject": "physics",
+   "hits": [
+    [
+     "id-sma-fisika-kelas11:65",
+     0.656
+    ],
+    [
+     "id-sma-fisika-kelas11:64",
+     0.6325
+    ],
+    [
+     "id-sma-fisika-kelas11:68",
+     0.6219
+    ],
+    [
+     "id-sma-fisika-kelas11:67",
+     0.6087
+    ],
+    [
+     "id-sma-fisika-kelas12:64",
+     0.577
+    ]
+   ]
+  }
+ }
+}

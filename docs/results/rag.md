@@ -191,3 +191,48 @@ The 30 marked questions are train questions, which test_ua shares, so the test_u
 
 **Too small to conclude anything.** Each cell rests on 44–68 answers and a handful of changed labels, and the direction isn't consistent (E2B does worse with a useful English passage; E4B better with a useful Indonesian one). It gives no support for "RAG helps when the passage is good". Testing that properly would need retrieval marked for many more questions.
 
+## MMLU-Pro: grading results (Kaggle T4, 2026-10-06)
+
+`edge-grader-mmlupro` on the lab's 3 × 100 subset (s1–s3), lm-eval's 5-shot chain-of-thought prompt, 2,048-token budget, llama.cpp `a3a1c47`. No RAG, then RAG-en: the top 3 OpenStax passages in front of the question. Files: `results/kaggle/mmlupro-{baseline,rag}-*` and `raw/`. The two 5-question RAG runs (`…-080057`, `…-080138`) are the quick test.
+
+### The runner reproduces the lab baseline
+
+The no-RAG run, paired question by question with the lab's lm-eval runs on the boards:
+
+| Model | Lab, Pi 5 | Lab, Jetson | **This runner, no RAG** | Same right/wrong as the lab | McNemar p (Pi / Jetson) |
+|---|---|---|---|---|---|
+| E2B | 51.7% | 52.7% | **51.3%** | 87% | 1.00 / 0.63 |
+| E4B | 65.7% | 66.0% | **65.3%** | 91–92% | 1.00 / 0.85 |
+
+No significant difference from either board, so "no RAG" here is the lab baseline. The 8–13% of questions that differ are long chain-of-thought answers taking a different path on a different machine and build; the differences cancel out.
+
+### RAG-en against no RAG (300 questions)
+
+| Model | No RAG | RAG-en | Paired flips (better / worse) | McNemar p | No answer found | Hit the 2,048-token cap |
+|---|---|---|---|---|---|---|
+| E2B | 51.3% | 52.0% (+0.7) | 28 / 26 | 0.89 | 17 → 29 | 19 → 29 |
+| E4B | 65.3% | 63.3% (−2.0) | 18 / 24 | 0.44 | 20 → 25 | 22 → 25 |
+
+By how well the retrieval check found material for the subject:
+
+| Subjects (from the check) | n | E2B, no RAG → RAG | E4B, no RAG → RAG |
+|---|---|---|---|
+| **Well covered:** biology, chemistry, history | 54 | 55.6% → 59.3% (+3.7; 6 / 4) | 63.0% → 68.5% (+5.6; 5 / 2) |
+| **Partly:** physics, math, economics, engineering, philosophy, health, psychology, business | 186 | 54.8% → 54.3% (−0.5; 18 / 19) | 69.9% → 66.7% (−3.2; 9 / 15) |
+| **Not covered:** law, "other", computer science | 60 | 36.7% → 38.3% (+1.7; 4 / 3) | 53.3% → 48.3% (−5.0; 4 / 7) |
+
+No group is significant (all p ≥ 0.31).
+
+**What it shows:**
+1. **RAG doesn't change MMLU-Pro accuracy.** E2B is +0.7, E4B −2.0, both well within noise. That's the same answer as SciEntsBank: adding course material doesn't make these small models better.
+2. **The direction follows the material,** though without significance. Both models gain in the well-covered subjects (+3.7 and +5.6), and E4B loses where the passages don't match (−3.2 and −5.0). Chemistry with E2B is the largest single gain (11 → 16 of 27). With 54–60 questions per group, a 5-point effect can't be told apart from chance.
+3. **The passages cost reasoning budget.** Prompts grow from ~1,440 to ~2,430 tokens. Answers that run out of tokens before stating a choice rise (E2B 19 → 29 of 300). For E2B, 7 of the 26 questions it lost with RAG were cut off by the cap, against 3 it gained where the no-RAG answer had been cut off: about 4 questions net. For E4B it's 5 and 5, so no net effect.
+4. **For RQ1–RQ2:** the subject-knowledge baseline doesn't move with retrieved knowledge either. Small models seem limited in using the material, not in having access to it, at least with this retrieval.
+
+## MMLU-Pro RAG-id: retrieval check failed, not graded (2026-10-07)
+
+`bge-m3` over the 1,670 Indonesian chunks (13 Kurikulum Merdeka SMA books), the same 30 validation questions as the English check. Owner's marking: **0 / 30** questions with a useful passage, 0 of 90 passages. That includes biology and chemistry, where Indonesian books exist and English found useful passages for 5 of 5. File: [`check-mmlupro-id.bge-m3-k5.json`](../../results/rag/check-mmlupro-id.bge-m3-k5.json).
+
+- **Why:** the SMA books are a level below MMLU-Pro's college questions, there are no books for law, philosophy, psychology or engineering, and the material is small (1,670 chunks against 32,016 English).
+- **Decision: not graded.** With no useful passage for any question, a grading run would only measure how much irrelevant text distracts the models, not whether Indonesian material helps. RAG-id was optional and the first to drop. The finding stands as it is: Indonesian school material has nothing usable for college-level MMLU-Pro.
+

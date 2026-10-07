@@ -1,0 +1,49 @@
+{
+  "stage": "rag",
+  "benchmark": "mmlupro",
+  "label": "e2b-kaggle-t4-en-k3",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "/tmp/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a3a1c47"
+  },
+  "subset": "s1",
+  "n_requested": 5,
+  "generation": {
+    "max_tokens": 2048,
+    "temperature": 0,
+    "stop": [
+      "Question:"
+    ],
+    "shots": 5,
+    "prompt": "lm-eval mmlu_pro chat messages"
+  },
+  "time": "2026-10-06T08:01:38+00:00",
+  "metrics": {
+    "n": 5,
+    "accuracy": 0.4,
+    "no_answer": 1,
+    "hit_token_cap": 0,
+    "errors": 0,
+    "median_latency_s": 5.936,
+    "wall_s": 27.6,
+    "prompt_tokens": 12539,
+    "completion_tokens": 2402,
+    "per_subject": {
+      "biology": {
+        "n": 5,
+        "correct": 2
+      }
+    }
+  },
+  "rag": {
+    "retrieval": "results/rag/retrieval-mmlupro-en.bge-small-en-k5.json",
+    "k": 3,
+    "index": "data/rag/index/mmlupro-en.bge-small-en",
+    "embedding_model": "BAAI/bge-small-en-v1.5",
+    "chunks": "data/rag/chunks/mmlupro-en.jsonl",
+    "chunks_sha256": "fda933ea9b0eac677a0b40c7b1b4e1a52c84ab212433a649f30fe18f89ac4fb7"
+  }
+}

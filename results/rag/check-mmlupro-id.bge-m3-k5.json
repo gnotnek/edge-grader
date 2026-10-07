@@ -1,0 +1,381 @@
+{
+ "stage": "rag",
+ "kind": "retrieval-check",
+ "time": "2026-10-07T05:29:34+00:00",
+ "settings": {
+  "retrieval": "results/rag/retrieval-mmlupro-id.bge-m3-k5.json",
+  "sheet": "data/rag/check/retrieval-mmlupro-id.bge-m3-k5.md",
+  "marked_by": "owner",
+  "split": "validation questions only",
+  "useful": "holds knowledge that helps answer the question"
+ },
+ "questions": {
+  "13": {
+   "passages": [
+    "id-sma-kimia-kelas12:29",
+    "id-sma-fisika-kelas11:64",
+    "id-sma-fisika-kelas12:64"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "14": {
+   "passages": [
+    "id-sma-fisika-kelas12:73",
+    "id-sma-fisika-kelas12:48",
+    "id-sma-fisika-kelas12:42"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "17": {
+   "passages": [
+    "id-sma-sejarah-kelas12:53",
+    "id-sma-sejarah-kelas12:40",
+    "id-sma-sejarah-kelas12:0"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "18": {
+   "passages": [
+    "id-sma-informatika-kelas11:130",
+    "id-sma-informatika-kelas11:136",
+    "id-sma-informatika-kelas11:137"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "19": {
+   "passages": [
+    "id-sma-informatika-kelas11:40",
+    "id-sma-ekonomi-kelas11:27",
+    "id-sma-informatika-kelas11:39"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "21": {
+   "passages": [
+    "id-sma-biologi-kelas12:113",
+    "id-sma-biologi-kelas12:114",
+    "id-sma-biologi-kelas12:131"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "23": {
+   "passages": [
+    "id-sma-biologi-kelas12:40",
+    "id-sma-biologi-kelas12:83",
+    "id-sma-biologi-kelas12:41"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "24": {
+   "passages": [
+    "id-sma-biologi-kelas11:5",
+    "id-sma-biologi-kelas11:10",
+    "id-sma-biologi-kelas12:85"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "25": {
+   "passages": [
+    "id-sma-matematika-tl-kelas12:53",
+    "id-sma-kimia-kelas11:37",
+    "id-sma-kimia-kelas12:0"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "27": {
+   "passages": [
+    "id-sma-kimia-kelas12:5",
+    "id-sma-kimia-kelas12:8",
+    "id-sma-kimia-kelas12:6"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "3": {
+   "passages": [
+    "id-sma-kimia-kelas11:105",
+    "id-sma-kimia-kelas11:108",
+    "id-sma-kimia-kelas12:16"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "30": {
+   "passages": [
+    "id-sma-informatika-kelas11:67",
+    "id-sma-fisika-kelas12:82",
+    "id-sma-fisika-kelas12:83"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "32": {
+   "passages": [
+    "id-sma-informatika-kelas11:152",
+    "id-sma-informatika-kelas11:150",
+    "id-sma-informatika-kelas11:151"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "37": {
+   "passages": [
+    "id-sma-matematika-tl-kelas12:210",
+    "id-sma-matematika-tl-kelas12:211",
+    "id-sma-matematika-tl-kelas12:209"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "38": {
+   "passages": [
+    "id-sma-ekonomi-kelas11:70",
+    "id-sma-ekonomi-kelas11:69",
+    "id-sma-ekonomi-kelas11:68"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "4": {
+   "passages": [
+    "id-sma-matematika-tl-kelas12:171",
+    "id-sma-informatika-kelas11:66",
+    "id-sma-matematika-tl-kelas11:1"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "42": {
+   "passages": [
+    "id-sma-fisika-kelas12:85",
+    "id-sma-fisika-kelas12:18",
+    "id-sma-fisika-kelas12:19"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "43": {
+   "passages": [
+    "id-sma-fisika-kelas12:31",
+    "id-sma-fisika-kelas12:5",
+    "id-sma-fisika-kelas12:7"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "48": {
+   "passages": [
+    "id-sma-informatika-kelas11:65",
+    "id-sma-ekonomi-kelas11:43",
+    "id-sma-ekonomi-kelas11:55"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "49": {
+   "passages": [
+    "id-sma-kimia-kelas11:33",
+    "id-sma-biologi-kelas12:50",
+    "id-sma-biologi-kelas12:70"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "5": {
+   "passages": [
+    "id-sma-biologi-kelas11:111",
+    "id-sma-biologi-kelas11:110",
+    "id-sma-biologi-kelas11:114"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "50": {
+   "passages": [
+    "id-sma-biologi-kelas11:73",
+    "id-sma-biologi-kelas12:153",
+    "id-sma-biologi-kelas11:68"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "53": {
+   "passages": [
+    "id-sma-biologi-kelas12:58",
+    "id-sma-biologi-kelas11:70",
+    "id-sma-biologi-kelas11:115"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "55": {
+   "passages": [
+    "id-sma-sejarah-kelas12:75",
+    "id-sma-sejarah-kelas12:71",
+    "id-sma-sejarah-kelas12:62"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "57": {
+   "passages": [
+    "id-sma-ekonomi-kelas11:10",
+    "id-sma-sejarah-kelas12:37",
+    "id-sma-sejarah-kelas12:53"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "61": {
+   "passages": [
+    "id-sma-informatika-kelas11:9",
+    "id-sma-informatika-kelas11:41",
+    "id-sma-informatika-kelas11:10"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "64": {
+   "passages": [
+    "id-sma-informatika-kelas11:25",
+    "id-sma-sejarah-kelas12:38",
+    "id-sma-informatika-kelas11:38"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "65": {
+   "passages": [
+    "id-sma-sejarah-kelas12:25",
+    "id-sma-sejarah-kelas11:18",
+    "id-sma-sejarah-kelas12:3"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "69": {
+   "passages": [
+    "id-sma-kimia-kelas11:81",
+    "id-sma-fisika-kelas12:132",
+    "id-sma-ekonomi-kelas11:32"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "9": {
+   "passages": [
+    "id-sma-biologi-kelas11:114",
+    "id-sma-biologi-kelas11:36",
+    "id-sma-biologi-kelas12:107"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  }
+ },
+ "summary": {
+  "questions": 30,
+  "top1_useful": 0,
+  "any_useful": 0,
+  "passages_useful": 0,
+  "passages_total": 90
+ }
+}

@@ -96,6 +96,7 @@ Decisions made while doing the work, not from the supervisor. Each has to serve 
 | 2026-10-05 | Pin llama.cpp to `a3a1c47` in the Kaggle notebook, and re-run the no-RAG baseline on it | Unpinned, Kaggle used whatever build was newest that day: the baseline ran on `86ea01d`, RAG-en on `a3a1c47`. Comparisons must differ only in the condition. Done the same day: same accuracy on both builds, so the RAG results stand ([build check](results/rag.md#build-check-baseline-re-run-on-a3a1c47)) | RQ2, RQ3 |
 | 2026-10-06 | Run MMLU-Pro no-RAG and RAG-en on all 300 questions despite the weaker retrieval (15/30), and report per subject, split into well- and poorly-covered groups | The supervisor asked for MMLU-Pro with RAG; the no-RAG run also checks the new runner against the lab's numbers; tuning retrieval further would delay stage 3 | RQ1, RQ2 |
 | 2026-10-06 | Correction to the 2026-10-05 retrieval-check row: re-marked, a useful passage for 16/30 (English) and 18/30 (Indonesian), not 29/30 and 30/30. RAG results kept, and reported with this retrieval quality | The first marking ticked every question by mistake. Grading had already run on frozen settings, and re-running with different retrieval would be tuning on the test splits | RQ2 |
+| 2026-10-07 | Don't grade MMLU-Pro RAG-id: its retrieval check found no useful passage (0/30) | A run with only irrelevant passages tests distraction, not the language question; RAG-id was optional | RQ2 |
 
 ## Open questions
 
