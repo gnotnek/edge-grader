@@ -17,5 +17,6 @@ The supervisor's call (2026-09-29): **reuse these device benchmarks rather than 
 | `telemetry-sample/` | `findings/measured/` | One `run_measured.sh` output folder, as a format example |
 | `early-engine-benchmarks/` | `findings/early-engine-benchmarks/` | Raw Sep-14 scratch output behind `gemma4-pi5-benchmarks.md` |
 | `mmlupro-correct-per-question.json` | the dashboard's `/api/compare` (added 2026-10-05, not from commit `12031f0`) | MMLU-Pro baseline, both boards, s1–s3: right or wrong per `question_id`. For pairing `edge-grader-mmlupro` runs with the lab's; its accuracies match the lab's (Pi 51.7 / 65.7%, Jetson 52.7 / 66.0%) |
+| `lm-eval/tinygsm8k-lab.json` | `findings/stdbench/{B-e2b,tiny1024-e2b,B-e4b}/samples_tinyGSM8k_*.jsonl` (added 2026-10-07) | tinyGSM8k: the chat messages lm-eval sent per question, and each run's reply and strict/flexible result. For checking `edge-grader-gsm` against the lab (E2B 81/100 at 1,024 tokens, E4B 75/100 at 256) |
 
 Not copied: `findings/viz/` (HTML views, regenerable), the per-sample lm-eval `.jsonl` files, and archived failed runs.

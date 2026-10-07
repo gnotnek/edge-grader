@@ -1,0 +1,387 @@
+{
+ "stage": "rag",
+ "kind": "retrieval-check",
+ "time": "2026-10-07T15:51:49+00:00",
+ "settings": {
+  "retrieval": "results/rag/retrieval-news-en.bge-small-en-k5.json",
+  "sheet": "data/rag/check/retrieval-news-en.bge-small-en-k5.md",
+  "marked_by": "owner",
+  "split": "test questions only",
+  "useful": "holds information that helps answer the question"
+ },
+ "questions": {
+  "news-006": {
+   "passages": [
+    "news:5b93e97a28f5:1",
+    "news:4bb3811a943f:1",
+    "news:c63b442ae71e:1"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "news-007": {
+   "passages": [
+    "news:991b94581a9c:0",
+    "news:76bc741b761a:4",
+    "news:76bc741b761a:3"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "news-018": {
+   "passages": [
+    "news:965998027330:0",
+    "news:965998027330:1",
+    "news:965998027330:4"
+   ],
+   "useful": [
+    false,
+    true,
+    false
+   ]
+  },
+  "news-021": {
+   "passages": [
+    "news:ef5a8c12e855:1",
+    "news:5e86916c62c9:0",
+    "news:ef5a8c12e855:0"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "news-027": {
+   "passages": [
+    "news:3af856c1a9b6:0",
+    "news:8b9013bdfe67:0",
+    "news:e1680ab915d6:1"
+   ],
+   "useful": [
+    false,
+    true,
+    false
+   ]
+  },
+  "news-040": {
+   "passages": [
+    "news:1c6977f0f2aa:0",
+    "news:1c6977f0f2aa:1",
+    "news:a2a8ac7f0834:0"
+   ],
+   "useful": [
+    false,
+    true,
+    false
+   ]
+  },
+  "news-042": {
+   "passages": [
+    "news:44d709dedfd7:2",
+    "news:44d709dedfd7:0",
+    "news:18ea94fabf51:0"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "news-045": {
+   "passages": [
+    "news:9ee5adfb4295:0",
+    "news:9ee5adfb4295:1",
+    "news:8076420b8c39:0"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "news-046": {
+   "passages": [
+    "news:0549f375c720:0",
+    "news:0c8c63bdc372:0",
+    "news:e2ee1bfad354:0"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "news-059": {
+   "passages": [
+    "news:2592bc777393:0",
+    "news:249be7718ea0:0",
+    "news:dd987296f779:0"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "news-062": {
+   "passages": [
+    "news:d87fd4187343:0",
+    "news:d87fd4187343:1",
+    "news:f1c943129bd5:4"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "news-077": {
+   "passages": [
+    "news:7dc64fac17a2:1",
+    "news:392fa6a60ed2:1",
+    "news:392fa6a60ed2:0"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "news-079": {
+   "passages": [
+    "news:42ff29d550ae:0",
+    "news:6c62a25aa038:0",
+    "news:6c62a25aa038:1"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "news-081": {
+   "passages": [
+    "news:dfd47cca0f63:0",
+    "news:dfd47cca0f63:1",
+    "news:3789aadcf6bb:3"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "news-093": {
+   "passages": [
+    "news:e44a54634f17:0",
+    "news:31578f378083:0",
+    "news:49142e911cdf:0"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "news-099": {
+   "passages": [
+    "news:b404e8d78ddb:2",
+    "news:b404e8d78ddb:0",
+    "news:ebdc5a407ac3:0"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "news-103": {
+   "passages": [
+    "news:b19ae92f2a00:1",
+    "news:c6e7f4cf2fca:2",
+    "news:f8fa160c33e7:3"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "news-106": {
+   "passages": [
+    "news:0cd502e94a6b:0",
+    "news:f41da37ddbd9:0",
+    "news:687da46ab0fe:1"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "news-110": {
+   "passages": [
+    "news:6b5a6378a07e:2",
+    "news:6b5a6378a07e:0",
+    "news:f0d3d8bccc14:0"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "news-111": {
+   "passages": [
+    "news:00ba0a0f8f32:0",
+    "news:b9183861cf4f:0",
+    "news:00ba0a0f8f32:1"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "news-119": {
+   "passages": [
+    "news:46177d0ac2d3:1",
+    "news:884596636eb2:0",
+    "news:884596636eb2:1"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "news-120": {
+   "passages": [
+    "news:564e35e55fe9:0",
+    "news:564e35e55fe9:1",
+    "news:1987d2811229:1"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "news-129": {
+   "passages": [
+    "news:ea60e3a05076:1",
+    "news:ea60e3a05076:0",
+    "news:05cb1869ae82:0"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "news-135": {
+   "passages": [
+    "news:d54dad58d203:0",
+    "news:5e820d7829e2:0",
+    "news:8e7f3e13a428:1"
+   ],
+   "useful": [
+    true,
+    true,
+    false
+   ]
+  },
+  "news-143": {
+   "passages": [
+    "news:3342a0d5bdf7:0",
+    "news:ec9ed227648a:0",
+    "news:2ff549fc9997:0"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "news-145": {
+   "passages": [
+    "news:1f489a091cce:0",
+    "news:cbfd4609a1c2:0",
+    "news:283062a24e17:0"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "news-153": {
+   "passages": [
+    "news:f77f45f936ea:0",
+    "news:388f6f1aaab9:4",
+    "news:b2e7469df788:0"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "news-167": {
+   "passages": [
+    "news:0e1acb2ad74d:0",
+    "news:17ae85fd75d7:0",
+    "news:1c0cd7ad96b7:1"
+   ],
+   "useful": [
+    false,
+    false,
+    true
+   ]
+  },
+  "news-171": {
+   "passages": [
+    "news:5baba143b2c0:0",
+    "news:0dfaa940bd84:0",
+    "news:0dfaa940bd84:1"
+   ],
+   "useful": [
+    false,
+    false,
+    true
+   ]
+  },
+  "news-199": {
+   "passages": [
+    "news:6a0be955279c:0",
+    "news:dd0664cab834:1",
+    "news:480410d6f3b8:0"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  }
+ },
+ "summary": {
+  "questions": 30,
+  "top1_useful": 16,
+  "any_useful": 21,
+  "passages_useful": 22,
+  "passages_total": 90
+ },
+ "own_article_hits": {
+  "questions": 200,
+  "top1": 181,
+  "top3": 194,
+  "top5": 199
+ }
+}

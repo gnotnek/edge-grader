@@ -1,0 +1,19 @@
+{
+ "stage": "rag",
+ "kind": "chunks",
+ "time": "2026-10-07T13:20:02+00:00",
+ "settings": {
+  "benchmark": "news",
+  "size_words": 250,
+  "overlap_words": 50,
+  "min_block_words": 8
+ },
+ "files": {
+  "news-en.jsonl": {
+   "sha256": "e60bd78c7f8b1c591cc6b68df2b932638b797a8943e0996db29ff07e4b06b540",
+   "chunks": 4861,
+   "words": 1095561,
+   "articles": 1176
+  }
+ }
+}

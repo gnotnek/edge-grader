@@ -1,6 +1,6 @@
 # Plan: steps and timeline
 
-*Last updated 2026-10-05. Tick steps off as they're done, and move dates when reality changes, noting why at the bottom. The research questions and the reasoning for each stage are in [`research-outline.md`](research-outline.md).*
+*Last updated 2026-10-07. Tick steps off as they're done, and move dates when reality changes, noting why at the bottom. The research questions and the reasoning for each stage are in [`research-outline.md`](research-outline.md).*
 
 **Weeks are counted from the internship start**, taken as the week of 2026-09-14 (two weeks had passed by 2026-09-26). The internship ends around mid-December.
 
@@ -10,7 +10,7 @@
 |---|---|---|---|---|
 | 3 | Sep 28 – Oct 4 | 1. Baseline | Grading baseline on Kaggle ✅; board cost estimated ✅, then measured ✅ | Baseline table complete: accuracy + cost ✅ |
 | 4 | Oct 5 – 11 | 2. RAG | SciEntsBank RAG-en graded, all splits, both models ✅; baseline re-run on the pinned build ✅; MMLU-Pro runner and retrieval | RAG vs baseline table (SciEntsBank) ✅ |
-| 5 | Oct 12 – 18 | 2. RAG | MMLU-Pro: no-RAG and RAG-en on Kaggle, per-subject analysis; RAG-id if time allows. Start the stage-3 notebook alongside | RAG vs baseline table (MMLU-Pro) |
+| 5 | Oct 12 – 18 | 2. RAG + topics | MMLU-Pro no-RAG and RAG-en, per-subject analysis ✅ (done in week 4). Topic benchmarks: math (GSM8K + GSM-Symbolic) and post-cutoff news, no RAG and RAG. Start the stage-3 notebook alongside | Math vs news table, no RAG and RAG |
 | 6 | Oct 19 – 25 | 3. Fine-tuning | QLoRA pipeline on Kaggle; E2B trained and converted to GGUF | Fine-tuned E2B graded on test_ua |
 | 7 | Oct 26 – Nov 1 | 3. Fine-tuning | E4B fine-tuned; RAG + fine-tuning combined | Baseline vs RAG vs fine-tuning vs both, per split |
 | 8 | Nov 2 – 8 | 4. Edge cost + cloud | All versions on the Pi 5 / Jetson; cloud reference (RQ5) | Accuracy vs energy chart |
@@ -61,6 +61,22 @@
 - [x] RAG-id: `mmlupro-id` index with `bge-m3` built on Kaggle (2026-10-07); retrieval check **0/30**, so **not graded** ([`results/rag.md`](results/rag.md#mmlu-pro-rag-id-retrieval-check-failed-not-graded-2026-10-07))
 - [x] Analysis per subject, paired McNemar: well-covered subjects trend up (+3.7 / +5.6), uncovered ones trend down for E4B (−5.0); nothing significant. More answers hit the token cap with RAG ([`results/rag.md`](results/rag.md#mmlu-pro-grading-results-kaggle-t4-2026-10-06))
 
+### Topic narrowing: math against news (week 5, pending the supervisor)
+*Supervisor, 2026-10-07: which topic suits these models (logic, math, news, general knowledge)? Reasoning in [`research-outline.md`](research-outline.md) (own decisions, 2026-10-07).*
+
+- [x] MMLU-Pro per subject, no RAG: math is the strongest subject for both models, significant; no logic or news category ([`results/rag.md`](results/rag.md#per-subject-no-rag-math-is-the-strongest-subject-analysis-2026-10-07))
+- [x] Scope (supervisor, 2026-10-07): beside SciEntsBank grading, not replacing it; stage 3 still fine-tunes on SciEntsBank
+- [x] Send the supervisor the proposal
+- [x] Gemma 4's training cutoff: **January 2025**, one date for the whole family (model card) ([`results/topics.md`](results/topics.md#gemma-4s-training-cutoff-january-2025))
+- [x] Math runner `edge-grader-gsm`: the 100 GSM8K test questions GSM-Symbolic templated, and 10 variants of each (1,000); the lab's lm-eval format with fixed 5 shots, 1,024 tokens; lm-eval's filters reimplemented, agreeing on all 300 recorded lab replies. The lab's tinyGSM8k prompts copied for a runner check ([`results/topics.md`](results/topics.md#math-gsm8k-and-gsm-symbolic))
+- [x] News set: **LiveNewsBench** January 2026 release, 200 human-verified questions on Nov–Dec 2025 events, with their source articles, instead of a self-built set. Runner `edge-grader-news` with its own no-search prompt; judge `edge-grader-news-judge` with its SimpleQA prompt ([`results/topics.md`](results/topics.md#news-livenewsbench-january-2026-release))
+- [x] News corpus: 1,176 articles → 4,861 chunks, `bge-small-en` index, retrieval (2026-10-07, on the Mac). Automatic check: a passage from the question's own article in the top 3 for **194/200**
+- [x] News retrieval check by hand, owner's marking (2026-10-07): a useful passage in the top 3 for **21/30** questions, 16/30 at rank 1 ([`results/topics.md`](results/topics.md#rag-corpus-and-retrieval))
+- [ ] Choose the news judge and provide its API key (owner; LiveNewsBench uses GPT-4.1)
+- [ ] Kaggle, math: `tiny` (runner check against the lab's 81/100 E2B, 75/100 E4B at 256 tokens), `gsm8k`, `symbolic`; E2B + E4B
+- [ ] Kaggle, news: no RAG and RAG-en, E2B + E4B; then judge every run
+- [ ] Analysis: math vs news, no RAG vs RAG; the GSM8K vs GSM-Symbolic gap as the memorisation check
+
 ### Stage 3: Fine-tuning (weeks 6–7)
 - [ ] Unsloth QLoRA notebook on Kaggle; train on the SciEntsBank **train** split only
 - [ ] Hold out part of train for validation; never touch the test splits while tuning
@@ -107,3 +123,5 @@
 | 2026-10-06 | SciEntsBank retrieval check re-marked: 29/30 → 16/30 (English), 30/30 → 18/30 (Indonesian) | The first marking ticked something for every question by mistake. RAG results stand; their interpretation now notes that only about half the questions got useful material |
 | 2026-10-06 | MMLU-Pro no-RAG and RAG-en done: runner matches the lab; RAG no significant change; stage 2 core complete (MMLU-Pro RAG-id remains optional) | Both benchmarks give the same answer to RQ2 |
 | 2026-10-07 | MMLU-Pro RAG-id dropped after its retrieval check scored 0/30; stage 2 complete | The Indonesian SMA material has nothing usable for college-level questions, so grading would measure only distraction |
+| 2026-10-07 | Topic narrowing added to week 5: math (GSM8K + GSM-Symbolic) against post-cutoff news, no RAG and RAG. Pending the supervisor | Supervisor asked which of logic, math, news and general knowledge suits these models. MMLU-Pro answers math only; math and news are the two ends of the knowledge-vs-skill contrast |
+| 2026-10-07 | Topic benchmarks built ahead of the supervisor's reply, at the owner's request: math runner, LiveNewsBench in place of a self-built news set, news corpus and retrieval. Kaggle runs and the judge remain | The build is cheap and doesn't touch SciEntsBank or stage 3; a published, human-verified post-cutoff set with source articles already existed |

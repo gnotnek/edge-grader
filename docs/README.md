@@ -5,7 +5,7 @@
 | Folder | Holds | Files |
 |---|---|---|
 | *(top)* | What the project is and where it stands | [`research-outline.md`](research-outline.md): research questions, stages, fixed setup, supervisor feedback<br>[`plan.md`](plan.md): step checklist, week-by-week timeline, change log |
-| [`results/`](results/) | Numbers and what they mean, one page per stage | [`baselines.md`](results/baselines.md): stage 1, MMLU-Pro and SciEntsBank grading<br>[`edge-benchmarks.md`](results/edge-benchmarks.md): device rates reused from `agentic-edge`<br>[`rag.md`](results/rag.md): stage 2, RAG conditions, retrieval check, frozen settings |
+| [`results/`](results/) | Numbers and what they mean, one page per stage | [`baselines.md`](results/baselines.md): stage 1, MMLU-Pro and SciEntsBank grading<br>[`edge-benchmarks.md`](results/edge-benchmarks.md): device rates reused from `agentic-edge`<br>[`rag.md`](results/rag.md): stage 2, RAG conditions, retrieval check, frozen settings<br>[`topics.md`](results/topics.md): stage 2 topic benchmarks, math (GSM8K, GSM-Symbolic) against post-cutoff news (LiveNewsBench) |
 | [`guides/`](guides/) | How to do things | [`kaggle-setup.md`](guides/kaggle-setup.md): running the grader on Kaggle<br>[`rag.md`](guides/rag.md): how RAG works and how to build it (stage 2)<br>[`rag-sources.md`](guides/rag-sources.md): the RAG material for SciEntsBank and MMLU-Pro, English and Indonesian, and how to download it |
 
 **Where new pages go:**

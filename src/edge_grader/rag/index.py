@@ -15,6 +15,9 @@ question to results/rag/retrieval-<index>-k<k>.json. SciEntsBank: every question
 keyed like "EM.45b". MMLU-Pro: the lab's 300 subset questions and the 70 validation questions
 (for the retrieval check), keyed by question_id; the options are never part of the query. That file holds ids, never text, so it can
 be committed; the grader looks the text up in the chunks file, whose sha256 it checks.
+
+News (LiveNewsBench): the 200 questions, keyed news-000 ..; every chunk of every question's articles
+is in one pool, as a teacher would load all the sources at once.
 """
 
 import argparse
@@ -156,7 +159,7 @@ def main(argv: list[str] | None = None) -> None:
     b.add_argument("--model", choices=list(MODELS), required=True)
     r = sub.add_parser("retrieve", help="top-k chunks for every question of a benchmark")
     r.add_argument("--index", type=Path, required=True, help="index path without extension")
-    r.add_argument("--benchmark", default="scientsbank", choices=["scientsbank", "mmlupro"])
+    r.add_argument("--benchmark", default="scientsbank", choices=["scientsbank", "mmlupro", "news"])
     r.add_argument("--k", type=int, default=5, help="stored per question; grade with --k <= this")
     r.add_argument("--out", type=Path, default=RESULTS_DIR)
     args = ap.parse_args(argv)
@@ -172,6 +175,10 @@ def main(argv: list[str] | None = None) -> None:
         from ..mmlupro import questions as mmlupro_questions
 
         qs = mmlupro_questions()
+    elif args.benchmark == "news":
+        from ..news import questions as news_questions
+
+        qs = news_questions()
     else:
         qs = questions()
     result = retrieve(args.index, qs, sentence_transformer(meta["model"]), args.k, args.benchmark)

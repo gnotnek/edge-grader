@@ -229,6 +229,28 @@ No group is significant (all p ≥ 0.31).
 3. **The passages cost reasoning budget.** Prompts grow from ~1,440 to ~2,430 tokens. Answers that run out of tokens before stating a choice rise (E2B 19 → 29 of 300). For E2B, 7 of the 26 questions it lost with RAG were cut off by the cap, against 3 it gained where the no-RAG answer had been cut off: about 4 questions net. For E4B it's 5 and 5, so no net effect.
 4. **For RQ1–RQ2:** the subject-knowledge baseline doesn't move with retrieved knowledge either. Small models seem limited in using the material, not in having access to it, at least with this retrieval.
 
+### Per subject, no RAG: math is the strongest subject (analysis 2026-10-07)
+
+Done for the supervisor's 2026-10-07 question of which topic suits these models (logic, math, news, general knowledge). Same no-RAG runs as above (`results/kaggle/raw/mmlupro-baseline-*.jsonl`), math against the other 13 subjects pooled, two-sided Fisher's exact test, 95% Wilson interval:
+
+| Model | Math | 95% interval | Other subjects | p |
+|---|---|---|---|---|
+| E2B | 26 / 33 = 78.8% | 62–89% | 128 / 267 = 47.9% | 0.0008 |
+| E4B | 29 / 33 = 87.9% | 73–95% | 167 / 267 = 62.5% | 0.003 |
+
+Both remain below a Bonferroni threshold for 14 subjects (0.05 / 14 = 0.0036). Math is the top subject for both models. RAG-en lowered it (E2B 78.8 → 69.7%, E4B 87.9 → 84.8%), in line with point 3 above.
+
+How the supervisor's four topics map onto MMLU-Pro:
+
+| Topic | MMLU-Pro subject | E2B / E4B, no RAG | Can MMLU-Pro answer it? |
+|---|---|---|---|
+| Math | math (33) | 78.8% / 87.9% | Yes, significant (above) |
+| General knowledge | "other" (24), a mixed category | 33.3% / 58.3% | Weakly: small and mixed |
+| Logic | none; formal logic sits inside philosophy (12) | 58.3% / 66.7% | No |
+| News | none | — | No |
+
+Logic and news need their own benchmarks. What was chosen instead is in the outline's [supervisor feedback](../research-outline.md#supervisor-feedback-so-far) (2026-10-07).
+
 ## MMLU-Pro RAG-id: retrieval check failed, not graded (2026-10-07)
 
 `bge-m3` over the 1,670 Indonesian chunks (13 Kurikulum Merdeka SMA books), the same 30 validation questions as the English check. Owner's marking: **0 / 30** questions with a useful passage, 0 of 90 passages. That includes biology and chemistry, where Indonesian books exist and English found useful passages for 5 of 5. File: [`check-mmlupro-id.bge-m3-k5.json`](../../results/rag/check-mmlupro-id.bge-m3-k5.json).

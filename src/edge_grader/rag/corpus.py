@@ -2,6 +2,7 @@
 
     uv run --group rag python -m edge_grader.rag.corpus                       # SciEntsBank, both langs
     uv run --group rag python -m edge_grader.rag.corpus --benchmark mmlupro
+    uv run python -m edge_grader.rag.corpus --benchmark news --lang en       # LiveNewsBench articles
 
 Reads data/rag/raw/<lang>/ (from edge_grader.rag.sources) and writes
 data/rag/chunks/<benchmark>-<lang>.jsonl, one chunk per line:
@@ -15,6 +16,10 @@ answer key, reference list or index, by the PDF's bookmarks) -> drop image credi
 short ones (captions, headings, list options, page numbers), references, worksheet prompts, and
 ones mostly addressed to the student (questions, activity steps) -> 250-word chunks
 overlapping by 50.
+
+News (the topic benchmark): LiveNewsBench's source articles, one document per distinct article
+(source "news:<id>", see edge_grader.news.article_id), each paragraph a block, then the same
+filters and windows. Some articles aren't in English; they're kept, as the benchmark gives them.
 """
 
 import argparse
@@ -229,8 +234,27 @@ def chunk(pages: list[Page], size: int = 250, overlap: int = 50) -> list[dict]:
     return chunks
 
 
+def news_pages() -> list[list[Page]]:
+    """Each distinct LiveNewsBench article as one document, in first-seen order."""
+    from ..news import article_id, load
+
+    docs, seen = [], set()
+    for q in load():
+        for a in q["articles"]:
+            aid = article_id(a)
+            if aid not in seen:
+                seen.add(aid)
+                paragraphs = [p for p in a["article_content"].split("\n\n") if p.strip()]
+                docs.append([Page(f"news:{aid}", None, paragraphs)])
+    return docs
+
+
 def build(benchmark: str, lang: str, raw_dir: Path = RAW_DIR, size: int = 250,
           overlap: int = 50) -> list[dict]:
+    if benchmark == "news":
+        docs = news_pages()
+        return [{**c, "lang": lang, "benchmark": benchmark}
+                for pages in docs for c in chunk(pages, size, overlap)]
     manifest = load_manifest()
     docs = []
     for book in manifest["books"]:
@@ -253,7 +277,7 @@ def build(benchmark: str, lang: str, raw_dir: Path = RAW_DIR, size: int = 250,
 
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("--benchmark", default="scientsbank", choices=["scientsbank", "mmlupro"])
+    ap.add_argument("--benchmark", default="scientsbank", choices=["scientsbank", "mmlupro", "news"])
     ap.add_argument("--lang", nargs="+", default=["en", "id"])
     ap.add_argument("--size", type=int, default=250, help="words per chunk")
     ap.add_argument("--overlap", type=int, default=50, help="words shared by neighbouring chunks")
@@ -274,6 +298,11 @@ def main(argv: list[str] | None = None) -> None:
             "words": sum(len(c["text"].split()) for c in chunks),
             "per_source": dict(sorted(per_source.items())),
         }
+        if args.benchmark == "news":
+            del files[path.name]["per_source"]  # one entry per article: too long to be useful
+            files[path.name]["articles"] = len(per_source)
+            print(f"{path}: {len(chunks)} chunks from {len(per_source)} articles")
+            continue
         wiki = sum(n for s, n in per_source.items() if s.startswith("wiki:"))
         print(f"{path}: {len(chunks)} chunks ({len(chunks) - wiki} from books, {wiki} from Wikipedia)")
     # The record of what was chunked, committed: chunks are built once here and uploaded to

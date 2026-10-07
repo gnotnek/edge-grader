@@ -11,7 +11,7 @@ Part of an internship at the NTUST MIT Lab. It builds on the lab's `agentic-edge
 | Stage | What | Status |
 |---|---|---|
 | 1. Baseline | Untouched model grades SciEntsBank answers; the lab's MMLU-Pro subset as a second baseline | Done: MMLU-Pro copied; grading on Kaggle (E4B 67–70%, E2B 55–60%), same accuracy on both boards; cost measured on test_ua (Jetson 4–7 J, Pi 5 28–56 J per answer) ([docs/results/baselines.md](docs/results/baselines.md)) |
-| 2. RAG | Retrieve course material (open textbooks) into the prompt | SciEntsBank done: RAG-en doesn't improve grading (E4B flat, E2B −2 to −5 points), it makes it more lenient ([docs/results/rag.md](docs/results/rag.md)). MMLU-Pro runner and retrieval built; Kaggle runs next |
+| 2. RAG | Retrieve course material (open textbooks) into the prompt | SciEntsBank done: RAG-en doesn't improve grading (E4B flat, E2B −2 to −5 points), it makes it more lenient ([docs/results/rag.md](docs/results/rag.md)). MMLU-Pro done: no significant change (E2B +0.7, E4B −2.0). Topic benchmarks (math: GSM8K/GSM-Symbolic; post-cutoff news: LiveNewsBench) built; Kaggle runs next ([docs/results/topics.md](docs/results/topics.md)) |
 | 3. Fine-tuning | QLoRA on Kaggle/Colab, converted to GGUF | — |
 | 4. Edge cost | Latency and energy per answer on the Pi 5 / Jetson, for each stage | — |
 
@@ -76,6 +76,8 @@ Start a `llama-server` yourself, e.g. `llama-server -m <model.gguf> -c 8192 --po
 uv run edge-grader-baseline --label e4b-q4 --n 100                 # 100 answers, unseen-answers split
 uv run edge-grader-baseline --label e4b-q4 --split test_ud --n 0   # whole unseen-domains split
 uv run edge-grader-mmlupro --label e4b-q4 --subset s1 --n 5        # MMLU-Pro, lm-eval's prompt
+uv run edge-grader-gsm --label e4b-q4 --set gsm8k --n 5            # math: GSM8K / GSM-Symbolic
+uv run edge-grader-news --label e4b-q4 --n 5                       # post-cutoff news (LiveNewsBench)
 ```
 
 The run stops straight away if no server answers. A failed request is recorded as an error and the run continues.
@@ -90,7 +92,7 @@ The run stops straight away if no server answers. A failed request is recorded a
 docs/                   index: docs/README.md
   research-outline.md   research questions, stages, supervisor feedback
   plan.md               step checklist and week-by-week timeline
-  results/              numbers: baselines, edge benchmarks
+  results/              numbers: baselines, edge benchmarks, RAG, topic benchmarks
   guides/               how-tos: Kaggle setup, RAG pipeline
 src/edge_grader/
   data.py       SciEntsBank loader + 5/3/2-way label schemes
@@ -98,12 +100,14 @@ src/edge_grader/
   metrics.py    accuracy, F1
   baseline.py   stage-1 CLI
   mmlupro.py    MMLU-Pro on the lab's 300 questions, lm-eval's prompt, with or without RAG
+  gsm.py        topic benchmark, math: GSM8K and GSM-Symbolic, lm-eval's format
+  news.py       topic benchmark, news: LiveNewsBench, with or without RAG; its LLM judge
   cost.py       board cost estimate from agentic-edge rates (edge-grader-cost)
   board_check.py  board runs vs Kaggle accuracy and the estimate (edge-grader-board-check)
   rag/          stage 2: sources.json + sources.py (material, downloader), corpus.py (chunks),
                 index.py (embed, retrieve), check.py (retrieval check); see docs/guides/rag.md
 notebooks/
-  kaggle_baseline.ipynb   grading and MMLU-Pro on a Kaggle GPU (stages 1-2)
+  kaggle_baseline.ipynb   grading, MMLU-Pro and the topic benchmarks on a Kaggle GPU (stages 1-2)
   kaggle_rag_index.ipynb  stage 2: embed the chunks and retrieve, on Kaggle
 scripts/
   board_grade.sh          stage 1 on the Pi 5 / Jetson, with telemetry

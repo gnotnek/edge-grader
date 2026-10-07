@@ -1,6 +1,6 @@
 # Research outline
 
-*Last updated 2026-10-05. The source of truth for what this project is trying to answer. Update it when the supervisor changes direction, and log the reason in the decisions table below.*
+*Last updated 2026-10-07. The source of truth for what this project is trying to answer. Update it when the supervisor changes direction, and log the reason in the decisions table below.*
 
 ## One-line summary
 
@@ -46,6 +46,9 @@ Measure how well a **small LLM on an edge device** grades students' short answer
   - test_ud 4,562 (unseen domains)
   - Labels: 5-way, collapsible to 3-way or 2-way
 - **MMLU-Pro:** the lab's fixed 100-question subset (`agentic-edge/benchmark/mmlupro_subset.py`, seed 20260918). Its physics and maths subsets are an option if a subject-specific benchmark is needed.
+- **Topic benchmarks (planned 2026-10-07, beside SciEntsBank, not replacing it, confirmed by the supervisor):**
+  - Math: GSM8K test set, with GSM-Symbolic (the same questions with names and numbers changed) as a memorisation check
+  - News: LiveNewsBench's January 2026 release (200 human-verified questions on Nov–Dec 2025 events, after Gemma 4's January 2025 cutoff), its source articles as the RAG corpus; scored by an LLM judge with its SimpleQA prompt. Setup: [`results/topics.md`](results/topics.md)
 - **Course material for RAG:** to be chosen in stage 2. It must match SciEntsBank's science topics.
 
 ## Metrics
@@ -77,6 +80,8 @@ Measure how well a **small LLM on an edge device** grades students' short answer
 | 2026-09-29 | Asked for references on why robustness can be dropped and edge measurement made optional | Edge kept (stage 4). Robustness: references sent (arXiv 2606.03090, 2602.00979, 2601.08843, 2412.15275); waiting for reply. |
 | 2026-09-29 | For benchmarking, use what the lab already has to cut time | `agentic-edge`'s device benchmarks copied, not re-run: [`results/edge-benchmarks.md`](results/edge-benchmarks.md) |
 | 2026-09-30 | "Yeppp" to keeping edge measurement: latency and energy per answer on the Pi 5 / Jetson | Confirmed: stage 4 measures every version on the boards. Stage 1 board cost is estimated from `agentic-edge`, see [`results/baselines.md`](results/baselines.md) |
+| 2026-10-07 | Narrow the research: which topic suits these models better, (1) logic, (2) math, (3) news knowledge (e.g. whether Pluto is a planet), (4) general knowledge? Find a benchmark for each; MMLU-Pro's subjects are fine, comparable benchmarks are nice to have | MMLU-Pro split by subject answers math only: math is the strongest subject for both models (E2B 79%, E4B 88% against 48% / 63% for the rest, significant; [`results/rag.md`](results/rag.md#per-subject-no-rag-math-is-the-strongest-subject-analysis-2026-10-07)). It has no logic or news category. Proposed narrowing: **math against news**, see own decisions. Waiting for the supervisor's reply |
+| 2026-10-07 | The topic benchmarks can be graded beside SciEntsBank (in reply to: do they replace it?) | Grading stays the main task; stage 3 still fine-tunes on SciEntsBank. The topic benchmarks take MMLU-Pro's role as the subject-knowledge baseline |
 
 ## Own decisions
 
@@ -97,12 +102,18 @@ Decisions made while doing the work, not from the supervisor. Each has to serve 
 | 2026-10-06 | Run MMLU-Pro no-RAG and RAG-en on all 300 questions despite the weaker retrieval (15/30), and report per subject, split into well- and poorly-covered groups | The supervisor asked for MMLU-Pro with RAG; the no-RAG run also checks the new runner against the lab's numbers; tuning retrieval further would delay stage 3 | RQ1, RQ2 |
 | 2026-10-06 | Correction to the 2026-10-05 retrieval-check row: re-marked, a useful passage for 16/30 (English) and 18/30 (Indonesian), not 29/30 and 30/30. RAG results kept, and reported with this retrieval quality | The first marking ticked every question by mistake. Grading had already run on frozen settings, and re-running with different retrieval would be tuning on the test splits | RQ2 |
 | 2026-10-07 | Don't grade MMLU-Pro RAG-id: its retrieval check found no useful passage (0/30) | A run with only irrelevant passages tests distraction, not the language question; RAG-id was optional | RQ2 |
+| 2026-10-07 | Narrow the supervisor's four topics to **math against news**. Math: GSM8K, paired with GSM-Symbolic as a memorisation check. News: a self-built set of questions about events after Gemma 4's training cutoff, the source articles as the RAG corpus. Both no RAG and RAG, same runner and server flags. Logic and general knowledge dropped | The two ends of the knowledge-vs-skill contrast. Math is where the models are already strong and RAG doesn't help (MMLU-Pro). Post-cutoff news can't be known without help, so it's the cleanest test of RAG and of the NotebookLM comparison. Old static news sets (FreshQA, the Pluto example) are pre-cutoff facts to Gemma 4 and would test memory, not news | RQ1, RQ2, RQ5 |
+| 2026-10-07 | News set: **LiveNewsBench** (arXiv 2602.13543, MIT), January 2026 release, the 200 human-verified test questions, in place of the self-built set planned above. Its own no-search prompt and SimpleQA judge prompt; the pooled source articles as the RAG corpus with the frozen RAG-en settings | Same design as planned (post-cutoff events, source articles included) but published and human-verified, so it's comparable and saves writing 200 questions. All events fall 10+ months after Gemma 4's January 2025 cutoff. Its questions are multi-hop, harder than the Pluto example; the paper's Qwen3 8B scores 3.5% without search | RQ1, RQ2, RQ5 |
+| 2026-10-07 | Math set: the 100 GSM8K test questions GSM-Symbolic templated, plus 10 of the 50 variants each; the lab's lm-eval prompt with fixed 5 shots, 1,024 tokens; flexible extraction as the headline. Runner checked on the lab's tinyGSM8k prompts | Pairs each original with its variants, so the gap is the memorisation check. 10 variants keep a model's run near an hour on a T4. Fixed shots make an original and its variants differ only in the question. 1,024 tokens is the lab's corrected cap | RQ1 |
+| 2026-10-07 | No "own articles only" retrieval condition for news | The pooled search already puts a passage from the question's own article in the top 3 for 194/200 questions, so the extra condition would barely differ from RAG-en | RQ2 |
+| 2026-10-07 | The topic benchmarks sit **beside** SciEntsBank grading, not in place of it. Grading stays the main task, and stage 3 still fine-tunes on SciEntsBank | Confirmed by the supervisor (feedback table, 2026-10-07). Grading is the project's purpose, and the stages already built for it (baseline, RAG, board cost) stay comparable. The topic benchmarks take MMLU-Pro's role: a subject-knowledge baseline next to grading | RQ1, RQ3 |
 
 ## Open questions
 
 - Robustness section: dropped or not? Waiting on the supervisor.
 - Which course material matches SciEntsBank topics well enough for RAG?
 - Is SciEntsBank in the models' training data? A newer dataset (e.g. SAS-Bench 2025) could serve as a check.
+- Which judge scores the news answers: LiveNewsBench's GPT-4.1 (comparable with the paper), or another cloud model. It needs the owner's API key.
 - How this relates to the lab's existing cascade analysis (`agentic-edge/benchmark/analyze_cascade.py`).
 
 ## Related notes
