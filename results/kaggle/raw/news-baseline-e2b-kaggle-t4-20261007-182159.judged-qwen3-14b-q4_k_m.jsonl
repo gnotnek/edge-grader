@@ -1,0 +1,200 @@
+{"id": "news-000", "category": "Politics and elections", "pred": "Information unavailable", "gold": "13", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-001", "category": "Armed conflicts and attacks", "pred": "I do not have access to that specific 2025 news coverage.", "gold": "Three sites in southern Gaza; they were operated by U.S. (American) private security contractors.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-002", "category": "Business and economy", "pred": "Information unavailable", "gold": "FrieslandCampina Belgium NV and FrieslandCampina Nederland BV, at 42.7%.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-003", "category": "Politics and elections", "pred": "I do not have the specific information regarding the documentary title, UN code, or industrial name.", "gold": "The documentary is titled “When Water Burns: The Fight for Georgia”, and the solvent is UN1710 trichloroethylene.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-004", "category": "Armed conflicts and attacks", "pred": "Information unavailable", "gold": "Yamas, under National Security Minister Itamar Ben‑Gvir.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-005", "category": "Law and crime", "pred": "Information unavailable", "gold": "John Lee.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-006", "category": "Politics and elections", "pred": "13.0", "gold": "12.2", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-007", "category": "Arts and culture", "pred": "Information missing", "gold": "69 days.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-008", "category": "Armed conflicts and attacks", "pred": "Information unavailable", "gold": "Jonathan Pratt, and 30,000 additional police officers.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-009", "category": "Politics and elections", "pred": "Information unavailable", "gold": "A vote on the rule for the Senate’s government funding deal.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-010", "category": "Politics and elections", "pred": "Insufficient data", "gold": "About 35 percent.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-011", "category": "Disasters and accidents", "pred": "Information insufficient", "gold": "About 76 million Philippine pesos per region.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-012", "category": "Law and crime", "pred": "Prisión de Guayaquil and Trio del Crimen", "gold": "El Encuentro; Los Lobos.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-013", "category": "Law and crime", "pred": "Information unavailable", "gold": "Section 27 of the Indian Evidence Act; Luksar district jail in Greater Noida.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-014", "category": "Disasters and accidents", "pred": "Cannot be determined", "gold": "Britain and Saudi Arabia.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-015", "category": "Politics and elections", "pred": "A few days", "gold": "3 days", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-016", "category": "Law and crime", "pred": "I do not have the specific investigative details required to answer this question.", "gold": "105.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-017", "category": "Politics and elections", "pred": "10 percentage points", "gold": "About 9 percentage points.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-018", "category": "Sports", "pred": "Two champions; May", "gold": "Three champions, with the 2027 transition-season MLS Cup to be played in May.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-019", "category": "Disasters and accidents", "pred": "I do not have the specific details from the report.", "gold": "Discovery Caravan Park in Harrington; the World Economic Forum; and the NSW SharkSmart app.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-020", "category": "International relations", "pred": "Information insufficient", "gold": "357.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-021", "category": "Disasters and accidents", "pred": "Information not provided", "gold": "105 minutes.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-022", "category": "Arts and culture", "pred": "0", "gold": "25 Saudi riyals.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-023", "category": "Sports", "pred": "1/3", "gold": "8 out of 15.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-024", "category": "Law and crime", "pred": "Information not provided", "gold": "6 years and 2 months.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-025", "category": "Sports", "pred": "Information unavailable", "gold": "Two.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-026", "category": "Arts and culture", "pred": "Information not available", "gold": "18.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-027", "category": "Armed conflicts and attacks", "pred": "Information unavailable", "gold": "Youssef Alian, via the Greater Nile pipeline system to Port Sudan.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-028", "category": "Armed conflicts and attacks", "pred": "Information unavailable", "gold": "Fentanyl and Venezuela.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-029", "category": "Armed conflicts and attacks", "pred": "Information unavailable", "gold": "Beit Lif, and 4,000 square metres.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-030", "category": "Armed conflicts and attacks", "pred": "Information unavailable", "gold": "Tank and Lakki Marwat; Doha and Istanbul.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-031", "category": "Armed conflicts and attacks", "pred": "Information unavailable", "gold": "Joshua Loitu Mollel; Kiryat Arba.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-032", "category": "Sports", "pred": "1", "gold": "2", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-033", "category": "Disasters and accidents", "pred": "Information unavailable", "gold": "16 minutes.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-034", "category": "Armed conflicts and attacks", "pred": "Information unavailable", "gold": "The operation was codenamed “Promising Future,” and the oil company was PetroMasila.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-035", "category": "Disasters and accidents", "pred": "I do not have the specific data required to answer this question.", "gold": "300 feet.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-036", "category": "Business and economy", "pred": "Information not provided", "gold": "About $56.2 billion.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-037", "category": "Politics and elections", "pred": "Information not provided", "gold": "20 November 2025.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-038", "category": "International relations", "pred": "Information unavailable", "gold": "USS Gerald Ford and Erik Akerboom.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-039", "category": "Law and crime", "pred": "Information unavailable", "gold": "Zero years.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-040", "category": "Disasters and accidents", "pred": "Spain and the United States", "gold": "The organization was Canarias 1500 Km de Costa, and the victims were from Romania and Slovakia.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-041", "category": "Armed conflicts and attacks", "pred": "Information not provided", "gold": "315 Palestinian bodies.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-042", "category": "Business and economy", "pred": "Information unavailable", "gold": "Romania, and 1 to 5.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-043", "category": "Armed conflicts and attacks", "pred": "Information not available", "gold": "40.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-044", "category": "Arts and culture", "pred": "Data insufficient", "gold": "Approximately 68%.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-045", "category": "Business and economy", "pred": "I do not have access to the specific details of that staff-level agreement.", "gold": "An estimated financing gap of about $136.5 billion, and commitments to accelerate efforts to prevent tax evasion and avoidance and to broaden the tax base.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-046", "category": "International relations", "pred": "Information unavailable", "gold": "4", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-047", "category": "International relations", "pred": "I do not have access to the specified news coverage.", "gold": "7 years.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-048", "category": "Law and crime", "pred": null, "gold": "8 days.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-049", "category": "Armed conflicts and attacks", "pred": "I do not have the specific information required to answer this question.", "gold": "About 3,000 people; he was being considered for the post of governor of Rafah.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-050", "category": "Armed conflicts and attacks", "pred": "John Kirby", "gold": "Steve Witkoff.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-051", "category": "Politics and elections", "pred": "Information unavailable", "gold": "Brad Parscale and “Papi, at your service”.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-052", "category": "Law and crime", "pred": "Information unavailable", "gold": "Chinachem Tower and the Independent Commission Against Corruption (ICAC).", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-053", "category": "Armed conflicts and attacks", "pred": "City, capital, mediators, country", "gold": "Kabul; Doha; Qatar and Turkey; Saudi Arabia.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-054", "category": "Armed conflicts and attacks", "pred": "I do not have access to the specific news coverage from December 31, 2025, to provide the exact details requested.", "gold": "Northern Gaza and 19 new Jewish settlements.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-055", "category": "Law and crime", "pred": "4 years", "gold": "30 years.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-056", "category": "Disasters and accidents", "pred": "Information not provided", "gold": "Roughly 1.75 million hectares.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-057", "category": "Politics and elections", "pred": "Information unavailable", "gold": "Jay Jones.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-058", "category": "Armed conflicts and attacks", "pred": "A specific Catholic charity", "gold": "Caritas Jerusalem", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-059", "category": "Business and economy", "pred": "Information unavailable", "gold": "38 days.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-060", "category": "Law and crime", "pred": "Information unavailable", "gold": "15 days; José Giovanni Martínez Milán.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-061", "category": "Business and economy", "pred": "Information unavailable", "gold": "About three times United Super’s fiscal 2024 revenue.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-062", "category": "Armed conflicts and attacks", "pred": "Data missing", "gold": "About 0.44 litres of fuel per U.S. dollar.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-063", "category": "International relations", "pred": "Senior Law and Human Rights Minister", "gold": "Yusril Ihza Mahendra.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-064", "category": "Politics and elections", "pred": "Information unavailable", "gold": "About 40% of the vote.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-065", "category": "Business and economy", "pred": "Information not provided", "gold": "600,000 barrels per day.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-066", "category": "Armed conflicts and attacks", "pred": "UN High Commissioner for Human Rights and World Food Programme emergency preparedness director", "gold": "Volker Turk and Ross Smith.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-067", "category": "Politics and elections", "pred": "Cannot be determined", "gold": "0.32 percentage points.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-068", "category": "Armed conflicts and attacks", "pred": "Information not provided", "gold": "39.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-069", "category": "Politics and elections", "pred": "Approximately 3", "gold": "About 2,890 times larger.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-070", "category": "Politics and elections", "pred": "Information unavailable", "gold": "26.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-071", "category": "Disasters and accidents", "pred": "Information unavailable", "gold": "GRIP 1 and about 80 kilometers east of Amsterdam.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-072", "category": "Politics and elections", "pred": "ECOWAS and a former president", "gold": "ECOWAS and Goodluck Jonathan.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-073", "category": "Armed conflicts and attacks", "pred": "Information not provided", "gold": "The operation was called “Iron Wall,” and Human Rights Watch said 32,000 people were forcibly displaced.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-074", "category": "Law and crime", "pred": "2 years", "gold": "One year.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-075", "category": "Armed conflicts and attacks", "pred": "0", "gold": "6", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-076", "category": "Law and crime", "pred": "Information not available", "gold": "About 13 months.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-077", "category": "Science and technology", "pred": "10 days", "gold": "193 days.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-078", "category": "Law and crime", "pred": "Information unavailable", "gold": "3 days.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-079", "category": "Arts and culture", "pred": "NewJeans: NewJeans; several billion KRW", "gold": "NJZ; nearly 43.1 billion won.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-080", "category": "Law and crime", "pred": "I do not have access to the specific polling data requested.", "gold": "24 percentage points.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-081", "category": "Sports", "pred": "1.5", "gold": "7.4 goals per match.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-082", "category": "Law and crime", "pred": "15 years", "gold": "21 years.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-083", "category": "Armed conflicts and attacks", "pred": "Mohammad al-Hussaini", "gold": "Haytham Ali Tabatabai.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-084", "category": "Politics and elections", "pred": "Information unavailable", "gold": "About 14 times larger.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-085", "category": "International relations", "pred": "Information insufficient", "gold": "$910 million", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-086", "category": "Disasters and accidents", "pred": "Information unavailable", "gold": "Level 2.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-087", "category": "Armed conflicts and attacks", "pred": "Zero days (information insufficient)", "gold": "Four days.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-088", "category": "Armed conflicts and attacks", "pred": "U.S. Coast Guard", "gold": "The Central Intelligence Agency (CIA).", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-089", "category": "Armed conflicts and attacks", "pred": null, "gold": "Emil Bove and Operation Southern Spear.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-090", "category": "Politics and elections", "pred": "Information unavailable", "gold": "Line Barfod, and her party received 22.1% of the vote.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-091", "category": "Disasters and accidents", "pred": "Information unavailable", "gold": "10 kilometres.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-092", "category": "Armed conflicts and attacks", "pred": "Information unavailable", "gold": "Maj. Gen. Murhaf al‑Naasan, head of internal security in Homs, and Interior Ministry spokesman Nour al‑Din al‑Baba.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-093", "category": "Health and environment", "pred": "Insufficient data", "gold": "26", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-094", "category": "International relations", "pred": "Information unavailable", "gold": "Humain, and nearly 300 American tanks.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-095", "category": "Law and crime", "pred": "Information not provided", "gold": "54.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-096", "category": "Disasters and accidents", "pred": "Information not provided", "gold": "14 people; September.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-097", "category": "Armed conflicts and attacks", "pred": "I do not have the specific information from the 2025 news reports.", "gold": "Yahya", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-098", "category": "Law and crime", "pred": "Border crossing and date", "gold": "They were detained at the Suben border crossing between Germany and Austria, and the Magdeburg SUV attack occurred on December 20.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-099", "category": "Sports", "pred": "Information insufficient", "gold": "1,601", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-100", "category": "Armed conflicts and attacks", "pred": "Information unavailable", "gold": "Rosreserv; France and the United Kingdom.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-101", "category": "Business and economy", "pred": "0", "gold": "30", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-102", "category": "Law and crime", "pred": null, "gold": "He was described as a local fisherman, and Nuñez said he was suspected of “self‑radicalisation.”", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-103", "category": "Armed conflicts and attacks", "pred": "Cannot be determined", "gold": "Rafah, and President Trump.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-104", "category": "Politics and elections", "pred": "Information unavailable", "gold": "5.5 million.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-105", "category": "Law and crime", "pred": "Information unavailable", "gold": "87.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-106", "category": "International relations", "pred": "I do not have access to the specified news coverage.", "gold": "It was described as primarily used as fuel for marine vessels, and the tanker was seized about 20 nautical miles off Khor Fakkan.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-107", "category": "Armed conflicts and attacks", "pred": "Oil field X, Drone from Y", "gold": "The Heglig oil field, and it was Turkish-made.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-108", "category": "Law and crime", "pred": "I do not know the names.", "gold": "Don Berthiaume and Michael Thomas.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-109", "category": "Politics and elections", "pred": "Approximately 30% to 40%", "gold": "About 55%.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-110", "category": "International relations", "pred": "Information not provided", "gold": "14 kilometres.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-111", "category": "Disasters and accidents", "pred": "Data unavailable", "gold": "9.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-112", "category": "Politics and elections", "pred": "House Foreign Affairs Committee; specific designation not recalled", "gold": "The U.S. House Appropriations Committee; Country of Particular Concern (CPC).", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-113", "category": "International relations", "pred": "Information unavailable", "gold": "Fitch Ratings; 18.2 trillion rubles.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-114", "category": "Politics and elections", "pred": "Information unavailable", "gold": "About 34% of the vote.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-115", "category": "Politics and elections", "pred": "Data unavailable", "gold": "About 730,000 workers.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-116", "category": "International relations", "pred": "Ecuador", "gold": "Guatemala.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-117", "category": "Politics and elections", "pred": "Information unavailable", "gold": "He was described as holding Moldovan, Romanian and U.S. citizenship, and his party defeated the Patriotic Electoral Bloc (BEP).", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-118", "category": "Politics and elections", "pred": "Information not found", "gold": "Edil Baisalov", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-119", "category": "Health and environment", "pred": "Information insufficient", "gold": "Five times as large, and three countries.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-120", "category": "Politics and elections", "pred": "Unknown", "gold": "15.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-121", "category": "Armed conflicts and attacks", "pred": "Egypt", "gold": "Turkey", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-122", "category": "Law and crime", "pred": "Information unavailable", "gold": "588 pages.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-123", "category": "International relations", "pred": "Cannot determine", "gold": "Poland and Argentina.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-124", "category": "International relations", "pred": "Information unavailable", "gold": "4", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-125", "category": "Armed conflicts and attacks", "pred": "Information not provided", "gold": "1,000.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-126", "category": "Sports", "pred": "Chanthaburi, 11th", "gold": "Songkhla province and fourth place.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-127", "category": "Law and crime", "pred": "365 days", "gold": "656 days.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-128", "category": "Politics and elections", "pred": "Information unavailable", "gold": "The Democrats; 28 endorsements.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-129", "category": "Politics and elections", "pred": "Insufficient data", "gold": "Approximately 263.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-130", "category": "Politics and elections", "pred": "Information unavailable", "gold": "15 days.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-131", "category": "Disasters and accidents", "pred": "Information not available", "gold": "200 kilometers.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-132", "category": "Business and economy", "pred": "Information missing", "gold": "About £52 million.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-133", "category": "Armed conflicts and attacks", "pred": "I do not have the specific details for this event.", "gold": "About half a kilometre (0.3 miles) from the yellow line, and the foreign-led “Board of Peace”.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-134", "category": "Politics and elections", "pred": "Information unavailable", "gold": "About 14,000 votes.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-135", "category": "Armed conflicts and attacks", "pred": "Information unavailable", "gold": "Bella 1 and the Skipper.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-136", "category": "Armed conflicts and attacks", "pred": "Information unavailable", "gold": "Caritas Jerusalem", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-137", "category": "Business and economy", "pred": "Data unavailable", "gold": "About $73 billion.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-138", "category": "Disasters and accidents", "pred": "Cannot be determined", "gold": "12", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-139", "category": "Politics and elections", "pred": "Information unavailable", "gold": "26 seats.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-140", "category": "International relations", "pred": "Information not available", "gold": "15.2 billion U.S. dollars.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-141", "category": "Armed conflicts and attacks", "pred": "Information unavailable", "gold": "Haytham Ali Tabatabai.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-142", "category": "Politics and elections", "pred": "Information unavailable", "gold": "8.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-143", "category": "Arts and culture", "pred": "Norway, Sweden, and the Netherlands; five", "gold": "Bulgaria, Moldova and Romania; seven countries.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-144", "category": "Law and crime", "pred": null, "gold": "France and 1.2 trillion CFA francs.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-145", "category": "Health and environment", "pred": null, "gold": "220 people", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-146", "category": "Law and crime", "pred": "Information unavailable", "gold": "76 years", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-147", "category": "Law and crime", "pred": "Information not available", "gold": "Volodymyr B. and Gdansk.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-148", "category": "Disasters and accidents", "pred": "Russia", "gold": "Gambia.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-149", "category": "Business and economy", "pred": "CPTPP; strategic materials", "gold": "The Comprehensive and Progressive Agreement for Trans‑Pacific Partnership (CPTPP), and rare earths.", "judge_reply": "A", "grade": "correct"}
+{"id": "news-150", "category": "Politics and elections", "pred": "3 years", "gold": "Five years.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-151", "category": "International relations", "pred": "Insufficient data", "gold": "About 3%.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-152", "category": "Politics and elections", "pred": "Information unavailable", "gold": "Christopher Landau and the Michoacan Plan for Peace and Justice.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-153", "category": "Law and crime", "pred": "Information not available", "gold": "Sviatlana Tsikhanouskaya; Belaruskali, Belarusian Potash Company (BPC), and Agrorozkvit.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-154", "category": "Armed conflicts and attacks", "pred": "Ghana", "gold": "Sierra Leone.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-155", "category": "Politics and elections", "pred": "Information unavailable", "gold": "Catherine Cortez Masto, John Fetterman, and Angus King.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-156", "category": "Law and crime", "pred": "Data insufficient", "gold": "10 percentage points.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-157", "category": "Armed conflicts and attacks", "pred": "Cannot be determined", "gold": "5 hostages’ bodies.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-158", "category": "Law and crime", "pred": "The nickname was \"Audrey,\" and the two-word phrase was \"Hamas sympathizer.\"", "gold": "Asiginaak and Hamas fangirl.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-159", "category": "Law and crime", "pred": "Information not available", "gold": "At least 1.64 billion Nepali rupees.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-160", "category": "Health and environment", "pred": "Data unavailable", "gold": "2,910,039.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-161", "category": "Law and crime", "pred": "Information unavailable", "gold": "150", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-162", "category": "Law and crime", "pred": "Codename: Midas (or related internal designation); Cooperation Group: International financial/governance body (specific name needed for absolute certainty, but based on the prompt structure, the key elements are the codename and the grouping).", "gold": "The codename “Professor” and the Group of Seven (G7).", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-163", "category": "Law and crime", "pred": "Contractor: [Specific Contractor Name]; Cybercrime Body: [Specific Cybercrime Body Name]", "gold": "Cezarah “Sarah” Discaya, and the Cybercrime Investigation and Coordinating Centre.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-164", "category": "Armed conflicts and attacks", "pred": "Information not available", "gold": "Prime Minister Nawaf Salam and army commander Gen. Rodolph Haikal.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-165", "category": "Law and crime", "pred": "Information unavailable", "gold": "The Sinaloa Cartel and Juan de Dios López Rubio.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-166", "category": "Armed conflicts and attacks", "pred": "Information not available", "gold": "Weapons control south of the Litani River, and about three and a half hours.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-167", "category": "Law and crime", "pred": "I do not have the specific information required to answer this question.", "gold": "A personality disorder, at two hospitals, using heart medication.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-168", "category": "Disasters and accidents", "pred": "Kingston", "gold": "Four prior trips, and Montego Bay.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-169", "category": "International relations", "pred": "Information missing", "gold": "9", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-170", "category": "Politics and elections", "pred": "0", "gold": "Approximately 7.4 percentage points.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-171", "category": "Law and crime", "pred": "An interim governing body", "gold": "A temporary caretaker government composed of Palestinians and international experts, followed by a reformed Palestinian Authority.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-172", "category": "Politics and elections", "pred": "Insufficient data", "gold": "About 5 times.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-173", "category": "Armed conflicts and attacks", "pred": "Information unavailable", "gold": "About 13.6%.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-174", "category": "Armed conflicts and attacks", "pred": "Ali", "gold": "Ismail", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-175", "category": "Armed conflicts and attacks", "pred": "A specific UN official or member of the mission.", "gold": "Mona Rishmawi.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-176", "category": "Business and economy", "pred": "Ofcom; three", "gold": "Ofcom, and 19 articles.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-177", "category": "Law and crime", "pred": "Ukraine", "gold": "Belgium", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-178", "category": "Politics and elections", "pred": "Che Guevara", "gold": "Oleksiy Chernyshov", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-179", "category": "Armed conflicts and attacks", "pred": null, "gold": "Lakurawa, and the Sahel corridor.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-180", "category": "Law and crime", "pred": "Cannot be determined", "gold": "About 83 times.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-181", "category": "International relations", "pred": "0", "gold": "760", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-182", "category": "Law and crime", "pred": "Mambilla Plateau; Special Operations Forces", "gold": "Bashar district and trained and equipped forest guards.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-183", "category": "Disasters and accidents", "pred": "I do not have specific information regarding the exact humanitarian organization and Afghan agency referenced in this specific narrative.", "gold": "Save the Children and the Afghanistan National Disaster Management Authority.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-184", "category": "International relations", "pred": "Approximately 12 months", "gold": "19 months.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-185", "category": "Politics and elections", "pred": "Information unavailable", "gold": "265", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-186", "category": "Armed conflicts and attacks", "pred": "France, US, and [Third Country]; France", "gold": "The United States, France and Saudi Arabia; Indonesia.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-187", "category": "Armed conflicts and attacks", "pred": "Division unknown; number unknown", "gold": "The organized-crime division FEMDO (Special Prosecutor for Organized Crime), and about 3,000 explosive devices.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-188", "category": "International relations", "pred": "Information insufficient", "gold": "About €11.5 billion per factory.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-189", "category": "International relations", "pred": "Perfume; 12", "gold": "She thought it was perfume, and three additional GRU officers.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-190", "category": "Armed conflicts and attacks", "pred": "Information not provided", "gold": "$24.5 billion.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-191", "category": "Politics and elections", "pred": "Information not available", "gold": "Approximately 29.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-192", "category": "Politics and elections", "pred": "Information unavailable", "gold": "Cost of living, and a 43‑percentage‑point lead.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-193", "category": "Law and crime", "pred": "Approximately 10% to 30%", "gold": "About 8%", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-194", "category": "Armed conflicts and attacks", "pred": "Cannot be determined", "gold": "About 14 months.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-195", "category": "Business and economy", "pred": "180 days", "gold": "368 days.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-196", "category": "Business and economy", "pred": "Information insufficient", "gold": "27 days.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-197", "category": "International relations", "pred": "LOT Polish Airlines and Jens Stoltenberg", "gold": "Finnair and Mark Rutte.", "judge_reply": "B", "grade": "incorrect"}
+{"id": "news-198", "category": "Armed conflicts and attacks", "pred": "The criminal organization was [Organization Name] and the airport was [Airport Name].", "gold": "Jalisco New Generation Cartel and Muhammad Ali International Airport.", "judge_reply": "C", "grade": "not_attempted"}
+{"id": "news-199", "category": "Arts and culture", "pred": "Information insufficient", "gold": "51 years.", "judge_reply": "C", "grade": "not_attempted"}

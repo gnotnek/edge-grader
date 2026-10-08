@@ -1,0 +1,55 @@
+{
+  "stage": "topics",
+  "benchmark": "gsm",
+  "set": "symbolic",
+  "label": "e2b-kaggle-t4",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "/tmp/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a3a1c47"
+  },
+  "n_requested": 0,
+  "generation": {
+    "max_tokens": 1024,
+    "temperature": 0,
+    "stop": [
+      "Question:",
+      "</s>",
+      "<|im_end|>"
+    ],
+    "shots": 5,
+    "prompt": "lm-eval gsm8k chat format, fixed shots (seed 1234)",
+    "instances": 10
+  },
+  "time": "2026-10-08T09:47:58+00:00",
+  "metrics": {
+    "n": 1000,
+    "accuracy": 0.8,
+    "strict_accuracy": 0.484,
+    "no_number": 0,
+    "hit_token_cap": 36,
+    "errors": 0,
+    "median_latency_s": 1.9315,
+    "wall_s": 2825.7,
+    "prompt_tokens": 1106198,
+    "completion_tokens": 257056,
+    "per_instance_accuracy": {
+      "0": 0.8,
+      "1": 0.81,
+      "2": 0.8,
+      "3": 0.79,
+      "4": 0.81,
+      "5": 0.83,
+      "6": 0.81,
+      "7": 0.78,
+      "8": 0.78,
+      "9": 0.79
+    },
+    "instance_accuracy_range": [
+      0.78,
+      0.83
+    ]
+  }
+}

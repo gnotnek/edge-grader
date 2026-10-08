@@ -1,0 +1,68 @@
+{
+  "kind": "judged",
+  "run": "results/kaggle/news-baseline-e4b-kaggle-t4-20261007-175302.json",
+  "run_label": "e4b-kaggle-t4",
+  "run_stage": "baseline",
+  "judge": {
+    "model": "qwen3-14b-q4_k_m",
+    "base_url": "http://127.0.0.1:8080/v1",
+    "temperature": 0,
+    "prompt": "LiveNewsBench evals/grade_simple_qa_prompt.txt (SimpleQA)",
+    "prompt_sha256": "fb6d6c1b4b6546f14f462ddbe19fdca47d04f29bef8b356949e2a44fe8e149d5",
+    "server": {
+      "model_path": "/tmp/models/Qwen3-14B-Q4_K_M.gguf",
+      "build_info": "b1-a3a1c47"
+    }
+  },
+  "time": "2026-10-08T12:57:14+00:00",
+  "metrics": {
+    "n": 200,
+    "accuracy": 0.005,
+    "correct": 1,
+    "incorrect": 42,
+    "not_attempted": 157,
+    "unparsed": 0,
+    "per_category": {
+      "Armed conflicts and attacks": {
+        "n": 49,
+        "correct": 1
+      },
+      "Arts and culture": {
+        "n": 7,
+        "correct": 0
+      },
+      "Business and economy": {
+        "n": 14,
+        "correct": 0
+      },
+      "Disasters and accidents": {
+        "n": 18,
+        "correct": 0
+      },
+      "Health and environment": {
+        "n": 4,
+        "correct": 0
+      },
+      "International relations": {
+        "n": 21,
+        "correct": 0
+      },
+      "Law and crime": {
+        "n": 39,
+        "correct": 0
+      },
+      "Politics and elections": {
+        "n": 40,
+        "correct": 0
+      },
+      "Science and technology": {
+        "n": 1,
+        "correct": 0
+      },
+      "Sports": {
+        "n": 7,
+        "correct": 0
+      }
+    }
+  }
+}
