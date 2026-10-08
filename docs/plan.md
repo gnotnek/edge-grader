@@ -92,17 +92,20 @@ Replaced by phases 0, A, B and C. Design: [`superpowers/specs/2026-10-08-baselin
 - [ ] Board-check every run; one baseline table, benchmark × model × board, in `results/baselines.md`
 
 ### Phase A: baseline vs RAG for every benchmark (week 5, Kaggle)
+*Implementation plan: [`superpowers/plans/2026-10-09-phaseA-math-rag.md`](superpowers/plans/2026-10-09-phaseA-math-rag.md).*
 - [ ] Math corpus: OpenStax *Prealgebra 2e*, pinned in `sources.json`, chunked with the frozen settings
 - [ ] Retrieval check: 30 GSM8K **train** questions, owner's marking
 - [ ] Kaggle: math RAG-en, E2B + E4B, GSM8K + GSM-Symbolic
 - [ ] Four-benchmark table: news, MMLU-Pro, SciEntsBank, math, baseline vs RAG
 
 ### Phase B: variations on the grading baseline (weeks 5–7)
+*Implementation plans: [B1 thinking](superpowers/plans/2026-10-09-phaseB1-thinking.md), [B2 little-gemma + reuse](superpowers/plans/2026-10-09-phaseB2-little-gemma-reuse.md), [B3 EmbeddingGemma 2](superpowers/plans/2026-10-09-phaseB3-embeddinggemma2.md).*
 - [ ] B1 thinking on: parser reads after the thought block (test); `max_tokens` 336; Kaggle all splits, E2B + E4B; boards test_ua for cost
 - [ ] B2 little-gemma on the Jetson: why test_ua had no prefix reuse; `lg-base`, `lg-reuse`, `llama-sorted` on test_ua; byte-identical check
 - [ ] B3 EmbeddingGemma 2: loads on the Mac?; retrieval check on the 30 SciEntsBank train questions; grading run only at ≥ 20/30
 
 ### Phase C: text + images (weeks 6–7)
+*Implementation plan: [`superpowers/plans/2026-10-09-phaseC-images.md`](superpowers/plans/2026-10-09-phaseC-images.md).*
 - [ ] C1: render answers (pinned font), private Kaggle dataset with sha256; matching vision projector; reading check on 100; Kaggle test_ua + test_uq; board cost
 - [ ] C2: data search (real student answers, figures, labels, English, licence, ~300+); run or drop, recorded in the outline
 
