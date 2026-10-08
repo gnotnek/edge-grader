@@ -1,10 +1,13 @@
-"""Check board grading runs against the Kaggle accuracy and the agentic-edge cost estimate.
+"""Check board runs against their Kaggle runs and the agentic-edge cost estimate.
 
 Stage 1 estimated board cost from agentic-edge's MMLU-Pro request rates (cost.py) and
 assumed board accuracy equals Kaggle's. A measured run on a board (scripts/board_grade.sh)
-tests both. Per run folder in results/board/ this reads
+tests both; phase 0 extends that to GSM8K/GSM-Symbolic and news. Per run folder in
+results/board/ this reads
 
-    baseline-*.json, raw/*.jsonl   accuracy and each answer's grade
+    baseline-*.json | gsm-*.json | news-*.json, raw/*.jsonl   accuracy and each answer
+    news-*.judged-<judge>.json, raw/*.judged-*.jsonl          news only: the Kaggle judge's grades
+    board-state.txt                CPU governor and clock range at the start of the run
     server.log                     llama-server's own per-request prefill and decode timings
     edge-grader-*/telemetry.csv    1 Hz board power from agentic-edge's run_measured.sh
     edge-grader-*/meta.json        the llama-server command line actually serving the run
@@ -13,7 +16,8 @@ Energy is integrated over the grading window only (first request start to last r
 end), so server start-up and the dataset download are left out. Power is board DC draw,
 not wall power. Accuracy is compared answer by answer: agreement and an exact McNemar test
 on which answers each run got right, against the Kaggle run of the same split and model,
-and between boards.
+and between boards. GSM and news runs are paired with Kaggle on the question ids both
+answered, so the Pi's trimmed GSM-Symbolic set compares on its 100 ids.
 
     uv run edge-grader-board-check results/board/*/
 """
@@ -31,6 +35,9 @@ from scipy.stats import binomtest
 ESTIMATES = "results/estimates"
 KAGGLE = "results/kaggle"
 BOARDS = {"pi5": "pi", "jetson": "jetson"}  # run label -> board name in the estimate
+SUMMARY_GLOBS = ("baseline-*.json", "gsm-*.json", "news-*.json")
+JUDGE = "qwen3-14b-q4_k_m"  # the news judge's file tag (docs/results/topics.md)
+CPU_STATE = re.compile(r"^cpu0: governor (\S+) min (\d+) max (\d+)")
 
 TIMING = re.compile(
     r"^(\S+) .*print_timing: id\s+\d+ \| task (\d+) \|\s+(prompt eval|eval) time =\s+"
@@ -68,14 +75,18 @@ def mcnemar(right_a: list[bool], right_b: list[bool]) -> dict:
 
 
 def compare(a: dict[str, dict], b: dict[str, dict]) -> dict:
+    """Two runs' outcomes, paired on the question ids both have."""
     ids = sorted(a.keys() & b.keys())
+
+    def acc(x: dict[str, dict]) -> float | None:
+        return round(sum(x[i]["right"] for i in ids) / len(ids), 4) if ids else None
+
     return {
         "n": len(ids),
-        "same_grade": sum(a[i]["pred"] == b[i]["pred"] for i in ids),
-        "mcnemar": mcnemar(
-            [a[i]["pred"] == a[i]["gold"] for i in ids],
-            [b[i]["pred"] == b[i]["gold"] for i in ids],
-        ),
+        "same_grade": sum(a[i]["answer"] == b[i]["answer"] for i in ids),
+        "first_accuracy": acc(a),
+        "second_accuracy": acc(b),
+        "mcnemar": mcnemar([a[i]["right"] for i in ids], [b[i]["right"] for i in ids]),
     }
 
 
@@ -85,14 +96,66 @@ def read_answers(summary_path: Path) -> dict[str, dict]:
     return {r["id"]: r for r in rows}
 
 
+def find_summary(run_dir: Path) -> Path:
+    """The runner's summary in a run folder (a judge's file is not one)."""
+    found = sorted(p for g in SUMMARY_GLOBS for p in run_dir.glob(g) if ".judged-" not in p.name)
+    if len(found) != 1:
+        raise SystemExit(f"{run_dir}: expected one run summary, found {[p.name for p in found]}")
+    return found[0]
+
+
+def benchmark(summary: dict) -> str:
+    return summary.get("benchmark", "scientsbank")  # grading summaries have no "benchmark" key
+
+
+def split_of(summary: dict) -> str:
+    return {"gsm": summary.get("set"), "news": "test"}.get(benchmark(summary), summary.get("split"))
+
+
+def outcomes(summary_path: Path, judge: str = JUDGE) -> dict[str, dict] | None:
+    """Per question, the answer given and whether it was right; None for an unjudged news run.
+
+    Grading: the label. GSM: the flexible-extract number. News: the judge's grade."""
+    bench = benchmark(json.loads(summary_path.read_text()))
+    if bench == "news":
+        judged = summary_path.parent / "raw" / f"{summary_path.stem}.judged-{judge}.jsonl"
+        if not judged.exists():
+            return None
+        rows = [json.loads(line) for line in judged.read_text().splitlines() if line.strip()]
+        return {r["id"]: {"answer": r["grade"], "right": r["grade"] == "correct"} for r in rows}
+    rows = read_answers(summary_path).values()
+    if bench == "gsm":
+        return {r["id"]: {"answer": r["flexible"], "right": bool(r["correct"])} for r in rows}
+    return {r["id"]: {"answer": r["pred"], "right": r["pred"] == r["gold"]} for r in rows}
+
+
+def read_board_state(path: Path) -> dict | None:
+    """CPU governor and frequency range from board-state.txt; None for runs made before it."""
+    if not path.exists():
+        return None
+    for line in path.read_text().splitlines():
+        m = CPU_STATE.match(line)
+        if m:
+            gov, lo, hi = m.groups()
+            return {"governor": gov, "cpu_min_khz": int(lo), "cpu_max_khz": int(hi),
+                    "cpu_clock_locked": lo == hi}
+    return {}
+
+
 def threads(server_args: str) -> int | None:
     m = re.search(r"(?:^| )-t (\d+)", server_args)
     return int(m.group(1)) if m else None
 
 
-def read_run(run_dir: Path) -> dict:
-    summary_path = next(run_dir.glob("baseline-*.json"))
+def read_run(run_dir: Path, judge: str = JUDGE) -> dict:
+    summary_path = find_summary(run_dir)
     summary = json.loads(summary_path.read_text())
+    bench = benchmark(summary)
+    m = summary["metrics"]
+    accuracy = m.get("accuracy")
+    if bench == "news":  # the runner doesn't score news; the Kaggle judge does
+        judged = summary_path.with_name(f"{summary_path.stem}.judged-{judge}.json")
+        accuracy = json.loads(judged.read_text())["metrics"]["accuracy"] if judged.exists() else None
     model, board_label = summary["label"].split("-", 1)
     tele = next(run_dir.glob("edge-grader-*/"))
     meta = json.loads((tele / "meta.json").read_text())
@@ -110,19 +173,24 @@ def read_run(run_dir: Path) -> dict:
 
     prefill_x = [r["prompt_tokens"] for r in reqs]
     prefill_y = [r["prompt_ms"] for r in reqs]
-    slope, intercept = statistics.linear_regression(prefill_x, prefill_y)
-    m = summary["metrics"]
+    slope = intercept = None
+    if len(set(prefill_x)) >= 2:  # a fit needs two different prompt sizes (a 1-question smoke run has one)
+        slope, intercept = statistics.linear_regression(prefill_x, prefill_y)
+    sent = [a["prompt_tokens"] for a in read_answers(summary_path).values()
+            if a.get("prompt_tokens") is not None]
     return {
         "run": run_dir.name,
         "model": model,
         "board": BOARDS[board_label],
-        "split": summary["split"],
+        "benchmark": bench,
+        "split": split_of(summary),
+        "instances": summary.get("generation", {}).get("instances"),
         "threads": threads(meta.get("server_args_after", "")),
         "server_args": meta.get("server_args_after", ""),
         "n": n,
-        "accuracy": m["accuracy"],
-        "macro_f1": m["macro_f1"],
-        "unparsed": m["unparsed"],
+        "accuracy": accuracy,
+        "macro_f1": m.get("macro_f1"),
+        "unparsed": m.get("unparsed"),
         "errors": m["errors"],
         "requests_in_log": len(reqs),
         "median_latency_s": round(m["median_latency_s"], 2),
@@ -133,14 +201,13 @@ def read_run(run_dir: Path) -> dict:
         "j_per_answer_above_idle": round((joules - power["idle_w"] * seconds) / n, 2),
         "wh_per_1000_answers": round(joules / n * 1000 / 3600, 2),
         "mean_prompt_tokens_processed": round(statistics.fmean(prefill_x), 1),
-        "mean_prompt_tokens_sent": round(
-            statistics.fmean(a["prompt_tokens"] for a in read_answers(summary_path).values()), 1
-        ),
-        "prefill_fixed_ms": round(intercept, 1),
-        "prefill_ms_per_token": round(slope, 3),
+        "mean_prompt_tokens_sent": round(statistics.fmean(sent), 1) if sent else None,
+        "prefill_fixed_ms": None if intercept is None else round(intercept, 1),
+        "prefill_ms_per_token": None if slope is None else round(slope, 3),
         "decode_ms_per_token": round(
             statistics.median(r["gen_ms"] / r["gen_tokens"] for r in reqs if r["gen_tokens"]), 1
         ),
+        "board_state": read_board_state(run_dir / "board-state.txt"),
         "_summary": summary_path,
     }
 
@@ -149,11 +216,19 @@ def latest_estimate(directory: str) -> Path:
     return max(Path(directory).glob("board-cost-estimate-*.json"))
 
 
-def kaggle_run(directory: str, model: str, split: str, n: int) -> Path | None:
-    for path in sorted(Path(directory).glob(f"baseline-{model}-kaggle-*-{split}-*.json")):
-        if json.loads(path.read_text())["metrics"]["n"] == n:
-            return path
-    return None
+def kaggle_run(directory: str, bench: str, model: str, split: str, n: int) -> Path | None:
+    """The Kaggle run a board run is checked against. Grading: same split and n (as in stage 1).
+    GSM and news: the latest Kaggle baseline run of the set; pairing is on shared ids."""
+    d = Path(directory)
+    if bench == "scientsbank":
+        for path in sorted(d.glob(f"baseline-{model}-kaggle-*-{split}-*.json")):
+            if json.loads(path.read_text())["metrics"]["n"] == n:
+                return path
+        return None
+    pattern = (f"gsm-{split}-{model}-kaggle-*.json" if bench == "gsm"
+               else f"news-baseline-{model}-kaggle-*.json")
+    found = sorted(p for p in d.glob(pattern) if ".judged-" not in p.name)
+    return found[-1] if found else None
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -162,16 +237,18 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--estimate", type=Path, help="board-cost-estimate JSON (default: latest)")
     ap.add_argument("--kaggle", default=KAGGLE, help="directory of the Kaggle runs")
     ap.add_argument("--out", default=ESTIMATES, help="directory for the summary JSON")
+    ap.add_argument("--judge", default=JUDGE, help="news judge file tag")
     args = ap.parse_args(argv)
 
     est_path = args.estimate or latest_estimate(ESTIMATES)
     est = json.loads(est_path.read_text())["estimates"]
-    runs = [read_run(d) for d in sorted(args.runs)]
+    runs = [read_run(d, args.judge) for d in sorted(args.runs)]
 
     for r in runs:
         e = next(
             (x for x in est
-             if (x["model"], x["board"], x["split"]) == (r["model"], r["board"], r["split"])),
+             if r["benchmark"] == "scientsbank"
+             and (x["model"], x["board"], x["split"]) == (r["model"], r["board"], r["split"])),
             None,
         )
         r["estimate"] = e and {
@@ -180,26 +257,32 @@ def main(argv: list[str] | None = None) -> None:
             "measured_over_estimate_latency": round(r["median_latency_s"] / e["median_latency_s"], 2),
             "measured_over_estimate_energy": round(r["j_per_answer"] / e["mean_j_per_answer"], 2),
         }
-        k = kaggle_run(args.kaggle, r["model"], r["split"], r["n"])
-        r["vs_kaggle"] = k and {
-            "kaggle_run": k.name,
-            "kaggle_accuracy": json.loads(k.read_text())["metrics"]["accuracy"],
-            **compare(read_answers(r["_summary"]), read_answers(k)),
-        }
+        k = kaggle_run(args.kaggle, r["benchmark"], r["model"], r["split"], r["n"])
+        mine, theirs = outcomes(r["_summary"], args.judge), k and outcomes(k, args.judge)
+        if k and (mine is None or theirs is None):
+            r["vs_kaggle"] = {"kaggle_run": k.name, "pending": "judge the news run first"}
+        elif k:
+            c = compare(mine, theirs)
+            r["vs_kaggle"] = {"kaggle_run": k.name, "kaggle_accuracy": c.pop("second_accuracy"),
+                              "board_accuracy_paired": c.pop("first_accuracy"), **c}
+        else:
+            r["vs_kaggle"] = None
 
     pairs = []
     for a in runs:
         for b in runs:
-            if (a["model"], a["split"]) == (b["model"], b["split"]) and (a["board"], b["board"]) == (
-                "pi", "jetson"
-            ):
-                pairs.append({
-                    "first": a["run"],
-                    "second": b["run"],
-                    "latency_ratio": round(a["median_latency_s"] / b["median_latency_s"], 1),
-                    "energy_ratio": round(a["j_per_answer"] / b["j_per_answer"], 1),
-                    **compare(read_answers(a["_summary"]), read_answers(b["_summary"])),
-                })
+            same = (a["benchmark"], a["model"], a["split"]) == (b["benchmark"], b["model"], b["split"])
+            if not (same and (a["board"], b["board"]) == ("pi", "jetson")):
+                continue
+            oa, ob = outcomes(a["_summary"], args.judge), outcomes(b["_summary"], args.judge)
+            pairs.append({
+                "first": a["run"],
+                "second": b["run"],
+                "latency_ratio": round(a["median_latency_s"] / b["median_latency_s"], 1),
+                "energy_ratio": round(a["j_per_answer"] / b["j_per_answer"], 1),
+                **(compare(oa, ob) if oa is not None and ob is not None
+                   else {"pending": "judge the news runs first"}),
+            })
 
     stamp = datetime.now(UTC)
     out = {
@@ -211,7 +294,9 @@ def main(argv: list[str] | None = None) -> None:
             "method": "energy = trapezoid of telemetry power_w over the grading window (first "
             "request start to last request end, from server.log); board DC draw, not wall "
             "power. Prefill fit: prompt_ms = a + b*prompt tokens processed, every request. "
-            "Accuracy: same-grade count and exact McNemar on correctness, same answer ids.",
+            "Accuracy: same-grade count and exact McNemar on correctness, same answer ids. "
+            "GSM/news: paired with Kaggle and between boards on the question ids both runs "
+            "have; news correctness is the judge's grade.",
         },
         "runs": [{k: v for k, v in r.items() if not k.startswith("_")} for r in runs],
         "board_pairs": pairs,
@@ -220,19 +305,23 @@ def main(argv: list[str] | None = None) -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
     path = out_dir / f"board-check-{stamp:%Y%m%d-%H%M%S}.json"
     path.write_text(json.dumps(out, indent=2) + "\n")
+    def num(x, f=".3f"):
+        return "n/a" if x is None else format(x, f)
+
     for r in runs:
         e, k = r["estimate"] or {}, r["vs_kaggle"] or {}
         print(
-            f"{r['run']:38} t={r['threads']} acc {r['accuracy']:.3f} (kaggle "
-            f"{k.get('kaggle_accuracy', float('nan')):.3f}, same {k.get('same_grade')}/{k.get('n')}"
-            f", p {k.get('mcnemar', {}).get('p')})  median {r['median_latency_s']:.2f} s "
-            f"(est {e.get('median_latency_s')})  {r['j_per_answer']:.1f} J/answer "
-            f"(est {e.get('j_per_answer')})"
+            f"{r['run']:46} t={r['threads']} acc {num(r['accuracy'])} (kaggle "
+            f"{num(k.get('kaggle_accuracy'))} on {k.get('n')}, same {k.get('same_grade')}"
+            f", p {k.get('mcnemar', {}).get('p')}{', ' + k['pending'] if 'pending' in k else ''})"
+            f"  median {r['median_latency_s']:.2f} s (est {e.get('median_latency_s')})  "
+            f"{r['j_per_answer']:.1f} J/question (est {e.get('j_per_answer')})"
+            f"{'  CPU CLOCK LOCKED' if (r['board_state'] or {}).get('cpu_clock_locked') else ''}"
         )
     for p in pairs:
         print(
-            f"{p['first']} vs {p['second']}: same {p['same_grade']}/{p['n']}, "
-            f"McNemar p {p['mcnemar']['p']}, Pi/Jetson latency {p['latency_ratio']}x, "
+            f"{p['first']} vs {p['second']}: same {p.get('same_grade')}/{p.get('n')}, "
+            f"McNemar p {p.get('mcnemar', {}).get('p')}, Pi/Jetson latency {p['latency_ratio']}x, "
             f"energy {p['energy_ratio']}x"
         )
     print(f"wrote {path}")
