@@ -17,10 +17,14 @@ results/
                board-check-*.json: measured board runs vs Kaggle accuracy and that estimate
                (uv run edge-grader-cost results/kaggle/baseline-*.json)
   board/       runs on the Pi 5 / Jetson (from scripts/board_grade.sh), one folder per run:
-    <model>-<board>-<split>-<stamp>/
-      baseline-*.json   grading summary: metrics, settings, server model path, token totals
-      raw/*.jsonl       one line per graded answer, including the model's raw reply
+    <model>-<board>-<split>-<stamp>/          SciEntsBank grading (stage 1 and phase 0)
+    <bench>-<model>-<board>-<set>-<stamp>/    phase 0: gsm (set gsm8k | symbolic-i<variants>), news (set test)
+      baseline-*.json | gsm-*.json | news-*.json   the runner's summary: metrics, settings,
+                        server model path and build, token totals
+      raw/*.jsonl       one line per question, including the model's raw reply
+      news-*.judged-qwen3-14b-q4_k_m.json, raw/*.judged-*.jsonl   news only: the Kaggle judge's grades
       server.log        llama-server log
+      board-state.txt   CPU governor and clocks (Jetson: devfreq, nvpmodel) at the start of the run
       telemetry-*/      agentic-edge's run_measured.sh output: telemetry.csv, requests.csv,
                         meta.json, summary.json (energy, J/token), command.log
   local/       ad-hoc runs (the CLI's default --out); commit only the ones worth keeping

@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
-# Grading baseline on a lab board (Pi 5 or Jetson), with the same llama-server
+# The baseline on a lab board (Pi 5 or Jetson), with the same llama-server
 # flags as agentic-edge's MMLU-Pro baseline, wrapped in its run_measured.sh so
-# energy is recorded the same way.
+# energy is recorded the same way. BENCH picks the benchmark (default: grading).
 #
-#   scripts/board_grade.sh e4b                  # test_ua, all 540 answers, measured
+#   scripts/board_grade.sh e4b                  # SciEntsBank test_ua, all 540 answers, measured
 #   scripts/board_grade.sh e2b test_ud 200      # 200 answers of unseen domains
+#   BENCH=gsm scripts/board_grade.sh e2b gsm8k  # the 100 GSM8K originals
+#   BENCH=gsm INSTANCES=1 scripts/board_grade.sh e2b symbolic   # first GSM-Symbolic variant set
+#   BENCH=news scripts/board_grade.sh e4b       # LiveNewsBench, 200 (judge on Kaggle afterwards)
 #   MEASURE=0 scripts/board_grade.sh e4b        # no telemetry (a quick check)
+#   DRY_RUN=1 EG_BOARD=pi5 BENCH=gsm scripts/board_grade.sh e2b symbolic
+#                                               # print the run folder and commands, touch nothing
 #
 # Run it directly on an idle board, never through agentic-edge's job queue:
 # this project's runs must not land in the lab's measured/ or stdbench/. It
@@ -16,10 +21,12 @@
 #
 # Everything a run produces stays inside this repo, never in agentic-edge's
 # folders, so it can be committed as the record of the run:
-#   results/board/<model>-<board>-<split>-<stamp>/
-#     baseline-*.json      grading summary (metrics, settings, server model path)
-#     raw/*.jsonl          one line per graded answer
+#   results/board/<model>-<board>-<split>-<stamp>/          SciEntsBank (stage-1 names)
+#   results/board/<bench>-<model>-<board>-<set>-<stamp>/    gsm (set gsm8k | symbolic-i<N>), news (set test)
+#     <runner summary>.json  baseline-*, gsm-* or news-*: metrics, settings, server model path
+#     raw/*.jsonl          one line per question, including the model's raw reply
 #     server.log           llama-server log (timestamped)
+#     board-state.txt      CPU governor and clocks (and the Jetson's devfreq, nvpmodel) at the start
 #     telemetry-*/         run_measured.sh output: telemetry.csv, requests.csv,
 #                          meta.json, summary.json (energy, J/token), command.log
 #
@@ -31,37 +38,66 @@
 set -uo pipefail
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
 SELF="$HERE/scripts/$(basename "$0")"  # absolute: run_measured.sh cd's to its own dir
-MODEL_KEY="${1:?usage: $0 e2b|e4b [split] [n]}"
-SPLIT="${2:-test_ua}"
+MODEL_KEY="${1:?usage: [BENCH=scientsbank|gsm|news] [INSTANCES=n] $0 e2b|e4b [split|set] [n]}"
+BENCH="${BENCH:-scientsbank}"
+case "$BENCH" in
+  scientsbank) SETS="test_ua test_uq test_ud" ;;
+  gsm) SETS="gsm8k symbolic" ;;
+  news) SETS="test" ;;
+  *) echo "unknown BENCH: $BENCH (scientsbank|gsm|news)" >&2; exit 1 ;;
+esac
+SPLIT="${2:-${SETS%% *}}"
+case " $SETS " in
+  *" $SPLIT "*) ;;
+  *) echo "unknown split/set for $BENCH: $SPLIT (one of: $SETS)" >&2; exit 1 ;;
+esac
 N="${3:-0}"
+case "$N" in ''|*[!0-9]*) echo "n must be a whole number: $N" >&2; exit 1 ;; esac
+INSTANCES="${INSTANCES:-10}"
+case "$INSTANCES" in
+  ''|*[!0-9]*|0) echo "INSTANCES must be a positive whole number: $INSTANCES" >&2; exit 1 ;;
+esac
 MEASURE="${MEASURE:-1}"
 PORT="${PORT:-8080}"
 # deploy.sh installs uv here; non-interactive ssh shells do not have it on PATH.
 export PATH="$HOME/.local/bin:$PATH"
 
-if [ -f /etc/nv_tegra_release ]; then
-  BOARD=jetson
-  AE="${AE:-$HOME/research/agentic-edge/benchmark}"
-  LLAMA_SERVER="${LLAMA_SERVER:-$HOME/build/llama.cpp/build/bin/llama-server}"
-  MODEL_DIR="${MODEL_DIR:-$HOME/research/models}"
-  NGL=99
-  THREADS=""
-  # ~/research is an exFAT SSD (no symlinks); deploy.sh puts the venv here.
-  export UV_PROJECT_ENVIRONMENT="${UV_PROJECT_ENVIRONMENT:-$HOME/venvs/edge-grader}"
+# A dry run may pretend to be a board (EG_BOARD), so the tests can run anywhere.
+DETECTED=""
+if [ "${DRY_RUN:-0}" = 1 ] && [ -n "${EG_BOARD:-}" ]; then
+  DETECTED=$EG_BOARD
+elif [ -f /etc/nv_tegra_release ]; then
+  DETECTED=jetson
 elif grep -qi raspberry /proc/device-tree/model 2>/dev/null; then
-  BOARD=pi5
-  AE="${AE:-$HOME/Research/agentic-edge/benchmark}"
-  LLAMA_SERVER="${LLAMA_SERVER:-/home/mitlab/llama.cpp/build/bin/llama-server}"
-  MODEL_DIR="${MODEL_DIR:-/home/mitlab/models}"
-  NGL=0
-  # Every agentic-edge Pi run serves with -t 3 (va-llm, std_mmlupro.sh); without
-  # it llama.cpp takes all 4 cores and the Pi's speed and energy stop matching.
-  THREADS="-t 3"
-else
-  echo "not a Pi 5 or Jetson; on other machines start llama-server yourself and run" >&2
-  echo "  uv run edge-grader-baseline --label <name> --split $SPLIT --n $N" >&2
-  exit 1
+  DETECTED=pi5
 fi
+case "$DETECTED" in
+  jetson)
+    BOARD=jetson
+    AE="${AE:-$HOME/research/agentic-edge/benchmark}"
+    LLAMA_SERVER="${LLAMA_SERVER:-$HOME/build/llama.cpp/build/bin/llama-server}"
+    MODEL_DIR="${MODEL_DIR:-$HOME/research/models}"
+    NGL=99
+    THREADS=""
+    # ~/research is an exFAT SSD (no symlinks); deploy.sh puts the venv here.
+    export UV_PROJECT_ENVIRONMENT="${UV_PROJECT_ENVIRONMENT:-$HOME/venvs/edge-grader}"
+    ;;
+  pi5)
+    BOARD=pi5
+    AE="${AE:-$HOME/Research/agentic-edge/benchmark}"
+    LLAMA_SERVER="${LLAMA_SERVER:-/home/mitlab/llama.cpp/build/bin/llama-server}"
+    MODEL_DIR="${MODEL_DIR:-/home/mitlab/models}"
+    NGL=0
+    # Every agentic-edge Pi run serves with -t 3 (va-llm, std_mmlupro.sh); without
+    # it llama.cpp takes all 4 cores and the Pi's speed and energy stop matching.
+    THREADS="-t 3"
+    ;;
+  *)
+    echo "not a Pi 5 or Jetson; on other machines start llama-server yourself and run" >&2
+    echo "  uv run edge-grader-baseline --label <name> --split $SPLIT --n $N" >&2
+    exit 1
+    ;;
+esac
 
 case "$MODEL_KEY" in
   e2b) MODEL=$MODEL_DIR/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf ;;
@@ -69,8 +105,36 @@ case "$MODEL_KEY" in
   *) echo "unknown model key: $MODEL_KEY (e2b|e4b)" >&2; exit 1 ;;
 esac
 # The outer call picks the run directory and hands it to the inner call.
-RUN_DIR="${EG_RUN_DIR:-$HERE/results/board/$MODEL_KEY-$BOARD-$SPLIT-$(date +%Y%m%d-%H%M%S)}"
+# SciEntsBank keeps the stage-1 names; the other benchmarks lead with their name.
+if [ "$BENCH" = scientsbank ]; then
+  NAME="$MODEL_KEY-$BOARD-$SPLIT"
+elif [ "$SPLIT" = symbolic ]; then
+  NAME="$BENCH-$MODEL_KEY-$BOARD-symbolic-i$INSTANCES"
+else
+  NAME="$BENCH-$MODEL_KEY-$BOARD-$SPLIT"
+fi
+RUN_DIR="${EG_RUN_DIR:-$HERE/results/board/$NAME-$(date +%Y%m%d-%H%M%S)}"
 SRVLOG=$RUN_DIR/server.log
+
+# The agentic-edge baseline flags (baselines.json "mmlupro-baseline"): thinking off,
+# in the same order as the lab's command line. The same for every benchmark.
+server_cmd() {
+  echo "$LLAMA_SERVER -m $MODEL $THREADS -c 8192 --host 127.0.0.1 --port $PORT -ngl $NGL" \
+       "-rea off --reasoning-budget -1 --cache-ram 0"
+}
+
+# The benchmark's runner. $1 is "echo" for a dry run and "" for the real one.
+runner() {
+  local run=$1 url="http://127.0.0.1:$PORT/v1" label="$MODEL_KEY-$BOARD"
+  case "$BENCH" in
+    scientsbank) $run uv run edge-grader-baseline --base-url "$url" --label "$label" \
+                   --split "$SPLIT" --n "$N" --out "$RUN_DIR" ;;
+    gsm) $run uv run edge-grader-gsm --base-url "$url" --label "$label" \
+           --set "$SPLIT" --instances "$INSTANCES" --n "$N" --out "$RUN_DIR" ;;
+    news) $run uv run edge-grader-news --base-url "$url" --label "$label" \
+            --n "$N" --out "$RUN_DIR" ;;
+  esac
+}
 
 # This project's runs are not agentic-edge's. A job in agentic-edge's queue is
 # wrapped in the queue's own run_measured.sh, which writes telemetry into the
@@ -88,7 +152,7 @@ under_lab_run() {
   return 1
 }
 if [ -z "${EG_INNER:-}" ]; then
-  if LAB=$(under_lab_run); then
+  if LAB=$(under_lab_run 2>/dev/null); then
     echo "refusing: started from agentic-edge's queue or run_measured.sh ($LAB)" >&2
     echo "edge-grader runs stay out of agentic-edge's data; run this script directly on the board" >&2
     exit 1
@@ -104,6 +168,14 @@ case "$RUN_DIR" in
   "$HERE"/results/*) ;;
   *) echo "refusing: run directory $RUN_DIR is outside $HERE/results" >&2; exit 1 ;;
 esac
+
+if [ "${DRY_RUN:-0}" = 1 ]; then
+  echo "run_dir: $RUN_DIR"
+  echo "server: $(server_cmd)"
+  printf 'runner: '
+  runner echo
+  exit 0
+fi
 
 # One job per board (agentic-edge AGENTS §4.9): a second run spoils both runs'
 # telemetry, and on the Jetson this script kills any llama-server. So wait for
@@ -143,7 +215,8 @@ command -v uv >/dev/null || { echo "uv not installed on this board (run scripts/
 if [ "$MEASURE" = 1 ] && [ -z "${EG_INNER:-}" ]; then
   mkdir -p "$RUN_DIR"
   exec env MEASURED_ROOT="$RUN_DIR" SRVLOG="$SRVLOG" "$AE/run_measured.sh" telemetry -- \
-    env EG_INNER=1 EG_RUN_DIR="$RUN_DIR" MEASURE=1 "$SELF" "$MODEL_KEY" "$SPLIT" "$N"
+    env EG_INNER=1 EG_RUN_DIR="$RUN_DIR" MEASURE=1 BENCH="$BENCH" INSTANCES="$INSTANCES" \
+    "$SELF" "$MODEL_KEY" "$SPLIT" "$N"
 fi
 
 mkdir -p "$RUN_DIR"
@@ -154,6 +227,25 @@ restore() {
   fi
 }
 trap restore EXIT
+
+# What the board was set to, so a run with locked clocks (agentic-edge RESULTS.md §7.7)
+# can be told apart from one without. Read-only: nothing here changes a setting.
+board_state() {
+  local c=/sys/devices/system/cpu/cpu0/cpufreq d
+  echo "time: $(date '+%Y-%m-%dT%H:%M:%S%z')"
+  echo "kernel: $(uname -r)"
+  [ -r "$c/scaling_governor" ] && echo "cpu0: governor $(cat $c/scaling_governor)" \
+    "min $(cat $c/scaling_min_freq) max $(cat $c/scaling_max_freq)" \
+    "cur $(cat $c/scaling_cur_freq) (kHz)"
+  for d in /sys/class/devfreq/*; do
+    [ -r "$d/min_freq" ] && echo "devfreq $(basename "$d"): min $(cat "$d/min_freq")" \
+      "max $(cat "$d/max_freq") cur $(cat "$d/cur_freq") (Hz)"
+  done
+  command -v nvpmodel >/dev/null && echo "nvpmodel: $(nvpmodel -q 2>/dev/null | tr '\n' ' ')"
+  [ -f "$HERE/DEPLOYED.json" ] && echo "deployed: $(cat "$HERE/DEPLOYED.json")"
+  return 0
+}
+board_state > "$RUN_DIR/board-state.txt" 2>&1
 
 if [ "$BOARD" = pi5 ]; then
   sudo -n systemctl stop va-llm || { echo "cannot stop va-llm (sudo -n)" >&2; exit 1; }
@@ -166,20 +258,15 @@ sleep 2
 STAMP="python3 $AE/stamp.py"
 [ -f "$AE/stamp.py" ] || STAMP=cat
 
-# The agentic-edge baseline flags (baselines.json "mmlupro-baseline"): thinking off,
-# in the same order as the lab's command line.
 echo "$(date) starting llama-server on $BOARD: $(basename "$MODEL")"
-nohup sh -c "$LLAMA_SERVER -m $MODEL $THREADS -c 8192 --host 127.0.0.1 --port $PORT -ngl $NGL \
-  -rea off --reasoning-budget -1 --cache-ram 0 2>&1 | $STAMP" \
-  > "$SRVLOG" 2>&1 < /dev/null &
+nohup sh -c "$(server_cmd) 2>&1 | $STAMP" > "$SRVLOG" 2>&1 < /dev/null &
 for _ in $(seq 150); do curl -sf "localhost:$PORT/health" >/dev/null 2>&1 && break; sleep 2; done
 curl -sf "localhost:$PORT/health" >/dev/null || { echo "llama-server did not come up; see $SRVLOG" >&2; exit 1; }
 ps -o args= -C llama-server | head -1
 
 cd "$HERE" || exit 1
-uv run edge-grader-baseline --base-url "http://127.0.0.1:$PORT/v1" \
-  --label "$MODEL_KEY-$BOARD" --split "$SPLIT" --n "$N" --out "$RUN_DIR"
+runner ""
 RC=$?
-echo "$(date) grading finished rc=$RC; everything for this run is in $RUN_DIR"
-echo "commit it: git add results/board && git commit -m 'Board run: $MODEL_KEY $BOARD $SPLIT'"
+echo "$(date) $BENCH finished rc=$RC; everything for this run is in $RUN_DIR"
+echo "commit it: git add results/board && git commit -m 'Board run: $BENCH $MODEL_KEY $BOARD $SPLIT'"
 exit $RC

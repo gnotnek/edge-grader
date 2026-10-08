@@ -12,3 +12,7 @@ data/
 
 # results/ is the experiment record and is committed in full, including
 # per-answer raw/*.jsonl and board telemetry.
+
+# Plan-execution scratch (superpowers ledgers) and the boards' job queue state
+.superpowers/
+queue/
