@@ -60,7 +60,7 @@ for b in "${TARGETS[@]}"; do
   H=$(host_of "$b"); R=$(repo_of "$b")
   echo "== $b ($H:~/$R)"
 
-  busy=$(ssh "$H" 'pgrep -fa "[b]oard_grade|[e]dge-grader-(baseline|gsm|news)" | cut -c1-100')
+  busy=$(ssh "$H" 'pgrep -fa "[b]oard_grade|[b]oard_queue.py run|[e]dge-grader-(baseline|gsm|news)" | cut -c1-100')
   if [ -n "$busy" ]; then
     echo "   busy, not deploying:" >&2
     echo "$busy" | sed 's/^/     /' >&2
