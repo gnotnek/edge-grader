@@ -32,8 +32,8 @@
 #
 # What it does to the board, and undoes on exit:
 #   Pi     stops the va-llm service (it holds the model and port 8080), runs its
-#          own llama-server, then starts va-llm again. Same sudo -n rights the
-#          lab's std_mmlupro.sh uses.
+#          own llama-server, then starts va-llm again if it was running before.
+#          Same sudo -n rights the lab's std_mmlupro.sh uses.
 #   Jetson kills any "llama-server -m" and runs its own (as std_mmlupro_jetson.sh).
 set -uo pipefail
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
@@ -220,9 +220,12 @@ if [ "$MEASURE" = 1 ] && [ -z "${EG_INNER:-}" ]; then
 fi
 
 mkdir -p "$RUN_DIR"
+# Put the Pi's deployed server back the way it was found: restart it only if it was running.
+VA_LLM_WAS=""
+[ "$BOARD" = pi5 ] && VA_LLM_WAS=$(systemctl is-active va-llm 2>/dev/null)
 restore() {
   pkill -f "llama-server -m $MODEL" 2>/dev/null
-  if [ "$BOARD" = pi5 ]; then
+  if [ "$BOARD" = pi5 ] && [ "$VA_LLM_WAS" = active ]; then
     sudo -n systemctl start va-llm && echo "$(date) va-llm restarted"
   fi
 }
@@ -243,6 +246,7 @@ board_state() {
   done
   command -v nvpmodel >/dev/null && echo "nvpmodel: $(nvpmodel -q 2>/dev/null | tr '\n' ' ')"
   [ -f "$HERE/DEPLOYED.json" ] && echo "deployed: $(cat "$HERE/DEPLOYED.json")"
+  [ "$BOARD" = pi5 ] && echo "va-llm: ${VA_LLM_WAS:-unknown}"
   return 0
 }
 board_state > "$RUN_DIR/board-state.txt" 2>&1
