@@ -249,7 +249,9 @@ def test_main_pairs_trimmed_symbolic_on_shared_ids(tmp_path):
 STAGE1 = REPO / "results/board/e2b-jetson-test_ua-20260930-224702"
 
 
-@pytest.mark.skipif(not STAGE1.exists(), reason="results/ isn't deployed to the boards")
+# The boards keep their own partial results/board/ (no telemetry, no results/kaggle/); the
+# committed record is complete only in the repo checkout.
+@pytest.mark.skipif(not (REPO / "results/kaggle").exists(), reason="the committed results/ isn't on the boards")
 def test_stage1_jetson_run_reads_as_before():
     """The committed board-check-20261005-042603.json values for this run, unchanged."""
     r = read_run(STAGE1)
