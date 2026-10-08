@@ -41,7 +41,11 @@ The Gemma 4 model card ([ai.google.dev](https://ai.google.dev/gemma/docs/core/mo
 
 **Prompt:** LiveNewsBench's own no-search baseline, byte for byte. That is a system line plus "Today is 2025-12-31. Please answer … step by step … `<answer>…</answer>`", then the question. Greedy, up to 2,048 tokens (as MMLU-Pro; the paper allows 16k to frontier models). The final answer is the text in the last `<answer>` tags. With RAG, the top 3 passages go in front, headed "News articles, for background:".
 
-**Scoring: an LLM judge, as LiveNewsBench does.** The judge gets the question, the gold answer and the model's final answer, and returns CORRECT / INCORRECT / NOT_ATTEMPTED (the SimpleQA grading prompt, copied to [`prompts/simpleqa_grader.txt`](../../src/edge_grader/prompts/simpleqa_grader.txt)). `uv run edge-grader-news-judge <run>.json` writes `<run>.judged-<judge>.json/.jsonl` next to the run and never changes the run's own files. The paper's judge is GPT-4.1, the default here. **Pending the owner:** which judge (and API key) to use.
+**Scoring: an LLM judge, as LiveNewsBench does.** The judge gets the question, the gold answer and the model's final answer, and returns CORRECT / INCORRECT / NOT_ATTEMPTED (the SimpleQA grading prompt, copied to [`prompts/simpleqa_grader.txt`](../../src/edge_grader/prompts/simpleqa_grader.txt)). `uv run edge-grader-news-judge <run>.json` writes `<run>.judged-<judge>.json/.jsonl` next to the run and never changes the run's own files. The paper's judge is GPT-4.1, the CLI's default.
+
+**Judge used here: Qwen3-14B (Q4_K_M, Qwen's official GGUF, Apache 2.0) on Kaggle, not GPT-4.1** (own decision, 2026-10-08). GPT-4.1 needs paid API credit; the account's free tier allows 50 requests a day, and the four runs need 800. Qwen3-14B runs free on a Kaggle T4 in `llama-server` with the same flags (thinking off) and the same prompt, temperature 0. It isn't a Gemma model, so the judge doesn't grade its own family. The judge reads the leading letter, so "A: CORRECT" counts like "A"; anything else is `unparsed`. The judged file records the judge server's model path and build. **The cost:** the numbers aren't directly comparable with the paper's GPT-4.1 figures. To measure how much that matters, two checks are planned: GPT-4.1 on a 50-answer sample (one day of the free tier), and the owner's hand grades on 50 answers, each compared with Qwen3-14B's grades.
+
+Before judging, 329 of the 800 answers were plain declines ("Information unavailable", or no `<answer>` tag); they're judged like the rest, not filtered by a rule.
 
 ### RAG corpus and retrieval
 
@@ -72,7 +76,7 @@ On Kaggle, [`notebooks/kaggle_baseline.ipynb`](../../notebooks/kaggle_baseline.i
 - **News, no RAG:** `TASK = "news"`, `RAG = None`.
 - **News, RAG-en:** `TASK = "news"`, `RAG = "results/rag/retrieval-news-en.bge-small-en-k5.json"`. The notebook rebuilds the news chunks from the pinned download and checks their sha256, so nothing has to be uploaded.
 
-Then, on this machine: `OPENAI_API_KEY=… uv run edge-grader-news-judge results/kaggle/news-<…>.json` for each news run.
+Then the judge, also on Kaggle: `TASK = "news-judge"`, `RAG = None`. It grades every committed `results/kaggle/news-*.json` run with Qwen3-14B. (With an API key instead: `OPENAI_API_KEY=… uv run edge-grader-news-judge results/kaggle/news-<…>.json`.)
 
 ## Results
 

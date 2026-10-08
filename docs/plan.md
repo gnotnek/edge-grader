@@ -72,9 +72,11 @@
 - [x] News set: **LiveNewsBench** January 2026 release, 200 human-verified questions on Nov–Dec 2025 events, with their source articles, instead of a self-built set. Runner `edge-grader-news` with its own no-search prompt; judge `edge-grader-news-judge` with its SimpleQA prompt ([`results/topics.md`](results/topics.md#news-livenewsbench-january-2026-release))
 - [x] News corpus: 1,176 articles → 4,861 chunks, `bge-small-en` index, retrieval (2026-10-07, on the Mac). Automatic check: a passage from the question's own article in the top 3 for **194/200**
 - [x] News retrieval check by hand, owner's marking (2026-10-07): a useful passage in the top 3 for **21/30** questions, 16/30 at rank 1 ([`results/topics.md`](results/topics.md#rag-corpus-and-retrieval))
-- [ ] Choose the news judge and provide its API key (owner; LiveNewsBench uses GPT-4.1)
+- [x] News judge: **Qwen3-14B on Kaggle**, free, in place of the paper's GPT-4.1 (free tier: 50 requests a day, 800 needed) ([`results/topics.md`](results/topics.md#news-livenewsbench-january-2026-release))
 - [ ] Kaggle, math: `tiny` (runner check against the lab's 81/100 E2B, 75/100 E4B at 256 tokens), `gsm8k`, `symbolic`; E2B + E4B
-- [ ] Kaggle, news: no RAG and RAG-en, E2B + E4B; then judge every run
+- [x] Kaggle, news: no RAG and RAG-en, E2B + E4B (2026-10-07/08): 200 answers each, 0 errors, build `a3a1c47`
+- [ ] Kaggle, judge: `TASK = "news-judge"` on the four runs
+- [ ] Judge check: GPT-4.1 on 50 answers (free tier, one day) and the owner's hand grades on 50, agreement with Qwen3-14B
 - [ ] Analysis: math vs news, no RAG vs RAG; the GSM8K vs GSM-Symbolic gap as the memorisation check
 
 ### Stage 3: Fine-tuning (weeks 6–7)
@@ -125,3 +127,4 @@
 | 2026-10-07 | MMLU-Pro RAG-id dropped after its retrieval check scored 0/30; stage 2 complete | The Indonesian SMA material has nothing usable for college-level questions, so grading would measure only distraction |
 | 2026-10-07 | Topic narrowing added to week 5: math (GSM8K + GSM-Symbolic) against post-cutoff news, no RAG and RAG. Pending the supervisor | Supervisor asked which of logic, math, news and general knowledge suits these models. MMLU-Pro answers math only; math and news are the two ends of the knowledge-vs-skill contrast |
 | 2026-10-07 | Topic benchmarks built ahead of the supervisor's reply, at the owner's request: math runner, LiveNewsBench in place of a self-built news set, news corpus and retrieval. Kaggle runs and the judge remain | The build is cheap and doesn't touch SciEntsBank or stage 3; a published, human-verified post-cutoff set with source articles already existed |
+| 2026-10-08 | News judge: Qwen3-14B on Kaggle instead of GPT-4.1; agreement checked on samples against GPT-4.1 and hand grades | GPT-4.1 needs paid API credit (free tier: 50 requests a day, 800 needed); the open judge is free and reproducible |

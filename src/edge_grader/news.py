@@ -22,13 +22,15 @@ The final answer is the text inside the last <answer></answer>; none counts as n
 Answers are free text, so they're scored by an LLM judge, as LiveNewsBench does: its SimpleQA
 grading prompt, one of CORRECT / INCORRECT / NOT_ATTEMPTED per answer. edge-grader-news-judge
 reads a run's files and writes new ones next to them (<name>.judged-<judge>.json/.jsonl); the
-run's own files are never changed.
+run's own files are never changed. Each grade is saved as it comes (raw/<...>.jsonl.part), so a run
+stopped by an API limit resumes where it left off when the same command is run again.
 """
 
 import argparse
 import hashlib
 import json
 import os
+import re
 import statistics
 import sys
 import time
@@ -62,6 +64,26 @@ PROMPT = ("Today is 2025-12-31. Please answer the following question by thinking
 JUDGE_PROMPT = Path(__file__).with_name("prompts") / "simpleqa_grader.txt"
 JUDGE_SYSTEM = "You are a helpful assistant."
 GRADES = {"A": "correct", "B": "incorrect", "C": "not_attempted"}
+# grade_answers.py counts only a reply of exactly "A" as correct. Open judges sometimes add the
+# label ("A: CORRECT") or an empty think block; the letter they lead with is read the same way.
+GRADE_RE = re.compile(r"^\W*([ABC])\b")
+THINK_RE = re.compile(r"<think>.*?</think>", re.DOTALL)
+
+
+def parse_grade(reply: str) -> str:
+    m = GRADE_RE.match(THINK_RE.sub("", reply).strip())
+    return GRADES[m.group(1)] if m else "unparsed"
+
+
+def judge_server(base_url: str) -> dict | None:
+    """A local llama-server judge's /props, for provenance; None for a hosted API."""
+    try:
+        props = httpx.get(f"{base_url.rstrip('/').removesuffix('/v1')}/props", timeout=10).json()
+    except (httpx.HTTPError, ValueError):
+        return None
+    if not isinstance(props, dict) or "model_path" not in props:
+        return None
+    return {"model_path": props.get("model_path"), "build_info": props.get("build_info")}
 
 
 def fetch(path: Path = DATA_FILE) -> Path:
@@ -238,17 +260,34 @@ def judge_main(argv: list[str] | None = None) -> None:
     client = OpenAI(base_url=args.base_url, api_key=key, max_retries=5)
     template = JUDGE_PROMPT.read_text().strip()
     question = {q["id"]: q["question"] for q in load()}
+    tag = args.judge_model.replace("/", "_")
+    raw_out = args.run.parent / "raw" / f"{args.run.stem}.judged-{tag}.jsonl"
+    part = raw_out.with_name(raw_out.name + ".part")
+    done = {}
+    if part.exists():  # an earlier attempt stopped part-way: keep its grades
+        done = {g["id"]: g for g in map(json.loads, part.read_text().splitlines())}
+        print(f"resuming: {len(done)} of {len(rows)} already graded")
 
-    graded = []
-    for i, r in enumerate(rows, 1):
-        # As grade_answers.py: the extracted final answer, "" when there was none.
-        reply = judge_one(client, args.judge_model, template, question[r["id"]], r["gold"],
-                          r.get("pred") or "")
-        graded.append({"id": r["id"], "category": r["category"], "pred": r.get("pred"),
-                       "gold": r["gold"], "judge_reply": reply,
-                       "grade": GRADES.get(reply, "unparsed")})
-        print(f"\r{i}/{len(rows)}", end="", flush=True)
+    with open(part, "a") as f:
+        for i, r in enumerate(rows, 1):
+            if r["id"] in done:
+                continue
+            try:
+                # As grade_answers.py: the extracted final answer, "" when there was none.
+                reply = judge_one(client, args.judge_model, template, question[r["id"]],
+                                  r["gold"], r.get("pred") or "")
+            except APIError as e:
+                print()
+                sys.exit(f"stopped at {len(done)}/{len(rows)}, progress saved in {part}; "
+                         f"run the same command again to resume.\n{e}")
+            g = {"id": r["id"], "category": r["category"], "pred": r.get("pred"),
+                 "gold": r["gold"], "judge_reply": reply, "grade": parse_grade(reply)}
+            f.write(json.dumps(g, ensure_ascii=False) + "\n")
+            f.flush()
+            done[r["id"]] = g
+            print(f"\r{i}/{len(rows)}", end="", flush=True)
     print()
+    graded = [done[r["id"]] for r in rows]
     counts = Counter(g["grade"] for g in graded)
     n = len(graded)
     per_category = {}
@@ -256,7 +295,6 @@ def judge_main(argv: list[str] | None = None) -> None:
         c = per_category.setdefault(g["category"], {"n": 0, "correct": 0})
         c["n"] += 1
         c["correct"] += g["grade"] == "correct"
-    tag = args.judge_model.replace("/", "_")
     summary = {
         "kind": "judged",
         "run": str(args.run),
@@ -264,7 +302,8 @@ def judge_main(argv: list[str] | None = None) -> None:
         "run_stage": run["stage"],
         "judge": {"model": args.judge_model, "base_url": args.base_url, "temperature": 0,
                   "prompt": "LiveNewsBench evals/grade_simple_qa_prompt.txt (SimpleQA)",
-                  "prompt_sha256": hashlib.sha256(JUDGE_PROMPT.read_bytes()).hexdigest()},
+                  "prompt_sha256": hashlib.sha256(JUDGE_PROMPT.read_bytes()).hexdigest(),
+                  "server": judge_server(args.base_url)},
         "time": datetime.now(UTC).isoformat(timespec="seconds"),
         "metrics": {"n": n, "accuracy": round(counts["correct"] / n, 4) if n else None,
                     **{k: counts[k] for k in ("correct", "incorrect", "not_attempted", "unparsed")},
@@ -272,8 +311,9 @@ def judge_main(argv: list[str] | None = None) -> None:
     }
     out = args.run.parent / f"{args.run.stem}.judged-{tag}.json"
     out.write_text(json.dumps(summary, indent=2))
-    with open(args.run.parent / "raw" / f"{args.run.stem}.judged-{tag}.jsonl", "w") as f:
+    with open(raw_out, "w") as f:
         f.writelines(json.dumps(g, ensure_ascii=False) + "\n" for g in graded)
+    part.unlink()
     m = summary["metrics"]
     print(f"{m['accuracy']:.1%} correct of {n} (incorrect {m['incorrect']}, not attempted "
           f"{m['not_attempted']}, unparsed {m['unparsed']}) -> {out}")

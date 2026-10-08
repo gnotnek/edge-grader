@@ -1,0 +1,42 @@
+{
+  "stage": "rag",
+  "benchmark": "news",
+  "label": "e4b-kaggle-t4-en-k3",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "/tmp/models/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a3a1c47"
+  },
+  "dataset": {
+    "name": "LiveNewsBench jan_2026_release_2 human_verified_test",
+    "commit": "8a6b96e7904893977ac8a3ae3342ae3d39f89c2e",
+    "sha256": "e733b10302678c9d57d5e19cf41b735ddb852e81ba418436f2a9da28c96425e6"
+  },
+  "n_requested": 0,
+  "generation": {
+    "max_tokens": 2048,
+    "temperature": 0,
+    "prompt": "LiveNewsBench no-search baseline"
+  },
+  "time": "2026-10-08T06:52:26+00:00",
+  "metrics": {
+    "n": 200,
+    "answered": 200,
+    "hit_token_cap": 0,
+    "errors": 0,
+    "median_latency_s": 13.088000000000001,
+    "wall_s": 2889.7,
+    "prompt_tokens": 226035,
+    "completion_tokens": 134519
+  },
+  "rag": {
+    "retrieval": "results/rag/retrieval-news-en.bge-small-en-k5.json",
+    "k": 3,
+    "index": "data/rag/index/news-en.bge-small-en",
+    "embedding_model": "BAAI/bge-small-en-v1.5",
+    "chunks": "data/rag/chunks/news-en.jsonl",
+    "chunks_sha256": "e60bd78c7f8b1c591cc6b68df2b932638b797a8943e0996db29ff07e4b06b540"
+  }
+}

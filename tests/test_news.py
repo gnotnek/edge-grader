@@ -154,3 +154,43 @@ def test_rag_run_counts_passages_from_own_articles(server, tmp_path):
     assert [r["passages_from_own_articles"] for r in rows] == [1, 0]
     assert FakeServer.seen[0]["messages"][1]["content"].startswith(
         f"News articles, for background:\n[1] text of {own}:0\n[2] text of news:other:0\n\nToday")
+
+
+def test_judge_resumes_after_an_api_limit(server, tmp_path, monkeypatch):
+    import httpx
+    from openai import APIError
+
+    news.main(["--base-url", server, "--label", "fake", "--out", str(tmp_path)])
+    run_file = next(tmp_path.glob("news-baseline-fake-*.json"))
+    monkeypatch.setenv("FAKE_KEY", "k")
+    args = [str(run_file), "--base-url", server, "--judge-model", "fake/judge", "--key-env", "FAKE_KEY"]
+
+    real, calls = news.judge_one, []
+
+    def limited(*a, **kw):  # the second call hits a daily limit
+        calls.append(a[3])
+        if len(calls) == 2:
+            raise APIError("Rate limit reached", httpx.Request("POST", server), body=None)
+        return real(*a, **kw)
+
+    monkeypatch.setattr(news, "judge_one", limited)
+    with pytest.raises(SystemExit, match="progress saved"):
+        news.judge_main(args)
+    part = next((tmp_path / "raw").glob("*.judged-fake_judge.jsonl.part"))
+    assert len(part.read_text().splitlines()) == 1
+    assert not list(tmp_path.glob("*.judged-*.json"))
+
+    news.judge_main(args)  # resumes: only the second question is sent again
+    assert calls == ["Who won?", "What turnout?", "What turnout?"]
+    judged = json.loads(next(tmp_path.glob("*.judged-fake_judge.json")).read_text())
+    assert judged["metrics"]["n"] == 2 and judged["metrics"]["correct"] == 1
+    assert not part.exists()
+
+
+@pytest.mark.parametrize("reply,grade", [
+    ("A", "correct"), ("B", "incorrect"), ("C", "not_attempted"),
+    ("A: CORRECT", "correct"), ("**B**", "incorrect"), ("<think>\n\n</think>\n\nC", "not_attempted"),
+    ("CORRECT", "unparsed"), ("", "unparsed"), ("Answer: A", "unparsed"),
+])
+def test_parse_grade_reads_the_leading_letter(reply, grade):
+    assert news.parse_grade(reply) == grade
