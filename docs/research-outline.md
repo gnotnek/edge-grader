@@ -1,28 +1,29 @@
 # Research outline
 
-*Last updated 2026-10-07. The source of truth for what this project is trying to answer. Update it when the supervisor changes direction, and log the reason in the decisions table below.*
+*Last updated 2026-10-08. The source of truth for what this project is trying to answer. Update it when the supervisor changes direction, and log the reason in the decisions table below.*
 
 ## One-line summary
 
-Measure how well a **small LLM on an edge device** grades students' short answers, then test how much **subject knowledge** improves it, first through **RAG** (course material in the prompt) and then through **fine-tuning**. Report the accuracy gained against the time and energy each version costs on the device.
+Measure how well a **small LLM on an edge device** grades students' short answers, on the cloud and on the boards, then test what changes it: **subject knowledge** through **RAG** (course material in the prompt), **inference-time settings** (thinking, engine, prefix reuse, embedder) and **image input** (an answer given as an image). Report the accuracy gained against the time and energy each version costs on the device. Fine-tuning was dropped on 2026-10-08 (supervisor feedback below).
 
 ## Why
 
 - **Teachers:** grading short answers takes teachers a lot of time.
 - **Why local:** a model running locally avoids per-call API costs, keeps student data on school hardware, works offline, and doesn't change without notice.
 - **The problem:** small models lack subject knowledge. The supervisor's hypothesis is that adding it (e.g. for physics or maths) helps the model break down formulas and concepts better.
-- **The open question:** how much RAG and fine-tuning help, whether that help carries over to new topics, and what it costs on the device.
+- **The open question:** how much RAG helps, whether that help carries over to new topics, how much the way the model is run (thinking, engine) matters, and what it costs on the device.
 
 ## Research questions
 
 | # | Question | Stage |
 |---|---|---|
-| RQ1 | How well do **untouched** small models (Gemma 4 E2B/E4B) grade student answers? How does that compare with their subject knowledge on the lab's MMLU-Pro baseline? | 1 |
-| RQ2 | Does **RAG over course material** improve grading, especially on **unseen questions and unseen domains**? | 2 |
-| RQ3 | Does **fine-tuning** (QLoRA) improve grading? Does the gain survive on unseen domains, and how does it compare with RAG, or RAG plus fine-tuning? | 3 |
+| RQ1 | How well do **untouched** small models (Gemma 4 E2B/E4B) grade student answers? How does that compare with their subject knowledge (MMLU-Pro, math, news)? **On the cloud and on both boards** | 1, 0 |
+| RQ2 | Does **RAG over course material** improve grading, especially on **unseen questions and unseen domains**? And each subject-knowledge benchmark: MMLU-Pro, math, news? | 2, A |
+| ~~RQ3~~ | ~~Does **fine-tuning** (QLoRA) improve grading?~~ **Dropped 2026-10-08** (supervisor). The number is kept so older decisions still point to the right thing | — |
 | RQ4 | What does each version cost on the **Pi 5 / Jetson** (latency, energy per answer), and which gives the best accuracy per unit of energy? | 4 |
 | RQ5 | How close does the best local version get to a **cloud model with the same material**, which stands in for NotebookLM? The supervisor wants this tested, not assumed. | 2–4 |
-| *opt.* | Does thinking mode help or hurt small graders? | any |
+| **RQ6** | Do **inference-time settings** (thinking on, little-gemma instead of llama.cpp, prefix reuse, EmbeddingGemma 2 as the embedder) change grading accuracy or cost? Replaces the optional thinking question | B |
+| **RQ7** | Can the models grade an answer given **as an image**, and how much accuracy does reading cost? A question with a figure, if a dataset exists | C |
 
 ## Stages
 
@@ -30,12 +31,16 @@ Measure how well a **small LLM on an edge device** grades students' short answer
 |---|---|---|
 | **1. Baseline** | (a) The lab's MMLU-Pro 100-question subset, for subject knowledge. (b) SciEntsBank grading with the untouched model, served by `llama-server` with thinking off | Done: MMLU-Pro (E2B 51.7–52.7%, E4B 65.7–66.0%), grading accuracy per split (equal on Kaggle and both boards), and board cost measured on test_ua: Jetson 4.0 / 7.1 J and Pi 5 27.8 / 55.6 J per answer (E2B / E4B). See [`results/baselines.md`](results/baselines.md) |
 | **2. RAG** | Chunk open school-science material matched to SciEntsBank's topics (Utah OER textbooks + Wikipedia; Indonesian Kurikulum Merdeka books as an optional cross-lingual test); embed with a small model; retrieve the top 3 chunks per question into the grading prompt. Retrieval is done once per question, ahead of time | Improvement over the baseline, per split. Pipeline and retrieval check done: [`results/rag.md`](results/rag.md) |
-| **3. Fine-tuning** | QLoRA with Unsloth on Kaggle/Colab, trained on the SciEntsBank train split; convert to GGUF and serve like the others | Improvement over the baseline; RAG vs fine-tuning vs both |
+| ~~3. Fine-tuning~~ | **Dropped 2026-10-08** (supervisor). Replaced by phases 0, A, B, C below | — |
+| **0. Edge baseline** | Every baseline cell on both boards: SciEntsBank test_uq/test_ud, GSM8K + GSM-Symbolic (Pi: one variant set), news. Before anything new reaches the boards | Baseline table, accuracy vs Kaggle and cost per question, every benchmark × board |
+| **A. RAG, all benchmarks** | Math RAG-en (OpenStax Prealgebra) beside the SciEntsBank, MMLU-Pro and news RAG runs | Baseline vs RAG for all four benchmarks |
+| **B. Variations** | Thinking on (grading); little-gemma and prefix reuse (Jetson); EmbeddingGemma 2 (gated on its retrieval check) | Each against the baseline, accuracy and cost |
+| **C. Images** | (1) the student's answer as an image; (2) a question with a figure, if a dataset qualifies | Image vs text accuracy, reading errors, cost |
 | **4. Edge cost** | Run every version on the Pi 5 / Jetson with `scripts/board_grade.sh` (agentic-edge's `run_measured.sh` telemetry) | Accuracy vs latency and energy chart |
 
 **Rule:** don't start a stage until the one before it gives a number you trust.
 
-**Steps, checklist and week-by-week timeline:** [`plan.md`](plan.md).
+**Steps, checklist and week-by-week timeline:** [`plan.md`](plan.md). **Design for phases 0, A, B, C:** [`superpowers/specs/2026-10-08-baseline-variations-design.md`](superpowers/specs/2026-10-08-baseline-variations-design.md).
 
 ## Datasets
 
@@ -68,7 +73,7 @@ Measure how well a **small LLM on an edge device** grades students' short answer
   ```
 
 - Temperature 0; a fixed seed for sampling answers
-- **QAT caveat:** the lab's models are QAT builds. A fine-tuned model is quantized afterwards the ordinary way, so compare base and fine-tuned models under the **same** quantization.
+- **QAT caveat:** the lab's models are QAT builds. Anything that changes the weights or adds to them (the vision projector in phase C) must be matched to them, or the mismatch noted as a confound.
 
 ## Supervisor feedback so far
 
@@ -82,6 +87,10 @@ Measure how well a **small LLM on an edge device** grades students' short answer
 | 2026-09-30 | "Yeppp" to keeping edge measurement: latency and energy per answer on the Pi 5 / Jetson | Confirmed: stage 4 measures every version on the boards. Stage 1 board cost is estimated from `agentic-edge`, see [`results/baselines.md`](results/baselines.md) |
 | 2026-10-07 | Narrow the research: which topic suits these models better, (1) logic, (2) math, (3) news knowledge (e.g. whether Pluto is a planet), (4) general knowledge? Find a benchmark for each; MMLU-Pro's subjects are fine, comparable benchmarks are nice to have | MMLU-Pro split by subject answers math only: math is the strongest subject for both models (E2B 79%, E4B 88% against 48% / 63% for the rest, significant; [`results/rag.md`](results/rag.md#per-subject-no-rag-math-is-the-strongest-subject-analysis-2026-10-07)). It has no logic or news category. Proposed narrowing: **math against news**, see own decisions. Waiting for the supervisor's reply |
 | 2026-10-07 | The topic benchmarks can be graded beside SciEntsBank (in reply to: do they replace it?) | Grading stays the main task; stage 3 still fine-tunes on SciEntsBank. The topic benchmarks take MMLU-Pro's role as the subject-knowledge baseline |
+| 2026-10-08 | The findings are in the baseline: extend it like `agentic-edge` did, with thinking on/off and an engine other than llama.cpp | RQ6, phase B: thinking on for grading, little-gemma (owner's choice) with prefix reuse on the Jetson, and EmbeddingGemma 2 as a gated embedder swap. Owner: this **replaces fine-tuning**, so stage 3 / RQ3 is dropped |
+| 2026-10-08 | Gemma 4 is multimodal; narrow that to text + images for grading | RQ7, phase C: (1) the student's answer as an image, (2) a question with a figure, if a dataset with real student answers exists |
+| 2026-10-08 | Show the baseline against RAG for every benchmark: MMLU-Pro, SciEntsBank, math, news | Phase A: math was the missing cell; math RAG-en from a math textbook (owner's choice) |
+| 2026-10-08 | The project is about edge computing, so finish the baseline on the boards first, "so we aren't steps too far" | Phase 0, first: every missing baseline cell on both boards before anything new reaches them. Jetson runs everything; the Pi runs a trimmed math set (owner's choice) |
 
 ## Own decisions
 
@@ -109,6 +118,12 @@ Decisions made while doing the work, not from the supervisor. Each has to serve 
 | 2026-10-08 | GSM8K vs GSM-Symbolic tested with a permutation test (original swapped with a random one of its 11 items), not the planned sign test. Changed during the analysis; both results are reported | One original against ten variants isn't symmetric: the sign test favours the original even under the null (about 29 of 46 E2B "wins" by chance), so it would report a gap that isn't there | RQ1 |
 | 2026-10-07 | No "own articles only" retrieval condition for news | The pooled search already puts a passage from the question's own article in the top 3 for 194/200 questions, so the extra condition would barely differ from RAG-en | RQ2 |
 | 2026-10-07 | The topic benchmarks sit **beside** SciEntsBank grading, not in place of it. Grading stays the main task, and stage 3 still fine-tunes on SciEntsBank | Confirmed by the supervisor (feedback table, 2026-10-07). Grading is the project's purpose, and the stages already built for it (baseline, RAG, board cost) stay comparable. The topic benchmarks take MMLU-Pro's role: a subject-knowledge baseline next to grading | RQ1, RQ3 |
+| 2026-10-08 | Pi runs GSM8K (100) and only the first GSM-Symbolic variant set (100), not all 1,000; the Jetson runs all of them | All 1,000 variants would cost the Pi 27–42 h. The board runs measure cost and check that accuracy matches Kaggle, which has held in every board run so far; 200 paired questions do both | RQ1, RQ4 |
+| 2026-10-08 | Math RAG-en retrieves from OpenStax *Prealgebra 2e*, not from similar solved GSM8K train problems | Course material tests the supervisor's hypothesis (subject knowledge helps with formulas); solved problems would be retrieved worked examples, a different claim. Same frozen settings; graded whatever the retrieval check scores, unless 0/30 | RQ2 |
+| 2026-10-08 | EmbeddingGemma 2 gets a grading run only if its retrieval check reaches **20/30** (bge-small: 16/30). Threshold set before any result | A new embedder reopens frozen settings; it has to clearly beat the current one to be worth a run | RQ6 |
+| 2026-10-08 | Prefix-reuse test sorts answers by question and includes llama.cpp with the same order as the fair control; the prompt text isn't reordered | The grading prompt is shared up to the student answer, but the test_ua board runs processed every prompt in full. Without the llama.cpp control, an engine flag would get credit for what ordering alone gives (as S10 was for S9 in `agentic-edge`) | RQ6 |
+| 2026-10-08 | With thinking on, the label is read only from the text after the thought block | The thoughts name labels, and the parser takes the first label it sees | RQ6 |
+| 2026-10-08 | Dropped from phase B: n-gram speculation, MTP, TurboQuant KV, Q5_K_M | A grading reply is a single label, so speculation has nothing to speed up; TurboQuant cost E4B 3–5 points in `agentic-edge`; no question here needs a precision control | RQ6 |
 
 ## Open questions
 

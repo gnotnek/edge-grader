@@ -1,6 +1,6 @@
 # Plan: steps and timeline
 
-*Last updated 2026-10-07. Tick steps off as they're done, and move dates when reality changes, noting why at the bottom. The research questions and the reasoning for each stage are in [`research-outline.md`](research-outline.md).*
+*Last updated 2026-10-08. Tick steps off as they're done, and move dates when reality changes, noting why at the bottom. The research questions and the reasoning for each stage are in [`research-outline.md`](research-outline.md).*
 
 **Weeks are counted from the internship start**, taken as the week of 2026-09-14 (two weeks had passed by 2026-09-26). The internship ends around mid-December.
 
@@ -10,11 +10,11 @@
 |---|---|---|---|---|
 | 3 | Sep 28 – Oct 4 | 1. Baseline | Grading baseline on Kaggle ✅; board cost estimated ✅, then measured ✅ | Baseline table complete: accuracy + cost ✅ |
 | 4 | Oct 5 – 11 | 2. RAG | SciEntsBank RAG-en graded, all splits, both models ✅; baseline re-run on the pinned build ✅; MMLU-Pro runner and retrieval | RAG vs baseline table (SciEntsBank) ✅ |
-| 5 | Oct 12 – 18 | 2. RAG + topics | MMLU-Pro no-RAG and RAG-en, per-subject analysis ✅ (done in week 4). Topic benchmarks: math (GSM8K + GSM-Symbolic) and post-cutoff news, no RAG and RAG. Start the stage-3 notebook alongside | Math vs news table, no RAG and RAG |
-| 6 | Oct 19 – 25 | 3. Fine-tuning | QLoRA pipeline on Kaggle; E2B trained and converted to GGUF | Fine-tuned E2B graded on test_ua |
-| 7 | Oct 26 – Nov 1 | 3. Fine-tuning | E4B fine-tuned; RAG + fine-tuning combined | Baseline vs RAG vs fine-tuning vs both, per split |
-| 8 | Nov 2 – 8 | 4. Edge cost + cloud | All versions on the Pi 5 / Jetson; cloud reference (RQ5) | Accuracy vs energy chart |
-| 9 | Nov 9 – 15 | Buffer | Catch up; optional thinking-mode run; analysis and charts | All numbers final |
+| 5 | Oct 12 – 18 | 0. Edge baseline + A | **Phase 0 on the boards** (Jetson ~15 h, Pi ~30 h). On Kaggle meanwhile: math RAG-en (phase A), thinking-on grading (B1); EmbeddingGemma 2 tooling + check on the Mac (B3). Topic benchmarks done in week 4 ✅ | Baseline on both boards for every benchmark; baseline vs RAG for all four |
+| 6 | Oct 19 – 25 | B. Variations + C | little-gemma + prefix reuse on the Jetson (B2); thinking-on cost on the boards; answer-as-image rendering, reading check, Kaggle runs (C1); figure-question data search (C2) | Variations vs baseline table |
+| 7 | Oct 26 – Nov 1 | C. Images | C1 board cost; C2 if a dataset qualifies; B3 grading run if it passed its gate | Image vs text table |
+| 8 | Nov 2 – 8 | 4. Edge cost + cloud | RAG versions on the Pi 5 / Jetson; cloud reference (RQ5) | Accuracy vs energy chart |
+| 9 | Nov 9 – 15 | Buffer | Catch up; analysis and charts | All numbers final |
 | 10–11 | Nov 16 – 29 | Write-up | Report draft with figures; supervisor review | Draft sent to supervisor |
 | 12 | Nov 30 – Dec 6 | Wrap-up | Revisions, final report, repo cleanup | Final report |
 
@@ -79,18 +79,37 @@
 - [x] Judge check (GPT-4.1 and the owner's hand grades on 50 answers): **dropped**, owner's choice (2026-10-08). The news numbers are reported as judged by Qwen3-14B, unchecked apart from Claude's 12-grade spot-check
 - [x] Analysis: math vs news, no RAG vs RAG; the GSM8K vs GSM-Symbolic gap as the memorisation check ([`results/topics.md`](results/topics.md#math-against-news-what-suits-these-models))
 
-### Stage 3: Fine-tuning (weeks 6–7)
-- [ ] Unsloth QLoRA notebook on Kaggle; train on the SciEntsBank **train** split only
-- [ ] Hold out part of train for validation; never touch the test splits while tuning
-- [ ] Convert to GGUF and quantize like the baseline (see the QAT caveat in `research-outline.md`)
-- [ ] Grade with the same CLI: E2B, then E4B
-- [ ] RAG + fine-tuned combined
-- [ ] Analysis: the gain per split, especially **unseen domains** (does fine-tuning transfer?)
+### Stage 3: Fine-tuning: **dropped** (supervisor, 2026-10-08)
+Replaced by phases 0, A, B and C. Design: [`superpowers/specs/2026-10-08-baseline-variations-design.md`](superpowers/specs/2026-10-08-baseline-variations-design.md).
+
+### Phase 0: the baseline on the boards (week 5, first)
+*Implementation plan: [`superpowers/plans/2026-10-09-phase0-edge-baseline.md`](superpowers/plans/2026-10-09-phase0-edge-baseline.md).*
+- [ ] `board_grade.sh` takes a benchmark (`scientsbank` | `gsm` | `news`); dry-run tests
+- [ ] `edge-grader-board-check` pairs GSM and news board runs with Kaggle
+- [ ] Jetson: SciEntsBank test_uq + test_ud, GSM8K + GSM-Symbolic (1,000), news; E2B + E4B
+- [ ] Pi 5: SciEntsBank test_uq + test_ud, GSM8K + GSM-Symbolic first variant set (100), news; E2B + E4B
+- [ ] Judge the board news runs on Kaggle (Qwen3-14B)
+- [ ] Board-check every run; one baseline table, benchmark × model × board, in `results/baselines.md`
+
+### Phase A: baseline vs RAG for every benchmark (week 5, Kaggle)
+- [ ] Math corpus: OpenStax *Prealgebra 2e*, pinned in `sources.json`, chunked with the frozen settings
+- [ ] Retrieval check: 30 GSM8K **train** questions, owner's marking
+- [ ] Kaggle: math RAG-en, E2B + E4B, GSM8K + GSM-Symbolic
+- [ ] Four-benchmark table: news, MMLU-Pro, SciEntsBank, math, baseline vs RAG
+
+### Phase B: variations on the grading baseline (weeks 5–7)
+- [ ] B1 thinking on: parser reads after the thought block (test); `max_tokens` 336; Kaggle all splits, E2B + E4B; boards test_ua for cost
+- [ ] B2 little-gemma on the Jetson: why test_ua had no prefix reuse; `lg-base`, `lg-reuse`, `llama-sorted` on test_ua; byte-identical check
+- [ ] B3 EmbeddingGemma 2: loads on the Mac?; retrieval check on the 30 SciEntsBank train questions; grading run only at ≥ 20/30
+
+### Phase C: text + images (weeks 6–7)
+- [ ] C1: render answers (pinned font), private Kaggle dataset with sha256; matching vision projector; reading check on 100; Kaggle test_ua + test_uq; board cost
+- [ ] C2: data search (real student answers, figures, labels, English, licence, ~300+); run or drop, recorded in the outline
 
 ### Stage 4: Edge cost + cloud reference (week 8)
 *Device rates (tok/s, power, J/token) are reused from `agentic-edge`, not re-measured: [`results/edge-benchmarks.md`](results/edge-benchmarks.md).*
 
-- [ ] Every version (baseline, RAG, fine-tuned, both) × E2B/E4B on the Pi 5 and the Jetson with `board_grade.sh`
+- [ ] Every version (baseline, RAG, and the phase B/C versions that pass) × E2B/E4B on the Pi 5 and the Jetson with `board_grade.sh`
 - [ ] RAG on the board: include embedding and retrieval time in the latency
 - [ ] Cloud reference: a cloud model with the same material, on the same splits (RQ5, the NotebookLM question)
 - [ ] Main chart: accuracy vs energy per answer, for every version and board
@@ -102,7 +121,6 @@
 - [ ] Repo cleanup: README results summary, reproducible commands for every table
 
 ## Optional, if time allows
-- Thinking on vs off for the best version
 - A second dataset (e.g. SAS-Bench 2025, as a check against memorisation)
 - The cascade idea: small model first, escalate uncertain answers (check overlap with `agentic-edge`'s `analyze_cascade.py` first)
 - Fairness: are non-native English answers scored lower?
@@ -128,3 +146,4 @@
 | 2026-10-07 | Topic narrowing added to week 5: math (GSM8K + GSM-Symbolic) against post-cutoff news, no RAG and RAG. Pending the supervisor | Supervisor asked which of logic, math, news and general knowledge suits these models. MMLU-Pro answers math only; math and news are the two ends of the knowledge-vs-skill contrast |
 | 2026-10-07 | Topic benchmarks built ahead of the supervisor's reply, at the owner's request: math runner, LiveNewsBench in place of a self-built news set, news corpus and retrieval. Kaggle runs and the judge remain | The build is cheap and doesn't touch SciEntsBank or stage 3; a published, human-verified post-cutoff set with source articles already existed |
 | 2026-10-08 | News judge: Qwen3-14B on Kaggle instead of GPT-4.1; the planned agreement checks (GPT-4.1, hand grades) dropped, owner's choice | GPT-4.1 needs paid API credit (free tier: 50 requests a day, 800 needed); the open judge is free and reproducible |
+| 2026-10-08 | **Fine-tuning dropped**; phases 0 (baseline on the boards, first), A (math RAG), B (thinking, little-gemma + prefix reuse, EmbeddingGemma 2) and C (images) take weeks 5–7 | Supervisor, 2026-10-08: the findings are in the baseline, finish it on the edge first, show baseline vs RAG for every benchmark, narrow multimodal to text + images. Design: `superpowers/specs/2026-10-08-baseline-variations-design.md` |
