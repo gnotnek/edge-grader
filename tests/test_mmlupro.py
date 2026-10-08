@@ -41,6 +41,7 @@ def test_rag_changes_only_the_last_user_message():
         + plain[-1]["content"])
 
 
+@pytest.mark.skipif(not mmlupro.SUBSET_DIR.exists(), reason="results/ isn't deployed to the boards")
 def test_subset_ids_are_the_labs_three_disjoint_hundreds():
     ids = {s: mmlupro.subset_ids(s) for s in mmlupro.SUBSETS}
     assert all(len(v) == 100 for v in ids.values())

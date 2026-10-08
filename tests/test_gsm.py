@@ -9,11 +9,15 @@ import pytest
 
 from edge_grader import gsm
 
-LAB = json.loads(gsm.LAB_FILE.read_text())
+# The lab's recorded replies live in results/, which deploy.sh doesn't copy to the boards.
+HAVE_LAB = gsm.LAB_FILE.exists()
+LAB = json.loads(gsm.LAB_FILE.read_text()) if HAVE_LAB else {"runs": {}, "docs": {}}
+needs_lab = pytest.mark.skipif(not HAVE_LAB, reason="results/ isn't deployed to the boards")
 RECORDED = [(run, qid, rec) for run, r in LAB["runs"].items()
             for qid, rec in r["per_question"].items()]
 
 
+@needs_lab
 @pytest.mark.parametrize("filt", ["flexible", "strict"])
 def test_extract_and_match_agree_with_lm_eval_on_every_recorded_reply(filt):
     # 3 lab runs x 100 replies: same extracted string and same right/wrong as lm-eval's.
@@ -23,6 +27,7 @@ def test_extract_and_match_agree_with_lm_eval_on_every_recorded_reply(filt):
         assert gsm.exact_match(got, LAB["docs"][qid]["target"]) == rec[filt]["correct"], (run, qid)
 
 
+@needs_lab
 def test_lab_counts_are_what_the_lab_reported():
     runs = LAB["runs"]
     assert runs["tiny1024-e2b"]["flexible_correct"] == 81  # agentic-edge RESULTS.md, 1,024 tokens
@@ -37,6 +42,7 @@ def test_exact_match_normalises_like_lm_eval():
     assert gsm.extract("no digits")["flexible"] == gsm.INVALID
 
 
+@needs_lab
 def test_tiny_replays_the_labs_messages():
     docs = gsm.load("tiny")
     assert len(docs) == 100
