@@ -76,7 +76,7 @@ On Kaggle, [`notebooks/kaggle_baseline.ipynb`](../../notebooks/kaggle_baseline.i
 - **News, no RAG:** `TASK = "news"`, `RAG = None`.
 - **News, RAG-en:** `TASK = "news"`, `RAG = "results/rag/retrieval-news-en.bge-small-en-k5.json"`. The notebook rebuilds the news chunks from the pinned download and checks their sha256, so nothing has to be uploaded.
 
-Then the judge, also on Kaggle: `TASK = "news-judge"`, `RAG = None`. It grades every committed `results/kaggle/news-*.json` run with Qwen3-14B. (With an API key instead: `OPENAI_API_KEY=… uv run edge-grader-news-judge results/kaggle/news-<…>.json`.)
+Then the judge, also on Kaggle, in its own notebook: [`notebooks/kaggle_news_judge.ipynb`](../../notebooks/kaggle_news_judge.ipynb). It grades every committed `results/kaggle/news-*.json` run that has no Qwen3-14B grades yet. (With an API key instead: `OPENAI_API_KEY=… uv run edge-grader-news-judge results/kaggle/news-<…>.json`.)
 
 ## Results
 

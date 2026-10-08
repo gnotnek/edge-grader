@@ -75,7 +75,7 @@
 - [x] News judge: **Qwen3-14B on Kaggle**, free, in place of the paper's GPT-4.1 (free tier: 50 requests a day, 800 needed) ([`results/topics.md`](results/topics.md#news-livenewsbench-january-2026-release))
 - [ ] Kaggle, math: `tiny` (runner check against the lab's 81/100 E2B, 75/100 E4B at 256 tokens), `gsm8k`, `symbolic`; E2B + E4B
 - [x] Kaggle, news: no RAG and RAG-en, E2B + E4B (2026-10-07/08): 200 answers each, 0 errors, build `a3a1c47`
-- [ ] Kaggle, judge: `TASK = "news-judge"` on the four runs
+- [ ] Kaggle, judge: [`notebooks/kaggle_news_judge.ipynb`](../notebooks/kaggle_news_judge.ipynb) on the four runs
 - [ ] Judge check: GPT-4.1 on 50 answers (free tier, one day) and the owner's hand grades on 50, agreement with Qwen3-14B
 - [ ] Analysis: math vs news, no RAG vs RAG; the GSM8K vs GSM-Symbolic gap as the memorisation check
 

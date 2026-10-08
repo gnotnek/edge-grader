@@ -109,6 +109,7 @@ src/edge_grader/
 notebooks/
   kaggle_baseline.ipynb   grading, MMLU-Pro and the topic benchmarks on a Kaggle GPU (stages 1-2)
   kaggle_rag_index.ipynb  stage 2: embed the chunks and retrieve, on Kaggle
+  kaggle_news_judge.ipynb stage 2 topics: grade the news answers with an open judge (Qwen3-14B)
 scripts/
   board_grade.sh          stage 1 on the Pi 5 / Jetson, with telemetry
 tests/                    includes an end-to-end run against a fake llama-server
