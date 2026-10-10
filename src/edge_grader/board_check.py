@@ -9,8 +9,8 @@ results/board/ this reads
     news-*.judged-<judge>.json, raw/*.judged-*.jsonl          news only: the Kaggle judge's grades
     board-state.txt                CPU governor and clock range at the start of the run
     server.log                     llama-server's own per-request prefill and decode timings
-    edge-grader-*/telemetry.csv    1 Hz board power from agentic-edge's run_measured.sh
-    edge-grader-*/meta.json        the llama-server command line actually serving the run
+    telemetry-*/telemetry.csv      1 Hz board power from agentic-edge's run_measured.sh
+    telemetry-*/meta.json           the llama-server command line actually serving the run
 
 Energy is integrated over the grading window only (first request start to last request
 end), so server start-up and the dataset download are left out. Power is board DC draw,
@@ -157,7 +157,9 @@ def read_run(run_dir: Path, judge: str = JUDGE) -> dict:
         judged = summary_path.with_name(f"{summary_path.stem}.judged-{judge}.json")
         accuracy = json.loads(judged.read_text())["metrics"]["accuracy"] if judged.exists() else None
     model, board_label = summary["label"].split("-", 1)
-    tele = next(run_dir.glob("edge-grader-*/"))
+    # run_measured.sh's folder: telemetry-<stamp>/ now, edge-grader-*/ in the stage-1 runs
+    tele = next(d for d in sorted(run_dir.iterdir())
+                if d.is_dir() and d.name.startswith(("telemetry-", "edge-grader-")))
     meta = json.loads((tele / "meta.json").read_text())
     power = json.loads((tele / "summary.json").read_text())["power"]
 

@@ -70,7 +70,8 @@ def stamp(offset_s: int) -> str:
 
 
 def make_run(root: Path, name: str, summary: dict, rows: list[dict],
-             judged: list[dict] | None = None, state: str | None = None) -> Path:
+             judged: list[dict] | None = None, state: str | None = None,
+             tele_name: str = "edge-grader-x") -> Path:
     """A board run folder as board_grade.sh leaves it: one request per row, each 1 s long
     (500 ms prompt + 500 ms decode), ending 2 s apart from t=2; 5 W throughout."""
     run = root / name
@@ -87,7 +88,7 @@ def make_run(root: Path, name: str, summary: dict, rows: list[dict],
         log.append(f"{end} b llama-server[0]: I slot print_timing: id  0 | task {i} | "
                    f"       eval time =     500.00 ms /    10 tokens")
     (run / "server.log").write_text("\n".join(log) + "\n")
-    tele = run / "edge-grader-x"
+    tele = run / tele_name
     tele.mkdir()
     (tele / "meta.json").write_text(json.dumps({"server_args_after": "llama-server -m m.gguf -t 3"}))
     (tele / "summary.json").write_text(json.dumps({"power": {"idle_w": 2.0}}))
@@ -263,3 +264,12 @@ def test_stage1_jetson_run_reads_as_before():
     c = compare(outcomes(find_summary(STAGE1)), outcomes(k))
     assert (c["n"], c["same_grade"], c["second_accuracy"]) == (540, 507, 0.5519)
     assert (c["mcnemar"]["only_first_right"], c["mcnemar"]["only_second_right"]) == (15, 15)
+
+
+def test_reads_the_telemetry_folder_board_grade_writes_today(tmp_path):
+    """run_measured.sh names it telemetry-<stamp>/; stage-1 runs have edge-grader-*/."""
+    run = make_run(tmp_path, "gsm-e2b-pi5-gsm8k-20261010-100000",
+                   gsm_summary("gsm-gsm8k-e2b-pi5-1", "e2b-pi5", "gsm8k", 2, 0.5),
+                   gsm_rows({"1": True, "2": False}), tele_name="telemetry-20261010-100000")
+    r = read_run(run)
+    assert r["threads"] == 3 and r["j_per_answer"] == pytest.approx(7.5)
