@@ -111,7 +111,7 @@ Baseline = no RAG, thinking off, llama.cpp, the fixed flags.
 | Math | 83.0% / 80.0% → **to run** | 92.0% / 90.5% → **to run** |
 
 **Math RAG-en:**
-- **Corpus:** OpenStax *Prealgebra 2e* (CC BY 4.0). The source is checked and pinned in `sources.json` like the other books, and chunked with the frozen settings: 250 words, 50 overlap, the same noise filters, chapters by bookmarks as for the MMLU-Pro OpenStax books.
+- **Corpus:** OpenStax *Prealgebra 2e* (CC BY-NC-SA 4.0, as stated on the book's page; first written here as CC BY 4.0, corrected 2026-10-10). The source is checked and pinned in `sources.json` like the other books, and chunked with the frozen settings: 250 words, 50 overlap, the same noise filters, chapters by bookmarks as for the MMLU-Pro OpenStax books.
 - **Index:**
   - `bge-small-en-v1.5`
   - the query is the question text only

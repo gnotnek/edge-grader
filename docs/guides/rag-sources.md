@@ -183,3 +183,17 @@ The questions are college level, so this material is too.
 - **The baseline protocol has to change.** The lab's baseline uses lm-eval's 5-shot CoT prompt. Adding retrieved passages needs a custom lm-eval task, or this project's own runner, so the RAG run is a new protocol. Report it next to the baseline, not as a drop-in replacement.
 - **Context length:** the longest baseline prompt is 2,362 tokens and the server runs with `-c 8192`, so 3 passages of ~300 tokens fit.
 - **Query:** search with the question text, not the answer options. The options would pull in passages for wrong answers.
+
+## Math (GSM8K), phase A
+
+*Added 2026-10-10 for the math RAG condition: [`../superpowers/plans/2026-10-09-phaseA-math-rag.md`](../superpowers/plans/2026-10-09-phaseA-math-rag.md).*
+
+| | |
+|---|---|
+| Book | OpenStax *Prealgebra 2e* (`en-openstax-prealgebra-2e`, benchmark `gsm`), PDF version of 2020-03-11, 63 MB, sha256 pinned in `sources.json` |
+| Licence | Creative Commons Attribution-NonCommercial-ShareAlike 4.0, as the book's page states. Fine for this research use; like the other OpenStax books, the text isn't committed (chunks stay in `data/`) |
+| Page | https://openstax.org/details/books/prealgebra-2e |
+
+**Why this book:** GSM8K is grade-school arithmetic in word problems: whole numbers, fractions, decimals, percents, ratios, units, and a little algebra. That's prealgebra's syllabus. The supervisor's hypothesis is that course material helps the model with formulas and concepts, so the corpus is a course book, not solved problems (owner's choice, 2026-10-08).
+
+**How:** chunked with the frozen settings, the same as the MMLU-Pro OpenStax books: the body cut by the PDF's chapter bookmarks, 250 words, 50 overlap, the same noise filters.

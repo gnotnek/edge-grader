@@ -55,3 +55,10 @@ def test_fetch_checks_pinned_sha_without_downloading(tmp_path):
     assert rows[0]["status"] == "CHANGED"
     rows = fetch({"books": [{**book, "sha256": None}]}, tmp_path)
     assert rows[0]["status"] == "new"
+
+
+def test_gsm_material_is_one_english_openstax_book():
+    gsm = [b for b in load_manifest()["books"] if b["benchmark"] == "gsm"]
+    assert [b["id"] for b in gsm] == ["en-openstax-prealgebra-2e"]
+    assert gsm[0]["lang"] == "en" and gsm[0]["subjects"] == ["math"]
+    assert gsm[0]["sha256"]  # pinned after the first download

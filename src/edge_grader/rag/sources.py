@@ -4,7 +4,8 @@
     uv run --group rag python -m edge_grader.rag.sources --pin     # also record what was fetched
     uv run --group rag python -m edge_grader.rag.sources --only mmlupro   # one benchmark's material
 
-Each book serves one benchmark: "scientsbank" (school science) or "mmlupro" (college subjects).
+Each book serves one benchmark: "scientsbank" (school science), "mmlupro" (college subjects) or
+"gsm" (school math, for GSM8K).
 The Wikipedia topics are for SciEntsBank.
 
 Books go to data/rag/raw/<lang>/<id>.pdf and are checked against their pinned sha256.
@@ -21,7 +22,7 @@ from pathlib import Path
 
 MANIFEST = Path(__file__).with_name("sources.json")
 RAW_DIR = Path("data/rag/raw")
-BENCHMARKS = ("scientsbank", "mmlupro")
+BENCHMARKS = ("scientsbank", "mmlupro", "gsm")
 # Some hosts refuse a default client user agent.
 HEADERS = {"User-Agent": "Mozilla/5.0 (edge-grader research; RAG corpus download)"}
 # Wikimedia throttles user agents without a contact URL (HTTP 429).
@@ -169,7 +170,7 @@ def main(argv: list[str] | None = None) -> None:
         for book in manifest["books"]:
             book["sha256"] = digests.get(book["id"], book.get("sha256"))
         manifest["wikipedia"]["pinned"] = wiki
-        MANIFEST.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
+        MANIFEST.write_text(json.dumps(manifest, indent=1, ensure_ascii=False) + "\n")  # the committed layout
         print(f"pinned {len(digests)} new sha256 and {len(wiki)} Wikipedia topics")
     changed = [r["id"] for r in rows if r["status"] == "CHANGED"]
     if changed:

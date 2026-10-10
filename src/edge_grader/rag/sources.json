@@ -559,6 +559,21 @@
    "sha256": "b1330275566d9847623394ad29173f9a6f1c9f9270279e00cd5da2ac366ea5c8"
   },
   {
+   "id": "en-openstax-prealgebra-2e",
+   "lang": "en",
+   "benchmark": "gsm",
+   "subjects": [
+    "math"
+   ],
+   "title": "Prealgebra 2e",
+   "edition": "OpenStax, second edition (PDF version of 2020-03-11)",
+   "publisher": "OpenStax, Rice University",
+   "licence": "Creative Commons Attribution-NonCommercial-ShareAlike License 4.0",
+   "page_url": "https://openstax.org/details/books/prealgebra-2e",
+   "url": "https://assets.openstax.org/oscms-prodcms/media/documents/prealgebra-2e_-_WEB.pdf",
+   "sha256": "1a58f63a28535d2a84659019103df32a0fb73db0bd14ce6e533a4dff307ca2cb"
+  },
+  {
    "id": "id-sma-biologi-kelas12",
    "lang": "id",
    "grade": 12,
