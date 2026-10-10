@@ -93,7 +93,7 @@ class FakeLlamaServer(BaseHTTPRequestHandler):
     def do_POST(self):
         body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
         FakeLlamaServer.seen.append(body)
-        last = body["messages"][-1]["content"]
+        last = body["messages"][-1]["content"].split("\n\n")[-1]  # past any course material
         # Right except "six?" (says 7) and "ten?" (runs out of tokens with no number).
         reply, finish = {"three?": ("3+0 = 3\n#### 3", "stop"), "five?": ("It is $5.", "stop"),
                          "six?": ("#### 7", "stop"), "ten?": ("let me see", "length")}[
@@ -166,3 +166,55 @@ def test_gsm_questions_exclude_the_shots(monkeypatch):
     shot_texts = {m["content"] for m in gsm.fixed_shots(TRAIN) if m["role"] == "user"}
     pool = {gsm.turn(v["question"]) for v in gsm.questions().values() if v["splits"] == ["train"]}
     assert not shot_texts & pool
+
+
+# --- RAG (phase A) -------------------------------------------------------------------------
+
+def test_with_passages_prefixes_only_the_last_turn():
+    msgs = [{"role": "user", "content": "Question: shot?\nAnswer:"},
+            {"role": "assistant", "content": "#### 1"},
+            {"role": "user", "content": "Question: three?\nAnswer:"}]
+    out = gsm.with_passages(msgs, ["Add the parts.", "Count up."])
+    assert out[:2] == msgs[:2]
+    assert out[2]["content"] == ("Course material, for background only:\n[1] Add the parts.\n"
+                                 "[2] Count up.\n\nQuestion: three?\nAnswer:")
+    assert msgs[2]["content"] == "Question: three?\nAnswer:"  # the input isn't changed
+
+
+@pytest.fixture
+def retrieval(tmp_path):
+    import hashlib
+
+    chunks = tmp_path / "gsm-en.jsonl"
+    chunks.write_text("".join(json.dumps({"id": f"en-openstax-prealgebra-2e:{i}", "text": f"p{i}"}) + "\n"
+                              for i in range(3)))
+    r = {"settings": {"chunks": str(chunks), "k": 5, "index": "x", "model": "bge-small-en",
+                      "chunks_sha256": hashlib.sha256(chunks.read_bytes()).hexdigest()},
+         "questions": {q: {"hits": [[f"en-openstax-prealgebra-2e:{i}", 0.5] for i in range(3)]}
+                       for q in ("3", "5", "3/0", "3/1", "5/0", "5/1")}}
+    path = tmp_path / "retrieval-gsm-en.bge-small-en-k5.json"
+    path.write_text(json.dumps(r))
+    return path
+
+
+def test_rag_run_is_named_gsm_rag_and_records_settings(server, tmp_path, retrieval):
+    gsm.main(["--base-url", server, "--label", "fake", "--out", str(tmp_path / "out"),
+              "--set", "gsm8k", "--rag", str(retrieval), "--k", "2"])
+    files = list((tmp_path / "out").glob("gsm-*.json"))
+    assert [f.name.startswith("gsm-rag-gsm8k-fake-") for f in files] == [True]
+    run = json.loads(files[0].read_text())
+    assert run["stage"] == "rag" and run["rag"]["k"] == 2
+    assert run["metrics"]["accuracy"] == 1.0
+    last = FakeLlamaServer.seen[0]["messages"][-1]["content"]
+    assert last.startswith("Course material, for background only:\n[1] p0\n[2] p1\n\n")
+    rows = [json.loads(x) for x in next((tmp_path / "out" / "raw").glob("*.jsonl")).read_text().splitlines()]
+    assert rows[0]["passages"] == ["en-openstax-prealgebra-2e:0", "en-openstax-prealgebra-2e:1"]
+
+
+def test_rag_run_stops_when_a_question_has_no_passages(server, tmp_path, retrieval):
+    r = json.loads(retrieval.read_text())
+    del r["questions"]["5"]
+    retrieval.write_text(json.dumps(r))
+    with pytest.raises(SystemExit, match="no retrieved passages for question 5"):
+        gsm.main(["--base-url", server, "--label", "fake", "--out", str(tmp_path / "out"),
+                  "--set", "gsm8k", "--rag", str(retrieval)])

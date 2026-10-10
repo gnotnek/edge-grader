@@ -23,6 +23,12 @@ two filters: flexible (the last number in the reply, the lab's headline figure) 
 ("#### <number>"); both scored with lm-eval's exact match. "correct" is flexible.
 
 One file per set: <out>/gsm-<set>-<label>-<stamp>.json (settings and metrics) and raw/<same>.jsonl.
+
+With --rag (phase A), three passages of course material (OpenStax Prealgebra) go in front of the
+final question, as in MMLU-Pro's RAG; the worked examples are unchanged. RAG runs are named
+gsm-rag-<set>-..., so a baseline lookup never picks one up.
+
+    uv run edge-grader-gsm --set gsm8k symbolic --rag results/rag/retrieval-gsm-en.bge-small-en-k5.json --k 3
 """
 
 import argparse
@@ -30,6 +36,7 @@ import json
 import random
 import re
 import statistics
+import sys
 import time
 from collections import defaultdict
 from datetime import UTC, datetime
@@ -93,6 +100,15 @@ def fixed_shots(train: list[dict], n: int = SHOTS, seed: int = SHOT_SEED) -> lis
         out += [{"role": "user", "content": turn(train[i]["question"])},
                 {"role": "assistant", "content": train[i]["answer"]}]
     return out
+
+
+def with_passages(messages: list[dict], passages: list[str]) -> list[dict]:
+    """The same chat with course material in front of the final question (as MMLU-Pro's RAG);
+    the worked examples are untouched."""
+    numbered = "\n".join(f"[{i}] {p}" for i, p in enumerate(passages, 1))
+    last = messages[-1]
+    material = f"Course material, for background only:\n{numbered}\n\n"
+    return [*messages[:-1], {**last, "content": material + last["content"]}]
 
 
 def load(name: str, instances: int = 10) -> list[dict]:
@@ -192,7 +208,7 @@ def summarise(rows: list[dict], wall: float) -> dict:
 
 
 def main(argv: list[str] | None = None) -> None:
-    from .baseline import server_info
+    from .baseline import load_passages, server_info
 
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
     ap.add_argument("--base-url", default="http://127.0.0.1:8080/v1", help="llama-server endpoint")
@@ -203,7 +219,10 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--max-tokens", type=int, default=MAX_TOKENS)
     ap.add_argument("--n", type=int, default=0, help="first n questions per set (0 = all)")
     ap.add_argument("--out", default="results/local", help="directory for this run's files")
+    ap.add_argument("--rag", default=None, help="retrieval file: add course material to the prompt")
+    ap.add_argument("--k", type=int, default=3, help="passages per prompt with --rag")
     args = ap.parse_args(argv)
+    passages, rag = load_passages(args.rag, args.k) if args.rag else ({}, None)
 
     server = server_info(args.base_url)
     client = OpenAI(base_url=args.base_url, api_key="not-needed", timeout=1800, max_retries=3)
@@ -216,7 +235,14 @@ def main(argv: list[str] | None = None) -> None:
         for i, q in enumerate(todo, 1):
             row = {"id": q["id"], "template": q["template"], "gold": q["target"].split("#### ")[-1]}
             try:
-                row |= ask(client, args.model, q["messages"], args.max_tokens)
+                msgs = q["messages"]
+                if rag:
+                    hits = passages.get(str(q["id"]), [])
+                    if not hits:
+                        sys.exit(f"no retrieved passages for question {q['id']}")
+                    msgs = with_passages(msgs, [t for _, t in hits])
+                    row["passages"] = [cid for cid, _ in hits]
+                row |= ask(client, args.model, msgs, args.max_tokens)
             except (APIError, httpx.HTTPError) as e:  # one failed request must not lose a run
                 row |= {"error": repr(e)}
             row |= score(row, q["target"])
@@ -226,7 +252,7 @@ def main(argv: list[str] | None = None) -> None:
         now = datetime.now(UTC)
         label = args.label or args.model
         run = {
-            "stage": "topics",
+            "stage": "rag" if rag else "topics",
             "benchmark": "gsm",
             "set": name,
             "label": label,
@@ -242,7 +268,9 @@ def main(argv: list[str] | None = None) -> None:
             "time": now.isoformat(timespec="seconds"),
             "metrics": summarise(rows, time.perf_counter() - start),
         }
-        stem = f"gsm-{name}-{label}-{now.strftime('%Y%m%d-%H%M%S')}"
+        if rag:
+            run["rag"] = rag
+        stem = f"gsm-{'rag-' if rag else ''}{name}-{label}-{now.strftime('%Y%m%d-%H%M%S')}"
         (out / f"{stem}.json").write_text(json.dumps(run, indent=2))
         with open(out / "raw" / f"{stem}.jsonl", "w") as f:
             f.writelines(json.dumps(r) + "\n" for r in rows)
