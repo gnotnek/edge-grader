@@ -90,7 +90,7 @@ Replaced by phases 0, A, B and C. Design: [`superpowers/specs/2026-10-08-baselin
 - [x] Pi 5: SciEntsBank test_uq + test_ud, GSM8K + GSM-Symbolic first variant set (100), news; E2B + E4B (2026-10-09/10)
 - [x] Judge the board news runs on Kaggle (Qwen3-14B; 0 unparsed)
 - [x] Board-check every run; one baseline table, benchmark × model × board, in `results/baselines.md` §4 (`board-check-20261010-065251.json`)
-- [ ] Gate: 2 of 20 board-vs-Kaggle comparisons have p = 0.033 (Holm-corrected > 0.6). Owner to decide whether the corrected gate passes before phase B goes on the boards
+- [x] Gate: 2 of 20 board-vs-Kaggle comparisons have p = 0.033 (Holm-corrected > 0.6). **Passed with the Holm correction** (owner's decision, 2026-10-10; recorded in the outline's own decisions)
 
 ### Phase A: baseline vs RAG for every benchmark (week 5, Kaggle)
 *Implementation plan: [`superpowers/plans/2026-10-09-phaseA-math-rag.md`](superpowers/plans/2026-10-09-phaseA-math-rag.md).*
