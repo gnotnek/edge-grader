@@ -3,6 +3,7 @@
     uv run --group rag python -m edge_grader.rag.corpus                       # SciEntsBank, both langs
     uv run --group rag python -m edge_grader.rag.corpus --benchmark mmlupro
     uv run python -m edge_grader.rag.corpus --benchmark news --lang en       # LiveNewsBench articles
+    uv run --group rag python -m edge_grader.rag.corpus --benchmark gsm --lang en   # math (OpenStax Prealgebra)
 
 Reads data/rag/raw/<lang>/ (from edge_grader.rag.sources) and writes
 data/rag/chunks/<benchmark>-<lang>.jsonl, one chunk per line:
@@ -277,7 +278,8 @@ def build(benchmark: str, lang: str, raw_dir: Path = RAW_DIR, size: int = 250,
 
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    ap.add_argument("--benchmark", default="scientsbank", choices=["scientsbank", "mmlupro", "news"])
+    ap.add_argument("--benchmark", default="scientsbank",
+                    choices=["scientsbank", "mmlupro", "news", "gsm"])
     ap.add_argument("--lang", nargs="+", default=["en", "id"])
     ap.add_argument("--size", type=int, default=250, help="words per chunk")
     ap.add_argument("--overlap", type=int, default=50, help="words shared by neighbouring chunks")

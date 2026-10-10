@@ -118,6 +118,30 @@ def load(name: str, instances: int = 10) -> list[dict]:
              "target": a} for i, t, q, a in rows]
 
 
+CHECK_POOL = 60  # GSM8K train questions retrieved for, so the retrieval check can sample 30
+
+
+def questions(instances: int = 10) -> dict[str, dict]:
+    """For retrieval: the graded questions (gsm8k originals, symbolic variants) under the
+    runner's ids, and a fixed pool of GSM8K train questions for the retrieval check. The pool
+    leaves out the five worked examples every prompt carries."""
+    from datasets import load_dataset
+
+    out = {}
+    for name in ("gsm8k", "symbolic"):
+        for q in load(name, instances):
+            text = q["messages"][-1]["content"].removeprefix("Question: ").removesuffix("\nAnswer:")
+            out[str(q["id"])] = {"question": text, "subject": "math", "splits": [name]}
+    train = list(load_dataset(GSM8K_ID, "main", split="train"))
+    shots = set(random.Random(SHOT_SEED).sample(range(len(train)), SHOTS))
+    pool = [i for i in random.Random(0).sample(range(len(train)), CHECK_POOL + SHOTS)
+            if i not in shots][:CHECK_POOL]
+    for i in pool:
+        out[f"train-{i}"] = {"question": train[i]["question"], "subject": "math",
+                             "splits": ["train"]}
+    return out
+
+
 def ask(client, model: str, msgs: list[dict], max_tokens: int) -> dict:
     start = time.perf_counter()
     resp = client.chat.completions.create(

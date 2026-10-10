@@ -136,3 +136,33 @@ def test_run_writes_one_file_per_set(server, tmp_path):
             next((tmp_path / "raw").glob("gsm-symbolic-*.jsonl")).read_text().splitlines()]
     assert [r["template"] for r in rows] == [3, 3, 5, 5]
     assert [r["gold"] for r in rows] == ["3", "6", "5", "10"]
+
+
+# --- retrieval questions (phase A) ---------------------------------------------------------
+
+TRAIN = [{"question": f"train q{i}?", "answer": f"#### {i}"} for i in range(200)]
+
+
+def fake_load_dataset(name, config=None, split=None):
+    assert name == gsm.GSM8K_ID and split == "train"
+    return TRAIN
+
+
+def test_gsm_questions_cover_both_sets_and_a_train_pool(monkeypatch):
+    monkeypatch.setattr(gsm, "load", lambda name, instances=10: SETS[name])
+    import datasets
+    monkeypatch.setattr(datasets, "load_dataset", fake_load_dataset)
+    qs = gsm.questions()
+    assert qs["3"] == {"question": "three?", "subject": "math", "splits": ["gsm8k"]}
+    assert qs["5/1"]["splits"] == ["symbolic"]
+    train = [k for k, v in qs.items() if v["splits"] == ["train"]]
+    assert len(train) == gsm.CHECK_POOL and all(k.startswith("train-") for k in train)
+
+
+def test_gsm_questions_exclude_the_shots(monkeypatch):
+    monkeypatch.setattr(gsm, "load", lambda name, instances=10: SETS[name])
+    import datasets
+    monkeypatch.setattr(datasets, "load_dataset", fake_load_dataset)
+    shot_texts = {m["content"] for m in gsm.fixed_shots(TRAIN) if m["role"] == "user"}
+    pool = {gsm.turn(v["question"]) for v in gsm.questions().values() if v["splits"] == ["train"]}
+    assert not shot_texts & pool

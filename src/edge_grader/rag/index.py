@@ -159,7 +159,8 @@ def main(argv: list[str] | None = None) -> None:
     b.add_argument("--model", choices=list(MODELS), required=True)
     r = sub.add_parser("retrieve", help="top-k chunks for every question of a benchmark")
     r.add_argument("--index", type=Path, required=True, help="index path without extension")
-    r.add_argument("--benchmark", default="scientsbank", choices=["scientsbank", "mmlupro", "news"])
+    r.add_argument("--benchmark", default="scientsbank",
+                   choices=["scientsbank", "mmlupro", "news", "gsm"])
     r.add_argument("--k", type=int, default=5, help="stored per question; grade with --k <= this")
     r.add_argument("--out", type=Path, default=RESULTS_DIR)
     args = ap.parse_args(argv)
@@ -179,6 +180,10 @@ def main(argv: list[str] | None = None) -> None:
         from ..news import questions as news_questions
 
         qs = news_questions()
+    elif args.benchmark == "gsm":
+        from ..gsm import questions as gsm_questions
+
+        qs = gsm_questions()
     else:
         qs = questions()
     result = retrieve(args.index, qs, sentence_transformer(meta["model"]), args.k, args.benchmark)

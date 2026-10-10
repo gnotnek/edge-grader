@@ -8,6 +8,8 @@ SciEntsBank's train split (test_ua shares those questions, test_uq and test_ud n
 over the units; MMLU-Pro's validation split (the worked-example pool, disjoint from the test
 questions), spread over the subjects. News has no unscored split, so it samples the 200 test
 questions, over the categories; retrieval settings are frozen, so nothing gets tuned on them.
+GSM samples a fixed pool of 60 GSM8K train questions (not the five worked examples), so the
+graded test questions are never looked at.
 Writes data/rag/check/<retrieval>.md: each passage gets a box to tick if it would help a
 teacher grade the question. data/ is git-ignored because the passages quote the books.
 
@@ -32,10 +34,11 @@ from .index import read_chunks, sha256_of
 CHECK_DIR = Path("data/rag/check")
 RESULTS_DIR = Path("results/rag")
 PASSAGE_RE = re.compile(r"^- \[(.)\] \*\*\d+\.\*\* `([^`]+)`")
-CHECK_SPLIT = {"scientsbank": "train", "mmlupro": "validation", "news": "test"}
+CHECK_SPLIT = {"scientsbank": "train", "mmlupro": "validation", "news": "test", "gsm": "train"}
 USEFUL = {"scientsbank": "would help a teacher grade answers to the question",
           "mmlupro": "holds knowledge that helps answer the question",
-          "news": "holds information that helps answer the question"}
+          "news": "holds information that helps answer the question",
+          "gsm": "holds a concept, formula or method that helps solve the problem"}
 
 
 def sample_questions(questions: dict[str, dict], n: int, seed: int = 0,
@@ -163,6 +166,10 @@ def main(argv: list[str] | None = None) -> None:
         hits = source_hits(retrieval, {q: v["sources"] for q, v in qs.items()})
         print(f"own source article in the top 1/3/5: {hits['top1']}/{hits['top3']}/{hits['top5']} "
               f"of {hits['questions']} questions")
+    elif benchmark == "gsm":
+        from ..gsm import questions as gsm_questions
+
+        question_text = {q: v["question"] for q, v in gsm_questions().items()}
     else:
         from .. import data
 
