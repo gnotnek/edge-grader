@@ -1,0 +1,21 @@
+{
+ "stage": "rag",
+ "kind": "chunks",
+ "time": "2026-10-10T07:01:40+00:00",
+ "settings": {
+  "benchmark": "gsm",
+  "size_words": 250,
+  "overlap_words": 50,
+  "min_block_words": 8
+ },
+ "files": {
+  "gsm-en.jsonl": {
+   "sha256": "dce2ea3957ca7e0ecae0fd2ab8ed8b5c9e468744e647be20c33bc1dd814bce66",
+   "chunks": 641,
+   "words": 160057,
+   "per_source": {
+    "en-openstax-prealgebra-2e": 641
+   }
+  }
+ }
+}

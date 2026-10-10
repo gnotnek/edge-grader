@@ -32,6 +32,33 @@ The Gemma 4 model card ([ai.google.dev](https://ai.google.dev/gemma/docs/core/mo
 - **Test: a permutation test, not the sign test first planned** (changed 2026-10-08, during the analysis, after seeing the per-template counts; the sign test's result is reported below too, so the change is visible). The sign test counts templates where the original beats its variants' average, but one original against ten variants isn't symmetric: a correct original "wins" whenever any one of its ten variants slips, so the test favours the original even when the original is just another instance. The permutation test asks exactly the question: under the null, the original is exchangeable with its variants, so each template's original is swapped with a random one of its 11 items (20,000 times) and the gap recomputed. One-sided p: how often a random pick beats the rest by at least the observed gap.
 - A clear drop from `gsm8k` to `symbolic` would point to memorised GSM8K answers, or to the new numbers being harder. No drop means the math skill is the model's own.
 
+### Math RAG-en (phase A): corpus and retrieval check
+
+*Phase A plan: [`../superpowers/plans/2026-10-09-phaseA-math-rag.md`](../superpowers/plans/2026-10-09-phaseA-math-rag.md). Source: [`../guides/rag-sources.md`](../guides/rag-sources.md#math-gsm8k-phase-a).*
+
+**Corpus:** OpenStax *Prealgebra 2e* (CC BY-NC-SA 4.0), chapters 1–11 (pages 17–964) by the PDF's bookmarks, chunked with the frozen settings:
+- **641 chunks**, sha256 in [`chunks-gsm.json`](../../results/rag/chunks-gsm.json)
+- `bge-small-en-v1.5`, the question text as the query
+- top 5 stored, top 3 in the prompt
+- retrieval for all 1,160 questions: [`retrieval-gsm-en.bge-small-en-k5.json`](../../results/rag/retrieval-gsm-en.bge-small-en-k5.json)
+
+**A known weakness of this corpus:**
+- **Numbers are missing:** OpenStax typesets numbers as math, which the PDF's text layer drops. A chunk reads "She bought two adult tickets for each…", and about 150 of the 641 chunks show it.
+- **Exercise lists dominate:** 146 chunks are "In the following exercises…" lists, so the search tends to match a problem's story (tickets, money, cards) rather than its method.
+
+**Retrieval check (owner's marking, 2026-10-10):**
+- **Sample:** 30 GSM8K **train** questions from a fixed pool of 60 that leaves out the five worked examples. The graded test questions are never looked at.
+- **Rule:** a passage was ticked if it "holds a concept, formula or method that helps solve the problem".
+- **File:** [`check-gsm-en.bge-small-en-k5.json`](../../results/rag/check-gsm-en.bge-small-en-k5.json).
+
+| | Math (this check) | News | SciEntsBank, English | MMLU-Pro, English |
+|---|---|---|---|---|
+| Questions with a useful passage in the top 3 | **21 / 30** | 21 / 30 | 16 / 30 | 15 / 30 |
+| Useful passage at rank 1 | 17 / 30 | 16 / 30 | 13 / 30 | 15 / 30 |
+| Useful passages | 21 / 90 | 22 / 90 | 18 / 90 | 19 / 90 |
+
+At most one useful passage per question, and mostly at rank 1. The rule set before the check (grade unless 0/30) is met, so math RAG-en is graded on Kaggle.
+
 ## News: LiveNewsBench, January 2026 release
 
 **Why LiveNewsBench and not a self-built set** (own decision, 2026-10-07): it already is what the plan described. The [January 2026 release](https://github.com/YunfanZhang42/LiveNewsBench) has 200 **human-verified** test questions about events from **2025-11-01 to 2025-12-31**, and each question ships with the news articles it was written from (1,252 article texts, 1,178 distinct). It's published (arXiv 2602.13543, MIT licence), so the numbers can be compared with others', and it saves writing and checking 200 questions by hand. Its paper reports small-model reference points on the same 200 questions: Qwen3 8B at 3.5% without search and 49.5% with web search.

@@ -1,0 +1,381 @@
+{
+ "stage": "rag",
+ "kind": "retrieval-check",
+ "time": "2026-10-10T08:40:20+00:00",
+ "settings": {
+  "retrieval": "results/rag/retrieval-gsm-en.bge-small-en-k5.json",
+  "sheet": "data/rag/check/retrieval-gsm-en.bge-small-en-k5.md",
+  "marked_by": "owner",
+  "split": "train questions only",
+  "useful": "holds a concept, formula or method that helps solve the problem"
+ },
+ "questions": {
+  "train-1203": {
+   "passages": [
+    "en-openstax-prealgebra-2e:258",
+    "en-openstax-prealgebra-2e:367",
+    "en-openstax-prealgebra-2e:150"
+   ],
+   "useful": [
+    false,
+    true,
+    false
+   ]
+  },
+  "train-1789": {
+   "passages": [
+    "en-openstax-prealgebra-2e:366",
+    "en-openstax-prealgebra-2e:470",
+    "en-openstax-prealgebra-2e:85"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "train-2121": {
+   "passages": [
+    "en-openstax-prealgebra-2e:192",
+    "en-openstax-prealgebra-2e:329",
+    "en-openstax-prealgebra-2e:354"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "train-2308": {
+   "passages": [
+    "en-openstax-prealgebra-2e:39",
+    "en-openstax-prealgebra-2e:55",
+    "en-openstax-prealgebra-2e:314"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "train-2484": {
+   "passages": [
+    "en-openstax-prealgebra-2e:283",
+    "en-openstax-prealgebra-2e:456",
+    "en-openstax-prealgebra-2e:281"
+   ],
+   "useful": [
+    false,
+    true,
+    false
+   ]
+  },
+  "train-2898": {
+   "passages": [
+    "en-openstax-prealgebra-2e:259",
+    "en-openstax-prealgebra-2e:539",
+    "en-openstax-prealgebra-2e:303"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "train-331": {
+   "passages": [
+    "en-openstax-prealgebra-2e:360",
+    "en-openstax-prealgebra-2e:558",
+    "en-openstax-prealgebra-2e:55"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "train-3317": {
+   "passages": [
+    "en-openstax-prealgebra-2e:281",
+    "en-openstax-prealgebra-2e:31",
+    "en-openstax-prealgebra-2e:273"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "train-3445": {
+   "passages": [
+    "en-openstax-prealgebra-2e:294",
+    "en-openstax-prealgebra-2e:332",
+    "en-openstax-prealgebra-2e:458"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "train-3556": {
+   "passages": [
+    "en-openstax-prealgebra-2e:258",
+    "en-openstax-prealgebra-2e:324",
+    "en-openstax-prealgebra-2e:367"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "train-3867": {
+   "passages": [
+    "en-openstax-prealgebra-2e:260",
+    "en-openstax-prealgebra-2e:332",
+    "en-openstax-prealgebra-2e:258"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "train-3904": {
+   "passages": [
+    "en-openstax-prealgebra-2e:260",
+    "en-openstax-prealgebra-2e:367",
+    "en-openstax-prealgebra-2e:366"
+   ],
+   "useful": [
+    false,
+    true,
+    false
+   ]
+  },
+  "train-3980": {
+   "passages": [
+    "en-openstax-prealgebra-2e:501",
+    "en-openstax-prealgebra-2e:23",
+    "en-openstax-prealgebra-2e:515"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "train-4134": {
+   "passages": [
+    "en-openstax-prealgebra-2e:479",
+    "en-openstax-prealgebra-2e:496",
+    "en-openstax-prealgebra-2e:480"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "train-4188": {
+   "passages": [
+    "en-openstax-prealgebra-2e:448",
+    "en-openstax-prealgebra-2e:344",
+    "en-openstax-prealgebra-2e:339"
+   ],
+   "useful": [
+    false,
+    false,
+    true
+   ]
+  },
+  "train-4585": {
+   "passages": [
+    "en-openstax-prealgebra-2e:55",
+    "en-openstax-prealgebra-2e:192",
+    "en-openstax-prealgebra-2e:407"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "train-4779": {
+   "passages": [
+    "en-openstax-prealgebra-2e:344",
+    "en-openstax-prealgebra-2e:324",
+    "en-openstax-prealgebra-2e:279"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "train-4930": {
+   "passages": [
+    "en-openstax-prealgebra-2e:449",
+    "en-openstax-prealgebra-2e:360",
+    "en-openstax-prealgebra-2e:456"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "train-5065": {
+   "passages": [
+    "en-openstax-prealgebra-2e:456",
+    "en-openstax-prealgebra-2e:96",
+    "en-openstax-prealgebra-2e:39"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "train-5603": {
+   "passages": [
+    "en-openstax-prealgebra-2e:330",
+    "en-openstax-prealgebra-2e:534",
+    "en-openstax-prealgebra-2e:289"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "train-5978": {
+   "passages": [
+    "en-openstax-prealgebra-2e:55",
+    "en-openstax-prealgebra-2e:42",
+    "en-openstax-prealgebra-2e:358"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "train-604": {
+   "passages": [
+    "en-openstax-prealgebra-2e:39",
+    "en-openstax-prealgebra-2e:450",
+    "en-openstax-prealgebra-2e:470"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "train-6420": {
+   "passages": [
+    "en-openstax-prealgebra-2e:483",
+    "en-openstax-prealgebra-2e:482",
+    "en-openstax-prealgebra-2e:551"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "train-6917": {
+   "passages": [
+    "en-openstax-prealgebra-2e:404",
+    "en-openstax-prealgebra-2e:320",
+    "en-openstax-prealgebra-2e:395"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "train-6967": {
+   "passages": [
+    "en-openstax-prealgebra-2e:468",
+    "en-openstax-prealgebra-2e:39",
+    "en-openstax-prealgebra-2e:456"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "train-7304": {
+   "passages": [
+    "en-openstax-prealgebra-2e:360",
+    "en-openstax-prealgebra-2e:56",
+    "en-openstax-prealgebra-2e:314"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "train-7363": {
+   "passages": [
+    "en-openstax-prealgebra-2e:455",
+    "en-openstax-prealgebra-2e:42",
+    "en-openstax-prealgebra-2e:31"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "train-7390": {
+   "passages": [
+    "en-openstax-prealgebra-2e:66",
+    "en-openstax-prealgebra-2e:281",
+    "en-openstax-prealgebra-2e:582"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  },
+  "train-7452": {
+   "passages": [
+    "en-openstax-prealgebra-2e:471",
+    "en-openstax-prealgebra-2e:141",
+    "en-openstax-prealgebra-2e:458"
+   ],
+   "useful": [
+    true,
+    false,
+    false
+   ]
+  },
+  "train-776": {
+   "passages": [
+    "en-openstax-prealgebra-2e:258",
+    "en-openstax-prealgebra-2e:259",
+    "en-openstax-prealgebra-2e:422"
+   ],
+   "useful": [
+    false,
+    false,
+    false
+   ]
+  }
+ },
+ "summary": {
+  "questions": 30,
+  "top1_useful": 17,
+  "any_useful": 21,
+  "passages_useful": 21,
+  "passages_total": 90
+ }
+}
