@@ -1,0 +1,46 @@
+{
+  "stage": "topics",
+  "benchmark": "gsm",
+  "set": "symbolic",
+  "label": "e2b-pi5",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "/home/mitlab/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-661643e"
+  },
+  "n_requested": 0,
+  "generation": {
+    "max_tokens": 1024,
+    "temperature": 0,
+    "stop": [
+      "Question:",
+      "</s>",
+      "<|im_end|>"
+    ],
+    "shots": 5,
+    "prompt": "lm-eval gsm8k chat format, fixed shots (seed 1234)",
+    "instances": 1
+  },
+  "time": "2026-10-08T23:28:35+00:00",
+  "metrics": {
+    "n": 100,
+    "accuracy": 0.79,
+    "strict_accuracy": 0.53,
+    "no_number": 0,
+    "hit_token_cap": 3,
+    "errors": 0,
+    "median_latency_s": 23.7085,
+    "wall_s": 3274.8,
+    "prompt_tokens": 110619,
+    "completion_tokens": 24130,
+    "per_instance_accuracy": {
+      "0": 0.79
+    },
+    "instance_accuracy_range": [
+      0.79,
+      0.79
+    ]
+  }
+}

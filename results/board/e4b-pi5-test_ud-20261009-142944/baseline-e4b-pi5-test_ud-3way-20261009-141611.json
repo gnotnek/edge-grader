@@ -1,0 +1,28 @@
+{
+  "stage": "baseline",
+  "label": "e4b-pi5",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "/home/mitlab/models/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-661643e"
+  },
+  "split": "test_ud",
+  "scheme": "3way",
+  "n_requested": 0,
+  "seed": 0,
+  "time": "2026-10-09T14:16:11+00:00",
+  "metrics": {
+    "n": 4562,
+    "accuracy": 0.7017,
+    "macro_f1": 0.7008,
+    "weighted_f1": 0.6975,
+    "unparsed": 0,
+    "errors": 0,
+    "median_latency_s": 5.6975,
+    "wall_s": 27909.7,
+    "prompt_tokens": 709243,
+    "completion_tokens": 9896
+  }
+}

@@ -1,0 +1,16 @@
+{
+ "label": "telemetry",
+ "command": "env EG_INNER=1 EG_RUN_DIR=/home/mitlab/Research/edge-grader/results/board/e4b-pi5-test_ud-20261009-142944 MEASURE=1 BENCH=scientsbank INSTANCES=1 /home/mitlab/Research/edge-grader/scripts/board_grade.sh e4b test_ud 0",
+ "model_path": "",
+ "server_args": "",
+ "governor": "ondemand",
+ "kernel": "Linux 6.18.34+rpt-rpi-2712",
+ "host": "MITLAB-EDGE-PI-5-128",
+ "cpus": 4,
+ "start_epoch": 1791527385.0653322,
+ "throttled_at_start": "throttled=0x0",
+ "server_args_after": "/home/mitlab/llama.cpp/build/bin/llama-server -m /home/mitlab/models/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf -t 3 -c 8192 --host 127.0.0.1 --port 8080 -ngl 0 -rea off --reasoning-budget -1 --cache-ram 0",
+ "work_start_epoch": 1791527415.0,
+ "work_end_epoch": 1791555371.0,
+ "exit_code": 0
+}

@@ -1,0 +1,97 @@
+{
+ "label": "telemetry",
+ "model": "",
+ "command": "env EG_INNER=1 EG_RUN_DIR=/mnt/ssd-ex/research/edge-grader/results/board/gsm-e2b-jetson-gsm8k-20261009-014524 MEASURE=1 BENCH=gsm INSTANCES=10 /mnt/ssd-ex/research/edge-grader/scripts/board_grade.sh e2b gsm8k 0",
+ "samples": 1120,
+ "wall_s": 1144.2,
+ "work_s": 1082.5,
+ "power": {
+  "idle_w": 4.63,
+  "idle_post_w": 4.6,
+  "work_mean_w": 9.98,
+  "work_peak_w": 10.8,
+  "generation_mean_w": 10.18,
+  "energy_wh": 3.0,
+  "energy_j": 10800.2,
+  "energy_above_idle_j": 5788.3,
+  "_method": "sum of PMIC per-rail V*I, trapezoidal over 1Hz samples; board DC power, excludes PSU conversion loss"
+ },
+ "tokens": {
+  "requests": 100,
+  "prompt_tokens": 7924,
+  "generated_tokens": 24261,
+  "prefill_s": 22.5,
+  "decode_s": 1011.6,
+  "prefill_tok_s": 351.74,
+  "decode_tok_s": 23.98
+ },
+ "efficiency": {
+  "j_per_generated_token": 0.45,
+  "j_per_generated_token_above_idle": 0.24,
+  "j_per_token_all": 0.336,
+  "decode_tok_s_per_w": 2.356,
+  "tokens_per_wh": 8086.9
+ },
+ "thermal": {
+  "temp_c": {
+   "mean": 58.15,
+   "median": 58.8,
+   "min": 51.7,
+   "max": 59.5,
+   "n": 1061
+  },
+  "throttled_nonzero_samples": 0,
+  "cpu_mhz_mean": 868.78
+ },
+ "utilisation": {
+  "cpu_pct": {
+   "mean": 3.41,
+   "median": 2.3,
+   "min": 1.5,
+   "max": 30.0,
+   "n": 1061
+  },
+  "gpu_pct": {
+   "mean": 90.84,
+   "median": 99.9,
+   "min": 0.0,
+   "max": 100.0,
+   "n": 1061
+  },
+  "gpu_mhz": {
+   "mean": 600.18,
+   "median": 612.0,
+   "min": 306.0,
+   "max": 612.0,
+   "n": 1061
+  },
+  "proc_cpu_pct": {
+   "mean": 7.26,
+   "median": 5.9,
+   "min": 0.0,
+   "max": 100.0,
+   "n": 1059
+  },
+  "proc_rss_mb": {
+   "mean": 3489.02,
+   "median": 3517.9,
+   "min": 12.0,
+   "max": 3531.7,
+   "n": 1059
+  },
+  "mem_used_mb": {
+   "mean": 4254.61,
+   "median": 4289.0,
+   "min": 1603.0,
+   "max": 4321.0,
+   "n": 1061
+  },
+  "swap_used_mb": {
+   "mean": 0.0,
+   "median": 0.0,
+   "min": 0.0,
+   "max": 0.0,
+   "n": 1061
+  }
+ }
+}

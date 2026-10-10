@@ -1,0 +1,85 @@
+{
+ "label": "telemetry",
+ "model": "",
+ "command": "env EG_INNER=1 EG_RUN_DIR=/home/mitlab/Research/edge-grader/results/board/gsm-e2b-pi5-gsm8k-20261009-053836 MEASURE=1 BENCH=gsm INSTANCES=1 /home/mitlab/Research/edge-grader/scripts/board_grade.sh e2b gsm8k 0",
+ "samples": 3105,
+ "wall_s": 3259.9,
+ "work_s": 3200.2,
+ "power": {
+  "idle_w": 1.6,
+  "idle_post_w": 1.86,
+  "work_mean_w": 7.11,
+  "work_peak_w": 9.59,
+  "generation_mean_w": 7.09,
+  "energy_wh": 6.321,
+  "energy_j": 22754.6,
+  "energy_above_idle_j": 17634.3,
+  "_method": "sum of PMIC per-rail V*I, trapezoidal over 1Hz samples; board DC power, excludes PSU conversion loss"
+ },
+ "tokens": {
+  "requests": 100,
+  "prompt_tokens": 7924,
+  "generated_tokens": 23464,
+  "prefill_s": 213.6,
+  "decode_s": 2969.1,
+  "prefill_tok_s": 37.1,
+  "decode_tok_s": 7.9
+ },
+ "efficiency": {
+  "j_per_generated_token": 0.97,
+  "j_per_generated_token_above_idle": 0.75,
+  "j_per_token_all": 0.725,
+  "decode_tok_s_per_w": 1.115,
+  "tokens_per_wh": 3712.2
+ },
+ "thermal": {
+  "temp_c": {
+   "mean": 64.98,
+   "median": 65.0,
+   "min": 49.0,
+   "max": 70.0,
+   "n": 3047
+  },
+  "throttled_nonzero_samples": 0,
+  "cpu_mhz_mean": 2398.29
+ },
+ "utilisation": {
+  "cpu_pct": {
+   "mean": 74.37,
+   "median": 74.9,
+   "min": 0.5,
+   "max": 75.7,
+   "n": 3047
+  },
+  "gpu_pct": null,
+  "gpu_mhz": null,
+  "proc_cpu_pct": {
+   "mean": 292.8,
+   "median": 294.3,
+   "min": 0.0,
+   "max": 307.6,
+   "n": 3044
+  },
+  "proc_rss_mb": {
+   "mean": 4050.81,
+   "median": 4055.8,
+   "min": 117.0,
+   "max": 4055.8,
+   "n": 3044
+  },
+  "mem_used_mb": {
+   "mean": 2087.0,
+   "median": 2090.0,
+   "min": 359.0,
+   "max": 2145.0,
+   "n": 3047
+  },
+  "swap_used_mb": {
+   "mean": 0.0,
+   "median": 0.0,
+   "min": 0.0,
+   "max": 0.0,
+   "n": 3047
+  }
+ }
+}

@@ -1,0 +1,97 @@
+{
+ "label": "telemetry",
+ "model": "",
+ "command": "env EG_INNER=1 EG_RUN_DIR=/mnt/ssd-ex/research/edge-grader/results/board/e4b-jetson-test_ud-20261009-072141 MEASURE=1 BENCH=scientsbank INSTANCES=10 /mnt/ssd-ex/research/edge-grader/scripts/board_grade.sh e4b test_ud 0",
+ "samples": 3319,
+ "wall_s": 3388.4,
+ "work_s": 3327.7,
+ "power": {
+  "idle_w": 4.56,
+  "idle_post_w": 4.61,
+  "work_mean_w": 9.52,
+  "work_peak_w": 10.52,
+  "generation_mean_w": 9.73,
+  "energy_wh": 8.803,
+  "energy_j": 31689.2,
+  "energy_above_idle_j": 16514.7,
+  "_method": "sum of PMIC per-rail V*I, trapezoidal over 1Hz samples; board DC power, excludes PSU conversion loss"
+ },
+ "tokens": {
+  "requests": 4562,
+  "prompt_tokens": 699373,
+  "generated_tokens": 9872,
+  "prefill_s": 2640.4,
+  "decode_s": 483.2,
+  "prefill_tok_s": 264.87,
+  "decode_tok_s": 20.43
+ },
+ "efficiency": {
+  "j_per_generated_token": 3.21,
+  "j_per_generated_token_above_idle": 1.67,
+  "j_per_token_all": 0.045,
+  "decode_tok_s_per_w": 2.1,
+  "tokens_per_wh": 1121.5
+ },
+ "thermal": {
+  "temp_c": {
+   "mean": 58.02,
+   "median": 58.2,
+   "min": 51.6,
+   "max": 59.3,
+   "n": 3261
+  },
+  "throttled_nonzero_samples": 0,
+  "cpu_mhz_mean": 917.15
+ },
+ "utilisation": {
+  "cpu_pct": {
+   "mean": 7.39,
+   "median": 7.2,
+   "min": 1.3,
+   "max": 19.9,
+   "n": 3261
+  },
+  "gpu_pct": {
+   "mean": 89.65,
+   "median": 99.5,
+   "min": 0.0,
+   "max": 100.0,
+   "n": 3261
+  },
+  "gpu_mhz": {
+   "mean": 599.9,
+   "median": 612.0,
+   "min": 306.0,
+   "max": 612.0,
+   "n": 3261
+  },
+  "proc_cpu_pct": {
+   "mean": 31.43,
+   "median": 31.3,
+   "min": 0.0,
+   "max": 101.1,
+   "n": 3259
+  },
+  "proc_rss_mb": {
+   "mean": 5254.47,
+   "median": 5281.3,
+   "min": 12.1,
+   "max": 5289.7,
+   "n": 3259
+  },
+  "mem_used_mb": {
+   "mean": 6071.48,
+   "median": 6106.0,
+   "min": 1616.0,
+   "max": 6128.0,
+   "n": 3261
+  },
+  "swap_used_mb": {
+   "mean": 0.0,
+   "median": 0.0,
+   "min": 0.0,
+   "max": 0.0,
+   "n": 3261
+  }
+ }
+}

@@ -1,0 +1,55 @@
+{
+  "stage": "topics",
+  "benchmark": "gsm",
+  "set": "symbolic",
+  "label": "e4b-jetson",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "/home/ari/research/models/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a894dae"
+  },
+  "n_requested": 0,
+  "generation": {
+    "max_tokens": 1024,
+    "temperature": 0,
+    "stop": [
+      "Question:",
+      "</s>",
+      "<|im_end|>"
+    ],
+    "shots": 5,
+    "prompt": "lm-eval gsm8k chat format, fixed shots (seed 1234)",
+    "instances": 10
+  },
+  "time": "2026-10-09T05:24:38+00:00",
+  "metrics": {
+    "n": 1000,
+    "accuracy": 0.909,
+    "strict_accuracy": 0.814,
+    "no_number": 0,
+    "hit_token_cap": 3,
+    "errors": 0,
+    "median_latency_s": 12.276499999999999,
+    "wall_s": 16437.5,
+    "prompt_tokens": 1106198,
+    "completion_tokens": 194747,
+    "per_instance_accuracy": {
+      "0": 0.91,
+      "1": 0.92,
+      "2": 0.89,
+      "3": 0.9,
+      "4": 0.88,
+      "5": 0.93,
+      "6": 0.93,
+      "7": 0.92,
+      "8": 0.91,
+      "9": 0.9
+    },
+    "instance_accuracy_range": [
+      0.88,
+      0.93
+    ]
+  }
+}
