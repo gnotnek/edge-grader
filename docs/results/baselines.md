@@ -87,7 +87,7 @@ Before the board runs, cost was estimated from agentic-edge's MMLU-Pro request r
 - **The thread count isn't the cause:** the estimate's rates come from `-t 3` runs too, and 4 threads changed latency by only 5–14%.
 - **The ranking and the Pi/Jetson gap hold:** the estimate put the Jetson ~10× faster and 6–7× cheaper; measured is 7.7–8.8× and 7.0–7.8×.
 
-**Other splits (estimate only, an upper bound).** test_uq and test_ud weren't run on the boards, and stage 4 measures every version anyway. Until then, the estimate scaled by the test_ua ratios above is the best figure. Unseen domains (test_ud, 4,562 answers), unscaled:
+**Other splits (estimate, superseded 2026-10-10).** Before phase 0 measured test_uq and test_ud on both boards ([§4](#4-phase-0-every-baseline-on-both-boards-measured-2026-10-0910)), this estimate stood in for them. It was high again: test_ud measured 2.95 / 5.70 s on the Pi and 0.40 / 0.70 s on the Jetson (E2B / E4B). Kept for the record. Unseen domains (test_ud, 4,562 answers), unscaled:
 
 | Model | Board | Accuracy (Kaggle) | Median latency | J / answer | Wh / 1,000 answers | Hours / 1,000 answers |
 |---|---|---|---|---|---|---|
@@ -104,3 +104,59 @@ Before the board runs, cost was estimated from agentic-edge's MMLU-Pro request r
 | E4B | 65.7% | 70.4% | 55.6 / 7.1 J per answer |
 
 The two tasks aren't directly comparable (10-way multiple choice vs 3-way labels), but the E2B → E4B gain is similar on both, about 10–14 points.
+
+## 4. Phase 0: every baseline on both boards (measured, 2026-10-09/10)
+
+*Why: the supervisor (2026-10-08) asked to finish the baseline on the edge before going further. Spec: [`../superpowers/specs/2026-10-08-baseline-variations-design.md`](../superpowers/specs/2026-10-08-baseline-variations-design.md) §4.*
+
+**Runs:**
+- 20 folders in [`results/board/`](../../results/board/), run by the boards' own job queue (`scripts/board_queue.py`, which calls `scripts/board_grade.sh`) between 2026-10-09 00:55 and 2026-10-10 ~02:30.
+- Same GGUFs and flags as test_ua: Pi `661643e` at `-t 3`, Jetson `a894dae`.
+- **Jetson clocks:** restored by a reboot before its runs, so its energy is comparable with the 2026-09-30 test_ua runs. Every run's `board-state.txt` shows the clocks unlocked.
+
+**Check file:** [`board-check-20261010-065251.json`](../../results/estimates/board-check-20261010-065251.json), from `uv run edge-grader-board-check`.
+
+**Trimmed on the Pi:** it ran GSM-Symbolic's first variant set only (100 of 1,000). Its comparisons are on those 100 questions.
+
+**News:** judged by Qwen3-14B on Kaggle, as for the Kaggle runs, with 0 unparsed.
+
+"Same answer" means the same label (grading), the same extracted number (GSM) or the same judge grade (news), on the same questions.
+
+| Benchmark | Set | Model | Board | n | Board acc. | Kaggle acc. (same questions) | Same answer | McNemar p | Median s | J / question |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SciEntsBank | test_uq | E2B | Pi 5 | 733 | 59.8% | 59.8% | 712/733 | 1.0 | 3.19 | 26.1 |
+| SciEntsBank | test_uq | E2B | Jetson | 733 | 59.8% | 59.8% | 705/733 | 1.0 | 0.41 | 3.8 |
+| SciEntsBank | test_uq | E4B | Pi 5 | 733 | 68.2% | 67.5% | 718/733 | 0.267 | 6.36 | 52.4 |
+| SciEntsBank | test_uq | E4B | Jetson | 733 | 67.3% | 67.5% | 717/733 | 0.791 | 0.71 | 6.9 |
+| SciEntsBank | test_ud | E2B | Pi 5 | 4562 | 60.4% | 60.3% | 4446/4562 | 0.484 | 2.95 | 25.0 |
+| SciEntsBank | test_ud | E2B | Jetson | 4562 | 60.2% | 60.3% | 4405/4562 | 0.932 | 0.40 | 3.8 |
+| SciEntsBank | test_ud | E4B | Pi 5 | 4562 | 70.2% | 70.4% | 4502/4562 | 0.134 | 5.70 | 49.5 |
+| SciEntsBank | test_ud | E4B | Jetson | 4562 | 70.1% | 70.4% | 4498/4562 | **0.033** | 0.70 | 6.8 |
+| GSM | gsm8k | E2B | Pi 5 | 100 | 84.0% | 83.0% | 90/100 | 1.0 | 21.18 | 227.0 |
+| GSM | gsm8k | E2B | Jetson | 100 | 83.0% | 83.0% | 89/100 | 1.0 | 7.16 | 105.9 |
+| GSM | gsm8k | E4B | Pi 5 | 100 | 91.0% | 92.0% | 97/100 | 1.0 | 37.31 | 350.5 |
+| GSM | gsm8k | E4B | Jetson | 100 | 91.0% | 92.0% | 97/100 | 1.0 | 11.40 | 167.1 |
+| GSM | symbolic (1 var.) | E2B | Pi 5 | 100 | 79.0% | 80.0% | 88/100 | 1.0 | 23.71 | 233.9 |
+| GSM | symbolic (10 var.) | E2B | Jetson | 1000 | 82.1% | 80.0% | 833/1000 | **0.033** | 7.41 | 112.6 |
+| GSM | symbolic (1 var.) | E4B | Pi 5 | 100 | 89.0% | 91.0% | 96/100 | 0.5 | 39.99 | 401.9 |
+| GSM | symbolic (10 var.) | E4B | Jetson | 1000 | 90.9% | 90.5% | 955/1000 | 0.572 | 12.28 | 175.5 |
+| News | test | E2B | Pi 5 | 200 | 1.0% | 0.5% | 164/200 | 1.0 | 107.95 | 714.7 |
+| News | test | E2B | Jetson | 200 | 0.5% | 0.5% | 170/200 | 1.0 | 36.83 | 353.9 |
+| News | test | E4B | Pi 5 | 200 | 0.5% | 0.5% | 172/200 | 1.0 | 169.24 | 1311.5 |
+| News | test | E4B | Jetson | 200 | 0.5% | 0.5% | 176/200 | 1.0 | 56.89 | 648.9 |
+
+Pi against Jetson on the same questions (Pi time and energy as a multiple of the Jetson's):
+
+| Benchmark | Pi / Jetson time | Pi / Jetson energy | Same answer, Pi vs Jetson | McNemar p |
+|---|---|---|---|---|
+| SciEntsBank test_uq | 7.8× (E2B), 9.0× (E4B) | 6.9×, 7.6× | 702/733, 716/733 | 1.0, 0.143 |
+| SciEntsBank test_ud | 7.4×, 8.1× | 6.6×, 7.3× | 4437/4562, 4504/4562 | 0.382, 0.597 |
+| GSM8K | 3.0×, 3.3× | 2.1×, 2.1× | 87/100, 97/100 | 1.0, 1.0 |
+| GSM-Symbolic (Pi's 100) | 3.2×, 3.3× | 2.1×, 2.3× | 84/100, 95/100 | 1.0, 0.625 |
+| News | 2.9×, 3.0× | 2.0×, 2.0× | 166/200, 180/200 | 1.0, 1.0 |
+
+**What it shows:**
+- **Board accuracy equals Kaggle's on 18 of the 20 runs** (McNemar p ≥ 0.13). The two exceptions are both p = 0.033, and they point opposite ways: E4B on the Jetson's test_ud is 0.3 points *below* Kaggle (20 answers right only on the board, 37 only on Kaggle), and E2B on the Jetson's GSM-Symbolic is 2.1 points *above* (55 against 34). Over 20 comparisons about one p below 0.05 is expected by chance; corrected for all 20 (Holm), both are above 0.6. **The gate as planned (any p < 0.05 stops phase B on the boards) is tripped as written; whether to apply the correction is the owner's decision, pending.**
+- **The Pi/Jetson gap depends on the task's shape.** Grading (a ~165-token prompt, a 2-token label) runs 7.4–9.0× slower and costs 6.6–7.6× more energy on the Pi, as on test_ua (7.7–8.8×, 7.0–7.8×). GSM and news, whose answers run to hundreds of tokens, are only 2.9–3.3× slower and 2.0–2.3× dearer, close to MMLU-Pro's 3.4× / 2.3×: long answers are decode-bound, where the Jetson's lead is smaller.
+- **Cost per question spans three orders of magnitude.** Grading costs 3.8–6.9 J on the Jetson and 25–52 J on the Pi; a GSM question 106–176 J and 227–402 J; a news question 354–649 J and 715–1,312 J, for 0.5–1% accuracy without RAG, because the news prompt asks the model to think step by step before it declines.
+

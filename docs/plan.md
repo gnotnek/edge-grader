@@ -84,12 +84,13 @@ Replaced by phases 0, A, B and C. Design: [`superpowers/specs/2026-10-08-baselin
 
 ### Phase 0: the baseline on the boards (week 5, first)
 *Implementation plan: [`superpowers/plans/2026-10-09-phase0-edge-baseline.md`](superpowers/plans/2026-10-09-phase0-edge-baseline.md).*
-- [ ] `board_grade.sh` takes a benchmark (`scientsbank` | `gsm` | `news`); dry-run tests
-- [ ] `edge-grader-board-check` pairs GSM and news board runs with Kaggle
-- [ ] Jetson: SciEntsBank test_uq + test_ud, GSM8K + GSM-Symbolic (1,000), news; E2B + E4B
-- [ ] Pi 5: SciEntsBank test_uq + test_ud, GSM8K + GSM-Symbolic first variant set (100), news; E2B + E4B
-- [ ] Judge the board news runs on Kaggle (Qwen3-14B)
-- [ ] Board-check every run; one baseline table, benchmark × model × board, in `results/baselines.md`
+- [x] `board_grade.sh` takes a benchmark (`scientsbank` | `gsm` | `news`); dry-run tests (2026-10-09). Plus the boards' own job queue, `scripts/board_queue.py` / `scripts/queue.sh` (owner's request)
+- [x] `edge-grader-board-check` pairs GSM and news board runs with Kaggle (2026-10-09; telemetry folder fix 2026-10-10)
+- [x] Jetson: SciEntsBank test_uq + test_ud, GSM8K + GSM-Symbolic (1,000), news; E2B + E4B (2026-10-09, clocks restored by a reboot first)
+- [x] Pi 5: SciEntsBank test_uq + test_ud, GSM8K + GSM-Symbolic first variant set (100), news; E2B + E4B (2026-10-09/10)
+- [x] Judge the board news runs on Kaggle (Qwen3-14B; 0 unparsed)
+- [x] Board-check every run; one baseline table, benchmark × model × board, in `results/baselines.md` §4 (`board-check-20261010-065251.json`)
+- [ ] Gate: 2 of 20 board-vs-Kaggle comparisons have p = 0.033 (Holm-corrected > 0.6). Owner to decide whether the corrected gate passes before phase B goes on the boards
 
 ### Phase A: baseline vs RAG for every benchmark (week 5, Kaggle)
 *Implementation plan: [`superpowers/plans/2026-10-09-phaseA-math-rag.md`](superpowers/plans/2026-10-09-phaseA-math-rag.md).*
@@ -150,3 +151,4 @@ Replaced by phases 0, A, B and C. Design: [`superpowers/specs/2026-10-08-baselin
 | 2026-10-07 | Topic benchmarks built ahead of the supervisor's reply, at the owner's request: math runner, LiveNewsBench in place of a self-built news set, news corpus and retrieval. Kaggle runs and the judge remain | The build is cheap and doesn't touch SciEntsBank or stage 3; a published, human-verified post-cutoff set with source articles already existed |
 | 2026-10-08 | News judge: Qwen3-14B on Kaggle instead of GPT-4.1; the planned agreement checks (GPT-4.1, hand grades) dropped, owner's choice | GPT-4.1 needs paid API credit (free tier: 50 requests a day, 800 needed); the open judge is free and reproducible |
 | 2026-10-08 | **Fine-tuning dropped**; phases 0 (baseline on the boards, first), A (math RAG), B (thinking, little-gemma + prefix reuse, EmbeddingGemma 2) and C (images) take weeks 5–7 | Supervisor, 2026-10-08: the findings are in the baseline, finish it on the edge first, show baseline vs RAG for every benchmark, narrow multimodal to text + images. Design: `superpowers/specs/2026-10-08-baseline-variations-design.md` |
+| 2026-10-10 | Phase 0 runs done: 20 board runs, all complete; board = Kaggle on 18/20, two at p = 0.033 (opposite directions); gate decision pending | Supervisor 2026-10-08: baseline on the edge first. Results: `results/baselines.md` §4 |
