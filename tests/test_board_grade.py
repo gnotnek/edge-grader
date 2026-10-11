@@ -14,7 +14,7 @@ STAMP = r"\d{8}-\d{6}"
 def dry(*args: str, board: str = "jetson", **env: str) -> subprocess.CompletedProcess:
     """Run the script with DRY_RUN=1 on a pretend board; BENCH etc. only if given."""
     e = {k: v for k, v in os.environ.items()
-         if k not in {"BENCH", "INSTANCES", "EG_RUN_DIR", "EG_INNER", "MEASURE"}}
+         if k not in {"BENCH", "INSTANCES", "THINKING", "EG_RUN_DIR", "EG_INNER", "MEASURE"}}
     e |= {"DRY_RUN": "1", "EG_BOARD": board, **env}
     return subprocess.run(["bash", str(SCRIPT), *args], env=e, capture_output=True, text=True,
                           check=False)
@@ -91,3 +91,17 @@ def test_rejects_bad_arguments():
         p = dry(*args, **env)
         assert p.returncode != 0, (env, args)
         assert message in p.stderr, (env, args, p.stderr)
+
+
+def test_thinking_on_changes_only_the_reasoning_flags_and_the_name():
+    off = fields(dry("e2b", board="pi5"))
+    on = fields(dry("e2b", board="pi5", THINKING="on"))
+    assert on["server"] == off["server"].replace(
+        "-rea off --reasoning-budget -1", "-rea on --reasoning-budget 320 --reasoning-format none")
+    assert re.fullmatch(rf"{REPO}/results/board/think-e2b-pi5-test_ua-{STAMP}", on["run_dir"])
+    assert on["runner"].endswith(f"--out {on['run_dir']} --thinking")
+
+
+def test_thinking_is_scientsbank_only():
+    p = dry("e2b", BENCH="gsm", THINKING="on")
+    assert p.returncode != 0 and "THINKING" in p.stderr

@@ -57,6 +57,13 @@ INSTANCES="${INSTANCES:-10}"
 case "$INSTANCES" in
   ''|*[!0-9]*|0) echo "INSTANCES must be a positive whole number: $INSTANCES" >&2; exit 1 ;;
 esac
+# Phase B1: THINKING=on serves with agentic-edge's thinking-on flags (grading only).
+THINKING="${THINKING:-off}"
+case "$THINKING" in
+  off) ;;
+  on) [ "$BENCH" = scientsbank ] || { echo "THINKING=on is for BENCH=scientsbank only" >&2; exit 1; } ;;
+  *) echo "THINKING must be on or off: $THINKING" >&2; exit 1 ;;
+esac
 MEASURE="${MEASURE:-1}"
 PORT="${PORT:-8080}"
 # deploy.sh installs uv here; non-interactive ssh shells do not have it on PATH.
@@ -108,6 +115,7 @@ esac
 # SciEntsBank keeps the stage-1 names; the other benchmarks lead with their name.
 if [ "$BENCH" = scientsbank ]; then
   NAME="$MODEL_KEY-$BOARD-$SPLIT"
+  [ "$THINKING" = on ] && NAME="think-$NAME"
 elif [ "$SPLIT" = symbolic ]; then
   NAME="$BENCH-$MODEL_KEY-$BOARD-symbolic-i$INSTANCES"
 else
@@ -118,9 +126,11 @@ SRVLOG=$RUN_DIR/server.log
 
 # The agentic-edge baseline flags (baselines.json "mmlupro-baseline"): thinking off,
 # in the same order as the lab's command line. The same for every benchmark.
+# THINKING=on swaps in "mmlupro-thinking-on"'s reasoning flags and nothing else.
 server_cmd() {
   echo "$LLAMA_SERVER -m $MODEL $THREADS -c 8192 --host 127.0.0.1 --port $PORT -ngl $NGL" \
-       "-rea off --reasoning-budget -1 --cache-ram 0"
+       "$( [ "$THINKING" = on ] && echo '-rea on --reasoning-budget 320 --reasoning-format none' \
+           || echo '-rea off --reasoning-budget -1' ) --cache-ram 0"
 }
 
 # The benchmark's runner. $1 is "echo" for a dry run and "" for the real one.
@@ -128,7 +138,7 @@ runner() {
   local run=$1 url="http://127.0.0.1:$PORT/v1" label="$MODEL_KEY-$BOARD"
   case "$BENCH" in
     scientsbank) $run uv run edge-grader-baseline --base-url "$url" --label "$label" \
-                   --split "$SPLIT" --n "$N" --out "$RUN_DIR" ;;
+                   --split "$SPLIT" --n "$N" --out "$RUN_DIR" $( [ "$THINKING" = on ] && echo --thinking ) ;;
     gsm) $run uv run edge-grader-gsm --base-url "$url" --label "$label" \
            --set "$SPLIT" --instances "$INSTANCES" --n "$N" --out "$RUN_DIR" ;;
     news) $run uv run edge-grader-news --base-url "$url" --label "$label" \
@@ -215,7 +225,7 @@ command -v uv >/dev/null || { echo "uv not installed on this board (run scripts/
 if [ "$MEASURE" = 1 ] && [ -z "${EG_INNER:-}" ]; then
   mkdir -p "$RUN_DIR"
   exec env MEASURED_ROOT="$RUN_DIR" SRVLOG="$SRVLOG" "$AE/run_measured.sh" telemetry -- \
-    env EG_INNER=1 EG_RUN_DIR="$RUN_DIR" MEASURE=1 BENCH="$BENCH" INSTANCES="$INSTANCES" \
+    env EG_INNER=1 EG_RUN_DIR="$RUN_DIR" MEASURE=1 BENCH="$BENCH" INSTANCES="$INSTANCES" THINKING="$THINKING" \
     "$SELF" "$MODEL_KEY" "$SPLIT" "$N"
 fi
 

@@ -273,3 +273,11 @@ def test_reads_the_telemetry_folder_board_grade_writes_today(tmp_path):
                    gsm_rows({"1": True, "2": False}), tele_name="telemetry-20261010-100000")
     r = read_run(run)
     assert r["threads"] == 3 and r["j_per_answer"] == pytest.approx(7.5)
+
+
+def test_kaggle_run_pairs_think_with_think(tmp_path):
+    for n in ("baseline-e2b-kaggle-t4-test_ua-3way-1.json", "think-e2b-kaggle-t4-test_ua-3way-1.json"):
+        (tmp_path / n).write_text(json.dumps({"metrics": {"n": 540}}))
+    d = str(tmp_path)
+    assert kaggle_run(d, "scientsbank", "e2b", "test_ua", 540).name.startswith("baseline-")
+    assert kaggle_run(d, "scientsbank", "e2b", "test_ua", 540, thinking=True).name.startswith("think-")

@@ -35,7 +35,7 @@ from scipy.stats import binomtest
 ESTIMATES = "results/estimates"
 KAGGLE = "results/kaggle"
 BOARDS = {"pi5": "pi", "jetson": "jetson"}  # run label -> board name in the estimate
-SUMMARY_GLOBS = ("baseline-*.json", "gsm-*.json", "news-*.json")
+SUMMARY_GLOBS = ("baseline-*.json", "think-*.json", "gsm-*.json", "news-*.json")
 JUDGE = "qwen3-14b-q4_k_m"  # the news judge's file tag (docs/results/topics.md)
 CPU_STATE = re.compile(r"^cpu0: governor (\S+) min (\d+) max (\d+)")
 
@@ -186,6 +186,7 @@ def read_run(run_dir: Path, judge: str = JUDGE) -> dict:
         "board": BOARDS[board_label],
         "benchmark": bench,
         "split": split_of(summary),
+        "thinking": summary.get("stage") == "think",
         "instances": summary.get("generation", {}).get("instances"),
         "threads": threads(meta.get("server_args_after", "")),
         "server_args": meta.get("server_args_after", ""),
@@ -218,12 +219,15 @@ def latest_estimate(directory: str) -> Path:
     return max(Path(directory).glob("board-cost-estimate-*.json"))
 
 
-def kaggle_run(directory: str, bench: str, model: str, split: str, n: int) -> Path | None:
-    """The Kaggle run a board run is checked against. Grading: same split and n (as in stage 1).
+def kaggle_run(directory: str, bench: str, model: str, split: str, n: int,
+               thinking: bool = False) -> Path | None:
+    """The Kaggle run a board run is checked against. Grading: same split and n (as in stage 1),
+    and a thinking-on board run against the Kaggle thinking-on run.
     GSM and news: the latest Kaggle baseline run of the set; pairing is on shared ids."""
     d = Path(directory)
     if bench == "scientsbank":
-        for path in sorted(d.glob(f"baseline-{model}-kaggle-*-{split}-*.json")):
+        prefix = "think" if thinking else "baseline"
+        for path in sorted(d.glob(f"{prefix}-{model}-kaggle-*-{split}-*.json")):
             if json.loads(path.read_text())["metrics"]["n"] == n:
                 return path
         return None
@@ -259,7 +263,8 @@ def main(argv: list[str] | None = None) -> None:
             "measured_over_estimate_latency": round(r["median_latency_s"] / e["median_latency_s"], 2),
             "measured_over_estimate_energy": round(r["j_per_answer"] / e["mean_j_per_answer"], 2),
         }
-        k = kaggle_run(args.kaggle, r["benchmark"], r["model"], r["split"], r["n"])
+        k = kaggle_run(args.kaggle, r["benchmark"], r["model"], r["split"], r["n"],
+                       thinking=r["thinking"])
         mine, theirs = outcomes(r["_summary"], args.judge), k and outcomes(k, args.judge)
         if k and (mine is None or theirs is None):
             r["vs_kaggle"] = {"kaggle_run": k.name, "pending": "judge the news run first"}
