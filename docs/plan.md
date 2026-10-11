@@ -101,7 +101,7 @@ Replaced by phases 0, A, B and C. Design: [`superpowers/specs/2026-10-08-baselin
 
 ### Phase B: variations on the grading baseline (weeks 5–7)
 *Implementation plans: [B1 thinking](superpowers/plans/2026-10-09-phaseB1-thinking.md), [B2 little-gemma + reuse](superpowers/plans/2026-10-09-phaseB2-little-gemma-reuse.md), [B3 EmbeddingGemma 2](superpowers/plans/2026-10-09-phaseB3-embeddinggemma2.md).*
-- [ ] B1 thinking on: parser reads after the thought block (test); `max_tokens` 336; Kaggle all splits, E2B + E4B; boards test_ua for cost
+- [ ] B1 thinking on: parser reads after the thought block (test); `max_tokens` 336; boards first (2026-10-11): Jetson all splits, Pi test_ua + test_uq, E2B + E4B, against each board's thinking-off baseline; Kaggle optional
 - [ ] B2 little-gemma on the Jetson: why test_ua had no prefix reuse; `lg-base`, `lg-reuse`, `llama-sorted` on test_ua; byte-identical check
 - [ ] B3 EmbeddingGemma 2: loads on the Mac?; retrieval check on the 30 SciEntsBank train questions; grading run only at ≥ 20/30
 
@@ -153,3 +153,4 @@ Replaced by phases 0, A, B and C. Design: [`superpowers/specs/2026-10-08-baselin
 | 2026-10-08 | **Fine-tuning dropped**; phases 0 (baseline on the boards, first), A (math RAG), B (thinking, little-gemma + prefix reuse, EmbeddingGemma 2) and C (images) take weeks 5–7 | Supervisor, 2026-10-08: the findings are in the baseline, finish it on the edge first, show baseline vs RAG for every benchmark, narrow multimodal to text + images. Design: `superpowers/specs/2026-10-08-baseline-variations-design.md` |
 | 2026-10-10 | Phase 0 runs done: 20 board runs, all complete; board = Kaggle on 18/20, two at p = 0.033 (opposite directions); gate decision pending | Supervisor 2026-10-08: baseline on the edge first. Results: `results/baselines.md` §4 |
 | 2026-10-10 | Phase A done: math RAG-en (Prealgebra) lowers GSM accuracy for both models; the four-benchmark baseline-vs-RAG table is in `results/rag.md` | Supervisor 2026-10-08: compare each baseline with RAG. Math and news had the same retrieval check (21/30) and went opposite ways |
+| 2026-10-11 | Edge first, cloud optional: B1 runs on the boards (Jetson all splits, Pi test_ua + test_uq), compared within each board; Kaggle thinking runs optional | Owner 2026-10-11. Outline, own decisions |

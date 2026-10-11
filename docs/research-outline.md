@@ -1,6 +1,6 @@
 # Research outline
 
-*Last updated 2026-10-08. The source of truth for what this project is trying to answer. Update it when the supervisor changes direction, and log the reason in the decisions table below.*
+*Last updated 2026-10-11. The source of truth for what this project is trying to answer. Update it when the supervisor changes direction, and log the reason in the decisions table below.*
 
 ## One-line summary
 
@@ -125,6 +125,7 @@ Decisions made while doing the work, not from the supervisor. Each has to serve 
 | 2026-10-08 | With thinking on, the label is read only from the text after the thought block | The thoughts name labels, and the parser takes the first label it sees | RQ6 |
 | 2026-10-08 | Dropped from phase B: n-gram speculation, MTP, TurboQuant KV, Q5_K_M | A grading reply is a single label, so speculation has nothing to speed up; TurboQuant cost E4B 3–5 points in `agentic-edge`; no question here needs a precision control | RQ6 |
 | 2026-10-10 | Phase 0 gate passed with a Holm correction over the 20 board-vs-Kaggle comparisons (owner's decision). Raw p = 0.033 for E4B Jetson test_ud (−0.3 pt) and E2B Jetson GSM-Symbolic (+2.1 pt); corrected 0.66 and 0.63; all others p ≥ 0.13 | The gate as planned (any p < 0.05) didn't allow for testing 20 runs at once, where about one p below 0.05 is expected by chance; the two differences go opposite ways. The correction was chosen after seeing the results, so it's recorded as such and both runs are named in the write-up | RQ1, RQ4 |
+| 2026-10-11 | **Edge first, cloud optional** (owner). New runs go on the boards first; Kaggle is an optional cross-check, not the main result. B1: board thinking-on runs on all three splits on the Jetson and test_ua + test_uq on the Pi 5, each compared with the same board's thinking-off baseline (stage 1, phase 0); the Kaggle thinking runs are optional | The question is how the model grades on the device; phase 0 showed board accuracy equals Kaggle's (18/20, gate passed), so a board run stands on its own. Pi test_ud skipped: ~4 days at thinking-on speed (13.5 s/answer on the Jetson for E2B, Pi 7–9× slower) | RQ1, RQ4, RQ6 |
 
 ## Open questions
 
