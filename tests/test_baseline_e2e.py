@@ -35,6 +35,8 @@ class FakeLlamaServer(BaseHTTPRequestHandler):
         prompt = body["messages"][0]["content"]
         # Grades "right" answers correct and everything else incorrect.
         reply = "correct" if "Student answer: right" in prompt else "incorrect"
+        if body.get("max_tokens", 16) > 16:  # a thinking-on request: thoughts first, naming labels
+            reply = f"<|channel>thought\nIs it correct or contradictory?<channel|>{reply}"
         self._send({
             "id": "x", "object": "chat.completion", "created": 0, "model": body["model"],
             "choices": [{"index": 0, "finish_reason": "stop",
@@ -120,3 +122,21 @@ def _spy(fn, seen):
         seen.append(out)
         return out
     return wrapped
+
+
+def test_think_run_is_named_and_records_settings(server, tmp_path, monkeypatch):
+    monkeypatch.setattr(data, "load", lambda *a, **k: ITEMS)
+    baseline.main(["--base-url", server, "--label", "fake", "--n", "0", "--out", str(tmp_path),
+                   "--thinking"])
+    (f,) = tmp_path.glob("think-fake-test_ua-3way-*.json")
+    run = json.loads(f.read_text())
+    assert run["stage"] == "think"
+    assert run["thinking"]["server_flags"] == "-rea on --reasoning-budget 320 --reasoning-format none"
+    assert run["metrics"]["accuracy"] == pytest.approx(2 / 3, abs=1e-3)  # "right" -> correct, others -> incorrect
+    assert run["metrics"]["unparsed"] == 0
+    assert "median_completion_tokens" in run["metrics"]
+
+
+def test_thinking_and_rag_together_are_refused(tmp_path):
+    with pytest.raises(SystemExit, match="--thinking with --rag"):
+        baseline.main(["--out", str(tmp_path), "--thinking", "--rag", "x.json"])

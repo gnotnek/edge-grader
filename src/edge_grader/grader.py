@@ -14,6 +14,21 @@ LABEL_HELP = {
     "non_domain": "not about the subject at all",
 }
 
+THINK_MAX_TOKENS = 336  # the 320-token thought budget (agentic-edge's) plus the usual 16 for the label
+# Thought-block markers as llama-server returns them with --reasoning-format none. Gemma 4's
+# channel markers first; <think> as a fallback. The pilot (phase B1 Task 2) pins the real one.
+THOUGHT_OPEN_RE = re.compile(r"<\|channel>thought|<think>")
+THOUGHT_CLOSE_RE = re.compile(r"<channel\|>|</think>")
+
+
+def answer_part(text: str) -> str | None:
+    """The reply after its thought block: all of it if there's no block, None if a thought
+    opened and never closed (the grade would otherwise be read from the thoughts)."""
+    closes = list(THOUGHT_CLOSE_RE.finditer(text))
+    if closes:
+        return text[closes[-1].end():]
+    return None if THOUGHT_OPEN_RE.search(text) else text
+
 
 def build_prompt(item: Item, labels: list[str], passages: list[str] | None = None) -> str:
     """The stage-1 prompt; with passages (RAG), course material goes before the question."""
@@ -49,8 +64,10 @@ def parse_label(text: str, labels: list[str]) -> str | None:
 
 
 def grade(client, model: str, item: Item, labels: list[str], max_tokens: int = 16,
-          passages: list[str] | None = None) -> dict:
+          passages: list[str] | None = None, thinking: bool = False) -> dict:
     prompt = build_prompt(item, labels, passages)
+    if thinking and max_tokens == 16:
+        max_tokens = THINK_MAX_TOKENS
     start = time.perf_counter()
     resp = client.chat.completions.create(
         model=model,
@@ -59,14 +76,23 @@ def grade(client, model: str, item: Item, labels: list[str], max_tokens: int = 1
         max_tokens=max_tokens,
     )
     latency = time.perf_counter() - start
-    text = resp.choices[0].message.content or ""
+    choice = resp.choices[0]
+    text = choice.message.content or ""
+    if thinking:
+        part = None if choice.finish_reason == "length" else answer_part(text)
+        pred = parse_label(part, labels) if part is not None else None
+    else:
+        pred = parse_label(text, labels)
     usage = resp.usage
-    return {
+    row = {
         "id": item.id,
         "gold": item.label,
-        "pred": parse_label(text, labels),
+        "pred": pred,
         "raw": text,
         "latency_s": round(latency, 3),
         "prompt_tokens": getattr(usage, "prompt_tokens", None),
         "completion_tokens": getattr(usage, "completion_tokens", None),
     }
+    if thinking:
+        row["finish"] = choice.finish_reason
+    return row

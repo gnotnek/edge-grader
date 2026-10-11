@@ -75,10 +75,15 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--out", default="results/local", help="directory for this run's files")
     ap.add_argument("--rag", default=None, help="retrieval file: add course material to the prompt")
     ap.add_argument("--k", type=int, default=3, help="passages per prompt with --rag")
+    ap.add_argument("--thinking", action="store_true",
+                    help="the server runs with -rea on --reasoning-budget 320 --reasoning-format none: "
+                         "read the label after the thoughts")
     args = ap.parse_args(argv)
+    if args.thinking and args.rag:
+        sys.exit("--thinking with --rag isn't a condition in this study")
 
     passages, rag = load_passages(args.rag, args.k) if args.rag else ({}, None)
-    stage = "rag" if args.rag else "baseline"
+    stage = "think" if args.thinking else ("rag" if args.rag else "baseline")
     server = server_info(args.base_url)
     items = data.load(args.split, args.scheme, n=args.n or None, seed=args.seed)
     labels = data.labels_for(args.scheme)
@@ -91,7 +96,8 @@ def main(argv: list[str] | None = None) -> None:
         if rag and not hits:
             sys.exit(f"no retrieved passages for question {question_id(item.id)}")
         try:
-            row = grader.grade(client, args.model, item, labels, passages=[t for _, t in hits])
+            row = grader.grade(client, args.model, item, labels, passages=[t for _, t in hits],
+                               thinking=args.thinking)
             if rag:
                 row["passages"] = [cid for cid, _ in hits]
             rows.append(row)
@@ -108,6 +114,8 @@ def main(argv: list[str] | None = None) -> None:
     summary["wall_s"] = round(wall, 1)
     summary["prompt_tokens"] = sum(r["prompt_tokens"] or 0 for r in ok)
     summary["completion_tokens"] = sum(r["completion_tokens"] or 0 for r in ok)
+    summary["median_completion_tokens"] = (
+        statistics.median(r["completion_tokens"] or 0 for r in ok) if ok else None)
     now = datetime.now(UTC)
     run = {
         "stage": stage,
@@ -124,6 +132,10 @@ def main(argv: list[str] | None = None) -> None:
     }
     if rag:
         run["rag"] = rag
+    if args.thinking:
+        run["thinking"] = {"server_flags": "-rea on --reasoning-budget 320 --reasoning-format none",
+                           "max_tokens": grader.THINK_MAX_TOKENS,
+                           "parse": "label after the thought block; unclosed or cut replies unparsed"}
 
     stamp = now.strftime("%Y%m%d-%H%M%S")
     name = f"{stage}-{run['label']}-{args.split}-{args.scheme}-{stamp}"

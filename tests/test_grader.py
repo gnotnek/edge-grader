@@ -1,5 +1,5 @@
 from edge_grader.data import TO_2WAY, TO_3WAY, Item, labels_for
-from edge_grader.grader import build_prompt, parse_label
+from edge_grader.grader import THINK_MAX_TOKENS, answer_part, build_prompt, grade, parse_label
 from edge_grader.metrics import score
 
 LABELS = labels_for("3way")
@@ -64,3 +64,35 @@ def test_prompt_with_passages_numbers_them_and_keeps_the_instruction_last():
     assert "the reference answer decides the grade" in prompt
     assert prompt.index("[2]") < prompt.index("Question:")
     assert prompt.endswith("Reply with the label only.")
+
+
+def test_answer_part_without_a_thought_block_is_the_whole_reply():
+    assert answer_part("correct") == "correct"
+
+
+def test_thinking_reads_the_label_after_the_thought_block():
+    for opened, closed in (("<|channel>thought\n", "<channel|>"), ("<think>", "</think>")):
+        reply = f"{opened}It is not contradictory; maybe incorrect.{closed}correct"
+        assert answer_part(reply) == "correct"
+        assert parse_label(answer_part(reply), LABELS) == "correct"
+
+
+def test_unclosed_thought_or_cut_reply_is_unparsed():
+    assert answer_part("<|channel>thought\nIt is incorrect because") is None
+
+    class Client:
+        class chat:
+            class completions:
+                @staticmethod
+                def create(**kw):
+                    class R:
+                        class usage:
+                            prompt_tokens, completion_tokens = 100, THINK_MAX_TOKENS
+                        choices = (type("C", (), {"finish_reason": "length",
+                                   "message": type("M", (), {"content": "<think>x</think>incor"})}),)
+                    assert kw["max_tokens"] == THINK_MAX_TOKENS
+                    return R
+
+    item = Item("1", "Q?", "ref", "ans", "correct")
+    row = grade(Client, "m", item, LABELS, thinking=True)
+    assert row["pred"] is None and row["finish"] == "length"
