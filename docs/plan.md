@@ -94,10 +94,10 @@ Replaced by phases 0, A, B and C. Design: [`superpowers/specs/2026-10-08-baselin
 
 ### Phase A: baseline vs RAG for every benchmark (week 5, Kaggle)
 *Implementation plan: [`superpowers/plans/2026-10-09-phaseA-math-rag.md`](superpowers/plans/2026-10-09-phaseA-math-rag.md).*
-- [ ] Math corpus: OpenStax *Prealgebra 2e*, pinned in `sources.json`, chunked with the frozen settings
-- [ ] Retrieval check: 30 GSM8K **train** questions, owner's marking
-- [ ] Kaggle: math RAG-en, E2B + E4B, GSM8K + GSM-Symbolic
-- [ ] Four-benchmark table: news, MMLU-Pro, SciEntsBank, math, baseline vs RAG
+- [x] Math corpus: OpenStax *Prealgebra 2e* (CC BY-NC-SA 4.0), pinned in `sources.json`, chunked with the frozen settings: 641 chunks (2026-10-10)
+- [x] Retrieval check: 30 GSM8K **train** questions, owner's marking: **21/30** (17/30 at rank 1)
+- [x] Kaggle: math RAG-en, E2B + E4B, GSM8K + GSM-Symbolic (2026-10-10): every cell down (E2B −5.0/−4.9, E4B −4.0/−1.4); E2B GSM-Symbolic significant by template (p 0.04)
+- [x] Four-benchmark table: news, MMLU-Pro, SciEntsBank, math, baseline vs RAG ([`results/rag.md`](results/rag.md#baseline-against-rag-en-all-four-benchmarks-phase-a-2026-10-10))
 
 ### Phase B: variations on the grading baseline (weeks 5–7)
 *Implementation plans: [B1 thinking](superpowers/plans/2026-10-09-phaseB1-thinking.md), [B2 little-gemma + reuse](superpowers/plans/2026-10-09-phaseB2-little-gemma-reuse.md), [B3 EmbeddingGemma 2](superpowers/plans/2026-10-09-phaseB3-embeddinggemma2.md).*
@@ -152,3 +152,4 @@ Replaced by phases 0, A, B and C. Design: [`superpowers/specs/2026-10-08-baselin
 | 2026-10-08 | News judge: Qwen3-14B on Kaggle instead of GPT-4.1; the planned agreement checks (GPT-4.1, hand grades) dropped, owner's choice | GPT-4.1 needs paid API credit (free tier: 50 requests a day, 800 needed); the open judge is free and reproducible |
 | 2026-10-08 | **Fine-tuning dropped**; phases 0 (baseline on the boards, first), A (math RAG), B (thinking, little-gemma + prefix reuse, EmbeddingGemma 2) and C (images) take weeks 5–7 | Supervisor, 2026-10-08: the findings are in the baseline, finish it on the edge first, show baseline vs RAG for every benchmark, narrow multimodal to text + images. Design: `superpowers/specs/2026-10-08-baseline-variations-design.md` |
 | 2026-10-10 | Phase 0 runs done: 20 board runs, all complete; board = Kaggle on 18/20, two at p = 0.033 (opposite directions); gate decision pending | Supervisor 2026-10-08: baseline on the edge first. Results: `results/baselines.md` §4 |
+| 2026-10-10 | Phase A done: math RAG-en (Prealgebra) lowers GSM accuracy for both models; the four-benchmark baseline-vs-RAG table is in `results/rag.md` | Supervisor 2026-10-08: compare each baseline with RAG. Math and news had the same retrieval check (21/30) and went opposite ways |

@@ -154,6 +154,46 @@ Paired per question (exact McNemar): RAG against no RAG, E2B 78 questions gained
 4. **Retrieval sets the ceiling.** With no passage from the question's own articles in the top 3, 0–1 of 6 right; with three, 51 (E2B) and 61 (E4B) of 135. In a sample of 6 misses (E4B), most were near-misses (658 for 656 days; "Caritas Internationalis" for Caritas Jerusalem) or a two-part answer with one part not in the passages.
 5. **Spot-check (Claude, 12 random E4B RAG grades, not the owner's):** all 12 read as right calls, e.g. "Over 1,750,000 hectares" accepted for "Roughly 1.75 million hectares", "658" rejected for "656 days". No person checked the judge's grades (owner's choice); this spot-check is all there is, and it's small and not independent.
 
+### Math RAG-en results (Kaggle T4, 2026-10-10)
+
+**Runs:**
+- `gsm-rag-{gsm8k,symbolic}-{e2b,e4b}-kaggle-t4-en-k3-20261010-*.json` in [`results/kaggle/`](../../results/kaggle/)
+- the fixed 5 worked examples, plus 3 Prealgebra passages in front of the question
+- build `a3a1c47`, 1,024 tokens
+- 0 errors, 3 passages on every question
+
+**Compared with:** the 2026-10-08 baseline runs, question by question.
+
+| Model | Set | n | Baseline → RAG-en | RAG only right / baseline only right | McNemar p | Strict (`#### N`) | Hit the token cap |
+|---|---|---|---|---|---|---|---|
+| E2B | GSM8K | 100 | 83.0% → 78.0% (−5.0) | 5 / 10 | 0.30 | 54.0% → 48.0% | 4 → 1 |
+| E2B | GSM-Symbolic | 1,000 | 80.0% → 75.1% (**−4.9**) | 64 / 113 | **< 0.001** | 48.4% → 41.2% | 36 → 20 |
+| E4B | GSM8K | 100 | 92.0% → 88.0% (−4.0) | 2 / 6 | 0.29 | 85.0% → 51.0% | 1 → 0 |
+| E4B | GSM-Symbolic | 1,000 | 90.5% → 89.1% (−1.4) | 27 / 41 | 0.11 | 80.6% → 42.4% | 15 → 5 |
+
+**GSM-Symbolic, tested by template:** its 1,000 questions are 100 templates × 10 variants, so the item-level McNemar overstates the evidence. Paired by template (each template's accuracy with RAG minus without, two-sided sign-flip test, 20,000 draws):
+- **E2B:** −4.9 points, 32 templates worse, 24 better, **p = 0.038**
+- **E4B:** −1.4 points, 20 worse, 9 better, p = 0.24
+
+**The memorisation check with RAG:** the same permutation test as above. The reimplementation reproduces the baseline numbers: E2B +3.0 points, p 0.20; E4B +1.5, p 0.33 against 0.32, which is Monte Carlo noise.
+
+| Model | GSM8K − GSM-Symbolic gap, baseline | With RAG-en | 95% bootstrap (RAG) | Permutation p (RAG) |
+|---|---|---|---|---|
+| E2B | +3.0 pts (p 0.20) | +2.9 pts | −3.8 to +9.6 | 0.24 |
+| E4B | +1.5 pts (p 0.33) | −1.1 pts | −5.0 to +2.3 | 0.79 |
+
+**What it shows:**
+- **Course material doesn't help these models with math; it costs a little.**
+  - All four cells go down.
+  - E2B's drop on GSM-Symbolic holds at the template level (−4.9 points, p 0.04).
+  - The other three aren't significant on their own, but none goes up.
+  - This matches MMLU-Pro, where RAG left math-heavy subjects flat or lower.
+- **The passages change how the models answer, not only whether they're right:**
+  - **E4B drops the GSM8K answer format** the five examples teach (`#### N`): strict accuracy 85% → 51% on GSM8K and 81% → 42% on GSM-Symbolic, while the final number (flexible, the headline) barely moves. So the extra text pulls the model away from the worked examples' layout.
+  - **E4B writes more:** 24% more tokens on GSM-Symbolic (197k → 246k). That's also a cost on the boards.
+- **No sign of memorisation, with or without RAG:** the original-vs-variant gap stays inside noise for both models.
+- **Caveat on the corpus:** about a quarter of the chunks lost their numbers in extraction (§ corpus above). A cleaner math text might do less harm. The retrieval check still found something useful for 21/30 questions, the same as news.
+
 ### Math against news: what suits these models
 
 | | E2B | E4B | Needs |
@@ -162,5 +202,7 @@ Paired per question (exact McNemar): RAG against no RAG, E2B 78 questions gained
 | Math, unseen numbers (GSM-Symbolic) | 80.0% | 90.5% | the same skill, not memory |
 | News after the cutoff, no RAG | 0.5% | 0.5% | facts the model can't have |
 | News after the cutoff, RAG-en | 39.0% | 45.0% | reading the facts it's given |
+| Math, GSM8K with RAG-en (Prealgebra) | 78.0% | 88.0% | the skill, with text that doesn't add to it |
+| Math, GSM-Symbolic with RAG-en | 75.1% | 89.1% | |
 
-The two ends of the range behave as expected, and the contrast is the finding: these small models are good at what they can do on their own (math), and RAG is what makes knowledge they lack usable at all. Where RAG didn't help earlier (SciEntsBank grading, MMLU-Pro), two things differed: those tasks lean less on facts the model can't have, and retrieval was weaker (a useful passage for 16/30 and 15/30 checked questions, against 21/30 here). Which of the two matters more isn't separated by these runs. What they do show: RAG pays off when knowledge is the missing piece and retrieval finds it.
+The two ends of the range behave as expected, and the contrast is the finding: these small models are good at what they can do on their own (math), and RAG is what makes knowledge they lack usable at all. Where RAG didn't help earlier (SciEntsBank grading, MMLU-Pro), two things differed: those tasks lean less on facts the model can't have, and retrieval was weaker (a useful passage for 16/30 and 15/30 checked questions, against 21/30 here). Math RAG-en (2026-10-10) separates the two: its retrieval check scored the same as news (21/30), yet RAG lowered math accuracy where it raised news by 39–45 points. So retrieval quality alone doesn't explain it; what matters is whether the task is missing knowledge the passages supply. (Caveats: "useful" was judged per benchmark, and many math passages lost their numbers.) What the runs show: RAG pays off when knowledge is the missing piece and retrieval finds it, and costs a little when it isn't.

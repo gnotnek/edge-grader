@@ -258,3 +258,30 @@ Logic and news need their own benchmarks. What was chosen instead is in the outl
 - **Why:** the SMA books are a level below MMLU-Pro's college questions, there are no books for law, philosophy, psychology or engineering, and the material is small (1,670 chunks against 32,016 English).
 - **Decision: not graded.** With no useful passage for any question, a grading run would only measure how much irrelevant text distracts the models, not whether Indonesian material helps. RAG-id was optional and the first to drop. The finding stands as it is: Indonesian school material has nothing usable for college-level MMLU-Pro.
 
+## Baseline against RAG-en, all four benchmarks (phase A, 2026-10-10)
+
+*The supervisor (2026-10-08) asked to compare each baseline with its RAG version. Kaggle T4, build `a3a1c47`, frozen RAG settings (`bge-small-en-v1.5`, question as query, top 3). Ordered from knowledge-heavy to skill-heavy.*
+
+| Benchmark | Needs | E2B baseline → RAG-en | E4B baseline → RAG-en | Retrieval check (top 3) |
+|---|---|---|---|---|
+| News (LiveNewsBench, 200, after the cutoff) | facts the model can't have | 0.5% → **39.0%** | 0.5% → **45.0%** | 21 / 30 |
+| MMLU-Pro (300) | broad subject knowledge | 51.3% → 52.0% (p 0.89) | 65.3% → 63.3% (p 0.44) | 15 / 30 |
+| SciEntsBank grading, test_ud (4,562) | judging an answer | 60.3% → 55.1% (**p < 0.001**) | 70.4% → 70.7% (p 0.59) | 16 / 30 |
+| Math, GSM8K (100) | a skill the model has | 83.0% → 78.0% (p 0.30) | 92.0% → 88.0% (p 0.29) | 21 / 30 |
+| Math, GSM-Symbolic (1,000) | the same skill, new numbers | 80.0% → 75.1% (**p 0.04** by template) | 90.5% → 89.1% (p 0.24 by template) | (same) |
+
+**Sources:**
+- **News:** [`topics.md`](topics.md#news-results-kaggle-t4-judged-by-qwen3-14b-2026-10-08), judged by Qwen3-14B
+- **MMLU-Pro:** [above](#mmlu-pro-grading-results-kaggle-t4-2026-10-06)
+- **SciEntsBank:** [above](#grading-results-rag-en-kaggle-t4-2026-10-05). The other splits move the same way: E2B down on all three, E4B with no significant change on any.
+- **Math:** [`topics.md`](topics.md#math-rag-en-results-kaggle-t4-2026-10-10)
+
+**The answer to RQ2 across benchmarks:**
+- **RAG helps only where the task is missing knowledge the passages supply:**
+  - **News:** a large gain.
+  - **MMLU-Pro:** a small, non-significant gain on well-covered subjects.
+  - **Grading:** nothing for E4B and a loss for E2B.
+  - **Math:** a small loss.
+- **Retrieval quality doesn't explain the difference on its own:** math and news scored the same retrieval check (21/30) and went opposite ways.
+- **The smaller model is hurt more whenever the material isn't needed:** on test_ud grading E2B loses 5.1 points where E4B gains 0.3, and on math E2B loses 4.9–5.0 where E4B loses 1.4–4.0.
+
