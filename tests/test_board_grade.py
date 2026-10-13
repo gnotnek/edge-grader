@@ -14,7 +14,8 @@ STAMP = r"\d{8}-\d{6}"
 def dry(*args: str, board: str = "jetson", **env: str) -> subprocess.CompletedProcess:
     """Run the script with DRY_RUN=1 on a pretend board; BENCH etc. only if given."""
     e = {k: v for k, v in os.environ.items()
-         if k not in {"BENCH", "INSTANCES", "THINKING", "EG_RUN_DIR", "EG_INNER", "MEASURE"}}
+         if k not in {"BENCH", "INSTANCES", "THINKING", "VARIANT", "RAG", "LG_ENGINE", "EG_RUN_DIR", "EG_INNER",
+                       "MEASURE"}}
     e |= {"DRY_RUN": "1", "EG_BOARD": board, **env}
     return subprocess.run(["bash", str(SCRIPT), *args], env=e, capture_output=True, text=True,
                           check=False)
@@ -105,3 +106,35 @@ def test_thinking_on_changes_only_the_reasoning_flags_and_the_name():
 def test_thinking_is_scientsbank_only():
     p = dry("e2b", BENCH="gsm", THINKING="on")
     assert p.returncode != 0 and "THINKING" in p.stderr
+
+
+def test_swafull_adds_only_that_flag():
+    base = fields(dry("e2b"))
+    swa = fields(dry("e2b", VARIANT="swafull"))
+    assert swa["server"] == base["server"] + " --swa-full"
+    assert re.fullmatch(rf"{REPO}/results/board/swafull-e2b-jetson-test_ua-{STAMP}", swa["run_dir"])
+    assert swa["runner"] == base["runner"].replace(base["run_dir"], swa["run_dir"])
+
+
+def test_little_gemma_variants_use_the_shim():
+    lg = fields(dry("e4b", VARIANT="lg"))
+    assert "lg_openai_shim.py --engine " in lg["server"]
+    assert lg["server"].endswith("--thinking off --think -1 --port 8080")
+    reuse = fields(dry("e4b", VARIANT="lg-reuse"))
+    assert reuse["server"] == lg["server"] + " --engine-flags=-reuse"
+    assert re.fullmatch(rf"{REPO}/results/board/lg-reuse-e4b-jetson-test_ua-{STAMP}", reuse["run_dir"])
+
+
+def test_variants_are_jetson_scientsbank_only():
+    for env, board in (({"VARIANT": "lg"}, "pi5"), ({"VARIANT": "lg", "BENCH": "gsm"}, "jetson"),
+                       ({"VARIANT": "fast"}, "jetson")):
+        p = dry("e2b", board=board, **env)
+        assert p.returncode != 0 and "VARIANT" in p.stderr, (env, board, p.stderr)
+
+
+def test_rag_adds_the_retrieval_file_and_prefix():
+    f = fields(dry("e2b", VARIANT="lg-reuse",
+                   RAG="results/rag/retrieval-scientsbank-en.bge-small-en-k5.json"))
+    assert re.fullmatch(rf"{REPO}/results/board/rag-lg-reuse-e2b-jetson-test_ua-{STAMP}", f["run_dir"])
+    assert f["runner"].endswith(
+        f"--out {f['run_dir']} --rag results/rag/retrieval-scientsbank-en.bge-small-en-k5.json --k 3")

@@ -35,9 +35,10 @@ from scipy.stats import binomtest
 ESTIMATES = "results/estimates"
 KAGGLE = "results/kaggle"
 BOARDS = {"pi5": "pi", "jetson": "jetson"}  # run label -> board name in the estimate
-SUMMARY_GLOBS = ("baseline-*.json", "think-*.json", "gsm-*.json", "news-*.json")
+SUMMARY_GLOBS = ("baseline-*.json", "think-*.json", "rag-*.json", "gsm-*.json", "news-*.json")
 JUDGE = "qwen3-14b-q4_k_m"  # the news judge's file tag (docs/results/topics.md)
 CPU_STATE = re.compile(r"^cpu0: governor (\S+) min (\d+) max (\d+)")
+STATE_LINE = re.compile(r"^(variant|engine): (.*)$")
 
 TIMING = re.compile(
     r"^(\S+) .*print_timing: id\s+\d+ \| task (\d+) \|\s+(prompt eval|eval) time =\s+"
@@ -130,16 +131,21 @@ def outcomes(summary_path: Path, judge: str = JUDGE) -> dict[str, dict] | None:
 
 
 def read_board_state(path: Path) -> dict | None:
-    """CPU governor and frequency range from board-state.txt; None for runs made before it."""
+    """CPU governor and frequency range (and the variant, engine) from board-state.txt;
+    None for runs made before it existed."""
     if not path.exists():
         return None
+    out: dict = {}
     for line in path.read_text().splitlines():
         m = CPU_STATE.match(line)
-        if m:
+        if m and "governor" not in out:
             gov, lo, hi = m.groups()
-            return {"governor": gov, "cpu_min_khz": int(lo), "cpu_max_khz": int(hi),
+            out |= {"governor": gov, "cpu_min_khz": int(lo), "cpu_max_khz": int(hi),
                     "cpu_clock_locked": lo == hi}
-    return {}
+        s = STATE_LINE.match(line)
+        if s:
+            out[s.group(1)] = s.group(2)
+    return out
 
 
 def threads(server_args: str) -> int | None:
@@ -164,8 +170,14 @@ def read_run(run_dir: Path, judge: str = JUDGE) -> dict:
     power = json.loads((tele / "summary.json").read_text())["power"]
 
     reqs = parse_server_log((run_dir / "server.log").read_text())
-    start = min(r["end"] - (r["prompt_ms"] + r["gen_ms"]) / 1000 for r in reqs)
-    end = max(r["end"] for r in reqs)
+    if reqs:
+        start = min(r["end"] - (r["prompt_ms"] + r["gen_ms"]) / 1000 for r in reqs)
+        end = max(r["end"] for r in reqs)
+        window_from = "server.log"
+    else:  # little-gemma's shim logs no per-request timings: the runner's own loop window
+        end = datetime.fromisoformat(summary["time"]).timestamp()
+        start = end - m["wall_s"]
+        window_from = "summary"
     header, *lines = (tele / "telemetry.csv").read_text().splitlines()
     t_col, w_col = (header.split(",").index(c) for c in ("ts_epoch", "power_w"))
     samples = [(float(c[t_col]), float(c[w_col])) for c in (ln.split(",") for ln in lines)]
@@ -178,6 +190,8 @@ def read_run(run_dir: Path, judge: str = JUDGE) -> dict:
     slope = intercept = None
     if len(set(prefill_x)) >= 2:  # a fit needs two different prompt sizes (a 1-question smoke run has one)
         slope, intercept = statistics.linear_regression(prefill_x, prefill_y)
+    decode = statistics.median(r["gen_ms"] / r["gen_tokens"] for r in reqs if r["gen_tokens"]) \
+        if any(r["gen_tokens"] for r in reqs) else None
     sent = [a["prompt_tokens"] for a in read_answers(summary_path).values()
             if a.get("prompt_tokens") is not None]
     return {
@@ -187,6 +201,7 @@ def read_run(run_dir: Path, judge: str = JUDGE) -> dict:
         "benchmark": bench,
         "split": split_of(summary),
         "thinking": summary.get("stage") == "think",
+        "stage": summary.get("stage", "baseline"),
         "instances": summary.get("generation", {}).get("instances"),
         "threads": threads(meta.get("server_args_after", "")),
         "server_args": meta.get("server_args_after", ""),
@@ -196,6 +211,7 @@ def read_run(run_dir: Path, judge: str = JUDGE) -> dict:
         "unparsed": m.get("unparsed"),
         "errors": m["errors"],
         "requests_in_log": len(reqs),
+        "window_from": window_from,
         "median_latency_s": round(m["median_latency_s"], 2),
         "grading_window_s": round(seconds, 1),
         "mean_w": round(joules / seconds, 2),
@@ -203,13 +219,11 @@ def read_run(run_dir: Path, judge: str = JUDGE) -> dict:
         "j_per_answer": round(joules / n, 2),
         "j_per_answer_above_idle": round((joules - power["idle_w"] * seconds) / n, 2),
         "wh_per_1000_answers": round(joules / n * 1000 / 3600, 2),
-        "mean_prompt_tokens_processed": round(statistics.fmean(prefill_x), 1),
+        "mean_prompt_tokens_processed": round(statistics.fmean(prefill_x), 1) if reqs else None,
         "mean_prompt_tokens_sent": round(statistics.fmean(sent), 1) if sent else None,
         "prefill_fixed_ms": None if intercept is None else round(intercept, 1),
         "prefill_ms_per_token": None if slope is None else round(slope, 3),
-        "decode_ms_per_token": round(
-            statistics.median(r["gen_ms"] / r["gen_tokens"] for r in reqs if r["gen_tokens"]), 1
-        ),
+        "decode_ms_per_token": None if decode is None else round(decode, 1),
         "board_state": read_board_state(run_dir / "board-state.txt"),
         "_summary": summary_path,
     }
@@ -220,14 +234,15 @@ def latest_estimate(directory: str) -> Path:
 
 
 def kaggle_run(directory: str, bench: str, model: str, split: str, n: int,
-               thinking: bool = False) -> Path | None:
+               thinking: bool = False, stage: str = "baseline") -> Path | None:
     """The Kaggle run a board run is checked against. Grading: same split and n (as in stage 1),
-    and a thinking-on board run against the Kaggle thinking-on run.
+    a thinking-on board run against the Kaggle thinking-on run, a RAG one against Kaggle's RAG-en.
     GSM and news: the latest Kaggle baseline run of the set; pairing is on shared ids."""
     d = Path(directory)
     if bench == "scientsbank":
-        prefix = "think" if thinking else "baseline"
-        for path in sorted(d.glob(f"{prefix}-{model}-kaggle-*-{split}-*.json")):
+        prefix = "think" if thinking else stage
+        tag = "-en-k3" if prefix == "rag" else ""
+        for path in sorted(d.glob(f"{prefix}-{model}-kaggle-*{tag}-{split}-*.json")):
             if json.loads(path.read_text())["metrics"]["n"] == n:
                 return path
         return None
@@ -264,7 +279,7 @@ def main(argv: list[str] | None = None) -> None:
             "measured_over_estimate_energy": round(r["j_per_answer"] / e["mean_j_per_answer"], 2),
         }
         k = kaggle_run(args.kaggle, r["benchmark"], r["model"], r["split"], r["n"],
-                       thinking=r["thinking"])
+                       thinking=r["thinking"], stage=r["stage"])
         mine, theirs = outcomes(r["_summary"], args.judge), k and outcomes(k, args.judge)
         if k and (mine is None or theirs is None):
             r["vs_kaggle"] = {"kaggle_run": k.name, "pending": "judge the news run first"}

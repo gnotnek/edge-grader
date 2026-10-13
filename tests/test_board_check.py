@@ -281,3 +281,30 @@ def test_kaggle_run_pairs_think_with_think(tmp_path):
     d = str(tmp_path)
     assert kaggle_run(d, "scientsbank", "e2b", "test_ua", 540).name.startswith("baseline-")
     assert kaggle_run(d, "scientsbank", "e2b", "test_ua", 540, thinking=True).name.startswith("think-")
+
+
+def test_read_run_without_token_counts_or_timing_lines(tmp_path):
+    summary = {"_stem": "baseline-e2b-jetson-test_ua-3way-1", "label": "e2b-jetson", "split": "test_ua",
+               "time": "2026-10-10T02:00:06+00:00",  # = 10:00:06 +08:00, the window's end
+               "metrics": {"n": 2, "accuracy": 0.5, "macro_f1": 0.4, "unparsed": 0, "errors": 0,
+                           "median_latency_s": 1.0, "wall_s": 5.0}}
+    rows = [{"id": "a", "gold": "correct", "pred": "correct", "prompt_tokens": None},
+            {"id": "b", "gold": "correct", "pred": "incorrect", "prompt_tokens": None}]
+    run = make_run(tmp_path, "lg-e2b-jetson-test_ua-1", summary, rows,
+                   state="variant: lg\nengine: /x/run-cuda-i8\n")
+    (run / "server.log").write_text("shim: request 1  500 prompt chars  7 reply chars  0.40s  stop\n")
+    r = read_run(run)
+    assert r["window_from"] == "summary" and r["grading_window_s"] == 5.0
+    assert r["j_per_answer"] == pytest.approx(12.5)  # 5 s x 5 W / 2 answers
+    assert r["mean_prompt_tokens_sent"] is None and r["decode_ms_per_token"] is None
+    assert r["board_state"]["variant"] == "lg"
+
+
+def test_rag_board_run_is_found_and_paired_with_kaggle_rag(tmp_path):
+    (tmp_path / "rag-e2b-jetson-test_ua-3way-1.json").write_text("{}")
+    assert find_summary(tmp_path).name.startswith("rag-")
+    for n in ("baseline-e2b-kaggle-t4-test_ua-3way-1.json",
+              "rag-e2b-kaggle-t4-en-k3-test_ua-3way-1.json"):
+        (tmp_path / n).write_text(json.dumps({"metrics": {"n": 540}}))
+    d = str(tmp_path)
+    assert kaggle_run(d, "scientsbank", "e2b", "test_ua", 540, stage="rag").name.startswith("rag-")

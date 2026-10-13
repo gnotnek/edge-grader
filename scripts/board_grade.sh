@@ -64,6 +64,15 @@ case "$THINKING" in
   on) [ "$BENCH" = scientsbank ] || { echo "THINKING=on is for BENCH=scientsbank only" >&2; exit 1; } ;;
   *) echo "THINKING must be on or off: $THINKING" >&2; exit 1 ;;
 esac
+# Phase B2: VARIANT picks the engine setup (Jetson, grading only); RAG adds course material.
+VARIANT="${VARIANT:-base}"
+case "$VARIANT" in base|swafull|lg|lg-reuse) ;;
+  *) echo "unknown VARIANT: $VARIANT (base|swafull|lg|lg-reuse)" >&2; exit 1 ;;
+esac
+RAG="${RAG:-}"
+if [ "$VARIANT" != base ] || [ -n "$RAG" ]; then
+  [ "$BENCH" = scientsbank ] || { echo "VARIANT/RAG are for BENCH=scientsbank only" >&2; exit 1; }
+fi
 MEASURE="${MEASURE:-1}"
 PORT="${PORT:-8080}"
 # deploy.sh installs uv here; non-interactive ssh shells do not have it on PATH.
@@ -106,6 +115,13 @@ case "$DETECTED" in
     ;;
 esac
 
+case "$VARIANT" in lg|lg-reuse|swafull)
+  [ "$BOARD" = jetson ] || { echo "VARIANT=$VARIANT runs on the Jetson only" >&2; exit 1; } ;;
+esac
+# agentic-edge's S9 build (pin + ae.patch): the one with -reuse. With no flags it reproduces
+# the plain little-gemma build byte for byte (agentic-edge's ae gate), so lg and lg-reuse share it.
+LG_ENGINE="${LG_ENGINE:-$HOME/build/little-gemma-ae/build/run-cuda-i8}"
+
 case "$MODEL_KEY" in
   e2b) MODEL=$MODEL_DIR/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf ;;
   e4b) MODEL=$MODEL_DIR/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf ;;
@@ -116,6 +132,8 @@ esac
 if [ "$BENCH" = scientsbank ]; then
   NAME="$MODEL_KEY-$BOARD-$SPLIT"
   [ "$THINKING" = on ] && NAME="think-$NAME"
+  [ "$VARIANT" != base ] && NAME="$VARIANT-$NAME"
+  [ -n "$RAG" ] && NAME="rag-$NAME"
 elif [ "$SPLIT" = symbolic ]; then
   NAME="$BENCH-$MODEL_KEY-$BOARD-symbolic-i$INSTANCES"
 else
@@ -127,10 +145,18 @@ SRVLOG=$RUN_DIR/server.log
 # The agentic-edge baseline flags (baselines.json "mmlupro-baseline"): thinking off,
 # in the same order as the lab's command line. The same for every benchmark.
 # THINKING=on swaps in "mmlupro-thinking-on"'s reasoning flags and nothing else.
+# VARIANT=swafull adds --swa-full; lg and lg-reuse serve through agentic-edge's shim instead
+# (its flags stand in for llama-server's: lg_openai_shim.py -h).
 server_cmd() {
-  echo "$LLAMA_SERVER -m $MODEL $THREADS -c 8192 --host 127.0.0.1 --port $PORT -ngl $NGL" \
-       "$( [ "$THINKING" = on ] && echo '-rea on --reasoning-budget 320 --reasoning-format none' \
-           || echo '-rea off --reasoning-budget -1' ) --cache-ram 0"
+  case "$VARIANT" in
+    lg|lg-reuse)
+      echo "python3 $AE/lg_openai_shim.py --engine $LG_ENGINE -m $MODEL" \
+           "--thinking off --think -1 --port $PORT$( [ "$VARIANT" = lg-reuse ] && echo ' --engine-flags=-reuse')" ;;
+    *)
+      echo "$LLAMA_SERVER -m $MODEL $THREADS -c 8192 --host 127.0.0.1 --port $PORT -ngl $NGL" \
+           "$( [ "$THINKING" = on ] && echo '-rea on --reasoning-budget 320 --reasoning-format none' \
+               || echo '-rea off --reasoning-budget -1' ) --cache-ram 0$( [ "$VARIANT" = swafull ] && echo ' --swa-full')" ;;
+  esac
 }
 
 # The benchmark's runner. $1 is "echo" for a dry run and "" for the real one.
@@ -138,7 +164,8 @@ runner() {
   local run=$1 url="http://127.0.0.1:$PORT/v1" label="$MODEL_KEY-$BOARD"
   case "$BENCH" in
     scientsbank) $run uv run edge-grader-baseline --base-url "$url" --label "$label" \
-                   --split "$SPLIT" --n "$N" --out "$RUN_DIR" $( [ "$THINKING" = on ] && echo --thinking ) ;;
+                   --split "$SPLIT" --n "$N" --out "$RUN_DIR" $( [ "$THINKING" = on ] && echo --thinking ) \
+                   $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) ;;
     gsm) $run uv run edge-grader-gsm --base-url "$url" --label "$label" \
            --set "$SPLIT" --instances "$INSTANCES" --n "$N" --out "$RUN_DIR" ;;
     news) $run uv run edge-grader-news --base-url "$url" --label "$label" \
@@ -212,7 +239,10 @@ if [ -z "${EG_INNER:-}" ]; then
 fi
 
 # Fail before touching the board if anything is missing.
-for f in "$LLAMA_SERVER" "$MODEL"; do
+ENGINE_BIN=$LLAMA_SERVER
+case "$VARIANT" in lg|lg-reuse) ENGINE_BIN=$LG_ENGINE
+  [ -f "$AE/lg_openai_shim.py" ] || { echo "missing: $AE/lg_openai_shim.py" >&2; exit 1; } ;; esac
+for f in "$ENGINE_BIN" "$MODEL"; do
   [ -e "$f" ] || { echo "missing: $f" >&2; exit 1; }
 done
 command -v uv >/dev/null || { echo "uv not installed on this board (run scripts/deploy.sh from the Mac)" >&2; exit 1; }
@@ -226,6 +256,7 @@ if [ "$MEASURE" = 1 ] && [ -z "${EG_INNER:-}" ]; then
   mkdir -p "$RUN_DIR"
   exec env MEASURED_ROOT="$RUN_DIR" SRVLOG="$SRVLOG" "$AE/run_measured.sh" telemetry -- \
     env EG_INNER=1 EG_RUN_DIR="$RUN_DIR" MEASURE=1 BENCH="$BENCH" INSTANCES="$INSTANCES" THINKING="$THINKING" \
+    VARIANT="$VARIANT" RAG="$RAG" LG_ENGINE="$LG_ENGINE" \
     "$SELF" "$MODEL_KEY" "$SPLIT" "$N"
 fi
 
@@ -233,8 +264,14 @@ mkdir -p "$RUN_DIR"
 # Put the Pi's deployed server back the way it was found: restart it only if it was running.
 VA_LLM_WAS=""
 [ "$BOARD" = pi5 ] && VA_LLM_WAS=$(systemctl is-active va-llm 2>/dev/null)
+stop_engines() {   # bracketed patterns never match this script or an ssh command line
+  pkill -f "[l]lama-server -m $MODEL" 2>/dev/null
+  pkill -f "[l]g_openai_shim.py" 2>/dev/null
+  sleep 2
+  pkill -f "[r]un-cuda-i8 -m" 2>/dev/null
+}
 restore() {
-  pkill -f "llama-server -m $MODEL" 2>/dev/null
+  stop_engines
   if [ "$BOARD" = pi5 ] && [ "$VA_LLM_WAS" = active ]; then
     sudo -n systemctl start va-llm && echo "$(date) va-llm restarted"
   fi
@@ -257,6 +294,11 @@ board_state() {
   command -v nvpmodel >/dev/null && echo "nvpmodel: $(nvpmodel -q 2>/dev/null | tr '\n' ' ')"
   [ -f "$HERE/DEPLOYED.json" ] && echo "deployed: $(cat "$HERE/DEPLOYED.json")"
   [ "$BOARD" = pi5 ] && echo "va-llm: ${VA_LLM_WAS:-unknown}"
+  echo "variant: $VARIANT"
+  case "$VARIANT" in
+    lg|lg-reuse) echo "engine: $LG_ENGINE ($(head -1 "$(dirname "$LG_ENGINE")/BUILD_INFO" 2>/dev/null))" ;;
+    *) echo "engine: $LLAMA_SERVER" ;;
+  esac
   return 0
 }
 board_state > "$RUN_DIR/board-state.txt" 2>&1
@@ -264,7 +306,7 @@ board_state > "$RUN_DIR/board-state.txt" 2>&1
 if [ "$BOARD" = pi5 ]; then
   sudo -n systemctl stop va-llm || { echo "cannot stop va-llm (sudo -n)" >&2; exit 1; }
 else
-  pkill -f "llama-server -m" 2>/dev/null
+  pkill -f "[l]lama-server -m" 2>/dev/null; stop_engines
 fi
 sleep 2
 
