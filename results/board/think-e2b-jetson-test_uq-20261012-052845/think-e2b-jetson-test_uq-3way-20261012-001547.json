@@ -1,0 +1,34 @@
+{
+  "stage": "think",
+  "label": "e2b-jetson",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "/home/ari/research/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a894dae"
+  },
+  "split": "test_uq",
+  "scheme": "3way",
+  "n_requested": 0,
+  "seed": 0,
+  "time": "2026-10-12T00:15:47+00:00",
+  "metrics": {
+    "n": 733,
+    "accuracy": 0.7572,
+    "macro_f1": 0.6895,
+    "weighted_f1": 0.7537,
+    "unparsed": 0,
+    "errors": 0,
+    "median_latency_s": 13.705,
+    "wall_s": 9905.4,
+    "prompt_tokens": 125078,
+    "completion_tokens": 234775,
+    "median_completion_tokens": 325
+  },
+  "thinking": {
+    "server_flags": "-rea on --reasoning-budget 320 --reasoning-format none",
+    "max_tokens": 336,
+    "parse": "label after the thought block; unclosed or cut replies unparsed"
+  }
+}

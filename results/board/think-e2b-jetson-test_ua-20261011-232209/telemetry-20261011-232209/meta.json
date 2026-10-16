@@ -1,0 +1,16 @@
+{
+ "label": "telemetry",
+ "command": "env EG_INNER=1 EG_RUN_DIR=/mnt/ssd-ex/research/edge-grader/results/board/think-e2b-jetson-test_ua-20261011-232209 MEASURE=1 BENCH=scientsbank INSTANCES=10 THINKING=on /mnt/ssd-ex/research/edge-grader/scripts/board_grade.sh e2b test_ua 0",
+ "model_path": "",
+ "server_args": "",
+ "governor": "schedutil",
+ "kernel": "Linux 6.8.12-1021-tegra",
+ "host": "mitlab-orin-nano",
+ "cpus": 6,
+ "start_epoch": 1791732129.8779454,
+ "throttled_at_start": "",
+ "server_args_after": "/home/ari/build/llama.cpp/build/bin/llama-server -m /home/ari/research/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf -c 8192 --host 127.0.0.1 --port 8080 -ngl 99 -rea on --reasoning-budget 320 --reasoning-format none --cache-ram 0",
+ "work_start_epoch": 1791732159.0,
+ "work_end_epoch": 1791739655.0,
+ "exit_code": 0
+}

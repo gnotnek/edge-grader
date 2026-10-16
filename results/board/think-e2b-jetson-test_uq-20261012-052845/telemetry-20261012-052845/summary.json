@@ -1,0 +1,97 @@
+{
+ "label": "telemetry",
+ "model": "",
+ "command": "env EG_INNER=1 EG_RUN_DIR=/mnt/ssd-ex/research/edge-grader/results/board/think-e2b-jetson-test_uq-20261012-052845 MEASURE=1 BENCH=scientsbank INSTANCES=10 THINKING=on /mnt/ssd-ex/research/edge-grader/scripts/board_grade.sh e2b test_uq 0",
+ "samples": 9845,
+ "wall_s": 10052.2,
+ "work_s": 9992.6,
+ "power": {
+  "idle_w": 4.6,
+  "idle_post_w": 4.6,
+  "work_mean_w": 10.09,
+  "work_peak_w": 11.53,
+  "generation_mean_w": 10.14,
+  "energy_wh": 27.998,
+  "energy_j": 100791.8,
+  "energy_above_idle_j": 54825.8,
+  "_method": "sum of PMIC per-rail V*I, trapezoidal over 1Hz samples; board DC power, excludes PSU conversion loss"
+ },
+ "tokens": {
+  "requests": 733,
+  "prompt_tokens": 119118,
+  "generated_tokens": 234775,
+  "prefill_s": 265.9,
+  "decode_s": 9627.4,
+  "prefill_tok_s": 447.96,
+  "decode_tok_s": 24.39
+ },
+ "efficiency": {
+  "j_per_generated_token": 0.43,
+  "j_per_generated_token_above_idle": 0.23,
+  "j_per_token_all": 0.285,
+  "decode_tok_s_per_w": 2.405,
+  "tokens_per_wh": 8385.5
+ },
+ "thermal": {
+  "temp_c": {
+   "mean": 58.2,
+   "median": 58.2,
+   "min": 50.6,
+   "max": 59.5,
+   "n": 9788
+  },
+  "throttled_nonzero_samples": 0,
+  "cpu_mhz_mean": 869.15
+ },
+ "utilisation": {
+  "cpu_pct": {
+   "mean": 2.78,
+   "median": 2.1,
+   "min": 1.0,
+   "max": 28.5,
+   "n": 9788
+  },
+  "gpu_pct": {
+   "mean": 93.95,
+   "median": 99.7,
+   "min": 0.0,
+   "max": 100.0,
+   "n": 9788
+  },
+  "gpu_mhz": {
+   "mean": 609.28,
+   "median": 612.0,
+   "min": 306.0,
+   "max": 612.0,
+   "n": 9788
+  },
+  "proc_cpu_pct": {
+   "mean": 6.57,
+   "median": 5.9,
+   "min": 0.0,
+   "max": 101.5,
+   "n": 9785
+  },
+  "proc_rss_mb": {
+   "mean": 3467.9,
+   "median": 3475.5,
+   "min": 12.0,
+   "max": 3487.1,
+   "n": 9785
+  },
+  "mem_used_mb": {
+   "mean": 4287.82,
+   "median": 4305.0,
+   "min": 1629.0,
+   "max": 4419.0,
+   "n": 9788
+  },
+  "swap_used_mb": {
+   "mean": 0.0,
+   "median": 0.0,
+   "min": 0.0,
+   "max": 0.0,
+   "n": 9788
+  }
+ }
+}

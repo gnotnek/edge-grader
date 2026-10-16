@@ -1,0 +1,97 @@
+{
+ "label": "telemetry",
+ "model": "",
+ "command": "env EG_INNER=1 EG_RUN_DIR=/mnt/ssd-ex/research/edge-grader/results/board/lg-e2b-jetson-test_ua-20261013-152608 MEASURE=1 BENCH=scientsbank INSTANCES=10 THINKING=off VARIANT=lg RAG= LG_ENGINE=/home/ari/build/little-gemma-ae/build/run-cuda-i8 /mnt/ssd-ex/research/edge-grader/scripts/board_grade.sh e2b test_ua 0",
+ "samples": 180,
+ "wall_s": 187.8,
+ "work_s": 128.1,
+ "power": {
+  "idle_w": 4.59,
+  "idle_post_w": 4.54,
+  "work_mean_w": 9.22,
+  "work_peak_w": 10.36,
+  "generation_mean_w": null,
+  "energy_wh": 0.328,
+  "energy_j": 1181.7,
+  "energy_above_idle_j": 593.7,
+  "_method": "sum of PMIC per-rail V*I, trapezoidal over 1Hz samples; board DC power, excludes PSU conversion loss"
+ },
+ "tokens": {
+  "requests": 0,
+  "prompt_tokens": 0,
+  "generated_tokens": 0,
+  "prefill_s": 0.0,
+  "decode_s": 0.0,
+  "prefill_tok_s": null,
+  "decode_tok_s": null
+ },
+ "efficiency": {
+  "j_per_generated_token": null,
+  "j_per_generated_token_above_idle": null,
+  "j_per_token_all": null,
+  "decode_tok_s_per_w": null,
+  "tokens_per_wh": 0.0
+ },
+ "thermal": {
+  "temp_c": {
+   "mean": 55.44,
+   "median": 55.8,
+   "min": 52.1,
+   "max": 57.8,
+   "n": 123
+  },
+  "throttled_nonzero_samples": 0,
+  "cpu_mhz_mean": 880.11
+ },
+ "utilisation": {
+  "cpu_pct": {
+   "mean": 4.18,
+   "median": 3.0,
+   "min": 1.1,
+   "max": 23.2,
+   "n": 123
+  },
+  "gpu_pct": {
+   "mean": 77.95,
+   "median": 98.7,
+   "min": 0.0,
+   "max": 99.9,
+   "n": 123
+  },
+  "gpu_mhz": {
+   "mean": 564.73,
+   "median": 612.0,
+   "min": 306.0,
+   "max": 612.0,
+   "n": 123
+  },
+  "proc_cpu_pct": {
+   "mean": 6.02,
+   "median": 4.8,
+   "min": 0.0,
+   "max": 67.9,
+   "n": 117
+  },
+  "proc_rss_mb": {
+   "mean": 4310.81,
+   "median": 4424.3,
+   "min": 59.6,
+   "max": 4436.3,
+   "n": 117
+  },
+  "mem_used_mb": {
+   "mean": 3778.64,
+   "median": 3956.0,
+   "min": 1621.0,
+   "max": 3973.0,
+   "n": 123
+  },
+  "swap_used_mb": {
+   "mean": 0.0,
+   "median": 0.0,
+   "min": 0.0,
+   "max": 0.0,
+   "n": 123
+  }
+ }
+}

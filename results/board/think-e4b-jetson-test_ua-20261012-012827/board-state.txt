@@ -1,0 +1,12 @@
+time: 2026-10-12T01:28:57+0800
+kernel: 6.8.12-1021-tegra
+cpu0: governor schedutil min 729600 max 1497600 cur 1497600 (kHz)
+devfreq 15340000.vic: min 115200000 max 435200000 cur 435200000 (Hz)
+devfreq 15380000.nvjpg: min 115200000 max 499200000 cur 499200000 (Hz)
+devfreq 15480000.nvdec: min 115200000 max 524800000 cur 524800000 (Hz)
+devfreq 15540000.nvjpg: min 115200000 max 499200000 cur 499200000 (Hz)
+devfreq 15a50000.ofa: min 115200000 max 537600000 cur 537600000 (Hz)
+devfreq 17000000.gpu: min 306000000 max 612000000 cur 306000000 (Hz)
+devfreq bwmgr: min 204000000 max 2133000000 cur 2133000000 (Hz)
+nvpmodel: NV Power Mode: 15W 0 
+deployed: {"commit": "2ca25af", "dirty": false, "at": "2026-10-11T23:21:56+0800"}

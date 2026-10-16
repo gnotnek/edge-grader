@@ -1,3 +1,6 @@
+import json
+from pathlib import Path
+
 from edge_grader.data import TO_2WAY, TO_3WAY, Item, labels_for
 from edge_grader.grader import THINK_MAX_TOKENS, answer_part, build_prompt, grade, parse_label
 from edge_grader.metrics import score
@@ -96,3 +99,10 @@ def test_unclosed_thought_or_cut_reply_is_unparsed():
     item = Item("1", "Q?", "ref", "ans", "correct")
     row = grade(Client, "m", item, LABELS, thinking=True)
     assert row["pred"] is None and row["finish"] == "length"
+
+
+def test_a_real_thinking_reply_parses_to_its_final_label():
+    """A Jetson reply (B1, -rea on --reasoning-format none): the markers as Gemma 4 emits them."""
+    rec = json.loads((Path(__file__).parent / "fixtures" / "thinking_reply.json").read_text())
+    assert parse_label(rec["raw"], LABELS) != rec["label"]  # the thoughts name another label first
+    assert parse_label(answer_part(rec["raw"]), LABELS) == rec["label"]
