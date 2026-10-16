@@ -16,3 +16,6 @@ data/
 # Plan-execution scratch (superpowers ledgers) and the boards' job queue state
 .superpowers/
 queue/
+
+# Board backups (scripts/backup_board.sh): a local safety copy, not the record
+backups/
