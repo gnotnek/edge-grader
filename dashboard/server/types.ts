@@ -1,0 +1,120 @@
+// Shapes the /api routes return. Shared by the server parsers and the React pages.
+
+export type Board = 'pi5' | 'jetson' | 'kaggle'
+export type Model = 'e2b' | 'e4b'
+export type Benchmark = 'scientsbank' | 'gsm' | 'news' | 'mmlupro'
+export type Condition = 'baseline' | 'rag-en' | 'rag-id' | 'think' | 'lg' | 'lg-reuse' | 'swafull'
+
+export interface RunKey {
+  condition: Condition
+  benchmark: Benchmark
+  model: Model
+  board: Board
+  split: string
+  stamp: string
+}
+
+export interface VsKaggle {
+  kaggleRun: string
+  kaggleAccuracy: number
+  boardAccuracy: number
+  n: number
+  sameGrade: number
+  p: number
+}
+
+export interface Run extends RunKey {
+  id: string
+  time?: string
+  // results/ = fetched and committed; backup = only in backups/<board>/, not fetched yet
+  location: 'results' | 'backup'
+  source: string
+  metrics: Record<string, number | null>
+  summary?: unknown
+  error?: string
+  energy?: { jPerAnswer: number; meanW: number }
+  vsKaggle?: VsKaggle
+}
+
+export interface PlanItem {
+  done: boolean
+  text: string
+  group?: string
+}
+
+export interface Plan {
+  updated?: string
+  timeline: {
+    week: string
+    dates: string
+    stage: string
+    goal: string
+    checkpoint: string
+    start?: string
+    end?: string
+  }[]
+  sections: { title: string; items: PlanItem[] }[]
+  changelog: { date: string; change: string; why: string }[]
+}
+
+export interface Job {
+  id: number
+  state: string
+  args: string[]
+  env: Record<string, string>
+  added?: string
+  started?: string | null
+  ended?: string | null
+  rc?: number | null
+  run_dir?: string | null
+  busy_waits?: number
+  logTail?: string
+}
+
+export interface BoardState {
+  board: 'pi5' | 'jetson'
+  hasBackup: boolean
+  lastBackup?: string
+  jobs: Job[]
+  error?: string
+}
+
+export interface Expected {
+  board: Board
+  model: Model
+  benchmark: Benchmark
+  split: string
+  condition: Condition
+  plan: string
+}
+
+export type Status = 'done' | 'on-board' | 'queued' | 'running' | 'missing'
+
+export interface ExpectedStatus extends Expected {
+  status: Status
+  run?: Run
+}
+
+export interface BoardPair {
+  first: string
+  second: string
+  latency_ratio?: number
+  energy_ratio?: number
+  n: number
+  same_grade: number
+  first_accuracy: number
+  second_accuracy: number
+  mcnemar: { only_first_right: number; only_second_right: number; p: number }
+}
+
+export interface Overview {
+  today: string
+  currentWeek?: Plan['timeline'][number]
+  runsByBoard: Record<string, number>
+  owedByBoard: Record<string, number>
+  lastBackup: Record<string, string | null>
+  waiting: ExpectedStatus[]
+  newest: Run[]
+  planProgress: { done: number; total: number }
+  errors: number
+}

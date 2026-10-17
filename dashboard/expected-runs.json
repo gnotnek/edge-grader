@@ -1,0 +1,6 @@
+[
+  { "board": "pi5", "model": "e2b", "benchmark": "scientsbank", "split": "test_ua", "condition": "think", "plan": "B1 thinking on" },
+  { "board": "pi5", "model": "e2b", "benchmark": "scientsbank", "split": "test_uq", "condition": "think", "plan": "B1 thinking on" },
+  { "board": "pi5", "model": "e4b", "benchmark": "scientsbank", "split": "test_ua", "condition": "think", "plan": "B1 thinking on" },
+  { "board": "pi5", "model": "e4b", "benchmark": "scientsbank", "split": "test_uq", "condition": "think", "plan": "B1 thinking on" }
+]
