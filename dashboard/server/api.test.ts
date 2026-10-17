@@ -2,7 +2,7 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { describe, expect, test } from 'vitest'
-import { buildOverview, currentWeek, loadExpected, loadPairs } from './api.ts'
+import { buildOverview, currentWeek, isLocalHost, loadExpected, loadPairs } from './api.ts'
 import { parsePlan } from './plan.ts'
 
 const REPO = path.resolve(import.meta.dirname, '../..')
@@ -59,5 +59,18 @@ describe('hand-edited and odd files', () => {
       'results/estimates/board-check-20261020-000000.json': '{broken',
     })
     expect(loadPairs(root).pairs).toHaveLength(1)
+  })
+})
+
+describe('isLocalHost (DNS-rebinding guard)', () => {
+  test('the dev server\'s own addresses pass', () => {
+    expect(isLocalHost('127.0.0.1:5173')).toBe(true)
+    expect(isLocalHost('localhost:5173')).toBe(true)
+    expect(isLocalHost('[::1]:5173')).toBe(true)
+  })
+  test('any other name is refused, even if it resolves to 127.0.0.1', () => {
+    expect(isLocalHost('evil.example:5173')).toBe(false)
+    expect(isLocalHost('127.0.0.1.evil.example:5173')).toBe(false)
+    expect(isLocalHost(undefined)).toBe(false)
   })
 })

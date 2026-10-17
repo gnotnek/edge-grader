@@ -10,6 +10,17 @@ import { expectedStatus } from './status.ts'
 import type { BoardPair, Expected, ExpectedStatus, Overview, Plan, Run } from './types.ts'
 
 const NEWEST = 8
+const LOCAL_NAMES = new Set(['127.0.0.1', 'localhost', '[::1]'])
+
+/**
+ * The API answers only requests addressed to this machine by name. A page on another site can
+ * point its own hostname at 127.0.0.1 (DNS rebinding); its requests then carry that hostname.
+ */
+export function isLocalHost(host: string | undefined): boolean {
+  if (!host) return false
+  const name = host.startsWith('[') ? host.slice(0, host.indexOf(']') + 1) : host.split(':')[0]
+  return LOCAL_NAMES.has(name.toLowerCase())
+}
 
 export function currentWeek(timeline: Plan['timeline'], today: string): Plan['timeline'][number] | undefined {
   return timeline.find((w) => w.start && w.end && w.start <= today && today <= w.end)
@@ -102,6 +113,11 @@ export function apiPlugin(repo: string): Plugin {
     configureServer(server) {
       server.middlewares.use('/api', (req, res) => {
         res.setHeader('Content-Type', 'application/json')
+        if (!isLocalHost(req.headers.host)) {
+          res.statusCode = 403
+          res.end(JSON.stringify({ error: 'local requests only' }))
+          return
+        }
         if (req.method !== 'GET') {
           res.statusCode = 405
           res.end(JSON.stringify({ error: 'read-only' }))
