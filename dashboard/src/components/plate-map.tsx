@@ -55,7 +55,7 @@ function WellDot({ well, board }: { well: Well; board: Board }) {
     )
   }
   if (well.kind === 'expected')
-    return <span className="block size-3.5 rounded-full border-2 border-dashed" style={{ borderColor: 'var(--serious)' }} />
+    return <span className="block size-3.5 rounded-full border-2 border-dashed" style={{ borderColor: 'var(--tag-red-ink)' }} />
   return <span className="block size-3.5 rounded-full border border-border" />
 }
 
@@ -170,7 +170,7 @@ export function PlateLegend() {
         <span className="size-3 rounded-full border-2 border-foreground/70" style={{ background: 'linear-gradient(90deg, color-mix(in oklab, var(--foreground) 70%, transparent) 50%, transparent 50%)' }} /> On the board, not fetched
       </span>
       <span className="inline-flex items-center gap-1.5">
-        <span className="size-3 rounded-full border-2 border-dashed" style={{ borderColor: 'var(--serious)' }} /> Expected, not here yet
+        <span className="size-3 rounded-full border-2 border-dashed" style={{ borderColor: 'var(--tag-red-ink)' }} /> Expected, not here yet
       </span>
       <span className="inline-flex items-center gap-1.5">
         <span className="size-3 rounded-full border border-border" /> Not planned

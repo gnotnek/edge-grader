@@ -13,6 +13,10 @@ describe('format', () => {
   test('plan markdown loses link targets and bold, keeps code', () => {
     expect(plainMarkdown('see [`results/rag.md`](results/rag.md) **dropped**')).toBe('see `results/rag.md` dropped')
   })
+  test('plan markdown loses emoji (the plan ticks weeks with them)', () => {
+    expect(plainMarkdown('Topic benchmarks done in week 4 ✅')).toBe('Topic benchmarks done in week 4')
+    expect(plainMarkdown('Baseline table ✅; cost ✅, then measured')).toBe('Baseline table; cost, then measured')
+  })
   test('deltaPts is signed percentage points, null when either side is missing', () => {
     expect(deltaPts(0.92, 0.88)).toBeCloseTo(-4.0)
     expect(deltaPts(null, 0.5)).toBeNull()

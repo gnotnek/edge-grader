@@ -40,22 +40,32 @@ export default function App() {
   const [reload, setReload] = useState(0)
   useEffect(() => {
     const on = () => setPage(pageFromHash())
+    // R reloads the data, unless the key is going into a field.
+    const key = (e: KeyboardEvent) => {
+      const t = e.target as HTMLElement
+      if (e.key !== 'r' || e.metaKey || e.ctrlKey || e.altKey || t.closest('input, textarea, [contenteditable]')) return
+      setReload((n) => n + 1)
+    }
     window.addEventListener('hashchange', on)
-    return () => window.removeEventListener('hashchange', on)
+    window.addEventListener('keydown', key)
+    return () => {
+      window.removeEventListener('hashchange', on)
+      window.removeEventListener('keydown', key)
+    }
   }, [])
   const { title, Page } = PAGES[page]
 
   return (
     <ReloadContext.Provider value={reload}>
       <SidebarProvider>
-        <Sidebar collapsible="icon" variant="inset">
+        <Sidebar collapsible="icon">
           <SidebarHeader>
             <div className="flex items-center gap-2 px-1 py-1.5">
-              <div className="grid size-8 shrink-0 place-items-center rounded-md bg-primary text-primary-foreground">
+              <div className="grid size-8 shrink-0 place-items-center rounded-md border bg-card text-[var(--heading)]">
                 <Cpu className="size-4" aria-hidden />
               </div>
               <div className="grid leading-tight group-data-[collapsible=icon]:hidden">
-                <span className="font-semibold">edge-grader</span>
+                <span className="font-serif text-base font-medium">edge-grader</span>
                 <span className="text-xs text-muted-foreground">Small graders on small boards</span>
               </div>
             </div>
@@ -90,19 +100,19 @@ export default function App() {
           </SidebarFooter>
           <SidebarRail />
         </Sidebar>
-        <SidebarInset className="min-w-0">
-          <header className="sticky top-0 z-10 flex h-14 items-center gap-2 border-b bg-background/90 px-4 backdrop-blur">
+        <SidebarInset className="min-w-0 bg-transparent">
+          <header className="sticky top-0 z-10 flex h-14 items-center gap-2 border-b bg-background/80 px-4 backdrop-blur md:px-6">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-1 data-[orientation=vertical]:h-4" />
-            <h1 className="font-semibold">{title}</h1>
+            <h1 className="font-medium text-[var(--heading)]">{title}</h1>
             <div className="ml-auto flex items-center gap-1">
-              <Button variant="ghost" size="sm" onClick={() => setReload((n) => n + 1)}>
-                <RefreshCw /> Reload data
+              <Button variant="ghost" size="sm" className="active:scale-[0.98]" onClick={() => setReload((n) => n + 1)}>
+                <RefreshCw /> Reload data <kbd className="hidden sm:inline">R</kbd>
               </Button>
               <ThemeToggle />
             </div>
           </header>
-          <main className="mx-auto w-full max-w-6xl p-4 md:p-6">
+          <main className="mx-auto w-full max-w-6xl px-4 py-8 md:px-10 md:py-12">
             <Page />
           </main>
         </SidebarInset>

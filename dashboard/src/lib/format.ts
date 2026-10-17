@@ -72,7 +72,11 @@ export function splitGroup(split: string): string {
   return split.startsWith('symbolic') ? 'symbolic' : split
 }
 
-/** Plan text is markdown: drop link targets and emphasis markers for plain display. */
+/** Plan text is markdown: drop link targets, emphasis markers and the emoji ticks for plain display. */
 export function plainMarkdown(s: string): string {
-  return s.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/\*\*([^*]+)\*\*/g, '$1')
+  return s
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\s*\p{Extended_Pictographic}\uFE0F?/gu, '')
+    .trim()
 }

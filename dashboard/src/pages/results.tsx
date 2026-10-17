@@ -81,9 +81,9 @@ function ScientsbankByCondition({ runs }: { runs: Run[] }) {
     >
       <div className="grid gap-3 lg:grid-cols-2">
         {MODELS.map((model) => (
-          <Card key={model} className="gap-2 py-4">
-            <CardHeader className="px-4"><CardTitle className="text-base">{MODEL_LABEL[model]}</CardTitle></CardHeader>
-            <CardContent className="px-4">
+          <Card key={model} className="gap-2">
+            <CardHeader><CardTitle className="font-serif text-xl font-medium">{MODEL_LABEL[model]}</CardTitle></CardHeader>
+            <CardContent>
               {asTable ? (
                 <Table className="tabular">
                   <TableHeader>
@@ -128,7 +128,7 @@ function ScientsbankByCondition({ runs }: { runs: Run[] }) {
                       }
                     />
                     <ChartLegend content={<ChartLegendContent />} />
-                    {BOARD_ORDER.map((b) => <Bar key={b} dataKey={b} fill={`var(--color-${b})`} radius={[0, 4, 4, 0]} />)}
+                    {BOARD_ORDER.map((b) => <Bar key={b} dataKey={b} fill={`var(--color-${b})`} radius={[0, 4, 4, 0]} isAnimationActive={false} />)}
                   </BarChart>
                 </ChartContainer>
               )}
@@ -158,10 +158,11 @@ function BaselineVsRag({ runs }: { runs: Run[] }) {
   })
   return (
     <Section
+      i={2}
       title="Baseline against RAG"
       description="Kaggle T4, the newest run per cell. News accuracy is the Qwen3-14B judge's. Differences are in percentage points; significance is in docs/results/rag.md."
     >
-      <Card className="py-0">
+      <Card className="table-inset py-0">
         <Table className="tabular">
           <TableHeader>
             <TableRow>
@@ -212,10 +213,11 @@ function BoardAgreement({ runs, onOpen }: { runs: Run[]; onOpen: (r: Run) => voi
   const checked = runs.filter((r) => r.vsKaggle)
   return (
     <Section
+      i={3}
       title="Boards against Kaggle"
       description="From the board-check files in results/estimates/: the same answers graded on a board and on Kaggle, with an exact McNemar test. Unadjusted p; the phase 0 gate used the Holm correction."
     >
-      <Card className="py-0">
+      <Card className="table-inset py-0">
         <Table className="tabular">
           <TableHeader>
             <TableRow>
@@ -247,12 +249,12 @@ function BoardAgreement({ runs, onOpen }: { runs: Run[]; onOpen: (r: Run) => voi
         </Table>
       </Card>
       {pairs.data && pairs.data.pairs.length > 0 && (
-        <Card className="gap-2 py-4">
-          <CardHeader className="px-4">
-            <CardTitle className="text-base">Pi 5 against Jetson</CardTitle>
+        <Card className="gap-2">
+          <CardHeader>
+            <CardTitle className="font-serif text-xl font-medium">Pi 5 against Jetson</CardTitle>
             <p className="text-sm text-muted-foreground">How many times slower and more energy the Pi takes per answer. From {pairs.data.file}.</p>
           </CardHeader>
-          <CardContent className="px-0">
+          <CardContent className="table-inset px-0">
             <Table className="tabular">
               <TableHeader>
                 <TableRow>
@@ -315,11 +317,12 @@ function AccuracyVsEnergy({ runs, onOpen }: { runs: Run[]; onOpen: (r: Run) => v
 
   return (
     <Section
+      i={1}
       title="Accuracy against energy per answer"
       description={`SciEntsBank board runs with a board check (${n} so far). Energy is board DC power over the grading window. The x axis is logarithmic, so each step is three times the energy. Filled dots are E2B, hollow are E4B; click one to open the run.`}
     >
-      <Card className="py-4">
-        <CardContent className="px-4">
+      <Card>
+        <CardContent>
           <ChartContainer config={boardConfig} className="aspect-auto h-80 w-full">
             <ScatterChart margin={{ top: 8, right: 16, bottom: 8, left: 0 }}>
               <CartesianGrid stroke="var(--grid)" />
@@ -347,7 +350,7 @@ function AccuracyVsEnergy({ runs, onOpen }: { runs: Run[]; onOpen: (r: Run) => v
               <ChartLegend content={<ChartLegendContent />} />
               {byBoard.map(({ board, pts }) => (
                 <Scatter
-                  key={board} name={board} dataKey={board} data={pts} fill={`var(--color-${board})`}
+                  key={board} name={board} dataKey={board} data={pts} fill={`var(--color-${board})`} isAnimationActive={false}
                   shape={(p: unknown) => <Dot {...(p as Parameters<typeof Dot>[0])} />}
                   onClick={(d: unknown) => {
                     const run = (d as { payload?: Point })?.payload?.run
@@ -369,7 +372,7 @@ export function ResultsPage() {
   if (error) return <ErrorNote message={error} />
   if (!runs) return <Loading rows={4} />
   return (
-    <div className="space-y-10">
+    <div className="space-y-16">
       <ScientsbankByCondition runs={runs} />
       <AccuracyVsEnergy runs={runs} onOpen={setOpen} />
       <BaselineVsRag runs={runs} />

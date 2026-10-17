@@ -1,9 +1,8 @@
 import type { Run } from '@server/types'
 import { ArrowDown, ArrowUp, CircleAlert, Search } from 'lucide-react'
 import { useMemo, useState } from 'react'
-import { BoardName, ErrorNote, Loading } from '@/components/bits'
+import { BoardDot, BoardName, ErrorNote, Loading, Tag } from '@/components/bits'
 import { RunSheet } from '@/components/run-sheet'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -110,38 +109,39 @@ export function RunsPage() {
         <span className="ml-auto text-sm text-muted-foreground">{shown.length} of {runs.length} runs</span>
       </div>
 
-      <Card className="py-0">
+      <Card className="table-inset py-0">
         <Table className="tabular">
           <TableHeader>
             <TableRow>
-              <TableHead>Run</TableHead>
-              <TableHead>Board</TableHead>
+              <TableHead className="pl-6">Run</TableHead>
+              <TableHead className="hidden sm:table-cell">Board</TableHead>
               <SortHead label="Accuracy" k="accuracy" sort={sort} setSort={setSort} className="text-right" />
               <SortHead label="Macro F1" k="macro_f1" sort={sort} setSort={setSort} className="hidden text-right md:table-cell" />
               <SortHead label="J / answer" k="energy" sort={sort} setSort={setSort} className="hidden text-right lg:table-cell" />
               <SortHead label="Median s" k="latency" sort={sort} setSort={setSort} className="hidden text-right xl:table-cell" />
-              <SortHead label="Started" k="stamp" sort={sort} setSort={setSort} />
+              <SortHead label="Started" k="stamp" sort={sort} setSort={setSort} className="pr-6" />
             </TableRow>
           </TableHeader>
           <TableBody>
             {shown.map((r) => (
-              <TableRow key={`${r.location}${r.id}`} className="cursor-pointer" onClick={() => setOpen(r)}>
-                <TableCell>
+              <TableRow key={`${r.location}${r.id}`} className="cursor-pointer transition-colors duration-200" onClick={() => setOpen(r)}>
+                <TableCell className="pl-6">
                   <button type="button" className="text-left focus-visible:underline focus-visible:outline-none" onClick={() => setOpen(r)}>
-                    <span className="font-medium">{BENCH_LABEL[r.benchmark]} {CONDITION_LABEL[r.condition]} {MODEL_LABEL[r.model]}</span>{' '}
-                    <span className="text-muted-foreground">{r.split}</span>
+                    <BoardDot board={r.board} className="mr-1.5 sm:hidden" />
+                    <span className="font-medium text-[var(--heading)]">{BENCH_LABEL[r.benchmark]} {CONDITION_LABEL[r.condition]} {MODEL_LABEL[r.model]}</span>{' '}
+                    <span className="font-mono text-xs text-muted-foreground">{r.split}</span>
                   </button>
-                  <div className="flex gap-1.5">
-                    {r.location === 'backup' && <Badge variant="outline">Board only</Badge>}
-                    {r.error && <Badge variant="destructive"><CircleAlert /> Unreadable</Badge>}
+                  <div className="mt-1 flex gap-1.5 empty:hidden">
+                    {r.location === 'backup' && <Tag tone="yellow">Not fetched</Tag>}
+                    {r.error && <Tag tone="red" icon={CircleAlert}>Unreadable</Tag>}
                   </div>
                 </TableCell>
-                <TableCell><BoardName board={r.board} /></TableCell>
+                <TableCell className="hidden sm:table-cell"><BoardName board={r.board} /></TableCell>
                 <TableCell className="text-right">{pct(r.metrics.accuracy)}</TableCell>
                 <TableCell className="hidden text-right md:table-cell">{fixed(r.metrics.macro_f1)}</TableCell>
                 <TableCell className="hidden text-right lg:table-cell">{fixed(r.energy?.jPerAnswer, 2)}</TableCell>
                 <TableCell className="hidden text-right xl:table-cell">{fixed(r.metrics.median_latency_s, 2)}</TableCell>
-                <TableCell className="whitespace-nowrap text-muted-foreground">{stampLabel(r.stamp)}</TableCell>
+                <TableCell className="font-mono text-xs whitespace-nowrap text-muted-foreground">{stampLabel(r.stamp)}</TableCell>
               </TableRow>
             ))}
             {!shown.length && (

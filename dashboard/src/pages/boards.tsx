@@ -1,8 +1,7 @@
 import type { BoardState, ExpectedStatus, Job } from '@server/types'
 import { ChevronRight, HardDrive } from 'lucide-react'
 import { Fragment, useState } from 'react'
-import { BoardDot, ErrorNote, Loading, StatusLabel } from '@/components/bits'
-import { Badge } from '@/components/ui/badge'
+import { BoardDot, ErrorNote, Loading, StatusLabel, Tag, type Tone } from '@/components/bits'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { useApi } from '@/lib/api'
@@ -20,8 +19,12 @@ function jobLabel(j: Job): string {
 }
 
 function JobState({ state, rc }: { state: string; rc?: number | null }) {
-  const variant = state === 'done' && rc === 0 ? 'secondary' : state === 'running' ? 'default' : 'outline'
-  return <Badge variant={variant} className={cn(state === 'interrupted' && 'border-[var(--serious)]')}>{state}</Badge>
+  const tone: Tone =
+    state === 'done' && rc === 0 ? 'green'
+    : state === 'running' ? 'blue'
+    : state === 'pending' ? 'neutral'
+    : 'red'
+  return <Tag tone={tone}>{state}</Tag>
 }
 
 function JobsTable({ jobs }: { jobs: Job[] }) {
@@ -31,11 +34,11 @@ function JobsTable({ jobs }: { jobs: Job[] }) {
     <Table className="tabular">
       <TableHeader>
         <TableRow>
-          <TableHead className="w-10 pl-4">#</TableHead>
+          <TableHead className="w-10 pl-6">#</TableHead>
           <TableHead>Job</TableHead>
           <TableHead>State</TableHead>
           <TableHead className="hidden md:table-cell">Started</TableHead>
-          <TableHead className="hidden pr-4 text-right md:table-cell">Took</TableHead>
+          <TableHead className="hidden pr-6 text-right md:table-cell">Took</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -44,7 +47,7 @@ function JobsTable({ jobs }: { jobs: Job[] }) {
           return (
             <Fragment key={j.id}>
               <TableRow className="cursor-pointer" onClick={() => setOpenId(open ? null : j.id)}>
-                <TableCell className="pl-4 text-muted-foreground">{j.id}</TableCell>
+                <TableCell className="pl-6 text-muted-foreground">{j.id}</TableCell>
                 <TableCell>
                   <button
                     type="button" aria-expanded={open}
@@ -56,13 +59,13 @@ function JobsTable({ jobs }: { jobs: Job[] }) {
                   </button>
                 </TableCell>
                 <TableCell><JobState state={j.state} rc={j.rc} /></TableCell>
-                <TableCell className="hidden whitespace-nowrap text-muted-foreground md:table-cell">{dateLabel(j.started)}</TableCell>
-                <TableCell className="hidden pr-4 text-right whitespace-nowrap md:table-cell">{duration(j.started, j.ended)}</TableCell>
+                <TableCell className="hidden font-mono text-xs whitespace-nowrap text-muted-foreground md:table-cell">{dateLabel(j.started)}</TableCell>
+                <TableCell className="hidden pr-6 text-right whitespace-nowrap md:table-cell">{duration(j.started, j.ended)}</TableCell>
               </TableRow>
               {open && (
                 <TableRow className="hover:bg-transparent">
-                  <TableCell colSpan={5} className="px-4">
-                    <pre className="max-h-80 overflow-auto rounded-md bg-muted p-3 text-xs leading-relaxed whitespace-pre-wrap">
+                  <TableCell colSpan={5} className="px-6">
+                    <pre className="max-h-80 overflow-auto rounded-md border bg-muted p-3 font-mono text-xs leading-relaxed whitespace-pre-wrap">
                       {j.logTail ?? 'No log for this job in the backup.'}
                     </pre>
                   </TableCell>
@@ -79,9 +82,9 @@ function JobsTable({ jobs }: { jobs: Job[] }) {
 function BoardCard({ b, owed }: { b: BoardState; owed: ExpectedStatus[] }) {
   const counts = b.jobs.reduce<Record<string, number>>((acc, j) => ({ ...acc, [j.state]: (acc[j.state] ?? 0) + 1 }), {})
   return (
-    <Card className="gap-4 py-4">
-      <CardHeader className="px-4">
-        <CardTitle className="flex items-center gap-2 text-base">
+    <Card className="gap-4">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2 font-serif text-xl font-medium">
           <BoardDot board={b.board} className="size-2.5" /> {BOARD_LABEL[b.board]}
         </CardTitle>
         <CardDescription>
@@ -90,9 +93,9 @@ function BoardCard({ b, owed }: { b: BoardState; owed: ExpectedStatus[] }) {
             : 'No backup of this board on the Mac yet.'}
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4 px-0">
+      <CardContent className="table-inset space-y-4 px-0">
         {owed.length > 0 && (
-          <div className="px-4">
+          <div className="px-6">
             <div className="mb-1 text-sm font-medium">Still owed</div>
             <ul className="divide-y rounded-md border">
               {owed.map((w) => (
@@ -104,11 +107,11 @@ function BoardCard({ b, owed }: { b: BoardState; owed: ExpectedStatus[] }) {
             </ul>
           </div>
         )}
-        {b.error && <div className="px-4"><ErrorNote message={b.error} /></div>}
+        {b.error && <div className="px-6"><ErrorNote message={b.error} /></div>}
         {b.hasBackup ? (
-          b.jobs.length ? <JobsTable jobs={b.jobs} /> : <p className="px-4 text-sm text-muted-foreground">The backup has no queue jobs.</p>
+          b.jobs.length ? <JobsTable jobs={b.jobs} /> : <p className="px-6 text-sm text-muted-foreground">The backup has no queue jobs.</p>
         ) : (
-          <div className="mx-4 flex items-start gap-3 rounded-md border border-dashed p-4 text-sm">
+          <div className="mx-6 flex items-start gap-3 rounded-md border border-dashed p-4 text-sm">
             <HardDrive className="mt-0.5 size-4 shrink-0 text-muted-foreground" aria-hidden />
             <div>
               <p>When the board is free, copy its queue and results here, then reload:</p>
