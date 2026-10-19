@@ -13,7 +13,7 @@
 | 5 | Oct 12 – 18 | 0. Edge baseline + A | **Phase 0 on the boards** (Jetson ~15 h, Pi ~30 h). On Kaggle meanwhile: math RAG-en (phase A), thinking-on grading (B1); EmbeddingGemma 2 tooling + check on the Mac (B3). Topic benchmarks done in week 4 ✅ | Baseline on both boards for every benchmark; baseline vs RAG for all four |
 | 6 | Oct 19 – 25 | B. Variations + C | little-gemma + prefix reuse on the Jetson (B2); thinking-on cost on the boards; answer-as-image rendering, reading check, Kaggle runs (C1); figure-question data search (C2) | Variations vs baseline table |
 | 7 | Oct 26 – Nov 1 | C. Images | C1 board cost; C2 if a dataset qualifies; B3 grading run if it passed its gate | Image vs text table |
-| 8 | Nov 2 – 8 | 4. Edge cost + cloud | RAG versions on the Pi 5 / Jetson; cloud reference (RQ5) | Accuracy vs energy chart |
+| 8 | Nov 2 – 8 | 4. Edge cost | RAG versions on the Pi 5 / Jetson; cloud reference (RQ5) only if time allows (optional since 2026-10-19) | Accuracy vs energy chart |
 | 9 | Nov 9 – 15 | Buffer | Catch up; analysis and charts | All numbers final |
 | 10–11 | Nov 16 – 29 | Write-up | Report draft with figures; supervisor review | Draft sent to supervisor |
 | 12 | Nov 30 – Dec 6 | Wrap-up | Revisions, final report, repo cleanup | Final report |
@@ -110,12 +110,11 @@ Replaced by phases 0, A, B and C. Design: [`superpowers/specs/2026-10-08-baselin
 - [ ] C1: render answers (pinned font), private Kaggle dataset with sha256; matching vision projector; reading check on 100; Kaggle test_ua + test_uq; board cost
 - [ ] C2: data search (real student answers, figures, labels, English, licence, ~300+); run or drop, recorded in the outline
 
-### Stage 4: Edge cost + cloud reference (week 8)
+### Stage 4: Edge cost (week 8)
 *Device rates (tok/s, power, J/token) are reused from `agentic-edge`, not re-measured: [`results/edge-benchmarks.md`](results/edge-benchmarks.md).*
 
 - [ ] Every version (baseline, RAG, and the phase B/C versions that pass) × E2B/E4B on the Pi 5 and the Jetson with `board_grade.sh`
 - [ ] RAG on the board: include embedding and retrieval time in the latency
-- [ ] Cloud reference: a cloud model with the same material, on the same splits (RQ5, the NotebookLM question)
 - [ ] Main chart: accuracy vs energy per answer, for every version and board
 
 ### Write-up (weeks 10–12)
@@ -128,6 +127,7 @@ Replaced by phases 0, A, B and C. Design: [`superpowers/specs/2026-10-08-baselin
 - A second dataset (e.g. SAS-Bench 2025, as a check against memorisation)
 - The cascade idea: small model first, escalate uncertain answers (check overlap with `agentic-edge`'s `analyze_cascade.py` first)
 - Fairness: are non-native English answers scored lower?
+- Cloud reference (RQ5, the NotebookLM question): a cloud model with the same material, on the same splits. Optional since 2026-10-19; if it isn't run, the report lists it as a limitation
 
 ## Change log
 | Date | Change | Why |
@@ -154,3 +154,4 @@ Replaced by phases 0, A, B and C. Design: [`superpowers/specs/2026-10-08-baselin
 | 2026-10-10 | Phase 0 runs done: 20 board runs, all complete; board = Kaggle on 18/20, two at p = 0.033 (opposite directions); gate decision pending | Supervisor 2026-10-08: baseline on the edge first. Results: `results/baselines.md` §4 |
 | 2026-10-10 | Phase A done: math RAG-en (Prealgebra) lowers GSM accuracy for both models; the four-benchmark baseline-vs-RAG table is in `results/rag.md` | Supervisor 2026-10-08: compare each baseline with RAG. Math and news had the same retrieval check (21/30) and went opposite ways |
 | 2026-10-11 | Edge first, cloud optional: B1 runs on the boards (Jetson all splits, Pi test_ua + test_uq), compared within each board; Kaggle thinking runs optional | Owner 2026-10-11. Outline, own decisions |
+| 2026-10-19 | Cloud reference (RQ5) moved from stage 4 to the optional list; stage 4 is edge cost only | Owner 2026-10-19: the focus is small models on the edge. Not run → stated as a limitation. The supervisor asked for it (2026-09-29), so confirm with them. Outline, own decisions |

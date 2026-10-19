@@ -12,7 +12,8 @@
 - B3, the EmbeddingGemma 2 embedder
 - Phase C, image answers (RQ7)
 - RAG on the boards (stage 4)
-- The cloud reference (RQ5)
+
+**Optional:** the cloud reference (RQ5), since 2026-10-19. The focus is small models on the edge, so it runs only if time allows, and it's listed under [limitations](#limitations) until then.
 
 ## RQ1: how good are the untouched models?
 
@@ -124,3 +125,38 @@ Grading, test_ua (thinking off unless stated):
 - Does thinking's gain survive RAG?
 - Can n-gram drafting cut thinking's decode cost on grading, as it did on MMLU-Pro?
 - Does a better embedder (B3) or a cleaner corpus change the RAG picture?
+
+## Limitations
+
+**Scope: what the project doesn't answer**
+- **No cloud comparison (RQ5, optional).**
+  - The project measures small models on edge devices against each other, not against a cloud model with the same material (the NotebookLM question).
+  - So it can say which edge version grades best per joule. It can't say how much accuracy running locally gives up against the cloud.
+  - The supervisor asked for this comparison (2026-09-29). It was made optional on 2026-10-19 to keep the focus on the edge.
+- **One grading dataset.**
+  - SciEntsBank (2013): English school science, scored on three labels.
+  - It may be in the models' training data (an open question in the outline).
+  - It isn't real classroom data, and there are no Indonesian student answers.
+- **Two models from one family, at one quantization:** Gemma 4 E2B / E4B, Q4_K_XL QAT. Other models or precisions may behave differently.
+- **One zero-shot prompt.** Prompt design wasn't explored, and fine-tuning was dropped (2026-10-08).
+- **Labels only.** The model gives no feedback a student could use, and fairness (e.g. non-native English writers) isn't studied.
+
+**RAG**
+- **Fixed retrieval:** one small English embedder, the question as the query, the top 3 passages, frozen 2026-10-03. Other settings might change the RAG results; B3 tests one other embedder.
+- **Uneven course material.** About a quarter of the math chunks lost their numbers in PDF extraction, and many chunks are exercise lists. "RAG doesn't help math" partly reflects that.
+- **Retrieval checked lightly:** 30 questions per benchmark, marked by one person.
+- **RAG not run on the boards yet.** Its device cost (a prompt ~6× longer) is an estimate, and on-device embedding and retrieval time isn't included.
+
+**Measurement and statistics**
+- **News scores rest on an unchecked judge.** Qwen3-14B graded them, with no human check, so they can't be compared directly with the paper's GPT-4.1 figures.
+- **Small samples in places.**
+  - GSM8K's 100 questions can't detect small changes.
+  - GSM-Symbolic's 1,000 answers are about 100 independent templates.
+  - MMLU-Pro is a 300-question subset.
+- **One correction chosen after seeing results.** Phase 0's gate was passed with the Holm correction, decided after the results were in; the outline records this.
+- **Trimmed runs.**
+  - The Pi ran 100 of GSM-Symbolic's 1,000 questions, and no test_ud with thinking on.
+  - B2 ran on the Jetson's test_ua only.
+- **One thinking budget,** 320 tokens, nearly always used up. A larger budget might do differently.
+- **Copied MMLU-Pro numbers.** The board MMLU-Pro figures are `agentic-edge`'s, from lm-eval rather than this project's runner. Its time and energy are means, not medians.
+- **Energy isn't wall power.** It's board DC draw. The Pi runs at 3 threads to match the lab.
