@@ -138,3 +138,21 @@ def test_rag_adds_the_retrieval_file_and_prefix():
     assert re.fullmatch(rf"{REPO}/results/board/rag-lg-reuse-e2b-jetson-test_ua-{STAMP}", f["run_dir"])
     assert f["runner"].endswith(
         f"--out {f['run_dir']} --rag results/rag/retrieval-scientsbank-en.bge-small-en-k5.json --k 3")
+
+
+def test_rag_for_gsm_and_news_names_the_folder_and_passes_the_file():
+    gsm = fields(dry("e2b", "symbolic", BENCH="gsm",
+                     RAG="results/rag/retrieval-gsm-en.bge-small-en-k5.json"))
+    assert re.fullmatch(rf"{REPO}/results/board/gsm-rag-e2b-jetson-symbolic-i10-{STAMP}", gsm["run_dir"])
+    assert gsm["runner"].endswith(
+        f"--out {gsm['run_dir']} --rag results/rag/retrieval-gsm-en.bge-small-en-k5.json --k 3")
+    news = fields(dry("e4b", BENCH="news", RAG="results/rag/retrieval-news-en.bge-small-en-k5.json"))
+    assert re.fullmatch(rf"{REPO}/results/board/news-rag-e4b-jetson-test-{STAMP}", news["run_dir"])
+    assert news["runner"].endswith("--rag results/rag/retrieval-news-en.bge-small-en-k5.json --k 3")
+    # The server is the baseline's: RAG changes the prompt only.
+    assert gsm["server"] == fields(dry("e2b", "symbolic", BENCH="gsm"))["server"]
+
+
+def test_rag_file_must_be_the_benchmarks_own():
+    p = dry("e2b", BENCH="news", RAG="results/rag/retrieval-gsm-en.bge-small-en-k5.json")
+    assert p.returncode != 0 and "not a news retrieval file" in p.stderr

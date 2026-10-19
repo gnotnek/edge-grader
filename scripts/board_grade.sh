@@ -8,6 +8,8 @@
 #   BENCH=gsm scripts/board_grade.sh e2b gsm8k  # the 100 GSM8K originals
 #   BENCH=gsm INSTANCES=1 scripts/board_grade.sh e2b symbolic   # first GSM-Symbolic variant set
 #   BENCH=news scripts/board_grade.sh e4b       # LiveNewsBench, 200 (judge on Kaggle afterwards)
+#   BENCH=news RAG=results/rag/retrieval-news-en.bge-small-en-k5.json scripts/board_grade.sh e4b
+#                                               # with RAG-en: top 3 passages (any benchmark)
 #   MEASURE=0 scripts/board_grade.sh e4b        # no telemetry (a quick check)
 #   DRY_RUN=1 EG_BOARD=pi5 BENCH=gsm scripts/board_grade.sh e2b symbolic
 #                                               # print the run folder and commands, touch nothing
@@ -22,7 +24,7 @@
 # Everything a run produces stays inside this repo, never in agentic-edge's
 # folders, so it can be committed as the record of the run:
 #   results/board/<model>-<board>-<split>-<stamp>/          SciEntsBank (stage-1 names)
-#   results/board/<bench>-<model>-<board>-<set>-<stamp>/    gsm (set gsm8k | symbolic-i<N>), news (set test)
+#   results/board/<bench>[-rag]-<model>-<board>-<set>-<stamp>/  gsm (set gsm8k | symbolic-i<N>), news (set test)
 #     <runner summary>.json  baseline-*, gsm-* or news-*: metrics, settings, server model path
 #     raw/*.jsonl          one line per question, including the model's raw reply
 #     server.log           llama-server log (timestamped)
@@ -69,9 +71,16 @@ VARIANT="${VARIANT:-base}"
 case "$VARIANT" in base|swafull|lg|lg-reuse) ;;
   *) echo "unknown VARIANT: $VARIANT (base|swafull|lg|lg-reuse)" >&2; exit 1 ;;
 esac
+# RAG (stage 4) works for every benchmark: the runner's --rag with that benchmark's retrieval file.
 RAG="${RAG:-}"
-if [ "$VARIANT" != base ] || [ -n "$RAG" ]; then
-  [ "$BENCH" = scientsbank ] || { echo "VARIANT/RAG are for BENCH=scientsbank only" >&2; exit 1; }
+if [ "$VARIANT" != base ]; then
+  [ "$BENCH" = scientsbank ] || { echo "VARIANT is for BENCH=scientsbank only" >&2; exit 1; }
+fi
+if [ -n "$RAG" ]; then
+  case "$(basename "$RAG")" in
+    retrieval-"$BENCH"-*.json) ;;
+    *) echo "RAG file $RAG is not a $BENCH retrieval file (retrieval-$BENCH-*.json)" >&2; exit 1 ;;
+  esac
 fi
 MEASURE="${MEASURE:-1}"
 PORT="${PORT:-8080}"
@@ -135,9 +144,9 @@ if [ "$BENCH" = scientsbank ]; then
   [ "$VARIANT" != base ] && NAME="$VARIANT-$NAME"
   [ -n "$RAG" ] && NAME="rag-$NAME"
 elif [ "$SPLIT" = symbolic ]; then
-  NAME="$BENCH-$MODEL_KEY-$BOARD-symbolic-i$INSTANCES"
+  NAME="$BENCH$( [ -n "$RAG" ] && echo -rag )-$MODEL_KEY-$BOARD-symbolic-i$INSTANCES"
 else
-  NAME="$BENCH-$MODEL_KEY-$BOARD-$SPLIT"
+  NAME="$BENCH$( [ -n "$RAG" ] && echo -rag )-$MODEL_KEY-$BOARD-$SPLIT"
 fi
 RUN_DIR="${EG_RUN_DIR:-$HERE/results/board/$NAME-$(date +%Y%m%d-%H%M%S)}"
 SRVLOG=$RUN_DIR/server.log
@@ -167,9 +176,10 @@ runner() {
                    --split "$SPLIT" --n "$N" --out "$RUN_DIR" $( [ "$THINKING" = on ] && echo --thinking ) \
                    $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) ;;
     gsm) $run uv run edge-grader-gsm --base-url "$url" --label "$label" \
-           --set "$SPLIT" --instances "$INSTANCES" --n "$N" --out "$RUN_DIR" ;;
+           --set "$SPLIT" --instances "$INSTANCES" --n "$N" --out "$RUN_DIR" \
+           $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) ;;
     news) $run uv run edge-grader-news --base-url "$url" --label "$label" \
-            --n "$N" --out "$RUN_DIR" ;;
+            --n "$N" --out "$RUN_DIR" $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) ;;
   esac
 }
 
@@ -239,6 +249,8 @@ if [ -z "${EG_INNER:-}" ]; then
 fi
 
 # Fail before touching the board if anything is missing.
+[ -z "$RAG" ] || [ -f "$HERE/$RAG" ] || [ -f "$RAG" ] || {
+  echo "missing: $RAG (copy results/rag/ and data/rag/chunks/ from the Mac)" >&2; exit 1; }
 ENGINE_BIN=$LLAMA_SERVER
 case "$VARIANT" in lg|lg-reuse) ENGINE_BIN=$LG_ENGINE
   [ -f "$AE/lg_openai_shim.py" ] || { echo "missing: $AE/lg_openai_shim.py" >&2; exit 1; } ;; esac

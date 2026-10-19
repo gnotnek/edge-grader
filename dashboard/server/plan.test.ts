@@ -23,9 +23,9 @@ describe('parsePlan on docs/plan.md', () => {
     expect(p0.items).toHaveLength(7)
     expect(p0.items.every((i) => i.done)).toBe(true)
   })
-  test('Phase B has three open items', () => {
+  test('Phase B has three items, B1 and B2 done', () => {
     const pb = plan.sections.find((s) => s.title.startsWith('Phase B'))!
-    expect(pb.items.map((i) => i.done)).toEqual([false, false, false])
+    expect(pb.items.map((i) => i.done)).toEqual([true, true, false])
   })
   test('bold sub-headings group the items under them', () => {
     const s2 = plan.sections.find((s) => s.title.startsWith('Stage 2'))!

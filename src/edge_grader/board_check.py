@@ -243,7 +243,8 @@ def kaggle_run(directory: str, bench: str, model: str, split: str, n: int,
                thinking: bool = False, stage: str = "baseline") -> Path | None:
     """The Kaggle run a board run is checked against. Grading: same split and n (as in stage 1),
     a thinking-on board run against the Kaggle thinking-on run, a RAG one against Kaggle's RAG-en.
-    GSM and news: the latest Kaggle baseline run of the set; pairing is on shared ids."""
+    GSM and news: the latest Kaggle run of the set with the same stage (baseline or RAG-en);
+    pairing is on shared ids."""
     d = Path(directory)
     if bench == "scientsbank":
         prefix = "think" if thinking else stage
@@ -252,8 +253,9 @@ def kaggle_run(directory: str, bench: str, model: str, split: str, n: int,
             if json.loads(path.read_text())["metrics"]["n"] == n:
                 return path
         return None
-    pattern = (f"gsm-{split}-{model}-kaggle-*.json" if bench == "gsm"
-               else f"news-baseline-{model}-kaggle-*.json")
+    rag = stage == "rag"
+    pattern = (f"gsm-{'rag-' if rag else ''}{split}-{model}-kaggle-*.json" if bench == "gsm"
+               else f"news-{'rag' if rag else 'baseline'}-{model}-kaggle-*.json")
     found = sorted(p for p in d.glob(pattern) if ".judged-" not in p.name)
     return found[-1] if found else None
 

@@ -37,7 +37,10 @@ export function parseRunFolder(name: string): RunKey | null {
   let benchmark: Benchmark = 'scientsbank'
   let condition: Condition = 'baseline'
   if (pre === 'gsm' || pre === 'news') benchmark = pre
-  else if (pre !== '') {
+  else if (pre === 'gsm-rag' || pre === 'news-rag') {
+    benchmark = pre === 'gsm-rag' ? 'gsm' : 'news'
+    condition = 'rag-en'
+  } else if (pre !== '') {
     // SciEntsBank prefixes stack as rag-<variant>-think-; the outermost one names the condition.
     const first = pre.startsWith('lg-reuse') ? 'lg-reuse' : pre.split('-')[0]
     const known: Record<string, Condition> = {

@@ -199,6 +199,21 @@ def test_kaggle_run_finds_each_benchmark(tmp_path):
     assert kaggle_run(d, "gsm", "e4b", "gsm8k", 100) is None
 
 
+def test_kaggle_run_pairs_gsm_and_news_rag_with_rag(tmp_path):
+    names = ["gsm-gsm8k-e2b-kaggle-t4-20261008-1.json",
+             "gsm-rag-gsm8k-e2b-kaggle-t4-en-k3-20261010-1.json",
+             "news-baseline-e2b-kaggle-t4-20261007-1.json",
+             "news-rag-e2b-kaggle-t4-en-k3-20261008-1.json",
+             "news-rag-e2b-kaggle-t4-en-k3-20261008-1.judged-qwen3-14b-q4_k_m.json"]
+    for n in names:
+        (tmp_path / n).write_text(json.dumps({"metrics": {"n": 100}}))
+    d = str(tmp_path)
+    assert kaggle_run(d, "gsm", "e2b", "gsm8k", 100, stage="topics").name == names[0]
+    assert kaggle_run(d, "gsm", "e2b", "gsm8k", 100, stage="rag").name == names[1]
+    assert kaggle_run(d, "news", "e2b", "test", 200, stage="rag").name == names[3]
+    assert kaggle_run(d, "gsm", "e2b", "symbolic", 100, stage="rag") is None
+
+
 def test_read_board_state(tmp_path):
     assert read_board_state(tmp_path / "missing.txt") is None
     p = tmp_path / "board-state.txt"

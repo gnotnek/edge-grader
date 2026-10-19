@@ -32,6 +32,14 @@ describe('parseRunFolder', () => {
       benchmark: 'news', split: 'test', board: 'pi5',
     })
   })
+  test('gsm and news RAG board runs', () => {
+    expect(parseRunFolder('gsm-rag-e2b-jetson-symbolic-i10-20261020-010000')).toMatchObject({
+      benchmark: 'gsm', condition: 'rag-en', split: 'symbolic-i10',
+    })
+    expect(parseRunFolder('news-rag-e4b-jetson-test-20261020-010000')).toMatchObject({
+      benchmark: 'news', condition: 'rag-en', split: 'test',
+    })
+  })
   test('interrupted and pilot folders are not runs', () => {
     expect(parseRunFolder('interrupted-think-e4b-jetson-test_ud-20261013-063811')).toBeNull()
     expect(parseRunFolder('pilot-base')).toBeNull()

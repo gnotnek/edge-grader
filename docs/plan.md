@@ -114,6 +114,7 @@ Replaced by phases 0, A, B and C. Design: [`superpowers/specs/2026-10-08-baselin
 *Device rates (tok/s, power, J/token) are reused from `agentic-edge`, not re-measured: [`results/edge-benchmarks.md`](results/edge-benchmarks.md).*
 
 - [ ] Every version (baseline, RAG, and the phase B/C versions that pass) × E2B/E4B on the Pi 5 and the Jetson with `board_grade.sh`
+- [ ] RAG-en on the **Jetson first** (supervisor, 2026-10-19): SciEntsBank test_ua/uq/ud, news, GSM8K + GSM-Symbolic (1,000), E2B + E4B, 12 jobs (`scripts/queue.sh jetson add --preset rag`). Same server flags as phase 0; the frozen retrieval files, as on Kaggle. News judged on Kaggle afterwards. The Pi waits
 - [ ] RAG on the board: include embedding and retrieval time in the latency
 - [ ] Main chart: accuracy vs energy per answer, for every version and board
 
@@ -155,3 +156,4 @@ Replaced by phases 0, A, B and C. Design: [`superpowers/specs/2026-10-08-baselin
 | 2026-10-10 | Phase A done: math RAG-en (Prealgebra) lowers GSM accuracy for both models; the four-benchmark baseline-vs-RAG table is in `results/rag.md` | Supervisor 2026-10-08: compare each baseline with RAG. Math and news had the same retrieval check (21/30) and went opposite ways |
 | 2026-10-11 | Edge first, cloud optional: B1 runs on the boards (Jetson all splits, Pi test_ua + test_uq), compared within each board; Kaggle thinking runs optional | Owner 2026-10-11. Outline, own decisions |
 | 2026-10-19 | Cloud reference (RQ5) moved from stage 4 to the optional list; stage 4 is edge cost only | Owner 2026-10-19: the focus is small models on the edge. Not run → stated as a limitation. The supervisor asked for it (2026-09-29), so confirm with them. Outline, own decisions |
+| 2026-10-19 | Stage 4 starts with RAG-en on the Jetson only, all three board benchmarks; `board_grade.sh` takes `RAG` for GSM and news too | Supervisor: the Pi 5 results were too weak and slow to lead with; the Jetson ran the whole phase 0 baseline, so baseline vs RAG is complete on one board |

@@ -94,6 +94,19 @@ def test_phase0_preset_per_board(q, monkeypatch):
     assert {j["env"]["INSTANCES"] for j in pi} == {"1"}
 
 
+def test_rag_preset(q):
+    bq.main(["add", "--preset", "rag"])
+    js = jobs(q)
+    assert len(js) == 12
+    assert [j["args"] for j in js[:2]] == [["e2b", "test_ua"], ["e4b", "test_ua"]]
+    assert [(j["env"]["BENCH"], j["args"][1]) for j in js[::2]] == [
+        ("scientsbank", "test_ua"), ("scientsbank", "test_uq"), ("scientsbank", "test_ud"),
+        ("news", "test"), ("gsm", "gsm8k"), ("gsm", "symbolic")]
+    for j in js:
+        assert j["env"]["RAG"] == f"results/rag/retrieval-{j['env']['BENCH']}-en.bge-small-en-k5.json"
+    assert {j["env"]["INSTANCES"] for j in js} == {"10"}
+
+
 def test_run_goes_in_order_and_records_results(q, monkeypatch):
     bq.main(["add", "BENCH=gsm", "--", "e2b", "gsm8k"])
     bq.main(["add", "--", "e4b", "test_uq"])

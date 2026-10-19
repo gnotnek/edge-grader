@@ -3,6 +3,7 @@
 
     python3 scripts/board_queue.py add BENCH=gsm INSTANCES=1 -- e2b symbolic   # one job
     python3 scripts/board_queue.py add --preset phase0      # phase 0's 10 jobs for this board
+    python3 scripts/board_queue.py add --preset rag         # stage 4's 12 RAG-en jobs
     python3 scripts/board_queue.py status
     python3 scripts/board_queue.py start                    # the worker, detached
     python3 scripts/board_queue.py stop                     # finish the current job, then stop
@@ -79,13 +80,28 @@ def jobs_locked(qdir: Path):
         tmp.replace(path)
 
 
+# Stage 4's RAG-en runs: each benchmark's frozen retrieval file, the same ones the Kaggle RAG runs used.
+RAG_FILES = {bench: f"results/rag/retrieval-{bench}-en.bge-small-en-k5.json"
+             for bench in ("scientsbank", "gsm", "news")}
+
+
 def preset(name: str, where: str) -> list[tuple[dict, list[str]]]:
-    if name != "phase0":
-        sys.exit(f"unknown preset: {name} (phase0)")
+    if name not in ("phase0", "rag"):
+        sys.exit(f"unknown preset: {name} (phase0, rag)")
     # Phase 0 (docs/superpowers/plans/2026-10-09-phase0-edge-baseline.md): the Jetson runs all
     # 1,000 GSM-Symbolic variants, the Pi the first variant set only.
     instances = "10" if where == "jetson" else "1"
     out = []
+    if name == "rag":
+        # Stage 4, RAG-en next to phase 0's baseline on the same board: every SciEntsBank split
+        # (test_ua too: its board baseline is stage 1's), both GSM sets and news. Shortest first.
+        for bench, split in (("scientsbank", "test_ua"), ("scientsbank", "test_uq"),
+                             ("scientsbank", "test_ud"), ("news", "test"),
+                             ("gsm", "gsm8k"), ("gsm", "symbolic")):
+            for model in ("e2b", "e4b"):
+                out.append(({"BENCH": bench, "INSTANCES": instances, "RAG": RAG_FILES[bench]},
+                            [model, split]))
+        return out
     for model in ("e2b", "e4b"):
         for bench, split in (("scientsbank", "test_uq"), ("scientsbank", "test_ud"),
                              ("gsm", "gsm8k"), ("gsm", "symbolic"), ("news", "test")):
@@ -258,7 +274,7 @@ def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     add = sub.add_parser("add", help="add a job, or a preset's jobs")
-    add.add_argument("--preset", help="phase0")
+    add.add_argument("--preset", help="phase0 | rag")
     add.add_argument("args", nargs=argparse.REMAINDER, help="[KEY=value ...] -- <model> [split|set] [n]")
     for name in ("status", "run", "start", "stop"):
         sub.add_parser(name)
