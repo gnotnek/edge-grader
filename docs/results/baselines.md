@@ -145,6 +145,15 @@ The two tasks aren't directly comparable (10-way multiple choice vs 3-way labels
 | News | test | E4B | Pi 5 | 200 | 0.5% | 0.5% | 172/200 | 1.0 | 169.24 | 1311.5 |
 | News | test | E4B | Jetson | 200 | 0.5% | 0.5% | 176/200 | 1.0 | 56.89 | 648.9 |
 
+**MMLU-Pro on both boards, copied from `agentic-edge`** (not re-run; the spec's phase 0 table marks it as copied). Same GGUFs and thinking-off flags, run through lm-eval on the boards in 2026-09. Copied 2026-10-19 into [`agentic-edge-mmlupro-variations.json`](../../results/reference/agentic-edge-mmlupro-variations.json). The "Kaggle" column is this project's runner on the same 300 questions ([`rag.md`](rag.md#the-runner-reproduces-the-lab-baseline)), where "same answer" means the same right/wrong. agentic-edge reports only totals, so the time and energy columns are its totals ÷ 300: a **mean**, not a median.
+
+| Benchmark | Set | Model | Board | n | Board acc. | Kaggle acc. (same questions) | Same right/wrong | McNemar p | Mean s | J / question |
+|---|---|---|---|---|---|---|---|---|---|---|
+| MMLU-Pro | s1–s3 | E2B | Pi 5 | 300 | 51.7% | 51.3% | 87% | 1.00 | 110 | 770 |
+| MMLU-Pro | s1–s3 | E2B | Jetson | 300 | 52.7% | 51.3% | 87% | 0.63 | 31 | 307 |
+| MMLU-Pro | s1–s3 | E4B | Pi 5 | 300 | 65.7% | 65.3% | 91–92% | 1.00 | 222 | 1506 |
+| MMLU-Pro | s1–s3 | E4B | Jetson | 300 | 66.0% | 65.3% | 91–92% | 0.85 | 63 | 654 |
+
 Pi against Jetson on the same questions (Pi time and energy as a multiple of the Jetson's):
 
 | Benchmark | Pi / Jetson time | Pi / Jetson energy | Same answer, Pi vs Jetson | McNemar p |
@@ -154,9 +163,11 @@ Pi against Jetson on the same questions (Pi time and energy as a multiple of the
 | GSM8K | 3.0×, 3.3× | 2.1×, 2.1× | 87/100, 97/100 | 1.0, 1.0 |
 | GSM-Symbolic (Pi's 100) | 3.2×, 3.3× | 2.1×, 2.3× | 84/100, 95/100 | 1.0, 0.625 |
 | News | 2.9×, 3.0× | 2.0×, 2.0× | 166/200, 180/200 | 1.0, 1.0 |
+| MMLU-Pro (`agentic-edge`, n = 300) | 3.6×, 3.5× | 2.5×, 2.3× | same letter ~72%, ~86% | 0.76, 1.00 |
 
 **What it shows:**
 - **Board accuracy equals Kaggle's on 18 of the 20 runs** (McNemar p ≥ 0.13). The two exceptions are both p = 0.033, and they point opposite ways: E4B on the Jetson's test_ud is 0.3 points *below* Kaggle (20 answers right only on the board, 37 only on Kaggle), and E2B on the Jetson's GSM-Symbolic is 2.1 points *above* (55 against 34). Over 20 comparisons about one p below 0.05 is expected by chance; corrected for all 20 (Holm), both are above 0.6. **The gate as planned (any p < 0.05 stops phase B on the boards) is tripped as written; the owner accepted it with the Holm correction (2026-10-10), a choice made after seeing the results and recorded as such in the outline.**
 - **The Pi/Jetson gap depends on the task's shape.** Grading (a ~165-token prompt, a 2-token label) runs 7.4–9.0× slower and costs 6.6–7.6× more energy on the Pi, as on test_ua (7.7–8.8×, 7.0–7.8×). GSM and news, whose answers run to hundreds of tokens, are only 2.9–3.3× slower and 2.0–2.3× dearer, close to MMLU-Pro's 3.4× / 2.3×: long answers are decode-bound, where the Jetson's lead is smaller.
-- **Cost per question spans three orders of magnitude.** Grading costs 3.8–6.9 J on the Jetson and 25–52 J on the Pi; a GSM question 106–176 J and 227–402 J; a news question 354–649 J and 715–1,312 J, for 0.5–1% accuracy without RAG, because the news prompt asks the model to think step by step before it declines.
+- **Cost per question spans three orders of magnitude.** Grading costs 3.8–6.9 J on the Jetson and 25–52 J on the Pi; a GSM question 106–176 J and 227–402 J; a news question 354–649 J and 715–1,312 J, for 0.5–1% accuracy without RAG, because the news prompt asks the model to think step by step before it declines. MMLU-Pro, with its 5-shot chain of thought, is the dearest: 307–654 J on the Jetson and 770–1,506 J on the Pi.
+- **With MMLU-Pro, all four benchmarks have a baseline on both boards, and none differs between them.** MMLU-Pro's boards agree on the answer letter less often (~72% for E2B) than grading's on the label (96–99%): a long answer gives CPU and CUDA arithmetic more chances to split at a near-tie. The splits cancel out.
 

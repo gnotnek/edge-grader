@@ -1,0 +1,74 @@
+{
+  "stage": "variations",
+  "task": "mmlu_pro",
+  "source": "agentic-edge findings/RESULTS.md sections 7.1, 7.2, 7.4, 7.6, 7.7 and 7.8 (repo commit 16eace9; findings/ unchanged in the working tree)",
+  "copied": "2026-10-19",
+  "why": "Phase B (RQ6) compares grading variations with the same variations on MMLU-Pro. The spec (2026-10-08) says the MMLU-Pro side is copied from agentic-edge, not re-run: same GGUFs, same llama-server flags, same boards.",
+  "protocol": {
+    "harness": "lm-eval mmlu_pro, 5-shot CoT, greedy, max_gen_toks 2048",
+    "subset": "3 x 100-question stratified subsets (s1/s2/s3), seed 20260918, n=300 per cell",
+    "models": "Gemma 4 E2B / E4B, Unsloth Q4_K_XL QAT GGUF",
+    "baseline_server": "llama-server -c 8192 --cache-ram 0 -rea off --reasoning-budget -1",
+    "thinking_server": "-rea on --reasoning-budget 320 --reasoning-format none",
+    "power": "board DC draw summed over PMIC/INA3221 rails, not wall power",
+    "per_question": "energy_j_per_question and mean_s_per_question are this project's division of agentic-edge's totals by 300; agentic-edge reports totals only"
+  },
+  "baseline_pi_vs_jetson": {
+    "e2b": {"pi5": 0.517, "jetson": 0.527, "mcnemar_p": 0.76, "same_letter": 0.72},
+    "e4b": {"pi5": 0.657, "jetson": 0.660, "mcnemar_p": 1.00, "same_letter": 0.86},
+    "pooled_mcnemar_p": 0.71,
+    "cost": {
+      "e2b": {"pi5": {"energy_wh": 64.2, "wall_min": 552, "energy_j_per_question": 770, "mean_s_per_question": 110.4},
+              "jetson": {"energy_wh": 25.6, "wall_min": 155, "energy_j_per_question": 307, "mean_s_per_question": 31.0}},
+      "e4b": {"pi5": {"energy_wh": 125.5, "wall_min": 1111, "energy_j_per_question": 1506, "mean_s_per_question": 222.2},
+              "jetson": {"energy_wh": 54.5, "wall_min": 313, "energy_j_per_question": 654, "mean_s_per_question": 62.6}}
+    }
+  },
+  "thinking_on_budget_320": {
+    "e2b": {
+      "pi5":    {"accuracy": 0.500, "baseline": 0.517, "both_right": 121, "both_wrong": 116, "base_only": 34, "think_only": 29, "mcnemar_p": 0.61, "energy_wh": 79.8, "wall_min": 685, "energy_j_per_question": 958},
+      "jetson": {"accuracy": 0.497, "baseline": 0.527, "both_right": 126, "both_wrong": 119, "base_only": 32, "think_only": 23, "mcnemar_p": 0.28, "energy_wh": 32.6, "wall_min": 196, "energy_j_per_question": 391}
+    },
+    "e4b": {
+      "pi5":    {"accuracy": 0.663, "baseline": 0.657, "both_right": 179, "both_wrong": 83, "base_only": 18, "think_only": 20, "mcnemar_p": 0.87, "energy_wh": 151.2, "wall_min": 1332, "energy_j_per_question": 1814},
+      "jetson": {"accuracy": 0.667, "baseline": 0.660, "both_right": 182, "both_wrong": 84, "base_only": 16, "think_only": 18, "mcnemar_p": 0.86, "energy_wh": 67.5, "wall_min": 386, "energy_j_per_question": 810}
+    },
+    "unextractable_answers": {"e2b": {"pi5": [25, 41], "jetson": [22, 39]}, "e4b": {"pi5": [25, 27], "jetson": [20, 24]}},
+    "notes": [
+      "The 320-token budget binds on most questions (thoughts median ~1,250 characters); the usual 5-shot CoT follows the thought block.",
+      "E2B's loss is mostly format: +16/+17 answers without 'answer is (X)', about its accuracy loss.",
+      "Cost is volume only: +20-27% tokens, energy and time; J/token unchanged."
+    ]
+  },
+  "engine_little_gemma_jetson": {
+    "note": "S3, little-gemma aee759d + patch, Jetson only (on the Pi it prefills 41-43x slower). Run 2026-09-25..27, before the clock lock, so energy compares with S1.",
+    "thinking_off": {
+      "e2b": {"accuracy": 0.530, "llama_cpp": 0.527, "mcnemar_p": 1.00, "energy_wh": 24.5, "wall_min": 141, "energy_j_per_question": 294, "vs_llama_cpp": "-4% Wh, -9% time"},
+      "e4b": {"accuracy": 0.653, "llama_cpp": 0.660, "mcnemar_p": 0.85, "energy_wh": 47.6, "wall_min": 260, "energy_j_per_question": 571, "vs_llama_cpp": "-13% Wh, -17% time"}
+    },
+    "thinking_on": {
+      "e2b": {"accuracy": 0.493, "llama_cpp": 0.497, "mcnemar_p": 1.00, "energy_wh": 30.5, "wall_min": 174},
+      "e4b": {"accuracy": 0.637, "llama_cpp": 0.667, "mcnemar_p": 0.20, "energy_wh": 58.7, "wall_min": 316}
+    },
+    "same_letter_as_llama_cpp": {"e2b": 0.77, "e4b": 0.83}
+  },
+  "prefix_reuse_and_ngram_jetson": {
+    "note": "S9 = little-gemma + agentic-edge's ae.patch (-reuse: KV snapshot of the shared few-shot prefix; -ngram -block 3: prompt-lookup drafts). Every reply byte-identical to S3, so accuracy is S3's. The reuse-only runs ran under locked clocks (+5-9% energy at the same speed): read their time, not their energy.",
+    "e2b": {
+      "full":  {"energy_wh": 20.3, "wall_min": 121, "vs_s3": "-17% Wh, -14% time", "vs_llama_cpp": "-21% Wh, -22% time"},
+      "ngram": {"energy_wh": 20.8, "wall_min": 124, "vs_s3": "-15% Wh, -12% time"},
+      "reuse": {"energy_wh": 25.5, "wall_min": 136, "vs_s3": "+4% Wh (locked clocks), -4% time", "prompt_tokens_per_subset": "38k against S3's 144k"}
+    },
+    "e4b": {
+      "full":  {"energy_wh": 37.7, "wall_min": 208, "vs_s3": "-21% Wh, -20% time", "vs_llama_cpp": "-31% Wh, -34% time"},
+      "ngram": {"energy_wh": 38.8, "wall_min": 214, "vs_s3": "-18% Wh, -18% time"},
+      "reuse": {"energy_wh": 47.6, "wall_min": 238, "vs_s3": "+-0% Wh (locked clocks), -8% time", "prompt_tokens_per_subset": "38k against S3's 144k"}
+    },
+    "llama_cpp_prompt_cache": "llama.cpp S1 already processes ~38k prompt tokens per subset (its own prompt cache reuses the 5-shot prefix), the same as S9 reuse.",
+    "llama_cpp_ngram_s10_n3m3": {
+      "e2b": {"accuracy": 0.533, "mcnemar_p_vs_s1": 0.86, "energy_wh": 24.1, "wall_min": 139, "same_text_as_s1": "29/300"},
+      "e4b": {"accuracy": 0.650, "mcnemar_p_vs_s1": 0.69, "energy_wh": 50.4, "wall_min": 271, "same_text_as_s1": "20/300"},
+      "note": "Accuracy-neutral but not byte-identical to S1; locked clocks, so its energy saving is understated."
+    }
+  }
+}

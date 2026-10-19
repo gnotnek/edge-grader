@@ -101,8 +101,8 @@ Replaced by phases 0, A, B and C. Design: [`superpowers/specs/2026-10-08-baselin
 
 ### Phase B: variations on the grading baseline (weeks 5–7)
 *Implementation plans: [B1 thinking](superpowers/plans/2026-10-09-phaseB1-thinking.md), [B2 little-gemma + reuse](superpowers/plans/2026-10-09-phaseB2-little-gemma-reuse.md), [B3 EmbeddingGemma 2](superpowers/plans/2026-10-09-phaseB3-embeddinggemma2.md).*
-- [ ] B1 thinking on: parser reads after the thought block (test); `max_tokens` 336; boards first (2026-10-11): Jetson all splits, Pi test_ua + test_uq, E2B + E4B, against each board's thinking-off baseline; Kaggle optional
-- [ ] B2 little-gemma on the Jetson: why test_ua had no prefix reuse; `lg-base`, `lg-reuse`, `llama-sorted` on test_ua; byte-identical check
+- [x] B1 thinking on: parser reads after the thought block (test); `max_tokens` 336; boards first (2026-10-11): Jetson all splits, Pi test_ua + test_uq, E2B + E4B, against each board's thinking-off baseline; Kaggle optional. Done 2026-10-13: +3.0 to +18.8 points on all 10 runs (p ≤ 0.004), at 11× (Pi) and 35–40× (Jetson) the energy; MMLU-Pro side copied from `agentic-edge` (no change): [`results/variations.md`](results/variations.md#b1-thinking-on)
+- [x] B2 little-gemma on the Jetson: why test_ua had no prefix reuse; `lg-base`, `lg-reuse`, `llama-sorted` on test_ua; byte-identical check. Done 2026-10-13, with `--swa-full` as the llama.cpp reuse control in place of `llama-sorted` (pilot, 2026-10-13): accuracy unchanged (p ≥ 0.38); energy −50% / −21% (little-gemma, E2B / E4B), −42% / −44% (`--swa-full`); `lg-reuse` byte-identical to `lg` and reuses nothing on grading prompts: [`results/variations.md`](results/variations.md#b2-engine-little-gemma-and-prefix-reuse)
 - [ ] B3 EmbeddingGemma 2: loads on the Mac?; retrieval check on the 30 SciEntsBank train questions; grading run only at ≥ 20/30
 
 ### Phase C: text + images (weeks 6–7)
