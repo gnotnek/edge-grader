@@ -65,10 +65,25 @@ def test_news():
     )
 
 
+def test_mmlupro_defaults_to_all_three_subsets():
+    f = fields(dry("e2b", BENCH="mmlupro"))
+    assert re.fullmatch(rf"{REPO}/results/board/mmlupro-e2b-jetson-all-{STAMP}", f["run_dir"])
+    assert f["runner"] == (
+        "uv run edge-grader-mmlupro --base-url http://127.0.0.1:8080/v1 --label e2b-jetson "
+        f"--subset s1 s2 s3 --n 0 --out {f['run_dir']}"
+    )
+
+
+def test_mmlupro_one_subset_and_n():
+    f = fields(dry("e4b", "s2", "5", BENCH="mmlupro"))
+    assert re.fullmatch(rf"{REPO}/results/board/mmlupro-e4b-jetson-s2-{STAMP}", f["run_dir"])
+    assert "--subset s2 --n 5 " in f["runner"]
+
+
 def test_server_flags_are_the_same_for_every_benchmark():
     for board, extra in (("jetson", "-ngl 99"), ("pi5", "-t 3")):
         servers = {fields(dry("e2b", board=board, BENCH=b))["server"]
-                   for b in ("scientsbank", "gsm", "news")}
+                   for b in ("scientsbank", "gsm", "news", "mmlupro")}
         assert len(servers) == 1
         (server,) = servers
         assert extra in server
@@ -81,6 +96,7 @@ def test_rejects_bad_arguments():
     cases = [
         ({"BENCH": "mmlu"}, ("e2b",), "unknown BENCH"),
         ({"BENCH": "gsm"}, ("e2b", "test_ua"), "unknown split/set"),
+        ({"BENCH": "mmlupro"}, ("e2b", "s4"), "unknown split/set"),
         ({}, ("e2b", "symbolic"), "unknown split/set"),
         ({"BENCH": "gsm", "INSTANCES": "0"}, ("e2b", "symbolic"), "INSTANCES"),
         ({"BENCH": "gsm", "INSTANCES": "x"}, ("e2b", "symbolic"), "INSTANCES"),
@@ -151,6 +167,14 @@ def test_rag_for_gsm_and_news_names_the_folder_and_passes_the_file():
     assert news["runner"].endswith("--rag results/rag/retrieval-news-en.bge-small-en-k5.json --k 3")
     # The server is the baseline's: RAG changes the prompt only.
     assert gsm["server"] == fields(dry("e2b", "symbolic", BENCH="gsm"))["server"]
+
+
+def test_rag_for_mmlupro_names_the_folder_and_passes_the_file():
+    rag = "results/rag/retrieval-mmlupro-en.bge-small-en-k5.json"
+    f = fields(dry("e4b", BENCH="mmlupro", RAG=rag))
+    assert re.fullmatch(rf"{REPO}/results/board/mmlupro-rag-e4b-jetson-all-{STAMP}", f["run_dir"])
+    assert f["runner"].endswith(f"--out {f['run_dir']} --rag {rag} --k 3")
+    assert f["server"] == fields(dry("e4b", BENCH="mmlupro"))["server"]
 
 
 def test_rag_file_must_be_the_benchmarks_own():

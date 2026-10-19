@@ -97,14 +97,19 @@ def test_phase0_preset_per_board(q, monkeypatch):
 def test_rag_preset(q):
     bq.main(["add", "--preset", "rag"])
     js = jobs(q)
-    assert len(js) == 12
+    assert len(js) == 16
     assert [j["args"] for j in js[:2]] == [["e2b", "test_ua"], ["e4b", "test_ua"]]
     assert [(j["env"]["BENCH"], j["args"][1]) for j in js[::2]] == [
         ("scientsbank", "test_ua"), ("scientsbank", "test_uq"), ("scientsbank", "test_ud"),
-        ("news", "test"), ("gsm", "gsm8k"), ("gsm", "symbolic")]
-    for j in js:
+        ("news", "test"), ("gsm", "gsm8k"), ("gsm", "symbolic"), ("mmlupro", "all"), ("mmlupro", "all")]
+    # MMLU-Pro has no board baseline from this project's runner (agentic-edge's is lm-eval),
+    # so the preset runs one before its RAG-en run: baseline e2b, e4b, then RAG e2b, e4b.
+    mmlu = js[12:]
+    assert [(j["args"], "RAG" in j["env"]) for j in mmlu] == [
+        (["e2b", "all"], False), (["e4b", "all"], False), (["e2b", "all"], True), (["e4b", "all"], True)]
+    for j in js[:12] + mmlu[2:]:
         assert j["env"]["RAG"] == f"results/rag/retrieval-{j['env']['BENCH']}-en.bge-small-en-k5.json"
-    assert {j["env"]["INSTANCES"] for j in js} == {"10"}
+    assert {j["env"]["INSTANCES"] for j in js[:12]} == {"10"}
 
 
 def test_run_goes_in_order_and_records_results(q, monkeypatch):

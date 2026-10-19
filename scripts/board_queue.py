@@ -3,7 +3,7 @@
 
     python3 scripts/board_queue.py add BENCH=gsm INSTANCES=1 -- e2b symbolic   # one job
     python3 scripts/board_queue.py add --preset phase0      # phase 0's 10 jobs for this board
-    python3 scripts/board_queue.py add --preset rag         # stage 4's 12 RAG-en jobs
+    python3 scripts/board_queue.py add --preset rag         # stage 4's 16 jobs: RAG-en, plus MMLU-Pro's baseline
     python3 scripts/board_queue.py status
     python3 scripts/board_queue.py start                    # the worker, detached
     python3 scripts/board_queue.py stop                     # finish the current job, then stop
@@ -82,7 +82,7 @@ def jobs_locked(qdir: Path):
 
 # Stage 4's RAG-en runs: each benchmark's frozen retrieval file, the same ones the Kaggle RAG runs used.
 RAG_FILES = {bench: f"results/rag/retrieval-{bench}-en.bge-small-en-k5.json"
-             for bench in ("scientsbank", "gsm", "news")}
+             for bench in ("scientsbank", "gsm", "news", "mmlupro")}
 
 
 def preset(name: str, where: str) -> list[tuple[dict, list[str]]]:
@@ -101,6 +101,12 @@ def preset(name: str, where: str) -> list[tuple[dict, list[str]]]:
             for model in ("e2b", "e4b"):
                 out.append(({"BENCH": bench, "INSTANCES": instances, "RAG": RAG_FILES[bench]},
                             [model, split]))
+        # MMLU-Pro last (the longest): its board baseline is agentic-edge's lm-eval run, a different
+        # harness, so this project's runner runs it without RAG first, as the pairing control.
+        for rag in (False, True):
+            for model in ("e2b", "e4b"):
+                env = {"BENCH": "mmlupro"} | ({"RAG": RAG_FILES["mmlupro"]} if rag else {})
+                out.append((env, [model, "all"]))
         return out
     for model in ("e2b", "e4b"):
         for bench, split in (("scientsbank", "test_uq"), ("scientsbank", "test_ud"),

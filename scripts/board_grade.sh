@@ -8,6 +8,7 @@
 #   BENCH=gsm scripts/board_grade.sh e2b gsm8k  # the 100 GSM8K originals
 #   BENCH=gsm INSTANCES=1 scripts/board_grade.sh e2b symbolic   # first GSM-Symbolic variant set
 #   BENCH=news scripts/board_grade.sh e4b       # LiveNewsBench, 200 (judge on Kaggle afterwards)
+#   BENCH=mmlupro scripts/board_grade.sh e2b    # MMLU-Pro, the lab's 300 questions (s1-s3; or one subset: s2)
 #   BENCH=news RAG=results/rag/retrieval-news-en.bge-small-en-k5.json scripts/board_grade.sh e4b
 #                                               # with RAG-en: top 3 passages (any benchmark)
 #   MEASURE=0 scripts/board_grade.sh e4b        # no telemetry (a quick check)
@@ -24,8 +25,9 @@
 # Everything a run produces stays inside this repo, never in agentic-edge's
 # folders, so it can be committed as the record of the run:
 #   results/board/<model>-<board>-<split>-<stamp>/          SciEntsBank (stage-1 names)
-#   results/board/<bench>[-rag]-<model>-<board>-<set>-<stamp>/  gsm (set gsm8k | symbolic-i<N>), news (set test)
-#     <runner summary>.json  baseline-*, gsm-* or news-*: metrics, settings, server model path
+#   results/board/<bench>[-rag]-<model>-<board>-<set>-<stamp>/  gsm (set gsm8k | symbolic-i<N>), news (set test),
+#                                                        mmlupro (set all | s1 | s2 | s3)
+#     <runner summary>.json  baseline-*, gsm-*, news-* or mmlupro-* (one per subset): metrics, settings, server model path
 #     raw/*.jsonl          one line per question, including the model's raw reply
 #     server.log           llama-server log (timestamped)
 #     board-state.txt      CPU governor and clocks (and the Jetson's devfreq, nvpmodel) at the start
@@ -40,13 +42,14 @@
 set -uo pipefail
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
 SELF="$HERE/scripts/$(basename "$0")"  # absolute: run_measured.sh cd's to its own dir
-MODEL_KEY="${1:?usage: [BENCH=scientsbank|gsm|news] [INSTANCES=n] $0 e2b|e4b [split|set] [n]}"
+MODEL_KEY="${1:?usage: [BENCH=scientsbank|gsm|news|mmlupro] [INSTANCES=n] $0 e2b|e4b [split|set] [n]}"
 BENCH="${BENCH:-scientsbank}"
 case "$BENCH" in
   scientsbank) SETS="test_ua test_uq test_ud" ;;
   gsm) SETS="gsm8k symbolic" ;;
   news) SETS="test" ;;
-  *) echo "unknown BENCH: $BENCH (scientsbank|gsm|news)" >&2; exit 1 ;;
+  mmlupro) SETS="all s1 s2 s3" ;;   # all: the three 100-question subsets in one run
+  *) echo "unknown BENCH: $BENCH (scientsbank|gsm|news|mmlupro)" >&2; exit 1 ;;
 esac
 SPLIT="${2:-${SETS%% *}}"
 case " $SETS " in
@@ -180,6 +183,9 @@ runner() {
            $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) ;;
     news) $run uv run edge-grader-news --base-url "$url" --label "$label" \
             --n "$N" --out "$RUN_DIR" $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) ;;
+    mmlupro) $run uv run edge-grader-mmlupro --base-url "$url" --label "$label" \
+               --subset $( [ "$SPLIT" = all ] && echo s1 s2 s3 || echo "$SPLIT" ) --n "$N" --out "$RUN_DIR" \
+               $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) ;;
   esac
 }
 
