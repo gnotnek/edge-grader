@@ -6,7 +6,7 @@
 
 **Check files:** [`board-check-20261016-083521.json`](../../results/estimates/board-check-20261016-083521.json) (Jetson B1 test_ud, B2) and [`board-check-20261019-102403.json`](../../results/estimates/board-check-20261019-102403.json) (B1 test_ua, test_uq, both boards). Paired McNemar against the baseline: `board_check.compare` on the two runs' raw files.
 
-**Jetson clocks:** every B1 and B2 run's `board-state.txt` shows them unlocked (GPU devfreq 306–612 MHz), as for the baselines. So energy compares across the runs.
+**Jetson clocks:** every B1 and B2 run's `board-state.txt` shows them unlocked (GPU devfreq 306–612 MHz), as do the phase 0 baselines (test_uq, test_ud). The 2026-09-30 test_ua baselines predate `board-state.txt`; they count as unlocked because phase 0 restored the Jetson's clocks with a reboot to make its runs comparable with them ([`baselines.md`](baselines.md) §4). So energy compares across the runs.
 
 ## B1. Thinking on
 
