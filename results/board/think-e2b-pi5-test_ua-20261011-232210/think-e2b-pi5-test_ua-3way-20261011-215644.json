@@ -1,0 +1,34 @@
+{
+  "stage": "think",
+  "label": "e2b-pi5",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "/home/mitlab/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-661643e"
+  },
+  "split": "test_ua",
+  "scheme": "3way",
+  "n_requested": 0,
+  "seed": 0,
+  "time": "2026-10-11T21:56:44+00:00",
+  "metrics": {
+    "n": 540,
+    "accuracy": 0.6667,
+    "macro_f1": 0.6389,
+    "weighted_f1": 0.6633,
+    "unparsed": 0,
+    "errors": 0,
+    "median_latency_s": 43.6425,
+    "wall_s": 23597.8,
+    "prompt_tokens": 93546,
+    "completion_tokens": 174105,
+    "median_completion_tokens": 325.0
+  },
+  "thinking": {
+    "server_flags": "-rea on --reasoning-budget 320 --reasoning-format none",
+    "max_tokens": 336,
+    "parse": "label after the thought block; unclosed or cut replies unparsed"
+  }
+}

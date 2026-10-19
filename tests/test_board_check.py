@@ -308,3 +308,28 @@ def test_rag_board_run_is_found_and_paired_with_kaggle_rag(tmp_path):
         (tmp_path / n).write_text(json.dumps({"metrics": {"n": 540}}))
     d = str(tmp_path)
     assert kaggle_run(d, "scientsbank", "e2b", "test_ua", 540, stage="rag").name.startswith("rag-")
+
+
+def test_board_pairs_only_pair_the_same_setting(tmp_path):
+    def grading(name, stem, label, stage="baseline", state=None):
+        summary = {"_stem": stem, "label": label, "split": "test_ua", "stage": stage,
+                   "metrics": {"n": 2, "accuracy": 0.5, "macro_f1": 0.4, "unparsed": 0, "errors": 0,
+                               "median_latency_s": 1.0}}
+        rows = [{"id": "a", "gold": "correct", "pred": "correct", "prompt_tokens": 50},
+                {"id": "b", "gold": "correct", "pred": "incorrect", "prompt_tokens": 60}]
+        return make_run(tmp_path / "board", name, summary, rows, state=state)
+    pi = grading("e2b-pi5-test_ua-1", "baseline-e2b-pi5-test_ua-3way-1", "e2b-pi5")
+    pi_think = grading("think-e2b-pi5-test_ua-1", "think-e2b-pi5-test_ua-3way-1", "e2b-pi5", "think")
+    jet = grading("e2b-jetson-test_ua-1", "baseline-e2b-jetson-test_ua-3way-1", "e2b-jetson")
+    jet_think = grading("think-e2b-jetson-test_ua-1", "think-e2b-jetson-test_ua-3way-1", "e2b-jetson",
+                        "think")
+    jet_lg = grading("lg-e2b-jetson-test_ua-1", "baseline-e2b-jetson-test_ua-3way-2", "e2b-jetson",
+                     state="variant: lg\nengine: /x/run-cuda-i8\n")
+    est = tmp_path / "est.json"
+    est.write_text(json.dumps({"estimates": []}))
+    out = tmp_path / "out"
+    main([str(d) for d in (pi, pi_think, jet, jet_think, jet_lg)] +
+         ["--estimate", str(est), "--kaggle", str(tmp_path / "none"), "--out", str(out)])
+    data = json.loads(next(out.glob("board-check-*.json")).read_text())
+    assert sorted((p["first"], p["second"]) for p in data["board_pairs"]) == [
+        (pi.name, jet.name), (pi_think.name, jet_think.name)]

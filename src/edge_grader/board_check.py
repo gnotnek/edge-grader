@@ -229,6 +229,12 @@ def read_run(run_dir: Path, judge: str = JUDGE) -> dict:
     }
 
 
+def setting(run: dict) -> tuple:
+    """What a Pi run and a Jetson run must share to be paired: the task and how it was served."""
+    variant = (run["board_state"] or {}).get("variant", "base")
+    return (run["benchmark"], run["model"], run["split"], run["stage"], run["thinking"], variant)
+
+
 def latest_estimate(directory: str) -> Path:
     return max(Path(directory).glob("board-cost-estimate-*.json"))
 
@@ -293,7 +299,7 @@ def main(argv: list[str] | None = None) -> None:
     pairs = []
     for a in runs:
         for b in runs:
-            same = (a["benchmark"], a["model"], a["split"]) == (b["benchmark"], b["model"], b["split"])
+            same = setting(a) == setting(b)
             if not (same and (a["board"], b["board"]) == ("pi", "jetson")):
                 continue
             oa, ob = outcomes(a["_summary"], args.judge), outcomes(b["_summary"], args.judge)
