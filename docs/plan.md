@@ -1,6 +1,6 @@
 # Plan: steps and timeline
 
-*Last updated 2026-10-08. Tick steps off as they're done, and move dates when reality changes, noting why at the bottom. The research questions and the reasoning for each stage are in [`research-outline.md`](research-outline.md).*
+*Last updated 2026-10-19. Tick steps off as they're done, and move dates when reality changes, noting why at the bottom. The research questions and the reasoning for each stage are in [`research-outline.md`](research-outline.md).*
 
 **Weeks are counted from the internship start**, taken as the week of 2026-09-14 (two weeks had passed by 2026-09-26). The internship ends around mid-December.
 
@@ -11,9 +11,9 @@
 | 3 | Sep 28 – Oct 4 | 1. Baseline | Grading baseline on Kaggle ✅; board cost estimated ✅, then measured ✅ | Baseline table complete: accuracy + cost ✅ |
 | 4 | Oct 5 – 11 | 2. RAG | SciEntsBank RAG-en graded, all splits, both models ✅; baseline re-run on the pinned build ✅; MMLU-Pro runner and retrieval | RAG vs baseline table (SciEntsBank) ✅ |
 | 5 | Oct 12 – 18 | 0. Edge baseline + A | **Phase 0 on the boards** (Jetson ~15 h, Pi ~30 h). On Kaggle meanwhile: math RAG-en (phase A), thinking-on grading (B1); EmbeddingGemma 2 tooling + check on the Mac (B3). Topic benchmarks done in week 4 ✅ | Baseline on both boards for every benchmark; baseline vs RAG for all four |
-| 6 | Oct 19 – 25 | B. Variations + C | little-gemma + prefix reuse on the Jetson (B2); thinking-on cost on the boards; answer-as-image rendering, reading check, Kaggle runs (C1); figure-question data search (C2) | Variations vs baseline table |
-| 7 | Oct 26 – Nov 1 | C. Images | C1 board cost; C2 if a dataset qualifies; B3 grading run if it passed its gate | Image vs text table |
-| 8 | Nov 2 – 8 | 4. Edge cost | RAG versions on the Pi 5 / Jetson; cloud reference (RQ5) only if time allows (optional since 2026-10-19) | Accuracy vs energy chart |
+| 6 | Oct 19 – 25 | B. Variations + C + 4 | little-gemma + prefix reuse on the Jetson (B2) ✅; thinking-on cost on the boards ✅; **RAG-en for all four benchmarks on the Jetson** (stage 4 brought forward, supervisor 2026-10-19); answer-as-image rendering, reading check, Kaggle runs (C1); figure-question data search (C2) | Variations vs baseline table ✅; baseline vs RAG on the Jetson |
+| 7 | Oct 26 – Nov 1 | C. Images | C1 cost on the Jetson; C2 if a dataset qualifies; B3 grading run if it passed its gate | Image vs text table |
+| 8 | Nov 2 – 8 | 4. Edge cost | Every remaining version on the Jetson (the Pi 5 is dropped, 2026-10-19); cloud reference (RQ5) only if time allows (optional since 2026-10-19) | Accuracy vs energy chart |
 | 9 | Nov 9 – 15 | Buffer | Catch up; analysis and charts | All numbers final |
 | 10–11 | Nov 16 – 29 | Write-up | Report draft with figures; supervisor review | Draft sent to supervisor |
 | 12 | Nov 30 – Dec 6 | Wrap-up | Revisions, final report, repo cleanup | Final report |
@@ -107,16 +107,20 @@ Replaced by phases 0, A, B and C. Design: [`superpowers/specs/2026-10-08-baselin
 
 ### Phase C: text + images (weeks 6–7)
 *Implementation plan: [`superpowers/plans/2026-10-09-phaseC-images.md`](superpowers/plans/2026-10-09-phaseC-images.md).*
-- [ ] C1: render answers (pinned font), private Kaggle dataset with sha256; matching vision projector; reading check on 100; Kaggle test_ua + test_uq; board cost
+- [ ] C1: render answers (pinned font), private Kaggle dataset with sha256; matching vision projector; reading check on 100; Kaggle test_ua + test_uq; cost on the Jetson
 - [ ] C2: data search (real student answers, figures, labels, English, licence, ~300+); run or drop, recorded in the outline
 
 ### Stage 4: Edge cost (week 8)
 *Device rates (tok/s, power, J/token) are reused from `agentic-edge`, not re-measured: [`results/edge-benchmarks.md`](results/edge-benchmarks.md).*
 
-- [ ] Every version (baseline, RAG, and the phase B/C versions that pass) × E2B/E4B on the Pi 5 and the Jetson with `board_grade.sh`
-- [ ] RAG-en on the **Jetson first** (supervisor, 2026-10-19): SciEntsBank test_ua/uq/ud, news, GSM8K + GSM-Symbolic (1,000), E2B + E4B, 12 jobs (`scripts/queue.sh jetson add --preset rag`). Same server flags as phase 0; the frozen retrieval files, as on Kaggle. News judged on Kaggle afterwards. The Pi waits
+*The Pi 5 is dropped (supervisor, 2026-10-19): its accuracy matched the Jetson's in every comparison but one (p = 0.024, 0.096 after Holm), at 3–9× the time. Its phase 0 and B1 runs stay as recorded; no new Pi runs. Every run below records all metrics: accuracy (macro-F1 for grading; flexible and strict for GSM; the judge's grade for news), latency, J per answer, prompt and completion tokens.*
+
+- [ ] Every version (baseline, RAG, and the phase B/C versions that pass) × E2B/E4B on the Jetson with `board_grade.sh`
+- [ ] RAG-en on the **Jetson first** (supervisor, 2026-10-19): SciEntsBank test_ua/uq/ud, news, GSM8K + GSM-Symbolic (1,000), E2B + E4B, 12 jobs (`scripts/queue.sh jetson add --preset rag`). Same server flags as phase 0; the frozen retrieval files, as on Kaggle. News judged on Kaggle afterwards. No Pi runs (dropped 2026-10-19)
+- [ ] MMLU-Pro on the Jetson, so RAG covers all four benchmarks: add `BENCH=mmlupro` to `board_grade.sh` (the `edge-grader-mmlupro` runner, s1–s3, 300 questions) and to the `rag` preset; run the baseline and RAG-en, E2B + E4B (4 jobs, ~8 h without RAG at `agentic-edge`'s Jetson rates, more with the longer RAG prompt). The baseline run is the pairing control: the copied `agentic-edge` numbers come from lm-eval
+- [ ] Board-check every RAG run against the Jetson's own baseline (paired McNemar; by template for GSM-Symbolic) and add a Jetson column to the four-benchmark table in `results/rag.md`
 - [ ] RAG on the board: include embedding and retrieval time in the latency
-- [ ] Main chart: accuracy vs energy per answer, for every version and board
+- [ ] Main chart: accuracy vs energy per answer, for every version on the Jetson (the Pi 5's baseline and thinking-on points for reference)
 
 ### Write-up (weeks 10–12)
 - [ ] Figures: the main chart, per-split tables, confusion matrices
@@ -157,3 +161,4 @@ Replaced by phases 0, A, B and C. Design: [`superpowers/specs/2026-10-08-baselin
 | 2026-10-11 | Edge first, cloud optional: B1 runs on the boards (Jetson all splits, Pi test_ua + test_uq), compared within each board; Kaggle thinking runs optional | Owner 2026-10-11. Outline, own decisions |
 | 2026-10-19 | Cloud reference (RQ5) moved from stage 4 to the optional list; stage 4 is edge cost only | Owner 2026-10-19: the focus is small models on the edge. Not run → stated as a limitation. The supervisor asked for it (2026-09-29), so confirm with them. Outline, own decisions |
 | 2026-10-19 | Stage 4 starts with RAG-en on the Jetson only, all three board benchmarks; `board_grade.sh` takes `RAG` for GSM and news too | Supervisor: the Pi 5 results were too weak and slow to lead with; the Jetson ran the whole phase 0 baseline, so baseline vs RAG is complete on one board |
+| 2026-10-19 | Pi 5 dropped for new runs; stage 4 (Jetson only) brought forward to week 6, starting with RAG-en for all four benchmarks, MMLU-Pro included (`BENCH=mmlupro` to add); phase C cost on the Jetson | Supervisor 2026-10-19: the Pi's results match the Jetson's, and RAG should be run for every benchmark on the board. Outline, supervisor feedback |

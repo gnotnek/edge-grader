@@ -159,4 +159,5 @@ Grading, test_ua (thinking off unless stated):
   - B2 ran on the Jetson's test_ua only.
 - **One thinking budget,** 320 tokens, nearly always used up. A larger budget might do differently.
 - **Copied MMLU-Pro numbers.** The board MMLU-Pro figures are `agentic-edge`'s, from lm-eval rather than this project's runner. Its time and energy are means, not medians.
+- **Later stages use one board.** The Pi 5 was dropped on 2026-10-19 (supervisor), after phase 0 and B1 showed it gives the Jetson's accuracy at 3–9× the time. RAG on the device, phase C and anything later are measured on the Jetson only, so their cost on a CPU-only board is inferred from the Pi's earlier ratios, not measured.
 - **Energy isn't wall power.** It's board DC draw. The Pi runs at 3 threads to match the lab.
