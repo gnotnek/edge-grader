@@ -1,6 +1,7 @@
 // Coverage as a plate map: one well per (benchmark, condition, split) × (board, model).
-// Filled = fetched, half = on the board only, dashed = expected but not here yet.
-import type { Benchmark, Board, Condition, ExpectedStatus, Model, Run } from '@server/types'
+// Filled = fetched, half = on the board only, dashed = expected but not here yet,
+// ring with a dot = agentic-edge's run of the same thing (reference, not ours).
+import type { Benchmark, Board, Condition, ExpectedStatus, Model, ReferenceRow, Run } from '@server/types'
 import { Fragment } from 'react'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import {
@@ -14,6 +15,7 @@ const COLUMNS = BOARD_ORDER.flatMap((board) => MODELS.map((model) => ({ board, m
 type Well =
   | { kind: 'run'; run: Run }
   | { kind: 'expected'; e: ExpectedStatus }
+  | { kind: 'reference'; r: ReferenceRow }
   | { kind: 'empty' }
 
 interface Row {
@@ -24,9 +26,15 @@ interface Row {
 
 const key = (b: Benchmark, c: Condition, s: string, board: Board, m: Model) => [b, c, s, board, m].join('|')
 
-function buildRows(runs: Run[], expected: ExpectedStatus[]): Row[] {
+// agentic-edge ran MMLU-Pro on the same three 100-question subsets the Kaggle runs use.
+const REFERENCE_SPLITS = ['s1', 's2', 's3']
+
+function buildRows(runs: Run[], expected: ExpectedStatus[], reference: ReferenceRow[]): Row[] {
   const splits = new Map<string, Set<string>>()
-  for (const x of [...runs, ...expected]) {
+  const refCells = reference.flatMap((r) =>
+    r.condition ? REFERENCE_SPLITS.map((split) => ({ benchmark: r.benchmark, condition: r.condition!, split })) : [],
+  )
+  for (const x of [...runs, ...expected, ...refCells]) {
     const k = `${x.benchmark}|${x.condition}`
     if (!splits.has(k)) splits.set(k, new Set())
     splits.get(k)!.add(splitGroup(x.split))
@@ -56,6 +64,12 @@ function WellDot({ well, board }: { well: Well; board: Board }) {
   }
   if (well.kind === 'expected')
     return <span className="block size-3.5 rounded-full border-2 border-dashed" style={{ borderColor: 'var(--tag-red-ink)' }} />
+  if (well.kind === 'reference')
+    return (
+      <span className="grid size-3.5 place-items-center rounded-full border-2" style={{ borderColor: color }}>
+        <span className="size-1 rounded-full" style={{ background: color }} />
+      </span>
+    )
   return <span className="block size-3.5 rounded-full border border-border" />
 }
 
@@ -66,12 +80,17 @@ function wellText(well: Well, split: string): string {
     return `${r.split}: ${pct(r.metrics.accuracy)} accuracy, ${stampLabel(r.stamp)}${where}`
   }
   if (well.kind === 'expected') return `${split}: expected for "${well.e.plan}", not here yet`
+  if (well.kind === 'reference') {
+    const acc = well.r.accuracy !== undefined ? `${pct(well.r.accuracy)} accuracy on s1–s3` : 'cost only, no accuracy'
+    return `${split}: agentic-edge's run (reference, not this project's), ${acc}`
+  }
   return `${split}: not planned`
 }
 
-export function PlateMap({ runs, expected, onOpen }: {
+export function PlateMap({ runs, expected, reference = [], onOpen }: {
   runs: Run[]
   expected: ExpectedStatus[]
+  reference?: ReferenceRow[]
   onOpen: (run: Run) => void
 }) {
   // Newest run per well; runs arrive newest first.
@@ -84,7 +103,15 @@ export function PlateMap({ runs, expected, onOpen }: {
     const k = key(e.benchmark, e.condition, splitGroup(e.split), e.board, e.model)
     if (!wells.has(k) && e.status !== 'done') wells.set(k, { kind: 'expected', e })
   }
-  const rows = buildRows(runs, expected)
+  // Reference fills only wells this project hasn't run itself.
+  for (const r of reference) {
+    if (!r.condition) continue
+    for (const split of REFERENCE_SPLITS) {
+      const k = key(r.benchmark, r.condition, split, r.board, r.model)
+      if (!wells.has(k)) wells.set(k, { kind: 'reference', r })
+    }
+  }
+  const rows = buildRows(runs, expected, reference)
 
   return (
     <div className="overflow-x-auto">
@@ -174,6 +201,9 @@ export function PlateLegend() {
       </span>
       <span className="inline-flex items-center gap-1.5">
         <span className="size-3 rounded-full border border-border" /> Not planned
+      </span>
+      <span className="inline-flex items-center gap-1.5">
+        <span className="grid size-3 place-items-center rounded-full border-2 border-foreground/70"><span className="size-1 rounded-full bg-foreground/70" /></span> agentic-edge's run (reference)
       </span>
       <span>Each well is one split, in alphabetical order. Hover a well to see which.</span>
     </div>

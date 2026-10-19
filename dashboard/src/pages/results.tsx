@@ -1,4 +1,4 @@
-import type { Board, BoardPair, Condition, Model, Run } from '@server/types'
+import type { Board, BoardPair, Condition, Model, Reference, Run } from '@server/types'
 import { ArrowDown, ArrowUp, CircleAlert, Minus, TableProperties } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { Bar, BarChart, CartesianGrid, Scatter, ScatterChart, XAxis, YAxis, ZAxis } from 'recharts'
@@ -14,7 +14,7 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { useApi } from '@/lib/api'
 import {
   BENCH_LABEL, BENCH_ORDER, BOARD_LABEL, BOARD_ORDER, CONDITION_LABEL, CONDITION_ORDER, MODEL_LABEL, deltaPts,
-  fixed, pct,
+  count, fixed, pct,
 } from '@/lib/format'
 
 const MODELS: Model[] = ['e2b', 'e4b']
@@ -63,7 +63,7 @@ function ScientsbankByCondition({ runs }: { runs: Run[] }) {
   return (
     <Section
       title="SciEntsBank by condition"
-      description="The newest run per board for each condition, on one split. Thinking, SWA full and little-gemma ran on the Jetson only so far."
+      description="The newest run per board for each condition, on one split. A missing bar means that board has no run of that condition yet."
       actions={
         <>
           <ToggleGroup type="single" size="sm" variant="outline" value={split} onValueChange={(v) => v && setSplit(v)} aria-label="Split">
@@ -366,6 +366,65 @@ function AccuracyVsEnergy({ runs, onOpen }: { runs: Run[]; onOpen: (r: Run) => v
   )
 }
 
+// 5. agentic-edge's MMLU-Pro board runs: the lab's numbers, copied, shown beside ours and never mixed in.
+function MmluProReference() {
+  const { data: ref, error } = useApi<Reference>('/reference')
+  if (error) return <ErrorNote message={error} />
+  if (!ref) return null
+  if (ref.error) return <ErrorNote message={ref.error} />
+  if (!ref.rows.length) return null
+  return (
+    <Section
+      i={3}
+      title="MMLU-Pro on the boards"
+      description={
+        <>
+          agentic-edge's runs, copied {ref.copied ? `on ${ref.copied} ` : ''}into <code className="font-mono text-xs">{ref.source}</code>.
+          They are the lab's numbers, not this project's, so they appear only here and as reference wells on the
+          coverage map. Same 300 questions (s1 to s3) for every row. The change is against llama.cpp with thinking off on
+          the same board.
+        </>
+      }
+    >
+      <Card className="table-inset py-0">
+        <Table className="tabular">
+          <TableHeader>
+            <TableRow>
+              <TableHead>Variation</TableHead>
+              <TableHead>Board</TableHead>
+              <TableHead>Model</TableHead>
+              <TableHead className="text-right">Accuracy</TableHead>
+              <TableHead className="text-right">Change</TableHead>
+              <TableHead className="hidden text-right md:table-cell">McNemar p</TableHead>
+              <TableHead className="hidden text-right lg:table-cell">J / question</TableHead>
+              <TableHead className="hidden text-right lg:table-cell">Energy, 300 q</TableHead>
+              <TableHead className="hidden text-right xl:table-cell">Time</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {ref.rows.map((r) => (
+              <TableRow key={`${r.section}${r.board}${r.model}`}>
+                <TableCell className="whitespace-normal">
+                  <span className="text-[var(--heading)]">{r.label}</span>
+                  {r.note && <span className="block text-xs text-muted-foreground">{r.note}</span>}
+                </TableCell>
+                <TableCell><BoardName board={r.board} /></TableCell>
+                <TableCell>{MODEL_LABEL[r.model]}</TableCell>
+                <TableCell className="text-right">{r.accuracy !== undefined ? pct(r.accuracy) : '—'}</TableCell>
+                <TableCell className="text-right"><Delta pts={deltaPts(r.baseline, r.accuracy)} /></TableCell>
+                <TableCell className="hidden text-right md:table-cell"><PValue p={r.mcnemarP} /></TableCell>
+                <TableCell className="hidden text-right lg:table-cell">{r.jPerQuestion !== undefined ? count(r.jPerQuestion) : '—'}</TableCell>
+                <TableCell className="hidden text-right lg:table-cell">{r.energyWh !== undefined ? `${fixed(r.energyWh, 1)} Wh` : '—'}</TableCell>
+                <TableCell className="hidden text-right xl:table-cell">{r.wallMin !== undefined ? `${count(r.wallMin)} min` : '—'}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Card>
+    </Section>
+  )
+}
+
 export function ResultsPage() {
   const { data: runs, error } = useApi<Run[]>('/runs')
   const [open, setOpen] = useState<Run | null>(null)
@@ -376,6 +435,7 @@ export function ResultsPage() {
       <ScientsbankByCondition runs={runs} />
       <AccuracyVsEnergy runs={runs} onOpen={setOpen} />
       <BaselineVsRag runs={runs} />
+      <MmluProReference />
       <BoardAgreement runs={runs} onOpen={setOpen} />
       <RunSheet run={open} onClose={() => setOpen(null)} />
     </div>

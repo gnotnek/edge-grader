@@ -118,3 +118,27 @@ export interface Overview {
   planProgress: { done: number; total: number }
   errors: number
 }
+
+/** A number copied from agentic-edge (results/reference/): the lab's runs, shown beside ours, never mixed in. */
+export interface ReferenceRow {
+  section: string
+  label: string
+  benchmark: 'mmlupro'
+  board: 'pi5' | 'jetson'
+  model: Model
+  condition?: Condition
+  accuracy?: number
+  baseline?: number
+  mcnemarP?: number
+  energyWh?: number
+  wallMin?: number
+  jPerQuestion?: number
+  note?: string
+}
+
+export interface Reference {
+  source: string | null
+  copied?: string
+  rows: ReferenceRow[]
+  error?: string
+}

@@ -1,4 +1,4 @@
-import type { Board, ExpectedStatus, Overview, Run } from '@server/types'
+import type { Board, ExpectedStatus, Overview, Reference, Run } from '@server/types'
 import { useState } from 'react'
 import { BoardDot, BoardName, ErrorNote, Loading, Reveal, Section, Stat, StatusLabel } from '@/components/bits'
 import { PlateLegend, PlateMap } from '@/components/plate-map'
@@ -77,6 +77,7 @@ export function OverviewPage() {
   const overview = useApi<Overview>('/overview')
   const runs = useApi<Run[]>('/runs')
   const expected = useApi<ExpectedStatus[]>('/expected')
+  const reference = useApi<Reference>('/reference')
   const [open, setOpen] = useState<Run | null>(null)
 
   const error = overview.error ?? runs.error ?? expected.error
@@ -112,11 +113,11 @@ export function OverviewPage() {
       <Section
         i={2}
         title="Coverage"
-        description="Every run the project has, by benchmark and condition. Click a filled well to open the run."
+        description="Every run the project has, by benchmark and condition, plus agentic-edge's MMLU-Pro board runs as reference. Click a filled well to open the run."
       >
         <Card>
           <CardContent className="space-y-4">
-            <PlateMap runs={runs.data} expected={expected.data} onOpen={setOpen} />
+            <PlateMap runs={runs.data} expected={expected.data} reference={reference.data?.rows} onOpen={setOpen} />
             <PlateLegend />
           </CardContent>
         </Card>

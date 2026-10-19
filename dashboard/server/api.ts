@@ -5,6 +5,7 @@ import path from 'node:path'
 import type { Plugin } from 'vite'
 import { loadBoards } from './boards.ts'
 import { parsePlan } from './plan.ts'
+import { loadReference } from './reference.ts'
 import { loadRuns } from './runs.ts'
 import { expectedStatus } from './status.ts'
 import type { BoardPair, Expected, ExpectedStatus, Overview, Plan, Run } from './types.ts'
@@ -104,6 +105,7 @@ function route(repo: string, url: string): unknown {
   if (p === '/expected') return loadExpectedStatus(repo)
   if (p === '/overview') return buildOverview(repo, localDate())
   if (p === '/pairs') return loadPairs(repo)
+  if (p === '/reference') return loadReference(repo)
   throw Object.assign(new Error(`no route ${p}`), { status: 404 })
 }
 

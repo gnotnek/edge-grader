@@ -25,14 +25,17 @@ describe('buildOverview on the real repo', () => {
     expect(o.runsByBoard.pi5).toBeGreaterThanOrEqual(14)
     expect(o.runsByBoard.jetson).toBeGreaterThanOrEqual(24)
   })
-  test('the Pi owes its four B1 thinking runs until they arrive', () => {
+  test('owed counts match the waiting list', () => {
     const piWaiting = o.waiting.filter((w) => w.board === 'pi5')
     expect(o.owedByBoard.pi5).toBe(piWaiting.length)
     expect(piWaiting.every((w) => w.status !== 'done')).toBe(true)
   })
-  test('the Pi has no backup date; the Jetson has one', () => {
-    expect(o.lastBackup.pi5).toBeNull()
-    expect(o.lastBackup.jetson).toBeTruthy()
+  test('a board has a backup date exactly when backups/<board>/ exists', () => {
+    expect(o.lastBackup.pi5 !== null).toBe(fs.existsSync(path.join(REPO, 'backups/pi')))
+    expect(o.lastBackup.jetson !== null).toBe(fs.existsSync(path.join(REPO, 'backups/jetson')))
+  })
+  test('the Pi\'s B1 thinking runs, now fetched into results/, are no longer owed', () => {
+    expect(o.waiting.filter((w) => w.board === 'pi5' && w.condition === 'think')).toEqual([])
   })
   test('week 5 on 2026-10-17', () => {
     expect(o.currentWeek?.week).toBe('5')
