@@ -63,7 +63,7 @@
 
 - [ ] **Step 3: Implement the helpers** in `src/edge_grader/finetune.py`. `split_by_question`: sort the unique question ids, shuffle with `random.Random(seed)`, take `round(frac * n_questions)` (at least 1) for validation. Torch/transformers/peft imports go inside `main()` only (Task 2), so the boards and the Mac never need them.
 
-- [ ] **Step 4: Add the extra and script**: `uv add --optional finetune torch transformers peft bitsandbytes accelerate` (transformers new enough for `Gemma4ForConditionalGeneration`; note the resolved versions in the commit message), and `edge-grader-finetune = "edge_grader.finetune:main"` under `[project.scripts]`.
+- [ ] **Step 4: Add the group and script**: `uv add --group finetune torch transformers peft bitsandbytes accelerate` (transformers new enough for `Gemma4ForConditionalGeneration`; note the resolved versions in the commit message), and `edge-grader-finetune = "edge_grader.finetune:main"` under `[project.scripts]`.
 
 - [ ] **Step 5: Run** `uv run pytest -q && uv run ruff check .` — expected: all pass, including the existing suite (the boards' `uv sync --frozen` without the extra must still work: `uv sync --frozen` then `uv run pytest -q`).
 

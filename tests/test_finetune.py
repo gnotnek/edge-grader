@@ -1,4 +1,5 @@
 import re
+import sys
 
 from edge_grader.data import Item, labels_for, question_id
 from edge_grader.finetune import (
@@ -68,3 +69,14 @@ def test_summary_records_settings():
     assert {"model", "base", "revision", "settings", "history", "chosen_epoch", "train_questions",
             "val_questions", "adapter_sha256", "versions", "created"} <= s.keys()
     assert (s["base"], s["revision"]) == BASES["e2b"]
+
+
+def test_dry_run_needs_no_torch(tmp_path, monkeypatch, capsys):
+    from edge_grader import data, finetune
+
+    monkeypatch.setattr(data, "load", lambda split, scheme: items(questions=10, answers=3))
+    monkeypatch.setitem(sys.modules, "torch", None)  # any `import torch` now raises
+    finetune.main(["--model", "e2b", "--out", str(tmp_path), "--dry-run"])
+    out = capsys.readouterr().out
+    assert "train 27 answers / 9 questions, validation 3 answers / 1 questions" in out
+    assert "You are grading a student's answer" in out
