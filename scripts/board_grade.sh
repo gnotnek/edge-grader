@@ -11,6 +11,8 @@
 #   BENCH=mmlupro scripts/board_grade.sh e2b    # MMLU-Pro, the lab's 300 questions (s1-s3; or one subset: s2)
 #   BENCH=news RAG=results/rag/retrieval-news-en.bge-small-en-k5.json scripts/board_grade.sh e4b
 #                                               # with RAG-en: top 3 passages (any benchmark)
+#   LORA=$HOME/research/models/adapters/e2b-ft.gguf scripts/board_grade.sh e2b test_uq
+#                                               # stage 3: the fine-tuned adapter (any benchmark)
 #   MEASURE=0 scripts/board_grade.sh e4b        # no telemetry (a quick check)
 #   DRY_RUN=1 EG_BOARD=pi5 BENCH=gsm scripts/board_grade.sh e2b symbolic
 #                                               # print the run folder and commands, touch nothing
@@ -85,6 +87,12 @@ if [ -n "$RAG" ]; then
     *) echo "RAG file $RAG is not a $BENCH retrieval file (retrieval-$BENCH-*.json)" >&2; exit 1 ;;
   esac
 fi
+# Stage 3: LORA serves the same GGUF plus a fine-tuned adapter (llama.cpp's --lora), any benchmark.
+LORA="${LORA:-}"
+if [ -n "$LORA" ]; then
+  case "$LORA" in *.gguf) ;; *) echo "LORA must be a .gguf adapter: $LORA" >&2; exit 1 ;; esac
+  case "$VARIANT" in lg|lg-reuse) echo "LORA needs llama.cpp; little-gemma can't load it (VARIANT=$VARIANT)" >&2; exit 1 ;; esac
+fi
 MEASURE="${MEASURE:-1}"
 PORT="${PORT:-8080}"
 # deploy.sh installs uv here; non-interactive ssh shells do not have it on PATH.
@@ -145,11 +153,12 @@ if [ "$BENCH" = scientsbank ]; then
   NAME="$MODEL_KEY-$BOARD-$SPLIT"
   [ "$THINKING" = on ] && NAME="think-$NAME"
   [ "$VARIANT" != base ] && NAME="$VARIANT-$NAME"
+  [ -n "$LORA" ] && NAME="ft-$NAME"
   [ -n "$RAG" ] && NAME="rag-$NAME"
 elif [ "$SPLIT" = symbolic ]; then
-  NAME="$BENCH$( [ -n "$RAG" ] && echo -rag )-$MODEL_KEY-$BOARD-symbolic-i$INSTANCES"
+  NAME="$BENCH$( [ -n "$RAG" ] && echo -rag )$( [ -n "$LORA" ] && echo -ft )-$MODEL_KEY-$BOARD-symbolic-i$INSTANCES"
 else
-  NAME="$BENCH$( [ -n "$RAG" ] && echo -rag )-$MODEL_KEY-$BOARD-$SPLIT"
+  NAME="$BENCH$( [ -n "$RAG" ] && echo -rag )$( [ -n "$LORA" ] && echo -ft )-$MODEL_KEY-$BOARD-$SPLIT"
 fi
 RUN_DIR="${EG_RUN_DIR:-$HERE/results/board/$NAME-$(date +%Y%m%d-%H%M%S)}"
 SRVLOG=$RUN_DIR/server.log
@@ -167,7 +176,7 @@ server_cmd() {
     *)
       echo "$LLAMA_SERVER -m $MODEL $THREADS -c 8192 --host 127.0.0.1 --port $PORT -ngl $NGL" \
            "$( [ "$THINKING" = on ] && echo '-rea on --reasoning-budget 320 --reasoning-format none' \
-               || echo '-rea off --reasoning-budget -1' ) --cache-ram 0$( [ "$VARIANT" = swafull ] && echo ' --swa-full')" ;;
+               || echo '-rea off --reasoning-budget -1' ) --cache-ram 0$( [ "$VARIANT" = swafull ] && echo ' --swa-full')$( [ -n "$LORA" ] && echo " --lora $LORA")" ;;
   esac
 }
 
@@ -260,7 +269,7 @@ fi
 ENGINE_BIN=$LLAMA_SERVER
 case "$VARIANT" in lg|lg-reuse) ENGINE_BIN=$LG_ENGINE
   [ -f "$AE/lg_openai_shim.py" ] || { echo "missing: $AE/lg_openai_shim.py" >&2; exit 1; } ;; esac
-for f in "$ENGINE_BIN" "$MODEL"; do
+for f in "$ENGINE_BIN" "$MODEL" ${LORA:+"$LORA"}; do
   [ -e "$f" ] || { echo "missing: $f" >&2; exit 1; }
 done
 command -v uv >/dev/null || { echo "uv not installed on this board (run scripts/deploy.sh from the Mac)" >&2; exit 1; }
@@ -313,6 +322,7 @@ board_state() {
   [ -f "$HERE/DEPLOYED.json" ] && echo "deployed: $(cat "$HERE/DEPLOYED.json")"
   [ "$BOARD" = pi5 ] && echo "va-llm: ${VA_LLM_WAS:-unknown}"
   echo "variant: $VARIANT"
+  [ -n "$LORA" ] && echo "lora: $LORA sha256 $(sha256sum "$LORA" | cut -d' ' -f1)"
   case "$VARIANT" in
     lg|lg-reuse) echo "engine: $LG_ENGINE ($(head -1 "$(dirname "$LG_ENGINE")/BUILD_INFO" 2>/dev/null))" ;;
     *) echo "engine: $LLAMA_SERVER" ;;

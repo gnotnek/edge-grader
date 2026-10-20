@@ -72,6 +72,11 @@ def test_add_refuses_a_job_the_script_would_refuse(q):
     assert not (q / "queue" / "jobs.json").exists() or jobs(q) == []
 
 
+def test_add_accepts_lora(q):
+    bq.main(["add", "LORA=/m/adapters/e2b-ft.gguf", "--", "e2b", "test_uq"])
+    assert jobs(q)[0]["env"] == {"LORA": "/m/adapters/e2b-ft.gguf"}
+
+
 def test_add_refuses_env_the_queue_does_not_pass(q):
     with pytest.raises(SystemExit, match="EG_RUN_DIR"):
         bq.main(["add", "EG_RUN_DIR=/tmp/x", "--", "e2b"])

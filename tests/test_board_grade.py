@@ -15,7 +15,7 @@ def dry(*args: str, board: str = "jetson", **env: str) -> subprocess.CompletedPr
     """Run the script with DRY_RUN=1 on a pretend board; BENCH etc. only if given."""
     e = {k: v for k, v in os.environ.items()
          if k not in {"BENCH", "INSTANCES", "THINKING", "VARIANT", "RAG", "LG_ENGINE", "EG_RUN_DIR", "EG_INNER",
-                       "MEASURE"}}
+                       "MEASURE", "LORA"}}
     e |= {"DRY_RUN": "1", "EG_BOARD": board, **env}
     return subprocess.run(["bash", str(SCRIPT), *args], env=e, capture_output=True, text=True,
                           check=False)
@@ -180,3 +180,34 @@ def test_rag_for_mmlupro_names_the_folder_and_passes_the_file():
 def test_rag_file_must_be_the_benchmarks_own():
     p = dry("e2b", BENCH="news", RAG="results/rag/retrieval-gsm-en.bge-small-en-k5.json")
     assert p.returncode != 0 and "not a news retrieval file" in p.stderr
+
+
+ADAPTER = "/m/adapters/e2b-ft.gguf"
+
+
+def test_lora_adds_only_that_flag_for_every_benchmark():
+    for bench, split in (("scientsbank", "test_uq"), ("gsm", "gsm8k"), ("news", "test"), ("mmlupro", "all")):
+        base = fields(dry("e2b", split, BENCH=bench))
+        ft = fields(dry("e2b", split, BENCH=bench, LORA=ADAPTER))
+        assert ft["server"] == base["server"] + f" --lora {ADAPTER}", bench
+        assert ft["runner"] == base["runner"].replace(base["run_dir"], ft["run_dir"]), bench
+
+
+def test_lora_folder_names():
+    for env, args, name in (({}, ("e2b",), "ft-e2b-jetson-test_ua"),
+                            ({"BENCH": "gsm", "INSTANCES": "1"}, ("e2b", "symbolic"),
+                             "gsm-ft-e2b-jetson-symbolic-i1"),
+                            ({"BENCH": "mmlupro"}, ("e2b",), "mmlupro-ft-e2b-jetson-all")):
+        f = fields(dry(*args, LORA=ADAPTER, **env))
+        assert re.fullmatch(rf"{REPO}/results/board/{name}-{STAMP}", f["run_dir"]), f["run_dir"]
+
+
+def test_lora_refused_with_little_gemma():
+    for variant in ("lg", "lg-reuse"):
+        p = dry("e2b", VARIANT=variant, LORA=ADAPTER)
+        assert p.returncode != 0 and "LORA" in p.stderr, (variant, p.stderr)
+
+
+def test_lora_must_be_a_gguf():
+    p = dry("e2b", LORA="/m/a.safetensors")
+    assert p.returncode != 0 and "LORA" in p.stderr, p.stderr
