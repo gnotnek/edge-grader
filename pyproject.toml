@@ -21,6 +21,7 @@ edge-grader-mmlupro = "edge_grader.mmlupro:main"
 edge-grader-gsm = "edge_grader.gsm:main"
 edge-grader-news = "edge_grader.news:main"
 edge-grader-news-judge = "edge_grader.news:judge_main"
+edge-grader-finetune = "edge_grader.finetune:main"
 
 [dependency-groups]
 dev = [
@@ -30,13 +31,20 @@ dev = [
 embed = [
     "sentence-transformers>=6.1.0",
 ]
+finetune = [
+    "accelerate>=1.15.0",
+    "bitsandbytes>=0.50.2 ; sys_platform == 'linux'",
+    "peft>=0.21.2",
+    "torch>=2.14.1",
+    "transformers>=5.18.0",
+]
 rag = [
     "numpy>=2.4.6",
     "pymupdf>=1.28.2",
 ]
 # rag:   extract and chunk the material (runs on this Mac)
 # embed: the embedding model, with torch; build indexes on Kaggle (this Mac doesn't run models)
-# finetune (stage 3): runs on Kaggle/Colab with Unsloth, not on this machine
+# finetune (stage 3): QLoRA with transformers + peft + bitsandbytes on a Kaggle T4, not on this machine
 
 [build-system]
 requires = ["hatchling"]
