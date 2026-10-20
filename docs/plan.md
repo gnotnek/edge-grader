@@ -1,6 +1,6 @@
 # Plan: steps and timeline
 
-*Last updated 2026-10-19. Tick steps off as they're done, and move dates when reality changes, noting why at the bottom. The research questions and the reasoning for each stage are in [`research-outline.md`](research-outline.md).*
+*Last updated 2026-10-21. Tick steps off as they're done, and move dates when reality changes, noting why at the bottom. The research questions and the reasoning for each stage are in [`research-outline.md`](research-outline.md).*
 
 **Weeks are counted from the internship start**, taken as the week of 2026-09-14 (two weeks had passed by 2026-09-26). The internship ends around mid-December.
 
@@ -12,7 +12,7 @@
 | 4 | Oct 5 – 11 | 2. RAG | SciEntsBank RAG-en graded, all splits, both models ✅; baseline re-run on the pinned build ✅; MMLU-Pro runner and retrieval | RAG vs baseline table (SciEntsBank) ✅ |
 | 5 | Oct 12 – 18 | 0. Edge baseline + A | **Phase 0 on the boards** (Jetson ~15 h, Pi ~30 h). On Kaggle meanwhile: math RAG-en (phase A), thinking-on grading (B1); EmbeddingGemma 2 tooling + check on the Mac (B3). Topic benchmarks done in week 4 ✅ | Baseline on both boards for every benchmark; baseline vs RAG for all four |
 | 6 | Oct 19 – 25 | B. Variations + C + 4 | little-gemma + prefix reuse on the Jetson (B2) ✅; thinking-on cost on the boards ✅; **RAG-en for all four benchmarks on the Jetson** (stage 4 brought forward, supervisor 2026-10-19): SciEntsBank, news, GSM ✅, MMLU-Pro to run; answer-as-image rendering, reading check, Kaggle runs (C1); figure-question data search (C2) | Variations vs baseline table ✅; baseline vs RAG on the Jetson |
-| 7 | Oct 26 – Nov 1 | C. Images | C1 cost on the Jetson; C2 if a dataset qualifies; B3 grading run if it passed its gate | Image vs text table |
+| 7 | Oct 26 – Nov 1 | 3. Fine-tuning | Week 1 (from Oct 21): adapters for E2B and E4B on Kaggle, sanity check on test_ua; week 2 (Oct 28 – Nov 3): tuned runs on the Jetson, analysis. Phase C (images) waits until this is done | Tuned vs baseline table, no-harm check |
 | 8 | Nov 2 – 8 | 4. Edge cost | Every remaining version on the Jetson (the Pi 5 is dropped, 2026-10-19); cloud reference (RQ5) only if time allows (optional since 2026-10-19) | Accuracy vs energy chart |
 | 9 | Nov 9 – 15 | Buffer | Catch up; analysis and charts | All numbers final |
 | 10–11 | Nov 16 – 29 | Write-up | Report draft with figures; supervisor review | Draft sent to supervisor |
@@ -79,8 +79,15 @@
 - [x] Judge check (GPT-4.1 and the owner's hand grades on 50 answers): **dropped**, owner's choice (2026-10-08). The news numbers are reported as judged by Qwen3-14B, unchecked apart from Claude's 12-grade spot-check
 - [x] Analysis: math vs news, no RAG vs RAG; the GSM8K vs GSM-Symbolic gap as the memorisation check ([`results/topics.md`](results/topics.md#math-against-news-what-suits-these-models))
 
-### Stage 3: Fine-tuning: **dropped** (supervisor, 2026-10-08)
-Replaced by phases 0, A, B and C. Design: [`superpowers/specs/2026-10-08-baseline-variations-design.md`](superpowers/specs/2026-10-08-baseline-variations-design.md).
+### Stage 3: Fine-tuning (weeks 6–7, revived 2026-10-21)
+*Dropped 2026-10-08 so the baseline came first; revived by the owner because RAG didn't improve grading. Design: [`superpowers/specs/2026-10-21-finetuning-design.md`](superpowers/specs/2026-10-21-finetuning-design.md).*
+
+- [ ] Re-run every Jetson baseline at the new clocks (14 jobs, queued 2026-10-21; owner): the cost pairs for stage 4 RAG and the tuned runs
+- [ ] Day 1 risk check: a tiny E2B QLoRA run on a Kaggle T4, adapter converted to GGUF and loaded with `--lora` on Kaggle's and the Jetson's llama.cpp builds
+- [ ] Training notebook; E2B and E4B adapters, epochs picked on a held-out 10% of train questions; summary JSON in `results/`
+- [ ] Adapter option in `board_grade.sh` and the Kaggle notebook; Kaggle sanity check on test_ua (100)
+- [ ] Jetson: SciEntsBank test_ua/uq/ud, MMLU-Pro (300), GSM8K + first GSM-Symbolic set, both models
+- [ ] `results/finetuning.md`: paired McNemar, Holm over the improvement and no-harm families; outline and summary updated
 
 ### Phase 0: the baseline on the boards (week 5, first)
 *Implementation plan: [`superpowers/plans/2026-10-09-phase0-edge-baseline.md`](superpowers/plans/2026-10-09-phase0-edge-baseline.md).*
@@ -164,3 +171,4 @@ Replaced by phases 0, A, B and C. Design: [`superpowers/specs/2026-10-08-baselin
 | 2026-10-19 | Cloud reference (RQ5) moved from stage 4 to the optional list; stage 4 is edge cost only | Owner 2026-10-19: the focus is small models on the edge. Not run → stated as a limitation. The supervisor asked for it (2026-09-29), so confirm with them. Outline, own decisions |
 | 2026-10-19 | Stage 4 starts with RAG-en on the Jetson only, all three board benchmarks; `board_grade.sh` takes `RAG` for GSM and news too | Supervisor: the Pi 5 results were too weak and slow to lead with; the Jetson ran the whole phase 0 baseline, so baseline vs RAG is complete on one board |
 | 2026-10-19 | Pi 5 dropped for new runs; stage 4 (Jetson only) brought forward to week 6, starting with RAG-en for all four benchmarks, MMLU-Pro included (`BENCH=mmlupro` to add); phase C cost on the Jetson | Supervisor 2026-10-19: the Pi's results match the Jetson's, and RAG should be run for every benchmark on the board. Outline, supervisor feedback |
+| 2026-10-21 | **Fine-tuning revived** (stage 3, weeks 6–7, Oct 21 – Nov 3); phase C moves after it. Every Jetson baseline re-run at the new clocks (14 jobs queued); the voice-agent services on the Jetson stopped for it | Owner: RAG didn't improve grading. The clock change made phase 0's cost incomparable with later runs. Outline, own decisions |
