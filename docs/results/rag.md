@@ -285,3 +285,109 @@ Logic and news need their own benchmarks. What was chosen instead is in the outl
 - **Retrieval quality doesn't explain the difference on its own:** math and news scored the same retrieval check (21/30) and went opposite ways.
 - **The smaller model is hurt more whenever the material isn't needed:** on test_ud grading E2B loses 5.1 points where E4B gains 0.3, and on math E2B loses 4.9–5.0 where E4B loses 1.4–4.0.
 
+
+## Jetson: baseline against RAG-en (stage 4, 2026-10-20)
+
+*Why: the supervisor (2026-10-19) asked for RAG on every benchmark on the board, and dropped the Pi 5 for new runs. Plan: stage 4 ([`../plan.md`](../plan.md)).*
+
+**Runs:**
+- 12 folders in [`results/board/`](../../results/board/) (`rag-*`, `gsm-rag-*`, `news-rag-*`, all `-jetson-`), run by the Jetson's job queue (`scripts/board_queue.py add --preset rag`, jobs 24–35) between 2026-10-19 23:30 and 2026-10-20 11:44, all rc=0.
+- Same GGUFs and server flags as phase 0 (`-ngl 99 -rea off --cache-ram 0`); the frozen retrieval files (`bge-small-en-v1.5`, question as query, top 3), the same files the Kaggle RAG runs used.
+- **Jetson clocks:** higher limits than in phase 0 (see [Cost](#cost-not-comparable-with-the-phase-0-baseline)). Accuracy is unaffected; cost isn't comparable.
+
+**Check file:** [`board-check-20261020-064504.json`](../../results/estimates/board-check-20261020-064504.json), from `uv run edge-grader-board-check` on these 12 runs and their 12 Jetson baselines. RAG against baseline: `board_check.compare` on the two runs' raw files; GSM-Symbolic also by template (two-sided sign-flip, 20,000 draws, seed 0), as in [`topics.md`](topics.md#math-rag-en-results-kaggle-t4-2026-10-10).
+
+**Not in yet:**
+- **News:** run, not judged. Judge on Kaggle (Qwen3-14B), as for phase 0.
+- **MMLU-Pro:** not run. Its 4 jobs (baseline + RAG-en, E2B + E4B) weren't in this queue.
+
+"Same answer" means the same label (grading) or the same extracted number (GSM), on the same questions.
+
+### The board against Kaggle (RAG-en on both)
+
+| Benchmark | Set | Model | Board | n | Board acc. | Kaggle acc. (same questions) | Same answer | McNemar p | Median s | J / question |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SciEntsBank | test_ua | E2B | Jetson | 540 | 53.1% | 53.3% | 515/540 | 1.0 | 0.26 | 6.7 |
+| SciEntsBank | test_ua | E4B | Jetson | 540 | 64.8% | 65.6% | 530/540 | 0.344 | 0.36 | 11.9 |
+| SciEntsBank | test_uq | E2B | Jetson | 733 | 55.9% | 56.9% | 702/733 | 0.21 | 0.21 | 3.5 |
+| SciEntsBank | test_uq | E4B | Jetson | 733 | 69.9% | 70.4% | 720/733 | 0.388 | 0.34 | 6.0 |
+| SciEntsBank | test_ud | E2B | Jetson | 4562 | 55.7% | 55.1% | 4383/4562 | 0.05 | 0.21 | 3.3 |
+| SciEntsBank | test_ud | E4B | Jetson | 4562 | 70.6% | 70.7% | 4471/4562 | 0.594 | 0.34 | 5.7 |
+| GSM | gsm8k | E2B | Jetson | 100 | 78.0% | 78.0% | 85/100 | 1.0 | 5.00 | 125.3 |
+| GSM | gsm8k | E4B | Jetson | 100 | 86.0% | 88.0% | 94/100 | 0.5 | 11.47 | 242.7 |
+| GSM | symbolic (10 var.) | E2B | Jetson | 1000 | 74.8% | 75.1% | 833/1000 | 0.826 | 5.50 | 134.3 |
+| GSM | symbolic (10 var.) | E4B | Jetson | 1000 | 88.4% | 89.1% | 932/1000 | 0.296 | 12.34 | 265.9 |
+| News | test | E2B | Jetson | 200 | *to judge* | 39.0% | | | 21.87 | 429.5 |
+| News | test | E4B | Jetson | 200 | *to judge* | 45.0% | | | 35.24 | 713.6 |
+
+### RAG-en against the Jetson's own baseline
+
+The baseline is phase 0's Jetson run of the same set (test_ua: the 2026-09-30 runs), from [`baselines.md`](baselines.md#4-phase-0-every-baseline-on-both-boards-measured-2026-10-0910). "RAG only / baseline only" counts the questions only one of the two got right.
+
+| Benchmark | Set | Model | n | Baseline → RAG-en | Same answer | RAG only / baseline only | McNemar p | Kaggle, same cell |
+|---|---|---|---|---|---|---|---|---|
+| SciEntsBank | test_ua | E2B | 540 | 55.2% → 53.1% (−2.0) | 385/540 | 55 / 66 | 0.363 | 55.2% → 53.3% |
+| SciEntsBank | test_ua | E4B | 540 | 66.7% → 64.8% (−1.9) | 468/540 | 28 / 38 | 0.268 | 67.0% → 65.6% |
+| SciEntsBank | test_uq | E2B | 733 | 59.8% → 55.9% (−3.8) | 545/733 | 66 / 94 | **0.032** | 59.8% → 56.9% |
+| SciEntsBank | test_uq | E4B | 733 | 67.3% → 69.9% (+2.6) | 620/733 | 63 / 44 | 0.081 | 67.5% → 70.4% |
+| SciEntsBank | test_ud | E2B | 4562 | 60.2% → 55.7% (−4.5) | 3317/4562 | 395 / 601 | **< 0.001** | 60.3% → 55.1% |
+| SciEntsBank | test_ud | E4B | 4562 | 70.1% → 70.6% (+0.5) | 4008/4562 | 269 / 245 | 0.31 | 70.4% → 70.7% |
+| GSM | gsm8k | E2B | 100 | 83.0% → 78.0% (−5.0) | 70/100 | 6 / 11 | 0.332 | 83.0% → 78.0% |
+| GSM | gsm8k | E4B | 100 | 91.0% → 86.0% (−5.0) | 84/100 | 3 / 8 | 0.227 | 92.0% → 88.0% |
+| GSM | symbolic (10 var.) | E2B | 1000 | 82.1% → 74.8% (−7.3) | 728/1000 | 50 / 123 | **0.002** by template | 80.0% → 75.1% |
+| GSM | symbolic (10 var.) | E4B | 1000 | 90.9% → 88.4% (−2.5) | 881/1000 | 26 / 51 | 0.056 by template | 90.5% → 89.1% |
+
+- **GSM-Symbolic by template:** E2B 33 templates worse, 16 better; E4B 18 worse, 6 better. Item-level McNemar, for reference: < 0.001 and 0.006.
+- **Macro-F1 (SciEntsBank)**, baseline → RAG, ua / uq / ud: E2B 0.522 → 0.508, 0.548 → 0.527, 0.570 → 0.521; E4B 0.658 → 0.629, 0.650 → 0.654, 0.701 → 0.697. Unparsed with RAG: E2B 5 (test_uq) and 2 (test_ud), 0 elsewhere.
+- **Strict (`#### N`), gsm8k / symbolic:** E2B 56% → 45% / 48.5% → 41.3%; E4B 85% → 51% / 81.4% → 42.9%.
+
+Recall per class, baseline → RAG-en:
+
+| Model | Split | correct | contradictory | incorrect | "contradictory" given |
+|---|---|---|---|---|---|
+| E2B | test_ua | 0.45 → 0.57 | 0.71 → 0.76 | 0.61 → 0.44 | 157 → 195 |
+| E2B | test_uq | 0.49 → 0.60 | 0.72 → 0.77 | 0.67 → 0.49 | 193 → 240 |
+| E2B | test_ud | 0.61 → 0.71 | 0.79 → 0.83 | 0.56 → 0.38 | 1,100 → 1,507 |
+| E4B | test_ua | 0.45 → 0.50 | 0.62 → 0.67 | 0.88 → 0.78 | 49 → 75 |
+| E4B | test_uq | 0.40 → 0.50 | 0.67 → 0.67 | 0.90 → 0.86 | 64 → 89 |
+| E4B | test_ud | 0.57 → 0.59 | 0.68 → 0.78 | 0.82 → 0.79 | 374 → 530 |
+
+### Cost: not comparable with the phase 0 baseline
+
+**The Jetson ran this queue with higher clock limits than phase 0, B1 and B2.** From `board-state.txt`; `nvpmodel` says "15W 0" and the governor is `schedutil` in both:
+
+| Limit | Phase 0, B1, B2 (to 2026-10-13) | Stage 4 RAG (2026-10-19/20) |
+|---|---|---|
+| GPU devfreq max | 612 MHz | 1,020 MHz |
+| Memory (`bwmgr`) max | 2,133 MHz | 3,199 MHz |
+| CPU max | 1,497.6 MHz | 1,728 MHz |
+
+Effect, same model and server flags:
+
+| | Phase 0 | Stage 4 RAG |
+|---|---|---|
+| Decode, grading (E2B / E4B) | 24.8 / 45.9 ms per token | 16.6 / 30.7 ms per token |
+| Decode, GSM (E2B / E4B) | 41.5 / 81.7 ms per token | 26.4 / 52.6 ms per token |
+| Mean power while grading | 9.1–10.7 W | 14.3–18.2 W |
+| Idle power | 4.5–4.6 W | 5.4–5.5 W |
+
+**Prompt tokens, sent → processed by the server** (per answer, from `server.log`):
+
+| Run | Baseline | RAG-en |
+|---|---|---|
+| SciEntsBank test_ua | 166 → 165 | 1,030 → 286 |
+| SciEntsBank test_uq | 164 → 162 | 1,039 → 83 |
+| SciEntsBank test_ud | 156 → 153 | 1,035 → 71 |
+| GSM-Symbolic | 1,106 → 70 | 2,074 → 855 |
+| News | 219 → 180 | 1,130 → 1,094–1,100 |
+
+### What it shows
+
+- **RAG-en doesn't help grading or math on the Jetson either: the board gives the Kaggle answer again.** E2B is lower on all 5 of its cells, E4B on 3 of 5. After a Holm correction over the 10 tests (GSM-Symbolic by template), two drops stay significant, both E2B: test_ud (−4.5 points, p < 0.01) and GSM-Symbolic (−7.3, p 0.018). E2B test_uq (p 0.032) doesn't survive it (0.26). E4B has no significant change on any cell. Kaggle had the same pattern: E2B down on every grading split, E4B flat, math down for both.
+- **The board reproduces Kaggle's RAG runs, as phase 0 did for the baseline.** All 10 scored cells agree with Kaggle's (McNemar p ≥ 0.05; the closest, E2B test_ud at 0.050, is 0.6 points *above* Kaggle). The same answer on 95–98% of grading questions and 83–94% of GSM ones, about phase 0's agreement. So RAG's effect is a property of the models and the material, not of the platform.
+- **RAG makes the grader more lenient, not better.** Recall on *correct* rises on all six grading rows (by up to 12 points) and recall on *incorrect* falls on all six (by up to 18): with passages that explain the concept, the model credits answers it rejected without them. E2B also gives "contradictory" more often (1,100 → 1,507 on test_ud; on Kaggle 1,105 → 1,522). The baseline and RAG runs give the same label on only 71–74% (E2B) and 85–88% (E4B) of answers, so RAG moves many grades in both directions, and the gains and losses nearly cancel.
+- **The smaller model is hurt more.** test_ud: E2B −4.5 against E4B +0.5. GSM-Symbolic: E2B −7.3 against E4B −2.5. The Jetson's GSM-Symbolic baseline for E2B was 2.1 points above Kaggle's (phase 0), so its drop here is larger than Kaggle's (−4.9), from the same RAG accuracy (74.8% against 75.1%).
+- **With the passages, E4B stops writing GSM's answer format but still gets the number.** Strict accuracy falls from 85% to 51% on GSM8K and from 81% to 43% on GSM-Symbolic, while the final number (the headline metric) moves 2.5–5 points. On Kaggle: 85% → 51%, 81% → 42%.
+- **RAG's cost on the board can't be read against the baseline yet.** The Jetson's GPU and memory clock limits rose between 2026-10-13 and 2026-10-19 (cause unknown; the same window as the supervisor's change of its IP). Decode is ~33% faster and the board draws ~5–8 W more, so the latency and J per question above aren't comparable with phase 0's. Within this queue, though, they are: grading with RAG costs 3.3–6.7 J (E2B) and 5.7–11.9 J (E4B), GSM 125–266 J, news 430–714 J. A RAG-vs-baseline cost comparison needs the baseline re-run in today's state, or the old limits back.
+- **RAG grading prompts are mostly reused by llama.cpp's prompt cache (observed; mechanism not checked).** A RAG grading prompt is ~1,035 tokens, but on test_uq and test_ud the server processed only 71–83 of them per answer (92–93% reused): consecutive answers to one question share the instructions, passages, question and reference answer. test_ua reuses less (286 processed), which fits it having fewer answers per question. Without RAG the grading prompts get almost no reuse (153 of 156), as B2 found for llama.cpp without `--swa-full`. So RAG's 6× longer grading prompt costs far less than 6× the prefill.
+- **Reuse follows the length of the shared prefix, not RAG as such.** GSM's baseline already reuses its fixed 5-shot prefix (70 of 1,106 tokens processed); with RAG the passages change per question, so 855 of 2,074 are processed. News shares little in either case (180 of 219; 1,094–1,100 of 1,130). A long shared prefix is reused with the phase 0 flags; the short baseline grading prompt isn't. Why, in llama.cpp's terms, isn't checked.
