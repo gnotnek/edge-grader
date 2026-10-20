@@ -1,0 +1,974 @@
+2026-10-20T04:55:23+0800 mitlab-orin-nano llama-server[0]: 0.00.000.794 I srv  llama_server: initializing ...
+2026-10-20T04:55:24+0800 mitlab-orin-nano llama-server[0]: 0.00.142.110 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+2026-10-20T04:55:24+0800 mitlab-orin-nano llama-server[0]: 0.00.143.114 W srv  llama_server: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+2026-10-20T04:55:24+0800 mitlab-orin-nano llama-server[0]: 0.00.144.713 I srv    load_model: loading model '/home/ari/research/models/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf'
+2026-10-20T04:55:27+0800 mitlab-orin-nano llama-server[0]: 0.04.058.533 W load: control-looking token:    212 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+2026-10-20T04:55:27+0800 mitlab-orin-nano llama-server[0]: 0.04.060.045 W load: control-looking token:     50 '<|tool_response>' was not control-type; this is probably a bug in the model. its type will be overridden
+2026-10-20T04:55:28+0800 mitlab-orin-nano llama-server[0]: 0.04.165.787 W load: special_eog_ids contains '<|tool_response>', removing '</s>' token from EOG list
+2026-10-20T04:57:33+0800 mitlab-orin-nano llama-server[0]: 2.09.825.418 I cmn          init: llama threadpool init, n_threads = 6
+2026-10-20T04:57:34+0800 mitlab-orin-nano llama-server[0]: 2.10.392.591 I srv    load_model: initializing, n_slots = 4, n_ctx_slot = 8192, kv_unified = 'true'
+2026-10-20T04:57:34+0800 mitlab-orin-nano llama-server[0]: 2.10.393.149 W srv          init: --cache-idle-slots requires --cache-ram, disabling
+2026-10-20T04:57:34+0800 mitlab-orin-nano llama-server[0]: 2.10.477.891 I srv  llama_server: model loaded
+2026-10-20T04:57:34+0800 mitlab-orin-nano llama-server[0]: 2.10.477.918 I srv  llama_server: listening on http://127.0.0.1:8080
+2026-10-20T04:57:34+0800 mitlab-orin-nano llama-server[0]: 2.10.477.920 W srv  llama_server: notice: server default port will be changed to :9931 in a future release (ref: https://github.com/ggml-org/llama.cpp/pull/26508)
+2026-10-20T04:57:54+0800 mitlab-orin-nano llama-server[0]: 2.30.613.271 I slot get_availabl: id  3 | task -1 | selected slot by LRU, t_last = -1
+2026-10-20T04:57:54+0800 mitlab-orin-nano llama-server[0]: 2.30.613.380 I slot launch_slot_: id  3 | task 0 | processing task, is_child = 0
+2026-10-20T04:57:57+0800 mitlab-orin-nano llama-server[0]: 2.33.671.822 I slot print_timing: id  3 | task 0 | prompt processing, n_tokens =   2034, progress = 1.00, t =   3.06 s / 665.06 tokens per second
+2026-10-20T04:58:03+0800 mitlab-orin-nano llama-server[0]: 2.39.660.511 I slot print_timing: id  3 | task 0 | n_gen =    100, tg =  18.80 t/s, tg_3s =  18.99 t/s
+2026-10-20T04:58:04+0800 mitlab-orin-nano llama-server[0]: 2.40.713.759 I slot print_timing: id  3 | task 0 | prompt eval time =    3781.68 ms /  2038 tokens (    1.86 ms per token,   538.91 tokens per second)
+2026-10-20T04:58:04+0800 mitlab-orin-nano llama-server[0]: 2.40.713.776 I slot print_timing: id  3 | task 0 |        eval time =    6318.62 ms /   120 tokens (   53.10 ms per token,    18.83 tokens per second)
+2026-10-20T04:58:04+0800 mitlab-orin-nano llama-server[0]: 2.40.713.784 I slot print_timing: id  3 | task 0 |       total time =   10100.31 ms /  2158 tokens
+2026-10-20T04:58:04+0800 mitlab-orin-nano llama-server[0]: 2.40.713.798 I slot print_timing: id  3 | task 0 |    graphs reused =        118
+2026-10-20T04:58:04+0800 mitlab-orin-nano llama-server[0]: 2.40.714.314 I slot      release: id  3 | task 0 | stop processing: n_tokens = 2157, truncated = 0
+2026-10-20T04:58:04+0800 mitlab-orin-nano llama-server[0]: 2.40.800.187 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.490 (> 0.100 thold), f_keep = 0.484
+2026-10-20T04:58:04+0800 mitlab-orin-nano llama-server[0]: 2.40.800.298 I slot launch_slot_: id  3 | task 126 | processing task, is_child = 0
+2026-10-20T04:58:11+0800 mitlab-orin-nano llama-server[0]: 2.47.987.729 I slot print_timing: id  3 | task 126 | n_gen =    100, tg =  18.78 t/s, tg_3s =  18.97 t/s
+2026-10-20T04:58:14+0800 mitlab-orin-nano llama-server[0]: 2.51.009.537 I slot print_timing: id  3 | task 126 | n_gen =    157, tg =  18.81 t/s, tg_3s =  18.86 t/s
+2026-10-20T04:58:17+0800 mitlab-orin-nano llama-server[0]: 2.54.057.897 I slot print_timing: id  3 | task 126 | n_gen =    214, tg =  18.78 t/s, tg_3s =  18.70 t/s
+2026-10-20T04:58:20+0800 mitlab-orin-nano llama-server[0]: 2.57.087.910 I slot print_timing: id  3 | task 126 | n_gen =    271, tg =  18.79 t/s, tg_3s =  18.81 t/s
+2026-10-20T04:58:24+0800 mitlab-orin-nano llama-server[0]: 3.00.113.440 I slot print_timing: id  3 | task 126 | n_gen =    328, tg =  18.80 t/s, tg_3s =  18.84 t/s
+2026-10-20T04:58:27+0800 mitlab-orin-nano llama-server[0]: 3.03.147.671 I slot print_timing: id  3 | task 126 | n_gen =    385, tg =  18.79 t/s, tg_3s =  18.79 t/s
+2026-10-20T04:58:29+0800 mitlab-orin-nano llama-server[0]: 3.05.125.331 I slot print_timing: id  3 | task 126 | prompt eval time =    1915.76 ms /  1088 tokens (    1.76 ms per token,   567.92 tokens per second)
+2026-10-20T04:58:29+0800 mitlab-orin-nano llama-server[0]: 3.05.125.347 I slot print_timing: id  3 | task 126 |        eval time =   22409.22 ms /   422 tokens (   53.23 ms per token,    18.79 tokens per second)
+2026-10-20T04:58:29+0800 mitlab-orin-nano llama-server[0]: 3.05.125.350 I slot print_timing: id  3 | task 126 |       total time =   24324.99 ms /  1510 tokens
+2026-10-20T04:58:29+0800 mitlab-orin-nano llama-server[0]: 3.05.125.352 I slot print_timing: id  3 | task 126 |    graphs reused =        537
+2026-10-20T04:58:29+0800 mitlab-orin-nano llama-server[0]: 3.05.125.805 I slot      release: id  3 | task 126 | stop processing: n_tokens = 2554, truncated = 0
+2026-10-20T04:58:29+0800 mitlab-orin-nano llama-server[0]: 3.05.203.567 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.498 (> 0.100 thold), f_keep = 0.409
+2026-10-20T04:58:29+0800 mitlab-orin-nano llama-server[0]: 3.05.203.673 I slot launch_slot_: id  3 | task 551 | processing task, is_child = 0
+2026-10-20T04:58:36+0800 mitlab-orin-nano llama-server[0]: 3.12.328.147 I slot print_timing: id  3 | task 551 | n_gen =    100, tg =  18.83 t/s, tg_3s =  19.02 t/s
+2026-10-20T04:58:39+0800 mitlab-orin-nano llama-server[0]: 3.15.343.219 I slot print_timing: id  3 | task 551 | n_gen =    157, tg =  18.86 t/s, tg_3s =  18.91 t/s
+2026-10-20T04:58:42+0800 mitlab-orin-nano llama-server[0]: 3.18.378.506 I slot print_timing: id  3 | task 551 | n_gen =    214, tg =  18.84 t/s, tg_3s =  18.78 t/s
+2026-10-20T04:58:45+0800 mitlab-orin-nano llama-server[0]: 3.21.398.528 I slot print_timing: id  3 | task 551 | n_gen =    271, tg =  18.84 t/s, tg_3s =  18.87 t/s
+2026-10-20T04:58:48+0800 mitlab-orin-nano llama-server[0]: 3.24.440.043 I slot print_timing: id  3 | task 551 | n_gen =    328, tg =  18.83 t/s, tg_3s =  18.74 t/s
+2026-10-20T04:58:51+0800 mitlab-orin-nano llama-server[0]: 3.27.305.410 I slot print_timing: id  3 | task 551 | prompt eval time =    1867.10 ms /  1054 tokens (    1.77 ms per token,   564.51 tokens per second)
+2026-10-20T04:58:51+0800 mitlab-orin-nano llama-server[0]: 3.27.305.425 I slot print_timing: id  3 | task 551 |        eval time =   20234.59 ms /   382 tokens (   53.11 ms per token,    18.83 tokens per second)
+2026-10-20T04:58:51+0800 mitlab-orin-nano llama-server[0]: 3.27.305.428 I slot print_timing: id  3 | task 551 |       total time =   22101.69 ms /  1436 tokens
+2026-10-20T04:58:51+0800 mitlab-orin-nano llama-server[0]: 3.27.305.433 I slot print_timing: id  3 | task 551 |    graphs reused =        916
+2026-10-20T04:58:51+0800 mitlab-orin-nano llama-server[0]: 3.27.305.877 I slot      release: id  3 | task 551 | stop processing: n_tokens = 2480, truncated = 0
+2026-10-20T04:58:51+0800 mitlab-orin-nano llama-server[0]: 3.27.383.744 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.500 (> 0.100 thold), f_keep = 0.421
+2026-10-20T04:58:51+0800 mitlab-orin-nano llama-server[0]: 3.27.383.843 I slot launch_slot_: id  3 | task 936 | processing task, is_child = 0
+2026-10-20T04:58:58+0800 mitlab-orin-nano llama-server[0]: 3.34.499.575 I slot print_timing: id  3 | task 936 | n_gen =    100, tg =  18.82 t/s, tg_3s =  19.01 t/s
+2026-10-20T04:59:01+0800 mitlab-orin-nano llama-server[0]: 3.37.519.262 I slot print_timing: id  3 | task 936 | n_gen =    157, tg =  18.84 t/s, tg_3s =  18.88 t/s
+2026-10-20T04:59:04+0800 mitlab-orin-nano llama-server[0]: 3.40.551.268 I slot print_timing: id  3 | task 936 | n_gen =    214, tg =  18.83 t/s, tg_3s =  18.80 t/s
+2026-10-20T04:59:07+0800 mitlab-orin-nano llama-server[0]: 3.43.138.165 I slot print_timing: id  3 | task 936 | prompt eval time =    1855.58 ms /  1044 tokens (    1.78 ms per token,   562.63 tokens per second)
+2026-10-20T04:59:07+0800 mitlab-orin-nano llama-server[0]: 3.43.138.183 I slot print_timing: id  3 | task 936 |        eval time =   13898.69 ms /   262 tokens (   53.25 ms per token,    18.78 tokens per second)
+2026-10-20T04:59:07+0800 mitlab-orin-nano llama-server[0]: 3.43.138.187 I slot print_timing: id  3 | task 936 |       total time =   15754.27 ms /  1306 tokens
+2026-10-20T04:59:07+0800 mitlab-orin-nano llama-server[0]: 3.43.138.191 I slot print_timing: id  3 | task 936 |    graphs reused =       1175
+2026-10-20T04:59:07+0800 mitlab-orin-nano llama-server[0]: 3.43.138.634 I slot      release: id  3 | task 936 | stop processing: n_tokens = 2350, truncated = 0
+2026-10-20T04:59:07+0800 mitlab-orin-nano llama-server[0]: 3.43.219.974 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.495 (> 0.100 thold), f_keep = 0.445
+2026-10-20T04:59:07+0800 mitlab-orin-nano llama-server[0]: 3.43.220.075 I slot launch_slot_: id  3 | task 1201 | processing task, is_child = 0
+2026-10-20T04:59:14+0800 mitlab-orin-nano llama-server[0]: 3.50.379.958 I slot print_timing: id  3 | task 1201 | n_gen =    100, tg =  18.78 t/s, tg_3s =  18.97 t/s
+2026-10-20T04:59:17+0800 mitlab-orin-nano llama-server[0]: 3.53.398.782 I slot print_timing: id  3 | task 1201 | n_gen =    157, tg =  18.82 t/s, tg_3s =  18.88 t/s
+2026-10-20T04:59:20+0800 mitlab-orin-nano llama-server[0]: 3.56.426.263 I slot print_timing: id  3 | task 1201 | n_gen =    214, tg =  18.82 t/s, tg_3s =  18.83 t/s
+2026-10-20T04:59:21+0800 mitlab-orin-nano llama-server[0]: 3.57.113.647 I slot print_timing: id  3 | task 1201 | prompt eval time =    1888.79 ms /  1067 tokens (    1.77 ms per token,   564.91 tokens per second)
+2026-10-20T04:59:21+0800 mitlab-orin-nano llama-server[0]: 3.57.113.664 I slot print_timing: id  3 | task 1201 |        eval time =   12004.73 ms /   227 tokens (   53.12 ms per token,    18.83 tokens per second)
+2026-10-20T04:59:21+0800 mitlab-orin-nano llama-server[0]: 3.57.113.667 I slot print_timing: id  3 | task 1201 |       total time =   13893.52 ms /  1294 tokens
+2026-10-20T04:59:21+0800 mitlab-orin-nano llama-server[0]: 3.57.113.671 I slot print_timing: id  3 | task 1201 |    graphs reused =       1399
+2026-10-20T04:59:21+0800 mitlab-orin-nano llama-server[0]: 3.57.114.158 I slot      release: id  3 | task 1201 | stop processing: n_tokens = 2338, truncated = 0
+2026-10-20T04:59:21+0800 mitlab-orin-nano llama-server[0]: 3.57.194.936 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.500 (> 0.100 thold), f_keep = 0.447
+2026-10-20T04:59:21+0800 mitlab-orin-nano llama-server[0]: 3.57.195.037 I slot launch_slot_: id  3 | task 1431 | processing task, is_child = 0
+2026-10-20T04:59:28+0800 mitlab-orin-nano llama-server[0]: 4.04.310.860 I slot print_timing: id  3 | task 1431 | n_gen =    100, tg =  18.86 t/s, tg_3s =  19.05 t/s
+2026-10-20T04:59:31+0800 mitlab-orin-nano llama-server[0]: 4.07.318.356 I slot print_timing: id  3 | task 1431 | n_gen =    157, tg =  18.89 t/s, tg_3s =  18.95 t/s
+2026-10-20T04:59:31+0800 mitlab-orin-nano llama-server[0]: 4.07.424.137 I slot print_timing: id  3 | task 1431 | prompt eval time =    1866.36 ms /  1047 tokens (    1.78 ms per token,   560.98 tokens per second)
+2026-10-20T04:59:31+0800 mitlab-orin-nano llama-server[0]: 4.07.424.151 I slot print_timing: id  3 | task 1431 |        eval time =    8362.69 ms /   159 tokens (   52.93 ms per token,    18.89 tokens per second)
+2026-10-20T04:59:31+0800 mitlab-orin-nano llama-server[0]: 4.07.424.154 I slot print_timing: id  3 | task 1431 |       total time =   10229.06 ms /  1206 tokens
+2026-10-20T04:59:31+0800 mitlab-orin-nano llama-server[0]: 4.07.424.157 I slot print_timing: id  3 | task 1431 |    graphs reused =       1556
+2026-10-20T04:59:31+0800 mitlab-orin-nano llama-server[0]: 4.07.424.585 I slot      release: id  3 | task 1431 | stop processing: n_tokens = 2250, truncated = 0
+2026-10-20T04:59:31+0800 mitlab-orin-nano llama-server[0]: 4.07.507.096 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.502 (> 0.100 thold), f_keep = 0.464
+2026-10-20T04:59:31+0800 mitlab-orin-nano llama-server[0]: 4.07.507.199 I slot launch_slot_: id  3 | task 1593 | processing task, is_child = 0
+2026-10-20T04:59:38+0800 mitlab-orin-nano llama-server[0]: 4.14.627.108 I slot print_timing: id  3 | task 1593 | n_gen =    100, tg =  18.78 t/s, tg_3s =  18.97 t/s
+2026-10-20T04:59:41+0800 mitlab-orin-nano llama-server[0]: 4.17.635.626 I slot print_timing: id  3 | task 1593 | n_gen =    157, tg =  18.84 t/s, tg_3s =  18.95 t/s
+2026-10-20T04:59:44+0800 mitlab-orin-nano llama-server[0]: 4.20.645.391 I slot print_timing: id  3 | task 1593 | n_gen =    214, tg =  18.87 t/s, tg_3s =  18.94 t/s
+2026-10-20T04:59:45+0800 mitlab-orin-nano llama-server[0]: 4.21.829.964 I slot print_timing: id  3 | task 1593 | prompt eval time =    1848.85 ms /  1037 tokens (    1.78 ms per token,   560.89 tokens per second)
+2026-10-20T04:59:45+0800 mitlab-orin-nano llama-server[0]: 4.21.829.979 I slot print_timing: id  3 | task 1593 |        eval time =   12473.87 ms /   236 tokens (   53.08 ms per token,    18.84 tokens per second)
+2026-10-20T04:59:45+0800 mitlab-orin-nano llama-server[0]: 4.21.829.983 I slot print_timing: id  3 | task 1593 |       total time =   14322.72 ms /  1273 tokens
+2026-10-20T04:59:45+0800 mitlab-orin-nano llama-server[0]: 4.21.829.986 I slot print_timing: id  3 | task 1593 |    graphs reused =       1789
+2026-10-20T04:59:45+0800 mitlab-orin-nano llama-server[0]: 4.21.830.426 I slot      release: id  3 | task 1593 | stop processing: n_tokens = 2317, truncated = 0
+2026-10-20T04:59:45+0800 mitlab-orin-nano llama-server[0]: 4.21.913.475 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.500 (> 0.100 thold), f_keep = 0.451
+2026-10-20T04:59:45+0800 mitlab-orin-nano llama-server[0]: 4.21.913.585 I slot launch_slot_: id  3 | task 1832 | processing task, is_child = 0
+2026-10-20T04:59:52+0800 mitlab-orin-nano llama-server[0]: 4.29.055.866 I slot print_timing: id  3 | task 1832 | n_gen =    100, tg =  18.77 t/s, tg_3s =  18.96 t/s
+2026-10-20T04:59:55+0800 mitlab-orin-nano llama-server[0]: 4.32.072.537 I slot print_timing: id  3 | task 1832 | n_gen =    157, tg =  18.82 t/s, tg_3s =  18.90 t/s
+2026-10-20T04:59:58+0800 mitlab-orin-nano llama-server[0]: 4.35.087.652 I slot print_timing: id  3 | task 1832 | n_gen =    214, tg =  18.84 t/s, tg_3s =  18.90 t/s
+2026-10-20T05:00:01+0800 mitlab-orin-nano llama-server[0]: 4.38.088.573 I slot print_timing: id  3 | task 1832 | n_gen =    270, tg =  18.80 t/s, tg_3s =  18.66 t/s
+2026-10-20T05:00:04+0800 mitlab-orin-nano llama-server[0]: 4.40.804.873 I slot print_timing: id  3 | task 1832 | prompt eval time =    1868.06 ms /  1046 tokens (    1.79 ms per token,   559.94 tokens per second)
+2026-10-20T05:00:04+0800 mitlab-orin-nano llama-server[0]: 4.40.804.891 I slot print_timing: id  3 | task 1832 |        eval time =   17023.18 ms /   321 tokens (   53.20 ms per token,    18.80 tokens per second)
+2026-10-20T05:00:04+0800 mitlab-orin-nano llama-server[0]: 4.40.804.894 I slot print_timing: id  3 | task 1832 |       total time =   18891.24 ms /  1367 tokens
+2026-10-20T05:00:04+0800 mitlab-orin-nano llama-server[0]: 4.40.804.897 I slot print_timing: id  3 | task 1832 |    graphs reused =       2107
+2026-10-20T05:00:04+0800 mitlab-orin-nano llama-server[0]: 4.40.805.321 I slot      release: id  3 | task 1832 | stop processing: n_tokens = 2411, truncated = 0
+2026-10-20T05:00:04+0800 mitlab-orin-nano llama-server[0]: 4.40.888.105 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.507 (> 0.100 thold), f_keep = 0.433
+2026-10-20T05:00:04+0800 mitlab-orin-nano llama-server[0]: 4.40.888.210 I slot launch_slot_: id  3 | task 2156 | processing task, is_child = 0
+2026-10-20T05:00:11+0800 mitlab-orin-nano llama-server[0]: 4.47.969.715 I slot print_timing: id  3 | task 2156 | n_gen =    100, tg =  18.71 t/s, tg_3s =  18.90 t/s
+2026-10-20T05:00:14+0800 mitlab-orin-nano llama-server[0]: 4.50.981.473 I slot print_timing: id  3 | task 2156 | n_gen =    157, tg =  18.79 t/s, tg_3s =  18.93 t/s
+2026-10-20T05:00:16+0800 mitlab-orin-nano llama-server[0]: 4.52.198.515 I slot print_timing: id  3 | task 2156 | prompt eval time =    1789.74 ms /  1018 tokens (    1.76 ms per token,   568.80 tokens per second)
+2026-10-20T05:00:16+0800 mitlab-orin-nano llama-server[0]: 4.52.198.530 I slot print_timing: id  3 | task 2156 |        eval time =    9520.51 ms /   180 tokens (   53.19 ms per token,    18.80 tokens per second)
+2026-10-20T05:00:16+0800 mitlab-orin-nano llama-server[0]: 4.52.198.534 I slot print_timing: id  3 | task 2156 |       total time =   11310.26 ms /  1198 tokens
+2026-10-20T05:00:16+0800 mitlab-orin-nano llama-server[0]: 4.52.198.537 I slot print_timing: id  3 | task 2156 |    graphs reused =       2285
+2026-10-20T05:00:16+0800 mitlab-orin-nano llama-server[0]: 4.52.198.951 I slot      release: id  3 | task 2156 | stop processing: n_tokens = 2242, truncated = 0
+2026-10-20T05:00:16+0800 mitlab-orin-nano llama-server[0]: 4.52.281.884 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.492 (> 0.100 thold), f_keep = 0.466
+2026-10-20T05:00:16+0800 mitlab-orin-nano llama-server[0]: 4.52.281.983 I slot launch_slot_: id  3 | task 2339 | processing task, is_child = 0
+2026-10-20T05:00:23+0800 mitlab-orin-nano llama-server[0]: 4.59.475.873 I slot print_timing: id  3 | task 2339 | n_gen =    100, tg =  18.80 t/s, tg_3s =  18.99 t/s
+2026-10-20T05:00:26+0800 mitlab-orin-nano llama-server[0]: 5.02.516.226 I slot print_timing: id  3 | task 2339 | n_gen =    157, tg =  18.78 t/s, tg_3s =  18.75 t/s
+2026-10-20T05:00:27+0800 mitlab-orin-nano llama-server[0]: 5.03.103.181 I slot print_timing: id  3 | task 2339 | prompt eval time =    1928.90 ms /  1078 tokens (    1.79 ms per token,   558.87 tokens per second)
+2026-10-20T05:00:27+0800 mitlab-orin-nano llama-server[0]: 5.03.103.202 I slot print_timing: id  3 | task 2339 |        eval time =    8892.25 ms /   168 tokens (   53.25 ms per token,    18.78 tokens per second)
+2026-10-20T05:00:27+0800 mitlab-orin-nano llama-server[0]: 5.03.103.206 I slot print_timing: id  3 | task 2339 |       total time =   10821.15 ms /  1246 tokens
+2026-10-20T05:00:27+0800 mitlab-orin-nano llama-server[0]: 5.03.103.209 I slot print_timing: id  3 | task 2339 |    graphs reused =       2451
+2026-10-20T05:00:27+0800 mitlab-orin-nano llama-server[0]: 5.03.103.631 I slot      release: id  3 | task 2339 | stop processing: n_tokens = 2290, truncated = 0
+2026-10-20T05:00:27+0800 mitlab-orin-nano llama-server[0]: 5.03.163.608 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.504 (> 0.100 thold), f_keep = 0.456
+2026-10-20T05:00:27+0800 mitlab-orin-nano llama-server[0]: 5.03.163.751 I slot launch_slot_: id  3 | task 2510 | processing task, is_child = 0
+2026-10-20T05:00:34+0800 mitlab-orin-nano llama-server[0]: 5.10.281.399 I slot print_timing: id  3 | task 2510 | n_gen =    100, tg =  18.74 t/s, tg_3s =  18.93 t/s
+2026-10-20T05:00:37+0800 mitlab-orin-nano llama-server[0]: 5.13.308.039 I slot print_timing: id  3 | task 2510 | n_gen =    157, tg =  18.77 t/s, tg_3s =  18.83 t/s
+2026-10-20T05:00:37+0800 mitlab-orin-nano llama-server[0]: 5.13.360.873 I slot print_timing: id  3 | task 2510 | prompt eval time =    1834.87 ms /  1029 tokens (    1.78 ms per token,   560.80 tokens per second)
+2026-10-20T05:00:37+0800 mitlab-orin-nano llama-server[0]: 5.13.360.887 I slot print_timing: id  3 | task 2510 |        eval time =    8362.19 ms /   158 tokens (   53.26 ms per token,    18.77 tokens per second)
+2026-10-20T05:00:37+0800 mitlab-orin-nano llama-server[0]: 5.13.360.890 I slot print_timing: id  3 | task 2510 |       total time =   10197.06 ms /  1187 tokens
+2026-10-20T05:00:37+0800 mitlab-orin-nano llama-server[0]: 5.13.360.893 I slot print_timing: id  3 | task 2510 |    graphs reused =       2607
+2026-10-20T05:00:37+0800 mitlab-orin-nano llama-server[0]: 5.13.361.314 I slot      release: id  3 | task 2510 | stop processing: n_tokens = 2231, truncated = 0
+2026-10-20T05:00:37+0800 mitlab-orin-nano llama-server[0]: 5.13.443.421 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.513 (> 0.100 thold), f_keep = 0.468
+2026-10-20T05:00:37+0800 mitlab-orin-nano llama-server[0]: 5.13.443.525 I slot launch_slot_: id  3 | task 2671 | processing task, is_child = 0
+2026-10-20T05:00:43+0800 mitlab-orin-nano llama-server[0]: 5.19.370.664 I slot print_timing: id  3 | task 2671 | prompt eval time =    1757.67 ms /   992 tokens (    1.77 ms per token,   564.38 tokens per second)
+2026-10-20T05:00:43+0800 mitlab-orin-nano llama-server[0]: 5.19.370.680 I slot print_timing: id  3 | task 2671 |        eval time =    4169.41 ms /    79 tokens (   53.45 ms per token,    18.71 tokens per second)
+2026-10-20T05:00:43+0800 mitlab-orin-nano llama-server[0]: 5.19.370.684 I slot print_timing: id  3 | task 2671 |       total time =    5927.09 ms /  1071 tokens
+2026-10-20T05:00:43+0800 mitlab-orin-nano llama-server[0]: 5.19.370.687 I slot print_timing: id  3 | task 2671 |    graphs reused =       2683
+2026-10-20T05:00:43+0800 mitlab-orin-nano llama-server[0]: 5.19.371.087 I slot      release: id  3 | task 2671 | stop processing: n_tokens = 2115, truncated = 0
+2026-10-20T05:00:43+0800 mitlab-orin-nano llama-server[0]: 5.19.432.569 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.519 (> 0.100 thold), f_keep = 0.494
+2026-10-20T05:00:43+0800 mitlab-orin-nano llama-server[0]: 5.19.432.671 I slot launch_slot_: id  3 | task 2753 | processing task, is_child = 0
+2026-10-20T05:00:50+0800 mitlab-orin-nano llama-server[0]: 5.26.403.543 I slot print_timing: id  3 | task 2753 | prompt eval time =    1750.46 ms /   970 tokens (    1.80 ms per token,   554.14 tokens per second)
+2026-10-20T05:00:50+0800 mitlab-orin-nano llama-server[0]: 5.26.403.557 I slot print_timing: id  3 | task 2753 |        eval time =    5220.36 ms /    99 tokens (   53.27 ms per token,    18.77 tokens per second)
+2026-10-20T05:00:50+0800 mitlab-orin-nano llama-server[0]: 5.26.403.560 I slot print_timing: id  3 | task 2753 |       total time =    6970.82 ms /  1069 tokens
+2026-10-20T05:00:50+0800 mitlab-orin-nano llama-server[0]: 5.26.403.562 I slot print_timing: id  3 | task 2753 |    graphs reused =       2779
+2026-10-20T05:00:50+0800 mitlab-orin-nano llama-server[0]: 5.26.403.962 I slot      release: id  3 | task 2753 | stop processing: n_tokens = 2113, truncated = 0
+2026-10-20T05:00:50+0800 mitlab-orin-nano llama-server[0]: 5.26.486.599 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.510 (> 0.100 thold), f_keep = 0.495
+2026-10-20T05:00:50+0800 mitlab-orin-nano llama-server[0]: 5.26.486.741 I slot launch_slot_: id  3 | task 2855 | processing task, is_child = 0
+2026-10-20T05:00:56+0800 mitlab-orin-nano llama-server[0]: 5.32.955.538 I slot print_timing: id  3 | task 2855 | prompt eval time =    1769.05 ms /  1003 tokens (    1.76 ms per token,   566.97 tokens per second)
+2026-10-20T05:00:56+0800 mitlab-orin-nano llama-server[0]: 5.32.955.555 I slot print_timing: id  3 | task 2855 |        eval time =    4699.69 ms /    89 tokens (   53.41 ms per token,    18.72 tokens per second)
+2026-10-20T05:00:56+0800 mitlab-orin-nano llama-server[0]: 5.32.955.558 I slot print_timing: id  3 | task 2855 |       total time =    6468.74 ms /  1092 tokens
+2026-10-20T05:00:56+0800 mitlab-orin-nano llama-server[0]: 5.32.955.560 I slot print_timing: id  3 | task 2855 |    graphs reused =       2866
+2026-10-20T05:00:56+0800 mitlab-orin-nano llama-server[0]: 5.32.955.969 I slot      release: id  3 | task 2855 | stop processing: n_tokens = 2136, truncated = 0
+2026-10-20T05:00:56+0800 mitlab-orin-nano llama-server[0]: 5.33.039.072 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.501 (> 0.100 thold), f_keep = 0.489
+2026-10-20T05:00:56+0800 mitlab-orin-nano llama-server[0]: 5.33.039.174 I slot launch_slot_: id  3 | task 2947 | processing task, is_child = 0
+2026-10-20T05:01:04+0800 mitlab-orin-nano llama-server[0]: 5.40.176.346 I slot print_timing: id  3 | task 2947 | n_gen =    100, tg =  18.75 t/s, tg_3s =  18.94 t/s
+2026-10-20T05:01:07+0800 mitlab-orin-nano llama-server[0]: 5.43.180.955 I slot print_timing: id  3 | task 2947 | n_gen =    157, tg =  18.83 t/s, tg_3s =  18.97 t/s
+2026-10-20T05:01:10+0800 mitlab-orin-nano llama-server[0]: 5.46.188.973 I slot print_timing: id  3 | task 2947 | n_gen =    214, tg =  18.86 t/s, tg_3s =  18.95 t/s
+2026-10-20T05:01:13+0800 mitlab-orin-nano llama-server[0]: 5.49.239.423 I slot print_timing: id  3 | task 2947 | n_gen =    271, tg =  18.82 t/s, tg_3s =  18.69 t/s
+2026-10-20T05:01:16+0800 mitlab-orin-nano llama-server[0]: 5.52.276.095 I slot print_timing: id  3 | task 2947 | n_gen =    328, tg =  18.82 t/s, tg_3s =  18.77 t/s
+2026-10-20T05:01:19+0800 mitlab-orin-nano llama-server[0]: 5.55.298.495 I slot print_timing: id  3 | task 2947 | n_gen =    385, tg =  18.82 t/s, tg_3s =  18.86 t/s
+2026-10-20T05:01:22+0800 mitlab-orin-nano llama-server[0]: 5.58.349.463 I slot print_timing: id  3 | task 2947 | n_gen =    442, tg =  18.80 t/s, tg_3s =  18.68 t/s
+2026-10-20T05:01:25+0800 mitlab-orin-nano llama-server[0]: 6.01.359.986 I slot print_timing: id  3 | task 2947 | n_gen =    498, tg =  18.78 t/s, tg_3s =  18.60 t/s
+2026-10-20T05:01:28+0800 mitlab-orin-nano llama-server[0]: 6.04.404.857 I slot print_timing: id  3 | task 2947 | n_gen =    555, tg =  18.77 t/s, tg_3s =  18.72 t/s
+2026-10-20T05:01:31+0800 mitlab-orin-nano llama-server[0]: 6.07.406.160 I slot print_timing: id  3 | task 2947 | n_gen =    611, tg =  18.76 t/s, tg_3s =  18.66 t/s
+2026-10-20T05:01:34+0800 mitlab-orin-nano llama-server[0]: 6.10.408.830 I slot print_timing: id  3 | task 2947 | n_gen =    667, tg =  18.75 t/s, tg_3s =  18.65 t/s
+2026-10-20T05:01:36+0800 mitlab-orin-nano llama-server[0]: 6.12.227.085 I slot print_timing: id  3 | task 2947 | prompt eval time =    1857.16 ms /  1042 tokens (    1.78 ms per token,   561.07 tokens per second)
+2026-10-20T05:01:36+0800 mitlab-orin-nano llama-server[0]: 6.12.227.096 I slot print_timing: id  3 | task 2947 |        eval time =   37330.71 ms /   701 tokens (   53.33 ms per token,    18.75 tokens per second)
+2026-10-20T05:01:36+0800 mitlab-orin-nano llama-server[0]: 6.12.227.098 I slot print_timing: id  3 | task 2947 |       total time =   39187.87 ms /  1743 tokens
+2026-10-20T05:01:36+0800 mitlab-orin-nano llama-server[0]: 6.12.227.100 I slot print_timing: id  3 | task 2947 |    graphs reused =       3563
+2026-10-20T05:01:36+0800 mitlab-orin-nano llama-server[0]: 6.12.227.392 I slot      release: id  3 | task 2947 | stop processing: n_tokens = 2787, truncated = 0
+2026-10-20T05:01:36+0800 mitlab-orin-nano llama-server[0]: 6.12.291.959 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.503 (> 0.100 thold), f_keep = 0.375
+2026-10-20T05:01:36+0800 mitlab-orin-nano llama-server[0]: 6.12.292.063 I slot launch_slot_: id  3 | task 3651 | processing task, is_child = 0
+2026-10-20T05:01:41+0800 mitlab-orin-nano llama-server[0]: 6.17.915.846 I slot print_timing: id  3 | task 3651 | prompt eval time =    1864.78 ms /  1034 tokens (    1.80 ms per token,   554.49 tokens per second)
+2026-10-20T05:01:41+0800 mitlab-orin-nano llama-server[0]: 6.17.915.862 I slot print_timing: id  3 | task 3651 |        eval time =    3758.96 ms /    72 tokens (   52.94 ms per token,    18.89 tokens per second)
+2026-10-20T05:01:41+0800 mitlab-orin-nano llama-server[0]: 6.17.915.865 I slot print_timing: id  3 | task 3651 |       total time =    5623.74 ms /  1106 tokens
+2026-10-20T05:01:41+0800 mitlab-orin-nano llama-server[0]: 6.17.915.868 I slot print_timing: id  3 | task 3651 |    graphs reused =       3633
+2026-10-20T05:01:41+0800 mitlab-orin-nano llama-server[0]: 6.17.916.291 I slot      release: id  3 | task 3651 | stop processing: n_tokens = 2150, truncated = 0
+2026-10-20T05:01:41+0800 mitlab-orin-nano llama-server[0]: 6.17.998.901 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.508 (> 0.100 thold), f_keep = 0.486
+2026-10-20T05:01:41+0800 mitlab-orin-nano llama-server[0]: 6.17.999.007 I slot launch_slot_: id  3 | task 3726 | processing task, is_child = 0
+2026-10-20T05:01:48+0800 mitlab-orin-nano llama-server[0]: 6.24.396.517 I slot print_timing: id  3 | task 3726 | prompt eval time =    1830.39 ms /  1029 tokens (    1.78 ms per token,   562.17 tokens per second)
+2026-10-20T05:01:48+0800 mitlab-orin-nano llama-server[0]: 6.24.396.532 I slot print_timing: id  3 | task 3726 |        eval time =    4567.07 ms /    87 tokens (   53.11 ms per token,    18.83 tokens per second)
+2026-10-20T05:01:48+0800 mitlab-orin-nano llama-server[0]: 6.24.396.535 I slot print_timing: id  3 | task 3726 |       total time =    6397.47 ms /  1116 tokens
+2026-10-20T05:01:48+0800 mitlab-orin-nano llama-server[0]: 6.24.396.538 I slot print_timing: id  3 | task 3726 |    graphs reused =       3718
+2026-10-20T05:01:48+0800 mitlab-orin-nano llama-server[0]: 6.24.396.942 I slot      release: id  3 | task 3726 | stop processing: n_tokens = 2145, truncated = 0
+2026-10-20T05:01:48+0800 mitlab-orin-nano llama-server[0]: 6.24.457.709 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.456 (> 0.100 thold), f_keep = 0.487
+2026-10-20T05:01:48+0800 mitlab-orin-nano llama-server[0]: 6.24.457.819 I slot launch_slot_: id  3 | task 3817 | processing task, is_child = 0
+2026-10-20T05:01:55+0800 mitlab-orin-nano llama-server[0]: 6.31.888.224 I slot print_timing: id  3 | task 3817 | n_gen =    100, tg =  18.73 t/s, tg_3s =  18.92 t/s
+2026-10-20T05:01:58+0800 mitlab-orin-nano llama-server[0]: 6.34.905.162 I slot print_timing: id  3 | task 3817 | n_gen =    157, tg =  18.79 t/s, tg_3s =  18.89 t/s
+2026-10-20T05:02:01+0800 mitlab-orin-nano llama-server[0]: 6.37.921.962 I slot print_timing: id  3 | task 3817 | n_gen =    214, tg =  18.82 t/s, tg_3s =  18.89 t/s
+2026-10-20T05:02:04+0800 mitlab-orin-nano llama-server[0]: 6.40.940.474 I slot print_timing: id  3 | task 3817 | n_gen =    271, tg =  18.83 t/s, tg_3s =  18.88 t/s
+2026-10-20T05:02:06+0800 mitlab-orin-nano llama-server[0]: 6.42.727.402 I slot print_timing: id  3 | task 3817 | prompt eval time =    2145.22 ms /  1245 tokens (    1.72 ms per token,   580.36 tokens per second)
+2026-10-20T05:02:06+0800 mitlab-orin-nano llama-server[0]: 6.42.727.414 I slot print_timing: id  3 | task 3817 |        eval time =   16124.31 ms /   304 tokens (   53.22 ms per token,    18.79 tokens per second)
+2026-10-20T05:02:06+0800 mitlab-orin-nano llama-server[0]: 6.42.727.416 I slot print_timing: id  3 | task 3817 |       total time =   18269.54 ms /  1549 tokens
+2026-10-20T05:02:06+0800 mitlab-orin-nano llama-server[0]: 6.42.727.418 I slot print_timing: id  3 | task 3817 |    graphs reused =       4016
+2026-10-20T05:02:06+0800 mitlab-orin-nano llama-server[0]: 6.42.727.695 I slot      release: id  3 | task 3817 | stop processing: n_tokens = 2593, truncated = 0
+2026-10-20T05:02:06+0800 mitlab-orin-nano llama-server[0]: 6.42.804.382 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.495 (> 0.100 thold), f_keep = 0.403
+2026-10-20T05:02:06+0800 mitlab-orin-nano llama-server[0]: 6.42.804.487 I slot launch_slot_: id  3 | task 4124 | processing task, is_child = 0
+2026-10-20T05:02:13+0800 mitlab-orin-nano llama-server[0]: 6.49.933.152 I slot print_timing: id  3 | task 4124 | n_gen =    100, tg =  18.85 t/s, tg_3s =  19.04 t/s
+2026-10-20T05:02:16+0800 mitlab-orin-nano llama-server[0]: 6.52.949.759 I slot print_timing: id  3 | task 4124 | n_gen =    157, tg =  18.87 t/s, tg_3s =  18.90 t/s
+2026-10-20T05:02:18+0800 mitlab-orin-nano llama-server[0]: 6.54.998.849 I slot print_timing: id  3 | task 4124 | prompt eval time =    1877.82 ms /  1064 tokens (    1.76 ms per token,   566.61 tokens per second)
+2026-10-20T05:02:18+0800 mitlab-orin-nano llama-server[0]: 6.54.998.868 I slot print_timing: id  3 | task 4124 |        eval time =   10316.49 ms /   196 tokens (   52.91 ms per token,    18.90 tokens per second)
+2026-10-20T05:02:18+0800 mitlab-orin-nano llama-server[0]: 6.54.998.871 I slot print_timing: id  3 | task 4124 |       total time =   12194.31 ms /  1260 tokens
+2026-10-20T05:02:18+0800 mitlab-orin-nano llama-server[0]: 6.54.998.874 I slot print_timing: id  3 | task 4124 |    graphs reused =       4210
+2026-10-20T05:02:18+0800 mitlab-orin-nano llama-server[0]: 6.54.999.288 I slot      release: id  3 | task 4124 | stop processing: n_tokens = 2304, truncated = 0
+2026-10-20T05:02:18+0800 mitlab-orin-nano llama-server[0]: 6.55.081.628 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.509 (> 0.100 thold), f_keep = 0.454
+2026-10-20T05:02:18+0800 mitlab-orin-nano llama-server[0]: 6.55.081.728 I slot launch_slot_: id  3 | task 4323 | processing task, is_child = 0
+2026-10-20T05:02:25+0800 mitlab-orin-nano llama-server[0]: 7.02.075.665 I slot print_timing: id  3 | task 4323 | n_gen =    100, tg =  18.89 t/s, tg_3s =  19.08 t/s
+2026-10-20T05:02:29+0800 mitlab-orin-nano llama-server[0]: 7.05.123.311 I slot print_timing: id  3 | task 4323 | n_gen =    158, tg =  18.94 t/s, tg_3s =  19.03 t/s
+2026-10-20T05:02:32+0800 mitlab-orin-nano llama-server[0]: 7.08.175.535 I slot print_timing: id  3 | task 4323 | n_gen =    216, tg =  18.96 t/s, tg_3s =  19.00 t/s
+2026-10-20T05:02:33+0800 mitlab-orin-nano llama-server[0]: 7.09.543.075 I slot print_timing: id  3 | task 4323 | prompt eval time =    1754.07 ms /  1009 tokens (    1.74 ms per token,   575.23 tokens per second)
+2026-10-20T05:02:33+0800 mitlab-orin-nano llama-server[0]: 7.09.543.092 I slot print_timing: id  3 | task 4323 |        eval time =   12707.23 ms /   242 tokens (   52.73 ms per token,    18.97 tokens per second)
+2026-10-20T05:02:33+0800 mitlab-orin-nano llama-server[0]: 7.09.543.096 I slot print_timing: id  3 | task 4323 |       total time =   14461.30 ms /  1251 tokens
+2026-10-20T05:02:33+0800 mitlab-orin-nano llama-server[0]: 7.09.543.099 I slot print_timing: id  3 | task 4323 |    graphs reused =       4449
+2026-10-20T05:02:33+0800 mitlab-orin-nano llama-server[0]: 7.09.543.510 I slot      release: id  3 | task 4323 | stop processing: n_tokens = 2295, truncated = 0
+2026-10-20T05:02:33+0800 mitlab-orin-nano llama-server[0]: 7.09.625.585 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.514 (> 0.100 thold), f_keep = 0.455
+2026-10-20T05:02:33+0800 mitlab-orin-nano llama-server[0]: 7.09.625.694 I slot launch_slot_: id  3 | task 4568 | processing task, is_child = 0
+2026-10-20T05:02:39+0800 mitlab-orin-nano llama-server[0]: 7.15.472.173 I slot print_timing: id  3 | task 4568 | prompt eval time =    1744.02 ms /   988 tokens (    1.77 ms per token,   566.51 tokens per second)
+2026-10-20T05:02:39+0800 mitlab-orin-nano llama-server[0]: 7.15.472.188 I slot print_timing: id  3 | task 4568 |        eval time =    4102.41 ms /    78 tokens (   53.28 ms per token,    18.77 tokens per second)
+2026-10-20T05:02:39+0800 mitlab-orin-nano llama-server[0]: 7.15.472.191 I slot print_timing: id  3 | task 4568 |       total time =    5846.44 ms /  1066 tokens
+2026-10-20T05:02:39+0800 mitlab-orin-nano llama-server[0]: 7.15.472.193 I slot print_timing: id  3 | task 4568 |    graphs reused =       4523
+2026-10-20T05:02:39+0800 mitlab-orin-nano llama-server[0]: 7.15.472.597 I slot      release: id  3 | task 4568 | stop processing: n_tokens = 2110, truncated = 0
+2026-10-20T05:02:39+0800 mitlab-orin-nano llama-server[0]: 7.15.555.275 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.484 (> 0.100 thold), f_keep = 0.495
+2026-10-20T05:02:39+0800 mitlab-orin-nano llama-server[0]: 7.15.555.378 I slot launch_slot_: id  3 | task 4649 | processing task, is_child = 0
+2026-10-20T05:02:45+0800 mitlab-orin-nano llama-server[0]: 7.21.988.655 I slot print_timing: id  3 | task 4649 | prompt eval time =    1948.97 ms /  1114 tokens (    1.75 ms per token,   571.58 tokens per second)
+2026-10-20T05:02:45+0800 mitlab-orin-nano llama-server[0]: 7.21.988.669 I slot print_timing: id  3 | task 4649 |        eval time =    4484.26 ms /    86 tokens (   52.76 ms per token,    18.96 tokens per second)
+2026-10-20T05:02:45+0800 mitlab-orin-nano llama-server[0]: 7.21.988.672 I slot print_timing: id  3 | task 4649 |       total time =    6433.23 ms /  1200 tokens
+2026-10-20T05:02:45+0800 mitlab-orin-nano llama-server[0]: 7.21.988.675 I slot print_timing: id  3 | task 4649 |    graphs reused =       4607
+2026-10-20T05:02:45+0800 mitlab-orin-nano llama-server[0]: 7.21.989.090 I slot      release: id  3 | task 4649 | stop processing: n_tokens = 2244, truncated = 0
+2026-10-20T05:02:45+0800 mitlab-orin-nano llama-server[0]: 7.22.071.877 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.508 (> 0.100 thold), f_keep = 0.466
+2026-10-20T05:02:45+0800 mitlab-orin-nano llama-server[0]: 7.22.071.976 I slot launch_slot_: id  3 | task 4738 | processing task, is_child = 0
+2026-10-20T05:02:52+0800 mitlab-orin-nano llama-server[0]: 7.29.067.758 I slot print_timing: id  3 | task 4738 | n_gen =    100, tg =  18.96 t/s, tg_3s =  19.15 t/s
+2026-10-20T05:02:56+0800 mitlab-orin-nano llama-server[0]: 7.32.116.522 I slot print_timing: id  3 | task 4738 | n_gen =    158, tg =  18.98 t/s, tg_3s =  19.02 t/s
+2026-10-20T05:02:59+0800 mitlab-orin-nano llama-server[0]: 7.35.163.255 I slot print_timing: id  3 | task 4738 | n_gen =    216, tg =  19.00 t/s, tg_3s =  19.04 t/s
+2026-10-20T05:03:02+0800 mitlab-orin-nano llama-server[0]: 7.38.184.491 I slot print_timing: id  3 | task 4738 | n_gen =    273, tg =  18.97 t/s, tg_3s =  18.87 t/s
+2026-10-20T05:03:05+0800 mitlab-orin-nano llama-server[0]: 7.41.233.288 I slot print_timing: id  3 | task 4738 | n_gen =    331, tg =  18.98 t/s, tg_3s =  19.02 t/s
+2026-10-20T05:03:08+0800 mitlab-orin-nano llama-server[0]: 7.44.281.105 I slot print_timing: id  3 | task 4738 | n_gen =    389, tg =  18.99 t/s, tg_3s =  19.03 t/s
+2026-10-20T05:03:11+0800 mitlab-orin-nano llama-server[0]: 7.47.282.060 I slot print_timing: id  3 | task 4738 | n_gen =    446, tg =  18.99 t/s, tg_3s =  18.99 t/s
+2026-10-20T05:03:14+0800 mitlab-orin-nano llama-server[0]: 7.50.292.683 I slot print_timing: id  3 | task 4738 | n_gen =    503, tg =  18.98 t/s, tg_3s =  18.93 t/s
+2026-10-20T05:03:17+0800 mitlab-orin-nano llama-server[0]: 7.53.298.917 I slot print_timing: id  3 | task 4738 | n_gen =    559, tg =  18.95 t/s, tg_3s =  18.63 t/s
+2026-10-20T05:03:20+0800 mitlab-orin-nano llama-server[0]: 7.56.340.961 I slot print_timing: id  3 | task 4738 | n_gen =    616, tg =  18.93 t/s, tg_3s =  18.74 t/s
+2026-10-20T05:03:23+0800 mitlab-orin-nano llama-server[0]: 7.59.383.586 I slot print_timing: id  3 | task 4738 | n_gen =    673, tg =  18.91 t/s, tg_3s =  18.73 t/s
+2026-10-20T05:03:24+0800 mitlab-orin-nano llama-server[0]: 8.00.769.358 I slot print_timing: id  3 | task 4738 | prompt eval time =    1774.44 ms /  1011 tokens (    1.76 ms per token,   569.76 tokens per second)
+2026-10-20T05:03:24+0800 mitlab-orin-nano llama-server[0]: 8.00.769.374 I slot print_timing: id  3 | task 4738 |        eval time =   36922.90 ms /   699 tokens (   52.90 ms per token,    18.90 tokens per second)
+2026-10-20T05:03:24+0800 mitlab-orin-nano llama-server[0]: 8.00.769.377 I slot print_timing: id  3 | task 4738 |       total time =   38697.34 ms /  1710 tokens
+2026-10-20T05:03:24+0800 mitlab-orin-nano llama-server[0]: 8.00.769.380 I slot print_timing: id  3 | task 4738 |    graphs reused =       5300
+2026-10-20T05:03:24+0800 mitlab-orin-nano llama-server[0]: 8.00.769.795 I slot      release: id  3 | task 4738 | stop processing: n_tokens = 2754, truncated = 0
+2026-10-20T05:03:24+0800 mitlab-orin-nano llama-server[0]: 8.00.852.778 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.504 (> 0.100 thold), f_keep = 0.379
+2026-10-20T05:03:24+0800 mitlab-orin-nano llama-server[0]: 8.00.852.872 I slot launch_slot_: id  3 | task 5440 | processing task, is_child = 0
+2026-10-20T05:03:31+0800 mitlab-orin-nano llama-server[0]: 8.07.869.610 I slot print_timing: id  3 | task 5440 | n_gen =    100, tg =  18.90 t/s, tg_3s =  19.09 t/s
+2026-10-20T05:03:34+0800 mitlab-orin-nano llama-server[0]: 8.10.917.838 I slot print_timing: id  3 | task 5440 | n_gen =    158, tg =  18.95 t/s, tg_3s =  19.03 t/s
+2026-10-20T05:03:37+0800 mitlab-orin-nano llama-server[0]: 8.13.757.347 I slot print_timing: id  3 | task 5440 | prompt eval time =    1777.90 ms /  1027 tokens (    1.73 ms per token,   577.65 tokens per second)
+2026-10-20T05:03:37+0800 mitlab-orin-nano llama-server[0]: 8.13.757.365 I slot print_timing: id  3 | task 5440 |        eval time =   11126.53 ms /   212 tokens (   52.73 ms per token,    18.96 tokens per second)
+2026-10-20T05:03:37+0800 mitlab-orin-nano llama-server[0]: 8.13.757.368 I slot print_timing: id  3 | task 5440 |       total time =   12904.43 ms /  1239 tokens
+2026-10-20T05:03:37+0800 mitlab-orin-nano llama-server[0]: 8.13.757.371 I slot print_timing: id  3 | task 5440 |    graphs reused =       5510
+2026-10-20T05:03:37+0800 mitlab-orin-nano llama-server[0]: 8.13.757.775 I slot      release: id  3 | task 5440 | stop processing: n_tokens = 2283, truncated = 0
+2026-10-20T05:03:37+0800 mitlab-orin-nano llama-server[0]: 8.13.841.161 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.510 (> 0.100 thold), f_keep = 0.458
+2026-10-20T05:03:37+0800 mitlab-orin-nano llama-server[0]: 8.13.841.265 I slot launch_slot_: id  3 | task 5655 | processing task, is_child = 0
+2026-10-20T05:03:44+0800 mitlab-orin-nano llama-server[0]: 8.20.852.390 I slot print_timing: id  3 | task 5655 | n_gen =    100, tg =  18.85 t/s, tg_3s =  19.04 t/s
+2026-10-20T05:03:47+0800 mitlab-orin-nano llama-server[0]: 8.23.854.633 I slot print_timing: id  3 | task 5655 | n_gen =    157, tg =  18.90 t/s, tg_3s =  18.99 t/s
+2026-10-20T05:03:50+0800 mitlab-orin-nano llama-server[0]: 8.26.899.842 I slot print_timing: id  3 | task 5655 | n_gen =    215, tg =  18.94 t/s, tg_3s =  19.05 t/s
+2026-10-20T05:03:52+0800 mitlab-orin-nano llama-server[0]: 8.28.953.028 I slot print_timing: id  3 | task 5655 | prompt eval time =    1759.11 ms /  1004 tokens (    1.75 ms per token,   570.74 tokens per second)
+2026-10-20T05:03:52+0800 mitlab-orin-nano llama-server[0]: 8.28.953.046 I slot print_timing: id  3 | task 5655 |        eval time =   13352.61 ms /   254 tokens (   52.78 ms per token,    18.95 tokens per second)
+2026-10-20T05:03:52+0800 mitlab-orin-nano llama-server[0]: 8.28.953.049 I slot print_timing: id  3 | task 5655 |       total time =   15111.72 ms /  1258 tokens
+2026-10-20T05:03:52+0800 mitlab-orin-nano llama-server[0]: 8.28.953.052 I slot print_timing: id  3 | task 5655 |    graphs reused =       5761
+2026-10-20T05:03:52+0800 mitlab-orin-nano llama-server[0]: 8.28.953.458 I slot      release: id  3 | task 5655 | stop processing: n_tokens = 2302, truncated = 0
+2026-10-20T05:03:52+0800 mitlab-orin-nano llama-server[0]: 8.29.037.024 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.506 (> 0.100 thold), f_keep = 0.454
+2026-10-20T05:03:52+0800 mitlab-orin-nano llama-server[0]: 8.29.037.119 I slot launch_slot_: id  3 | task 5912 | processing task, is_child = 0
+2026-10-20T05:03:59+0800 mitlab-orin-nano llama-server[0]: 8.36.051.818 I slot print_timing: id  3 | task 5912 | n_gen =    100, tg =  18.90 t/s, tg_3s =  19.09 t/s
+2026-10-20T05:04:02+0800 mitlab-orin-nano llama-server[0]: 8.39.089.199 I slot print_timing: id  3 | task 5912 | n_gen =    158, tg =  18.97 t/s, tg_3s =  19.10 t/s
+2026-10-20T05:04:06+0800 mitlab-orin-nano llama-server[0]: 8.42.133.540 I slot print_timing: id  3 | task 5912 | n_gen =    216, tg =  18.99 t/s, tg_3s =  19.05 t/s
+2026-10-20T05:04:09+0800 mitlab-orin-nano llama-server[0]: 8.45.168.390 I slot print_timing: id  3 | task 5912 | n_gen =    273, tg =  18.95 t/s, tg_3s =  18.78 t/s
+2026-10-20T05:04:10+0800 mitlab-orin-nano llama-server[0]: 8.46.386.254 I slot print_timing: id  3 | task 5912 | prompt eval time =    1775.60 ms /  1022 tokens (    1.74 ms per token,   575.58 tokens per second)
+2026-10-20T05:04:10+0800 mitlab-orin-nano llama-server[0]: 8.46.386.272 I slot print_timing: id  3 | task 5912 |        eval time =   15573.49 ms /   296 tokens (   52.79 ms per token,    18.94 tokens per second)
+2026-10-20T05:04:10+0800 mitlab-orin-nano llama-server[0]: 8.46.386.276 I slot print_timing: id  3 | task 5912 |       total time =   17349.09 ms /  1318 tokens
+2026-10-20T05:04:10+0800 mitlab-orin-nano llama-server[0]: 8.46.386.279 I slot print_timing: id  3 | task 5912 |    graphs reused =       6053
+2026-10-20T05:04:10+0800 mitlab-orin-nano llama-server[0]: 8.46.386.697 I slot      release: id  3 | task 5912 | stop processing: n_tokens = 2362, truncated = 0
+2026-10-20T05:04:10+0800 mitlab-orin-nano llama-server[0]: 8.46.471.066 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.505 (> 0.100 thold), f_keep = 0.442
+2026-10-20T05:04:10+0800 mitlab-orin-nano llama-server[0]: 8.46.471.166 I slot launch_slot_: id  3 | task 6211 | processing task, is_child = 0
+2026-10-20T05:04:17+0800 mitlab-orin-nano llama-server[0]: 8.53.483.162 I slot print_timing: id  3 | task 6211 | n_gen =    100, tg =  18.91 t/s, tg_3s =  19.11 t/s
+2026-10-20T05:04:20+0800 mitlab-orin-nano llama-server[0]: 8.56.485.809 I slot print_timing: id  3 | task 6211 | n_gen =    157, tg =  18.94 t/s, tg_3s =  18.98 t/s
+2026-10-20T05:04:20+0800 mitlab-orin-nano llama-server[0]: 8.56.591.176 I slot print_timing: id  3 | task 6211 | prompt eval time =    1777.81 ms /  1026 tokens (    1.73 ms per token,   577.12 tokens per second)
+2026-10-20T05:04:20+0800 mitlab-orin-nano llama-server[0]: 8.56.591.197 I slot print_timing: id  3 | task 6211 |        eval time =    8342.16 ms /   159 tokens (   52.80 ms per token,    18.94 tokens per second)
+2026-10-20T05:04:20+0800 mitlab-orin-nano llama-server[0]: 8.56.591.203 I slot print_timing: id  3 | task 6211 |       total time =   10119.97 ms /  1185 tokens
+2026-10-20T05:04:20+0800 mitlab-orin-nano llama-server[0]: 8.56.591.206 I slot print_timing: id  3 | task 6211 |    graphs reused =       6210
+2026-10-20T05:04:20+0800 mitlab-orin-nano llama-server[0]: 8.56.591.630 I slot      release: id  3 | task 6211 | stop processing: n_tokens = 2229, truncated = 0
+2026-10-20T05:04:20+0800 mitlab-orin-nano llama-server[0]: 8.56.674.477 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.515 (> 0.100 thold), f_keep = 0.469
+2026-10-20T05:04:20+0800 mitlab-orin-nano llama-server[0]: 8.56.674.582 I slot launch_slot_: id  3 | task 6373 | processing task, is_child = 0
+2026-10-20T05:04:26+0800 mitlab-orin-nano llama-server[0]: 9.02.988.675 I slot print_timing: id  3 | task 6373 | prompt eval time =    1744.27 ms /   984 tokens (    1.77 ms per token,   564.13 tokens per second)
+2026-10-20T05:04:26+0800 mitlab-orin-nano llama-server[0]: 9.02.988.685 I slot print_timing: id  3 | task 6373 |        eval time =    4569.78 ms /    87 tokens (   53.14 ms per token,    18.82 tokens per second)
+2026-10-20T05:04:26+0800 mitlab-orin-nano llama-server[0]: 9.02.988.686 I slot print_timing: id  3 | task 6373 |       total time =    6314.05 ms /  1071 tokens
+2026-10-20T05:04:26+0800 mitlab-orin-nano llama-server[0]: 9.02.988.689 I slot print_timing: id  3 | task 6373 |    graphs reused =       6293
+2026-10-20T05:04:26+0800 mitlab-orin-nano llama-server[0]: 9.02.989.018 I slot      release: id  3 | task 6373 | stop processing: n_tokens = 2115, truncated = 0
+2026-10-20T05:04:26+0800 mitlab-orin-nano llama-server[0]: 9.03.070.601 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.508 (> 0.100 thold), f_keep = 0.494
+2026-10-20T05:04:26+0800 mitlab-orin-nano llama-server[0]: 9.03.070.702 I slot launch_slot_: id  3 | task 6463 | processing task, is_child = 0
+2026-10-20T05:04:32+0800 mitlab-orin-nano llama-server[0]: 9.08.765.856 I slot print_timing: id  3 | task 6463 | prompt eval time =    1762.57 ms /  1012 tokens (    1.74 ms per token,   574.16 tokens per second)
+2026-10-20T05:04:32+0800 mitlab-orin-nano llama-server[0]: 9.08.765.873 I slot print_timing: id  3 | task 6463 |        eval time =    3932.54 ms /    75 tokens (   53.14 ms per token,    18.82 tokens per second)
+2026-10-20T05:04:32+0800 mitlab-orin-nano llama-server[0]: 9.08.765.876 I slot print_timing: id  3 | task 6463 |       total time =    5695.11 ms /  1087 tokens
+2026-10-20T05:04:32+0800 mitlab-orin-nano llama-server[0]: 9.08.765.879 I slot print_timing: id  3 | task 6463 |    graphs reused =       6366
+2026-10-20T05:04:32+0800 mitlab-orin-nano llama-server[0]: 9.08.766.329 I slot      release: id  3 | task 6463 | stop processing: n_tokens = 2131, truncated = 0
+2026-10-20T05:04:32+0800 mitlab-orin-nano llama-server[0]: 9.08.849.109 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.509 (> 0.100 thold), f_keep = 0.490
+2026-10-20T05:04:32+0800 mitlab-orin-nano llama-server[0]: 9.08.849.212 I slot launch_slot_: id  3 | task 6541 | processing task, is_child = 0
+2026-10-20T05:04:39+0800 mitlab-orin-nano llama-server[0]: 9.15.861.647 I slot print_timing: id  3 | task 6541 | n_gen =    100, tg =  18.90 t/s, tg_3s =  19.09 t/s
+2026-10-20T05:04:40+0800 mitlab-orin-nano llama-server[0]: 9.16.334.978 I slot print_timing: id  3 | task 6541 | prompt eval time =    1775.12 ms /  1010 tokens (    1.76 ms per token,   568.97 tokens per second)
+2026-10-20T05:04:40+0800 mitlab-orin-nano llama-server[0]: 9.16.334.993 I slot print_timing: id  3 | task 6541 |        eval time =    5710.60 ms /   109 tokens (   52.88 ms per token,    18.91 tokens per second)
+2026-10-20T05:04:40+0800 mitlab-orin-nano llama-server[0]: 9.16.334.996 I slot print_timing: id  3 | task 6541 |       total time =    7485.72 ms /  1119 tokens
+2026-10-20T05:04:40+0800 mitlab-orin-nano llama-server[0]: 9.16.334.999 I slot print_timing: id  3 | task 6541 |    graphs reused =       6473
+2026-10-20T05:04:40+0800 mitlab-orin-nano llama-server[0]: 9.16.335.403 I slot      release: id  3 | task 6541 | stop processing: n_tokens = 2163, truncated = 0
+2026-10-20T05:04:40+0800 mitlab-orin-nano llama-server[0]: 9.16.417.922 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.495 (> 0.100 thold), f_keep = 0.483
+2026-10-20T05:04:40+0800 mitlab-orin-nano llama-server[0]: 9.16.418.041 I slot launch_slot_: id  3 | task 6653 | processing task, is_child = 0
+2026-10-20T05:04:47+0800 mitlab-orin-nano llama-server[0]: 9.23.528.896 I slot print_timing: id  3 | task 6653 | n_gen =    100, tg =  18.91 t/s, tg_3s =  19.10 t/s
+2026-10-20T05:04:50+0800 mitlab-orin-nano llama-server[0]: 9.26.530.956 I slot print_timing: id  3 | task 6653 | n_gen =    157, tg =  18.94 t/s, tg_3s =  18.99 t/s
+2026-10-20T05:04:53+0800 mitlab-orin-nano llama-server[0]: 9.29.565.141 I slot print_timing: id  3 | task 6653 | n_gen =    214, tg =  18.90 t/s, tg_3s =  18.79 t/s
+2026-10-20T05:04:54+0800 mitlab-orin-nano llama-server[0]: 9.30.359.038 I slot print_timing: id  3 | task 6653 | prompt eval time =    1876.00 ms /  1064 tokens (    1.76 ms per token,   567.16 tokens per second)
+2026-10-20T05:04:54+0800 mitlab-orin-nano llama-server[0]: 9.30.359.056 I slot print_timing: id  3 | task 6653 |        eval time =   12064.95 ms /   229 tokens (   52.92 ms per token,    18.90 tokens per second)
+2026-10-20T05:04:54+0800 mitlab-orin-nano llama-server[0]: 9.30.359.060 I slot print_timing: id  3 | task 6653 |       total time =   13940.95 ms /  1293 tokens
+2026-10-20T05:04:54+0800 mitlab-orin-nano llama-server[0]: 9.30.359.065 I slot print_timing: id  3 | task 6653 |    graphs reused =       6698
+2026-10-20T05:04:54+0800 mitlab-orin-nano llama-server[0]: 9.30.359.473 I slot      release: id  3 | task 6653 | stop processing: n_tokens = 2337, truncated = 0
+2026-10-20T05:04:54+0800 mitlab-orin-nano llama-server[0]: 9.30.428.403 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.500 (> 0.100 thold), f_keep = 0.447
+2026-10-20T05:04:54+0800 mitlab-orin-nano llama-server[0]: 9.30.428.513 I slot launch_slot_: id  3 | task 6885 | processing task, is_child = 0
+2026-10-20T05:05:01+0800 mitlab-orin-nano llama-server[0]: 9.37.531.342 I slot print_timing: id  3 | task 6885 | n_gen =    100, tg =  18.90 t/s, tg_3s =  19.09 t/s
+2026-10-20T05:05:04+0800 mitlab-orin-nano llama-server[0]: 9.40.568.000 I slot print_timing: id  3 | task 6885 | n_gen =    158, tg =  18.98 t/s, tg_3s =  19.10 t/s
+2026-10-20T05:05:07+0800 mitlab-orin-nano llama-server[0]: 9.43.575.871 I slot print_timing: id  3 | task 6885 | n_gen =    215, tg =  18.97 t/s, tg_3s =  18.95 t/s
+2026-10-20T05:05:10+0800 mitlab-orin-nano llama-server[0]: 9.46.602.374 I slot print_timing: id  3 | task 6885 | n_gen =    272, tg =  18.94 t/s, tg_3s =  18.83 t/s
+2026-10-20T05:05:13+0800 mitlab-orin-nano llama-server[0]: 9.49.615.179 I slot print_timing: id  3 | task 6885 | n_gen =    329, tg =  18.94 t/s, tg_3s =  18.92 t/s
+2026-10-20T05:05:14+0800 mitlab-orin-nano llama-server[0]: 9.51.088.979 I slot print_timing: id  3 | task 6885 | prompt eval time =    1865.77 ms /  1045 tokens (    1.79 ms per token,   560.09 tokens per second)
+2026-10-20T05:05:14+0800 mitlab-orin-nano llama-server[0]: 9.51.088.994 I slot print_timing: id  3 | task 6885 |        eval time =   18794.64 ms /   357 tokens (   52.79 ms per token,    18.94 tokens per second)
+2026-10-20T05:05:14+0800 mitlab-orin-nano llama-server[0]: 9.51.088.997 I slot print_timing: id  3 | task 6885 |       total time =   20660.41 ms /  1402 tokens
+2026-10-20T05:05:14+0800 mitlab-orin-nano llama-server[0]: 9.51.089.002 I slot print_timing: id  3 | task 6885 |    graphs reused =       7051
+2026-10-20T05:05:14+0800 mitlab-orin-nano llama-server[0]: 9.51.089.415 I slot      release: id  3 | task 6885 | stop processing: n_tokens = 2446, truncated = 0
+2026-10-20T05:05:15+0800 mitlab-orin-nano llama-server[0]: 9.51.171.735 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.509 (> 0.100 thold), f_keep = 0.427
+2026-10-20T05:05:15+0800 mitlab-orin-nano llama-server[0]: 9.51.171.841 I slot launch_slot_: id  3 | task 7245 | processing task, is_child = 0
+2026-10-20T05:05:22+0800 mitlab-orin-nano llama-server[0]: 9.58.181.173 I slot print_timing: id  3 | task 7245 | n_gen =    100, tg =  18.87 t/s, tg_3s =  19.06 t/s
+2026-10-20T05:05:22+0800 mitlab-orin-nano llama-server[0]: 9.58.760.961 I slot print_timing: id  3 | task 7245 | prompt eval time =    1763.44 ms /  1008 tokens (    1.75 ms per token,   571.61 tokens per second)
+2026-10-20T05:05:22+0800 mitlab-orin-nano llama-server[0]: 9.58.760.978 I slot print_timing: id  3 | task 7245 |        eval time =    5825.63 ms /   111 tokens (   52.96 ms per token,    18.88 tokens per second)
+2026-10-20T05:05:22+0800 mitlab-orin-nano llama-server[0]: 9.58.760.980 I slot print_timing: id  3 | task 7245 |       total time =    7589.07 ms /  1119 tokens
+2026-10-20T05:05:22+0800 mitlab-orin-nano llama-server[0]: 9.58.760.983 I slot print_timing: id  3 | task 7245 |    graphs reused =       7159
+2026-10-20T05:05:22+0800 mitlab-orin-nano llama-server[0]: 9.58.761.382 I slot      release: id  3 | task 7245 | stop processing: n_tokens = 2163, truncated = 0
+2026-10-20T05:05:22+0800 mitlab-orin-nano llama-server[0]: 9.58.843.794 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.514 (> 0.100 thold), f_keep = 0.483
+2026-10-20T05:05:22+0800 mitlab-orin-nano llama-server[0]: 9.58.843.901 I slot launch_slot_: id  3 | task 7359 | processing task, is_child = 0
+2026-10-20T05:05:29+0800 mitlab-orin-nano llama-server[0]: 10.05.880.220 I slot print_timing: id  3 | task 7359 | n_gen =    100, tg =  18.69 t/s, tg_3s =  18.88 t/s
+2026-10-20T05:05:32+0800 mitlab-orin-nano llama-server[0]: 10.08.927.886 I slot print_timing: id  3 | task 7359 | n_gen =    158, tg =  18.81 t/s, tg_3s =  19.03 t/s
+2026-10-20T05:05:35+0800 mitlab-orin-nano llama-server[0]: 10.11.976.400 I slot print_timing: id  3 | task 7359 | n_gen =    216, tg =  18.87 t/s, tg_3s =  19.03 t/s
+2026-10-20T05:05:38+0800 mitlab-orin-nano llama-server[0]: 10.15.035.284 I slot print_timing: id  3 | task 7359 | n_gen =    274, tg =  18.89 t/s, tg_3s =  18.96 t/s
+2026-10-20T05:05:41+0800 mitlab-orin-nano llama-server[0]: 10.18.075.120 I slot print_timing: id  3 | task 7359 | n_gen =    331, tg =  18.87 t/s, tg_3s =  18.75 t/s
+2026-10-20T05:05:44+0800 mitlab-orin-nano llama-server[0]: 10.21.090.233 I slot print_timing: id  3 | task 7359 | n_gen =    388, tg =  18.87 t/s, tg_3s =  18.90 t/s
+2026-10-20T05:05:47+0800 mitlab-orin-nano llama-server[0]: 10.24.101.049 I slot print_timing: id  3 | task 7359 | n_gen =    445, tg =  18.88 t/s, tg_3s =  18.93 t/s
+2026-10-20T05:05:51+0800 mitlab-orin-nano llama-server[0]: 10.27.110.446 I slot print_timing: id  3 | task 7359 | n_gen =    502, tg =  18.89 t/s, tg_3s =  18.94 t/s
+2026-10-20T05:05:54+0800 mitlab-orin-nano llama-server[0]: 10.30.118.378 I slot print_timing: id  3 | task 7359 | n_gen =    558, tg =  18.86 t/s, tg_3s =  18.62 t/s
+2026-10-20T05:05:57+0800 mitlab-orin-nano llama-server[0]: 10.33.153.291 I slot print_timing: id  3 | task 7359 | n_gen =    615, tg =  18.85 t/s, tg_3s =  18.78 t/s
+2026-10-20T05:06:00+0800 mitlab-orin-nano llama-server[0]: 10.36.183.396 I slot print_timing: id  3 | task 7359 | n_gen =    672, tg =  18.85 t/s, tg_3s =  18.81 t/s
+2026-10-20T05:06:03+0800 mitlab-orin-nano llama-server[0]: 10.39.213.382 I slot print_timing: id  3 | task 7359 | n_gen =    729, tg =  18.85 t/s, tg_3s =  18.81 t/s
+2026-10-20T05:06:06+0800 mitlab-orin-nano llama-server[0]: 10.42.245.980 I slot print_timing: id  3 | task 7359 | n_gen =    786, tg =  18.84 t/s, tg_3s =  18.80 t/s
+2026-10-20T05:06:09+0800 mitlab-orin-nano llama-server[0]: 10.45.263.387 I slot print_timing: id  3 | task 7359 | n_gen =    842, tg =  18.82 t/s, tg_3s =  18.56 t/s
+2026-10-20T05:06:12+0800 mitlab-orin-nano llama-server[0]: 10.48.268.389 I slot print_timing: id  3 | task 7359 | n_gen =    898, tg =  18.81 t/s, tg_3s =  18.64 t/s
+2026-10-20T05:06:15+0800 mitlab-orin-nano llama-server[0]: 10.51.278.364 I slot print_timing: id  3 | task 7359 | n_gen =    954, tg =  18.80 t/s, tg_3s =  18.60 t/s
+2026-10-20T05:06:18+0800 mitlab-orin-nano llama-server[0]: 10.54.284.814 I slot print_timing: id  3 | task 7359 | n_gen =   1010, tg =  18.79 t/s, tg_3s =  18.63 t/s
+2026-10-20T05:06:18+0800 mitlab-orin-nano llama-server[0]: 10.55.035.775 I slot print_timing: id  3 | task 7359 | prompt eval time =    1738.93 ms /   987 tokens (    1.76 ms per token,   567.59 tokens per second)
+2026-10-20T05:06:18+0800 mitlab-orin-nano llama-server[0]: 10.55.035.792 I slot print_timing: id  3 | task 7359 |        eval time =   54452.90 ms /  1024 tokens (   53.23 ms per token,    18.79 tokens per second)
+2026-10-20T05:06:18+0800 mitlab-orin-nano llama-server[0]: 10.55.035.794 I slot print_timing: id  3 | task 7359 |       total time =   56191.82 ms /  2011 tokens
+2026-10-20T05:06:18+0800 mitlab-orin-nano llama-server[0]: 10.55.035.797 I slot print_timing: id  3 | task 7359 |    graphs reused =       8173
+2026-10-20T05:06:18+0800 mitlab-orin-nano llama-server[0]: 10.55.036.186 I slot      release: id  3 | task 7359 | stop processing: n_tokens = 3055, truncated = 0
+2026-10-20T05:06:19+0800 mitlab-orin-nano llama-server[0]: 10.55.119.854 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.504 (> 0.100 thold), f_keep = 0.342
+2026-10-20T05:06:19+0800 mitlab-orin-nano llama-server[0]: 10.55.119.960 I slot launch_slot_: id  3 | task 8386 | processing task, is_child = 0
+2026-10-20T05:06:26+0800 mitlab-orin-nano llama-server[0]: 11.02.139.733 I slot print_timing: id  3 | task 8386 | n_gen =    100, tg =  18.91 t/s, tg_3s =  19.10 t/s
+2026-10-20T05:06:29+0800 mitlab-orin-nano llama-server[0]: 11.05.191.503 I slot print_timing: id  3 | task 8386 | n_gen =    158, tg =  18.94 t/s, tg_3s =  19.01 t/s
+2026-10-20T05:06:32+0800 mitlab-orin-nano llama-server[0]: 11.08.196.789 I slot print_timing: id  3 | task 8386 | n_gen =    215, tg =  18.95 t/s, tg_3s =  18.97 t/s
+2026-10-20T05:06:35+0800 mitlab-orin-nano llama-server[0]: 11.11.197.432 I slot print_timing: id  3 | task 8386 | n_gen =    271, tg =  18.89 t/s, tg_3s =  18.66 t/s
+2026-10-20T05:06:38+0800 mitlab-orin-nano llama-server[0]: 11.14.213.253 I slot print_timing: id  3 | task 8386 | n_gen =    328, tg =  18.89 t/s, tg_3s =  18.90 t/s
+2026-10-20T05:06:40+0800 mitlab-orin-nano llama-server[0]: 11.16.966.219 I slot print_timing: id  3 | task 8386 | prompt eval time =    1783.86 ms /  1027 tokens (    1.74 ms per token,   575.72 tokens per second)
+2026-10-20T05:06:40+0800 mitlab-orin-nano llama-server[0]: 11.16.966.236 I slot print_timing: id  3 | task 8386 |        eval time =   20062.34 ms /   380 tokens (   52.93 ms per token,    18.89 tokens per second)
+2026-10-20T05:06:40+0800 mitlab-orin-nano llama-server[0]: 11.16.966.239 I slot print_timing: id  3 | task 8386 |       total time =   21846.21 ms /  1407 tokens
+2026-10-20T05:06:40+0800 mitlab-orin-nano llama-server[0]: 11.16.966.242 I slot print_timing: id  3 | task 8386 |    graphs reused =       8549
+2026-10-20T05:06:40+0800 mitlab-orin-nano llama-server[0]: 11.16.966.634 I slot      release: id  3 | task 8386 | stop processing: n_tokens = 2451, truncated = 0
+2026-10-20T05:06:40+0800 mitlab-orin-nano llama-server[0]: 11.17.049.809 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.519 (> 0.100 thold), f_keep = 0.426
+2026-10-20T05:06:40+0800 mitlab-orin-nano llama-server[0]: 11.17.049.914 I slot launch_slot_: id  3 | task 8769 | processing task, is_child = 0
+2026-10-20T05:06:47+0800 mitlab-orin-nano llama-server[0]: 11.24.037.684 I slot print_timing: id  3 | task 8769 | n_gen =    100, tg =  18.85 t/s, tg_3s =  19.04 t/s
+2026-10-20T05:06:50+0800 mitlab-orin-nano llama-server[0]: 11.27.084.314 I slot print_timing: id  3 | task 8769 | n_gen =    158, tg =  18.92 t/s, tg_3s =  19.04 t/s
+2026-10-20T05:06:53+0800 mitlab-orin-nano llama-server[0]: 11.29.334.904 I slot print_timing: id  3 | task 8769 | prompt eval time =    1734.93 ms /   969 tokens (    1.79 ms per token,   558.52 tokens per second)
+2026-10-20T05:06:53+0800 mitlab-orin-nano llama-server[0]: 11.29.334.913 I slot print_timing: id  3 | task 8769 |        eval time =   10550.01 ms /   201 tokens (   52.75 ms per token,    18.96 tokens per second)
+2026-10-20T05:06:53+0800 mitlab-orin-nano llama-server[0]: 11.29.334.915 I slot print_timing: id  3 | task 8769 |       total time =   12284.95 ms /  1170 tokens
+2026-10-20T05:06:53+0800 mitlab-orin-nano llama-server[0]: 11.29.334.917 I slot print_timing: id  3 | task 8769 |    graphs reused =       8746
+2026-10-20T05:06:53+0800 mitlab-orin-nano llama-server[0]: 11.29.335.192 I slot      release: id  3 | task 8769 | stop processing: n_tokens = 2214, truncated = 0
+2026-10-20T05:06:53+0800 mitlab-orin-nano llama-server[0]: 11.29.415.362 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.503 (> 0.100 thold), f_keep = 0.472
+2026-10-20T05:06:53+0800 mitlab-orin-nano llama-server[0]: 11.29.415.467 I slot launch_slot_: id  3 | task 8973 | processing task, is_child = 0
+2026-10-20T05:06:59+0800 mitlab-orin-nano llama-server[0]: 11.35.328.556 I slot print_timing: id  3 | task 8973 | prompt eval time =    1840.04 ms /  1034 tokens (    1.78 ms per token,   561.94 tokens per second)
+2026-10-20T05:06:59+0800 mitlab-orin-nano llama-server[0]: 11.35.328.572 I slot print_timing: id  3 | task 8973 |        eval time =    4073.01 ms /    78 tokens (   52.90 ms per token,    18.90 tokens per second)
+2026-10-20T05:06:59+0800 mitlab-orin-nano llama-server[0]: 11.35.328.575 I slot print_timing: id  3 | task 8973 |       total time =    5913.05 ms /  1112 tokens
+2026-10-20T05:06:59+0800 mitlab-orin-nano llama-server[0]: 11.35.328.578 I slot print_timing: id  3 | task 8973 |    graphs reused =       8822
+2026-10-20T05:06:59+0800 mitlab-orin-nano llama-server[0]: 11.35.328.983 I slot      release: id  3 | task 8973 | stop processing: n_tokens = 2156, truncated = 0
+2026-10-20T05:06:59+0800 mitlab-orin-nano llama-server[0]: 11.35.412.645 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.481 (> 0.100 thold), f_keep = 0.485
+2026-10-20T05:06:59+0800 mitlab-orin-nano llama-server[0]: 11.35.412.758 I slot launch_slot_: id  3 | task 9054 | processing task, is_child = 0
+2026-10-20T05:07:06+0800 mitlab-orin-nano llama-server[0]: 11.42.580.804 I slot print_timing: id  3 | task 9054 | n_gen =    100, tg =  19.00 t/s, tg_3s =  19.19 t/s
+2026-10-20T05:07:09+0800 mitlab-orin-nano llama-server[0]: 11.45.616.461 I slot print_timing: id  3 | task 9054 | n_gen =    157, tg =  18.92 t/s, tg_3s =  18.78 t/s
+2026-10-20T05:07:12+0800 mitlab-orin-nano llama-server[0]: 11.48.623.165 I slot print_timing: id  3 | task 9054 | n_gen =    214, tg =  18.93 t/s, tg_3s =  18.96 t/s
+2026-10-20T05:07:15+0800 mitlab-orin-nano llama-server[0]: 11.51.636.128 I slot print_timing: id  3 | task 9054 | n_gen =    271, tg =  18.93 t/s, tg_3s =  18.92 t/s
+2026-10-20T05:07:16+0800 mitlab-orin-nano llama-server[0]: 11.52.535.674 I slot print_timing: id  3 | task 9054 | prompt eval time =    1957.41 ms /  1126 tokens (    1.74 ms per token,   575.25 tokens per second)
+2026-10-20T05:07:16+0800 mitlab-orin-nano llama-server[0]: 11.52.535.693 I slot print_timing: id  3 | task 9054 |        eval time =   15165.46 ms /   288 tokens (   52.84 ms per token,    18.92 tokens per second)
+2026-10-20T05:07:16+0800 mitlab-orin-nano llama-server[0]: 11.52.535.696 I slot print_timing: id  3 | task 9054 |       total time =   17122.87 ms /  1414 tokens
+2026-10-20T05:07:16+0800 mitlab-orin-nano llama-server[0]: 11.52.535.699 I slot print_timing: id  3 | task 9054 |    graphs reused =       9106
+2026-10-20T05:07:16+0800 mitlab-orin-nano llama-server[0]: 11.52.536.131 I slot      release: id  3 | task 9054 | stop processing: n_tokens = 2458, truncated = 0
+2026-10-20T05:07:16+0800 mitlab-orin-nano llama-server[0]: 11.52.619.075 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.657 (> 0.100 thold), f_keep = 0.552
+2026-10-20T05:07:16+0800 mitlab-orin-nano llama-server[0]: 11.52.619.179 I slot launch_slot_: id  3 | task 9345 | processing task, is_child = 0
+2026-10-20T05:07:22+0800 mitlab-orin-nano llama-server[0]: 11.58.915.024 I slot print_timing: id  3 | task 9345 | prompt eval time =    1276.01 ms /   708 tokens (    1.80 ms per token,   554.85 tokens per second)
+2026-10-20T05:07:22+0800 mitlab-orin-nano llama-server[0]: 11.58.915.042 I slot print_timing: id  3 | task 9345 |        eval time =    5019.78 ms /    96 tokens (   52.84 ms per token,    18.93 tokens per second)
+2026-10-20T05:07:22+0800 mitlab-orin-nano llama-server[0]: 11.58.915.045 I slot print_timing: id  3 | task 9345 |       total time =    6295.80 ms /   804 tokens
+2026-10-20T05:07:22+0800 mitlab-orin-nano llama-server[0]: 11.58.915.051 I slot print_timing: id  3 | task 9345 |    graphs reused =       9200
+2026-10-20T05:07:22+0800 mitlab-orin-nano llama-server[0]: 11.58.915.472 I slot      release: id  3 | task 9345 | stop processing: n_tokens = 2159, truncated = 0
+2026-10-20T05:07:22+0800 mitlab-orin-nano llama-server[0]: 11.58.997.886 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.497 (> 0.100 thold), f_keep = 0.484
+2026-10-20T05:07:22+0800 mitlab-orin-nano llama-server[0]: 11.58.997.990 I slot launch_slot_: id  3 | task 9444 | processing task, is_child = 0
+2026-10-20T05:07:30+0800 mitlab-orin-nano llama-server[0]: 12.06.100.293 I slot print_timing: id  3 | task 9444 | n_gen =    100, tg =  18.90 t/s, tg_3s =  19.10 t/s
+2026-10-20T05:07:33+0800 mitlab-orin-nano llama-server[0]: 12.09.138.621 I slot print_timing: id  3 | task 9444 | n_gen =    158, tg =  18.97 t/s, tg_3s =  19.09 t/s
+2026-10-20T05:07:36+0800 mitlab-orin-nano llama-server[0]: 12.12.164.454 I slot print_timing: id  3 | task 9444 | n_gen =    215, tg =  18.94 t/s, tg_3s =  18.84 t/s
+2026-10-20T05:07:39+0800 mitlab-orin-nano llama-server[0]: 12.15.167.951 I slot print_timing: id  3 | task 9444 | n_gen =    272, tg =  18.94 t/s, tg_3s =  18.98 t/s
+2026-10-20T05:07:42+0800 mitlab-orin-nano llama-server[0]: 12.18.177.787 I slot print_timing: id  3 | task 9444 | n_gen =    329, tg =  18.94 t/s, tg_3s =  18.94 t/s
+2026-10-20T05:07:45+0800 mitlab-orin-nano llama-server[0]: 12.21.191.291 I slot print_timing: id  3 | task 9444 | n_gen =    386, tg =  18.94 t/s, tg_3s =  18.91 t/s
+2026-10-20T05:07:48+0800 mitlab-orin-nano llama-server[0]: 12.24.199.968 I slot print_timing: id  3 | task 9444 | n_gen =    443, tg =  18.94 t/s, tg_3s =  18.95 t/s
+2026-10-20T05:07:51+0800 mitlab-orin-nano llama-server[0]: 12.27.202.588 I slot print_timing: id  3 | task 9444 | n_gen =    499, tg =  18.91 t/s, tg_3s =  18.65 t/s
+2026-10-20T05:07:54+0800 mitlab-orin-nano llama-server[0]: 12.30.222.387 I slot print_timing: id  3 | task 9444 | n_gen =    556, tg =  18.90 t/s, tg_3s =  18.88 t/s
+2026-10-20T05:07:55+0800 mitlab-orin-nano llama-server[0]: 12.31.653.736 I slot print_timing: id  3 | task 9444 | prompt eval time =    1865.30 ms /  1056 tokens (    1.77 ms per token,   566.13 tokens per second)
+2026-10-20T05:07:55+0800 mitlab-orin-nano llama-server[0]: 12.31.653.751 I slot print_timing: id  3 | task 9444 |        eval time =   30790.40 ms /   583 tokens (   52.90 ms per token,    18.90 tokens per second)
+2026-10-20T05:07:55+0800 mitlab-orin-nano llama-server[0]: 12.31.653.754 I slot print_timing: id  3 | task 9444 |       total time =   32655.70 ms /  1639 tokens
+2026-10-20T05:07:55+0800 mitlab-orin-nano llama-server[0]: 12.31.653.756 I slot print_timing: id  3 | task 9444 |    graphs reused =       9777
+2026-10-20T05:07:55+0800 mitlab-orin-nano llama-server[0]: 12.31.654.200 I slot      release: id  3 | task 9444 | stop processing: n_tokens = 2683, truncated = 0
+2026-10-20T05:07:55+0800 mitlab-orin-nano llama-server[0]: 12.31.737.611 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.508 (> 0.100 thold), f_keep = 0.389
+2026-10-20T05:07:55+0800 mitlab-orin-nano llama-server[0]: 12.31.737.703 I slot launch_slot_: id  3 | task 10030 | processing task, is_child = 0
+2026-10-20T05:08:02+0800 mitlab-orin-nano llama-server[0]: 12.38.734.492 I slot print_timing: id  3 | task 10030 | n_gen =    100, tg =  18.94 t/s, tg_3s =  19.13 t/s
+2026-10-20T05:08:03+0800 mitlab-orin-nano llama-server[0]: 12.39.893.022 I slot print_timing: id  3 | task 10030 | prompt eval time =    1769.48 ms /  1012 tokens (    1.75 ms per token,   571.92 tokens per second)
+2026-10-20T05:08:03+0800 mitlab-orin-nano llama-server[0]: 12.39.893.039 I slot print_timing: id  3 | task 10030 |        eval time =    6385.80 ms /   122 tokens (   52.78 ms per token,    18.95 tokens per second)
+2026-10-20T05:08:03+0800 mitlab-orin-nano llama-server[0]: 12.39.893.042 I slot print_timing: id  3 | task 10030 |       total time =    8155.28 ms /  1134 tokens
+2026-10-20T05:08:03+0800 mitlab-orin-nano llama-server[0]: 12.39.893.045 I slot print_timing: id  3 | task 10030 |    graphs reused =       9897
+2026-10-20T05:08:03+0800 mitlab-orin-nano llama-server[0]: 12.39.893.451 I slot      release: id  3 | task 10030 | stop processing: n_tokens = 2178, truncated = 0
+2026-10-20T05:08:03+0800 mitlab-orin-nano llama-server[0]: 12.39.975.696 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.504 (> 0.100 thold), f_keep = 0.480
+2026-10-20T05:08:03+0800 mitlab-orin-nano llama-server[0]: 12.39.975.803 I slot launch_slot_: id  3 | task 10155 | processing task, is_child = 0
+2026-10-20T05:08:10+0800 mitlab-orin-nano llama-server[0]: 12.46.245.656 I slot print_timing: id  3 | task 10155 | prompt eval time =    1784.47 ms /  1028 tokens (    1.74 ms per token,   576.08 tokens per second)
+2026-10-20T05:08:10+0800 mitlab-orin-nano llama-server[0]: 12.46.245.672 I slot print_timing: id  3 | task 10155 |        eval time =    4485.34 ms /    86 tokens (   52.77 ms per token,    18.95 tokens per second)
+2026-10-20T05:08:10+0800 mitlab-orin-nano llama-server[0]: 12.46.245.674 I slot print_timing: id  3 | task 10155 |       total time =    6269.81 ms /  1114 tokens
+2026-10-20T05:08:10+0800 mitlab-orin-nano llama-server[0]: 12.46.245.677 I slot print_timing: id  3 | task 10155 |    graphs reused =       9981
+2026-10-20T05:08:10+0800 mitlab-orin-nano llama-server[0]: 12.46.246.123 I slot      release: id  3 | task 10155 | stop processing: n_tokens = 2158, truncated = 0
+2026-10-20T05:08:10+0800 mitlab-orin-nano llama-server[0]: 12.46.329.811 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.517 (> 0.100 thold), f_keep = 0.484
+2026-10-20T05:08:10+0800 mitlab-orin-nano llama-server[0]: 12.46.329.902 I slot launch_slot_: id  3 | task 10244 | processing task, is_child = 0
+2026-10-20T05:08:17+0800 mitlab-orin-nano llama-server[0]: 12.53.349.991 I slot print_timing: id  3 | task 10244 | n_gen =    100, tg =  18.75 t/s, tg_3s =  18.94 t/s
+2026-10-20T05:08:20+0800 mitlab-orin-nano llama-server[0]: 12.56.393.838 I slot print_timing: id  3 | task 10244 | n_gen =    158, tg =  18.86 t/s, tg_3s =  19.05 t/s
+2026-10-20T05:08:21+0800 mitlab-orin-nano llama-server[0]: 12.57.913.968 I slot print_timing: id  3 | task 10244 | prompt eval time =    1740.55 ms /   976 tokens (    1.78 ms per token,   560.74 tokens per second)
+2026-10-20T05:08:21+0800 mitlab-orin-nano llama-server[0]: 12.57.913.981 I slot print_timing: id  3 | task 10244 |        eval time =    9843.47 ms /   187 tokens (   52.92 ms per token,    18.90 tokens per second)
+2026-10-20T05:08:21+0800 mitlab-orin-nano llama-server[0]: 12.57.913.985 I slot print_timing: id  3 | task 10244 |       total time =   11584.03 ms /  1163 tokens
+2026-10-20T05:08:21+0800 mitlab-orin-nano llama-server[0]: 12.57.913.988 I slot print_timing: id  3 | task 10244 |    graphs reused =      10164
+2026-10-20T05:08:21+0800 mitlab-orin-nano llama-server[0]: 12.57.914.430 I slot      release: id  3 | task 10244 | stop processing: n_tokens = 2207, truncated = 0
+2026-10-20T05:08:21+0800 mitlab-orin-nano llama-server[0]: 12.57.997.972 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.497 (> 0.100 thold), f_keep = 0.473
+2026-10-20T05:08:21+0800 mitlab-orin-nano llama-server[0]: 12.57.998.090 I slot launch_slot_: id  3 | task 10434 | processing task, is_child = 0
+2026-10-20T05:08:28+0800 mitlab-orin-nano llama-server[0]: 13.05.072.517 I slot print_timing: id  3 | task 10434 | n_gen =    100, tg =  18.98 t/s, tg_3s =  19.17 t/s
+2026-10-20T05:08:32+0800 mitlab-orin-nano llama-server[0]: 13.08.113.347 I slot print_timing: id  3 | task 10434 | n_gen =    158, tg =  19.01 t/s, tg_3s =  19.07 t/s
+2026-10-20T05:08:33+0800 mitlab-orin-nano llama-server[0]: 13.09.951.041 I slot print_timing: id  3 | task 10434 | prompt eval time =    1858.12 ms /  1057 tokens (    1.76 ms per token,   568.85 tokens per second)
+2026-10-20T05:08:33+0800 mitlab-orin-nano llama-server[0]: 13.09.951.057 I slot print_timing: id  3 | task 10434 |        eval time =   10094.79 ms /   193 tokens (   52.58 ms per token,    19.02 tokens per second)
+2026-10-20T05:08:33+0800 mitlab-orin-nano llama-server[0]: 13.09.951.060 I slot print_timing: id  3 | task 10434 |       total time =   11952.91 ms /  1250 tokens
+2026-10-20T05:08:33+0800 mitlab-orin-nano llama-server[0]: 13.09.951.063 I slot print_timing: id  3 | task 10434 |    graphs reused =      10355
+2026-10-20T05:08:33+0800 mitlab-orin-nano llama-server[0]: 13.09.951.483 I slot      release: id  3 | task 10434 | stop processing: n_tokens = 2294, truncated = 0
+2026-10-20T05:08:33+0800 mitlab-orin-nano llama-server[0]: 13.10.014.191 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.504 (> 0.100 thold), f_keep = 0.456
+2026-10-20T05:08:33+0800 mitlab-orin-nano llama-server[0]: 13.10.014.293 I slot launch_slot_: id  3 | task 10630 | processing task, is_child = 0
+2026-10-20T05:08:40+0800 mitlab-orin-nano llama-server[0]: 13.17.081.199 I slot print_timing: id  3 | task 10630 | n_gen =    100, tg =  18.93 t/s, tg_3s =  19.12 t/s
+2026-10-20T05:08:44+0800 mitlab-orin-nano llama-server[0]: 13.20.124.819 I slot print_timing: id  3 | task 10630 | n_gen =    158, tg =  18.98 t/s, tg_3s =  19.06 t/s
+2026-10-20T05:08:47+0800 mitlab-orin-nano llama-server[0]: 13.23.158.831 I slot print_timing: id  3 | task 10630 | n_gen =    216, tg =  19.02 t/s, tg_3s =  19.12 t/s
+2026-10-20T05:08:50+0800 mitlab-orin-nano llama-server[0]: 13.26.185.497 I slot print_timing: id  3 | task 10630 | n_gen =    273, tg =  18.98 t/s, tg_3s =  18.83 t/s
+2026-10-20T05:08:52+0800 mitlab-orin-nano llama-server[0]: 13.28.559.280 I slot print_timing: id  3 | task 10630 | prompt eval time =    1837.82 ms /  1029 tokens (    1.79 ms per token,   559.90 tokens per second)
+2026-10-20T05:08:52+0800 mitlab-orin-nano llama-server[0]: 13.28.559.299 I slot print_timing: id  3 | task 10630 |        eval time =   16707.12 ms /   318 tokens (   52.70 ms per token,    18.97 tokens per second)
+2026-10-20T05:08:52+0800 mitlab-orin-nano llama-server[0]: 13.28.559.302 I slot print_timing: id  3 | task 10630 |       total time =   18544.94 ms /  1347 tokens
+2026-10-20T05:08:52+0800 mitlab-orin-nano llama-server[0]: 13.28.559.305 I slot print_timing: id  3 | task 10630 |    graphs reused =      10669
+2026-10-20T05:08:52+0800 mitlab-orin-nano llama-server[0]: 13.28.559.732 I slot      release: id  3 | task 10630 | stop processing: n_tokens = 2391, truncated = 0
+2026-10-20T05:08:52+0800 mitlab-orin-nano llama-server[0]: 13.28.643.727 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.500 (> 0.100 thold), f_keep = 0.437
+2026-10-20T05:08:52+0800 mitlab-orin-nano llama-server[0]: 13.28.643.832 I slot launch_slot_: id  3 | task 10951 | processing task, is_child = 0
+2026-10-20T05:08:59+0800 mitlab-orin-nano llama-server[0]: 13.35.723.938 I slot print_timing: id  3 | task 10951 | n_gen =    100, tg =  18.92 t/s, tg_3s =  19.11 t/s
+2026-10-20T05:09:02+0800 mitlab-orin-nano llama-server[0]: 13.38.727.402 I slot print_timing: id  3 | task 10951 | n_gen =    157, tg =  18.94 t/s, tg_3s =  18.98 t/s
+2026-10-20T05:09:05+0800 mitlab-orin-nano llama-server[0]: 13.41.728.338 I slot print_timing: id  3 | task 10951 | n_gen =    214, tg =  18.96 t/s, tg_3s =  18.99 t/s
+2026-10-20T05:09:08+0800 mitlab-orin-nano llama-server[0]: 13.44.774.144 I slot print_timing: id  3 | task 10951 | n_gen =    271, tg =  18.91 t/s, tg_3s =  18.71 t/s
+2026-10-20T05:09:09+0800 mitlab-orin-nano llama-server[0]: 13.45.517.259 I slot print_timing: id  3 | task 10951 | prompt eval time =    1848.34 ms /  1044 tokens (    1.77 ms per token,   564.83 tokens per second)
+2026-10-20T05:09:09+0800 mitlab-orin-nano llama-server[0]: 13.45.517.278 I slot print_timing: id  3 | task 10951 |        eval time =   15025.04 ms /   285 tokens (   52.91 ms per token,    18.90 tokens per second)
+2026-10-20T05:09:09+0800 mitlab-orin-nano llama-server[0]: 13.45.517.281 I slot print_timing: id  3 | task 10951 |       total time =   16873.38 ms /  1329 tokens
+2026-10-20T05:09:09+0800 mitlab-orin-nano llama-server[0]: 13.45.517.284 I slot print_timing: id  3 | task 10951 |    graphs reused =      10950
+2026-10-20T05:09:09+0800 mitlab-orin-nano llama-server[0]: 13.45.517.705 I slot      release: id  3 | task 10951 | stop processing: n_tokens = 2373, truncated = 0
+2026-10-20T05:09:09+0800 mitlab-orin-nano llama-server[0]: 13.45.583.525 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.526 (> 0.100 thold), f_keep = 0.440
+2026-10-20T05:09:09+0800 mitlab-orin-nano llama-server[0]: 13.45.583.642 I slot launch_slot_: id  3 | task 11239 | processing task, is_child = 0
+2026-10-20T05:09:14+0800 mitlab-orin-nano llama-server[0]: 13.50.589.715 I slot print_timing: id  3 | task 11239 | prompt eval time =    1673.74 ms /   941 tokens (    1.78 ms per token,   562.21 tokens per second)
+2026-10-20T05:09:14+0800 mitlab-orin-nano llama-server[0]: 13.50.589.732 I slot print_timing: id  3 | task 11239 |        eval time =    3332.27 ms /    64 tokens (   52.89 ms per token,    18.91 tokens per second)
+2026-10-20T05:09:14+0800 mitlab-orin-nano llama-server[0]: 13.50.589.735 I slot print_timing: id  3 | task 11239 |       total time =    5006.02 ms /  1005 tokens
+2026-10-20T05:09:14+0800 mitlab-orin-nano llama-server[0]: 13.50.589.738 I slot print_timing: id  3 | task 11239 |    graphs reused =      11011
+2026-10-20T05:09:14+0800 mitlab-orin-nano llama-server[0]: 13.50.590.161 I slot      release: id  3 | task 11239 | stop processing: n_tokens = 2049, truncated = 0
+2026-10-20T05:09:14+0800 mitlab-orin-nano llama-server[0]: 13.50.660.968 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.517 (> 0.100 thold), f_keep = 0.510
+2026-10-20T05:09:14+0800 mitlab-orin-nano llama-server[0]: 13.50.661.079 I slot launch_slot_: id  3 | task 11306 | processing task, is_child = 0
+2026-10-20T05:09:21+0800 mitlab-orin-nano llama-server[0]: 13.57.693.614 I slot print_timing: id  3 | task 11306 | n_gen =    100, tg =  18.75 t/s, tg_3s =  18.93 t/s
+2026-10-20T05:09:23+0800 mitlab-orin-nano llama-server[0]: 13.59.487.174 I slot print_timing: id  3 | task 11306 | prompt eval time =    1751.22 ms /   977 tokens (    1.79 ms per token,   557.90 tokens per second)
+2026-10-20T05:09:23+0800 mitlab-orin-nano llama-server[0]: 13.59.487.193 I slot print_timing: id  3 | task 11306 |        eval time =    7074.82 ms /   134 tokens (   53.19 ms per token,    18.80 tokens per second)
+2026-10-20T05:09:23+0800 mitlab-orin-nano llama-server[0]: 13.59.487.197 I slot print_timing: id  3 | task 11306 |       total time =    8826.05 ms /  1111 tokens
+2026-10-20T05:09:23+0800 mitlab-orin-nano llama-server[0]: 13.59.487.200 I slot print_timing: id  3 | task 11306 |    graphs reused =      11141
+2026-10-20T05:09:23+0800 mitlab-orin-nano llama-server[0]: 13.59.487.612 I slot      release: id  3 | task 11306 | stop processing: n_tokens = 2155, truncated = 0
+2026-10-20T05:09:23+0800 mitlab-orin-nano llama-server[0]: 13.59.570.680 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.521 (> 0.100 thold), f_keep = 0.485
+2026-10-20T05:09:23+0800 mitlab-orin-nano llama-server[0]: 13.59.570.784 I slot launch_slot_: id  3 | task 11443 | processing task, is_child = 0
+2026-10-20T05:09:30+0800 mitlab-orin-nano llama-server[0]: 14.06.531.153 I slot print_timing: id  3 | task 11443 | n_gen =    100, tg =  18.76 t/s, tg_3s =  18.95 t/s
+2026-10-20T05:09:33+0800 mitlab-orin-nano llama-server[0]: 14.09.547.786 I slot print_timing: id  3 | task 11443 | n_gen =    157, tg =  18.81 t/s, tg_3s =  18.90 t/s
+2026-10-20T05:09:36+0800 mitlab-orin-nano llama-server[0]: 14.12.560.507 I slot print_timing: id  3 | task 11443 | n_gen =    214, tg =  18.84 t/s, tg_3s =  18.92 t/s
+2026-10-20T05:09:37+0800 mitlab-orin-nano llama-server[0]: 14.13.559.774 I slot print_timing: id  3 | task 11443 | prompt eval time =    1682.17 ms /   959 tokens (    1.75 ms per token,   570.10 tokens per second)
+2026-10-20T05:09:37+0800 mitlab-orin-nano llama-server[0]: 14.13.559.792 I slot print_timing: id  3 | task 11443 |        eval time =   12306.77 ms /   233 tokens (   53.05 ms per token,    18.85 tokens per second)
+2026-10-20T05:09:37+0800 mitlab-orin-nano llama-server[0]: 14.13.559.795 I slot print_timing: id  3 | task 11443 |       total time =   13988.94 ms /  1192 tokens
+2026-10-20T05:09:37+0800 mitlab-orin-nano llama-server[0]: 14.13.559.798 I slot print_timing: id  3 | task 11443 |    graphs reused =      11370
+2026-10-20T05:09:37+0800 mitlab-orin-nano llama-server[0]: 14.13.560.210 I slot      release: id  3 | task 11443 | stop processing: n_tokens = 2236, truncated = 0
+2026-10-20T05:09:37+0800 mitlab-orin-nano llama-server[0]: 14.13.643.417 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.508 (> 0.100 thold), f_keep = 0.467
+2026-10-20T05:09:37+0800 mitlab-orin-nano llama-server[0]: 14.13.643.526 I slot launch_slot_: id  3 | task 11679 | processing task, is_child = 0
+2026-10-20T05:09:44+0800 mitlab-orin-nano llama-server[0]: 14.20.682.472 I slot print_timing: id  3 | task 11679 | n_gen =    100, tg =  18.81 t/s, tg_3s =  19.00 t/s
+2026-10-20T05:09:47+0800 mitlab-orin-nano llama-server[0]: 14.23.694.484 I slot print_timing: id  3 | task 11679 | n_gen =    157, tg =  18.85 t/s, tg_3s =  18.92 t/s
+2026-10-20T05:09:48+0800 mitlab-orin-nano llama-server[0]: 14.24.804.395 I slot print_timing: id  3 | task 11679 | prompt eval time =    1774.68 ms /  1012 tokens (    1.75 ms per token,   570.24 tokens per second)
+2026-10-20T05:09:48+0800 mitlab-orin-nano llama-server[0]: 14.24.804.411 I slot print_timing: id  3 | task 11679 |        eval time =    9386.14 ms /   178 tokens (   53.03 ms per token,    18.86 tokens per second)
+2026-10-20T05:09:48+0800 mitlab-orin-nano llama-server[0]: 14.24.804.414 I slot print_timing: id  3 | task 11679 |       total time =   11160.82 ms /  1190 tokens
+2026-10-20T05:09:48+0800 mitlab-orin-nano llama-server[0]: 14.24.804.417 I slot print_timing: id  3 | task 11679 |    graphs reused =      11546
+2026-10-20T05:09:48+0800 mitlab-orin-nano llama-server[0]: 14.24.804.834 I slot      release: id  3 | task 11679 | stop processing: n_tokens = 2234, truncated = 0
+2026-10-20T05:09:48+0800 mitlab-orin-nano llama-server[0]: 14.24.887.186 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.494 (> 0.100 thold), f_keep = 0.468
+2026-10-20T05:09:48+0800 mitlab-orin-nano llama-server[0]: 14.24.887.292 I slot launch_slot_: id  3 | task 11860 | processing task, is_child = 0
+2026-10-20T05:09:55+0800 mitlab-orin-nano llama-server[0]: 14.32.047.906 I slot print_timing: id  3 | task 11860 | n_gen =    100, tg =  18.84 t/s, tg_3s =  19.03 t/s
+2026-10-20T05:09:58+0800 mitlab-orin-nano llama-server[0]: 14.34.208.051 I slot print_timing: id  3 | task 11860 | prompt eval time =    1906.22 ms /  1071 tokens (    1.78 ms per token,   561.84 tokens per second)
+2026-10-20T05:09:58+0800 mitlab-orin-nano llama-server[0]: 14.34.208.069 I slot print_timing: id  3 | task 11860 |        eval time =    7414.49 ms /   141 tokens (   52.96 ms per token,    18.88 tokens per second)
+2026-10-20T05:09:58+0800 mitlab-orin-nano llama-server[0]: 14.34.208.073 I slot print_timing: id  3 | task 11860 |       total time =    9320.71 ms /  1212 tokens
+2026-10-20T05:09:58+0800 mitlab-orin-nano llama-server[0]: 14.34.208.076 I slot print_timing: id  3 | task 11860 |    graphs reused =      11685
+2026-10-20T05:09:58+0800 mitlab-orin-nano llama-server[0]: 14.34.208.499 I slot      release: id  3 | task 11860 | stop processing: n_tokens = 2256, truncated = 0
+2026-10-20T05:09:58+0800 mitlab-orin-nano llama-server[0]: 14.34.292.656 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.487 (> 0.100 thold), f_keep = 0.463
+2026-10-20T05:09:58+0800 mitlab-orin-nano llama-server[0]: 14.34.292.760 I slot launch_slot_: id  3 | task 12004 | processing task, is_child = 0
+2026-10-20T05:10:04+0800 mitlab-orin-nano llama-server[0]: 14.40.782.233 I slot print_timing: id  3 | task 12004 | prompt eval time =    1932.20 ms /  1101 tokens (    1.75 ms per token,   569.82 tokens per second)
+2026-10-20T05:10:04+0800 mitlab-orin-nano llama-server[0]: 14.40.782.250 I slot print_timing: id  3 | task 12004 |        eval time =    4557.23 ms /    87 tokens (   52.99 ms per token,    18.87 tokens per second)
+2026-10-20T05:10:04+0800 mitlab-orin-nano llama-server[0]: 14.40.782.253 I slot print_timing: id  3 | task 12004 |       total time =    6489.42 ms /  1188 tokens
+2026-10-20T05:10:04+0800 mitlab-orin-nano llama-server[0]: 14.40.782.259 I slot print_timing: id  3 | task 12004 |    graphs reused =      11770
+2026-10-20T05:10:04+0800 mitlab-orin-nano llama-server[0]: 14.40.782.690 I slot      release: id  3 | task 12004 | stop processing: n_tokens = 2232, truncated = 0
+2026-10-20T05:10:04+0800 mitlab-orin-nano llama-server[0]: 14.40.866.609 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.504 (> 0.100 thold), f_keep = 0.468
+2026-10-20T05:10:04+0800 mitlab-orin-nano llama-server[0]: 14.40.866.707 I slot launch_slot_: id  3 | task 12094 | processing task, is_child = 0
+2026-10-20T05:10:10+0800 mitlab-orin-nano llama-server[0]: 14.46.433.293 I slot print_timing: id  3 | task 12094 | prompt eval time =    1825.55 ms /  1029 tokens (    1.77 ms per token,   563.66 tokens per second)
+2026-10-20T05:10:10+0800 mitlab-orin-nano llama-server[0]: 14.46.433.309 I slot print_timing: id  3 | task 12094 |        eval time =    3740.99 ms /    71 tokens (   53.44 ms per token,    18.71 tokens per second)
+2026-10-20T05:10:10+0800 mitlab-orin-nano llama-server[0]: 14.46.433.311 I slot print_timing: id  3 | task 12094 |       total time =    5566.54 ms /  1100 tokens
+2026-10-20T05:10:10+0800 mitlab-orin-nano llama-server[0]: 14.46.433.314 I slot print_timing: id  3 | task 12094 |    graphs reused =      11839
+2026-10-20T05:10:10+0800 mitlab-orin-nano llama-server[0]: 14.46.433.734 I slot      release: id  3 | task 12094 | stop processing: n_tokens = 2144, truncated = 0
+2026-10-20T05:10:10+0800 mitlab-orin-nano llama-server[0]: 14.46.517.701 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.498 (> 0.100 thold), f_keep = 0.487
+2026-10-20T05:10:10+0800 mitlab-orin-nano llama-server[0]: 14.46.517.792 I slot launch_slot_: id  3 | task 12168 | processing task, is_child = 0
+2026-10-20T05:10:17+0800 mitlab-orin-nano llama-server[0]: 14.53.627.601 I slot print_timing: id  3 | task 12168 | n_gen =    100, tg =  18.88 t/s, tg_3s =  19.07 t/s
+2026-10-20T05:10:20+0800 mitlab-orin-nano llama-server[0]: 14.56.208.713 I slot print_timing: id  3 | task 12168 | prompt eval time =    1864.79 ms /  1053 tokens (    1.77 ms per token,   564.67 tokens per second)
+2026-10-20T05:10:20+0800 mitlab-orin-nano llama-server[0]: 14.56.208.731 I slot print_timing: id  3 | task 12168 |        eval time =    7826.08 ms /   149 tokens (   52.88 ms per token,    18.91 tokens per second)
+2026-10-20T05:10:20+0800 mitlab-orin-nano llama-server[0]: 14.56.208.734 I slot print_timing: id  3 | task 12168 |       total time =    9690.87 ms /  1202 tokens
+2026-10-20T05:10:20+0800 mitlab-orin-nano llama-server[0]: 14.56.208.737 I slot print_timing: id  3 | task 12168 |    graphs reused =      11986
+2026-10-20T05:10:20+0800 mitlab-orin-nano llama-server[0]: 14.56.209.164 I slot      release: id  3 | task 12168 | stop processing: n_tokens = 2246, truncated = 0
+2026-10-20T05:10:20+0800 mitlab-orin-nano llama-server[0]: 14.56.292.010 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.510 (> 0.100 thold), f_keep = 0.465
+2026-10-20T05:10:20+0800 mitlab-orin-nano llama-server[0]: 14.56.292.114 I slot launch_slot_: id  3 | task 12320 | processing task, is_child = 0
+2026-10-20T05:10:27+0800 mitlab-orin-nano llama-server[0]: 15.03.295.669 I slot print_timing: id  3 | task 12320 | n_gen =    100, tg =  18.85 t/s, tg_3s =  19.04 t/s
+2026-10-20T05:10:30+0800 mitlab-orin-nano llama-server[0]: 15.06.296.545 I slot print_timing: id  3 | task 12320 | n_gen =    157, tg =  18.90 t/s, tg_3s =  18.99 t/s
+2026-10-20T05:10:32+0800 mitlab-orin-nano llama-server[0]: 15.09.086.952 I slot print_timing: id  3 | task 12320 | prompt eval time =    1750.19 ms /  1004 tokens (    1.74 ms per token,   573.65 tokens per second)
+2026-10-20T05:10:32+0800 mitlab-orin-nano llama-server[0]: 15.09.086.968 I slot print_timing: id  3 | task 12320 |        eval time =   11044.60 ms /   210 tokens (   52.84 ms per token,    18.92 tokens per second)
+2026-10-20T05:10:32+0800 mitlab-orin-nano llama-server[0]: 15.09.086.971 I slot print_timing: id  3 | task 12320 |       total time =   12794.79 ms /  1214 tokens
+2026-10-20T05:10:32+0800 mitlab-orin-nano llama-server[0]: 15.09.086.978 I slot print_timing: id  3 | task 12320 |    graphs reused =      12193
+2026-10-20T05:10:32+0800 mitlab-orin-nano llama-server[0]: 15.09.087.385 I slot      release: id  3 | task 12320 | stop processing: n_tokens = 2258, truncated = 0
+2026-10-20T05:10:33+0800 mitlab-orin-nano llama-server[0]: 15.09.171.209 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.497 (> 0.100 thold), f_keep = 0.463
+2026-10-20T05:10:33+0800 mitlab-orin-nano llama-server[0]: 15.09.171.311 I slot launch_slot_: id  3 | task 12533 | processing task, is_child = 0
+2026-10-20T05:10:40+0800 mitlab-orin-nano llama-server[0]: 15.16.276.452 I slot print_timing: id  3 | task 12533 | n_gen =    100, tg =  18.90 t/s, tg_3s =  19.09 t/s
+2026-10-20T05:10:43+0800 mitlab-orin-nano llama-server[0]: 15.19.282.784 I slot print_timing: id  3 | task 12533 | n_gen =    157, tg =  18.92 t/s, tg_3s =  18.96 t/s
+2026-10-20T05:10:44+0800 mitlab-orin-nano llama-server[0]: 15.20.284.371 I slot print_timing: id  3 | task 12533 | prompt eval time =    1866.71 ms /  1059 tokens (    1.76 ms per token,   567.31 tokens per second)
+2026-10-20T05:10:44+0800 mitlab-orin-nano llama-server[0]: 15.20.284.386 I slot print_timing: id  3 | task 12533 |        eval time =    9246.30 ms /   176 tokens (   52.84 ms per token,    18.93 tokens per second)
+2026-10-20T05:10:44+0800 mitlab-orin-nano llama-server[0]: 15.20.284.389 I slot print_timing: id  3 | task 12533 |       total time =   11113.01 ms /  1235 tokens
+2026-10-20T05:10:44+0800 mitlab-orin-nano llama-server[0]: 15.20.284.392 I slot print_timing: id  3 | task 12533 |    graphs reused =      12367
+2026-10-20T05:10:44+0800 mitlab-orin-nano llama-server[0]: 15.20.284.816 I slot      release: id  3 | task 12533 | stop processing: n_tokens = 2279, truncated = 0
+2026-10-20T05:10:44+0800 mitlab-orin-nano llama-server[0]: 15.20.368.404 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.511 (> 0.100 thold), f_keep = 0.459
+2026-10-20T05:10:44+0800 mitlab-orin-nano llama-server[0]: 15.20.368.507 I slot launch_slot_: id  3 | task 12712 | processing task, is_child = 0
+2026-10-20T05:10:51+0800 mitlab-orin-nano llama-server[0]: 15.27.444.395 I slot print_timing: id  3 | task 12712 | n_gen =    100, tg =  18.63 t/s, tg_3s =  18.82 t/s
+2026-10-20T05:10:54+0800 mitlab-orin-nano llama-server[0]: 15.30.466.792 I slot print_timing: id  3 | task 12712 | n_gen =    157, tg =  18.71 t/s, tg_3s =  18.86 t/s
+2026-10-20T05:10:55+0800 mitlab-orin-nano llama-server[0]: 15.31.104.136 I slot print_timing: id  3 | task 12712 | prompt eval time =    1761.41 ms /  1001 tokens (    1.76 ms per token,   568.30 tokens per second)
+2026-10-20T05:10:55+0800 mitlab-orin-nano llama-server[0]: 15.31.104.151 I slot print_timing: id  3 | task 12712 |        eval time =    8974.18 ms /   169 tokens (   53.42 ms per token,    18.72 tokens per second)
+2026-10-20T05:10:55+0800 mitlab-orin-nano llama-server[0]: 15.31.104.154 I slot print_timing: id  3 | task 12712 |       total time =   10735.59 ms /  1170 tokens
+2026-10-20T05:10:55+0800 mitlab-orin-nano llama-server[0]: 15.31.104.157 I slot print_timing: id  3 | task 12712 |    graphs reused =      12532
+2026-10-20T05:10:55+0800 mitlab-orin-nano llama-server[0]: 15.31.104.581 I slot      release: id  3 | task 12712 | stop processing: n_tokens = 2214, truncated = 0
+2026-10-20T05:10:55+0800 mitlab-orin-nano llama-server[0]: 15.31.187.858 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.513 (> 0.100 thold), f_keep = 0.472
+2026-10-20T05:10:55+0800 mitlab-orin-nano llama-server[0]: 15.31.187.949 I slot launch_slot_: id  3 | task 12884 | processing task, is_child = 0
+2026-10-20T05:11:02+0800 mitlab-orin-nano llama-server[0]: 15.38.216.116 I slot print_timing: id  3 | task 12884 | n_gen =    100, tg =  18.79 t/s, tg_3s =  18.98 t/s
+2026-10-20T05:11:05+0800 mitlab-orin-nano llama-server[0]: 15.41.119.266 I slot print_timing: id  3 | task 12884 | prompt eval time =    1758.15 ms /   993 tokens (    1.77 ms per token,   564.80 tokens per second)
+2026-10-20T05:11:05+0800 mitlab-orin-nano llama-server[0]: 15.41.119.281 I slot print_timing: id  3 | task 12884 |        eval time =    8173.13 ms /   155 tokens (   53.07 ms per token,    18.84 tokens per second)
+2026-10-20T05:11:05+0800 mitlab-orin-nano llama-server[0]: 15.41.119.284 I slot print_timing: id  3 | task 12884 |       total time =    9931.28 ms /  1148 tokens
+2026-10-20T05:11:05+0800 mitlab-orin-nano llama-server[0]: 15.41.119.287 I slot print_timing: id  3 | task 12884 |    graphs reused =      12683
+2026-10-20T05:11:05+0800 mitlab-orin-nano llama-server[0]: 15.41.119.698 I slot      release: id  3 | task 12884 | stop processing: n_tokens = 2192, truncated = 0
+2026-10-20T05:11:05+0800 mitlab-orin-nano llama-server[0]: 15.41.202.661 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.497 (> 0.100 thold), f_keep = 0.477
+2026-10-20T05:11:05+0800 mitlab-orin-nano llama-server[0]: 15.41.202.805 I slot launch_slot_: id  3 | task 13042 | processing task, is_child = 0
+2026-10-20T05:11:09+0800 mitlab-orin-nano llama-server[0]: 15.45.961.015 I slot print_timing: id  3 | task 13042 | prompt eval time =    1882.83 ms /  1056 tokens (    1.78 ms per token,   560.86 tokens per second)
+2026-10-20T05:11:09+0800 mitlab-orin-nano llama-server[0]: 15.45.961.032 I slot print_timing: id  3 | task 13042 |        eval time =    2875.33 ms /    55 tokens (   53.25 ms per token,    18.78 tokens per second)
+2026-10-20T05:11:09+0800 mitlab-orin-nano llama-server[0]: 15.45.961.035 I slot print_timing: id  3 | task 13042 |       total time =    4758.16 ms /  1111 tokens
+2026-10-20T05:11:09+0800 mitlab-orin-nano llama-server[0]: 15.45.961.040 I slot print_timing: id  3 | task 13042 |    graphs reused =      12736
+2026-10-20T05:11:09+0800 mitlab-orin-nano llama-server[0]: 15.45.961.453 I slot      release: id  3 | task 13042 | stop processing: n_tokens = 2155, truncated = 0
+2026-10-20T05:11:09+0800 mitlab-orin-nano llama-server[0]: 15.46.044.003 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.516 (> 0.100 thold), f_keep = 0.485
+2026-10-20T05:11:09+0800 mitlab-orin-nano llama-server[0]: 15.46.044.108 I slot launch_slot_: id  3 | task 13100 | processing task, is_child = 0
+2026-10-20T05:11:16+0800 mitlab-orin-nano llama-server[0]: 15.53.074.162 I slot print_timing: id  3 | task 13100 | n_gen =    100, tg =  18.74 t/s, tg_3s =  18.93 t/s
+2026-10-20T05:11:17+0800 mitlab-orin-nano llama-server[0]: 15.53.127.026 I slot print_timing: id  3 | task 13100 | prompt eval time =    1748.13 ms /   982 tokens (    1.78 ms per token,   561.74 tokens per second)
+2026-10-20T05:11:17+0800 mitlab-orin-nano llama-server[0]: 15.53.127.046 I slot print_timing: id  3 | task 13100 |        eval time =    5334.75 ms /   101 tokens (   53.35 ms per token,    18.75 tokens per second)
+2026-10-20T05:11:17+0800 mitlab-orin-nano llama-server[0]: 15.53.127.051 I slot print_timing: id  3 | task 13100 |       total time =    7082.87 ms /  1083 tokens
+2026-10-20T05:11:17+0800 mitlab-orin-nano llama-server[0]: 15.53.127.054 I slot print_timing: id  3 | task 13100 |    graphs reused =      12833
+2026-10-20T05:11:17+0800 mitlab-orin-nano llama-server[0]: 15.53.127.471 I slot      release: id  3 | task 13100 | stop processing: n_tokens = 2127, truncated = 0
+2026-10-20T05:11:17+0800 mitlab-orin-nano llama-server[0]: 15.53.208.801 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.521 (> 0.100 thold), f_keep = 0.491
+2026-10-20T05:11:17+0800 mitlab-orin-nano llama-server[0]: 15.53.208.906 I slot launch_slot_: id  3 | task 13204 | processing task, is_child = 0
+2026-10-20T05:11:24+0800 mitlab-orin-nano llama-server[0]: 16.00.146.633 I slot print_timing: id  3 | task 13204 | n_gen =    100, tg =  18.87 t/s, tg_3s =  19.06 t/s
+2026-10-20T05:11:25+0800 mitlab-orin-nano llama-server[0]: 16.01.983.738 I slot print_timing: id  3 | task 13204 | prompt eval time =    1690.66 ms /   959 tokens (    1.76 ms per token,   567.23 tokens per second)
+2026-10-20T05:11:25+0800 mitlab-orin-nano llama-server[0]: 16.01.983.751 I slot print_timing: id  3 | task 13204 |        eval time =    7084.13 ms /   135 tokens (   52.87 ms per token,    18.92 tokens per second)
+2026-10-20T05:11:25+0800 mitlab-orin-nano llama-server[0]: 16.01.983.755 I slot print_timing: id  3 | task 13204 |       total time =    8774.79 ms /  1094 tokens
+2026-10-20T05:11:25+0800 mitlab-orin-nano llama-server[0]: 16.01.983.757 I slot print_timing: id  3 | task 13204 |    graphs reused =      12964
+2026-10-20T05:11:25+0800 mitlab-orin-nano llama-server[0]: 16.01.984.134 I slot      release: id  3 | task 13204 | stop processing: n_tokens = 2138, truncated = 0
+2026-10-20T05:11:25+0800 mitlab-orin-nano llama-server[0]: 16.02.067.186 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.511 (> 0.100 thold), f_keep = 0.489
+2026-10-20T05:11:25+0800 mitlab-orin-nano llama-server[0]: 16.02.067.292 I slot launch_slot_: id  3 | task 13342 | processing task, is_child = 0
+2026-10-20T05:11:32+0800 mitlab-orin-nano llama-server[0]: 16.09.076.823 I slot print_timing: id  3 | task 13342 | n_gen =    100, tg =  18.82 t/s, tg_3s =  19.01 t/s
+2026-10-20T05:11:36+0800 mitlab-orin-nano llama-server[0]: 16.12.112.368 I slot print_timing: id  3 | task 13342 | n_gen =    158, tg =  18.93 t/s, tg_3s =  19.11 t/s
+2026-10-20T05:11:39+0800 mitlab-orin-nano llama-server[0]: 16.15.160.739 I slot print_timing: id  3 | task 13342 | n_gen =    216, tg =  18.95 t/s, tg_3s =  19.03 t/s
+2026-10-20T05:11:41+0800 mitlab-orin-nano llama-server[0]: 16.17.648.024 I slot print_timing: id  3 | task 13342 | prompt eval time =    1749.71 ms /  1001 tokens (    1.75 ms per token,   572.10 tokens per second)
+2026-10-20T05:11:41+0800 mitlab-orin-nano llama-server[0]: 16.17.648.042 I slot print_timing: id  3 | task 13342 |        eval time =   13830.98 ms /   263 tokens (   52.79 ms per token,    18.94 tokens per second)
+2026-10-20T05:11:41+0800 mitlab-orin-nano llama-server[0]: 16.17.648.045 I slot print_timing: id  3 | task 13342 |       total time =   15580.69 ms /  1264 tokens
+2026-10-20T05:11:41+0800 mitlab-orin-nano llama-server[0]: 16.17.648.048 I slot print_timing: id  3 | task 13342 |    graphs reused =      13222
+2026-10-20T05:11:41+0800 mitlab-orin-nano llama-server[0]: 16.17.648.452 I slot      release: id  3 | task 13342 | stop processing: n_tokens = 2308, truncated = 0
+2026-10-20T05:11:41+0800 mitlab-orin-nano llama-server[0]: 16.17.730.875 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.513 (> 0.100 thold), f_keep = 0.453
+2026-10-20T05:11:41+0800 mitlab-orin-nano llama-server[0]: 16.17.730.977 I slot launch_slot_: id  3 | task 13608 | processing task, is_child = 0
+2026-10-20T05:11:48+0800 mitlab-orin-nano llama-server[0]: 16.24.365.314 I slot print_timing: id  3 | task 13608 | prompt eval time =    1745.59 ms /   991 tokens (    1.76 ms per token,   567.72 tokens per second)
+2026-10-20T05:11:48+0800 mitlab-orin-nano llama-server[0]: 16.24.365.330 I slot print_timing: id  3 | task 13608 |        eval time =    4888.70 ms /    93 tokens (   53.14 ms per token,    18.82 tokens per second)
+2026-10-20T05:11:48+0800 mitlab-orin-nano llama-server[0]: 16.24.365.333 I slot print_timing: id  3 | task 13608 |       total time =    6634.30 ms /  1084 tokens
+2026-10-20T05:11:48+0800 mitlab-orin-nano llama-server[0]: 16.24.365.336 I slot print_timing: id  3 | task 13608 |    graphs reused =      13311
+2026-10-20T05:11:48+0800 mitlab-orin-nano llama-server[0]: 16.24.365.753 I slot      release: id  3 | task 13608 | stop processing: n_tokens = 2128, truncated = 0
+2026-10-20T05:11:48+0800 mitlab-orin-nano llama-server[0]: 16.24.448.121 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.511 (> 0.100 thold), f_keep = 0.491
+2026-10-20T05:11:48+0800 mitlab-orin-nano llama-server[0]: 16.24.448.227 I slot launch_slot_: id  3 | task 13704 | processing task, is_child = 0
+2026-10-20T05:11:55+0800 mitlab-orin-nano llama-server[0]: 16.31.461.897 I slot print_timing: id  3 | task 13704 | n_gen =    100, tg =  18.84 t/s, tg_3s =  19.03 t/s
+2026-10-20T05:11:58+0800 mitlab-orin-nano llama-server[0]: 16.34.462.129 I slot print_timing: id  3 | task 13704 | n_gen =    157, tg =  18.90 t/s, tg_3s =  19.00 t/s
+2026-10-20T05:12:01+0800 mitlab-orin-nano llama-server[0]: 16.37.511.866 I slot print_timing: id  3 | task 13704 | n_gen =    215, tg =  18.93 t/s, tg_3s =  19.02 t/s
+2026-10-20T05:12:02+0800 mitlab-orin-nano llama-server[0]: 16.38.301.259 I slot print_timing: id  3 | task 13704 | prompt eval time =    1759.94 ms /  1000 tokens (    1.76 ms per token,   568.20 tokens per second)
+2026-10-20T05:12:02+0800 mitlab-orin-nano llama-server[0]: 16.38.301.273 I slot print_timing: id  3 | task 13704 |        eval time =   12093.05 ms /   230 tokens (   52.81 ms per token,    18.94 tokens per second)
+2026-10-20T05:12:02+0800 mitlab-orin-nano llama-server[0]: 16.38.301.276 I slot print_timing: id  3 | task 13704 |       total time =   13852.99 ms /  1230 tokens
+2026-10-20T05:12:02+0800 mitlab-orin-nano llama-server[0]: 16.38.301.279 I slot print_timing: id  3 | task 13704 |    graphs reused =      13537
+2026-10-20T05:12:02+0800 mitlab-orin-nano llama-server[0]: 16.38.301.699 I slot      release: id  3 | task 13704 | stop processing: n_tokens = 2274, truncated = 0
+2026-10-20T05:12:02+0800 mitlab-orin-nano llama-server[0]: 16.38.366.977 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.520 (> 0.100 thold), f_keep = 0.460
+2026-10-20T05:12:02+0800 mitlab-orin-nano llama-server[0]: 16.38.367.089 I slot launch_slot_: id  3 | task 13937 | processing task, is_child = 0
+2026-10-20T05:12:08+0800 mitlab-orin-nano llama-server[0]: 16.44.582.614 I slot print_timing: id  3 | task 13937 | prompt eval time =    1747.65 ms /   965 tokens (    1.81 ms per token,   552.17 tokens per second)
+2026-10-20T05:12:08+0800 mitlab-orin-nano llama-server[0]: 16.44.582.629 I slot print_timing: id  3 | task 13937 |        eval time =    4467.82 ms /    85 tokens (   53.19 ms per token,    18.80 tokens per second)
+2026-10-20T05:12:08+0800 mitlab-orin-nano llama-server[0]: 16.44.582.632 I slot print_timing: id  3 | task 13937 |       total time =    6215.48 ms /  1050 tokens
+2026-10-20T05:12:08+0800 mitlab-orin-nano llama-server[0]: 16.44.582.635 I slot print_timing: id  3 | task 13937 |    graphs reused =      13618
+2026-10-20T05:12:08+0800 mitlab-orin-nano llama-server[0]: 16.44.583.043 I slot      release: id  3 | task 13937 | stop processing: n_tokens = 2094, truncated = 0
+2026-10-20T05:12:08+0800 mitlab-orin-nano llama-server[0]: 16.44.665.767 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.501 (> 0.100 thold), f_keep = 0.499
+2026-10-20T05:12:08+0800 mitlab-orin-nano llama-server[0]: 16.44.665.869 I slot launch_slot_: id  3 | task 14025 | processing task, is_child = 0
+2026-10-20T05:12:15+0800 mitlab-orin-nano llama-server[0]: 16.51.740.851 I slot print_timing: id  3 | task 14025 | n_gen =    100, tg =  18.96 t/s, tg_3s =  19.15 t/s
+2026-10-20T05:12:17+0800 mitlab-orin-nano llama-server[0]: 16.53.530.167 I slot print_timing: id  3 | task 14025 | prompt eval time =    1853.68 ms /  1040 tokens (    1.78 ms per token,   561.05 tokens per second)
+2026-10-20T05:12:17+0800 mitlab-orin-nano llama-server[0]: 16.53.530.182 I slot print_timing: id  3 | task 14025 |        eval time =    7010.58 ms /   134 tokens (   52.71 ms per token,    18.97 tokens per second)
+2026-10-20T05:12:17+0800 mitlab-orin-nano llama-server[0]: 16.53.530.186 I slot print_timing: id  3 | task 14025 |       total time =    8864.25 ms /  1174 tokens
+2026-10-20T05:12:17+0800 mitlab-orin-nano llama-server[0]: 16.53.530.189 I slot print_timing: id  3 | task 14025 |    graphs reused =      13750
+2026-10-20T05:12:17+0800 mitlab-orin-nano llama-server[0]: 16.53.530.601 I slot      release: id  3 | task 14025 | stop processing: n_tokens = 2218, truncated = 0
+2026-10-20T05:12:17+0800 mitlab-orin-nano llama-server[0]: 16.53.603.367 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.506 (> 0.100 thold), f_keep = 0.471
+2026-10-20T05:12:17+0800 mitlab-orin-nano llama-server[0]: 16.53.603.462 I slot launch_slot_: id  3 | task 14162 | processing task, is_child = 0
+2026-10-20T05:12:24+0800 mitlab-orin-nano llama-server[0]: 17.00.598.698 I slot print_timing: id  3 | task 14162 | n_gen =    100, tg =  18.99 t/s, tg_3s =  19.18 t/s
+2026-10-20T05:12:27+0800 mitlab-orin-nano llama-server[0]: 17.03.637.169 I slot print_timing: id  3 | task 14162 | n_gen =    158, tg =  19.03 t/s, tg_3s =  19.09 t/s
+2026-10-20T05:12:30+0800 mitlab-orin-nano llama-server[0]: 17.06.684.094 I slot print_timing: id  3 | task 14162 | n_gen =    216, tg =  19.03 t/s, tg_3s =  19.04 t/s
+2026-10-20T05:12:33+0800 mitlab-orin-nano llama-server[0]: 17.09.306.289 I slot print_timing: id  3 | task 14162 | prompt eval time =    1782.73 ms /  1020 tokens (    1.75 ms per token,   572.15 tokens per second)
+2026-10-20T05:12:33+0800 mitlab-orin-nano llama-server[0]: 17.09.306.307 I slot print_timing: id  3 | task 14162 |        eval time =   13920.05 ms /   265 tokens (   52.73 ms per token,    18.97 tokens per second)
+2026-10-20T05:12:33+0800 mitlab-orin-nano llama-server[0]: 17.09.306.311 I slot print_timing: id  3 | task 14162 |       total time =   15702.78 ms /  1285 tokens
+2026-10-20T05:12:33+0800 mitlab-orin-nano llama-server[0]: 17.09.306.319 I slot print_timing: id  3 | task 14162 |    graphs reused =      14011
+2026-10-20T05:12:33+0800 mitlab-orin-nano llama-server[0]: 17.09.306.730 I slot      release: id  3 | task 14162 | stop processing: n_tokens = 2329, truncated = 0
+2026-10-20T05:12:33+0800 mitlab-orin-nano llama-server[0]: 17.09.388.781 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.503 (> 0.100 thold), f_keep = 0.449
+2026-10-20T05:12:33+0800 mitlab-orin-nano llama-server[0]: 17.09.388.881 I slot launch_slot_: id  3 | task 14430 | processing task, is_child = 0
+2026-10-20T05:12:40+0800 mitlab-orin-nano llama-server[0]: 17.16.507.022 I slot print_timing: id  3 | task 14430 | n_gen =    100, tg =  18.86 t/s, tg_3s =  19.05 t/s
+2026-10-20T05:12:43+0800 mitlab-orin-nano llama-server[0]: 17.19.559.277 I slot print_timing: id  3 | task 14430 | n_gen =    158, tg =  18.91 t/s, tg_3s =  19.00 t/s
+2026-10-20T05:12:46+0800 mitlab-orin-nano llama-server[0]: 17.22.581.924 I slot print_timing: id  3 | task 14430 | n_gen =    215, tg =  18.90 t/s, tg_3s =  18.86 t/s
+2026-10-20T05:12:49+0800 mitlab-orin-nano llama-server[0]: 17.25.585.767 I slot print_timing: id  3 | task 14430 | n_gen =    271, tg =  18.84 t/s, tg_3s =  18.64 t/s
+2026-10-20T05:12:51+0800 mitlab-orin-nano llama-server[0]: 17.27.561.004 I slot print_timing: id  3 | task 14430 | prompt eval time =    1867.75 ms /  1034 tokens (    1.81 ms per token,   553.61 tokens per second)
+2026-10-20T05:12:51+0800 mitlab-orin-nano llama-server[0]: 17.27.561.022 I slot print_timing: id  3 | task 14430 |        eval time =   16304.32 ms /   308 tokens (   53.11 ms per token,    18.83 tokens per second)
+2026-10-20T05:12:51+0800 mitlab-orin-nano llama-server[0]: 17.27.561.025 I slot print_timing: id  3 | task 14430 |       total time =   18172.08 ms /  1342 tokens
+2026-10-20T05:12:51+0800 mitlab-orin-nano llama-server[0]: 17.27.561.028 I slot print_timing: id  3 | task 14430 |    graphs reused =      14315
+2026-10-20T05:12:51+0800 mitlab-orin-nano llama-server[0]: 17.27.561.429 I slot      release: id  3 | task 14430 | stop processing: n_tokens = 2386, truncated = 0
+2026-10-20T05:12:51+0800 mitlab-orin-nano llama-server[0]: 17.27.644.943 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.508 (> 0.100 thold), f_keep = 0.438
+2026-10-20T05:12:51+0800 mitlab-orin-nano llama-server[0]: 17.27.645.043 I slot launch_slot_: id  3 | task 14741 | processing task, is_child = 0
+2026-10-20T05:12:58+0800 mitlab-orin-nano llama-server[0]: 17.34.692.388 I slot print_timing: id  3 | task 14741 | n_gen =    100, tg =  18.79 t/s, tg_3s =  18.98 t/s
+2026-10-20T05:13:01+0800 mitlab-orin-nano llama-server[0]: 17.37.705.585 I slot print_timing: id  3 | task 14741 | n_gen =    157, tg =  18.84 t/s, tg_3s =  18.92 t/s
+2026-10-20T05:13:04+0800 mitlab-orin-nano llama-server[0]: 17.40.714.392 I slot print_timing: id  3 | task 14741 | n_gen =    214, tg =  18.87 t/s, tg_3s =  18.94 t/s
+2026-10-20T05:13:07+0800 mitlab-orin-nano llama-server[0]: 17.43.748.145 I slot print_timing: id  3 | task 14741 | n_gen =    271, tg =  18.85 t/s, tg_3s =  18.79 t/s
+2026-10-20T05:13:10+0800 mitlab-orin-nano llama-server[0]: 17.46.765.789 I slot print_timing: id  3 | task 14741 | n_gen =    328, tg =  18.86 t/s, tg_3s =  18.89 t/s
+2026-10-20T05:13:13+0800 mitlab-orin-nano llama-server[0]: 17.49.779.339 I slot print_timing: id  3 | task 14741 | n_gen =    385, tg =  18.87 t/s, tg_3s =  18.91 t/s
+2026-10-20T05:13:14+0800 mitlab-orin-nano llama-server[0]: 17.50.521.444 I slot print_timing: id  3 | task 14741 | prompt eval time =    1779.64 ms /  1014 tokens (    1.76 ms per token,   569.78 tokens per second)
+2026-10-20T05:13:14+0800 mitlab-orin-nano llama-server[0]: 17.50.521.457 I slot print_timing: id  3 | task 14741 |        eval time =   21096.72 ms /   399 tokens (   53.01 ms per token,    18.87 tokens per second)
+2026-10-20T05:13:14+0800 mitlab-orin-nano llama-server[0]: 17.50.521.459 I slot print_timing: id  3 | task 14741 |       total time =   22876.36 ms /  1413 tokens
+2026-10-20T05:13:14+0800 mitlab-orin-nano llama-server[0]: 17.50.521.461 I slot print_timing: id  3 | task 14741 |    graphs reused =      14710
+2026-10-20T05:13:14+0800 mitlab-orin-nano llama-server[0]: 17.50.521.768 I slot      release: id  3 | task 14741 | stop processing: n_tokens = 2457, truncated = 0
+2026-10-20T05:13:14+0800 mitlab-orin-nano llama-server[0]: 17.50.584.993 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.496 (> 0.100 thold), f_keep = 0.425
+2026-10-20T05:13:14+0800 mitlab-orin-nano llama-server[0]: 17.50.585.141 I slot launch_slot_: id  3 | task 15143 | processing task, is_child = 0
+2026-10-20T05:13:21+0800 mitlab-orin-nano llama-server[0]: 17.57.702.073 I slot print_timing: id  3 | task 15143 | n_gen =    100, tg =  18.87 t/s, tg_3s =  19.07 t/s
+2026-10-20T05:13:24+0800 mitlab-orin-nano llama-server[0]: 18.00.745.020 I slot print_timing: id  3 | task 15143 | n_gen =    158, tg =  18.94 t/s, tg_3s =  19.06 t/s
+2026-10-20T05:13:27+0800 mitlab-orin-nano llama-server[0]: 18.03.771.994 I slot print_timing: id  3 | task 15143 | n_gen =    215, tg =  18.91 t/s, tg_3s =  18.83 t/s
+2026-10-20T05:13:28+0800 mitlab-orin-nano llama-server[0]: 18.04.245.807 I slot print_timing: id  3 | task 15143 | prompt eval time =    1871.80 ms /  1061 tokens (    1.76 ms per token,   566.83 tokens per second)
+2026-10-20T05:13:28+0800 mitlab-orin-nano llama-server[0]: 18.04.245.821 I slot print_timing: id  3 | task 15143 |        eval time =   11788.81 ms /   224 tokens (   52.86 ms per token,    18.92 tokens per second)
+2026-10-20T05:13:28+0800 mitlab-orin-nano llama-server[0]: 18.04.245.824 I slot print_timing: id  3 | task 15143 |       total time =   13660.61 ms /  1285 tokens
+2026-10-20T05:13:28+0800 mitlab-orin-nano llama-server[0]: 18.04.245.827 I slot print_timing: id  3 | task 15143 |    graphs reused =      14930
+2026-10-20T05:13:28+0800 mitlab-orin-nano llama-server[0]: 18.04.246.286 I slot      release: id  3 | task 15143 | stop processing: n_tokens = 2329, truncated = 0
+2026-10-20T05:13:28+0800 mitlab-orin-nano llama-server[0]: 18.04.329.716 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.492 (> 0.100 thold), f_keep = 0.449
+2026-10-20T05:13:28+0800 mitlab-orin-nano llama-server[0]: 18.04.329.873 I slot launch_slot_: id  3 | task 15370 | processing task, is_child = 0
+2026-10-20T05:13:35+0800 mitlab-orin-nano llama-server[0]: 18.11.465.370 I slot print_timing: id  3 | task 15370 | n_gen =    100, tg =  18.94 t/s, tg_3s =  19.14 t/s
+2026-10-20T05:13:38+0800 mitlab-orin-nano llama-server[0]: 18.14.507.953 I slot print_timing: id  3 | task 15370 | n_gen =    158, tg =  18.99 t/s, tg_3s =  19.06 t/s
+2026-10-20T05:13:41+0800 mitlab-orin-nano llama-server[0]: 18.17.550.222 I slot print_timing: id  3 | task 15370 | n_gen =    215, tg =  18.92 t/s, tg_3s =  18.74 t/s
+2026-10-20T05:13:44+0800 mitlab-orin-nano llama-server[0]: 18.20.567.994 I slot print_timing: id  3 | task 15370 | n_gen =    272, tg =  18.91 t/s, tg_3s =  18.89 t/s
+2026-10-20T05:13:47+0800 mitlab-orin-nano llama-server[0]: 18.23.588.208 I slot print_timing: id  3 | task 15370 | n_gen =    329, tg =  18.91 t/s, tg_3s =  18.87 t/s
+2026-10-20T05:13:50+0800 mitlab-orin-nano llama-server[0]: 18.26.607.868 I slot print_timing: id  3 | task 15370 | n_gen =    386, tg =  18.90 t/s, tg_3s =  18.88 t/s
+2026-10-20T05:13:53+0800 mitlab-orin-nano llama-server[0]: 18.29.642.811 I slot print_timing: id  3 | task 15370 | n_gen =    443, tg =  18.89 t/s, tg_3s =  18.78 t/s
+2026-10-20T05:13:56+0800 mitlab-orin-nano llama-server[0]: 18.32.690.677 I slot print_timing: id  3 | task 15370 | n_gen =    500, tg =  18.86 t/s, tg_3s =  18.70 t/s
+2026-10-20T05:13:59+0800 mitlab-orin-nano llama-server[0]: 18.35.508.682 I slot print_timing: id  3 | task 15370 | prompt eval time =    1909.53 ms /  1079 tokens (    1.77 ms per token,   565.06 tokens per second)
+2026-10-20T05:13:59+0800 mitlab-orin-nano llama-server[0]: 18.35.508.696 I slot print_timing: id  3 | task 15370 |        eval time =   29269.23 ms /   553 tokens (   53.02 ms per token,    18.86 tokens per second)
+2026-10-20T05:13:59+0800 mitlab-orin-nano llama-server[0]: 18.35.508.699 I slot print_timing: id  3 | task 15370 |       total time =   31178.76 ms /  1632 tokens
+2026-10-20T05:13:59+0800 mitlab-orin-nano llama-server[0]: 18.35.508.702 I slot print_timing: id  3 | task 15370 |    graphs reused =      15477
+2026-10-20T05:13:59+0800 mitlab-orin-nano llama-server[0]: 18.35.509.119 I slot      release: id  3 | task 15370 | stop processing: n_tokens = 2676, truncated = 0
+2026-10-20T05:13:59+0800 mitlab-orin-nano llama-server[0]: 18.35.592.422 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.514 (> 0.100 thold), f_keep = 0.391
+2026-10-20T05:13:59+0800 mitlab-orin-nano llama-server[0]: 18.35.592.523 I slot launch_slot_: id  3 | task 15926 | processing task, is_child = 0
+2026-10-20T05:14:06+0800 mitlab-orin-nano llama-server[0]: 18.42.640.755 I slot print_timing: id  3 | task 15926 | n_gen =    100, tg =  18.70 t/s, tg_3s =  18.89 t/s
+2026-10-20T05:14:09+0800 mitlab-orin-nano llama-server[0]: 18.45.657.092 I slot print_timing: id  3 | task 15926 | n_gen =    157, tg =  18.77 t/s, tg_3s =  18.90 t/s
+2026-10-20T05:14:12+0800 mitlab-orin-nano llama-server[0]: 18.48.661.516 I slot print_timing: id  3 | task 15926 | n_gen =    214, tg =  18.82 t/s, tg_3s =  18.97 t/s
+2026-10-20T05:14:14+0800 mitlab-orin-nano llama-server[0]: 18.50.713.152 I slot print_timing: id  3 | task 15926 | prompt eval time =    1753.31 ms /   989 tokens (    1.77 ms per token,   564.08 tokens per second)
+2026-10-20T05:14:14+0800 mitlab-orin-nano llama-server[0]: 18.50.713.168 I slot print_timing: id  3 | task 15926 |        eval time =   13367.28 ms /   253 tokens (   53.04 ms per token,    18.85 tokens per second)
+2026-10-20T05:14:14+0800 mitlab-orin-nano llama-server[0]: 18.50.713.171 I slot print_timing: id  3 | task 15926 |       total time =   15120.58 ms /  1242 tokens
+2026-10-20T05:14:14+0800 mitlab-orin-nano llama-server[0]: 18.50.713.174 I slot print_timing: id  3 | task 15926 |    graphs reused =      15726
+2026-10-20T05:14:14+0800 mitlab-orin-nano llama-server[0]: 18.50.713.588 I slot      release: id  3 | task 15926 | stop processing: n_tokens = 2286, truncated = 0
+2026-10-20T05:14:14+0800 mitlab-orin-nano llama-server[0]: 18.50.795.586 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.500 (> 0.100 thold), f_keep = 0.457
+2026-10-20T05:14:14+0800 mitlab-orin-nano llama-server[0]: 18.50.795.692 I slot launch_slot_: id  3 | task 16182 | processing task, is_child = 0
+2026-10-20T05:14:21+0800 mitlab-orin-nano llama-server[0]: 18.57.926.430 I slot print_timing: id  3 | task 16182 | n_gen =    100, tg =  18.81 t/s, tg_3s =  19.00 t/s
+2026-10-20T05:14:24+0800 mitlab-orin-nano llama-server[0]: 19.00.933.441 I slot print_timing: id  3 | task 16182 | n_gen =    157, tg =  18.86 t/s, tg_3s =  18.96 t/s
+2026-10-20T05:14:27+0800 mitlab-orin-nano llama-server[0]: 19.03.950.617 I slot print_timing: id  3 | task 16182 | n_gen =    214, tg =  18.87 t/s, tg_3s =  18.89 t/s
+2026-10-20T05:14:30+0800 mitlab-orin-nano llama-server[0]: 19.06.963.722 I slot print_timing: id  3 | task 16182 | n_gen =    270, tg =  18.81 t/s, tg_3s =  18.59 t/s
+2026-10-20T05:14:31+0800 mitlab-orin-nano llama-server[0]: 19.07.764.088 I slot print_timing: id  3 | task 16182 | prompt eval time =    1866.44 ms /  1045 tokens (    1.79 ms per token,   559.89 tokens per second)
+2026-10-20T05:14:31+0800 mitlab-orin-nano llama-server[0]: 19.07.764.106 I slot print_timing: id  3 | task 16182 |        eval time =   15101.91 ms /   285 tokens (   53.18 ms per token,    18.81 tokens per second)
+2026-10-20T05:14:31+0800 mitlab-orin-nano llama-server[0]: 19.07.764.109 I slot print_timing: id  3 | task 16182 |       total time =   16968.35 ms /  1330 tokens
+2026-10-20T05:14:31+0800 mitlab-orin-nano llama-server[0]: 19.07.764.114 I slot print_timing: id  3 | task 16182 |    graphs reused =      16007
+2026-10-20T05:14:31+0800 mitlab-orin-nano llama-server[0]: 19.07.764.526 I slot      release: id  3 | task 16182 | stop processing: n_tokens = 2374, truncated = 0
+2026-10-20T05:14:31+0800 mitlab-orin-nano llama-server[0]: 19.07.830.337 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.507 (> 0.100 thold), f_keep = 0.440
+2026-10-20T05:14:31+0800 mitlab-orin-nano llama-server[0]: 19.07.830.442 I slot launch_slot_: id  3 | task 16470 | processing task, is_child = 0
+2026-10-20T05:14:38+0800 mitlab-orin-nano llama-server[0]: 19.14.519.867 I slot print_timing: id  3 | task 16470 | prompt eval time =    1786.04 ms /  1015 tokens (    1.76 ms per token,   568.30 tokens per second)
+2026-10-20T05:14:38+0800 mitlab-orin-nano llama-server[0]: 19.14.519.882 I slot print_timing: id  3 | task 16470 |        eval time =    4903.33 ms /    93 tokens (   53.30 ms per token,    18.76 tokens per second)
+2026-10-20T05:14:38+0800 mitlab-orin-nano llama-server[0]: 19.14.519.885 I slot print_timing: id  3 | task 16470 |       total time =    6689.38 ms /  1108 tokens
+2026-10-20T05:14:38+0800 mitlab-orin-nano llama-server[0]: 19.14.519.888 I slot print_timing: id  3 | task 16470 |    graphs reused =      16098
+2026-10-20T05:14:38+0800 mitlab-orin-nano llama-server[0]: 19.14.520.301 I slot      release: id  3 | task 16470 | stop processing: n_tokens = 2152, truncated = 0
+2026-10-20T05:14:38+0800 mitlab-orin-nano llama-server[0]: 19.14.603.150 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.499 (> 0.100 thold), f_keep = 0.486
+2026-10-20T05:14:38+0800 mitlab-orin-nano llama-server[0]: 19.14.603.254 I slot launch_slot_: id  3 | task 16566 | processing task, is_child = 0
+2026-10-20T05:14:45+0800 mitlab-orin-nano llama-server[0]: 19.21.735.260 I slot print_timing: id  3 | task 16566 | n_gen =    100, tg =  18.78 t/s, tg_3s =  18.97 t/s
+2026-10-20T05:14:48+0800 mitlab-orin-nano llama-server[0]: 19.24.785.302 I slot print_timing: id  3 | task 16566 | n_gen =    158, tg =  18.87 t/s, tg_3s =  19.02 t/s
+2026-10-20T05:14:51+0800 mitlab-orin-nano llama-server[0]: 19.27.801.870 I slot print_timing: id  3 | task 16566 | n_gen =    215, tg =  18.88 t/s, tg_3s =  18.90 t/s
+2026-10-20T05:14:54+0800 mitlab-orin-nano llama-server[0]: 19.30.832.372 I slot print_timing: id  3 | task 16566 | n_gen =    272, tg =  18.86 t/s, tg_3s =  18.81 t/s
+2026-10-20T05:14:57+0800 mitlab-orin-nano llama-server[0]: 19.33.848.046 I slot print_timing: id  3 | task 16566 | n_gen =    329, tg =  18.87 t/s, tg_3s =  18.90 t/s
+2026-10-20T05:15:00+0800 mitlab-orin-nano llama-server[0]: 19.36.865.284 I slot print_timing: id  3 | task 16566 | n_gen =    386, tg =  18.87 t/s, tg_3s =  18.89 t/s
+2026-10-20T05:15:00+0800 mitlab-orin-nano llama-server[0]: 19.37.076.410 I slot print_timing: id  3 | task 16566 | prompt eval time =    1861.02 ms /  1049 tokens (    1.77 ms per token,   563.67 tokens per second)
+2026-10-20T05:15:00+0800 mitlab-orin-nano llama-server[0]: 19.37.076.424 I slot print_timing: id  3 | task 16566 |        eval time =   20612.10 ms /   390 tokens (   52.99 ms per token,    18.87 tokens per second)
+2026-10-20T05:15:00+0800 mitlab-orin-nano llama-server[0]: 19.37.076.427 I slot print_timing: id  3 | task 16566 |       total time =   22473.11 ms /  1439 tokens
+2026-10-20T05:15:00+0800 mitlab-orin-nano llama-server[0]: 19.37.076.430 I slot print_timing: id  3 | task 16566 |    graphs reused =      16484
+2026-10-20T05:15:00+0800 mitlab-orin-nano llama-server[0]: 19.37.076.850 I slot      release: id  3 | task 16566 | stop processing: n_tokens = 2483, truncated = 0
+2026-10-20T05:15:01+0800 mitlab-orin-nano llama-server[0]: 19.37.159.743 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.511 (> 0.100 thold), f_keep = 0.421
+2026-10-20T05:15:01+0800 mitlab-orin-nano llama-server[0]: 19.37.159.853 I slot launch_slot_: id  3 | task 16959 | processing task, is_child = 0
+2026-10-20T05:15:06+0800 mitlab-orin-nano llama-server[0]: 19.42.501.396 I slot print_timing: id  3 | task 16959 | prompt eval time =    1760.13 ms /  1000 tokens (    1.76 ms per token,   568.14 tokens per second)
+2026-10-20T05:15:06+0800 mitlab-orin-nano llama-server[0]: 19.42.501.411 I slot print_timing: id  3 | task 16959 |        eval time =    3581.37 ms /    68 tokens (   53.45 ms per token,    18.71 tokens per second)
+2026-10-20T05:15:06+0800 mitlab-orin-nano llama-server[0]: 19.42.501.414 I slot print_timing: id  3 | task 16959 |       total time =    5341.50 ms /  1068 tokens
+2026-10-20T05:15:06+0800 mitlab-orin-nano llama-server[0]: 19.42.501.417 I slot print_timing: id  3 | task 16959 |    graphs reused =      16548
+2026-10-20T05:15:06+0800 mitlab-orin-nano llama-server[0]: 19.42.501.825 I slot      release: id  3 | task 16959 | stop processing: n_tokens = 2112, truncated = 0
+2026-10-20T05:15:06+0800 mitlab-orin-nano llama-server[0]: 19.42.584.726 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.510 (> 0.100 thold), f_keep = 0.495
+2026-10-20T05:15:06+0800 mitlab-orin-nano llama-server[0]: 19.42.584.838 I slot launch_slot_: id  3 | task 17030 | processing task, is_child = 0
+2026-10-20T05:15:13+0800 mitlab-orin-nano llama-server[0]: 19.49.581.148 I slot print_timing: id  3 | task 17030 | n_gen =    100, tg =  18.90 t/s, tg_3s =  19.09 t/s
+2026-10-20T05:15:16+0800 mitlab-orin-nano llama-server[0]: 19.52.630.206 I slot print_timing: id  3 | task 17030 | n_gen =    158, tg =  18.94 t/s, tg_3s =  19.02 t/s
+2026-10-20T05:15:19+0800 mitlab-orin-nano llama-server[0]: 19.55.678.713 I slot print_timing: id  3 | task 17030 | n_gen =    216, tg =  18.97 t/s, tg_3s =  19.03 t/s
+2026-10-20T05:15:22+0800 mitlab-orin-nano llama-server[0]: 19.58.708.407 I slot print_timing: id  3 | task 17030 | n_gen =    273, tg =  18.93 t/s, tg_3s =  18.81 t/s
+2026-10-20T05:15:23+0800 mitlab-orin-nano llama-server[0]: 19.59.395.483 I slot print_timing: id  3 | task 17030 | prompt eval time =    1758.13 ms /  1003 tokens (    1.75 ms per token,   570.49 tokens per second)
+2026-10-20T05:15:23+0800 mitlab-orin-nano llama-server[0]: 19.59.395.500 I slot print_timing: id  3 | task 17030 |        eval time =   15052.47 ms /   286 tokens (   52.82 ms per token,    18.93 tokens per second)
+2026-10-20T05:15:23+0800 mitlab-orin-nano llama-server[0]: 19.59.395.503 I slot print_timing: id  3 | task 17030 |       total time =   16810.60 ms /  1289 tokens
+2026-10-20T05:15:23+0800 mitlab-orin-nano llama-server[0]: 19.59.395.505 I slot print_timing: id  3 | task 17030 |    graphs reused =      16829
+2026-10-20T05:15:23+0800 mitlab-orin-nano llama-server[0]: 19.59.395.910 I slot      release: id  3 | task 17030 | stop processing: n_tokens = 2333, truncated = 0
+2026-10-20T05:15:23+0800 mitlab-orin-nano llama-server[0]: 19.59.478.246 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.499 (> 0.100 thold), f_keep = 0.448
+2026-10-20T05:15:23+0800 mitlab-orin-nano llama-server[0]: 19.59.478.354 I slot launch_slot_: id  3 | task 17319 | processing task, is_child = 0
+2026-10-20T05:15:30+0800 mitlab-orin-nano llama-server[0]: 20.06.571.804 I slot print_timing: id  3 | task 17319 | n_gen =    100, tg =  18.94 t/s, tg_3s =  19.14 t/s
+2026-10-20T05:15:33+0800 mitlab-orin-nano llama-server[0]: 20.09.619.300 I slot print_timing: id  3 | task 17319 | n_gen =    158, tg =  18.98 t/s, tg_3s =  19.03 t/s
+2026-10-20T05:15:36+0800 mitlab-orin-nano llama-server[0]: 20.12.637.790 I slot print_timing: id  3 | task 17319 | n_gen =    215, tg =  18.95 t/s, tg_3s =  18.88 t/s
+2026-10-20T05:15:39+0800 mitlab-orin-nano llama-server[0]: 20.15.656.369 I slot print_timing: id  3 | task 17319 | n_gen =    272, tg =  18.94 t/s, tg_3s =  18.88 t/s
+2026-10-20T05:15:41+0800 mitlab-orin-nano llama-server[0]: 20.17.399.743 I slot print_timing: id  3 | task 17319 | prompt eval time =    1867.43 ms /  1051 tokens (    1.78 ms per token,   562.81 tokens per second)
+2026-10-20T05:15:41+0800 mitlab-orin-nano llama-server[0]: 20.17.399.757 I slot print_timing: id  3 | task 17319 |        eval time =   16053.92 ms /   305 tokens (   52.81 ms per token,    18.94 tokens per second)
+2026-10-20T05:15:41+0800 mitlab-orin-nano llama-server[0]: 20.17.399.761 I slot print_timing: id  3 | task 17319 |       total time =   17921.35 ms /  1356 tokens
+2026-10-20T05:15:41+0800 mitlab-orin-nano llama-server[0]: 20.17.399.764 I slot print_timing: id  3 | task 17319 |    graphs reused =      17130
+2026-10-20T05:15:41+0800 mitlab-orin-nano llama-server[0]: 20.17.400.168 I slot      release: id  3 | task 17319 | stop processing: n_tokens = 2400, truncated = 0
+2026-10-20T05:15:41+0800 mitlab-orin-nano llama-server[0]: 20.17.483.884 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.518 (> 0.100 thold), f_keep = 0.435
+2026-10-20T05:15:41+0800 mitlab-orin-nano llama-server[0]: 20.17.483.984 I slot launch_slot_: id  3 | task 17627 | processing task, is_child = 0
+2026-10-20T05:15:48+0800 mitlab-orin-nano llama-server[0]: 20.24.457.281 I slot print_timing: id  3 | task 17627 | n_gen =    100, tg =  18.91 t/s, tg_3s =  19.10 t/s
+2026-10-20T05:15:51+0800 mitlab-orin-nano llama-server[0]: 20.27.407.114 I slot print_timing: id  3 | task 17627 | prompt eval time =    1738.01 ms /   974 tokens (    1.78 ms per token,   560.41 tokens per second)
+2026-10-20T05:15:51+0800 mitlab-orin-nano llama-server[0]: 20.27.407.130 I slot print_timing: id  3 | task 17627 |        eval time =    8185.07 ms /   156 tokens (   52.81 ms per token,    18.94 tokens per second)
+2026-10-20T05:15:51+0800 mitlab-orin-nano llama-server[0]: 20.27.407.133 I slot print_timing: id  3 | task 17627 |       total time =    9923.08 ms /  1130 tokens
+2026-10-20T05:15:51+0800 mitlab-orin-nano llama-server[0]: 20.27.407.140 I slot print_timing: id  3 | task 17627 |    graphs reused =      17282
+2026-10-20T05:15:51+0800 mitlab-orin-nano llama-server[0]: 20.27.407.550 I slot      release: id  3 | task 17627 | stop processing: n_tokens = 2174, truncated = 0
+2026-10-20T05:15:51+0800 mitlab-orin-nano llama-server[0]: 20.27.490.630 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.506 (> 0.100 thold), f_keep = 0.481
+2026-10-20T05:15:51+0800 mitlab-orin-nano llama-server[0]: 20.27.490.732 I slot launch_slot_: id  3 | task 17786 | processing task, is_child = 0
+2026-10-20T05:15:58+0800 mitlab-orin-nano llama-server[0]: 20.34.498.610 I slot print_timing: id  3 | task 17786 | n_gen =    100, tg =  18.93 t/s, tg_3s =  19.12 t/s
+2026-10-20T05:16:01+0800 mitlab-orin-nano llama-server[0]: 20.37.546.189 I slot print_timing: id  3 | task 17786 | n_gen =    158, tg =  18.97 t/s, tg_3s =  19.03 t/s
+2026-10-20T05:16:04+0800 mitlab-orin-nano llama-server[0]: 20.40.277.277 I slot print_timing: id  3 | task 17786 | prompt eval time =    1777.96 ms /  1020 tokens (    1.74 ms per token,   573.69 tokens per second)
+2026-10-20T05:16:04+0800 mitlab-orin-nano llama-server[0]: 20.40.277.293 I slot print_timing: id  3 | task 17786 |        eval time =   11008.54 ms /   210 tokens (   52.67 ms per token,    18.99 tokens per second)
+2026-10-20T05:16:04+0800 mitlab-orin-nano llama-server[0]: 20.40.277.296 I slot print_timing: id  3 | task 17786 |       total time =   12786.50 ms /  1230 tokens
+2026-10-20T05:16:04+0800 mitlab-orin-nano llama-server[0]: 20.40.277.301 I slot print_timing: id  3 | task 17786 |    graphs reused =      17490
+2026-10-20T05:16:04+0800 mitlab-orin-nano llama-server[0]: 20.40.277.710 I slot      release: id  3 | task 17786 | stop processing: n_tokens = 2274, truncated = 0
+2026-10-20T05:16:04+0800 mitlab-orin-nano llama-server[0]: 20.40.346.531 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.503 (> 0.100 thold), f_keep = 0.460
+2026-10-20T05:16:04+0800 mitlab-orin-nano llama-server[0]: 20.40.346.659 I slot launch_slot_: id  3 | task 17999 | processing task, is_child = 0
+2026-10-20T05:16:11+0800 mitlab-orin-nano llama-server[0]: 20.47.434.035 I slot print_timing: id  3 | task 17999 | n_gen =    100, tg =  18.90 t/s, tg_3s =  19.09 t/s
+2026-10-20T05:16:13+0800 mitlab-orin-nano llama-server[0]: 20.49.117.563 I slot print_timing: id  3 | task 17999 | prompt eval time =    1849.90 ms /  1033 tokens (    1.79 ms per token,   558.41 tokens per second)
+2026-10-20T05:16:13+0800 mitlab-orin-nano llama-server[0]: 20.49.117.580 I slot print_timing: id  3 | task 17999 |        eval time =    6920.96 ms /   132 tokens (   52.83 ms per token,    18.93 tokens per second)
+2026-10-20T05:16:13+0800 mitlab-orin-nano llama-server[0]: 20.49.117.583 I slot print_timing: id  3 | task 17999 |       total time =    8770.85 ms /  1165 tokens
+2026-10-20T05:16:13+0800 mitlab-orin-nano llama-server[0]: 20.49.117.586 I slot print_timing: id  3 | task 17999 |    graphs reused =      17620
+2026-10-20T05:16:13+0800 mitlab-orin-nano llama-server[0]: 20.49.118.006 I slot      release: id  3 | task 17999 | stop processing: n_tokens = 2209, truncated = 0
+2026-10-20T05:16:13+0800 mitlab-orin-nano llama-server[0]: 20.49.201.540 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.506 (> 0.100 thold), f_keep = 0.473
+2026-10-20T05:16:13+0800 mitlab-orin-nano llama-server[0]: 20.49.201.685 I slot launch_slot_: id  3 | task 18134 | processing task, is_child = 0
+2026-10-20T05:16:20+0800 mitlab-orin-nano llama-server[0]: 20.56.210.221 I slot print_timing: id  3 | task 18134 | n_gen =    100, tg =  18.93 t/s, tg_3s =  19.12 t/s
+2026-10-20T05:16:20+0800 mitlab-orin-nano llama-server[0]: 20.56.628.949 I slot print_timing: id  3 | task 18134 | prompt eval time =    1777.79 ms /  1022 tokens (    1.74 ms per token,   574.87 tokens per second)
+2026-10-20T05:16:20+0800 mitlab-orin-nano llama-server[0]: 20.56.628.965 I slot print_timing: id  3 | task 18134 |        eval time =    5649.42 ms /   108 tokens (   52.80 ms per token,    18.94 tokens per second)
+2026-10-20T05:16:20+0800 mitlab-orin-nano llama-server[0]: 20.56.628.968 I slot print_timing: id  3 | task 18134 |       total time =    7427.21 ms /  1130 tokens
+2026-10-20T05:16:20+0800 mitlab-orin-nano llama-server[0]: 20.56.628.971 I slot print_timing: id  3 | task 18134 |    graphs reused =      17726
+2026-10-20T05:16:20+0800 mitlab-orin-nano llama-server[0]: 20.56.629.391 I slot      release: id  3 | task 18134 | stop processing: n_tokens = 2174, truncated = 0
+2026-10-20T05:16:20+0800 mitlab-orin-nano llama-server[0]: 20.56.712.630 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.514 (> 0.100 thold), f_keep = 0.481
+2026-10-20T05:16:20+0800 mitlab-orin-nano llama-server[0]: 20.56.712.734 I slot launch_slot_: id  3 | task 18245 | processing task, is_child = 0
+2026-10-20T05:16:27+0800 mitlab-orin-nano llama-server[0]: 21.03.713.121 I slot print_timing: id  3 | task 18245 | n_gen =    100, tg =  18.86 t/s, tg_3s =  19.05 t/s
+2026-10-20T05:16:30+0800 mitlab-orin-nano llama-server[0]: 21.06.758.441 I slot print_timing: id  3 | task 18245 | n_gen =    158, tg =  18.93 t/s, tg_3s =  19.05 t/s
+2026-10-20T05:16:33+0800 mitlab-orin-nano llama-server[0]: 21.09.809.193 I slot print_timing: id  3 | task 18245 | n_gen =    216, tg =  18.95 t/s, tg_3s =  19.01 t/s
+2026-10-20T05:16:36+0800 mitlab-orin-nano llama-server[0]: 21.12.810.193 I slot print_timing: id  3 | task 18245 | n_gen =    273, tg =  18.96 t/s, tg_3s =  18.99 t/s
+2026-10-20T05:16:38+0800 mitlab-orin-nano llama-server[0]: 21.14.465.332 I slot print_timing: id  3 | task 18245 | prompt eval time =    1750.39 ms /   988 tokens (    1.77 ms per token,   564.45 tokens per second)
+2026-10-20T05:16:38+0800 mitlab-orin-nano llama-server[0]: 21.14.465.348 I slot print_timing: id  3 | task 18245 |        eval time =   16002.17 ms /   304 tokens (   52.81 ms per token,    18.93 tokens per second)
+2026-10-20T05:16:38+0800 mitlab-orin-nano llama-server[0]: 21.14.465.351 I slot print_timing: id  3 | task 18245 |       total time =   17752.55 ms /  1292 tokens
+2026-10-20T05:16:38+0800 mitlab-orin-nano llama-server[0]: 21.14.465.354 I slot print_timing: id  3 | task 18245 |    graphs reused =      18024
+2026-10-20T05:16:38+0800 mitlab-orin-nano llama-server[0]: 21.14.465.764 I slot      release: id  3 | task 18245 | stop processing: n_tokens = 2336, truncated = 0
+2026-10-20T05:16:38+0800 mitlab-orin-nano llama-server[0]: 21.14.548.051 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.486 (> 0.100 thold), f_keep = 0.447
+2026-10-20T05:16:38+0800 mitlab-orin-nano llama-server[0]: 21.14.548.154 I slot launch_slot_: id  3 | task 18552 | processing task, is_child = 0
+2026-10-20T05:16:45+0800 mitlab-orin-nano llama-server[0]: 21.21.728.864 I slot print_timing: id  3 | task 18552 | n_gen =    100, tg =  18.87 t/s, tg_3s =  19.06 t/s
+2026-10-20T05:16:48+0800 mitlab-orin-nano llama-server[0]: 21.24.743.634 I slot print_timing: id  3 | task 18552 | n_gen =    157, tg =  18.88 t/s, tg_3s =  18.91 t/s
+2026-10-20T05:16:51+0800 mitlab-orin-nano llama-server[0]: 21.27.765.768 I slot print_timing: id  3 | task 18552 | n_gen =    214, tg =  18.88 t/s, tg_3s =  18.86 t/s
+2026-10-20T05:16:54+0800 mitlab-orin-nano llama-server[0]: 21.30.773.525 I slot print_timing: id  3 | task 18552 | n_gen =    271, tg =  18.89 t/s, tg_3s =  18.95 t/s
+2026-10-20T05:16:57+0800 mitlab-orin-nano llama-server[0]: 21.33.779.477 I slot print_timing: id  3 | task 18552 | n_gen =    328, tg =  18.91 t/s, tg_3s =  18.96 t/s
+2026-10-20T05:17:00+0800 mitlab-orin-nano llama-server[0]: 21.36.788.693 I slot print_timing: id  3 | task 18552 | n_gen =    385, tg =  18.91 t/s, tg_3s =  18.94 t/s
+2026-10-20T05:17:03+0800 mitlab-orin-nano llama-server[0]: 21.39.840.212 I slot print_timing: id  3 | task 18552 | n_gen =    442, tg =  18.88 t/s, tg_3s =  18.68 t/s
+2026-10-20T05:17:06+0800 mitlab-orin-nano llama-server[0]: 21.42.863.015 I slot print_timing: id  3 | task 18552 | n_gen =    499, tg =  18.88 t/s, tg_3s =  18.86 t/s
+2026-10-20T05:17:09+0800 mitlab-orin-nano llama-server[0]: 21.45.880.015 I slot print_timing: id  3 | task 18552 | n_gen =    556, tg =  18.88 t/s, tg_3s =  18.89 t/s
+2026-10-20T05:17:12+0800 mitlab-orin-nano llama-server[0]: 21.48.901.430 I slot print_timing: id  3 | task 18552 | n_gen =    613, tg =  18.88 t/s, tg_3s =  18.87 t/s
+2026-10-20T05:17:14+0800 mitlab-orin-nano llama-server[0]: 21.50.384.763 I slot print_timing: id  3 | task 18552 | prompt eval time =    1934.89 ms /  1107 tokens (    1.75 ms per token,   572.12 tokens per second)
+2026-10-20T05:17:14+0800 mitlab-orin-nano llama-server[0]: 21.50.384.776 I slot print_timing: id  3 | task 18552 |        eval time =   33901.68 ms /   641 tokens (   52.97 ms per token,    18.88 tokens per second)
+2026-10-20T05:17:14+0800 mitlab-orin-nano llama-server[0]: 21.50.384.779 I slot print_timing: id  3 | task 18552 |       total time =   35836.57 ms /  1748 tokens
+2026-10-20T05:17:14+0800 mitlab-orin-nano llama-server[0]: 21.50.384.782 I slot print_timing: id  3 | task 18552 |    graphs reused =      18659
+2026-10-20T05:17:14+0800 mitlab-orin-nano llama-server[0]: 21.50.385.194 I slot      release: id  3 | task 18552 | stop processing: n_tokens = 2792, truncated = 0
+2026-10-20T05:17:14+0800 mitlab-orin-nano llama-server[0]: 21.50.468.133 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.503 (> 0.100 thold), f_keep = 0.374
+2026-10-20T05:17:14+0800 mitlab-orin-nano llama-server[0]: 21.50.468.225 I slot launch_slot_: id  3 | task 19196 | processing task, is_child = 0
+2026-10-20T05:17:21+0800 mitlab-orin-nano llama-server[0]: 21.57.555.662 I slot print_timing: id  3 | task 19196 | n_gen =    100, tg =  18.84 t/s, tg_3s =  19.03 t/s
+2026-10-20T05:17:23+0800 mitlab-orin-nano llama-server[0]: 21.59.755.842 I slot print_timing: id  3 | task 19196 | prompt eval time =    1831.87 ms /  1031 tokens (    1.78 ms per token,   562.81 tokens per second)
+2026-10-20T05:17:23+0800 mitlab-orin-nano llama-server[0]: 21.59.755.857 I slot print_timing: id  3 | task 19196 |        eval time =    7455.70 ms /   142 tokens (   52.88 ms per token,    18.91 tokens per second)
+2026-10-20T05:17:23+0800 mitlab-orin-nano llama-server[0]: 21.59.755.860 I slot print_timing: id  3 | task 19196 |       total time =    9287.57 ms /  1173 tokens
+2026-10-20T05:17:23+0800 mitlab-orin-nano llama-server[0]: 21.59.755.863 I slot print_timing: id  3 | task 19196 |    graphs reused =      18799
+2026-10-20T05:17:23+0800 mitlab-orin-nano llama-server[0]: 21.59.756.276 I slot      release: id  3 | task 19196 | stop processing: n_tokens = 2217, truncated = 0
+2026-10-20T05:17:23+0800 mitlab-orin-nano llama-server[0]: 21.59.838.536 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.517 (> 0.100 thold), f_keep = 0.471
+2026-10-20T05:17:23+0800 mitlab-orin-nano llama-server[0]: 21.59.838.639 I slot launch_slot_: id  3 | task 19341 | processing task, is_child = 0
+2026-10-20T05:17:30+0800 mitlab-orin-nano llama-server[0]: 22.06.840.362 I slot print_timing: id  3 | task 19341 | n_gen =    100, tg =  18.83 t/s, tg_3s =  19.02 t/s
+2026-10-20T05:17:33+0800 mitlab-orin-nano llama-server[0]: 22.09.889.735 I slot print_timing: id  3 | task 19341 | n_gen =    158, tg =  18.90 t/s, tg_3s =  19.02 t/s
+2026-10-20T05:17:36+0800 mitlab-orin-nano llama-server[0]: 22.12.938.543 I slot print_timing: id  3 | task 19341 | n_gen =    216, tg =  18.93 t/s, tg_3s =  19.02 t/s
+2026-10-20T05:17:37+0800 mitlab-orin-nano llama-server[0]: 22.13.939.063 I slot print_timing: id  3 | task 19341 | prompt eval time =    1743.48 ms /   977 tokens (    1.78 ms per token,   560.37 tokens per second)
+2026-10-20T05:17:37+0800 mitlab-orin-nano llama-server[0]: 22.13.939.080 I slot print_timing: id  3 | task 19341 |        eval time =   12356.89 ms /   235 tokens (   52.81 ms per token,    18.94 tokens per second)
+2026-10-20T05:17:37+0800 mitlab-orin-nano llama-server[0]: 22.13.939.083 I slot print_timing: id  3 | task 19341 |       total time =   14100.37 ms /  1212 tokens
+2026-10-20T05:17:37+0800 mitlab-orin-nano llama-server[0]: 22.13.939.086 I slot print_timing: id  3 | task 19341 |    graphs reused =      19030
+2026-10-20T05:17:37+0800 mitlab-orin-nano llama-server[0]: 22.13.939.487 I slot      release: id  3 | task 19341 | stop processing: n_tokens = 2256, truncated = 0
+2026-10-20T05:17:37+0800 mitlab-orin-nano llama-server[0]: 22.14.023.412 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.494 (> 0.100 thold), f_keep = 0.463
+2026-10-20T05:17:37+0800 mitlab-orin-nano llama-server[0]: 22.14.023.511 I slot launch_slot_: id  3 | task 19579 | processing task, is_child = 0
+2026-10-20T05:17:45+0800 mitlab-orin-nano llama-server[0]: 22.21.149.499 I slot print_timing: id  3 | task 19579 | n_gen =    100, tg =  18.94 t/s, tg_3s =  19.13 t/s
+2026-10-20T05:17:48+0800 mitlab-orin-nano llama-server[0]: 22.24.202.208 I slot print_timing: id  3 | task 19579 | n_gen =    158, tg =  18.96 t/s, tg_3s =  19.00 t/s
+2026-10-20T05:17:51+0800 mitlab-orin-nano llama-server[0]: 22.27.236.031 I slot print_timing: id  3 | task 19579 | n_gen =    215, tg =  18.92 t/s, tg_3s =  18.79 t/s
+2026-10-20T05:17:54+0800 mitlab-orin-nano llama-server[0]: 22.30.258.766 I slot print_timing: id  3 | task 19579 | n_gen =    272, tg =  18.90 t/s, tg_3s =  18.86 t/s
+2026-10-20T05:17:57+0800 mitlab-orin-nano llama-server[0]: 22.33.269.540 I slot print_timing: id  3 | task 19579 | n_gen =    329, tg =  18.91 t/s, tg_3s =  18.93 t/s
+2026-10-20T05:18:00+0800 mitlab-orin-nano llama-server[0]: 22.36.285.683 I slot print_timing: id  3 | task 19579 | n_gen =    386, tg =  18.91 t/s, tg_3s =  18.90 t/s
+2026-10-20T05:18:01+0800 mitlab-orin-nano llama-server[0]: 22.37.134.784 I slot print_timing: id  3 | task 19579 | prompt eval time =    1898.94 ms /  1070 tokens (    1.77 ms per token,   563.47 tokens per second)
+2026-10-20T05:18:01+0800 mitlab-orin-nano llama-server[0]: 22.37.134.799 I slot print_timing: id  3 | task 19579 |        eval time =   21212.29 ms /   402 tokens (   52.90 ms per token,    18.90 tokens per second)
+2026-10-20T05:18:01+0800 mitlab-orin-nano llama-server[0]: 22.37.134.802 I slot print_timing: id  3 | task 19579 |       total time =   23111.22 ms /  1472 tokens
+2026-10-20T05:18:01+0800 mitlab-orin-nano llama-server[0]: 22.37.134.804 I slot print_timing: id  3 | task 19579 |    graphs reused =      19428
+2026-10-20T05:18:01+0800 mitlab-orin-nano llama-server[0]: 22.37.135.231 I slot      release: id  3 | task 19579 | stop processing: n_tokens = 2516, truncated = 0
+2026-10-20T05:18:01+0800 mitlab-orin-nano llama-server[0]: 22.37.217.081 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.516 (> 0.100 thold), f_keep = 0.415
+2026-10-20T05:18:01+0800 mitlab-orin-nano llama-server[0]: 22.37.217.185 I slot launch_slot_: id  3 | task 19984 | processing task, is_child = 0
+2026-10-20T05:18:08+0800 mitlab-orin-nano llama-server[0]: 22.44.253.223 I slot print_timing: id  3 | task 19984 | n_gen =    100, tg =  18.68 t/s, tg_3s =  18.87 t/s
+2026-10-20T05:18:11+0800 mitlab-orin-nano llama-server[0]: 22.47.256.923 I slot print_timing: id  3 | task 19984 | n_gen =    157, tg =  18.79 t/s, tg_3s =  18.98 t/s
+2026-10-20T05:18:14+0800 mitlab-orin-nano llama-server[0]: 22.50.259.212 I slot print_timing: id  3 | task 19984 | n_gen =    214, tg =  18.84 t/s, tg_3s =  18.99 t/s
+2026-10-20T05:18:15+0800 mitlab-orin-nano llama-server[0]: 22.52.100.190 I slot print_timing: id  3 | task 19984 | prompt eval time =    1736.99 ms /   979 tokens (    1.77 ms per token,   563.62 tokens per second)
+2026-10-20T05:18:15+0800 mitlab-orin-nano llama-server[0]: 22.52.100.206 I slot print_timing: id  3 | task 19984 |        eval time =   13145.97 ms /   249 tokens (   53.01 ms per token,    18.87 tokens per second)
+2026-10-20T05:18:15+0800 mitlab-orin-nano llama-server[0]: 22.52.100.209 I slot print_timing: id  3 | task 19984 |       total time =   14882.96 ms /  1228 tokens
+2026-10-20T05:18:15+0800 mitlab-orin-nano llama-server[0]: 22.52.100.216 I slot print_timing: id  3 | task 19984 |    graphs reused =      19673
+2026-10-20T05:18:15+0800 mitlab-orin-nano llama-server[0]: 22.52.100.609 I slot      release: id  3 | task 19984 | stop processing: n_tokens = 2272, truncated = 0
+2026-10-20T05:18:16+0800 mitlab-orin-nano llama-server[0]: 22.52.183.030 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.514 (> 0.100 thold), f_keep = 0.460
+2026-10-20T05:18:16+0800 mitlab-orin-nano llama-server[0]: 22.52.183.138 I slot launch_slot_: id  3 | task 20236 | processing task, is_child = 0
+2026-10-20T05:18:23+0800 mitlab-orin-nano llama-server[0]: 22.59.207.689 I slot print_timing: id  3 | task 20236 | n_gen =    100, tg =  18.79 t/s, tg_3s =  18.98 t/s
+2026-10-20T05:18:26+0800 mitlab-orin-nano llama-server[0]: 23.02.250.477 I slot print_timing: id  3 | task 20236 | n_gen =    158, tg =  18.89 t/s, tg_3s =  19.06 t/s
+2026-10-20T05:18:29+0800 mitlab-orin-nano llama-server[0]: 23.05.293.898 I slot print_timing: id  3 | task 20236 | n_gen =    216, tg =  18.94 t/s, tg_3s =  19.06 t/s
+2026-10-20T05:18:31+0800 mitlab-orin-nano llama-server[0]: 23.07.447.541 I slot print_timing: id  3 | task 20236 | prompt eval time =    1756.37 ms /   989 tokens (    1.78 ms per token,   563.09 tokens per second)
+2026-10-20T05:18:31+0800 mitlab-orin-nano llama-server[0]: 23.07.447.555 I slot print_timing: id  3 | task 20236 |        eval time =   13508.00 ms /   257 tokens (   52.77 ms per token,    18.95 tokens per second)
+2026-10-20T05:18:31+0800 mitlab-orin-nano llama-server[0]: 23.07.447.558 I slot print_timing: id  3 | task 20236 |       total time =   15264.36 ms /  1246 tokens
+2026-10-20T05:18:31+0800 mitlab-orin-nano llama-server[0]: 23.07.447.561 I slot print_timing: id  3 | task 20236 |    graphs reused =      19926
+2026-10-20T05:18:31+0800 mitlab-orin-nano llama-server[0]: 23.07.447.964 I slot      release: id  3 | task 20236 | stop processing: n_tokens = 2290, truncated = 0
+2026-10-20T05:18:31+0800 mitlab-orin-nano llama-server[0]: 23.07.529.286 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.499 (> 0.100 thold), f_keep = 0.456
+2026-10-20T05:18:31+0800 mitlab-orin-nano llama-server[0]: 23.07.529.395 I slot launch_slot_: id  3 | task 20496 | processing task, is_child = 0
+2026-10-20T05:18:38+0800 mitlab-orin-nano llama-server[0]: 23.14.621.381 I slot print_timing: id  3 | task 20496 | n_gen =    100, tg =  18.95 t/s, tg_3s =  19.14 t/s
+2026-10-20T05:18:41+0800 mitlab-orin-nano llama-server[0]: 23.17.671.462 I slot print_timing: id  3 | task 20496 | n_gen =    158, tg =  18.97 t/s, tg_3s =  19.02 t/s
+2026-10-20T05:18:44+0800 mitlab-orin-nano llama-server[0]: 23.20.678.588 I slot print_timing: id  3 | task 20496 | n_gen =    215, tg =  18.97 t/s, tg_3s =  18.95 t/s
+2026-10-20T05:18:47+0800 mitlab-orin-nano llama-server[0]: 23.23.708.931 I slot print_timing: id  3 | task 20496 | n_gen =    272, tg =  18.93 t/s, tg_3s =  18.81 t/s
+2026-10-20T05:18:50+0800 mitlab-orin-nano llama-server[0]: 23.26.713.218 I slot print_timing: id  3 | task 20496 | n_gen =    329, tg =  18.94 t/s, tg_3s =  18.97 t/s
+2026-10-20T05:18:51+0800 mitlab-orin-nano llama-server[0]: 23.27.768.419 I slot print_timing: id  3 | task 20496 | prompt eval time =    1867.34 ms /  1051 tokens (    1.78 ms per token,   562.83 tokens per second)
+2026-10-20T05:18:51+0800 mitlab-orin-nano llama-server[0]: 23.27.768.434 I slot print_timing: id  3 | task 20496 |        eval time =   18371.64 ms /   349 tokens (   52.79 ms per token,    18.94 tokens per second)
+2026-10-20T05:18:51+0800 mitlab-orin-nano llama-server[0]: 23.27.768.437 I slot print_timing: id  3 | task 20496 |       total time =   20238.98 ms /  1400 tokens
+2026-10-20T05:18:51+0800 mitlab-orin-nano llama-server[0]: 23.27.768.440 I slot print_timing: id  3 | task 20496 |    graphs reused =      20271
+2026-10-20T05:18:51+0800 mitlab-orin-nano llama-server[0]: 23.27.768.840 I slot      release: id  3 | task 20496 | stop processing: n_tokens = 2444, truncated = 0
+2026-10-20T05:18:51+0800 mitlab-orin-nano llama-server[0]: 23.27.852.352 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.503 (> 0.100 thold), f_keep = 0.428
+2026-10-20T05:18:51+0800 mitlab-orin-nano llama-server[0]: 23.27.852.454 I slot launch_slot_: id  3 | task 20848 | processing task, is_child = 0
+2026-10-20T05:18:57+0800 mitlab-orin-nano llama-server[0]: 23.34.045.147 I slot print_timing: id  3 | task 20848 | prompt eval time =    1859.55 ms /  1034 tokens (    1.80 ms per token,   556.05 tokens per second)
+2026-10-20T05:18:57+0800 mitlab-orin-nano llama-server[0]: 23.34.045.161 I slot print_timing: id  3 | task 20848 |        eval time =    4333.10 ms /    83 tokens (   52.84 ms per token,    18.92 tokens per second)
+2026-10-20T05:18:57+0800 mitlab-orin-nano llama-server[0]: 23.34.045.164 I slot print_timing: id  3 | task 20848 |       total time =    6192.65 ms /  1117 tokens
+2026-10-20T05:18:57+0800 mitlab-orin-nano llama-server[0]: 23.34.045.169 I slot print_timing: id  3 | task 20848 |    graphs reused =      20352
+2026-10-20T05:18:57+0800 mitlab-orin-nano llama-server[0]: 23.34.045.590 I slot      release: id  3 | task 20848 | stop processing: n_tokens = 2161, truncated = 0
+2026-10-20T05:18:58+0800 mitlab-orin-nano llama-server[0]: 23.34.128.757 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.502 (> 0.100 thold), f_keep = 0.484
+2026-10-20T05:18:58+0800 mitlab-orin-nano llama-server[0]: 23.34.128.869 I slot launch_slot_: id  3 | task 20934 | processing task, is_child = 0
+2026-10-20T05:19:04+0800 mitlab-orin-nano llama-server[0]: 23.40.406.994 I slot print_timing: id  3 | task 20934 | prompt eval time =    1838.23 ms /  1037 tokens (    1.77 ms per token,   564.13 tokens per second)
+2026-10-20T05:19:04+0800 mitlab-orin-nano llama-server[0]: 23.40.407.014 I slot print_timing: id  3 | task 20934 |        eval time =    4439.85 ms /    85 tokens (   52.86 ms per token,    18.92 tokens per second)
+2026-10-20T05:19:04+0800 mitlab-orin-nano llama-server[0]: 23.40.407.017 I slot print_timing: id  3 | task 20934 |       total time =    6278.07 ms /  1122 tokens
+2026-10-20T05:19:04+0800 mitlab-orin-nano llama-server[0]: 23.40.407.023 I slot print_timing: id  3 | task 20934 |    graphs reused =      20435
+2026-10-20T05:19:04+0800 mitlab-orin-nano llama-server[0]: 23.40.407.442 I slot      release: id  3 | task 20934 | stop processing: n_tokens = 2166, truncated = 0
+2026-10-20T05:19:04+0800 mitlab-orin-nano llama-server[0]: 23.40.489.939 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.504 (> 0.100 thold), f_keep = 0.482
+2026-10-20T05:19:04+0800 mitlab-orin-nano llama-server[0]: 23.40.490.056 I slot launch_slot_: id  3 | task 21022 | processing task, is_child = 0
+2026-10-20T05:19:11+0800 mitlab-orin-nano llama-server[0]: 23.47.497.198 I slot print_timing: id  3 | task 21022 | n_gen =    100, tg =  18.94 t/s, tg_3s =  19.13 t/s
+2026-10-20T05:19:14+0800 mitlab-orin-nano llama-server[0]: 23.50.548.936 I slot print_timing: id  3 | task 21022 | n_gen =    158, tg =  18.96 t/s, tg_3s =  19.01 t/s
+2026-10-20T05:19:14+0800 mitlab-orin-nano llama-server[0]: 23.51.073.625 I slot print_timing: id  3 | task 21022 | prompt eval time =    1779.29 ms /  1028 tokens (    1.73 ms per token,   577.76 tokens per second)
+2026-10-20T05:19:14+0800 mitlab-orin-nano llama-server[0]: 23.51.073.644 I slot print_timing: id  3 | task 21022 |        eval time =    8804.24 ms /   168 tokens (   52.72 ms per token,    18.97 tokens per second)
+2026-10-20T05:19:14+0800 mitlab-orin-nano llama-server[0]: 23.51.073.648 I slot print_timing: id  3 | task 21022 |       total time =   10583.53 ms /  1196 tokens
+2026-10-20T05:19:14+0800 mitlab-orin-nano llama-server[0]: 23.51.073.651 I slot print_timing: id  3 | task 21022 |    graphs reused =      20601
+2026-10-20T05:19:14+0800 mitlab-orin-nano llama-server[0]: 23.51.074.093 I slot      release: id  3 | task 21022 | stop processing: n_tokens = 2240, truncated = 0
+2026-10-20T05:19:15+0800 mitlab-orin-nano llama-server[0]: 23.51.155.337 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.486 (> 0.100 thold), f_keep = 0.467
+2026-10-20T05:19:15+0800 mitlab-orin-nano llama-server[0]: 23.51.155.445 I slot launch_slot_: id  3 | task 21193 | processing task, is_child = 0
+2026-10-20T05:19:22+0800 mitlab-orin-nano llama-server[0]: 23.58.316.407 I slot print_timing: id  3 | task 21193 | n_gen =    100, tg =  18.94 t/s, tg_3s =  19.13 t/s
+2026-10-20T05:19:25+0800 mitlab-orin-nano llama-server[0]: 24.01.373.545 I slot print_timing: id  3 | task 21193 | n_gen =    158, tg =  18.95 t/s, tg_3s =  18.97 t/s
+2026-10-20T05:19:28+0800 mitlab-orin-nano llama-server[0]: 24.04.405.925 I slot print_timing: id  3 | task 21193 | n_gen =    215, tg =  18.91 t/s, tg_3s =  18.80 t/s
+2026-10-20T05:19:31+0800 mitlab-orin-nano llama-server[0]: 24.07.415.421 I slot print_timing: id  3 | task 21193 | n_gen =    272, tg =  18.92 t/s, tg_3s =  18.94 t/s
+2026-10-20T05:19:34+0800 mitlab-orin-nano llama-server[0]: 24.10.432.366 I slot print_timing: id  3 | task 21193 | n_gen =    329, tg =  18.91 t/s, tg_3s =  18.89 t/s
+2026-10-20T05:19:35+0800 mitlab-orin-nano llama-server[0]: 24.11.489.953 I slot print_timing: id  3 | task 21193 | prompt eval time =    1934.67 ms /  1103 tokens (    1.75 ms per token,   570.12 tokens per second)
+2026-10-20T05:19:35+0800 mitlab-orin-nano llama-server[0]: 24.11.489.970 I slot print_timing: id  3 | task 21193 |        eval time =   18399.79 ms /   349 tokens (   52.87 ms per token,    18.91 tokens per second)
+2026-10-20T05:19:35+0800 mitlab-orin-nano llama-server[0]: 24.11.489.973 I slot print_timing: id  3 | task 21193 |       total time =   20334.46 ms /  1452 tokens
+2026-10-20T05:19:35+0800 mitlab-orin-nano llama-server[0]: 24.11.489.976 I slot print_timing: id  3 | task 21193 |    graphs reused =      20946
+2026-10-20T05:19:35+0800 mitlab-orin-nano llama-server[0]: 24.11.490.406 I slot      release: id  3 | task 21193 | stop processing: n_tokens = 2496, truncated = 0
+2026-10-20T05:19:35+0800 mitlab-orin-nano llama-server[0]: 24.11.573.424 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.501 (> 0.100 thold), f_keep = 0.419
+2026-10-20T05:19:35+0800 mitlab-orin-nano llama-server[0]: 24.11.573.521 I slot launch_slot_: id  3 | task 21545 | processing task, is_child = 0
+2026-10-20T05:19:41+0800 mitlab-orin-nano llama-server[0]: 24.17.920.751 I slot print_timing: id  3 | task 21545 | prompt eval time =    1858.26 ms /  1041 tokens (    1.79 ms per token,   560.20 tokens per second)
+2026-10-20T05:19:41+0800 mitlab-orin-nano llama-server[0]: 24.17.920.766 I slot print_timing: id  3 | task 21545 |        eval time =    4488.93 ms /    86 tokens (   52.81 ms per token,    18.94 tokens per second)
+2026-10-20T05:19:41+0800 mitlab-orin-nano llama-server[0]: 24.17.920.769 I slot print_timing: id  3 | task 21545 |       total time =    6347.18 ms /  1127 tokens
+2026-10-20T05:19:41+0800 mitlab-orin-nano llama-server[0]: 24.17.920.772 I slot print_timing: id  3 | task 21545 |    graphs reused =      21030
+2026-10-20T05:19:41+0800 mitlab-orin-nano llama-server[0]: 24.17.921.182 I slot      release: id  3 | task 21545 | stop processing: n_tokens = 2171, truncated = 0
+2026-10-20T05:19:41+0800 mitlab-orin-nano llama-server[0]: 24.18.006.277 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.484 (> 0.100 thold), f_keep = 0.481
+2026-10-20T05:19:41+0800 mitlab-orin-nano llama-server[0]: 24.18.006.378 I slot launch_slot_: id  3 | task 21634 | processing task, is_child = 0
+2026-10-20T05:19:49+0800 mitlab-orin-nano llama-server[0]: 24.25.176.683 I slot print_timing: id  3 | task 21634 | n_gen =    100, tg =  18.95 t/s, tg_3s =  19.15 t/s
+2026-10-20T05:19:52+0800 mitlab-orin-nano llama-server[0]: 24.28.210.992 I slot print_timing: id  3 | task 21634 | n_gen =    157, tg =  18.89 t/s, tg_3s =  18.79 t/s
+2026-10-20T05:19:55+0800 mitlab-orin-nano llama-server[0]: 24.31.218.636 I slot print_timing: id  3 | task 21634 | n_gen =    214, tg =  18.91 t/s, tg_3s =  18.95 t/s
+2026-10-20T05:19:55+0800 mitlab-orin-nano llama-server[0]: 24.31.797.419 I slot print_timing: id  3 | task 21634 | prompt eval time =    1947.31 ms /  1113 tokens (    1.75 ms per token,   571.56 tokens per second)
+2026-10-20T05:19:55+0800 mitlab-orin-nano llama-server[0]: 24.31.797.434 I slot print_timing: id  3 | task 21634 |        eval time =   11843.69 ms /   225 tokens (   52.87 ms per token,    18.91 tokens per second)
+2026-10-20T05:19:55+0800 mitlab-orin-nano llama-server[0]: 24.31.797.437 I slot print_timing: id  3 | task 21634 |       total time =   13791.00 ms /  1338 tokens
+2026-10-20T05:19:55+0800 mitlab-orin-nano llama-server[0]: 24.31.797.441 I slot print_timing: id  3 | task 21634 |    graphs reused =      21251
+2026-10-20T05:19:55+0800 mitlab-orin-nano llama-server[0]: 24.31.797.889 I slot      release: id  3 | task 21634 | stop processing: n_tokens = 2382, truncated = 0
+2026-10-20T05:19:55+0800 mitlab-orin-nano llama-server[0]: 24.31.881.942 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.504 (> 0.100 thold), f_keep = 0.439
+2026-10-20T05:19:55+0800 mitlab-orin-nano llama-server[0]: 24.31.882.069 I slot launch_slot_: id  3 | task 21862 | processing task, is_child = 0
+2026-10-20T05:20:02+0800 mitlab-orin-nano llama-server[0]: 24.38.933.533 I slot print_timing: id  3 | task 21862 | n_gen =    100, tg =  18.94 t/s, tg_3s =  19.13 t/s
+2026-10-20T05:20:05+0800 mitlab-orin-nano llama-server[0]: 24.41.985.264 I slot print_timing: id  3 | task 21862 | n_gen =    158, tg =  18.97 t/s, tg_3s =  19.01 t/s
+2026-10-20T05:20:07+0800 mitlab-orin-nano llama-server[0]: 24.43.344.518 I slot print_timing: id  3 | task 21862 | prompt eval time =    1825.31 ms /  1029 tokens (    1.77 ms per token,   563.74 tokens per second)
+2026-10-20T05:20:07+0800 mitlab-orin-nano llama-server[0]: 24.43.344.534 I slot print_timing: id  3 | task 21862 |        eval time =    9637.10 ms /   184 tokens (   52.66 ms per token,    18.99 tokens per second)
+2026-10-20T05:20:07+0800 mitlab-orin-nano llama-server[0]: 24.43.344.537 I slot print_timing: id  3 | task 21862 |       total time =   11462.41 ms /  1213 tokens
+2026-10-20T05:20:07+0800 mitlab-orin-nano llama-server[0]: 24.43.344.540 I slot print_timing: id  3 | task 21862 |    graphs reused =      21433
+2026-10-20T05:20:07+0800 mitlab-orin-nano llama-server[0]: 24.43.344.968 I slot      release: id  3 | task 21862 | stop processing: n_tokens = 2257, truncated = 0
+2026-10-20T05:20:07+0800 mitlab-orin-nano llama-server[0]: 24.43.429.029 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.495 (> 0.100 thold), f_keep = 0.463
+2026-10-20T05:20:07+0800 mitlab-orin-nano llama-server[0]: 24.43.429.127 I slot launch_slot_: id  3 | task 22049 | processing task, is_child = 0
+2026-10-20T05:20:14+0800 mitlab-orin-nano llama-server[0]: 24.50.525.062 I slot print_timing: id  3 | task 22049 | n_gen =    100, tg =  18.99 t/s, tg_3s =  19.18 t/s
+2026-10-20T05:20:16+0800 mitlab-orin-nano llama-server[0]: 24.53.041.555 I slot print_timing: id  3 | task 22049 | prompt eval time =    1882.80 ms /  1065 tokens (    1.77 ms per token,   565.65 tokens per second)
+2026-10-20T05:20:16+0800 mitlab-orin-nano llama-server[0]: 24.53.041.571 I slot print_timing: id  3 | task 22049 |        eval time =    7729.57 ms /   148 tokens (   52.58 ms per token,    19.02 tokens per second)
+2026-10-20T05:20:16+0800 mitlab-orin-nano llama-server[0]: 24.53.041.574 I slot print_timing: id  3 | task 22049 |       total time =    9612.38 ms /  1213 tokens
+2026-10-20T05:20:16+0800 mitlab-orin-nano llama-server[0]: 24.53.041.578 I slot print_timing: id  3 | task 22049 |    graphs reused =      21579
+2026-10-20T05:20:16+0800 mitlab-orin-nano llama-server[0]: 24.53.042.010 I slot      release: id  3 | task 22049 | stop processing: n_tokens = 2257, truncated = 0
+2026-10-20T05:20:17+0800 mitlab-orin-nano llama-server[0]: 24.53.123.021 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.522 (> 0.100 thold), f_keep = 0.463
+2026-10-20T05:20:17+0800 mitlab-orin-nano llama-server[0]: 24.53.123.110 I slot launch_slot_: id  3 | task 22200 | processing task, is_child = 0
+2026-10-20T05:20:23+0800 mitlab-orin-nano llama-server[0]: 25.00.092.881 I slot print_timing: id  3 | task 22200 | n_gen =    100, tg =  18.76 t/s, tg_3s =  18.94 t/s
+2026-10-20T05:20:24+0800 mitlab-orin-nano llama-server[0]: 25.00.568.215 I slot print_timing: id  3 | task 22200 | prompt eval time =    1691.17 ms /   957 tokens (    1.77 ms per token,   565.88 tokens per second)
+2026-10-20T05:20:24+0800 mitlab-orin-nano llama-server[0]: 25.00.568.230 I slot print_timing: id  3 | task 22200 |        eval time =    5753.89 ms /   109 tokens (   53.28 ms per token,    18.77 tokens per second)
+2026-10-20T05:20:24+0800 mitlab-orin-nano llama-server[0]: 25.00.568.233 I slot print_timing: id  3 | task 22200 |       total time =    7445.06 ms /  1066 tokens
+2026-10-20T05:20:24+0800 mitlab-orin-nano llama-server[0]: 25.00.568.236 I slot print_timing: id  3 | task 22200 |    graphs reused =      21684
+2026-10-20T05:20:24+0800 mitlab-orin-nano llama-server[0]: 25.00.568.656 I slot      release: id  3 | task 22200 | stop processing: n_tokens = 2110, truncated = 0
+2026-10-20T05:20:24+0800 mitlab-orin-nano llama-server[0]: 25.00.651.505 I slot get_availabl: id  3 | task -1 | selected slot by LCP similarity, f_sim_best = 0.507 (> 0.100 thold), f_keep = 0.495
+2026-10-20T05:20:24+0800 mitlab-orin-nano llama-server[0]: 25.00.651.603 I slot launch_slot_: id  3 | task 22312 | processing task, is_child = 0
+2026-10-20T05:20:31+0800 mitlab-orin-nano llama-server[0]: 25.07.657.841 I slot print_timing: id  3 | task 22312 | n_gen =    100, tg =  18.91 t/s, tg_3s =  19.10 t/s
+2026-10-20T05:20:33+0800 mitlab-orin-nano llama-server[0]: 25.09.709.697 I slot print_timing: id  3 | task 22312 | prompt eval time =    1770.17 ms /  1015 tokens (    1.74 ms per token,   573.39 tokens per second)
+2026-10-20T05:20:33+0800 mitlab-orin-nano llama-server[0]: 25.09.709.713 I slot print_timing: id  3 | task 22312 |        eval time =    7287.87 ms /   139 tokens (   52.81 ms per token,    18.94 tokens per second)
+2026-10-20T05:20:33+0800 mitlab-orin-nano llama-server[0]: 25.09.709.716 I slot print_timing: id  3 | task 22312 |       total time =    9058.04 ms /  1154 tokens
+2026-10-20T05:20:33+0800 mitlab-orin-nano llama-server[0]: 25.09.709.719 I slot print_timing: id  3 | task 22312 |    graphs reused =      21821
+2026-10-20T05:20:33+0800 mitlab-orin-nano llama-server[0]: 25.09.710.191 I slot      release: id  3 | task 22312 | stop processing: n_tokens = 2198, truncated = 0
+2026-10-20T05:20:34+0800 mitlab-orin-nano llama-server[0]: 25.10.522.680 I srv    operator(): operator(): cleaning up before exit...

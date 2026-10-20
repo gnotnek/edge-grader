@@ -1,0 +1,63 @@
+{
+  "stage": "rag",
+  "benchmark": "gsm",
+  "set": "symbolic",
+  "label": "e2b-jetson",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "/home/ari/research/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a894dae"
+  },
+  "n_requested": 0,
+  "generation": {
+    "max_tokens": 1024,
+    "temperature": 0,
+    "stop": [
+      "Question:",
+      "</s>",
+      "<|im_end|>"
+    ],
+    "shots": 5,
+    "prompt": "lm-eval gsm8k chat format, fixed shots (seed 1234)",
+    "instances": 10
+  },
+  "time": "2026-10-19T23:34:27+00:00",
+  "metrics": {
+    "n": 1000,
+    "accuracy": 0.748,
+    "strict_accuracy": 0.413,
+    "no_number": 0,
+    "hit_token_cap": 34,
+    "errors": 0,
+    "median_latency_s": 5.503,
+    "wall_s": 7862.7,
+    "prompt_tokens": 2074020,
+    "completion_tokens": 261693,
+    "per_instance_accuracy": {
+      "0": 0.71,
+      "1": 0.77,
+      "2": 0.73,
+      "3": 0.78,
+      "4": 0.73,
+      "5": 0.77,
+      "6": 0.77,
+      "7": 0.75,
+      "8": 0.69,
+      "9": 0.78
+    },
+    "instance_accuracy_range": [
+      0.69,
+      0.78
+    ]
+  },
+  "rag": {
+    "retrieval": "results/rag/retrieval-gsm-en.bge-small-en-k5.json",
+    "k": 3,
+    "index": "data/rag/index/gsm-en.bge-small-en",
+    "embedding_model": "BAAI/bge-small-en-v1.5",
+    "chunks": "data/rag/chunks/gsm-en.jsonl",
+    "chunks_sha256": "dce2ea3957ca7e0ecae0fd2ab8ed8b5c9e468744e647be20c33bc1dd814bce66"
+  }
+}

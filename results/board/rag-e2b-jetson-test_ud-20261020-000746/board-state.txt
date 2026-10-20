@@ -1,0 +1,14 @@
+time: 2026-10-20T00:08:16+0800
+kernel: 6.8.12-1021-tegra
+cpu0: governor schedutil min 729600 max 1728000 cur 1190400 (kHz)
+devfreq 15340000.vic: min 115200000 max 435200000 cur 435200000 (Hz)
+devfreq 15380000.nvjpg: min 115200000 max 499200000 cur 499200000 (Hz)
+devfreq 15480000.nvdec: min 115200000 max 524800000 cur 524800000 (Hz)
+devfreq 15540000.nvjpg: min 115200000 max 499200000 cur 499200000 (Hz)
+devfreq 15a50000.ofa: min 115200000 max 537600000 cur 537600000 (Hz)
+devfreq 17000000.gpu: min 306000000 max 1020000000 cur 1020000000 (Hz)
+devfreq bwmgr: min 204000000 max 3199000000 cur 2133000000 (Hz)
+nvpmodel: NV Power Mode: 15W 0 
+deployed: {"commit": "5d8c15b", "dirty": false, "at": "2026-10-19T23:29:59+0800"}
+variant: base
+engine: /home/ari/build/llama.cpp/build/bin/llama-server

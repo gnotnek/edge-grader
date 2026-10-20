@@ -1,0 +1,16 @@
+{
+ "label": "telemetry",
+ "command": "env EG_INNER=1 EG_RUN_DIR=/mnt/ssd-ex/research/edge-grader/results/board/gsm-rag-e4b-jetson-symbolic-i10-20261020-073521 MEASURE=1 BENCH=gsm INSTANCES=10 THINKING=off VARIANT=base RAG=results/rag/retrieval-gsm-en.bge-small-en-k5.json LG_ENGINE=/home/ari/build/little-gemma-ae/build/run-cuda-i8 /mnt/ssd-ex/research/edge-grader/scripts/board_grade.sh e4b symbolic 0",
+ "model_path": "",
+ "server_args": "",
+ "governor": "schedutil",
+ "kernel": "Linux 6.8.12-1021-tegra",
+ "host": "mitlab-orin-nano",
+ "cpus": 6,
+ "start_epoch": 1792452922.198796,
+ "throttled_at_start": "",
+ "server_args_after": "/home/ari/build/llama.cpp/build/bin/llama-server -m /home/ari/research/models/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf -c 8192 --host 127.0.0.1 --port 8080 -ngl 99 -rea off --reasoning-budget -1 --cache-ram 0",
+ "work_start_epoch": 1792452952.0,
+ "work_end_epoch": 1792467803.0,
+ "exit_code": 0
+}
