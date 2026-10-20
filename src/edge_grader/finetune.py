@@ -63,6 +63,27 @@ def summary(model_key: str, args: dict, history: list[dict], chosen: int, train_
             "created": datetime.now(UTC).isoformat(timespec="seconds")}
 
 
+def training_kwargs(out: Path, epochs: int, max_steps: int, seed: int) -> dict:
+    """TrainingArguments for the recipe. transformers 5 has no warmup_ratio: a warmup_steps
+    below 1 is read as a fraction of the steps."""
+    return {"output_dir": str(out / "trainer"), "per_device_train_batch_size": RECIPE["batch"],
+            "gradient_accumulation_steps": RECIPE["grad_accum"], "learning_rate": RECIPE["lr"],
+            "lr_scheduler_type": RECIPE["scheduler"], "warmup_steps": RECIPE["warmup_ratio"],
+            "num_train_epochs": epochs, "max_steps": max_steps or -1, "fp16": True,
+            "logging_steps": 10, "save_strategy": "no", "report_to": [], "seed": seed,
+            "remove_unused_columns": False}
+
+
+def prepare_for_lora(model) -> None:
+    """Freeze the base and turn on non-reentrant checkpointing, in place of peft's
+    prepare_model_for_kbit_training: that casts every non-4-bit weight to fp32 (Gemma 4's
+    per-layer embeddings alone are 2.35B parameters, out of memory on a T4), and its reentrant
+    checkpointing drops the gradient through the KV that Gemma 4's shared layers reuse."""
+    for p in model.parameters():
+        p.requires_grad_(False)
+    model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
+
+
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--model", choices=sorted(BASES), required=True)
@@ -106,7 +127,7 @@ def main(argv: list[str] | None = None) -> None:
         quantization_config=BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_quant_type="nf4",
                                                bnb_4bit_use_double_quant=True,
                                                bnb_4bit_compute_dtype=torch.float16))
-    model = peft.prepare_model_for_kbit_training(model, use_gradient_checkpointing=True)
+    prepare_for_lora(model)
     model = peft.get_peft_model(model, peft.LoraConfig(
         r=RECIPE["rank"], lora_alpha=RECIPE["alpha"], lora_dropout=RECIPE["dropout"],
         target_modules=TARGET_MODULES, task_type="CAUSAL_LM"))
@@ -163,13 +184,7 @@ def main(argv: list[str] | None = None) -> None:
     trainer = Trainer(
         model=model, train_dataset=[example(i) for i in train], data_collator=collate,
         callbacks=[Validate()],
-        args=TrainingArguments(
-            output_dir=str(args.out / "trainer"), per_device_train_batch_size=RECIPE["batch"],
-            gradient_accumulation_steps=RECIPE["grad_accum"], learning_rate=RECIPE["lr"],
-            lr_scheduler_type=RECIPE["scheduler"], warmup_ratio=RECIPE["warmup_ratio"],
-            num_train_epochs=args.epochs, max_steps=args.max_steps or -1, fp16=True,
-            logging_steps=10, save_strategy="no", report_to=[], seed=args.seed,
-            remove_unused_columns=False))
+        args=TrainingArguments(**training_kwargs(args.out, args.epochs, args.max_steps, args.seed)))
     trainer.train()
     if not history:  # --max-steps ended inside the first epoch
         validate(trainer.state.epoch)

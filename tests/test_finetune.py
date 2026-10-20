@@ -1,6 +1,8 @@
 import re
 import sys
 
+import pytest
+
 from edge_grader.data import Item, labels_for, question_id
 from edge_grader.finetune import (
     BASES,
@@ -80,3 +82,28 @@ def test_dry_run_needs_no_torch(tmp_path, monkeypatch, capsys):
     out = capsys.readouterr().out
     assert "train 27 answers / 9 questions, validation 3 answers / 1 questions" in out
     assert "You are grading a student's answer" in out
+
+
+def test_training_arguments_construct(tmp_path):
+    transformers = pytest.importorskip("transformers")
+    from edge_grader.finetune import RECIPE, training_kwargs
+
+    kw = training_kwargs(tmp_path, epochs=3, max_steps=0, seed=0)
+    assert kw["fp16"] is True and kw["max_steps"] == -1
+    args = transformers.TrainingArguments(**{**kw, "fp16": False})  # fp16 needs a GPU here
+    assert args.warmup_steps == RECIPE["warmup_ratio"]
+    assert args.per_device_train_batch_size * args.gradient_accumulation_steps == 16
+
+
+def test_prepare_freezes_and_uses_non_reentrant_checkpointing():
+    torch = pytest.importorskip("torch")
+    from edge_grader.finetune import prepare_for_lora
+
+    class Model(torch.nn.Linear):
+        def gradient_checkpointing_enable(self, **kw):
+            self.checkpointing = kw
+
+    m = Model(2, 2)
+    prepare_for_lora(m)
+    assert not any(p.requires_grad for p in m.parameters())
+    assert m.checkpointing == {"gradient_checkpointing_kwargs": {"use_reentrant": False}}
