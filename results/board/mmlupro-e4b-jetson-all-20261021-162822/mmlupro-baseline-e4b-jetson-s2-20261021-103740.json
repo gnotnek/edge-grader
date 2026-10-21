@@ -1,0 +1,93 @@
+{
+  "stage": "baseline",
+  "benchmark": "mmlupro",
+  "label": "e4b-jetson",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "/home/ari/research/models/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a894dae"
+  },
+  "subset": "s2",
+  "n_requested": 0,
+  "generation": {
+    "max_tokens": 2048,
+    "temperature": 0,
+    "stop": [
+      "Question:"
+    ],
+    "shots": 5,
+    "prompt": "lm-eval mmlu_pro chat messages"
+  },
+  "time": "2026-10-21T10:37:40+00:00",
+  "metrics": {
+    "n": 100,
+    "accuracy": 0.64,
+    "no_answer": 8,
+    "hit_token_cap": 6,
+    "errors": 0,
+    "median_latency_s": 29.9725,
+    "wall_s": 3911.4,
+    "prompt_tokens": 143503,
+    "completion_tokens": 70015,
+    "per_subject": {
+      "biology": {
+        "n": 6,
+        "correct": 6
+      },
+      "business": {
+        "n": 7,
+        "correct": 4
+      },
+      "chemistry": {
+        "n": 9,
+        "correct": 6
+      },
+      "computer science": {
+        "n": 3,
+        "correct": 3
+      },
+      "economics": {
+        "n": 7,
+        "correct": 5
+      },
+      "engineering": {
+        "n": 8,
+        "correct": 4
+      },
+      "health": {
+        "n": 7,
+        "correct": 4
+      },
+      "history": {
+        "n": 3,
+        "correct": 2
+      },
+      "law": {
+        "n": 9,
+        "correct": 5
+      },
+      "math": {
+        "n": 11,
+        "correct": 8
+      },
+      "other": {
+        "n": 8,
+        "correct": 4
+      },
+      "philosophy": {
+        "n": 4,
+        "correct": 1
+      },
+      "physics": {
+        "n": 11,
+        "correct": 8
+      },
+      "psychology": {
+        "n": 7,
+        "correct": 4
+      }
+    }
+  }
+}
