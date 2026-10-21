@@ -1,0 +1,124 @@
+{
+  "stage": "baseline",
+  "kind": "board-check",
+  "time": "2026-10-21T14:19:04+00:00",
+  "settings": {
+    "estimate": "results/estimates/board-cost-estimate-20260930-051813.json",
+    "method": "energy = trapezoid of telemetry power_w over the grading window (first request start to last request end, from server.log); board DC draw, not wall power. Prefill fit: prompt_ms = a + b*prompt tokens processed, every request. Accuracy: same-grade count and exact McNemar on correctness, same answer ids. GSM/news: paired with Kaggle and between boards on the question ids both runs have; news correctness is the judge's grade."
+  },
+  "runs": [
+    {
+      "run": "mmlupro-e2b-jetson-all-20261021-145638",
+      "model": "e2b",
+      "board": "jetson",
+      "benchmark": "mmlupro",
+      "split": "s1+s2+s3",
+      "thinking": false,
+      "stage": "baseline",
+      "instances": null,
+      "threads": null,
+      "server_args": "/home/ari/build/llama.cpp/build/bin/llama-server -m /home/ari/research/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf -c 8192 --host 127.0.0.1 --port 8080 -ngl 99 -rea off --reasoning-budget -1 --cache-ram 0",
+      "n": 300,
+      "accuracy": 0.55,
+      "macro_f1": null,
+      "unparsed": 14,
+      "errors": 0,
+      "requests_in_log": 300,
+      "window_from": "server.log",
+      "median_latency_s": 13.09,
+      "grading_window_s": 5334.8,
+      "mean_w": 17.4,
+      "idle_w": 5.44,
+      "j_per_answer": 309.41,
+      "j_per_answer_above_idle": 212.67,
+      "wh_per_1000_answers": 85.95,
+      "mean_prompt_tokens_processed": 381.0,
+      "mean_prompt_tokens_sent": 1444.3,
+      "prefill_fixed_ms": 69.4,
+      "prefill_ms_per_token": 1.139,
+      "decode_ms_per_token": 27.1,
+      "board_state": {
+        "governor": "schedutil",
+        "cpu_min_khz": 729600,
+        "cpu_max_khz": 1728000,
+        "cpu_clock_locked": false,
+        "variant": "base",
+        "engine": "/home/ari/build/llama.cpp/build/bin/llama-server"
+      },
+      "estimate": null,
+      "vs_kaggle": {
+        "kaggle_run": [
+          "mmlupro-baseline-e2b-kaggle-t4-s1-20261006-093134.json",
+          "mmlupro-baseline-e2b-kaggle-t4-s2-20261006-094420.json",
+          "mmlupro-baseline-e2b-kaggle-t4-s3-20261006-095705.json"
+        ],
+        "kaggle_accuracy": 0.5133,
+        "board_accuracy_paired": 0.55,
+        "n": 300,
+        "same_grade": 223,
+        "mcnemar": {
+          "only_first_right": 27,
+          "only_second_right": 16,
+          "p": 0.126
+        }
+      }
+    },
+    {
+      "run": "mmlupro-e4b-jetson-all-20261021-162822",
+      "model": "e4b",
+      "board": "jetson",
+      "benchmark": "mmlupro",
+      "split": "s1+s2+s3",
+      "thinking": false,
+      "stage": "baseline",
+      "instances": null,
+      "threads": null,
+      "server_args": "/home/ari/build/llama.cpp/build/bin/llama-server -m /home/ari/research/models/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf -c 8192 --host 127.0.0.1 --port 8080 -ngl 99 -rea off --reasoning-budget -1 --cache-ram 0",
+      "n": 300,
+      "accuracy": 0.65,
+      "macro_f1": null,
+      "unparsed": 21,
+      "errors": 0,
+      "requests_in_log": 300,
+      "window_from": "server.log",
+      "median_latency_s": 28.83,
+      "grading_window_s": 11417.1,
+      "mean_w": 18.33,
+      "idle_w": 5.45,
+      "j_per_answer": 697.66,
+      "j_per_answer_above_idle": 490.25,
+      "wh_per_1000_answers": 193.79,
+      "mean_prompt_tokens_processed": 381.2,
+      "mean_prompt_tokens_sent": 1444.3,
+      "prefill_fixed_ms": 131.3,
+      "prefill_ms_per_token": 1.941,
+      "decode_ms_per_token": 54.4,
+      "board_state": {
+        "governor": "schedutil",
+        "cpu_min_khz": 729600,
+        "cpu_max_khz": 1728000,
+        "cpu_clock_locked": false,
+        "variant": "base",
+        "engine": "/home/ari/build/llama.cpp/build/bin/llama-server"
+      },
+      "estimate": null,
+      "vs_kaggle": {
+        "kaggle_run": [
+          "mmlupro-baseline-e4b-kaggle-t4-s1-20261006-082750.json",
+          "mmlupro-baseline-e4b-kaggle-t4-s2-20261006-085308.json",
+          "mmlupro-baseline-e4b-kaggle-t4-s3-20261006-091916.json"
+        ],
+        "kaggle_accuracy": 0.6533,
+        "board_accuracy_paired": 0.65,
+        "n": 300,
+        "same_grade": 251,
+        "mcnemar": {
+          "only_first_right": 13,
+          "only_second_right": 14,
+          "p": 1.0
+        }
+      }
+    }
+  ],
+  "board_pairs": []
+}

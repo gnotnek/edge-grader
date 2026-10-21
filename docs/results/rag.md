@@ -299,7 +299,7 @@ Logic and news need their own benchmarks. What was chosen instead is in the outl
 
 **Not in yet:**
 - **News:** RAG-en run, not judged. Judge on Kaggle (Qwen3-14B), as for phase 0. The re-run baseline needs no judging: its replies are phase 0's, which are judged.
-- **MMLU-Pro:** not run. Its 4 jobs (baseline + RAG-en, E2B + E4B) weren't in this queue; the two baseline re-runs (jobs 48, 49) failed on a subset-id file `deploy.sh` didn't ship (fixed in `a6c5066`) and were re-queued on 2026-10-21.
+- **MMLU-Pro RAG-en:** not run (its 2 jobs weren't in this queue). The baseline is in: [below](#mmlu-pro-baseline-on-the-jetson-2026-10-21).
 
 "Same answer" means the same label (grading) or the same extracted number (GSM), on the same questions.
 
@@ -319,6 +319,19 @@ Logic and news need their own benchmarks. What was chosen instead is in the outl
 | GSM | symbolic (10 var.) | E4B | Jetson | 1000 | 88.4% | 89.1% | 932/1000 | 0.296 | 12.34 | 265.9 |
 | News | test | E2B | Jetson | 200 | *to judge* | 39.0% | | | 21.87 | 429.5 |
 | News | test | E4B | Jetson | 200 | *to judge* | 45.0% | | | 35.24 | 713.6 |
+
+### MMLU-Pro baseline on the Jetson (2026-10-21)
+
+This project's MMLU-Pro runner (the one that [reproduces the lab baseline](#the-runner-reproduces-the-lab-baseline)) on the Jetson, set `all` (s1–s3, 300 questions), no RAG, in the stage 4 clock state. It's the pairing control for MMLU-Pro RAG-en on the board. Jobs 48–49, run after the first attempts failed on a subset-id file `deploy.sh` didn't ship (fixed in `a6c5066`). Folders: `results/board/mmlupro-e2b-jetson-all-20261021-145638`, `mmlupro-e4b-jetson-all-20261021-162822`. **Check file:** [`board-check-20261021-141904.json`](../../results/estimates/board-check-20261021-141904.json). The three subsets of a run are pooled and paired with Kaggle's three no-RAG runs (2026-10-06) on question id.
+
+| Model | n | Board acc. | Kaggle acc. (same questions) | Same answer | Same right/wrong | Board only / Kaggle only right | McNemar p | Median s | Mean s | J / question |
+|---|---|---|---|---|---|---|---|---|---|---|
+| E2B | 300 | 55.0% | 51.3% | 223/300 | 257/300 | 27 / 16 | 0.126 | 13.1 | 17.8 | 309 |
+| E4B | 300 | 65.0% | 65.3% | 251/300 | 273/300 | 13 / 14 | 1.0 | 28.8 | 38.1 | 698 |
+
+- **The board agrees with Kaggle on both models.** E2B's +3.7 points isn't significant (p 0.13). Same right/wrong on 86% (E2B) and 91% (E4B) of questions, about the 87% and 91–92% between this runner and the lab's lm-eval runs. Long chain-of-thought answers take a different path on a different machine, and the differences mostly cancel.
+- **0 errors.** No answer extracted: 14 (E2B) and 21 (E4B); replies that hit the 2,048-token cap: 16 and 20.
+- **Cost:** 27.1 / 54.4 ms per decoded token, 17.4 / 18.3 W mean, 5.4 W idle; ~635–680 tokens generated per question. Prompts are 1,444 tokens sent, 381 processed (the 5-shot prefix is reused). agentic-edge's lm-eval run on the Jetson (old clocks, its totals ÷ 300) gave 31 / 63 s and 307 / 654 J per question: a different harness and clock state, so not a like-for-like comparison.
 
 ### RAG-en against the Jetson's own baseline
 

@@ -262,6 +262,54 @@ def test_main_pairs_trimmed_symbolic_on_shared_ids(tmp_path):
     assert (pair["first"], pair["second"], pair["n"]) == (pi.name, jet.name, 2)
 
 
+def mmlupro_summary(stem: str, label: str, subset: str, n: int, acc: float) -> dict:
+    return {"_stem": stem, "stage": "baseline", "benchmark": "mmlupro", "label": label,
+            "subset": subset, "time": T0,
+            "metrics": {"n": n, "accuracy": acc, "no_answer": 1, "errors": 0,
+                        "median_latency_s": 9.0, "wall_s": 4.0}}
+
+
+def test_mmlupro_run_pools_its_subsets_and_pairs_with_kaggle(tmp_path):
+    """MMLU-Pro writes one summary per subset into one run folder (one server, one telemetry)."""
+    def row(i, subset, gold, pred, latency):
+        return {"id": i, "subset": subset, "gold": gold, "pred": pred, "correct": pred == gold,
+                "latency_s": latency, "prompt_tokens": 50}
+    s1 = [row(1, "s1", "A", "A", 1.0), row(2, "s1", "B", None, 2.0)]
+    s2 = [row(3, "s2", "C", "C", 3.0)]
+    run = make_run(tmp_path / "board", "mmlupro-e2b-jetson-all-20261021-145638",
+                   mmlupro_summary("mmlupro-baseline-e2b-jetson-s1-1", "e2b-jetson", "s1", 2, 0.5),
+                   s1 + s2)  # server.log and telemetry cover all three requests
+    (run / "raw" / "mmlupro-baseline-e2b-jetson-s1-1.jsonl").write_text(
+        "".join(json.dumps(r) + "\n" for r in s1))
+    s2_summary = mmlupro_summary("", "e2b-jetson", "s2", 1, 1.0)
+    write_kaggle(run, "mmlupro-baseline-e2b-jetson-s2-1",
+                 {k: v for k, v in s2_summary.items() if k != "_stem"}, s2)
+
+    r = read_run(run)
+    assert (r["benchmark"], r["model"], r["board"], r["split"]) == ("mmlupro", "e2b", "jetson", "s1+s2")
+    assert (r["n"], r["accuracy"], r["unparsed"], r["errors"]) == (3, 0.6667, 2, 0)
+    assert r["median_latency_s"] == 2.0  # over all answers, not a median of the subsets' medians
+    assert r["j_per_answer"] == pytest.approx(25 / 3, abs=0.01)
+
+    kdir = tmp_path / "kaggle"
+    write_kaggle(kdir, "mmlupro-baseline-e2b-kaggle-t4-s1-1", {"metrics": {"n": 2}},
+                 [row(1, "s1", "A", "A", 1.0), row(2, "s1", "B", "B", 1.0)])
+    write_kaggle(kdir, "mmlupro-baseline-e2b-kaggle-t4-s2-1", {"metrics": {"n": 1}},
+                 [row(3, "s2", "C", "D", 1.0)])
+    write_kaggle(kdir, "mmlupro-rag-e2b-kaggle-t4-en-k3-s1-1", {"metrics": {"n": 2}},
+                 [row(1, "s1", "A", "Z", 1.0), row(2, "s1", "B", "Z", 1.0)])
+    est = tmp_path / "est.json"
+    est.write_text(json.dumps({"estimates": []}))
+    out = tmp_path / "out"
+    main([str(run), "--estimate", str(est), "--kaggle", str(kdir), "--out", str(out)])
+    (got,) = json.loads(next(out.glob("board-check-*.json")).read_text())["runs"]
+    vs = got["vs_kaggle"]
+    assert vs["kaggle_run"] == ["mmlupro-baseline-e2b-kaggle-t4-s1-1.json",
+                                "mmlupro-baseline-e2b-kaggle-t4-s2-1.json"]
+    assert (vs["n"], vs["same_grade"], vs["kaggle_accuracy"], vs["board_accuracy_paired"]) == (
+        3, 1, 0.6667, 0.6667)
+
+
 STAGE1 = REPO / "results/board/e2b-jetson-test_ua-20260930-224702"
 
 

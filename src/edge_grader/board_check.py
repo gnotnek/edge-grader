@@ -6,6 +6,7 @@ tests both; phase 0 extends that to GSM8K/GSM-Symbolic and news. Per run folder 
 results/board/ this reads
 
     baseline-*.json | gsm-*.json | news-*.json, raw/*.jsonl   accuracy and each answer
+    mmlupro-*.json, raw/*.jsonl    MMLU-Pro: one per subset (s1-s3), pooled into one run
     news-*.judged-<judge>.json, raw/*.judged-*.jsonl          news only: the Kaggle judge's grades
     board-state.txt                CPU governor and clock range at the start of the run
     server.log                     llama-server's own per-request prefill and decode timings
@@ -35,7 +36,8 @@ from scipy.stats import binomtest
 ESTIMATES = "results/estimates"
 KAGGLE = "results/kaggle"
 BOARDS = {"pi5": "pi", "jetson": "jetson"}  # run label -> board name in the estimate
-SUMMARY_GLOBS = ("baseline-*.json", "think-*.json", "rag-*.json", "gsm-*.json", "news-*.json")
+SUMMARY_GLOBS = ("baseline-*.json", "think-*.json", "rag-*.json", "gsm-*.json", "news-*.json",
+                 "mmlupro-*.json")
 JUDGE = "qwen3-14b-q4_k_m"  # the news judge's file tag (docs/results/topics.md)
 CPU_STATE = re.compile(r"^cpu0: governor (\S+) min (\d+) max (\d+)")
 STATE_LINE = re.compile(r"^(variant|engine): (.*)$")
@@ -97,9 +99,17 @@ def read_answers(summary_path: Path) -> dict[str, dict]:
     return {r["id"]: r for r in rows}
 
 
-def find_summary(run_dir: Path) -> Path:
-    """The runner's summary in a run folder (a judge's file is not one)."""
+def find_summaries(run_dir: Path) -> list[Path]:
+    """The runner's summaries in a run folder (a judge's file is not one): exactly one, or
+    one per subset for MMLU-Pro."""
     found = sorted(p for g in SUMMARY_GLOBS for p in run_dir.glob(g) if ".judged-" not in p.name)
+    if len(found) != 1 and not (found and all(p.name.startswith("mmlupro-") for p in found)):
+        raise SystemExit(f"{run_dir}: expected one run summary, found {[p.name for p in found]}")
+    return found
+
+
+def find_summary(run_dir: Path) -> Path:
+    found = find_summaries(run_dir)
     if len(found) != 1:
         raise SystemExit(f"{run_dir}: expected one run summary, found {[p.name for p in found]}")
     return found[0]
@@ -110,7 +120,24 @@ def benchmark(summary: dict) -> str:
 
 
 def split_of(summary: dict) -> str:
-    return {"gsm": summary.get("set"), "news": "test"}.get(benchmark(summary), summary.get("split"))
+    return {"gsm": summary.get("set"), "news": "test", "mmlupro": summary.get("subset")}.get(
+        benchmark(summary), summary.get("split"))
+
+
+def pooled_metrics(summaries: list[dict], answers: list[dict]) -> dict:
+    """One run's metrics from its per-subset summaries (MMLU-Pro); its unparsed = no answer."""
+    ms = [s["metrics"] for s in summaries]
+    n = sum(m["n"] for m in ms)
+    return {"n": n, "accuracy": round(sum(m["accuracy"] * m["n"] for m in ms) / n, 4),
+            "unparsed": sum(m["no_answer"] for m in ms), "errors": sum(m["errors"] for m in ms),
+            "median_latency_s": statistics.median(a["latency_s"] for a in answers),
+            "wall_s": sum(m["wall_s"] for m in ms)}
+
+
+def run_outcomes(summary_paths: list[Path], judge: str = JUDGE) -> dict[str, dict] | None:
+    """outcomes() over every summary of a run (MMLU-Pro's subsets); None if any is unjudged."""
+    parts = [outcomes(p, judge) for p in summary_paths]
+    return None if None in parts else {k: v for part in parts for k, v in part.items()}
 
 
 def outcomes(summary_path: Path, judge: str = JUDGE) -> dict[str, dict] | None:
@@ -154,10 +181,13 @@ def threads(server_args: str) -> int | None:
 
 
 def read_run(run_dir: Path, judge: str = JUDGE) -> dict:
-    summary_path = find_summary(run_dir)
-    summary = json.loads(summary_path.read_text())
+    summary_paths = find_summaries(run_dir)
+    summaries = [json.loads(p.read_text()) for p in summary_paths]
+    summary, summary_path = summaries[0], summary_paths[0]
+    answers = [a for p in summary_paths for a in read_answers(p).values()]
     bench = benchmark(summary)
-    m = summary["metrics"]
+    m = pooled_metrics(summaries, answers) if bench == "mmlupro" else summary["metrics"]
+    split = "+".join(split_of(s) for s in summaries)
     accuracy = m.get("accuracy")
     if bench == "news":  # the runner doesn't score news; the Kaggle judge does
         judged = summary_path.with_name(f"{summary_path.stem}.judged-{judge}.json")
@@ -175,15 +205,16 @@ def read_run(run_dir: Path, judge: str = JUDGE) -> dict:
         end = max(r["end"] for r in reqs)
         window_from = "server.log"
     else:  # little-gemma's shim logs no per-request timings: the runner's own loop window
-        end = datetime.fromisoformat(summary["time"]).timestamp()
-        start = end - m["wall_s"]
+        ends = [datetime.fromisoformat(s["time"]).timestamp() for s in summaries]
+        start = min(e - s["metrics"]["wall_s"] for e, s in zip(ends, summaries))
+        end = max(ends)
         window_from = "summary"
     header, *lines = (tele / "telemetry.csv").read_text().splitlines()
     t_col, w_col = (header.split(",").index(c) for c in ("ts_epoch", "power_w"))
     samples = [(float(c[t_col]), float(c[w_col])) for c in (ln.split(",") for ln in lines)]
     joules = window_energy(samples, start, end)
     seconds = end - start
-    n = summary["metrics"]["n"]
+    n = m["n"]
 
     prefill_x = [r["prompt_tokens"] for r in reqs]
     prefill_y = [r["prompt_ms"] for r in reqs]
@@ -192,14 +223,13 @@ def read_run(run_dir: Path, judge: str = JUDGE) -> dict:
         slope, intercept = statistics.linear_regression(prefill_x, prefill_y)
     decode = statistics.median(r["gen_ms"] / r["gen_tokens"] for r in reqs if r["gen_tokens"]) \
         if any(r["gen_tokens"] for r in reqs) else None
-    sent = [a["prompt_tokens"] for a in read_answers(summary_path).values()
-            if a.get("prompt_tokens") is not None]
+    sent = [a["prompt_tokens"] for a in answers if a.get("prompt_tokens") is not None]
     return {
         "run": run_dir.name,
         "model": model,
         "board": BOARDS[board_label],
         "benchmark": bench,
-        "split": split_of(summary),
+        "split": split,
         "thinking": summary.get("stage") == "think",
         "stage": summary.get("stage", "baseline"),
         "instances": summary.get("generation", {}).get("instances"),
@@ -225,7 +255,7 @@ def read_run(run_dir: Path, judge: str = JUDGE) -> dict:
         "prefill_ms_per_token": None if slope is None else round(slope, 3),
         "decode_ms_per_token": None if decode is None else round(decode, 1),
         "board_state": read_board_state(run_dir / "board-state.txt"),
-        "_summary": summary_path,
+        "_summaries": summary_paths,
     }
 
 
@@ -260,6 +290,19 @@ def kaggle_run(directory: str, bench: str, model: str, split: str, n: int,
     return found[-1] if found else None
 
 
+def kaggle_runs(directory: str, run: dict) -> list[Path]:
+    """kaggle_run() as a list; MMLU-Pro: the latest Kaggle run of each of the board run's
+    subsets with the same stage, or none if a subset has no Kaggle run."""
+    if run["benchmark"] != "mmlupro":
+        k = kaggle_run(directory, run["benchmark"], run["model"], run["split"], run["n"],
+                       thinking=run["thinking"], stage=run["stage"])
+        return [k] if k else []
+    kind = "rag" if run["stage"] == "rag" else "baseline"
+    found = [sorted(Path(directory).glob(f"mmlupro-{kind}-{run['model']}-kaggle-*-{s}-*.json"))
+             for s in run["split"].split("+")]
+    return [f[-1] for f in found] if all(found) else []
+
+
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
     ap.add_argument("runs", nargs="+", type=Path, help="board run folders (results/board/<run>/)")
@@ -286,14 +329,14 @@ def main(argv: list[str] | None = None) -> None:
             "measured_over_estimate_latency": round(r["median_latency_s"] / e["median_latency_s"], 2),
             "measured_over_estimate_energy": round(r["j_per_answer"] / e["mean_j_per_answer"], 2),
         }
-        k = kaggle_run(args.kaggle, r["benchmark"], r["model"], r["split"], r["n"],
-                       thinking=r["thinking"], stage=r["stage"])
-        mine, theirs = outcomes(r["_summary"], args.judge), k and outcomes(k, args.judge)
-        if k and (mine is None or theirs is None):
-            r["vs_kaggle"] = {"kaggle_run": k.name, "pending": "judge the news run first"}
-        elif k:
+        ks = kaggle_runs(args.kaggle, r)
+        k_name = (ks[0].name if len(ks) == 1 else [p.name for p in ks]) if ks else None
+        mine, theirs = run_outcomes(r["_summaries"], args.judge), ks and run_outcomes(ks, args.judge)
+        if ks and (mine is None or theirs is None):
+            r["vs_kaggle"] = {"kaggle_run": k_name, "pending": "judge the news run first"}
+        elif ks:
             c = compare(mine, theirs)
-            r["vs_kaggle"] = {"kaggle_run": k.name, "kaggle_accuracy": c.pop("second_accuracy"),
+            r["vs_kaggle"] = {"kaggle_run": k_name, "kaggle_accuracy": c.pop("second_accuracy"),
                               "board_accuracy_paired": c.pop("first_accuracy"), **c}
         else:
             r["vs_kaggle"] = None
@@ -304,7 +347,7 @@ def main(argv: list[str] | None = None) -> None:
             same = setting(a) == setting(b)
             if not (same and (a["board"], b["board"]) == ("pi", "jetson")):
                 continue
-            oa, ob = outcomes(a["_summary"], args.judge), outcomes(b["_summary"], args.judge)
+            oa, ob = run_outcomes(a["_summaries"], args.judge), run_outcomes(b["_summaries"], args.judge)
             pairs.append({
                 "first": a["run"],
                 "second": b["run"],
