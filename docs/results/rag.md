@@ -293,13 +293,13 @@ Logic and news need their own benchmarks. What was chosen instead is in the outl
 **Runs:**
 - 12 folders in [`results/board/`](../../results/board/) (`rag-*`, `gsm-rag-*`, `news-rag-*`, all `-jetson-`), run by the Jetson's job queue (`scripts/board_queue.py add --preset rag`, jobs 24–35) between 2026-10-19 23:30 and 2026-10-20 11:44, all rc=0.
 - Same GGUFs and server flags as phase 0 (`-ngl 99 -rea off --cache-ram 0`); the frozen retrieval files (`bge-small-en-v1.5`, question as query, top 3), the same files the Kaggle RAG runs used.
-- **Jetson clocks:** higher limits than in phase 0 (see [Cost](#cost-not-comparable-with-the-phase-0-baseline)). Accuracy is unaffected; cost isn't comparable.
+- **Jetson clocks:** higher limits than in phase 0 (see [Cost](#cost-rag-en-against-the-re-run-baseline)). So the baseline is the **re-run of 2026-10-21** in the same clock state (jobs 36–47, `results/board/*-jetson-*-20261021-*`), not phase 0's runs. Every re-run gives **byte-identical replies** to its phase 0 run (all 12 cells, 14,270 replies), so the accuracy below is unchanged; only cost moved.
 
-**Check file:** [`board-check-20261020-064504.json`](../../results/estimates/board-check-20261020-064504.json), from `uv run edge-grader-board-check` on these 12 runs and their 12 Jetson baselines. RAG against baseline: `board_check.compare` on the two runs' raw files; GSM-Symbolic also by template (two-sided sign-flip, 20,000 draws, seed 0), as in [`topics.md`](topics.md#math-rag-en-results-kaggle-t4-2026-10-10).
+**Check file:** [`board-check-20261021-065457.json`](../../results/estimates/board-check-20261021-065457.json), from `uv run edge-grader-board-check` on these 12 runs and the 12 re-run baselines. It replaces [`board-check-20261020-064504.json`](../../results/estimates/board-check-20261020-064504.json), which paired them with phase 0's baselines (kept; its RAG rows are the same). RAG against baseline: `board_check.compare` on the two runs' raw files; GSM-Symbolic also by template (two-sided sign-flip, 20,000 draws, seed 0), as in [`topics.md`](topics.md#math-rag-en-results-kaggle-t4-2026-10-10).
 
 **Not in yet:**
-- **News:** run, not judged. Judge on Kaggle (Qwen3-14B), as for phase 0.
-- **MMLU-Pro:** not run. Its 4 jobs (baseline + RAG-en, E2B + E4B) weren't in this queue.
+- **News:** RAG-en run, not judged. Judge on Kaggle (Qwen3-14B), as for phase 0. The re-run baseline needs no judging: its replies are phase 0's, which are judged.
+- **MMLU-Pro:** not run. Its 4 jobs (baseline + RAG-en, E2B + E4B) weren't in this queue; the two baseline re-runs (jobs 48, 49) failed on a subset-id file `deploy.sh` didn't ship (fixed in `a6c5066`) and were re-queued on 2026-10-21.
 
 "Same answer" means the same label (grading) or the same extracted number (GSM), on the same questions.
 
@@ -322,7 +322,7 @@ Logic and news need their own benchmarks. What was chosen instead is in the outl
 
 ### RAG-en against the Jetson's own baseline
 
-The baseline is phase 0's Jetson run of the same set (test_ua: the 2026-09-30 runs), from [`baselines.md`](baselines.md#4-phase-0-every-baseline-on-both-boards-measured-2026-10-0910). "RAG only / baseline only" counts the questions only one of the two got right.
+The baseline is the 2026-10-21 re-run of the same set, whose replies are identical to phase 0's Jetson run ([`baselines.md`](baselines.md#4-phase-0-every-baseline-on-both-boards-measured-2026-10-0910)). "RAG only / baseline only" counts the questions only one of the two got right.
 
 | Benchmark | Set | Model | n | Baseline → RAG-en | Same answer | RAG only / baseline only | McNemar p | Kaggle, same cell |
 |---|---|---|---|---|---|---|---|---|
@@ -352,24 +352,47 @@ Recall per class, baseline → RAG-en:
 | E4B | test_uq | 0.40 → 0.50 | 0.67 → 0.67 | 0.90 → 0.86 | 64 → 89 |
 | E4B | test_ud | 0.57 → 0.59 | 0.68 → 0.78 | 0.82 → 0.79 | 374 → 530 |
 
-### Cost: not comparable with the phase 0 baseline
+### Cost: RAG-en against the re-run baseline
 
-**The Jetson ran this queue with higher clock limits than phase 0, B1 and B2.** From `board-state.txt`; `nvpmodel` says "15W 0" and the governor is `schedutil` in both:
+**The Jetson ran this queue with higher clock limits than phase 0, B1 and B2.** From `board-state.txt`; `nvpmodel` says "15W 0" and the governor is `schedutil` in both. The 2026-10-21 baseline re-runs have the stage 4 limits (all 26 run folders from 2026-10-19 on agree):
 
-| Limit | Phase 0, B1, B2 (to 2026-10-13) | Stage 4 RAG (2026-10-19/20) |
+| Limit | Phase 0, B1, B2 (to 2026-10-13) | Stage 4 RAG (2026-10-19/20) and the re-run baselines (2026-10-21) |
 |---|---|---|
 | GPU devfreq max | 612 MHz | 1,020 MHz |
 | Memory (`bwmgr`) max | 2,133 MHz | 3,199 MHz |
 | CPU max | 1,497.6 MHz | 1,728 MHz |
 
-Effect, same model and server flags:
+Effect on the baseline, same replies (phase 0 → re-run):
 
-| | Phase 0 | Stage 4 RAG |
+| | Phase 0 | Re-run, 2026-10-21 |
 |---|---|---|
-| Decode, grading (E2B / E4B) | 24.8 / 45.9 ms per token | 16.6 / 30.7 ms per token |
-| Decode, GSM (E2B / E4B) | 41.5 / 81.7 ms per token | 26.4 / 52.6 ms per token |
-| Mean power while grading | 9.1–10.7 W | 14.3–18.2 W |
+| Decode, grading (E2B / E4B) | 24.8 / 45.9 ms per token | 16.0 / 29.6 ms per token |
+| Decode, GSM (E2B / E4B) | 41.5 / 81.7 ms per token | 25.8 / 51.6 ms per token |
+| Median s, grading (E2B / E4B) | 0.40–0.42 / 0.70–0.72 | 0.25–0.27 / 0.44–0.45 |
+| Mean power while grading | 9.1–9.7 W | 14.8–16.1 W |
 | Idle power | 4.5–4.6 W | 5.4–5.5 W |
+| J per answer, grading (E2B / E4B) | 3.8–4.0 / 6.8–7.1 | 4.0–4.1 / 7.1–7.4 |
+
+So the new state is ~37% faster per answer for about 5% more energy: the board draws more power for less time.
+
+**Baseline → RAG-en, same clock state** (median seconds and J per question, whole board DC draw):
+
+| Benchmark | Set | Model | Median s | J / question | Change in J |
+|---|---|---|---|---|---|
+| SciEntsBank | test_ua | E2B | 0.27 → 0.26 | 4.1 → 6.7 | +63% |
+| SciEntsBank | test_ua | E4B | 0.45 → 0.36 | 7.4 → 11.9 | +60% |
+| SciEntsBank | test_uq | E2B | 0.27 → 0.21 | 4.0 → 3.5 | −13% |
+| SciEntsBank | test_uq | E4B | 0.45 → 0.34 | 7.2 → 6.0 | −17% |
+| SciEntsBank | test_ud | E2B | 0.25 → 0.21 | 4.0 → 3.3 | −15% |
+| SciEntsBank | test_ud | E4B | 0.44 → 0.34 | 7.1 → 5.7 | −20% |
+| GSM | gsm8k | E2B | 4.49 → 5.00 | 112.1 → 125.3 | +12% |
+| GSM | gsm8k | E4B | 7.24 → 11.47 | 180.0 → 242.7 | +35% |
+| GSM | symbolic (10 var.) | E2B | 4.67 → 5.50 | 119.8 → 134.3 | +12% |
+| GSM | symbolic (10 var.) | E4B | 7.78 → 12.34 | 189.4 → 265.9 | +40% |
+| News | test | E2B | 23.09 → 21.87 | 376.7 → 429.5 | +14% |
+| News | test | E4B | 35.92 → 35.24 | 701.3 → 713.6 | +2% |
+
+Embedding and retrieval time isn't included: the retrieval files are precomputed, as on Kaggle.
 
 **Prompt tokens, sent → processed by the server** (per answer, from `server.log`):
 
@@ -388,6 +411,6 @@ Effect, same model and server flags:
 - **RAG makes the grader more lenient, not better.** Recall on *correct* rises on all six grading rows (by up to 12 points) and recall on *incorrect* falls on all six (by up to 18): with passages that explain the concept, the model credits answers it rejected without them. E2B also gives "contradictory" more often (1,100 → 1,507 on test_ud; on Kaggle 1,105 → 1,522). The baseline and RAG runs give the same label on only 71–74% (E2B) and 85–88% (E4B) of answers, so RAG moves many grades in both directions, and the gains and losses nearly cancel.
 - **The smaller model is hurt more.** test_ud: E2B −4.5 against E4B +0.5. GSM-Symbolic: E2B −7.3 against E4B −2.5. The Jetson's GSM-Symbolic baseline for E2B was 2.1 points above Kaggle's (phase 0), so its drop here is larger than Kaggle's (−4.9), from the same RAG accuracy (74.8% against 75.1%).
 - **With the passages, E4B stops writing GSM's answer format but still gets the number.** Strict accuracy falls from 85% to 51% on GSM8K and from 81% to 43% on GSM-Symbolic, while the final number (the headline metric) moves 2.5–5 points. On Kaggle: 85% → 51%, 81% → 42%.
-- **RAG's cost on the board can't be read against the baseline yet.** The Jetson's GPU and memory clock limits rose between 2026-10-13 and 2026-10-19 (cause unknown; the same window as the supervisor's change of its IP). Decode is ~33% faster and the board draws ~5–8 W more, so the latency and J per question above aren't comparable with phase 0's. Within this queue, though, they are: grading with RAG costs 3.3–6.7 J (E2B) and 5.7–11.9 J (E4B), GSM 125–266 J, news 430–714 J. A RAG-vs-baseline cost comparison needs the baseline re-run in today's state, or the old limits back.
+- **RAG doesn't cost 6× on the Jetson; on most grading it costs less.** Against the baseline re-run in the same clock state: test_uq and test_ud grading get 13–20% cheaper and faster with RAG, test_ua 60–63% dearer, math 12–40% dearer (E4B most, 7 → 12 s median), news 2–14%. The grading result follows the prompt cache (next bullet): where many answers share a question, the long RAG prompt is mostly reused, and the baseline's short prompt isn't. Why RAG-en grading prompts process *fewer* tokens than the baseline's isn't checked. Earlier, against phase 0, this couldn't be read: the clock limits rose between 2026-10-13 and 2026-10-19 (cause unknown; the same window as the supervisor's change of its IP).
 - **RAG grading prompts are mostly reused by llama.cpp's prompt cache (observed; mechanism not checked).** A RAG grading prompt is ~1,035 tokens, but on test_uq and test_ud the server processed only 71–83 of them per answer (92–93% reused): consecutive answers to one question share the instructions, passages, question and reference answer. test_ua reuses less (286 processed), which fits it having fewer answers per question. Without RAG the grading prompts get almost no reuse (153 of 156), as B2 found for llama.cpp without `--swa-full`. So RAG's 6× longer grading prompt costs far less than 6× the prefill.
 - **Reuse follows the length of the shared prefix, not RAG as such.** GSM's baseline already reuses its fixed 5-shot prefix (70 of 1,106 tokens processed); with RAG the passages change per question, so 855 of 2,074 are processed. News shares little in either case (180 of 219; 1,094–1,100 of 1,130). A long shared prefix is reused with the phase 0 flags; the short baseline grading prompt isn't. Why, in llama.cpp's terms, isn't checked.

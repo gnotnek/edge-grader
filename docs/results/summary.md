@@ -110,7 +110,7 @@ Grading, test_ua (thinking off unless stated):
    - ~67% for ~4 J (E4B with `--swa-full`)
    - ~73% for ~280 J (E4B with thinking)
    - The last step costs 70× the energy for +6 points on test_ua. Against the plain baseline, thinking adds +12.6 on test_uq.
-5. **RAG's cost on the boards isn't measured yet.** The grading prompt grows ~6.3× (160 → 1,035 tokens), so expect roughly 6× the energy on the Pi, where grading is prefill-bound. RAG brought no grading gain to pay for it.
+5. **RAG's cost on the Jetson (stage 4, 2026-10-21), against the baseline re-run in the same clock state:** the grading prompt grows ~6.3× (160 → 1,035 tokens), but llama.cpp's prompt cache reuses most of it, so grading test_uq/test_ud gets 13–20% cheaper and test_ua 60–63% dearer; math costs 12–40% more and news 2–14% ([`rag.md`](rag.md#cost-rag-en-against-the-re-run-baseline)). RAG brought no grading gain to pay for it. The Pi 5 isn't measured (dropped for new runs).
 
 ## What it adds up to
 

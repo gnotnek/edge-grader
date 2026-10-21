@@ -82,7 +82,7 @@
 ### Stage 3: Fine-tuning (weeks 6–7, revived 2026-10-21)
 *Dropped 2026-10-08 so the baseline came first; revived by the owner because RAG didn't improve grading. Design: [`superpowers/specs/2026-10-21-finetuning-design.md`](superpowers/specs/2026-10-21-finetuning-design.md).*
 
-- [ ] Re-run every Jetson baseline at the new clocks (14 jobs, queued 2026-10-21; owner): the cost pairs for stage 4 RAG and the tuned runs
+- [ ] Re-run every Jetson baseline at the new clocks (14 jobs, queued 2026-10-21; owner): the cost pairs for stage 4 RAG and the tuned runs. 12 of 14 done ✅ (byte-identical replies to phase 0; `board-check-20261021-065457.json`, RAG cost table in [`results/rag.md`](results/rag.md#cost-rag-en-against-the-re-run-baseline)); MMLU-Pro (jobs 48, 49) failed on a missing subset-id file, re-queued after `a6c5066`
 - [ ] Day 1 risk check: a tiny E2B QLoRA run on a Kaggle T4, adapter converted to GGUF and loaded with `--lora` on Kaggle's and the Jetson's llama.cpp builds
 - [ ] Training notebook; E2B and E4B adapters, epochs picked on a held-out 10% of train questions; summary JSON in `results/`
 - [ ] Adapter option in `board_grade.sh` and the Kaggle notebook; Kaggle sanity check on test_ua (100)
@@ -127,7 +127,7 @@
 - [ ] Judge the two Jetson news RAG-en runs on Kaggle (Qwen3-14B, as for phase 0)
 - [ ] MMLU-Pro on the Jetson, so RAG covers all four benchmarks: `BENCH=mmlupro` in `board_grade.sh` (the `edge-grader-mmlupro` runner; set `all` = s1–s3, 300 questions) and in the `rag` preset ✅ (2026-10-19); not in the 2026-10-19 queue (the Jetson had the code from before that commit), so deploy and add the 4 jobs on their own; run the baseline and RAG-en, E2B + E4B (4 jobs, ~8 h without RAG at `agentic-edge`'s Jetson rates, more with the longer RAG prompt). The baseline run is the pairing control: the copied `agentic-edge` numbers come from lm-eval
 - [ ] Board-check every RAG run against the Jetson's own baseline (paired McNemar; by template for GSM-Symbolic) and add a Jetson column to the four-benchmark table in `results/rag.md`. SciEntsBank + math done 2026-10-20: same as Kaggle (E2B down on every cell, significant after Holm on test_ud and GSM-Symbolic; E4B no significant change), board matches Kaggle on every cell ([`results/rag.md`](results/rag.md#jetson-baseline-against-rag-en-stage-4-2026-10-20)); news (after the judge) and MMLU-Pro to add
-- [ ] Jetson clocks changed between 2026-10-13 and 2026-10-19 (GPU max 612 → 1,020 MHz, memory 2,133 → 3,199 MHz, same nvpmodel): RAG cost isn't comparable with phase 0. Ask the supervisor whether it was deliberate; then either re-run the baselines in the new state or restore the old limits before stage 4's cost runs
+- [x] Jetson clocks changed between 2026-10-13 and 2026-10-19 (GPU max 612 → 1,020 MHz, memory 2,133 → 3,199 MHz, same nvpmodel): RAG cost isn't comparable with phase 0. Ask the supervisor whether it was deliberate; then either re-run the baselines in the new state or restore the old limits before stage 4's cost runs. Resolved 2026-10-21: baselines re-run in the new state (owner)
 - [ ] RAG on the board: include embedding and retrieval time in the latency
 - [ ] Main chart: accuracy vs energy per answer, for every version on the Jetson (the Pi 5's baseline and thinking-on points for reference)
 
