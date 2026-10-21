@@ -11,7 +11,8 @@
 #   1. refuses while a grading run is in progress (never rsync under a run)
 #   2. installs uv into ~/.local/bin if it is missing (no sudo)
 #   3. rsyncs the tracked files, minus results/ and .claude/ .agents/ (the boards write their own
-#      results/board/, pulled back with scripts/fetch_results.sh)
+#      results/board/, pulled back with scripts/fetch_results.sh). results/reference/ and results/rag/
+#      do go: they're read-only inputs the runners need (MMLU-Pro's subset ids, retrieval files)
 #   4. uv sync --frozen, then the test suite, on the board
 #   5. writes DEPLOYED.json (commit, dirty, time)
 set -uo pipefail
@@ -53,7 +54,8 @@ LIST=$(mktemp)
 trap 'rm -f "$LIST"' EXIT
 { git ls-files
   [ $DIRTY -eq 1 ] && git ls-files --others --exclude-standard
-} | grep -Ev '^(results|\.claude|\.agents)/' | sort -u > "$LIST"  # agent tooling: symlinks the Jetson's exFAT can't hold
+} | awk '!/^(\.claude|\.agents)\// && (!/^results\// || /^results\/(reference|rag)\//)' |
+  sort -u > "$LIST"  # agent tooling: symlinks the Jetson's exFAT can't hold
 
 STATUS=0
 for b in "${TARGETS[@]}"; do
