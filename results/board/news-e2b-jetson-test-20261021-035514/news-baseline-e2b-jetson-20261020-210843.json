@@ -1,0 +1,34 @@
+{
+  "stage": "baseline",
+  "benchmark": "news",
+  "label": "e2b-jetson",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "/home/ari/research/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a894dae"
+  },
+  "dataset": {
+    "name": "LiveNewsBench jan_2026_release_2 human_verified_test",
+    "commit": "8a6b96e7904893977ac8a3ae3342ae3d39f89c2e",
+    "sha256": "e733b10302678c9d57d5e19cf41b735ddb852e81ba418436f2a9da28c96425e6"
+  },
+  "n_requested": 0,
+  "generation": {
+    "max_tokens": 2048,
+    "temperature": 0,
+    "prompt": "LiveNewsBench no-search baseline"
+  },
+  "time": "2026-10-20T21:08:43+00:00",
+  "metrics": {
+    "n": 200,
+    "answered": 190,
+    "hit_token_cap": 1,
+    "errors": 0,
+    "median_latency_s": 23.0855,
+    "wall_s": 4357.6,
+    "prompt_tokens": 43716,
+    "completion_tokens": 165915
+  }
+}
