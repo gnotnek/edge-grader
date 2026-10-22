@@ -13,6 +13,7 @@ Torch and friends are imported inside main() only: the Mac and the boards never 
 import argparse
 import hashlib
 import json
+import os
 import random
 import shutil
 from datetime import UTC, datetime
@@ -30,7 +31,9 @@ BASES = {
 # Language-model projections only: the vision and audio towers stay untouched.
 TARGET_MODULES = r".*language_model.*\.(q_proj|k_proj|v_proj|o_proj|gate_proj|up_proj|down_proj)"
 # The one recipe (spec 5.1); epochs are a ceiling, validation picks one of them.
-RECIPE = {"rank": 16, "alpha": 32, "dropout": 0.05, "lr": 2e-4, "batch": 4, "grad_accum": 4,
+# Batch 1 x 16: the loss holds every position x Gemma 4's 262,144-token vocabulary in fp32, and
+# batch 4 ran a T4 out of memory there (Day 1, 2026-10-22). Same effective batch of 16.
+RECIPE = {"rank": 16, "alpha": 32, "dropout": 0.05, "lr": 2e-4, "batch": 1, "grad_accum": 16,
           "scheduler": "cosine", "warmup_ratio": 0.03, "quant": "nf4, double quant, fp16 compute",
           "val_frac": 0.1, "max_new_tokens": 16}
 
@@ -107,6 +110,8 @@ def main(argv: list[str] | None = None) -> None:
     if args.val_n:
         val = val[:args.val_n]
 
+    # Before torch loads: reserved-but-fragmented memory (3 GB on Day 1) becomes usable.
+    os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
     import bitsandbytes
     import peft
     import torch
