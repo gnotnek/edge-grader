@@ -1,0 +1,10 @@
+{"id": "ST.58.533.1", "gold": "correct", "pred": "correct", "raw": "correct", "latency_s": 0.466, "prompt_tokens": 119, "completion_tokens": 2}
+{"id": "LF.18a.912.1", "gold": "contradictory", "pred": "contradictory", "raw": "contradictory", "latency_s": 0.168, "prompt_tokens": 128, "completion_tokens": 4}
+{"id": "VB.15a.394.1", "gold": "incorrect", "pred": "incorrect", "raw": "incorrect", "latency_s": 0.171, "prompt_tokens": 218, "completion_tokens": 2}
+{"id": "EM.21b.401.1", "gold": "incorrect", "pred": "incorrect", "raw": "incorrect", "latency_s": 0.11, "prompt_tokens": 131, "completion_tokens": 2}
+{"id": "ME.69b.646.1", "gold": "incorrect", "pred": "incorrect", "raw": "incorrect", "latency_s": 0.166, "prompt_tokens": 223, "completion_tokens": 2}
+{"id": "FN.20a.443.1", "gold": "incorrect", "pred": "incorrect", "raw": "incorrect", "latency_s": 0.139, "prompt_tokens": 185, "completion_tokens": 2}
+{"id": "VB.40a.417.1", "gold": "incorrect", "pred": "incorrect", "raw": "incorrect", "latency_s": 0.13, "prompt_tokens": 150, "completion_tokens": 2}
+{"id": "II.24b.529.1", "gold": "incorrect", "pred": "incorrect", "raw": "incorrect", "latency_s": 0.118, "prompt_tokens": 140, "completion_tokens": 2}
+{"id": "LF.18a.754.1", "gold": "incorrect", "pred": "incorrect", "raw": "incorrect", "latency_s": 0.111, "prompt_tokens": 130, "completion_tokens": 2}
+{"id": "ME.10.214.1", "gold": "incorrect", "pred": "correct", "raw": "correct", "latency_s": 0.118, "prompt_tokens": 135, "completion_tokens": 2}
