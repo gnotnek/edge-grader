@@ -9,6 +9,8 @@ __pycache__/
 data/
 *.gguf
 *.safetensors
+# Fine-tuned adapters live in the private Kaggle dataset, not in git
+adapters/
 
 # results/ is the experiment record and is committed in full, including
 # per-answer raw/*.jsonl and board telemetry.
