@@ -5,6 +5,7 @@
 **Done:**
 - RQ1, the baseline: four benchmarks, Kaggle and both boards
 - RQ2, RAG-en: all four benchmarks, on Kaggle
+- RQ3, fine-tuning: accuracy and the no-harm check, on Kaggle (2026-10-28); cost on the Jetson still to do
 - RQ6 B1, thinking on: both boards
 - RQ6 B2, engine and prefix reuse: Jetson
 
@@ -64,6 +65,21 @@ Kaggle, `bge-small-en-v1.5`, top 3 passages ([rag.md](rag.md#baseline-against-ra
    - On SciEntsBank it's significantly worse on unseen domains for both models (E2B −7.4, E4B −4.2), although its retrieval check was no worse (18/30 against 16/30) ([rag.md](rag.md#grading-results-rag-id-kaggle-t4-2026-10-05)).
    - For MMLU-Pro it found nothing usable (0/30), so it wasn't graded.
 
+## RQ3: does fine-tuning help?
+
+QLoRA on the SciEntsBank train split, served with `--lora` on the unchanged Q4 GGUF. Paired with the untuned runs on the same build; Holm within each family ([finetuning](finetuning.md)).
+
+| | E2B untuned → tuned | E4B untuned → tuned |
+|---|---|---|
+| SciEntsBank test_ua / test_uq / test_ud | 55.2 / 59.8 / 60.3 → **79.4 / 76.7 / 74.9%** | 66.7 / 67.5 / 70.4 → **79.1 / 79.9 / 76.4%** |
+| MMLU-Pro (300) | 51.3 → 49.0% | 65.3 → 66.0% |
+| GSM8K / GSM-Symbolic (100 each) | 83 / 80 → 83 / 81% | 92 / 91 → 90 / 90% |
+
+1. **Fine-tuning is the largest grading gain in the project:** +6 to +24 points, every split p < 0.001 after Holm. Both models beat their targets (65% and 75%) on unseen questions and domains.
+2. **It fixes the baseline's weak spot.** Recall on *correct* answers rose from 0.40–0.60 to 0.73–0.78, and E2B stopped overusing "contradictory".
+3. **E2B catches up with E4B** (within 3 points on every split). Both are at or near the best published SciEntsBank numbers (Claude 3.5 Sonnet + RAG: 78.7 / 76.9 / 73.4%).
+4. **No harm to general ability:** no significant drop on MMLU-Pro or math (Holm p = 1.0 for all six). One E2B MMLU-Pro subset fell 10 points, mostly from more answers hitting the token cap.
+
 ## RQ6: do inference-time settings matter?
 
 [variations.md](variations.md):
@@ -114,6 +130,7 @@ Grading, test_ua (thinking off unless stated):
 
 ## What it adds up to
 
+- **Fine-tuning is what makes the small models good graders:** +6 to +24 points on SciEntsBank, at no measured cost to general ability (accuracy on Kaggle; cost on the Jetson to come).
 - **For grading on the device, how the model is run matters more than what it's given.**
   - Thinking raised grading accuracy on every split and board.
   - Course material didn't, and it hurt E2B.
@@ -138,7 +155,8 @@ Grading, test_ua (thinking off unless stated):
   - It may be in the models' training data (an open question in the outline).
   - It isn't real classroom data, and there are no Indonesian student answers.
 - **Two models from one family, at one quantization:** Gemma 4 E2B / E4B, Q4_K_XL QAT. Other models or precisions may behave differently.
-- **One zero-shot prompt.** Prompt design wasn't explored, and fine-tuning was dropped (2026-10-08).
+- **One zero-shot prompt.** Prompt design wasn't explored.
+- **Fine-tuning: one seed, one training run per model.** A re-run with the same settings moved test_ua by a point.
 - **Labels only.** The model gives no feedback a student could use, and fairness (e.g. non-native English writers) isn't studied.
 
 **RAG**
