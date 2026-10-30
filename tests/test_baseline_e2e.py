@@ -69,6 +69,20 @@ def test_baseline_writes_summary_and_raw(server, tmp_path, monkeypatch):
     assert len(raw_file.read_text().splitlines()) == 3
 
 
+def test_held_out_run_is_named_by_dataset_and_scored_two_way(server, tmp_path, monkeypatch):
+    seen = {}
+    monkeypatch.setattr(data, "load", lambda *a, **k: seen.update(k) or ITEMS)
+    baseline.main(["--base-url", server, "--label", "fake", "--dataset", "beetle",
+                   "--split", "test_uq", "--out", str(tmp_path)])
+
+    assert seen["dataset"] == "beetle"
+    [summary_file] = tmp_path.glob("beetle-baseline-fake-test_uq-3way-*.json")
+    run = json.loads(summary_file.read_text())
+    assert run["benchmark"] == "beetle"
+    # The contradictory answer graded "incorrect" is right once both sides are 2-way.
+    assert run["metrics"]["two_way"]["accuracy"] == 1.0
+
+
 def test_baseline_exits_when_no_server(tmp_path):
     with pytest.raises(SystemExit):
         baseline.main(["--base-url", "http://127.0.0.1:9/v1", "--out", str(tmp_path)])

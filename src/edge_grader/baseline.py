@@ -68,6 +68,8 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--base-url", default="http://127.0.0.1:8080/v1", help="llama-server endpoint")
     ap.add_argument("--model", default="local", help="model name sent to the server")
     ap.add_argument("--label", default=None, help="run label for the results file, e.g. e4b-q4")
+    ap.add_argument("--dataset", default="scientsbank", choices=list(data.DATASETS),
+                    help="beetle / saf: held-out grading sets (test_ua and test_uq only)")
     ap.add_argument("--split", default="test_ua", choices=["test_ua", "test_uq", "test_ud"])
     ap.add_argument("--scheme", default="3way", choices=list(data.SCHEMES))
     ap.add_argument("--n", type=int, default=100, help="number of answers (0 = whole split)")
@@ -81,11 +83,13 @@ def main(argv: list[str] | None = None) -> None:
     args = ap.parse_args(argv)
     if args.thinking and args.rag:
         sys.exit("--thinking with --rag isn't a condition in this study")
+    if args.dataset != "scientsbank" and (args.rag or args.split == "test_ud"):
+        sys.exit(f"{args.dataset}: test_ua or test_uq, without --rag")
 
     passages, rag = load_passages(args.rag, args.k) if args.rag else ({}, None)
     stage = "think" if args.thinking else ("rag" if args.rag else "baseline")
     server = server_info(args.base_url)
-    items = data.load(args.split, args.scheme, n=args.n or None, seed=args.seed)
+    items = data.load(args.split, args.scheme, n=args.n or None, seed=args.seed, dataset=args.dataset)
     labels = data.labels_for(args.scheme)
     client = OpenAI(base_url=args.base_url, api_key="not-needed", timeout=600, max_retries=3)
 
@@ -109,6 +113,11 @@ def main(argv: list[str] | None = None) -> None:
 
     summary = metrics.score([r["gold"] for r in rows], [r["pred"] for r in rows])
     ok = [r for r in rows if "error" not in r]
+    if args.scheme != "2way":
+        # Correct vs not: SAF's headline (it has no "contradictory"), and Beetle's published 2-way.
+        two = [None if p is None else ("correct" if p == "correct" else "incorrect")
+               for r in rows for p in (r["gold"], r["pred"])]
+        summary["two_way"] = metrics.score(two[0::2], two[1::2])
     summary["errors"] = len(rows) - len(ok)
     summary["median_latency_s"] = statistics.median(r["latency_s"] for r in ok) if ok else None
     summary["wall_s"] = round(wall, 1)
@@ -118,6 +127,7 @@ def main(argv: list[str] | None = None) -> None:
         statistics.median(r["completion_tokens"] or 0 for r in ok) if ok else None)
     now = datetime.now(UTC)
     run = {
+        "benchmark": args.dataset,
         "stage": stage,
         "label": args.label or args.model,
         "model": args.model,
@@ -139,6 +149,8 @@ def main(argv: list[str] | None = None) -> None:
 
     stamp = now.strftime("%Y%m%d-%H%M%S")
     name = f"{stage}-{run['label']}-{args.split}-{args.scheme}-{stamp}"
+    if args.dataset != "scientsbank":
+        name = f"{args.dataset}-{name}"
     out = Path(args.out)
     (out / "raw").mkdir(parents=True, exist_ok=True)
     (out / f"{name}.json").write_text(json.dumps(run, indent=2))
