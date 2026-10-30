@@ -108,6 +108,50 @@ These are single runs with one seed and one prompt. The published systems differ
   - Read as: the adapter makes E2B ramble more on some long reasoning questions, not answer them worse.
 - **E4B's subsets:** s1 67 → 65%, s2 64 → 65%, s3 65 → 68%.
 
+## Held-out grading sets: Beetle and SAF (2026-10-31)
+
+**Why (supervisor, 2026-10-30):** the adapters were trained on SciEntsBank, so gains on SciEntsBank's splits can't show they grade better in general. MMLU-Pro and GSM can't show it either: they test knowledge and math, not grading, and only check for damage. The fair test is grading data the adapters never saw. The supervisor accepted this on 2026-10-30.
+
+- **Beetle** (Dzikovska et al. 2013, SemEval-2013 Task 7, \*SEM 2013 pp. 263–274): SciEntsBank's sister corpus, basic electricity and electronics from the BEETLE II tutor. HF `nkazi/Beetle`, the same fields and 3-way labels. test_ua 439, test_uq 819. **Headline: 3-way accuracy and macro-F1.** SciEntsBank's train split has electricity questions (`EM.*`), so the topic isn't wholly new; the questions, students and annotators are.
+- **SAF**, English (Filighera et al. 2022, ACL 2022 pp. 8577–8591): communication networks, university level. HF `Short-Answer-Feedback/saf_communication_networks_english`, test_ua 375, test_uq 479. Labels Correct / Partially correct / Incorrect, with no "contradictory", so **the headline is correct vs not (2-way)**: Partially correct counts as incorrect, as in SciEntsBank's 3-way, and the model's "contradictory" counts as incorrect too.
+- **Setup:** the same prompt (it still says "a science question"), build `a3a1c47`, GGUFs and Oct 27 adapters as above; Kaggle T4, kernels `edge-grader-heldout-base` and `-ft`, code `a22f2b7`. Each tuned run is paired item by item with the untuned run from the same day. McNemar, Holm over the 8 comparisons.
+
+| | Majority class | Untuned acc | **Tuned acc** | Untuned macro-F1 | Tuned macro-F1 | Fixed / broken | p | p (Holm) |
+|---|---|---|---|---|---|---|---|---|
+| E2B Beetle test_ua | 40.1% | 53.5% | **59.0%** | 0.528 | 0.531 | 85 / 61 | 0.057 | 0.34 |
+| E2B Beetle test_uq | 42.0% | 50.2% | **56.6%** | 0.497 | 0.499 | 157 / 104 | 0.001 | **0.008** |
+| E4B Beetle test_ua | 40.1% | 56.7% | 60.1% | 0.535 | 0.525 | 71 / 56 | 0.21 | 0.86 |
+| E4B Beetle test_uq | 42.0% | 50.3% | 52.0% | 0.479 | 0.451 | 101 / 87 | 0.34 | 1.0 |
+| E2B SAF test_ua (2-way) | 64.0% | 61.9% | **68.8%** | 0.614 | 0.644 | 60 / 34 | 0.010 | 0.07 |
+| E2B SAF test_uq (2-way) | 51.6% | 72.9% | 76.0% | 0.729 | 0.760 | 39 / 24 | 0.077 | 0.39 |
+| E4B SAF test_ua (2-way) | 64.0% | 70.9% | 72.0% | 0.703 | 0.667 | 57 / 53 | 0.78 | 1.0 |
+| E4B SAF test_uq (2-way) | 51.6% | 78.5% | 79.1% | 0.784 | 0.786 | 42 / 39 | 0.82 | 1.0 |
+
+0 errors in all 16 runs; 3 unparsed (untuned E2B SAF test_ua), 0 tuned.
+
+**Most of the SciEntsBank gain does not carry over.**
+
+- On SciEntsBank's unseen questions the adapters added +17 (E2B) and +12 (E4B) points. On the held-out sets they add **+2 to +7, and only one of the 8 comparisons survives Holm** (E2B Beetle test_uq, +6.4).
+- **E4B gains nothing that holds up:** +0.6 to +3.4 points, every p ≥ 0.21, and macro-F1 drops on 3 of 4.
+- **E2B gains a little**, mostly on Beetle; with its smaller untuned start, it has more to catch up.
+
+**What the adapters learned, on Beetle: SciEntsBank's label habits, not better judging.** Recall per class, untuned → tuned:
+
+| | correct | contradictory | incorrect | Predicted "contradictory" (gold) |
+|---|---|---|---|---|
+| E2B test_ua | 54 → 83% | 49 → **22%** | 57 → 59% | 136 → 37 (111) |
+| E2B test_uq | 52 → 82% | 46 → **16%** | 52 → 62% | 237 → 56 (244) |
+| E4B test_ua | 56 → 89% | 30 → **17%** | 77 → 59% | 69 → 24 (111) |
+| E4B test_uq | 54 → 69% | 23 → **11%** | 74 → 70% | 108 → 34 (244) |
+
+- Tuned, both models say "correct" far more and "contradictory" rarely. That fits SciEntsBank, where contradictory is 10% of the train split the adapters learned from (499 of 4,969), but Beetle has 25–30%.
+- So accuracy rises because "correct" is Beetle's biggest class, while macro-F1 stays flat (E2B) or falls (E4B): the gain on *correct* is paid for by *contradictory*.
+- This supports the supervisor's concern in a narrower form. It isn't leakage (no test item was trained on), but **the adapters fit SciEntsBank's label distribution**, and that only partly transfers.
+
+**Read with care:** one seed, one prompt (which says "science question" for SAF's networking questions), and SAF test_uq has only 5 questions. Accuracy on Kaggle, as before; no board runs.
+
+**What it means for the next step:** a better recipe has to teach judging that transfers, for example training on more than one grading set and keeping one out, or balancing the classes. Changing the model alone, with the same SciEntsBank-only recipe, would likely meet the same limit; the held-out sets are now the test any new model or recipe has to pass.
+
 ## Not done yet
 
 - **Cost on the Jetson.** Latency and energy per answer for the tuned models, against the re-run baselines in the same clock state. Kaggle times aren't board cost, so no cost number is quoted here.

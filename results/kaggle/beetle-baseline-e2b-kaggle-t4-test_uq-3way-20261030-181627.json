@@ -1,0 +1,37 @@
+{
+  "benchmark": "beetle",
+  "stage": "baseline",
+  "label": "e2b-kaggle-t4",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "/tmp/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a3a1c47"
+  },
+  "split": "test_uq",
+  "scheme": "3way",
+  "n_requested": 0,
+  "seed": 0,
+  "time": "2026-10-30T18:16:27+00:00",
+  "metrics": {
+    "n": 819,
+    "accuracy": 0.5018,
+    "macro_f1": 0.4967,
+    "weighted_f1": 0.5056,
+    "unparsed": 0,
+    "two_way": {
+      "n": 819,
+      "accuracy": 0.6654,
+      "macro_f1": 0.6466,
+      "weighted_f1": 0.6597,
+      "unparsed": 0
+    },
+    "errors": 0,
+    "median_latency_s": 0.081,
+    "wall_s": 71.5,
+    "prompt_tokens": 98736,
+    "completion_tokens": 2112,
+    "median_completion_tokens": 2
+  }
+}
