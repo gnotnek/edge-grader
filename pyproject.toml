@@ -22,6 +22,7 @@ edge-grader-gsm = "edge_grader.gsm:main"
 edge-grader-news = "edge_grader.news:main"
 edge-grader-news-judge = "edge_grader.news:judge_main"
 edge-grader-finetune = "edge_grader.finetune:main"
+edge-grader-reasons = "edge_grader.reasons:main"
 
 [dependency-groups]
 dev = [
