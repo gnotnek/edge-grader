@@ -20,6 +20,12 @@ THINK_MAX_TOKENS = 336  # the 320-token thought budget (agentic-edge's) plus the
 THOUGHT_OPEN_RE = re.compile(r"<\|channel>thought|<think>")
 THOUGHT_CLOSE_RE = re.compile(r"<channel\|>|</think>")
 
+# Stage 3b: what a tuned adapter was trained to reply (spec 2026-11-01 §5.2). The prompt is the
+# same for all three; "label" is every run before stage 3b.
+REPLY_FORMATS = ("label", "reason-first", "label-first")
+REASON_FIRST_MAX_TOKENS = 160  # the teacher's 128-token reason cap plus the label line
+LABEL_LINE_RE = re.compile(r"label:", re.IGNORECASE)
+
 
 def answer_part(text: str) -> str | None:
     """The reply after its thought block: all of it if there's no block, None if a thought
@@ -63,17 +69,43 @@ def parse_label(text: str, labels: list[str]) -> str | None:
     return min(hits)[1] if hits else None
 
 
+def reply_text(label: str, reason: str | None, fmt: str) -> str:
+    """The reply an adapter is trained to give."""
+    if fmt == "label":
+        return label
+    if not reason:
+        raise ValueError(f"{fmt} needs a reason")
+    return f"{reason}\nLabel: {label}" if fmt == "reason-first" else f"{label}\n{reason}"
+
+
+def parse_reply(text: str, labels: list[str], fmt: str) -> str | None:
+    """The label in a reply of the given format; reasons are never read, they name labels too."""
+    if fmt == "reason-first":
+        marks = list(LABEL_LINE_RE.finditer(text))
+        return parse_label(text[marks[-1].end():], labels) if marks else None
+    if fmt == "label-first":
+        return parse_label(text.split("\n", 1)[0], labels)
+    return parse_label(text, labels)
+
+
 def grade(client, model: str, item: Item, labels: list[str], max_tokens: int = 16,
-          passages: list[str] | None = None, thinking: bool = False) -> dict:
+          passages: list[str] | None = None, thinking: bool = False, reply: str = "label") -> dict:
+    if thinking and reply != "label":
+        raise ValueError("thinking with a reason format isn't a condition in this study")
     prompt = build_prompt(item, labels, passages)
     if thinking and max_tokens == 16:
         max_tokens = THINK_MAX_TOKENS
+    if reply == "reason-first" and max_tokens == 16:
+        max_tokens = REASON_FIRST_MAX_TOKENS
+    # label-first: stop where the trained reply's label line ends, so the reason costs nothing.
+    extra = {"stop": ["\n"]} if reply == "label-first" else {}
     start = time.perf_counter()
     resp = client.chat.completions.create(
         model=model,
         messages=[{"role": "user", "content": prompt}],
         temperature=0,
         max_tokens=max_tokens,
+        **extra,
     )
     latency = time.perf_counter() - start
     choice = resp.choices[0]
@@ -81,8 +113,10 @@ def grade(client, model: str, item: Item, labels: list[str], max_tokens: int = 1
     if thinking:
         part = None if choice.finish_reason == "length" else answer_part(text)
         pred = parse_label(part, labels) if part is not None else None
+    elif reply == "reason-first" and choice.finish_reason == "length":
+        pred = None  # cut before its label line, or inside it
     else:
-        pred = parse_label(text, labels)
+        pred = parse_reply(text, labels, reply)
     usage = resp.usage
     row = {
         "id": item.id,
@@ -93,6 +127,6 @@ def grade(client, model: str, item: Item, labels: list[str], max_tokens: int = 1
         "prompt_tokens": getattr(usage, "prompt_tokens", None),
         "completion_tokens": getattr(usage, "completion_tokens", None),
     }
-    if thinking:
+    if thinking or reply != "label":
         row["finish"] = choice.finish_reason
     return row

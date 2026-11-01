@@ -1,8 +1,20 @@
 import json
 from pathlib import Path
 
+import pytest
+
 from edge_grader.data import TO_2WAY, TO_3WAY, Item, labels_for
-from edge_grader.grader import THINK_MAX_TOKENS, answer_part, build_prompt, grade, parse_label
+from edge_grader.grader import (
+    REASON_FIRST_MAX_TOKENS,
+    REPLY_FORMATS,
+    THINK_MAX_TOKENS,
+    answer_part,
+    build_prompt,
+    grade,
+    parse_label,
+    parse_reply,
+    reply_text,
+)
 from edge_grader.metrics import score
 
 LABELS = labels_for("3way")
@@ -106,3 +118,85 @@ def test_a_real_thinking_reply_parses_to_its_final_label():
     rec = json.loads((Path(__file__).parent / "fixtures" / "thinking_reply.json").read_text())
     assert parse_label(rec["raw"], LABELS) != rec["label"]  # the thoughts name another label first
     assert parse_label(answer_part(rec["raw"]), LABELS) == rec["label"]
+
+
+# Stage 3b reply formats (docs/superpowers/specs/2026-11-01-reasoning-finetune-design.md §5.2).
+ALL_WORDS = "It is not correct, nor incorrect, nor contradictory."
+
+
+def fake_client(content: str, finish: str = "stop"):
+    seen = {}
+
+    class Client:
+        class chat:
+            class completions:
+                @staticmethod
+                def create(**kw):
+                    seen.update(kw)
+
+                    class R:
+                        class usage:
+                            prompt_tokens, completion_tokens = 100, 5
+                        choices = (type("C", (), {"finish_reason": finish,
+                                   "message": type("M", (), {"content": content})}),)
+                    return R
+
+    return Client, seen
+
+
+def test_reason_first_reads_the_label_after_the_last_label_line():
+    reply = "The answer names the wrong force, so it is not correct.\nLabel: contradictory"
+    assert parse_reply(reply, LABELS, "reason-first") == "contradictory"
+    assert parse_reply("Label: correct\nmore\nLABEL: incorrect", LABELS, "reason-first") == "incorrect"
+    assert parse_reply("It is correct.", LABELS, "reason-first") is None
+
+
+def test_label_first_reads_the_first_line_only():
+    assert parse_reply("incorrect\nIt leaves out the correct idea.", LABELS, "label-first") == "incorrect"
+    assert parse_reply("\nIt is correct.", LABELS, "label-first") is None
+
+
+def test_label_format_is_parse_label():
+    assert parse_reply("incorrect, not correct", LABELS, "label") == "incorrect"
+
+
+def test_reply_text_formats():
+    assert reply_text("correct", "r", "reason-first") == "r\nLabel: correct"
+    assert reply_text("correct", "r", "label-first") == "correct\nr"
+    assert reply_text("correct", None, "label") == "correct"
+    with pytest.raises(ValueError):
+        reply_text("correct", None, "reason-first")
+
+
+@pytest.mark.parametrize("fmt", REPLY_FORMATS)
+@pytest.mark.parametrize("label", LABELS)
+def test_written_reply_parses_back_to_its_label(fmt, label):
+    assert parse_reply(reply_text(label, ALL_WORDS, fmt), LABELS, fmt) == label
+
+
+def test_label_request_is_unchanged():
+    client, seen = fake_client("correct")
+    row = grade(client, "m", Item("1", "Q?", "ref", "ans", "correct"), LABELS)
+    assert seen["max_tokens"] == 16 and "stop" not in seen
+    assert row["pred"] == "correct" and "finish" not in row
+
+
+def test_label_first_stops_at_the_newline():
+    client, seen = fake_client("incorrect")
+    row = grade(client, "m", Item("1", "Q?", "ref", "ans", "incorrect"), LABELS, reply="label-first")
+    assert seen["max_tokens"] == 16 and seen["stop"] == ["\n"]
+    assert row["pred"] == "incorrect" and row["finish"] == "stop"
+
+
+def test_reason_first_cut_by_length_is_unparsed():
+    client, seen = fake_client("It is correct because\nLabel: corr", finish="length")
+    row = grade(client, "m", Item("1", "Q?", "ref", "ans", "correct"), LABELS, reply="reason-first")
+    assert seen["max_tokens"] == REASON_FIRST_MAX_TOKENS
+    assert row["pred"] is None and row["finish"] == "length"
+
+
+def test_thinking_with_a_reason_format_is_refused():
+    client, _ = fake_client("correct")
+    with pytest.raises(ValueError):
+        grade(client, "m", Item("1", "Q?", "ref", "ans", "correct"), LABELS, thinking=True,
+              reply="label-first")
