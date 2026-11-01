@@ -1,6 +1,6 @@
 # Plan: steps and timeline
 
-*Last updated 2026-10-28. Tick steps off as they're done, and move dates when reality changes, noting why at the bottom. The research questions and the reasoning for each stage are in [`research-outline.md`](research-outline.md).*
+*Last updated 2026-11-01. Tick steps off as they're done, and move dates when reality changes, noting why at the bottom. The research questions and the reasoning for each stage are in [`research-outline.md`](research-outline.md).*
 
 **Weeks are counted from the internship start**, taken as the week of 2026-09-14 (two weeks had passed by 2026-09-26). The internship ends around mid-December.
 
@@ -13,8 +13,8 @@
 | 5 | Oct 12 – 18 | 0. Edge baseline + A | **Phase 0 on the boards** (Jetson ~15 h, Pi ~30 h). On Kaggle meanwhile: math RAG-en (phase A), thinking-on grading (B1); EmbeddingGemma 2 tooling + check on the Mac (B3). Topic benchmarks done in week 4 ✅ | Baseline on both boards for every benchmark; baseline vs RAG for all four |
 | 6 | Oct 19 – 25 | B. Variations + C + 4 | little-gemma + prefix reuse on the Jetson (B2) ✅; thinking-on cost on the boards ✅; **RAG-en for all four benchmarks on the Jetson** (stage 4 brought forward, supervisor 2026-10-19): SciEntsBank, news, GSM ✅, MMLU-Pro to run; answer-as-image rendering, reading check, Kaggle runs (C1); figure-question data search (C2) | Variations vs baseline table ✅; baseline vs RAG on the Jetson |
 | 7 | Oct 26 – Nov 1 | 3. Fine-tuning | Week 1 (from Oct 21): adapters for E2B and E4B on Kaggle, sanity check on test_ua; week 2 (Oct 28 – Nov 3): tuned runs on Kaggle ✅ (accuracy), on the Jetson (cost), analysis. Phase C (images) waits until this is done | Tuned vs baseline table ✅, no-harm check ✅; cost on the Jetson |
-| 8 | Nov 2 – 8 | 4. Edge cost | Every remaining version on the Jetson (the Pi 5 is dropped, 2026-10-19); cloud reference (RQ5) only if time allows (optional since 2026-10-19) | Accuracy vs energy chart |
-| 9 | Nov 9 – 15 | Buffer | Catch up; analysis and charts | All numbers final |
+| 8 | Nov 2 – 8 | 4. Edge cost + 3b | Every remaining version on the Jetson (the Pi 5 is dropped, 2026-10-19); cloud reference (RQ5) only if time allows (optional since 2026-10-19). **On Kaggle alongside** (owner, 2026-11-01): reasoning-guided fine-tuning of E2B (stage 3b) | Accuracy vs energy chart |
+| 9 | Nov 9 – 15 | Buffer | Catch up; analysis and charts; stage 3b done by Nov 15 (E4B / Jetson / no-harm only if its gate passes and time is left) | All numbers final |
 | 10–11 | Nov 16 – 29 | Write-up | Report draft with figures; supervisor review | Draft sent to supervisor |
 | 12 | Nov 30 – Dec 6 | Wrap-up | Revisions, final report, repo cleanup | Final report |
 
@@ -90,6 +90,16 @@
 - [x] Kaggle (2026-10-28, owner: the Jetson was off the network; Kaggle gives the boards' accuracy): smoke test first, the first 100 of test_uq/test_ud (supervisor: check it rises before the full runs), E2B +19 / +13, E4B +10 / +3 points; then the full splits, MMLU-Pro (300), GSM8K + first GSM-Symbolic set, both models. **SciEntsBank test_uq / test_ud: E2B 76.7 / 74.9%, E4B 79.9 / 76.4%** (targets 65 / 75%), every split p < 0.001 after Holm; no-harm family: no significant drop (Holm p = 1.0 for all six) ([`results/finetuning.md`](results/finetuning.md))
 - [ ] Jetson: the same runs for cost (latency, J per answer) against the re-run baselines, and the adapter load check on `a894dae`
 - [x] `results/finetuning.md`: paired McNemar, Holm over the improvement and no-harm families; outline and summary updated (2026-10-28, accuracy; the Jetson's cost to add)
+
+### Stage 3b: reasoning-guided fine-tuning (weeks 8–9, Kaggle)
+*Held-out check first (2026-10-30), then the supervisor's literature request (2026-10-31). Design: [`superpowers/specs/2026-11-01-reasoning-finetune-design.md`](superpowers/specs/2026-11-01-reasoning-finetune-design.md). Implementation plan: [`superpowers/plans/2026-11-01-reasoning-finetune.md`](superpowers/plans/2026-11-01-reasoning-finetune.md).*
+
+- [x] Held-out grading sets: Beetle and SAF in the baseline runner and Kaggle notebook; the Oct 28 adapters graded on them (2026-10-30): small gains, one significant ([`results/finetuning.md`](results/finetuning.md#held-out-grading-sets-beetle-and-saf-2026-10-31))
+- [x] Literature: published work on tuning Gemma for grading (2026-10-31); reasoning-guided QLoRA chosen
+- [ ] Code: reply formats, `edge-grader-reasons`, `--reply` in training and grading, the comparison and gate (plan Tasks 1–5)
+- [ ] Reasons by Qwen3-14B on Kaggle: 50-answer pilot, full run, owner's spot check (25/30 gate)
+- [ ] Train E2B reason-first and label-first; grade Beetle, SAF, SciEntsBank test_uq/test_ud
+- [ ] Compare against the untuned E2B and the Oct 28 adapter; write up; E4B only if the gate passes
 
 ### Phase 0: the baseline on the boards (week 5, first)
 *Implementation plan: [`superpowers/plans/2026-10-09-phase0-edge-baseline.md`](superpowers/plans/2026-10-09-phase0-edge-baseline.md).*
@@ -179,3 +189,4 @@
 | 2026-10-27 | Stage 3 adapters re-trained as committed Kaggle versions, same settings; validation picked epoch 2 for E2B, 1 for E4B | The 2026-10-23 adapters weren't kept as files. test_ua (100) moved by a point (E2B 75 → 76%, E4B 72 → 73%) |
 | 2026-10-28 | Stage 3 accuracy runs on **Kaggle instead of the Jetson** (owner), **smoke test first** (supervisor): the first 100 of test_uq/test_ud, the full runs only if accuracy rose | The Jetson was off the network; Kaggle's accuracy stands for the boards' (phase 0). The smoke test cuts development time. Cost still needs the Jetson |
 | 2026-10-28 | Stage 3 accuracy done: fine-tuning works. test_uq / test_ud E2B 59.8 / 60.3 → 76.7 / 74.9%, E4B 67.5 / 70.4 → 79.9 / 76.4% (p < 0.001 after Holm); MMLU-Pro and GSM unchanged | Both above their targets, and at or near the best published numbers. Next: the tuned runs on the Jetson for cost |
+| 2026-11-01 | Stage 3b, reasoning-guided fine-tuning of E2B, runs on Kaggle alongside stage 4 (weeks 8–9), done by Nov 15; stage 4 keeps its dates | Owner. The Oct 28 adapters barely moved Beetle and SAF; the supervisor asked for published methods, and Faza et al. 2025 is the closest. The two share no hardware (Kaggle vs Jetson) |
