@@ -71,10 +71,11 @@ def main(argv: list[str] | None = None) -> None:
 
     server = server_info(args.base_url)
     teacher = Path(server["model_path"] or "teacher").stem.lower()
-    name = f"reasons-{teacher}" + (f"-n{args.n}" if args.n else "")
+    sha = prompt_sha256()
+    # a pilot carries the prompt sha, so trials of different prompts keep their own files
+    name = f"reasons-{teacher}" + (f"-n{args.n}-{sha[:8]}" if args.n else "")
     labels = data.labels_for("3way")
     items = data.load(split="train", scheme="3way", n=args.n or None, seed=0)
-    sha = prompt_sha256()
     raw = args.out / "raw"
     raw.mkdir(parents=True, exist_ok=True)
     part = raw / f"{name}.jsonl.part"

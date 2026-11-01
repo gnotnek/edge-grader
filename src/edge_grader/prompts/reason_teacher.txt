@@ -1,6 +1,8 @@
 You are helping to build training data for a model that grades students' short answers to science questions.
 
-A teacher has already graded the student's answer below. In 1 to 3 sentences, at most 60 words, explain why the answer earns that grade: compare it with the reference answer, and say what it gets right and what is missing or contradicts the reference.
+A teacher has already graded the student's answer below. The grade is final. In 1 to 3 sentences, at most 60 words, explain why the answer earns that grade by comparing it with the reference answer. Every sentence must support the grade:
+- For a "correct" grade, say which key idea of the reference the answer states. Do not list missing details or weaknesses; the answer does not need to match the reference word for word.
+- For any other grade, say what key idea is missing, or what the answer gets wrong compared with the reference.
 
 Question: {question}
 Reference answer: {reference_answer}

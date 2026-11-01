@@ -121,4 +121,4 @@ def test_resume_refuses_reasons_from_another_prompt(server, tmp_path):
 
 def test_a_pilot_is_named_apart_from_the_full_run(server, tmp_path):
     reasons.main(["--base-url", server, "--out", str(tmp_path), "--n", "2"])
-    assert (tmp_path / "raw" / "reasons-fake-teacher-n2.jsonl").exists()
+    assert (tmp_path / "raw" / f"reasons-fake-teacher-n2-{reasons.prompt_sha256()[:8]}.jsonl").exists()
