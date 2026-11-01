@@ -27,7 +27,7 @@
 
 1. **Label read from the reason.** Reason-first replies contain words like "correct". `parse_reply` must read only after the last `Label:`; label-first only the first line. Tests (Task 1).
 2. **Training text ≠ served text.** The reply is trained inside the same chat template check as Oct 28 (`full.startswith(prompt)`), and the label-first server request stops at `\n`, the same boundary the training reply has. Test (Task 1, Task 3).
-3. **The two adapters train on different answers.** Both must drop exactly the answers whose reason has a `drop` code. Test (Task 3).
+3. **The two adapters train on different answers.** Both must drop exactly the training answers whose reason has a `drop` code. Test (Task 3).
 4. **Old runs change meaning.** `--reply label` must give byte-identical prompts, `max_tokens` and file names to today's runs. Tests (Tasks 1, 4).
 5. **The gate written after the result.** `compare.gate` and its test land in Task 5, before any grading run.
 
@@ -88,7 +88,7 @@
 **Changes:**
 - `to_messages(item, labels, reply="label", reason=None)`: the assistant content is `grader.reply_text(item.label, reason, reply)`.
 - `load_reasons(path: Path) -> tuple[dict[str, str], str]`: id → reason for lines with `drop` null, and the file's sha256.
-- `main`: `--reply` (choices `grader.REPLY_FORMATS`, default `label`) and `--reasons` (required unless `--reply label`). Training **and** validation items without a kept reason are dropped before the split is used (the split itself is still computed on all train items, so the questions match Oct 28); the counts are printed and recorded.
+- `main`: `--reply` (choices `grader.REPLY_FORMATS`, default `label`) and `--reasons` (required unless `--reply label`). Training items without a kept reason are dropped after the split (the split is computed on all train items, so the questions match Oct 28). Validation keeps every answer, as on Oct 28: it reads only the gold label, so a dropped reason doesn't matter there, and the epoch choice stays comparable. The count is printed and recorded.
 - Validation reads each prediction with `parse_reply(..., args.reply)` and generates up to `REASON_FIRST_MAX_TOKENS` for `reason-first`; for `label-first` it cuts the decoded text at the first `\n` (as the server's stop does).
 - Summary `settings` gains `reply`, `reasons` path, `reasons_sha256`, `dropped_no_reason`; the file is `finetune-<model>-<reply>-<stamp>.json` when `reply != "label"` (unchanged name otherwise).
 - `--dry-run` prints one example per format it would train.

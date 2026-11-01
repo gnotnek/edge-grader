@@ -1,3 +1,5 @@
+import hashlib
+import json
 import re
 import sys
 
@@ -7,6 +9,7 @@ from edge_grader.data import Item, labels_for, question_id
 from edge_grader.finetune import (
     BASES,
     TARGET_MODULES,
+    load_reasons,
     pick_epoch,
     split_by_question,
     summary,
@@ -107,3 +110,55 @@ def test_prepare_freezes_and_uses_non_reentrant_checkpointing():
     prepare_for_lora(m)
     assert not any(p.requires_grad for p in m.parameters())
     assert m.checkpointing == {"gradient_checkpointing_kwargs": {"use_reentrant": False}}
+
+
+# Stage 3b: training on a reply format with teacher reasons.
+
+def reasons_file(tmp_path, part: list[Item], dropped: set[str]):
+    path = tmp_path / "reasons.jsonl"
+    path.write_text("".join(json.dumps({"id": i.id, "gold": i.label, "reason": f"why {i.id}",
+                                        "drop": "wrong_label" if i.id in dropped else None}) + "\n"
+                            for i in part))
+    return path
+
+
+def test_messages_for_reason_formats():
+    item = items()[0]
+    assert to_messages(item, LABELS, "reason-first", "r")[1]["content"] == f"r\nLabel: {item.label}"
+    assert to_messages(item, LABELS, "label-first", "r")[1]["content"] == f"{item.label}\nr"
+    assert to_messages(item, LABELS, "label-first", "r")[0] == to_messages(item, LABELS)[0]
+
+
+def test_load_reasons_skips_dropped_and_hashes_the_file(tmp_path):
+    part = items(questions=2, answers=2)
+    path = reasons_file(tmp_path, part, {part[1].id})
+    kept, sha = load_reasons(path)
+    assert set(kept) == {part[0].id, part[2].id, part[3].id}
+    assert kept[part[0].id] == f"why {part[0].id}"
+    assert sha == hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+@pytest.mark.parametrize("reply", ["reason-first", "label-first"])
+def test_reason_formats_drop_the_same_answers_and_keep_the_split(reply, tmp_path, monkeypatch, capsys):
+    from edge_grader import data, finetune
+
+    everything = items(questions=10, answers=3)
+    train, _ = split_by_question(everything, 0.1, 0)
+    dropped = {train[0].id, train[5].id}
+    path = reasons_file(tmp_path, everything, dropped)
+    monkeypatch.setattr(data, "load", lambda split, scheme: everything)
+    monkeypatch.setitem(sys.modules, "torch", None)
+    finetune.main(["--model", "e2b", "--out", str(tmp_path), "--dry-run", "--reply", reply,
+                   "--reasons", str(path)])
+    out = capsys.readouterr().out
+    # The same split as the label-only adapter; validation keeps every answer.
+    assert "train 27 answers / 9 questions, validation 3 answers / 1 questions" in out
+    assert "training on 25 answers: 2 dropped (no kept reason)" in out
+    assert f"why {train[1].id}" in out
+
+
+def test_a_reason_format_needs_reasons(tmp_path):
+    from edge_grader import finetune
+
+    with pytest.raises(SystemExit):
+        finetune.main(["--model", "e2b", "--out", str(tmp_path), "--dry-run", "--reply", "label-first"])

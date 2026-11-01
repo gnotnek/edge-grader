@@ -5,7 +5,13 @@ baseline prompt (grader.build_prompt) in Gemma 4's chat template with thinking o
 the 3-way label, so the adapter serves through llama-server's --lora with nothing else changed.
 Validation is 10% of the train *questions*; it picks the epoch and nothing else.
 
+Stage 3b (spec 2026-11-01-reasoning-finetune-design.md): --reply reason-first / label-first trains
+the same prompt on a reply with a teacher's reason (edge-grader-reasons). Answers whose reason was
+dropped are left out of training only; the split and the validation answers stay as above.
+
     uv run --group finetune edge-grader-finetune --model e2b --out /kaggle/working/adapters/e2b
+    uv run --group finetune edge-grader-finetune --model e2b --out ... --reply reason-first \\
+        --reasons results/finetune/raw/reasons-qwen3-14b-q4_k_m.jsonl
 
 Torch and friends are imported inside main() only: the Mac and the boards never install them.
 """
@@ -21,7 +27,7 @@ from pathlib import Path
 
 from . import data
 from .data import Item, question_id
-from .grader import build_prompt, parse_label
+from .grader import REASON_FIRST_MAX_TOKENS, REPLY_FORMATS, build_prompt, parse_reply, reply_text
 
 # The QAT checkpoints the lab's UD-Q4_K_XL GGUFs were made from, pinned (not gated).
 BASES = {
@@ -47,9 +53,16 @@ def split_by_question(items: list[Item], frac: float = 0.1, seed: int = 0) -> tu
             [i for i in items if question_id(i.id) in held])
 
 
-def to_messages(item: Item, labels: list[str]) -> list[dict]:
+def to_messages(item: Item, labels: list[str], reply: str = "label", reason: str | None = None) -> list[dict]:
     return [{"role": "user", "content": build_prompt(item, labels)},
-            {"role": "assistant", "content": item.label}]
+            {"role": "assistant", "content": reply_text(item.label, reason, reply)}]
+
+
+def load_reasons(path: Path) -> tuple[dict[str, str], str]:
+    """Answer id -> reason for the reasons kept by edge-grader-reasons, and the file's sha256."""
+    raw = path.read_bytes()
+    rows = [json.loads(line) for line in raw.decode().splitlines()]
+    return {r["id"]: r["reason"] for r in rows if r["drop"] is None}, hashlib.sha256(raw).hexdigest()
 
 
 def pick_epoch(history: list[dict]) -> int:
@@ -97,15 +110,25 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--val-n", type=int, default=0, help="validate on the first N only (smoke)")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--dry-run", action="store_true", help="show the split and one example, no torch")
+    ap.add_argument("--reply", choices=REPLY_FORMATS, default="label", help="what the adapter learns to reply")
+    ap.add_argument("--reasons", type=Path, default=None, help="edge-grader-reasons JSONL (reason formats)")
     args = ap.parse_args(argv)
+    if (args.reply == "label") != (args.reasons is None):
+        ap.error("--reasons goes with --reply reason-first / label-first, and only with them")
 
     labels = data.labels_for("3way")
     train, val = split_by_question(data.load(split="train", scheme="3way"), RECIPE["val_frac"], args.seed)
     tq, vq = sorted({question_id(i.id) for i in train}), sorted({question_id(i.id) for i in val})
     print(f"train {len(train)} answers / {len(tq)} questions, "
           f"validation {len(val)} answers / {len(vq)} questions")
+    reasons, reasons_sha = load_reasons(args.reasons) if args.reasons else ({}, None)
+    dropped = 0
+    if reasons:
+        kept = [i for i in train if i.id in reasons]
+        dropped, train = len(train) - len(kept), kept
+        print(f"training on {len(train)} answers: {dropped} dropped (no kept reason)")
     if args.dry_run:
-        print(json.dumps(to_messages(train[0], labels), indent=2))
+        print(json.dumps(to_messages(train[0], labels, args.reply, reasons.get(train[0].id)), indent=2))
         return
     if args.val_n:
         val = val[:args.val_n]
@@ -145,7 +168,8 @@ def main(argv: list[str] | None = None) -> None:
     def example(item: Item) -> dict:
         # The prompt is tokenized on its own, as llama-server does; loss only on the reply.
         prompt = prompt_text(item)
-        full = tok.apply_chat_template(to_messages(item, labels), tokenize=False, enable_thinking=False)
+        full = tok.apply_chat_template(to_messages(item, labels, args.reply, reasons.get(item.id)),
+                                       tokenize=False, enable_thinking=False)
         if not full.startswith(prompt):
             raise ValueError(f"chat template: the conversation doesn't start with the prompt\n"
                              f"{prompt!r}\n{full!r}")
@@ -163,15 +187,21 @@ def main(argv: list[str] | None = None) -> None:
 
     history: list[dict] = []
 
+    # Read the way llama-server's runs will be (grader.grade): a reason-first reply cut at the cap
+    # is unparsed; label-first is read from its first line.
+    max_new = REASON_FIRST_MAX_TOKENS if args.reply == "reason-first" else RECIPE["max_new_tokens"]
+
     def validate(epoch: float) -> None:
         model.eval()
         right = unparsed = 0
         with torch.no_grad():
             for item in val:
                 enc = tok(prompt_text(item), add_special_tokens=False, return_tensors="pt").to(0)
-                out = model.generate(**enc, max_new_tokens=RECIPE["max_new_tokens"], do_sample=False)
-                pred = parse_label(tok.decode(out[0][enc["input_ids"].shape[1]:],
-                                              skip_special_tokens=True), labels)
+                out = model.generate(**enc, max_new_tokens=max_new, do_sample=False)
+                new = out[0][enc["input_ids"].shape[1]:]
+                cut = args.reply == "reason-first" and len(new) >= max_new and new[-1] != tok.eos_token_id
+                pred = None if cut else parse_reply(tok.decode(new, skip_special_tokens=True),
+                                                    labels, args.reply)
                 right += pred == item.label
                 unparsed += pred is None
         model.train()
@@ -199,9 +229,12 @@ def main(argv: list[str] | None = None) -> None:
     sha = hashlib.sha256((args.out / "adapter" / "adapter_model.safetensors").read_bytes()).hexdigest()
     versions = {m.__name__: m.__version__ for m in (torch, transformers, peft, bitsandbytes)}
     s = summary(args.model, {**RECIPE, **{k: str(v) if isinstance(v, Path) else v
-                                          for k, v in vars(args).items()}},
+                                          for k, v in vars(args).items()},
+                             "reasons_sha256": reasons_sha, "dropped_no_reason": dropped,
+                             "max_new_tokens": max_new},
                 history, chosen, tq, vq, sha, versions)
     args.results.mkdir(parents=True, exist_ok=True)
-    path = args.results / f"finetune-{args.model}-{datetime.now(UTC):%Y%m%d-%H%M%S}.json"
+    tag = "" if args.reply == "label" else f"-{args.reply}"
+    path = args.results / f"finetune-{args.model}{tag}-{datetime.now(UTC):%Y%m%d-%H%M%S}.json"
     path.write_text(json.dumps(s, indent=2) + "\n")
     print(f"chosen epoch {chosen}; adapter {args.out / 'adapter'} sha256 {sha}; summary {path}")
