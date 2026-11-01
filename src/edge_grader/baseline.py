@@ -80,9 +80,13 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--thinking", action="store_true",
                     help="the server runs with -rea on --reasoning-budget 320 --reasoning-format none: "
                          "read the label after the thoughts")
+    ap.add_argument("--reply", default="label", choices=grader.REPLY_FORMATS,
+                    help="stage 3b: the reply format the adapter was trained on (default: the label only)")
     args = ap.parse_args(argv)
     if args.thinking and args.rag:
         sys.exit("--thinking with --rag isn't a condition in this study")
+    if args.reply != "label" and (args.thinking or args.rag):
+        sys.exit(f"--reply {args.reply} with --thinking or --rag isn't a condition in this study")
     if args.dataset != "scientsbank" and (args.rag or args.split == "test_ud"):
         sys.exit(f"{args.dataset}: test_ua or test_uq, without --rag")
 
@@ -101,7 +105,7 @@ def main(argv: list[str] | None = None) -> None:
             sys.exit(f"no retrieved passages for question {question_id(item.id)}")
         try:
             row = grader.grade(client, args.model, item, labels, passages=[t for _, t in hits],
-                               thinking=args.thinking)
+                               thinking=args.thinking, reply=args.reply)
             if rag:
                 row["passages"] = [cid for cid, _ in hits]
             rows.append(row)
@@ -119,6 +123,8 @@ def main(argv: list[str] | None = None) -> None:
                for r in rows for p in (r["gold"], r["pred"])]
         summary["two_way"] = metrics.score(two[0::2], two[1::2])
     summary["errors"] = len(rows) - len(ok)
+    if args.reply != "label":
+        summary["cut"] = sum(r.get("finish") == "length" for r in ok)
     summary["median_latency_s"] = statistics.median(r["latency_s"] for r in ok) if ok else None
     summary["wall_s"] = round(wall, 1)
     summary["prompt_tokens"] = sum(r["prompt_tokens"] or 0 for r in ok)
@@ -135,6 +141,7 @@ def main(argv: list[str] | None = None) -> None:
         "server": server,
         "split": args.split,
         "scheme": args.scheme,
+        "reply": args.reply,
         "n_requested": args.n,
         "seed": args.seed,
         "time": now.isoformat(timespec="seconds"),

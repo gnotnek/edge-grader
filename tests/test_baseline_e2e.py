@@ -3,10 +3,12 @@
 import json
 import threading
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from typing import ClassVar
 
 import pytest
 
 from edge_grader import baseline, data
+from edge_grader.grader import REASON_FIRST_MAX_TOKENS
 
 ITEMS = [
     data.Item("a", "Q1?", "ref", "right answer", "correct"),
@@ -16,6 +18,8 @@ ITEMS = [
 
 
 class FakeLlamaServer(BaseHTTPRequestHandler):
+    requests: ClassVar[list[dict]] = []
+
     def log_message(self, *args):
         pass
 
@@ -32,10 +36,13 @@ class FakeLlamaServer(BaseHTTPRequestHandler):
 
     def do_POST(self):
         body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
+        type(self).requests.append(body)
         prompt = body["messages"][0]["content"]
         # Grades "right" answers correct and everything else incorrect.
         reply = "correct" if "Student answer: right" in prompt else "incorrect"
-        if body.get("max_tokens", 16) > 16:  # a thinking-on request: thoughts first, naming labels
+        if body.get("max_tokens") == REASON_FIRST_MAX_TOKENS:  # reason-first: a reason naming labels
+            reply = f"Not contradictory, nor correct in full.\nLabel: {reply}"
+        elif body.get("max_tokens", 16) > 16:  # a thinking-on request: thoughts first, naming labels
             reply = f"<|channel>thought\nIs it correct or contradictory?<channel|>{reply}"
         self._send({
             "id": "x", "object": "chat.completion", "created": 0, "model": body["model"],
@@ -154,3 +161,30 @@ def test_think_run_is_named_and_records_settings(server, tmp_path, monkeypatch):
 def test_thinking_and_rag_together_are_refused(tmp_path):
     with pytest.raises(SystemExit, match="--thinking with --rag"):
         baseline.main(["--out", str(tmp_path), "--thinking", "--rag", "x.json"])
+
+
+@pytest.mark.parametrize("reply", ["reason-first", "label-first"])
+def test_reply_format_run_records_it_and_reads_the_label(reply, server, tmp_path, monkeypatch):
+    monkeypatch.setattr(data, "load", lambda *a, **k: ITEMS)
+    FakeLlamaServer.requests.clear()
+    baseline.main(["--base-url", server, "--label", "fake-ft-rf", "--out", str(tmp_path), "--reply", reply])
+    [f] = tmp_path.glob("baseline-fake-ft-rf-test_ua-3way-*.json")
+    run = json.loads(f.read_text())
+    assert run["reply"] == reply
+    assert run["metrics"]["accuracy"] == pytest.approx(2 / 3, abs=1e-3)
+    assert run["metrics"]["unparsed"] == 0 and run["metrics"]["cut"] == 0
+    assert all(("stop" in r) == (reply == "label-first") for r in FakeLlamaServer.requests)
+
+
+def test_label_run_records_the_default_reply(server, tmp_path, monkeypatch):
+    monkeypatch.setattr(data, "load", lambda *a, **k: ITEMS)
+    baseline.main(["--base-url", server, "--label", "fake", "--out", str(tmp_path)])
+    [f] = tmp_path.glob("baseline-fake-*.json")
+    run = json.loads(f.read_text())
+    assert run["reply"] == "label" and "cut" not in run["metrics"]
+
+
+@pytest.mark.parametrize("extra", [["--thinking"], ["--rag", "x.json"]])
+def test_reason_formats_refuse_thinking_and_rag(extra, tmp_path):
+    with pytest.raises(SystemExit, match="--reply"):
+        baseline.main(["--out", str(tmp_path), "--reply", "reason-first", *extra])
