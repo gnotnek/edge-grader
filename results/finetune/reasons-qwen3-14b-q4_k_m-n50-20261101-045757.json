@@ -1,0 +1,27 @@
+{
+  "kind": "reasons",
+  "teacher": {
+    "model_path": "/tmp/models/Qwen3-14B-Q4_K_M.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a3a1c47"
+  },
+  "model": "local",
+  "settings": {
+    "temperature": 0,
+    "max_tokens": 128,
+    "split": "train",
+    "scheme": "3way",
+    "n_requested": 50,
+    "seed": 0
+  },
+  "prompt": "prompts/reason_teacher.txt",
+  "prompt_sha256": "cd39ab27ece2d9f56889ee6dfef941ba2d691eddedd2fe58eef1627883cfec6d",
+  "n": 50,
+  "kept": 50,
+  "drops": {},
+  "drop_share": 0.0,
+  "reasons": "results/finetune/raw/reasons-qwen3-14b-q4_k_m-n50.jsonl",
+  "reasons_sha256": "f793b1a7695d81de04adb13685f0dc0a037ce342e847797e218e77440951d82e",
+  "wall_s": 201.1,
+  "time": "2026-11-01T04:57:57+00:00"
+}
