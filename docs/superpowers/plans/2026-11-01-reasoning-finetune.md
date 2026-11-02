@@ -130,14 +130,14 @@
 
 **Files:** create `notebooks/kaggle_reasons.ipynb`; modify `notebooks/kaggle_finetune.ipynb`, `notebooks/kaggle_baseline.ipynb`.
 
-- [ ] `kaggle_reasons.ipynb`: copy the news-judge notebook's structure (build `a3a1c47`, download the teacher, get the code, start `llama-server` with the Gemma flags and `-rea off`), then `edge-grader-reasons` with `N` (50 for the pilot, 0 for all), then zip `results/finetune/reasons-*` and `raw/reasons-*` for download. Get the code the way the Oct 30 held-out runs did (the `edge-grader-code` dataset bundle).
-- [ ] `kaggle_finetune.ipynb`: `REPLY = "label"` setting in cell 1, passed as `--reply {REPLY} --reasons {REPO}/results/finetune/raw/reasons-qwen3-14b-q4_k_m.jsonl` when not `label`; the adapter GGUF is named `{MODEL}-ft-{rf|lf}.gguf`. The Gemma token check from spec §5.3 runs as a cell before training when `REPLY == "reason-first"`: the longest training reply in Gemma's tokenizer, plus 8; if that is above `REASON_FIRST_MAX_TOKENS`, stop and update the constant (commit, rebundle) before training.
-- [ ] `kaggle_baseline.ipynb`: `REPLY = "label"` beside `LORA`; asserts `REPLY == "label" or LORA`; passes `--reply`; the label tag becomes `-ft-rf` / `-ft-lf`.
-- [ ] Commit; bundle the code to the `edge-grader-code` dataset (as on Oct 30).
-- [ ] **Pilot:** run the reasons notebook with `N = 50`. Look at the drop share and read the 50 reasons. If the drop share is above 5%, fix the prompt now (this is still before the full run, so it costs one pilot).
-- [ ] **Full run** (`N = 0`). If more than 5% are dropped: fix the prompt, rewrite once (spec §5.1); a second failure stops work for the owner's decision.
-- [ ] **Owner spot check:** draw 30 kept reasons with a fixed seed (`random.Random(0)`) and give them to the owner in a file, each with its question, reference, answer and gold label. Gate: 25/30 faithful. Record the marks in `docs/results/finetuning.md`. Fail → rewrite once; a second failure stops work.
-- [ ] Commit the reasons JSONL and summary.
+- [x] `kaggle_reasons.ipynb`: copy the news-judge notebook's structure (build `a3a1c47`, download the teacher, get the code, start `llama-server` with the Gemma flags and `-rea off`), then `edge-grader-reasons` with `N` (50 for the pilot, 0 for all), then zip `results/finetune/reasons-*` and `raw/reasons-*` for download. Get the code the way the Oct 30 held-out runs did (the `edge-grader-code` dataset bundle).
+- [x] `kaggle_finetune.ipynb`: `REPLY = "label"` setting in cell 1, passed as `--reply {REPLY} --reasons {REPO}/results/finetune/raw/reasons-qwen3-14b-q4_k_m.jsonl` when not `label`; the adapter GGUF is named `{MODEL}-ft-{rf|lf}.gguf`. The Gemma token check from spec §5.3 runs as a cell before training when `REPLY == "reason-first"`: the longest training reply in Gemma's tokenizer, plus 8; if that is above `REASON_FIRST_MAX_TOKENS`, stop and update the constant (commit, rebundle) before training.
+- [x] `kaggle_baseline.ipynb`: `REPLY = "label"` beside `LORA`; asserts `REPLY == "label" or LORA`; passes `--reply`; the label tag becomes `-ft-rf` / `-ft-lf`.
+- [x] Commit; bundle the code to the `edge-grader-code` dataset (as on Oct 30).
+- [x] **Pilot:** run the reasons notebook with `N = 50`. Look at the drop share and read the 50 reasons. If the drop share is above 5%, fix the prompt now (this is still before the full run, so it costs one pilot).
+- [x] **Full run** (`N = 0`). If more than 5% are dropped: fix the prompt, rewrite once (spec §5.1); a second failure stops work for the owner's decision.
+- [x] **Owner spot check:** draw 30 kept reasons with a fixed seed (`random.Random(0)`) and give them to the owner in a file, each with its question, reference, answer and gold label. Gate: 25/30 faithful. Record the marks in `docs/results/finetuning.md`. Fail → rewrite once; a second failure stops work.
+- [x] Commit the reasons JSONL and summary.
 
 ### Task 7: Train the two E2B adapters (Kaggle)
 

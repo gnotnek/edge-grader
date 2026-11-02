@@ -152,6 +152,29 @@ These are single runs with one seed and one prompt. The published systems differ
 
 **What it means for the next step:** a better recipe has to teach judging that transfers, for example training on more than one grading set and keeping one out, or balancing the classes. Changing the model alone, with the same SciEntsBank-only recipe, would likely meet the same limit; the held-out sets are now the test any new model or recipe has to pass.
 
+## Reasoning-guided fine-tuning (E2B, stage 3b)
+
+*Design: [`../superpowers/specs/2026-11-01-reasoning-finetune-design.md`](../superpowers/specs/2026-11-01-reasoning-finetune-design.md). The training and the grading are still to come.*
+
+### Teacher reasons (2026-11-01)
+
+- **Teacher:** Qwen3-14B Q4_K_M on a Kaggle T4, `llama-server` `a3a1c47`, thinking off, temperature 0, at most 128 tokens. It is given the gold grade and explains it.
+- **Pilot 1** (50 train answers, prompt `cd39ab27`): none dropped, but 28 of the 29 reasons for "correct" answers listed shortcomings, and some argued for a lower grade. Training on them could teach the over-calling of "correct" that the 2026-10-28 adapters showed, so the prompt was tightened: the grade is final, and every sentence must support it ([summary](../../results/finetune/reasons-qwen3-14b-q4_k_m-n50-20261101-045757.json)).
+- **Pilot 2** (the same 50, prompt `e73e9afc`): none of the 29 "correct" reasons argues against the grade; 2 dropped (4%) ([summary](../../results/finetune/reasons-qwen3-14b-q4_k_m-n50-e73e9afc-20261101-072837.json)). The prompt was changed after reading training answers only, never test data.
+- **Full run** (all 4,969 train answers, prompt `e73e9afc`, 6.9 h): 4,819 kept, 150 dropped (3.0%, under the 5% limit). Every drop is `wrong_label`: a reason for an "incorrect" (116) or "contradictory" (34) answer that uses a grade word, usually "correct". No reason was cut at the token limit. Mean 52 words, longest 84 ([summary](../../results/finetune/reasons-qwen3-14b-q4_k_m-20261101-152101.json)).
+  - The drops all fall on non-"correct" answers, so training has slightly more "correct" answers than before (about 5% of the incorrect and contradictory ones are left out).
+
+### Owner spot check (2026-11-02): 27 of 30, passed
+
+30 kept reasons drawn with `random.Random(0)` (15 incorrect, 11 correct, 4 contradictory), each marked faithful if it explains the gold grade and says something true about the answer. Gate: 25 of 30.
+
+The owner marked **27 of 30** faithful. Of the 3 left unmarked:
+
+- **Two are disagreements with the dataset's grade, not with the reason.** In `MX.10.453.1` ("there are bubbles") and `II.13b.576.1` ("loops are facing different direction"), the owner would grade the answer "correct"; the reason explains the gold "incorrect" accurately. Counted as marked; under the strict rule the count would be 29.
+- **One is a fair miss.** `ST.54b3.469.1` (student: "A plant.", gold "correct"): the reason stretches the answer to fit the grade and ends with a shortcoming ("lacks specific details").
+
+The owner's two grade disagreements are a small sign that SciEntsBank's "incorrect" can be strict for short answers that name the right evidence without the explanation.
+
 ## Not done yet
 
 - **Cost on the Jetson.** Latency and energy per answer for the tuned models, against the re-run baselines in the same clock state. Kaggle times aren't board cost, so no cost number is quoted here.
