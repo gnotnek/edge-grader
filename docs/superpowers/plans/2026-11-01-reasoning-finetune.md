@@ -37,10 +37,10 @@
 
 **Files:** `docs/research-outline.md`, `docs/plan.md`, the spec.
 
-- [ ] Outline: a row in the own-decisions table (2026-11-01): reasoning-guided QLoRA, Qwen3-14B teacher, two orders, SciEntsBank only, E2B first, alongside stage 4; RQ3. A feedback-table row for the supervisor's request (look for published work that makes Gemma grade better), with the answer: Faza et al. 2025.
-- [ ] `plan.md`: under week 8 (Nov 2–8), add the Kaggle pilot beside stage 4, and the Nov 15 end in week 9.
-- [ ] Spec §5.1: the reasons file is committed under `results/finetune/raw/` (see Global Constraints).
-- [ ] Commit with the spec and this plan.
+- [x] Outline: a row in the own-decisions table (2026-11-01): reasoning-guided QLoRA, Qwen3-14B teacher, two orders, SciEntsBank only, E2B first, alongside stage 4; RQ3. A feedback-table row for the supervisor's request (look for published work that makes Gemma grade better), with the answer: Faza et al. 2025.
+- [x] `plan.md`: under week 8 (Nov 2–8), add the Kaggle pilot beside stage 4, and the Nov 15 end in week 9.
+- [x] Spec §5.1: the reasons file is committed under `results/finetune/raw/` (see Global Constraints).
+- [x] Commit with the spec and this plan.
 
 ### Task 1: Reply formats in `grader.py`
 
@@ -56,15 +56,15 @@
   - `label-first`: `parse_label` on the first line only
 - `grade(..., reply: str = "label")`: `label-first` sends `max_tokens=16, stop=["\n"]`; `reason-first` sends `max_tokens=REASON_FIRST_MAX_TOKENS` and a reply with `finish_reason == "length"` is unparsed; the row records `"finish"` for both reason formats. `thinking` and a reply other than `label` together raise `ValueError`.
 
-- [ ] **Tests first:**
+- [x] **Tests first:**
   - `parse_reply("The answer names the wrong force, so it is not correct.\nLabel: contradictory", ..., "reason-first") == "contradictory"`
   - reason-first with no `Label:` → `None`; with two `Label:` lines → the last one
   - `parse_reply("incorrect\nIt leaves out ... correct idea ...", ..., "label-first") == "incorrect"`
   - `reply_text("correct", "r", "reason-first") == "r\nLabel: correct"`, `reply_text("correct", "r", "label-first") == "correct\nr"`, `reply_text("correct", None, "label") == "correct"`
   - `parse_reply(reply_text(l, r, f), labels, f) == l` for every format and label, with `r` containing all three label words
   - `grade` with a fake client: `label` sends `max_tokens=16` and no `stop` (today's request, unchanged); `label-first` sends `stop=["\n"]`; `reason-first` cut by length → `pred is None`
-- [ ] Run `uv run pytest tests/test_grader.py -v`: fail, then implement, then pass.
-- [ ] `uv run pytest -q && uv run ruff check .`; commit.
+- [x] Run `uv run pytest tests/test_grader.py -v`: fail, then implement, then pass.
+- [x] `uv run pytest -q && uv run ruff check .`; commit.
 
 ### Task 2: The teacher (`reasons.py`)
 
@@ -75,11 +75,11 @@
 - `check_reason(text: str, finish: str, gold: str, labels: list[str]) -> str | None`, the drop code or `None`: `"empty"` (blank after strip), `"cut"` (`finish == "length"`), `"wrong_label"` (a label word other than `gold` appears; uses the same `\b` matching as `parse_label`, so "incorrect" doesn't count as "correct").
 - `main(argv)`: `--base-url`, `--n` (0 = all; a pilot uses 50), `--out` (default `results/finetune`). Loads `data.load(split="train", scheme="3way")`, writes one JSON line per answer to `raw/reasons-<name>.jsonl.part` as it goes, skips ids already in the `.part` file (resume), renames to `.jsonl` when complete, then writes `reasons-<name>-<stamp>.json`: teacher `server_info`, prompt sha256, n, drop counts by code, drop share, the JSONL's sha256, wall time. The name comes from the server's model path (`qwen3-14b-q4_k_m`).
 
-- [ ] **Tests first** (no network: a fake client, as in `test_baseline_e2e.py`):
+- [x] **Tests first** (no network: a fake client, as in `test_baseline_e2e.py`):
   - `check_reason` for each code, and `None` for a clean reason; a reason saying "incorrect" for gold `incorrect` is kept; "correct" inside "incorrect" for gold `incorrect` is kept
   - `teacher_messages` includes the gold label's help text and the three answer fields
   - a run of 3 items against a fake server writes 3 lines and a summary with the drop counts; a second run with a `.part` holding 2 lines asks the server only once
-- [ ] Implement; `uv run pytest -q && uv run ruff check .`; commit.
+- [x] Implement; `uv run pytest -q && uv run ruff check .`; commit.
 
 ### Task 3: `finetune.py` trains a reply format
 
@@ -93,12 +93,12 @@
 - Summary `settings` gains `reply`, `reasons` path, `reasons_sha256`, `dropped_no_reason`; the file is `finetune-<model>-<reply>-<stamp>.json` when `reply != "label"` (unchanged name otherwise).
 - `--dry-run` prints one example per format it would train.
 
-- [ ] **Tests first:**
+- [x] **Tests first:**
   - the split is identical for `label` and both reason formats (same validation questions as `split_by_question` on all items)
   - with a reasons file where 2 ids are dropped, both reason formats train on the same set, and that set excludes those 2
   - `to_messages(..., "label")` equals today's output (regression)
   - `load_reasons` skips dropped lines and returns the sha256 of the file bytes
-- [ ] Implement; `uv run pytest -q && uv run ruff check .`; commit.
+- [x] Implement; `uv run pytest -q && uv run ruff check .`; commit.
 
 ### Task 4: `baseline.py --reply`
 
@@ -108,11 +108,11 @@
 - The run records `"reply": args.reply`; `summary["unparsed"]` already counts `None` preds; add `summary["cut"]` (rows with `finish == "length"`) for reason formats.
 - File names are unchanged; the label carries the adapter (`e2b-kaggle-t4-ft-rf`), set by the notebook.
 
-- [ ] **Tests:** extend `FakeLlamaServer` so a request with `max_tokens > 16` and no thinking returns `"Some reason.\nLabel: correct"` style replies, and one with `stop` returns only the label line:
+- [x] **Tests:** extend `FakeLlamaServer` so a request with `max_tokens > 16` and no thinking returns `"Some reason.\nLabel: correct"` style replies, and one with `stop` returns only the label line:
   - `--reply reason-first` scores like the label run (2/3) and records `reply`
   - `--reply label-first` sends `stop`
   - `--reply reason-first --thinking` exits
-- [ ] `uv run pytest -q && uv run ruff check .`; commit.
+- [x] `uv run pytest -q && uv run ruff check .`; commit.
 
 ### Task 5: The comparison and the gate (`compare.py`)
 
@@ -123,8 +123,8 @@
 - `gate(cells: dict[tuple[str, str], dict[str, dict]]) -> tuple[bool, list]`: `cells[(set, split)]["vs_base"]` and `["vs_ft"]` hold `paired` results with Holm-corrected `p_holm`. True if **some** cell has both differences > 0 and both `p_holm < 0.05` (spec §2). Holm runs over all 16 tests (2 adapters × 2 baselines × 4 cells) at once.
 - `main`: given the run labels, finds the newest raw files per (dataset, split, label) under `results/kaggle/raw/`, prints the table (Beetle 3-way, SAF 2-way; SciEntsBank and per-class recall described, not tested) and the gate, and writes `results/kaggle/compare-reason-ft-<stamp>.json`.
 
-- [ ] **Tests:** gate true only when one cell wins against both; false when the two wins are in different cells; false when a win is positive but `p_holm ≥ 0.05`; `paired` refuses mismatched ids; 2-way mapping.
-- [ ] Commit **before** Task 7 starts.
+- [x] **Tests:** gate true only when one cell wins against both; false when the two wins are in different cells; false when a win is positive but `p_holm ≥ 0.05`; `paired` refuses mismatched ids; 2-way mapping.
+- [x] Commit **before** Task 7 starts.
 
 ### Task 6: Notebooks, then the reasons run (Kaggle)
 
@@ -141,23 +141,23 @@
 
 ### Task 7: Train the two E2B adapters (Kaggle)
 
-- [ ] Run `kaggle_finetune.ipynb` with `MODEL = "e2b"`, `SMOKE = True`, `REPLY = "reason-first"` first (minutes): the template check passes, the loss is finite, validation parses replies. Then `SMOKE = False`.
-- [ ] The same for `REPLY = "label-first"`.
-- [ ] Check each summary: `versions` equal the Oct 27 ones (Tech Stack); `dropped_no_reason` equal in both; validation unparsed near 0.
-- [ ] Upload `e2b-ft-rf.gguf` and `e2b-ft-lf.gguf` to `edge-grader-adapters` (new version, the old files kept). Commit the training summaries.
+- [x] Run `kaggle_finetune.ipynb` with `MODEL = "e2b"`, `SMOKE = True`, `REPLY = "reason-first"` first (minutes): the template check passes, the loss is finite, validation parses replies. Then `SMOKE = False`.
+- [x] The same for `REPLY = "label-first"`. (Smoke run skipped to save GPU time, 2026-11-02; the full run was the check.)
+- [x] Check each summary: `versions` equal the Oct 27 ones (Tech Stack); `dropped_no_reason` equal in both; validation unparsed near 0.
+- [x] Upload `e2b-ft-rf.gguf` and `e2b-ft-lf.gguf` to `edge-grader-adapters` (new version, the old files kept). Commit the training summaries.
 
 ### Task 8: Grade (Kaggle)
 
-- [ ] `kaggle_baseline.ipynb`, `MODELS = ["e2b"]`, `N = 0`, one kernel per adapter:
+- [x] `kaggle_baseline.ipynb`, `MODELS = ["e2b"]`, `N = 0`, one kernel per adapter:
   - `DATASETS = ["beetle", "saf"]`, `SPLITS = ["test_ua", "test_uq"]`
   - `DATASETS = ["scientsbank"]`, `SPLITS = ["test_uq", "test_ud"]` (test_ud is the first cut if Nov 15 is at risk, spec §6)
-- [ ] Download the results the way Oct 30 did (MCP `download_notebook_output` + curl); unzip into `results/kaggle/`. Check every run: `n` equals the split size, `errors == 0`, and for reason-first the `cut` count. Commit.
+- [x] Download the results the way Oct 30 did (MCP `download_notebook_output` + curl); unzip into `results/kaggle/`. Check every run: `n` equals the split size, `errors == 0`, and for reason-first the `cut` count. Commit.
 
 ### Task 9: Compare and write up
 
-- [ ] `uv run python -m edge_grader.compare ...` with the labels `e2b-kaggle-t4`, `e2b-kaggle-t4-ft`, `e2b-kaggle-t4-ft-rf`, `e2b-kaggle-t4-ft-lf`. Commit its JSON.
-- [ ] `docs/results/finetuning.md`: a section "Reasoning-guided fine-tuning (E2B)", covering setup, the reasons check, the table, per-class recall on Beetle, unparsed and completion tokens, the gate result, and reason-first against label-first.
-- [ ] Outline and `plan.md`: the result and what happens to step 4 (E4B / Jetson / no-harm) by the spec's rule.
+- [x] `uv run python -m edge_grader.compare ...` with the labels `e2b-kaggle-t4`, `e2b-kaggle-t4-ft`, `e2b-kaggle-t4-ft-rf`, `e2b-kaggle-t4-ft-lf`. Commit its JSON.
+- [x] `docs/results/finetuning.md`: a section "Reasoning-guided fine-tuning (E2B)", covering setup, the reasons check, the table, per-class recall on Beetle, unparsed and completion tokens, the gate result, and reason-first against label-first.
+- [x] Outline and `plan.md`: the result and what happens to step 4 (E4B / Jetson / no-harm) by the spec's rule.
 
 ## Not in this plan
 

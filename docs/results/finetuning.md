@@ -154,7 +154,9 @@ These are single runs with one seed and one prompt. The published systems differ
 
 ## Reasoning-guided fine-tuning (E2B, stage 3b)
 
-*Design: [`../superpowers/specs/2026-11-01-reasoning-finetune-design.md`](../superpowers/specs/2026-11-01-reasoning-finetune-design.md). The training and the grading are still to come.*
+*Design: [`../superpowers/specs/2026-11-01-reasoning-finetune-design.md`](../superpowers/specs/2026-11-01-reasoning-finetune-design.md). E2B only; E4B, the Jetson cost and the no-harm checks come next if time allows (design §6).*
+
+**In short:** the gate passed, in one of the four held-out cells. On Beetle test_ua both new adapters beat the untuned E2B (+11.4 points) and the Oct 28 adapter (+5.9), each significant after Holm. The other three cells show no significant gain over the Oct 28 adapter. "Contradictory" did not recover. The reason doesn't have to come first: label-first matches or beats reason-first on 3 of 4 cells at 2 tokens per answer instead of about 65.
 
 ### Teacher reasons (2026-11-01)
 
@@ -174,6 +176,66 @@ The owner marked **27 of 30** faithful. Of the 3 left unmarked:
 - **One is a fair miss.** `ST.54b3.469.1` (student: "A plant.", gold "correct"): the reason stretches the answer to fit the grade and ends with a shortcoming ("lacks specific details").
 
 The owner's two grade disagreements are a small sign that SciEntsBank's "incorrect" can be strict for short answers that name the right evidence without the explanation.
+
+### Training (2026-11-02)
+
+The Oct 27 recipe unchanged except for the target text: the same base checkpoint, split, seed, library versions and epoch choice on the 499 validation answers. The 136 train answers whose reason was dropped are left out of both adapters.
+
+| Adapter | Target | Chosen epoch | Validation acc by epoch | Summary |
+|---|---|---|---|---|
+| Oct 28 (label only, trained Oct 27) | `<label>` | | 78.8% (chosen) | |
+| Reason-first | `<reason>\nLabel: <label>` | 3 | 74.3 / 72.7 / 76.4% | [json](../../results/finetune/finetune-e2b-reason-first-20261102-145522.json) |
+| Label-first | `<label>\n<reason>` | 3 | 73.5 / 76.2 / 77.2% | [json](../../results/finetune/finetune-e2b-label-first-20261102-115213.json) |
+
+- Converted to GGUF LoRA (`e2b-ft-rf.gguf` sha `190b81da`, `e2b-ft-lf.gguf` sha `282075cb`) and served with `--lora` on `a3a1c47`, as on Oct 28.
+- Smoke run for reason-first only (10 answers, 0 unparsed, longest reply 98 of the 160-token cap). Label-first's smoke run was skipped to save GPU time; its first full run served as the check.
+- Sanity runs on the first 100 SciEntsBank test_ua answers (not part of the test; test_ua shares questions with train): reason-first 67%, label-first 79%, the Oct 27 adapter 76% ([rf](../../results/kaggle/baseline-e2b-kaggle-t4-ft-rf-test_ua-3way-20261102-145733.json), [lf](../../results/kaggle/baseline-e2b-kaggle-t4-ft-lf-test_ua-3way-20261102-115258.json)).
+
+### Grading and the gate (2026-11-02): passed, in one cell
+
+Kaggle T4, the whole split each time, build `a3a1c47`, kernels `edge-grader-grade-{rf,lf}-{held,sb}`. 0 errors, 0 unparsed and 0 cut at the token cap in all 12 runs. The untuned and Oct 28 runs are the 2026-10-30 (Beetle, SAF) and 2026-10-05 / 10-28 (SciEntsBank) runs above, on the same build. Paired McNemar, Holm over the 16 tests, fixed before grading ([comparison](../../results/kaggle/compare-reason-ft-20261102-200813.json)).
+
+| Cell | Untuned | Oct 28 | **Reason-first** | **Label-first** | RF vs untuned / Oct 28 (Holm p) | LF vs untuned / Oct 28 (Holm p) |
+|---|---|---|---|---|---|---|
+| Beetle test_ua (3-way) | 53.5% | 59.0% | **64.9%** | **64.9%** | +11.4 (**0.0006**) / +5.9 (**0.031**) | +11.4 (**0.0003**) / +5.9 (**0.009**) |
+| Beetle test_uq (3-way) | 50.2% | 56.6% | 55.2% | 56.9% | +5.0 (0.15) / −1.5 (1.0) | +6.7 (**0.005**) / +0.2 (1.0) |
+| SAF test_ua (2-way) | 61.9% | 68.8% | 65.1% | 67.2% | +3.2 (1.0) / −3.7 (0.91) | +5.3 (0.15) / −1.6 (1.0) |
+| SAF test_uq (2-way) | 72.9% | 76.0% | 77.5% | 71.2% | +4.6 (0.28) / +1.5 (1.0) | −1.7 (1.0) / −4.8 (0.12) |
+
+Macro-F1 (Beetle 3-way, SAF 2-way), untuned / Oct 28 / reason-first / label-first: Beetle test_ua 0.528 / 0.531 / 0.584 / 0.598; Beetle test_uq 0.497 / 0.499 / 0.485 / 0.525; SAF test_ua 0.614 / 0.644 / 0.619 / 0.658; SAF test_uq 0.729 / 0.760 / 0.772 / 0.710.
+
+**The gate passed, but narrowly.**
+
+- Both adapters pass in the same cell, Beetle test_ua, which is what design §2 asks for. There the Oct 28 adapter's own gain (+5.5) had not been significant.
+- On the other three cells neither adapter is significantly above the Oct 28 adapter, and two point estimates are below it (label-first SAF test_uq −4.8, reason-first SAF test_ua −3.7; neither significant).
+- So training on reasons adds something on Beetle's unseen answers and nothing that holds up elsewhere. One seed: the Oct 23 → Oct 27 re-run moved test_ua by about 1 point on 100 answers, so the +5.9 is beyond that, but a second seed would be the proper check.
+
+**"Contradictory" did not recover.** The design's hope was that reasons would undo the Oct 28 adapter's fit to SciEntsBank's label mix. Beetle recall per class:
+
+| | correct | contradictory | incorrect | Predicted "contradictory" (gold) |
+|---|---|---|---|---|
+| test_ua: untuned / Oct 28 / RF / LF | 54 / 83 / 89 / 88% | 49 / 22 / 23 / 28% | 57 / 59 / 68 / 66% | 136 / 37 / 31 / 44 (111) |
+| test_uq: untuned / Oct 28 / RF / LF | 52 / 82 / 79 / 78% | 46 / 16 / 15 / 25% | 52 / 62 / 63 / 58% | 237 / 56 / 52 / 96 (244) |
+
+- The Beetle test_ua gain comes from "incorrect" (+7 to +9 points of recall over Oct 28) and "correct" (+5), not from "contradictory".
+- Label-first predicts "contradictory" somewhat more (25–28% recall against 15–23%), but still far below the untuned model's 46–49%. The label mix the adapters learned is still SciEntsBank's.
+
+**SciEntsBank (described, not tested): slightly below the Oct 28 adapter.**
+
+| | Untuned | Oct 28 | Reason-first | Label-first |
+|---|---|---|---|---|
+| test_uq (733) | 59.8% | 76.7% | 75.2% | 76.4% |
+| test_ud (4,562) | 60.3% | 74.9% | 71.0% | 73.2% |
+
+This matches the validation numbers: reasons don't help on the dataset the adapters were trained on, which the Oct 28 adapter already fits.
+
+**Reason-first against label-first: the reason doesn't have to come first.**
+
+- Accuracy: equal on Beetle test_ua; label-first ahead on Beetle test_uq (+1.7) and SAF test_ua (+2.1), reason-first ahead on SAF test_uq (+6.3); label-first ahead on SciEntsBank (+1.2 test_uq, +2.2 test_ud). Not tested against each other (design §5.5).
+- Cost: reason-first writes a median of 63–72 tokens per answer, label-first 2 (the server stops at the label). On the T4 that made reason-first's runs 7.5–9× longer (Beetle test_ua 420 s against 47 s; SciEntsBank test_ud 4,495 s against 601 s). On the Jetson the gap would be larger, since decoding dominates there.
+- So for a device, **label-first is the one to carry forward**: it gets the reason's training benefit at the label-only cost. This matches Faza et al. 2025's finding that the reason helps training, without their 35× inference cost.
+
+**Read with care:** one seed; the gate passed in one of four cells; Kaggle accuracy only, no board runs yet. The teacher prompt was changed once, after reading training answers only (pilot 1 → pilot 2), and the epoch was chosen on validation, never on test or held-out data.
 
 ## Not done yet
 

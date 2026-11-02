@@ -1,6 +1,6 @@
 # Research outline
 
-*Last updated 2026-10-21. The source of truth for what this project is trying to answer. Update it when the supervisor changes direction, and log the reason in the decisions table below.*
+*Last updated 2026-11-03. The source of truth for what this project is trying to answer. Update it when the supervisor changes direction, and log the reason in the decisions table below.*
 
 ## One-line summary
 
@@ -138,6 +138,7 @@ Decisions made while doing the work, not from the supervisor. Each has to serve 
 | 2026-10-21 | Fine-tuning cut order if two weeks run short (owner), first cut first: the optional news run; the GSM-Symbolic set; test_ua on the Jetson; phase C slips a week. E4B is dropped last | Fixed before any result, so a cut can't follow from what the numbers show | RQ3 |
 | 2026-10-30 | Held-out grading sets: **Beetle** (SemEval-2013 Task 7's other corpus, 3-way and 2-way) and **SAF** (Filighera et al., ACL 2022, communication networks; 2-way headline, partially correct → incorrect), test_ua and test_uq only, no RAG or thinking | Neither is trained on, so a gain there can't come from the training questions; both have a published reference and labels close to SciEntsBank's | RQ3 |
 | 2026-11-01 | **Reasoning-guided fine-tuning** (owner): Qwen3-14B on Kaggle writes a reason for each SciEntsBank train answer, given the gold label; two E2B adapters, reason-first and label-first; SciEntsBank train only, as before; E4B only if an E2B adapter beats both the untuned model and the Oct 28 adapter in the same Beetle/SAF cell after Holm. Runs on Kaggle alongside stage 4, done by Nov 15 | The Oct 28 adapters fit SciEntsBank's label mix; Faza et al. 2025 found reasons fix that kind of overfitting for Gemma. Label-first tests whether the reason helps without costing the device extra tokens. One change from Oct 28 (the training target), so a gain is attributable. [Spec](superpowers/specs/2026-11-01-reasoning-finetune-design.md), [plan](superpowers/plans/2026-11-01-reasoning-finetune.md) | RQ3 |
+| 2026-11-03 | **Reasoning-guided fine-tuning, E2B result:** the gate passed in one of four held-out cells (Beetle test_ua: both adapters beat the untuned model by 11.4 points and the Oct 28 adapter by 5.9, Holm p ≤ 0.031); no significant gain over Oct 28 on Beetle test_uq or SAF; "contradictory" recall on Beetle stays at 15–28%. Label-first matches reason-first at 2 tokens per answer. Next by design §6, only if the buffer week has time: E4B, then Jetson cost and no-harm for label-first | Gate fixed before grading; label-first goes to the Jetson because it costs the device nothing extra (Claude's call). [Results](results/finetuning.md#reasoning-guided-fine-tuning-e2b-stage-3b) | RQ3 |
 
 ## Open questions
 

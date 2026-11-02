@@ -1,0 +1,685 @@
+{
+  "kind": "compare-reason-ft",
+  "labels": {
+    "base": "e2b-kaggle-t4",
+    "ft": "e2b-kaggle-t4-ft",
+    "new": [
+      "e2b-kaggle-t4-ft-rf",
+      "e2b-kaggle-t4-ft-lf"
+    ]
+  },
+  "builds": [
+    "b1-a3a1c47"
+  ],
+  "runs": [
+    {
+      "dataset": "beetle",
+      "split": "test_ua",
+      "label": "e2b-kaggle-t4",
+      "file": "beetle-baseline-e2b-kaggle-t4-test_ua-3way-20261030-181511.json",
+      "build": "b1-a3a1c47",
+      "reply": "label",
+      "n": 439,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": null,
+      "median_completion_tokens": 2
+    },
+    {
+      "dataset": "beetle",
+      "split": "test_ua",
+      "label": "e2b-kaggle-t4-ft",
+      "file": "beetle-baseline-e2b-kaggle-t4-ft-test_ua-3way-20261030-181209.json",
+      "build": "b1-a3a1c47",
+      "reply": "label",
+      "n": 439,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": null,
+      "median_completion_tokens": 2
+    },
+    {
+      "dataset": "beetle",
+      "split": "test_ua",
+      "label": "e2b-kaggle-t4-ft-rf",
+      "file": "beetle-baseline-e2b-kaggle-t4-ft-rf-test_ua-3way-20261102-161800.json",
+      "build": "b1-a3a1c47",
+      "reply": "reason-first",
+      "n": 439,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": 0,
+      "median_completion_tokens": 64
+    },
+    {
+      "dataset": "beetle",
+      "split": "test_ua",
+      "label": "e2b-kaggle-t4-ft-lf",
+      "file": "beetle-baseline-e2b-kaggle-t4-ft-lf-test_ua-3way-20261102-161006.json",
+      "build": "b1-a3a1c47",
+      "reply": "label-first",
+      "n": 439,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": 0,
+      "median_completion_tokens": 2
+    },
+    {
+      "dataset": "beetle",
+      "split": "test_uq",
+      "label": "e2b-kaggle-t4",
+      "file": "beetle-baseline-e2b-kaggle-t4-test_uq-3way-20261030-181627.json",
+      "build": "b1-a3a1c47",
+      "reply": "label",
+      "n": 819,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": null,
+      "median_completion_tokens": 2
+    },
+    {
+      "dataset": "beetle",
+      "split": "test_uq",
+      "label": "e2b-kaggle-t4-ft",
+      "file": "beetle-baseline-e2b-kaggle-t4-ft-test_uq-3way-20261030-181342.json",
+      "build": "b1-a3a1c47",
+      "reply": "label",
+      "n": 819,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": null,
+      "median_completion_tokens": 2
+    },
+    {
+      "dataset": "beetle",
+      "split": "test_uq",
+      "label": "e2b-kaggle-t4-ft-rf",
+      "file": "beetle-baseline-e2b-kaggle-t4-ft-rf-test_uq-3way-20261102-163110.json",
+      "build": "b1-a3a1c47",
+      "reply": "reason-first",
+      "n": 819,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": 0,
+      "median_completion_tokens": 63
+    },
+    {
+      "dataset": "beetle",
+      "split": "test_uq",
+      "label": "e2b-kaggle-t4-ft-lf",
+      "file": "beetle-baseline-e2b-kaggle-t4-ft-lf-test_uq-3way-20261102-161140.json",
+      "build": "b1-a3a1c47",
+      "reply": "label-first",
+      "n": 819,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": 0,
+      "median_completion_tokens": 2
+    },
+    {
+      "dataset": "saf",
+      "split": "test_ua",
+      "label": "e2b-kaggle-t4",
+      "file": "saf-baseline-e2b-kaggle-t4-test_ua-3way-20261030-181732.json",
+      "build": "b1-a3a1c47",
+      "reply": "label",
+      "n": 375,
+      "unparsed": 3,
+      "errors": 0,
+      "cut": null,
+      "median_completion_tokens": 2
+    },
+    {
+      "dataset": "saf",
+      "split": "test_ua",
+      "label": "e2b-kaggle-t4-ft",
+      "file": "saf-baseline-e2b-kaggle-t4-ft-test_ua-3way-20261030-181509.json",
+      "build": "b1-a3a1c47",
+      "reply": "label",
+      "n": 375,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": null,
+      "median_completion_tokens": 2
+    },
+    {
+      "dataset": "saf",
+      "split": "test_ua",
+      "label": "e2b-kaggle-t4-ft-rf",
+      "file": "saf-baseline-e2b-kaggle-t4-ft-rf-test_ua-3way-20261102-163858.json",
+      "build": "b1-a3a1c47",
+      "reply": "reason-first",
+      "n": 375,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": 0,
+      "median_completion_tokens": 72
+    },
+    {
+      "dataset": "saf",
+      "split": "test_ua",
+      "label": "e2b-kaggle-t4-ft-lf",
+      "file": "saf-baseline-e2b-kaggle-t4-ft-lf-test_ua-3way-20261102-161301.json",
+      "build": "b1-a3a1c47",
+      "reply": "label-first",
+      "n": 375,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": 0,
+      "median_completion_tokens": 2
+    },
+    {
+      "dataset": "saf",
+      "split": "test_uq",
+      "label": "e2b-kaggle-t4",
+      "file": "saf-baseline-e2b-kaggle-t4-test_uq-3way-20261030-181852.json",
+      "build": "b1-a3a1c47",
+      "reply": "label",
+      "n": 479,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": null,
+      "median_completion_tokens": 2
+    },
+    {
+      "dataset": "saf",
+      "split": "test_uq",
+      "label": "e2b-kaggle-t4-ft",
+      "file": "saf-baseline-e2b-kaggle-t4-ft-test_uq-3way-20261030-181653.json",
+      "build": "b1-a3a1c47",
+      "reply": "label",
+      "n": 479,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": null,
+      "median_completion_tokens": 2
+    },
+    {
+      "dataset": "saf",
+      "split": "test_uq",
+      "label": "e2b-kaggle-t4-ft-rf",
+      "file": "saf-baseline-e2b-kaggle-t4-ft-rf-test_uq-3way-20261102-164826.json",
+      "build": "b1-a3a1c47",
+      "reply": "reason-first",
+      "n": 479,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": 0,
+      "median_completion_tokens": 70
+    },
+    {
+      "dataset": "saf",
+      "split": "test_uq",
+      "label": "e2b-kaggle-t4-ft-lf",
+      "file": "saf-baseline-e2b-kaggle-t4-ft-lf-test_uq-3way-20261102-161445.json",
+      "build": "b1-a3a1c47",
+      "reply": "label-first",
+      "n": 479,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": 0,
+      "median_completion_tokens": 2
+    },
+    {
+      "dataset": "scientsbank",
+      "split": "test_uq",
+      "label": "e2b-kaggle-t4",
+      "file": "baseline-e2b-kaggle-t4-test_uq-3way-20261005-100230.json",
+      "build": "b1-a3a1c47",
+      "reply": "label",
+      "n": 733,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": null,
+      "median_completion_tokens": null
+    },
+    {
+      "dataset": "scientsbank",
+      "split": "test_uq",
+      "label": "e2b-kaggle-t4-ft",
+      "file": "baseline-e2b-kaggle-t4-ft-test_uq-3way-20261028-074544.json",
+      "build": "b1-a3a1c47",
+      "reply": "label",
+      "n": 733,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": null,
+      "median_completion_tokens": 2
+    },
+    {
+      "dataset": "scientsbank",
+      "split": "test_uq",
+      "label": "e2b-kaggle-t4-ft-rf",
+      "file": "baseline-e2b-kaggle-t4-ft-rf-test_uq-3way-20261102-174744.json",
+      "build": "b1-a3a1c47",
+      "reply": "reason-first",
+      "n": 733,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": 0,
+      "median_completion_tokens": 64
+    },
+    {
+      "dataset": "scientsbank",
+      "split": "test_uq",
+      "label": "e2b-kaggle-t4-ft-lf",
+      "file": "baseline-e2b-kaggle-t4-ft-lf-test_uq-3way-20261102-165537.json",
+      "build": "b1-a3a1c47",
+      "reply": "label-first",
+      "n": 733,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": 0,
+      "median_completion_tokens": 2
+    },
+    {
+      "dataset": "scientsbank",
+      "split": "test_ud",
+      "label": "e2b-kaggle-t4",
+      "file": "baseline-e2b-kaggle-t4-test_ud-3way-20261005-101102.json",
+      "build": "b1-a3a1c47",
+      "reply": "label",
+      "n": 4562,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": null,
+      "median_completion_tokens": null
+    },
+    {
+      "dataset": "scientsbank",
+      "split": "test_ud",
+      "label": "e2b-kaggle-t4-ft",
+      "file": "baseline-e2b-kaggle-t4-ft-test_ud-3way-20261028-075550.json",
+      "build": "b1-a3a1c47",
+      "reply": "label",
+      "n": 4562,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": null,
+      "median_completion_tokens": 2.0
+    },
+    {
+      "dataset": "scientsbank",
+      "split": "test_ud",
+      "label": "e2b-kaggle-t4-ft-rf",
+      "file": "baseline-e2b-kaggle-t4-ft-rf-test_ud-3way-20261102-190244.json",
+      "build": "b1-a3a1c47",
+      "reply": "reason-first",
+      "n": 4562,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": 0,
+      "median_completion_tokens": 63.0
+    },
+    {
+      "dataset": "scientsbank",
+      "split": "test_ud",
+      "label": "e2b-kaggle-t4-ft-lf",
+      "file": "baseline-e2b-kaggle-t4-ft-lf-test_ud-3way-20261102-170543.json",
+      "build": "b1-a3a1c47",
+      "reply": "label-first",
+      "n": 4562,
+      "unparsed": 0,
+      "errors": 0,
+      "cut": 0,
+      "median_completion_tokens": 2.0
+    }
+  ],
+  "tests": [
+    {
+      "adapter": "e2b-kaggle-t4-ft-rf",
+      "baseline": "base",
+      "dataset": "beetle",
+      "split": "test_ua",
+      "scheme": "3way",
+      "n": 439,
+      "first_accuracy": 0.5353,
+      "second_accuracy": 0.6492,
+      "diff": 0.1139,
+      "only_first_right": 48,
+      "only_second_right": 98,
+      "p": 4.266345800701663e-05,
+      "p_holm": 0.0006399518701052495
+    },
+    {
+      "adapter": "e2b-kaggle-t4-ft-rf",
+      "baseline": "ft",
+      "dataset": "beetle",
+      "split": "test_ua",
+      "scheme": "3way",
+      "n": 439,
+      "first_accuracy": 0.59,
+      "second_accuracy": 0.6492,
+      "diff": 0.0592,
+      "only_first_right": 22,
+      "only_second_right": 48,
+      "p": 0.0025475648982539578,
+      "p_holm": 0.030570778779047493
+    },
+    {
+      "adapter": "e2b-kaggle-t4-ft-lf",
+      "baseline": "base",
+      "dataset": "beetle",
+      "split": "test_ua",
+      "scheme": "3way",
+      "n": 439,
+      "first_accuracy": 0.5353,
+      "second_accuracy": 0.6492,
+      "diff": 0.1139,
+      "only_first_right": 42,
+      "only_second_right": 92,
+      "p": 1.870615952593889e-05,
+      "p_holm": 0.00029929855241502223
+    },
+    {
+      "adapter": "e2b-kaggle-t4-ft-lf",
+      "baseline": "ft",
+      "dataset": "beetle",
+      "split": "test_ua",
+      "scheme": "3way",
+      "n": 439,
+      "first_accuracy": 0.59,
+      "second_accuracy": 0.6492,
+      "diff": 0.0592,
+      "only_first_right": 15,
+      "only_second_right": 41,
+      "p": 0.0006855641563783821,
+      "p_holm": 0.008912334032918967
+    },
+    {
+      "adapter": "e2b-kaggle-t4-ft-rf",
+      "baseline": "base",
+      "dataset": "beetle",
+      "split": "test_uq",
+      "scheme": "3way",
+      "n": 819,
+      "first_accuracy": 0.5018,
+      "second_accuracy": 0.5519,
+      "diff": 0.0501,
+      "only_first_right": 114,
+      "only_second_right": 155,
+      "p": 0.01458151181660419,
+      "p_holm": 0.1458151181660419
+    },
+    {
+      "adapter": "e2b-kaggle-t4-ft-rf",
+      "baseline": "ft",
+      "dataset": "beetle",
+      "split": "test_uq",
+      "scheme": "3way",
+      "n": 819,
+      "first_accuracy": 0.5665,
+      "second_accuracy": 0.5519,
+      "diff": -0.0146,
+      "only_first_right": 72,
+      "only_second_right": 60,
+      "p": 0.3383802389398243,
+      "p_holm": 1.0
+    },
+    {
+      "adapter": "e2b-kaggle-t4-ft-lf",
+      "baseline": "base",
+      "dataset": "beetle",
+      "split": "test_uq",
+      "scheme": "3way",
+      "n": 819,
+      "first_accuracy": 0.5018,
+      "second_accuracy": 0.569,
+      "diff": 0.0672,
+      "only_first_right": 88,
+      "only_second_right": 143,
+      "p": 0.0003595271659801953,
+      "p_holm": 0.005033380323722734
+    },
+    {
+      "adapter": "e2b-kaggle-t4-ft-lf",
+      "baseline": "ft",
+      "dataset": "beetle",
+      "split": "test_uq",
+      "scheme": "3way",
+      "n": 819,
+      "first_accuracy": 0.5665,
+      "second_accuracy": 0.569,
+      "diff": 0.0025,
+      "only_first_right": 49,
+      "only_second_right": 51,
+      "p": 0.9204107626128217,
+      "p_holm": 1.0
+    },
+    {
+      "adapter": "e2b-kaggle-t4-ft-rf",
+      "baseline": "base",
+      "dataset": "saf",
+      "split": "test_ua",
+      "scheme": "2way",
+      "n": 375,
+      "first_accuracy": 0.6187,
+      "second_accuracy": 0.6507,
+      "diff": 0.032,
+      "only_first_right": 44,
+      "only_second_right": 56,
+      "p": 0.27125302407383545,
+      "p_holm": 1.0
+    },
+    {
+      "adapter": "e2b-kaggle-t4-ft-rf",
+      "baseline": "ft",
+      "dataset": "saf",
+      "split": "test_ua",
+      "scheme": "2way",
+      "n": 375,
+      "first_accuracy": 0.688,
+      "second_accuracy": 0.6507,
+      "diff": -0.0373,
+      "only_first_right": 44,
+      "only_second_right": 30,
+      "p": 0.13017768031912758,
+      "p_holm": 0.911243762233893
+    },
+    {
+      "adapter": "e2b-kaggle-t4-ft-lf",
+      "baseline": "base",
+      "dataset": "saf",
+      "split": "test_ua",
+      "scheme": "2way",
+      "n": 375,
+      "first_accuracy": 0.6187,
+      "second_accuracy": 0.672,
+      "diff": 0.0533,
+      "only_first_right": 22,
+      "only_second_right": 42,
+      "p": 0.01685819004428113,
+      "p_holm": 0.15172371039853016
+    },
+    {
+      "adapter": "e2b-kaggle-t4-ft-lf",
+      "baseline": "ft",
+      "dataset": "saf",
+      "split": "test_ua",
+      "scheme": "2way",
+      "n": 375,
+      "first_accuracy": 0.688,
+      "second_accuracy": 0.672,
+      "diff": -0.016,
+      "only_first_right": 37,
+      "only_second_right": 31,
+      "p": 0.5446122234192592,
+      "p_holm": 1.0
+    },
+    {
+      "adapter": "e2b-kaggle-t4-ft-rf",
+      "baseline": "base",
+      "dataset": "saf",
+      "split": "test_uq",
+      "scheme": "2way",
+      "n": 479,
+      "first_accuracy": 0.7286,
+      "second_accuracy": 0.7745,
+      "diff": 0.0459,
+      "only_first_right": 39,
+      "only_second_right": 61,
+      "p": 0.03520020021770483,
+      "p_holm": 0.2816016017416386
+    },
+    {
+      "adapter": "e2b-kaggle-t4-ft-rf",
+      "baseline": "ft",
+      "dataset": "saf",
+      "split": "test_uq",
+      "scheme": "2way",
+      "n": 479,
+      "first_accuracy": 0.7599,
+      "second_accuracy": 0.7745,
+      "diff": 0.0146,
+      "only_first_right": 48,
+      "only_second_right": 55,
+      "p": 0.5546010666648736,
+      "p_holm": 1.0
+    },
+    {
+      "adapter": "e2b-kaggle-t4-ft-lf",
+      "baseline": "base",
+      "dataset": "saf",
+      "split": "test_uq",
+      "scheme": "2way",
+      "n": 479,
+      "first_accuracy": 0.7286,
+      "second_accuracy": 0.7119,
+      "diff": -0.0167,
+      "only_first_right": 38,
+      "only_second_right": 30,
+      "p": 0.39612484029702977,
+      "p_holm": 1.0
+    },
+    {
+      "adapter": "e2b-kaggle-t4-ft-lf",
+      "baseline": "ft",
+      "dataset": "saf",
+      "split": "test_uq",
+      "scheme": "2way",
+      "n": 479,
+      "first_accuracy": 0.7599,
+      "second_accuracy": 0.7119,
+      "diff": -0.048,
+      "only_first_right": 49,
+      "only_second_right": 26,
+      "p": 0.01058211705170527,
+      "p_holm": 0.11640328756875798
+    }
+  ],
+  "gate": {
+    "passed": true,
+    "wins": [
+      {
+        "adapter": "e2b-kaggle-t4-ft-lf",
+        "dataset": "beetle",
+        "split": "test_ua"
+      },
+      {
+        "adapter": "e2b-kaggle-t4-ft-rf",
+        "dataset": "beetle",
+        "split": "test_ua"
+      }
+    ],
+    "rule": "one adapter beats both baselines in the same Beetle/SAF cell, diff > 0 and Holm p < 0.05 for both (spec 2026-11-01 \u00a72)"
+  },
+  "described": [
+    {
+      "dataset": "scientsbank",
+      "split": "test_uq",
+      "label": "e2b-kaggle-t4",
+      "accuracy": 0.5975
+    },
+    {
+      "dataset": "scientsbank",
+      "split": "test_uq",
+      "label": "e2b-kaggle-t4-ft",
+      "accuracy": 0.7667
+    },
+    {
+      "dataset": "scientsbank",
+      "split": "test_uq",
+      "label": "e2b-kaggle-t4-ft-rf",
+      "accuracy": 0.7517
+    },
+    {
+      "dataset": "scientsbank",
+      "split": "test_uq",
+      "label": "e2b-kaggle-t4-ft-lf",
+      "accuracy": 0.764
+    },
+    {
+      "dataset": "scientsbank",
+      "split": "test_ud",
+      "label": "e2b-kaggle-t4",
+      "accuracy": 0.6026
+    },
+    {
+      "dataset": "scientsbank",
+      "split": "test_ud",
+      "label": "e2b-kaggle-t4-ft",
+      "accuracy": 0.7486
+    },
+    {
+      "dataset": "scientsbank",
+      "split": "test_ud",
+      "label": "e2b-kaggle-t4-ft-rf",
+      "accuracy": 0.7096
+    },
+    {
+      "dataset": "scientsbank",
+      "split": "test_ud",
+      "label": "e2b-kaggle-t4-ft-lf",
+      "accuracy": 0.7321
+    }
+  ],
+  "recall": {
+    "beetle": {
+      "test_ua": {
+        "e2b-kaggle-t4": {
+          "contradictory": 0.4865,
+          "correct": 0.5398,
+          "incorrect": 0.5658
+        },
+        "e2b-kaggle-t4-ft": {
+          "contradictory": 0.2162,
+          "correct": 0.8295,
+          "incorrect": 0.5855
+        },
+        "e2b-kaggle-t4-ft-rf": {
+          "contradictory": 0.2252,
+          "correct": 0.8864,
+          "incorrect": 0.6842
+        },
+        "e2b-kaggle-t4-ft-lf": {
+          "contradictory": 0.2793,
+          "correct": 0.875,
+          "incorrect": 0.6579
+        }
+      },
+      "test_uq": {
+        "e2b-kaggle-t4": {
+          "contradictory": 0.459,
+          "correct": 0.5174,
+          "incorrect": 0.5238
+        },
+        "e2b-kaggle-t4-ft": {
+          "contradictory": 0.1557,
+          "correct": 0.8198,
+          "incorrect": 0.6234
+        },
+        "e2b-kaggle-t4-ft-rf": {
+          "contradictory": 0.1475,
+          "correct": 0.7878,
+          "incorrect": 0.6277
+        },
+        "e2b-kaggle-t4-ft-lf": {
+          "contradictory": 0.25,
+          "correct": 0.7849,
+          "incorrect": 0.5844
+        }
+      }
+    }
+  },
+  "time": "2026-11-02T20:08:13+00:00"
+}
