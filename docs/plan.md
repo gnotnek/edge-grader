@@ -100,7 +100,7 @@
 - [x] Reasons by Qwen3-14B on Kaggle: 50-answer pilot, full run, owner's spot check (27/30, passed 2026-11-02)
 - [x] Train E2B reason-first and label-first; grade Beetle, SAF, SciEntsBank test_uq/test_ud (2026-11-02)
 - [x] Compare against the untuned E2B and the Oct 28 adapter; write up (2026-11-03): **gate passed in one cell** (Beetle test_ua, both adapters), no significant gain elsewhere ([`results/finetuning.md`](results/finetuning.md#reasoning-guided-fine-tuning-e2b-stage-3b))
-- [ ] Step 4, only if time is left in the buffer week: E4B reason-first and label-first on Kaggle; then the Jetson cost and no-harm checks for label-first (otherwise future work in the write-up)
+- [ ] Step 4: E4B reason-first and label-first on Kaggle, training pushed at the quota reset on Nov 7 (owner, 2026-11-03); then the Jetson cost and no-harm checks for label-first (otherwise future work in the write-up)
 
 ### Phase 0: the baseline on the boards (week 5, first)
 *Implementation plan: [`superpowers/plans/2026-10-09-phase0-edge-baseline.md`](superpowers/plans/2026-10-09-phase0-edge-baseline.md).*
@@ -192,3 +192,4 @@
 | 2026-10-28 | Stage 3 accuracy done: fine-tuning works. test_uq / test_ud E2B 59.8 / 60.3 → 76.7 / 74.9%, E4B 67.5 / 70.4 → 79.9 / 76.4% (p < 0.001 after Holm); MMLU-Pro and GSM unchanged | Both above their targets, and at or near the best published numbers. Next: the tuned runs on the Jetson for cost |
 | 2026-11-01 | Stage 3b, reasoning-guided fine-tuning of E2B, runs on Kaggle alongside stage 4 (weeks 8–9), done by Nov 15; stage 4 keeps its dates | Owner. The Oct 28 adapters barely moved Beetle and SAF; the supervisor asked for published methods, and Faza et al. 2025 is the closest. The two share no hardware (Kaggle vs Jetson) |
 | 2026-11-03 | Stage 3b steps 1–3 done: the gate passed in one cell (Beetle test_ua: both adapters +11.4 over untuned, +5.9 over Oct 28, significant after Holm); no significant gain in the other three; "contradictory" not recovered. Step 4 (E4B, Jetson, no-harm) only if the buffer week has time, label-first first | Design §6. Label-first matches reason-first at 2 tokens per answer instead of ~65, so it is the one to cost on the Jetson (Claude's call) |
+| 2026-11-03 | Stage 3b step 4 (E4B) starts at the Kaggle quota reset, Nov 7 08:00 local, not now | Owner. 5.2 GPU h were left; E2B training took 3.5 h (label-first) and 6.5 h (reason-first), and E4B is larger, so a run started now would hit the quota before finishing |
