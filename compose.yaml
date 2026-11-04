@@ -1,5 +1,7 @@
 # edge-grader on the lab's DGX Spark. Usage: docs/guides/spark-docker.md
 # The GPU comes in through CDI (the Spark's Docker has no "nvidia" runtime).
+# Everything a run reads or writes stays in this folder: models in data/models, the Hugging Face
+# cache (and token) in data/hf, adapters in data/adapters, logs in data/logs, summaries in results/.
 
 x-common: &common
   image: edge-grader:spark
@@ -10,21 +12,38 @@ x-common: &common
     - nvidia.com/gpu=all
   volumes:
     - .:/workspace
-    - ${MODELS_DIR:-${HOME}/research/models}:/models
-    - ${HF_CACHE:-${HOME}/.cache/huggingface}:/home/grader/.cache/huggingface
+    - ./data/models:/models
   shm_size: 16g
 
+# One fine-tuning run per container, named so lab members can find it in `docker ps`.
+x-finetune: &finetune
+  <<: *common
+  profiles: [finetune]  # never started by a plain `docker compose up`
+  restart: "no"
+
 services:
-  # Shell, tests, fine-tuning: docker compose run --rm dev <command>
+  # Shell, tests: docker compose run --rm dev <command>
   dev:
     <<: *common
 
   # Grading server with the lab's baseline flags, on 127.0.0.1 only.
   llama-server:
     <<: *common
+    container_name: edge-grader-llama-server
     ports:
       - "127.0.0.1:${LLAMA_PORT:-8099}:8080"
     command: >
       llama-server -m /models/${MODEL:-gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf}
       -c 8192 --host 0.0.0.0 --port 8080
       -rea off --reasoning-budget -1 --cache-ram 0 -ngl 99
+
+  # Stage 3b, E4B (moved from Kaggle, 2026-11-05): docker compose up -d finetune-e4b-lf
+  finetune-e4b-lf:
+    <<: *finetune
+    container_name: edge-grader-finetune-e4b-lf
+    command: scripts/spark_finetune.sh e4b label-first
+
+  finetune-e4b-rf:
+    <<: *finetune
+    container_name: edge-grader-finetune-e4b-rf
+    command: scripts/spark_finetune.sh e4b reason-first

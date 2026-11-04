@@ -9,7 +9,7 @@ ARG UBUNTU=ubuntu24.04
 # --- llama-server, pinned like notebooks/kaggle_baseline.ipynb -------------
 FROM nvidia/cuda:${CUDA_VERSION}-devel-${UBUNTU} AS llama
 ARG LLAMA_CPP_COMMIT=a3a1c4747fdc0dcad40b3946108b89375d9a7d0e
-# GB10 is compute capability 12.1. Kaggle uses "60;75" (P100, T4).
+# GB10 is compute capability 12.1. Kaggle builds for 75 (T4).
 ARG CUDA_ARCH=121
 RUN apt-get update && apt-get install -y --no-install-recommends \
         git cmake build-essential ca-certificates \
@@ -37,6 +37,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 COPY --from=ghcr.io/astral-sh/uv:0.13.0 /uv /uvx /usr/local/bin/
 COPY --from=llama /opt/llama.cpp/build/bin /opt/llama.cpp/bin
+# The LoRA → GGUF converter at the same commit (scripts/spark_finetune.sh gives it its own venv).
+COPY --from=llama /opt/llama.cpp/convert_lora_to_gguf.py /opt/llama.cpp/convert_hf_to_gguf.py /opt/llama.cpp/
+COPY --from=llama /opt/llama.cpp/conversion /opt/llama.cpp/conversion
+COPY --from=llama /opt/llama.cpp/gguf-py /opt/llama.cpp/gguf-py
+COPY --from=llama /opt/llama.cpp/requirements /opt/llama.cpp/requirements
 ENV PATH=/opt/llama.cpp/bin:$PATH \
     LD_LIBRARY_PATH=/opt/llama.cpp/bin:$LD_LIBRARY_PATH
 
@@ -53,7 +58,7 @@ ENV UV_PROJECT_ENVIRONMENT=/opt/venv \
     UV_PYTHON_DOWNLOADS=never \
     UV_LINK_MODE=copy \
     UV_COMPILE_BYTECODE=1 \
-    HF_HOME=/home/grader/.cache/huggingface
+    HF_HOME=/workspace/data/hf
 WORKDIR /workspace
 COPY --chown=grader pyproject.toml uv.lock .python-version ./
 RUN uv sync --frozen --no-install-project --group finetune --group dev
