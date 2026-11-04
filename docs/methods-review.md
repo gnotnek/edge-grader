@@ -2,7 +2,7 @@
 
 *Written 2026-11-05 by Claude, at the owner's request, after the outline's 2026-11-04 change (RQ4, the cost of accuracy on the Jetson, is now the main result). These are **proposals, not decisions.** Any method that's adopted gets a row in the outline's "Own decisions" table with the RQ it serves. Sources were found by web search. For most of them only the abstract or a summary was read, not the full paper, so check the figures marked "(abstract)" before you cite them.*
 
-> **2026-11-05, supervisor:** focus on tweaking the model, one model configuration at a time. Cascades that run two models together, and anything in parallel, are out. So methods 1 and 2 are set aside, and their simulation stays recorded in [variations.md](results/variations.md#cascade-and-defer-to-teacher-simulated-from-b1-2026-11-05). Method 7 is held until the supervisor confirms it. The order at the end has been updated.
+> **2026-11-05, supervisor:** the cascade concept isn't far from Jev (TypeSafe AI's "System One" model, fast decisions with calibrated probabilities). Focus on tweaking the model's settings, one configuration at a time, as the baseline was extended with thinking on/off. So methods 1 and 2 are set aside, and their simulation stays recorded in [variations.md](results/variations.md#cascade-and-defer-to-teacher-simulated-from-b1-2026-11-05). The setting tweaks are listed at the end.
 
 ## What the outline needs
 
@@ -32,7 +32,7 @@ Fine-tuning is excluded here because RQ3 already covers it.
 | 4 | Retrieve graded **example answers** (not textbook passages) as few-shot examples | (b) | prompt grows; same as RAG-en's cost runs | RQ2, RQ4 |
 | 5 | Thinking budget sweep (e.g. 0 / 64 / 128 / 320 tokens) | (a) | heavy: thinking runs are 14–27 s per answer | RQ6, RQ4 |
 | 6 | Jetson power modes (`nvpmodel`) | (c) | one baseline run per mode | RQ4 |
-| 7 | Parallel slots (batching a class's answers) **held: ask the supervisor** | (c) | one baseline run per slot count | RQ4 |
+| 7 | Parallel slots (batching a class's answers) | (c) | one baseline run per slot count | RQ4 |
 | — | Not recommended: self-consistency voting, MatFormer slicing, speculative decoding (see the end) | | | |
 
 ### 1. Confidence cascade
@@ -153,14 +153,30 @@ Fine-tuning is excluded here because RQ3 already covers it.
 - **Speculative decoding (E2B drafting for E4B, or n-gram):** the label is 1–2 tokens, which is why phase B dropped it. It could only matter for thinking-on decode, and published Jetson energy numbers are thin (SLED arXiv 2506.09397, HeteroReason arXiv 2609.28717 report speed or assertions, not measured joules).
 - **Frozen-embedding classifier (bge-small + logistic regression) as a cost floor:** it would show what ~0 J buys. But it is trained on SciEntsBank's label mix, which repeats the adapters' held-out problem. SemEval-2013's lexical baseline was already hard to beat. Optional at most.
 
+## Model-setting tweaks from agentic-edge (2026-11-05)
+
+Each tweak below is one model with one setting changed, compared with the same board's baseline, as phase B did. "Done here" means it has been measured for grading in this project.
+
+| Tweak | What `agentic-edge` found | Done here for grading? | Worth running for grading? |
+|---|---|---|---|
+| Thinking on/off (budget 320) | MMLU-Pro unchanged; +20–27% energy | **Done** (B1): +3.0 to +18.8 points at 35–40× energy | **Yes, as a budget sweep** (e.g. 0 / 64 / 128 / 320 tokens): the only tweak that has moved grading accuracy. It fills the 7 J to 270 J gap with one model |
+| Engine: little-gemma vs llama.cpp (S3) | Same accuracy, −4% to −17% energy | **Done** (B2): accuracy ±0.4 | No: done |
+| Prefix reuse: little-gemma `-reuse` (S9), llama.cpp `--swa-full` | Byte-identical output, less time | **Done** (B2): `--swa-full` halves E2B's energy | Only combined with the best version (adapter + `--swa-full`, already stage 4 item 4) |
+| MTP draft (speculative decoding) | **Byte-identical output**, 1.5–1.7× faster; **2.1× faster with thinking on** (Pi 5) | No: dropped 2026-10-08 because a label is 1–2 tokens | **Yes, with thinking on only.** Thinking is decode-bound (25 s, 270 J per answer for E4B), and the output doesn't change, so it's a pure cost cut on the most accurate setting. First check that the Jetson's llama.cpp build has `draft-mtp` |
+| n-gram speculation (S9 full, S10) | Same accuracy, −6% to −31% energy on MMLU-Pro | No: dropped 2026-10-08 | Maybe, with thinking on. A thought block repeats less than a 5-shot MMLU-Pro answer, so the gain is likely smaller than MTP's |
+| Weight quantization (Q4_K_M / Q4_K_XL QAT / Q5_K_M / Q8_0, Pi 5, E4B) | The QAT Q4 is the smallest, fastest and most accurate | No: Q5_K_M dropped 2026-10-08 | Optional: E2B Q8_0 against the QAT Q4. A non-QAT build changes the weights, which is the outline's QAT caveat. E4B Q8_0 (7.6 GiB) likely doesn't fit the Jetson's 8 GB |
+| KV cache quantization (TurboQuant `turbo3`, S8) | E4B −3 to −5 points (MMLU-Pro); n.s. on tool calls | No: dropped 2026-10-08 | No. Grading prompts are ~160 tokens, so the KV cache is tiny and there's little to save |
+| Output format (JSON vs Code Mode, tool calls) | Code Mode +6.6 points for E4B | The grading analogue is the reply format: stage 3b label-first vs reason-first | Already covered by stage 3b |
+| Clocks locked (`jetson_clocks`) | +5–9% energy at the same speed | Recorded as a confound (10-13 → 10-19 change) | A board setting, not a model tweak (method 6) |
+
 ## Suggested order
 
-Since 2026-11-05 (supervisor), the order is one model configuration at a time. Each version is still compared with the same-board baseline. Stage 4's own order comes first, and the adapters are the main "tweak".
+Since 2026-11-05 (supervisor), the order is one model's settings at a time. Stage 4's own order stays first.
 
-1. **The adapters on the Jetson** (stage 4 item 1, already planned): Oct 28 adapters for E2B and E4B, then label-first E2B.
-2. **Method 3: logprob labels with batch calibration** on test_uq and test_ud. Run it first on the untuned models. If it helps, try it on the adapters, since their remaining errors are label-mix errors (`label_prior.py`). Same ~2 tokens per answer, so the cost is the baseline's.
-3. **Method 4: retrieved graded examples** on test_uq and test_ud. This is the inference-time counterpart to the adapters, and it uses the same training data.
-4. **Method 5: a thinking-budget sweep** on E2B, test_uq only: it fills the gap between 7 J and 270 J with a single model.
-5. **Method 6: power modes**, only with the owner's OK to change the board.
+1. **The adapters on the Jetson** (stage 4 items 1–2, already planned).
+2. **Thinking budget sweep** on E2B and E4B, test_uq first. This is the direct extension of "thinking on/off".
+3. **MTP (or n-gram) drafting with thinking on**, if the Jetson build supports it. It costs nothing in accuracy (byte-identical) and targets the most expensive setting.
+4. **Method 3: logprob labels with calibration**. It changes how the label is read, not the model. Close to the Jev idea, so ask the supervisor before running it.
+5. Optional: E2B Q8_0, method 4 (graded examples), method 6 (power modes).
 
-Methods 1 and 2 (set aside) and method 7 (held) are not run.
+Methods 1 and 2 are set aside.
