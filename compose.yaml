@@ -1,0 +1,30 @@
+# edge-grader on the lab's DGX Spark. Usage: docs/guides/spark-docker.md
+# The GPU comes in through CDI (the Spark's Docker has no "nvidia" runtime).
+
+x-common: &common
+  image: edge-grader:spark
+  build:
+    context: .
+    dockerfile: docker/Dockerfile
+  devices:
+    - nvidia.com/gpu=all
+  volumes:
+    - .:/workspace
+    - ${MODELS_DIR:-${HOME}/research/models}:/models
+    - ${HF_CACHE:-${HOME}/.cache/huggingface}:/home/grader/.cache/huggingface
+  shm_size: 16g
+
+services:
+  # Shell, tests, fine-tuning: docker compose run --rm dev <command>
+  dev:
+    <<: *common
+
+  # Grading server with the lab's baseline flags, on 127.0.0.1 only.
+  llama-server:
+    <<: *common
+    ports:
+      - "127.0.0.1:${LLAMA_PORT:-8099}:8080"
+    command: >
+      llama-server -m /models/${MODEL:-gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf}
+      -c 8192 --host 0.0.0.0 --port 8080
+      -rea off --reasoning-budget -1 --cache-ram 0 -ngl 99
