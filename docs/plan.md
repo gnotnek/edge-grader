@@ -1,6 +1,6 @@
 # Plan: steps and timeline
 
-*Last updated 2026-11-03. Tick steps off as they're done, and move dates when reality changes, noting why at the bottom. The research questions and the reasoning for each stage are in [`research-outline.md`](research-outline.md).*
+*Last updated 2026-11-04. Tick steps off as they're done, and move dates when reality changes, noting why at the bottom. The research questions and the reasoning for each stage are in [`research-outline.md`](research-outline.md).*
 
 **Weeks are counted from the internship start**, taken as the week of 2026-09-14 (two weeks had passed by 2026-09-26). The internship ends around mid-December.
 
@@ -13,7 +13,7 @@
 | 5 | Oct 12 – 18 | 0. Edge baseline + A | **Phase 0 on the boards** (Jetson ~15 h, Pi ~30 h). On Kaggle meanwhile: math RAG-en (phase A), thinking-on grading (B1); EmbeddingGemma 2 tooling + check on the Mac (B3). Topic benchmarks done in week 4 ✅ | Baseline on both boards for every benchmark; baseline vs RAG for all four |
 | 6 | Oct 19 – 25 | B. Variations + C + 4 | little-gemma + prefix reuse on the Jetson (B2) ✅; thinking-on cost on the boards ✅; **RAG-en for all four benchmarks on the Jetson** (stage 4 brought forward, supervisor 2026-10-19): SciEntsBank, news, GSM ✅, MMLU-Pro to run; answer-as-image rendering, reading check, Kaggle runs (C1); figure-question data search (C2) | Variations vs baseline table ✅; baseline vs RAG on the Jetson |
 | 7 | Oct 26 – Nov 1 | 3. Fine-tuning | Week 1 (from Oct 21): adapters for E2B and E4B on Kaggle, sanity check on test_ua; week 2 (Oct 28 – Nov 3): tuned runs on Kaggle ✅ (accuracy), on the Jetson (cost), analysis. Phase C (images) waits until this is done | Tuned vs baseline table ✅, no-harm check ✅; cost on the Jetson |
-| 8 | Nov 2 – 8 | 4. Edge cost + 3b | Every remaining version on the Jetson (the Pi 5 is dropped, 2026-10-19); cloud reference (RQ5) only if time allows (optional since 2026-10-19). **On Kaggle alongside** (owner, 2026-11-01): reasoning-guided fine-tuning of E2B (stage 3b) | Accuracy vs energy chart |
+| 8 | Nov 2 – 8 | 4. Edge cost (main, supervisor 2026-11-04) + 3b | The accuracy–cost trade-off on the Jetson: tuned adapters first, then stage 3b label-first vs reason-first, MMLU-Pro RAG-en; every remaining version on the Jetson (the Pi 5 is dropped, 2026-10-19); cloud reference (RQ5) only if time allows (optional since 2026-10-19). **On Kaggle alongside** (owner, 2026-11-01): reasoning-guided fine-tuning of E2B (stage 3b) | Trade-off table; accuracy vs energy and vs latency charts |
 | 9 | Nov 9 – 15 | Buffer | Catch up; analysis and charts; stage 3b done by Nov 15 (E4B / Jetson / no-harm only if its gate passes and time is left) | All numbers final |
 | 10–11 | Nov 16 – 29 | Write-up | Report draft with figures; supervisor review | Draft sent to supervisor |
 | 12 | Nov 30 – Dec 6 | Wrap-up | Revisions, final report, repo cleanup | Final report |
@@ -142,7 +142,11 @@
 - [ ] Board-check every RAG run against the Jetson's own baseline (paired McNemar; by template for GSM-Symbolic) and add a Jetson column to the four-benchmark table in `results/rag.md`. SciEntsBank + math done 2026-10-20: same as Kaggle (E2B down on every cell, significant after Holm on test_ud and GSM-Symbolic; E4B no significant change), board matches Kaggle on every cell ([`results/rag.md`](results/rag.md#jetson-baseline-against-rag-en-stage-4-2026-10-20)); news (after the judge) and MMLU-Pro to add
 - [x] Jetson clocks changed between 2026-10-13 and 2026-10-19 (GPU max 612 → 1,020 MHz, memory 2,133 → 3,199 MHz, same nvpmodel): RAG cost isn't comparable with phase 0. Ask the supervisor whether it was deliberate; then either re-run the baselines in the new state or restore the old limits before stage 4's cost runs. Resolved 2026-10-21: baselines re-run in the new state (owner)
 - [ ] RAG on the board: include embedding and retrieval time in the latency
-- [ ] Main chart: accuracy vs energy per answer, for every version on the Jetson (the Pi 5's baseline and thinking-on points for reference)
+- [ ] Oct 28 adapters on the Jetson, E2B + E4B, test_uq + test_ud, against the 2026-10-21 baselines (the stage 3 Jetson item; first, as the most accurate versions)
+- [ ] Stage 3b E2B label-first and reason-first on the Jetson, test_uq: same accuracy, ~2 against ~65 tokens per answer, so the cost of a written reason on the device
+- [ ] Optional: the best adapter with `--swa-full` (the cheapest setting at the best accuracy)
+- [ ] Trade-off table, every Jetson version against its same-board baseline: Δ accuracy (McNemar), × latency, × energy, mean/peak W, decode tok/s, peak RSS, max temperature, extra J per extra correct answer (metrics in the outline)
+- [ ] Main charts: accuracy vs J per answer and accuracy vs latency, for every version on the Jetson, with the front marked (the Pi 5's baseline and thinking-on points for reference)
 
 ### Write-up (weeks 10–12)
 - [ ] Figures: the main chart, per-split tables, confusion matrices
@@ -151,6 +155,7 @@
 - [ ] Repo cleanup: README results summary, reproducible commands for every table
 
 ## Optional, if time allows
+- Phase C (images, RQ7) and B3 (EmbeddingGemma 2): optional since 2026-11-04, cut first (supervisor: focus on edge cost)
 - A second dataset (e.g. SAS-Bench 2025, as a check against memorisation)
 - The cascade idea: small model first, escalate uncertain answers (check overlap with `agentic-edge`'s `analyze_cascade.py` first)
 - Fairness: are non-native English answers scored lower?
@@ -193,3 +198,4 @@
 | 2026-11-01 | Stage 3b, reasoning-guided fine-tuning of E2B, runs on Kaggle alongside stage 4 (weeks 8–9), done by Nov 15; stage 4 keeps its dates | Owner. The Oct 28 adapters barely moved Beetle and SAF; the supervisor asked for published methods, and Faza et al. 2025 is the closest. The two share no hardware (Kaggle vs Jetson) |
 | 2026-11-03 | Stage 3b steps 1–3 done: the gate passed in one cell (Beetle test_ua: both adapters +11.4 over untuned, +5.9 over Oct 28, significant after Holm); no significant gain in the other three; "contradictory" not recovered. Step 4 (E4B, Jetson, no-harm) only if the buffer week has time, label-first first | Design §6. Label-first matches reason-first at 2 tokens per answer instead of ~65, so it is the one to cost on the Jetson (Claude's call) |
 | 2026-11-03 | Stage 3b step 4 (E4B) starts at the Kaggle quota reset, Nov 7 08:00 local, not now | Owner. 5.2 GPU h were left; E2B training took 3.5 h (label-first) and 6.5 h (reason-first), and E4B is larger, so a run started now would hit the quota before finishing |
+| 2026-11-04 | Edge cost becomes the main result; stage 4 runs the tuned adapters first, then stage 3b label-first vs reason-first; phase C and B3 move to the optional list | Supervisor 2026-11-04: time is short, focus on the edge device, power and generation speed: "if the accuracy is high what is the trade off". Outline, supervisor feedback and own decisions |
