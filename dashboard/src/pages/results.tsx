@@ -1,8 +1,8 @@
-import type { Board, BoardPair, Condition, Model, Reference, Run } from '@server/types'
+import type { Benchmark, Board, BoardPair, Condition, Finetune, Model, Reference, Run } from '@server/types'
 import { ArrowDown, ArrowUp, CircleAlert, Minus, TableProperties } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { Bar, BarChart, CartesianGrid, Scatter, ScatterChart, XAxis, YAxis, ZAxis } from 'recharts'
-import { BoardName, ErrorNote, Loading, Section } from '@/components/bits'
+import { BoardName, ErrorNote, Loading, Section, Tag } from '@/components/bits'
 import { RunSheet } from '@/components/run-sheet'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
@@ -14,11 +14,27 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { useApi } from '@/lib/api'
 import {
   BENCH_LABEL, BENCH_ORDER, BOARD_LABEL, BOARD_ORDER, CONDITION_LABEL, CONDITION_ORDER, MODEL_LABEL, deltaPts,
-  count, fixed, pct,
+  count, dateLabel, fixed, pct,
 } from '@/lib/format'
 
 const MODELS: Model[] = ['e2b', 'e4b']
-const SPLITS = ['test_ua', 'test_uq', 'test_ud']
+const GRADING: Benchmark[] = ['scientsbank', 'beetle', 'saf']
+
+// What a grading run stores, all on the same answers. Accuracy-like ones read as %, F1 as 0-1.
+type Metric = 'accuracy' | 'macro_f1' | 'weighted_f1' | 'two_way_accuracy'
+const METRICS: [Metric, string][] = [
+  ['accuracy', 'Accuracy'], ['macro_f1', 'Macro F1'], ['weighted_f1', 'Weighted F1'], ['two_way_accuracy', '2-way accuracy'],
+]
+const isPct = (m: Metric) => m === 'accuracy' || m === 'two_way_accuracy'
+const showMetric = (m: Metric, v: number | null | undefined) => (isPct(m) ? pct(v) : fixed(v))
+
+function MetricToggle({ value, onChange }: { value: Metric; onChange: (m: Metric) => void }) {
+  return (
+    <ToggleGroup type="single" size="sm" variant="outline" value={value} onValueChange={(v) => v && onChange(v as Metric)} aria-label="Metric">
+      {METRICS.map(([m, label]) => <ToggleGroupItem key={m} value={m}>{label}</ToggleGroupItem>)}
+    </ToggleGroup>
+  )
+}
 const boardConfig = Object.fromEntries(
   BOARD_ORDER.map((b) => [b, { label: BOARD_LABEL[b], color: `var(--${b})` }]),
 ) satisfies ChartConfig
@@ -42,13 +58,16 @@ function Delta({ pts }: { pts: number | null }) {
   )
 }
 
-// 1. SciEntsBank by condition: one chart per model, a bar per board.
-function ScientsbankByCondition({ runs }: { runs: Run[] }) {
-  const [split, setSplit] = useState('test_ua')
-  const [metric, setMetric] = useState<'accuracy' | 'macro_f1'>('accuracy')
+// 1. Grading by condition: one chart per model, a bar per board.
+function GradingByCondition({ runs }: { runs: Run[] }) {
+  const [bench, setBench] = useState<Benchmark>('scientsbank')
+  const [splitPick, setSplit] = useState('test_ua')
+  const [metric, setMetric] = useState<Metric>('accuracy')
   const [asTable, setAsTable] = useState(false)
+  const splits = [...new Set(runs.filter((r) => r.benchmark === bench).map((r) => r.split))].sort()
+  const split = splits.includes(splitPick) ? splitPick : (splits[0] ?? splitPick)
   const latest = newestBy(
-    runs.filter((r) => r.benchmark === 'scientsbank' && r.split === split && r.metrics.accuracy != null),
+    runs.filter((r) => r.benchmark === bench && r.split === split && r.metrics.accuracy != null),
     (r) => `${r.board}|${r.model}|${r.condition}`,
   )
   const conditions = CONDITION_ORDER.filter((c) => [...latest.values()].some((r) => r.condition === c))
@@ -58,21 +77,21 @@ function ScientsbankByCondition({ runs }: { runs: Run[] }) {
       for (const b of BOARD_ORDER) row[b] = latest.get(`${b}|${model}|${c}`)?.metrics[metric] ?? null
       return row
     })
-  const fmt = metric === 'accuracy' ? (v: number) => pct(v, 0) : (v: number) => v.toFixed(2)
+  const fmt = isPct(metric) ? (v: number) => pct(v, 0) : (v: number) => v.toFixed(2)
 
   return (
     <Section
-      title="SciEntsBank by condition"
-      description="The newest run per board for each condition, on one split. A missing bar means that board has no run of that condition yet."
+      title="Grading by condition"
+      description="The newest run per board for each condition, on one split. A missing bar means that board has no run of that condition yet; Beetle and SAF were graded on Kaggle only. 2-way accuracy scores the same answers as correct or not."
       actions={
         <>
+          <ToggleGroup type="single" size="sm" variant="outline" value={bench} onValueChange={(v) => v && setBench(v as Benchmark)} aria-label="Benchmark">
+            {GRADING.map((b) => <ToggleGroupItem key={b} value={b}>{BENCH_LABEL[b]}</ToggleGroupItem>)}
+          </ToggleGroup>
           <ToggleGroup type="single" size="sm" variant="outline" value={split} onValueChange={(v) => v && setSplit(v)} aria-label="Split">
-            {SPLITS.map((s) => <ToggleGroupItem key={s} value={s}>{s}</ToggleGroupItem>)}
+            {splits.map((s) => <ToggleGroupItem key={s} value={s}>{s}</ToggleGroupItem>)}
           </ToggleGroup>
-          <ToggleGroup type="single" size="sm" variant="outline" value={metric} onValueChange={(v) => v && setMetric(v as typeof metric)} aria-label="Metric">
-            <ToggleGroupItem value="accuracy">Accuracy</ToggleGroupItem>
-            <ToggleGroupItem value="macro_f1">Macro F1</ToggleGroupItem>
-          </ToggleGroup>
+          <MetricToggle value={metric} onChange={setMetric} />
           <Toggle size="sm" variant="outline" pressed={asTable} onPressedChange={setAsTable} aria-label="Show as table">
             <TableProperties /> Table
           </Toggle>
@@ -98,7 +117,7 @@ function ScientsbankByCondition({ runs }: { runs: Run[] }) {
                         <TableCell>{r.condition}</TableCell>
                         {BOARD_ORDER.map((b) => (
                           <TableCell key={b} className="text-right">
-                            {r[b] == null ? '—' : metric === 'accuracy' ? pct(r[b] as number) : fixed(r[b] as number)}
+                            {showMetric(metric, r[b] as number | null)}
                           </TableCell>
                         ))}
                       </TableRow>
@@ -120,7 +139,7 @@ function ScientsbankByCondition({ runs }: { runs: Run[] }) {
                               <span className="size-2.5 shrink-0 rounded-[2px]" style={{ background: `var(--color-${name})` }} />
                               <span className="text-muted-foreground">{BOARD_LABEL[name as Board]}</span>
                               <span className="tabular ml-auto font-medium">
-                                {metric === 'accuracy' ? pct(Number(value)) : fixed(Number(value))}
+                                {showMetric(metric, Number(value))}
                               </span>
                             </div>
                           )}
@@ -140,13 +159,191 @@ function ScientsbankByCondition({ runs }: { runs: Run[] }) {
   )
 }
 
-// 2. Baseline against RAG, Kaggle, every benchmark.
-function BaselineVsRag({ runs }: { runs: Run[] }) {
+const TUNED: Condition[] = ['ft', 'ft-rf', 'ft-lf']
+
+/** "e2b-kaggle-t4-ft-rf" → "E2B Fine-tuned, reason first"; the label the stage 3b comparison uses. */
+function adapterName(label: string): string {
+  const [model, , , ...rest] = label.split('-')
+  const cond = (rest.join('-') || 'baseline') as Condition
+  return `${MODEL_LABEL[model as Model] ?? model} ${CONDITION_LABEL[cond] ?? cond}`
+}
+
+// 2. Fine-tuning: base against the LoRA adapters, how they trained, and the stage 3b gate.
+function Finetuning({ runs }: { runs: Run[] }) {
+  const [metric, setMetric] = useState<Metric>('accuracy')
+  const ft = useApi<Finetune>('/finetune')
   const kaggle = runs.filter((r) => r.board === 'kaggle' && r.metrics.accuracy != null)
   const latest = newestBy(kaggle, (r) => `${r.benchmark}|${r.split}|${r.model}|${r.condition}`)
-  const acc = (b: string, s: string, m: Model, c: Condition) => latest.get(`${b}|${s}|${m}|${c}`)?.metrics.accuracy ?? null
+  const cell = (b: string, s: string, m: Model, c: Condition) => latest.get(`${b}|${s}|${m}|${c}`)
   const rows = BENCH_ORDER.flatMap((bench) => {
-    const splits = [...new Set(kaggle.filter((r) => r.benchmark === bench && r.condition !== 'baseline').map((r) => r.split))].sort()
+    const splits = [...new Set(kaggle.filter((r) => r.benchmark === bench && TUNED.includes(r.condition)).map((r) => r.split))].sort()
+    return splits.flatMap((split) =>
+      MODELS.filter((m) => TUNED.some((c) => cell(bench, split, m, c))).map((model) => ({ bench, split, model })),
+    )
+  })
+  if (!rows.length && !ft.data?.adapters.length) return null
+
+  return (
+    <Section
+      i={1}
+      title="Fine-tuning"
+      description="LoRA adapters trained on the SciEntsBank train split, graded on Kaggle T4: SciEntsBank, the held-out Beetle and SAF sets, and GSM and MMLU-Pro as no-harm checks. The newest run per cell; change is against the base model on the same split. A smaller n marks a partial run."
+      actions={<MetricToggle value={metric} onChange={setMetric} />}
+    >
+      <Card className="table-inset py-0">
+        <Table className="tabular">
+          <TableHeader>
+            <TableRow>
+              <TableHead>Benchmark</TableHead>
+              <TableHead>Split</TableHead>
+              <TableHead>Model</TableHead>
+              <TableHead className="text-right">Base</TableHead>
+              {TUNED.map((c) => <TableHead key={c} className="text-right">{CONDITION_LABEL[c]}</TableHead>)}
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {rows.map(({ bench, split, model }) => {
+              const base = cell(bench, split, model, 'baseline')
+              const b = base?.metrics[metric]
+              return (
+                <TableRow key={`${bench}${split}${model}`}>
+                  <TableCell>{BENCH_LABEL[bench]}</TableCell>
+                  <TableCell className="font-mono text-xs text-muted-foreground">{split}</TableCell>
+                  <TableCell>{MODEL_LABEL[model]}</TableCell>
+                  <TableCell className="text-right">{showMetric(metric, b)}</TableCell>
+                  {TUNED.map((c) => {
+                    const r = cell(bench, split, model, c)
+                    if (!r) return <TableCell key={c} className="text-right text-muted-foreground">—</TableCell>
+                    const partial = base?.metrics.n != null && r.metrics.n != null && r.metrics.n !== base.metrics.n
+                    return (
+                      <TableCell key={c} className="text-right">
+                        <span className="block">{showMetric(metric, r.metrics[metric])}</span>
+                        <span className="block text-xs text-muted-foreground"><Delta pts={deltaPts(b, r.metrics[metric])} /></span>
+                        {partial && <span className="block text-xs text-muted-foreground">n = {count(r.metrics.n)}</span>}
+                      </TableCell>
+                    )
+                  })}
+                </TableRow>
+              )
+            })}
+          </TableBody>
+        </Table>
+      </Card>
+
+      {ft.error && <ErrorNote message={ft.error} />}
+      {ft.data?.errors.map((e) => <ErrorNote key={e} message={e} />)}
+      {ft.data && ft.data.adapters.length > 0 && (
+        <Card className="gap-2">
+          <CardHeader>
+            <CardTitle className="font-serif text-xl font-medium">Training</CardTitle>
+            <p className="text-sm text-muted-foreground">
+              From results/finetune/. Validation accuracy per epoch; the chosen epoch is in bold.
+            </p>
+          </CardHeader>
+          <CardContent className="table-inset px-0">
+            <Table className="tabular">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Adapter</TableHead>
+                  <TableHead>Trained</TableHead>
+                  <TableHead className="text-right">Validation accuracy</TableHead>
+                  <TableHead className="hidden text-right md:table-cell">Train loss</TableHead>
+                  <TableHead className="hidden text-right lg:table-cell">LoRA r / α</TableHead>
+                  <TableHead className="hidden text-right lg:table-cell">LR</TableHead>
+                  <TableHead className="hidden text-right xl:table-cell">Questions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {[...ft.data.adapters].reverse().map((a) => {
+                  const chosen = a.epochs.find((e) => e.epoch === a.chosenEpoch)
+                  return (
+                    <TableRow key={a.file}>
+                      <TableCell>
+                        <span className="text-[var(--heading)]">{MODEL_LABEL[a.model] ?? a.model}</span>{' '}
+                        <span className="text-muted-foreground">{a.reply === 'label' ? 'label only' : a.reply}</span>
+                      </TableCell>
+                      <TableCell className="font-mono text-xs whitespace-nowrap text-muted-foreground">{a.created ? dateLabel(a.created) : '—'}</TableCell>
+                      <TableCell className="text-right whitespace-nowrap">
+                        {a.epochs.map((e, i) => (
+                          <span key={e.epoch} className={e.epoch === a.chosenEpoch ? 'font-semibold text-[var(--heading)]' : 'text-muted-foreground'}>
+                            {i > 0 && <span className="text-muted-foreground"> · </span>}
+                            {pct(e.valAccuracy)}
+                          </span>
+                        ))}
+                      </TableCell>
+                      <TableCell className="hidden text-right md:table-cell">{fixed(chosen?.trainLoss)}</TableCell>
+                      <TableCell className="hidden text-right lg:table-cell">{a.rank ?? '—'} / {a.alpha ?? '—'}</TableCell>
+                      <TableCell className="hidden text-right lg:table-cell">{a.lr ?? '—'}</TableCell>
+                      <TableCell className="hidden text-right xl:table-cell">{a.trainQuestions ?? '—'} / {a.valQuestions ?? '—'}</TableCell>
+                    </TableRow>
+                  )
+                })}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      )}
+
+      {ft.data?.compare && (
+        <Card className="gap-2">
+          <CardHeader>
+            <CardTitle className="flex flex-wrap items-center gap-2 font-serif text-xl font-medium">
+              Stage 3b gate
+              {ft.data.compare.passed ? <Tag tone="green">Passed</Tag> : <Tag tone="red">Not passed</Tag>}
+            </CardTitle>
+            <p className="max-w-prose text-sm text-muted-foreground">
+              Rule: {ft.data.compare.rule}. Paired tests on the same answers, from {ft.data.compare.file}.
+            </p>
+          </CardHeader>
+          <CardContent className="table-inset px-0">
+            <Table className="tabular">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Adapter</TableHead>
+                  <TableHead>Against</TableHead>
+                  <TableHead>Set</TableHead>
+                  <TableHead className="text-right">Before</TableHead>
+                  <TableHead className="text-right">After</TableHead>
+                  <TableHead className="text-right">Change</TableHead>
+                  <TableHead className="hidden text-right md:table-cell">Holm p</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {ft.data.compare.tests.map((t) => {
+                  const win = ft.data!.compare!.wins.some((w) => w.adapter === t.adapter && w.dataset === t.dataset && w.split === t.split)
+                  return (
+                    <TableRow key={`${t.adapter}${t.baseline}${t.dataset}${t.split}`}>
+                      <TableCell className="whitespace-nowrap">
+                        {adapterName(t.adapter)} {win && <Tag tone="green" className="ml-1">Win</Tag>}
+                      </TableCell>
+                      <TableCell className="text-muted-foreground">{t.baseline === 'base' ? 'Base' : t.baseline === 'ft' ? 'Fine-tuned' : t.baseline}</TableCell>
+                      <TableCell className="whitespace-nowrap">
+                        {BENCH_LABEL[t.dataset as Benchmark] ?? t.dataset} <span className="font-mono text-xs text-muted-foreground">{t.split}</span>
+                      </TableCell>
+                      <TableCell className="text-right">{pct(t.first_accuracy)}</TableCell>
+                      <TableCell className="text-right">{pct(t.second_accuracy)}</TableCell>
+                      <TableCell className="text-right"><Delta pts={t.diff * 100} /></TableCell>
+                      <TableCell className="hidden text-right md:table-cell"><PValue p={t.p_holm} /></TableCell>
+                    </TableRow>
+                  )
+                })}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      )}
+    </Section>
+  )
+}
+
+// 3. Baseline against RAG, Kaggle, every benchmark.
+function BaselineVsRag({ runs }: { runs: Run[] }) {
+  const [metric, setMetric] = useState<Metric>('accuracy')
+  const kaggle = runs.filter((r) => r.board === 'kaggle' && r.metrics.accuracy != null)
+  const latest = newestBy(kaggle, (r) => `${r.benchmark}|${r.split}|${r.model}|${r.condition}`)
+  const acc = (b: string, s: string, m: Model, c: Condition) => latest.get(`${b}|${s}|${m}|${c}`)?.metrics[metric] ?? null
+  const rows = BENCH_ORDER.flatMap((bench) => {
+    const splits = [...new Set(kaggle.filter((r) => r.benchmark === bench && r.condition.startsWith('rag')).map((r) => r.split))].sort()
     return splits.flatMap((split) =>
       MODELS.map((model) => ({
         bench, split, model,
@@ -160,7 +357,8 @@ function BaselineVsRag({ runs }: { runs: Run[] }) {
     <Section
       i={2}
       title="Baseline against RAG"
-      description="Kaggle T4, the newest run per cell. News accuracy is the Qwen3-14B judge's. Differences are in percentage points; significance is in docs/results/rag.md."
+      description="Kaggle T4, the newest run per cell. News accuracy is the Qwen3-14B judge's. Differences are in percentage points; significance is in docs/results/rag.md. GSM, news and MMLU-Pro have accuracy only."
+      actions={<MetricToggle value={metric} onChange={setMetric} />}
     >
       <Card className="table-inset py-0">
         <Table className="tabular">
@@ -182,10 +380,10 @@ function BaselineVsRag({ runs }: { runs: Run[] }) {
                 <TableCell>{BENCH_LABEL[r.bench]}</TableCell>
                 <TableCell className="text-muted-foreground">{r.split}</TableCell>
                 <TableCell>{MODEL_LABEL[r.model]}</TableCell>
-                <TableCell className="text-right">{pct(r.base)}</TableCell>
-                <TableCell className="text-right">{pct(r.en)}</TableCell>
+                <TableCell className="text-right">{showMetric(metric, r.base)}</TableCell>
+                <TableCell className="text-right">{showMetric(metric, r.en)}</TableCell>
                 <TableCell className="text-right"><Delta pts={deltaPts(r.base, r.en)} /></TableCell>
-                <TableCell className="hidden text-right md:table-cell">{pct(r.id)}</TableCell>
+                <TableCell className="hidden text-right md:table-cell">{showMetric(metric, r.id)}</TableCell>
                 <TableCell className="hidden text-right md:table-cell"><Delta pts={deltaPts(r.base, r.id)} /></TableCell>
               </TableRow>
             ))}
@@ -432,7 +630,8 @@ export function ResultsPage() {
   if (!runs) return <Loading rows={4} />
   return (
     <div className="space-y-16">
-      <ScientsbankByCondition runs={runs} />
+      <GradingByCondition runs={runs} />
+      <Finetuning runs={runs} />
       <AccuracyVsEnergy runs={runs} onOpen={setOpen} />
       <BaselineVsRag runs={runs} />
       <MmluProReference />

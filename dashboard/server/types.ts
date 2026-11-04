@@ -2,8 +2,8 @@
 
 export type Board = 'pi5' | 'jetson' | 'kaggle'
 export type Model = 'e2b' | 'e4b'
-export type Benchmark = 'scientsbank' | 'gsm' | 'news' | 'mmlupro'
-export type Condition = 'baseline' | 'rag-en' | 'rag-id' | 'think' | 'lg' | 'lg-reuse' | 'swafull'
+export type Benchmark = 'scientsbank' | 'beetle' | 'saf' | 'gsm' | 'news' | 'mmlupro'
+export type Condition = 'baseline' | 'rag-en' | 'rag-id' | 'think' | 'lg' | 'lg-reuse' | 'swafull' | 'ft' | 'ft-rf' | 'ft-lf'
 
 export interface RunKey {
   condition: Condition
@@ -141,4 +141,45 @@ export interface Reference {
   copied?: string
   rows: ReferenceRow[]
   error?: string
+}
+
+/** One LoRA training run (results/finetune/finetune-*.json). */
+export interface Adapter {
+  file: string
+  model: Model
+  reply: string
+  created?: string
+  chosenEpoch?: number
+  epochs: { epoch: number; trainLoss: number; valAccuracy: number }[]
+  rank?: number
+  alpha?: number
+  lr?: number
+  trainQuestions?: number
+  valQuestions?: number
+}
+
+/** A paired test from the stage 3b comparison (results/kaggle/compare-reason-ft-*.json). */
+export interface FinetuneTest {
+  adapter: string
+  baseline: string
+  dataset: string
+  split: string
+  n: number
+  first_accuracy: number
+  second_accuracy: number
+  diff: number
+  p: number
+  p_holm: number
+}
+
+export interface Finetune {
+  adapters: Adapter[]
+  compare?: {
+    file: string
+    passed: boolean
+    rule: string
+    wins: { adapter: string; dataset: string; split: string }[]
+    tests: FinetuneTest[]
+  }
+  errors: string[]
 }

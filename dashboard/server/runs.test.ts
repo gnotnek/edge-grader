@@ -40,6 +40,11 @@ describe('parseRunFolder', () => {
       benchmark: 'news', condition: 'rag-en', split: 'test',
     })
   })
+  test('board RAG and MMLU-Pro folders', () => {
+    expect(parseRunFolder('gsm-rag-e2b-jetson-gsm8k-20261020-043935')).toMatchObject({ benchmark: 'gsm', condition: 'rag-en', split: 'gsm8k' })
+    expect(parseRunFolder('news-rag-e4b-jetson-test-20261020-022520')).toMatchObject({ benchmark: 'news', condition: 'rag-en', split: 'test' })
+    expect(parseRunFolder('mmlupro-e2b-jetson-all-20261021-145638')).toMatchObject({ benchmark: 'mmlupro', condition: 'baseline', split: 'all' })
+  })
   test('interrupted and pilot folders are not runs', () => {
     expect(parseRunFolder('interrupted-think-e4b-jetson-test_ud-20261013-063811')).toBeNull()
     expect(parseRunFolder('pilot-base')).toBeNull()
@@ -81,6 +86,29 @@ describe('parseKaggleFile', () => {
       benchmark: 'news', condition: 'rag-en', split: 'test',
     })
   })
+  test('fine-tuned adapters: plain, reason first, label first', () => {
+    expect(parseKaggleFile('baseline-e2b-kaggle-t4-ft-test_ua-3way-20261028-075708.json')).toMatchObject({
+      benchmark: 'scientsbank', condition: 'ft', split: 'test_ua',
+    })
+    expect(parseKaggleFile('baseline-e2b-kaggle-t4-ft-rf-test_ua-3way-20261102-145733.json')?.condition).toBe('ft-rf')
+    expect(parseKaggleFile('beetle-baseline-e2b-kaggle-t4-ft-lf-test_ua-3way-20261102-161006.json')).toMatchObject({
+      benchmark: 'beetle', condition: 'ft-lf', split: 'test_ua',
+    })
+  })
+  test('held-out grading sets and the no-harm checks', () => {
+    expect(parseKaggleFile('saf-baseline-e4b-kaggle-t4-test_uq-3way-20261030-182605.json')).toMatchObject({
+      benchmark: 'saf', condition: 'baseline', split: 'test_uq',
+    })
+    expect(parseKaggleFile('mmlupro-baseline-e2b-kaggle-t4-ft-s1-20261028-064436.json')).toMatchObject({
+      benchmark: 'mmlupro', condition: 'ft', split: 's1',
+    })
+    expect(parseKaggleFile('gsm-gsm8k-e2b-kaggle-t4-ft-20261028-052054.json')).toMatchObject({
+      benchmark: 'gsm', condition: 'ft', split: 'gsm8k',
+    })
+  })
+  test('the comparison file is not a run', () => {
+    expect(parseKaggleFile('compare-reason-ft-20261102-200813.json')).toBeNull()
+  })
   test('judge files are not runs', () => {
     expect(parseKaggleFile('news-rag-e4b-kaggle-t4-en-k3-20261008-065226.judged-qwen3-14b-q4_k_m.json')).toBeNull()
   })
@@ -88,9 +116,23 @@ describe('parseKaggleFile', () => {
 
 describe('loadRuns on the real repo', () => {
   const runs = loadRuns(REPO)
-  test('every fetched board folder becomes one run', () => {
-    const fetched = fs.readdirSync(path.join(REPO, 'results/board'))
-    expect(runs.filter((r) => r.board !== 'kaggle' && r.location === 'results')).toHaveLength(fetched.length)
+  test('every fetched board folder becomes at least one run', () => {
+    const ids = new Set(runs.filter((r) => r.board !== 'kaggle' && r.location === 'results').map((r) => r.id.split('/')[0]))
+    expect([...ids].sort()).toEqual(fs.readdirSync(path.join(REPO, 'results/board')).sort())
+  })
+  test('a board MMLU-Pro folder holds one run per subset', () => {
+    const subs = runs.filter((r) => r.id.startsWith('mmlupro-e2b-jetson-all-20261021-145638'))
+    expect(subs.map((r) => [r.id, r.split, r.benchmark])).toEqual([
+      ['mmlupro-e2b-jetson-all-20261021-145638/s1', 's1', 'mmlupro'],
+      ['mmlupro-e2b-jetson-all-20261021-145638/s2', 's2', 'mmlupro'],
+      ['mmlupro-e2b-jetson-all-20261021-145638/s3', 's3', 'mmlupro'],
+    ])
+  })
+  test('tuned Kaggle runs are fine-tuned, not baseline', () => {
+    const r = runs.find((x) => x.id === 'baseline-e2b-kaggle-t4-ft-rf-test_ua-3way-20261102-145733.json')!
+    expect(r.condition).toBe('ft-rf')
+    expect(r.metrics.two_way_accuracy).toBe(0.76)
+    expect(r.metrics.weighted_f1).toBe(0.6679)
   })
   test('news accuracy is the judge\'s, read from the judged file', () => {
     const run = runs.find((r) => r.id === 'news-e2b-pi5-test-20261009-072927')!

@@ -36,10 +36,12 @@ export function parseRunFolder(name: string): RunKey | null {
 
   let benchmark: Benchmark = 'scientsbank'
   let condition: Condition = 'baseline'
-  if (pre === 'gsm' || pre === 'news') benchmark = pre
-  else if (pre === 'gsm-rag' || pre === 'news-rag') {
-    benchmark = pre === 'gsm-rag' ? 'gsm' : 'news'
-    condition = 'rag-en'
+  const [lead, ...rest] = pre.split('-')
+  if (lead === 'gsm' || lead === 'news' || lead === 'mmlupro') {
+    // The other benchmarks lead with their name, then an optional rag-.
+    if (rest.length > 1 || (rest.length === 1 && rest[0] !== 'rag')) return null
+    benchmark = lead
+    if (rest[0] === 'rag') condition = 'rag-en'
   } else if (pre !== '') {
     // SciEntsBank prefixes stack as rag-<variant>-think-; the outermost one names the condition.
     const first = pre.startsWith('lg-reuse') ? 'lg-reuse' : pre.split('-')[0]
@@ -63,6 +65,9 @@ export function parseKaggleFile(file: string): RunKey | null {
   const pre = tokens.slice(0, m)
   const post = tokens.slice(m + 3) // after <model>-kaggle-t4
   const rag = (): Condition => (post.includes('id') ? 'rag-id' : 'rag-en')
+  // A LoRA adapter on the baseline prompt: -ft, and -ft-rf / -ft-lf for the reply formats of stage 3b.
+  const base = (): Condition =>
+    !post.includes('ft') ? 'baseline' : post.includes('rf') ? 'ft-rf' : post.includes('lf') ? 'ft-lf' : 'ft'
   const key = (benchmark: Benchmark, condition: Condition, split: string): RunKey => ({
     condition, benchmark, model: tokens[m] as Model, board: 'kaggle', split, stamp,
   })
@@ -72,14 +77,20 @@ export function parseKaggleFile(file: string): RunKey | null {
     case 'rag': {
       const split = post.find((t) => t.startsWith('test_'))
       if (!split) return null
-      return key('scientsbank', pre[0] === 'rag' ? rag() : 'baseline', split)
+      return key('scientsbank', pre[0] === 'rag' ? rag() : base(), split)
+    }
+    case 'beetle':
+    case 'saf': {
+      const split = post.find((t) => t.startsWith('test_'))
+      if (!split || pre[1] !== 'baseline') return null
+      return key(pre[0], base(), split)
     }
     case 'mmlupro':
-      return key('mmlupro', pre[1] === 'rag' ? rag() : 'baseline', post[post.length - 1] ?? '')
+      return key('mmlupro', pre[1] === 'rag' ? rag() : base(), post[post.length - 1] ?? '')
     case 'gsm':
-      return pre[1] === 'rag' ? key('gsm', rag(), pre[2] ?? '') : key('gsm', 'baseline', pre[1] ?? '')
+      return pre[1] === 'rag' ? key('gsm', rag(), pre[2] ?? '') : key('gsm', base(), pre[1] ?? '')
     case 'news':
-      return key('news', pre[1] === 'rag' ? rag() : 'baseline', 'test')
+      return key('news', pre[1] === 'rag' ? rag() : base(), 'test')
     default:
       return null
   }
@@ -104,6 +115,9 @@ function pickMetrics(summary: unknown): Record<string, number | null> {
     const v = metrics[k]
     if (typeof v === 'number') out[k] = v
   }
+  // The 3-way grading runs also score the same answers 2-way (correct vs not).
+  const twoWay = (metrics.two_way as { accuracy?: unknown } | undefined)?.accuracy
+  if (typeof twoWay === 'number') out.two_way_accuracy = twoWay
   return out
 }
 
@@ -129,14 +143,29 @@ function fillFromSummary(run: Run, summaryFile: string | undefined, judgedFile: 
   }
 }
 
-function boardRun(repo: string, dir: string, key: RunKey, location: Run['location']): Run {
+/** One run per folder, except a folder with several summaries (MMLU-Pro s1-s3): one per summary. */
+function boardRuns(repo: string, dir: string, key: RunKey, location: Run['location']): Run[] {
   const id = path.basename(dir)
   const files = listDir(dir).filter((f) => f.endsWith('.json'))
-  const run: Run = { ...key, id, location, source: path.relative(repo, dir), metrics: {} }
-  const summary = files.find((f) => !f.includes('.judged-'))
+  const summaries = files.filter((f) => !f.includes('.judged-'))
   const judged = files.find((f) => f.includes('.judged-'))
-  fillFromSummary(run, summary && path.join(dir, summary), judged && path.join(dir, judged))
-  return run
+  if (summaries.length <= 1) {
+    const run: Run = { ...key, id, location, source: path.relative(repo, dir), metrics: {} }
+    fillFromSummary(run, summaries[0] && path.join(dir, summaries[0]), judged && path.join(dir, judged))
+    return [run]
+  }
+  return summaries.map((f) => {
+    const file = path.join(dir, f)
+    const run: Run = { ...key, id: `${id}/${f}`, location, source: path.relative(repo, file), metrics: {} }
+    fillFromSummary(run, file, undefined)
+    const s = run.summary as { subset?: unknown; split?: unknown } | undefined
+    const split = s?.subset ?? s?.split
+    if (typeof split === 'string') {
+      run.split = split
+      run.id = `${id}/${split}`
+    }
+    return run
+  })
 }
 
 interface CheckEntry {
@@ -185,7 +214,7 @@ export function loadRuns(repo: string): Run[] {
       if (!key || seen.has(name)) continue
       if (!fs.statSync(path.join(dir, name)).isDirectory()) continue
       seen.add(name)
-      runs.push(boardRun(repo, path.join(dir, name), key, location))
+      runs.push(...boardRuns(repo, path.join(dir, name), key, location))
     }
   }
 

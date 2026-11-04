@@ -3,14 +3,15 @@ import type { Benchmark, Board, Condition, Model } from '@server/types'
 export const BOARD_LABEL: Record<Board, string> = { jetson: 'Jetson', pi5: 'Pi 5', kaggle: 'Kaggle T4' }
 export const MODEL_LABEL: Record<Model, string> = { e2b: 'E2B', e4b: 'E4B' }
 export const BENCH_LABEL: Record<Benchmark, string> = {
-  scientsbank: 'SciEntsBank', gsm: 'GSM', news: 'News', mmlupro: 'MMLU-Pro',
+  scientsbank: 'SciEntsBank', beetle: 'Beetle', saf: 'SAF', gsm: 'GSM', news: 'News', mmlupro: 'MMLU-Pro',
 }
 export const CONDITION_LABEL: Record<Condition, string> = {
   baseline: 'Baseline', 'rag-en': 'RAG-en', 'rag-id': 'RAG-id', think: 'Thinking on',
   lg: 'little-gemma', 'lg-reuse': 'little-gemma + reuse', swafull: 'SWA full',
+  ft: 'Fine-tuned', 'ft-rf': 'Fine-tuned, reason first', 'ft-lf': 'Fine-tuned, label first',
 }
-export const CONDITION_ORDER: Condition[] = ['baseline', 'think', 'rag-en', 'rag-id', 'swafull', 'lg', 'lg-reuse']
-export const BENCH_ORDER: Benchmark[] = ['scientsbank', 'gsm', 'news', 'mmlupro']
+export const CONDITION_ORDER: Condition[] = ['baseline', 'ft', 'ft-rf', 'ft-lf', 'think', 'rag-en', 'rag-id', 'swafull', 'lg', 'lg-reuse']
+export const BENCH_ORDER: Benchmark[] = ['scientsbank', 'beetle', 'saf', 'gsm', 'news', 'mmlupro']
 export const BOARD_ORDER: Board[] = ['jetson', 'pi5', 'kaggle']
 
 export function pct(v: number | null | undefined, digits = 1): string {

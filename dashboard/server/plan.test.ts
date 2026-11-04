@@ -8,7 +8,7 @@ const plan = parsePlan(md)
 
 describe('parsePlan on docs/plan.md', () => {
   test('reads the last-updated date', () => {
-    expect(plan.updated).toBe('2026-10-08')
+    expect(plan.updated).toBe(md.match(/\*Last updated (\d{4}-\d{2}-\d{2})/)![1])
   })
   test('timeline has one row per table row, with ISO week bounds', () => {
     expect(plan.timeline).toHaveLength(9)

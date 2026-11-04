@@ -41,6 +41,8 @@ function Details({ id }: { id: string }) {
             <Row label="Answers">{count(m.n)}</Row>
             <Row label={run.benchmark === 'news' ? 'Accuracy (judged)' : 'Accuracy'}>{pct(m.accuracy)}</Row>
             {m.macro_f1 != null && <Row label="Macro F1">{fixed(m.macro_f1)}</Row>}
+            {m.weighted_f1 != null && <Row label="Weighted F1">{fixed(m.weighted_f1)}</Row>}
+            {m.two_way_accuracy != null && <Row label="2-way accuracy">{pct(m.two_way_accuracy)}</Row>}
             {m.strict_accuracy != null && <Row label="Strict accuracy">{pct(m.strict_accuracy)}</Row>}
             {m.unparsed != null && <Row label="Unparsed">{count(m.unparsed)}</Row>}
             {m.errors != null && <Row label="Errors">{count(m.errors)}</Row>}
