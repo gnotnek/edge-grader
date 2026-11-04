@@ -19,6 +19,7 @@ import {
 
 const MODELS: Model[] = ['e2b', 'e4b']
 const GRADING: Benchmark[] = ['scientsbank', 'beetle', 'saf']
+const ALL_SPLITS = 'all'
 
 // What a grading run stores, all on the same answers. Accuracy-like ones read as %, F1 as 0-1.
 type Metric = 'accuracy' | 'macro_f1' | 'weighted_f1' | 'two_way_accuracy'
@@ -61,20 +62,24 @@ function Delta({ pts }: { pts: number | null }) {
 // 1. Grading by condition: one chart per model, a bar per board.
 function GradingByCondition({ runs }: { runs: Run[] }) {
   const [bench, setBench] = useState<Benchmark>('scientsbank')
-  const [splitPick, setSplit] = useState('test_ua')
+  const [splitPick, setSplit] = useState(ALL_SPLITS)
   const [metric, setMetric] = useState<Metric>('accuracy')
   const [asTable, setAsTable] = useState(false)
   const splits = [...new Set(runs.filter((r) => r.benchmark === bench).map((r) => r.split))].sort()
-  const split = splits.includes(splitPick) ? splitPick : (splits[0] ?? splitPick)
+  const shownSplits = splitPick === ALL_SPLITS ? splits : [splits.includes(splitPick) ? splitPick : splits[0]]
+  const many = shownSplits.length > 1
   const latest = newestBy(
-    runs.filter((r) => r.benchmark === bench && r.split === split && r.metrics.accuracy != null),
-    (r) => `${r.board}|${r.model}|${r.condition}`,
+    runs.filter((r) => r.benchmark === bench && shownSplits.includes(r.split) && r.metrics.accuracy != null),
+    (r) => `${r.board}|${r.model}|${r.condition}|${r.split}`,
   )
-  const conditions = CONDITION_ORDER.filter((c) => [...latest.values()].some((r) => r.condition === c))
+  // One row per condition and split that has any run; with all splits shown, the split joins the label.
+  const cells = CONDITION_ORDER.flatMap((c) =>
+    shownSplits.filter((sp) => [...latest.values()].some((r) => r.condition === c && r.split === sp)).map((sp) => ({ c, sp })),
+  )
   const rows = (model: Model) =>
-    conditions.map((c) => {
-      const row: Record<string, string | number | null> = { condition: CONDITION_LABEL[c] }
-      for (const b of BOARD_ORDER) row[b] = latest.get(`${b}|${model}|${c}`)?.metrics[metric] ?? null
+    cells.map(({ c, sp }) => {
+      const row: Record<string, string | number | null> = { condition: many ? `${CONDITION_LABEL[c]}, ${sp}` : CONDITION_LABEL[c] }
+      for (const b of BOARD_ORDER) row[b] = latest.get(`${b}|${model}|${c}|${sp}`)?.metrics[metric] ?? null
       return row
     })
   const fmt = isPct(metric) ? (v: number) => pct(v, 0) : (v: number) => v.toFixed(2)
@@ -82,13 +87,14 @@ function GradingByCondition({ runs }: { runs: Run[] }) {
   return (
     <Section
       title="Grading by condition"
-      description="The newest run per board for each condition, on one split. A missing bar means that board has no run of that condition yet; Beetle and SAF were graded on Kaggle only. 2-way accuracy scores the same answers as correct or not."
+      description="The newest run per board for each condition and split. A missing bar means that board has no run of that condition yet; Beetle and SAF were graded on Kaggle only. 2-way accuracy scores the same answers as correct or not."
       actions={
         <>
           <ToggleGroup type="single" size="sm" variant="outline" value={bench} onValueChange={(v) => v && setBench(v as Benchmark)} aria-label="Benchmark">
             {GRADING.map((b) => <ToggleGroupItem key={b} value={b}>{BENCH_LABEL[b]}</ToggleGroupItem>)}
           </ToggleGroup>
-          <ToggleGroup type="single" size="sm" variant="outline" value={split} onValueChange={(v) => v && setSplit(v)} aria-label="Split">
+          <ToggleGroup type="single" size="sm" variant="outline" value={splitPick === ALL_SPLITS ? ALL_SPLITS : shownSplits[0]} onValueChange={(v) => v && setSplit(v)} aria-label="Split">
+            <ToggleGroupItem value={ALL_SPLITS}>All splits</ToggleGroupItem>
             {splits.map((s) => <ToggleGroupItem key={s} value={s}>{s}</ToggleGroupItem>)}
           </ToggleGroup>
           <MetricToggle value={metric} onChange={setMetric} />
@@ -125,11 +131,11 @@ function GradingByCondition({ runs }: { runs: Run[] }) {
                   </TableBody>
                 </Table>
               ) : (
-                <ChartContainer config={boardConfig} className="aspect-auto w-full" style={{ height: 56 + conditions.length * 44 }}>
+                <ChartContainer config={boardConfig} className="aspect-auto w-full" style={{ height: 56 + cells.length * (many ? 36 : 44) }}>
                   <BarChart data={rows(model)} layout="vertical" margin={{ left: 8, right: 16 }} barGap={2} barSize={8}>
                     <CartesianGrid horizontal={false} stroke="var(--grid)" />
                     <XAxis type="number" domain={[0, 1]} tickFormatter={fmt} tickLine={false} axisLine={false} />
-                    <YAxis type="category" dataKey="condition" width={132} tickLine={false} axisLine={false} />
+                    <YAxis type="category" dataKey="condition" width={many ? 190 : 132} tickLine={false} axisLine={false} />
                     <ChartTooltip
                       cursor={{ fill: 'var(--muted)', opacity: 0.6 }}
                       content={
