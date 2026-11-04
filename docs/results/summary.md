@@ -127,6 +127,10 @@ Grading, test_ua (thinking off unless stated):
    - ~73% for ~280 J (E4B with thinking)
    - The last step costs 70× the energy for +6 points on test_ua. Against the plain baseline, thinking adds +12.6 on test_uq.
 5. **RAG's cost on the Jetson (stage 4, 2026-10-21), against the baseline re-run in the same clock state:** the grading prompt grows ~6.3× (160 → 1,035 tokens), but llama.cpp's prompt cache reuses most of it, so grading test_uq/test_ud gets 13–20% cheaper and test_ua 60–63% dearer; math costs 12–40% more and news 2–14% ([`rag.md`](rag.md#cost-rag-en-against-the-re-run-baseline)). RAG brought no grading gain to pay for it. The Pi 5 isn't measured (dropped for new runs).
+6. **A cascade fills the gap between ~7 J and ~270 J (simulated from existing runs, 2026-11-05; set aside the same day by the supervisor: one model configuration at a time).**
+   - E2B and E4B grade every answer, and only their disagreements (31–37%) get thinking on.
+   - Escalating to E4B thinking reaches 70.9 / 75.8 / 72.5% (test_ua / test_uq / test_ud) at 95–109 J, about 35–40% of always-on thinking's energy.
+   - Handing the disagreements to the teacher instead keeps 63–69% of answers at 72–76% accuracy, for 11 J ([variations.md](variations.md#cascade-and-defer-to-teacher-simulated-from-b1-2026-11-05)).
 
 ## What it adds up to
 

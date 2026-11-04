@@ -27,6 +27,8 @@ results/
       board-state.txt   CPU governor and clocks (Jetson: devfreq, nvpmodel) at the start of the run
       telemetry-*/      agentic-edge's run_measured.sh output: telemetry.csv, requests.csv,
                         meta.json, summary.json (energy, J/token), command.log
+  cascade/     cascade-jetson-*.json: cascade and defer-to-teacher simulated from existing Jetson runs
+               (uv run python -m edge_grader.cascade); no new board time
   local/       ad-hoc runs (the CLI's default --out); commit only the ones worth keeping
 ```
 

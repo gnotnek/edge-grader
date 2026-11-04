@@ -149,3 +149,36 @@ Jetson, n = 300, thinking off:
 5. **For deployment on the Jetson:**
    - llama.cpp `--swa-full` and little-gemma are the cheapest ways to serve the baseline. Both are accuracy-neutral and cut energy per answer roughly in half for E2B.
    - With thinking on, the job becomes decode-bound. On MMLU-Pro, only n-gram drafting moved the decode cost (−6% to −31%). That hasn't been measured for grading.
+
+## Cascade and defer-to-teacher (simulated from B1, 2026-11-05)
+
+*Set aside the same day by the supervisor: the project tweaks one model configuration at a time, so it doesn't run two models together. This result is kept as recorded, and it isn't developed further or run on the board.*
+
+No new board runs. `uv run python -m edge_grader.cascade` re-reads the Jetson runs of the 612 MHz clock state: the baselines (stage 1 / phase 0) and B1 thinking on, both models, all three splits. Each answer was graded by every version, so a policy only picks which label to keep. Policies:
+
+- **cascade:** grade with E2B and E4B. Where they agree, keep the label. Where they disagree, take the thinking-on label (E2B's or E4B's). The cost is both baselines on every answer, plus thinking on the disagreements.
+- **defer:** the same check, but disagreements go back to the teacher.
+
+Agreement has no threshold, so nothing is fitted on the splits reported.
+
+Energy per answer is the run's measured energy, apportioned to answers by latency. Cascade accuracy is paired with plain E4B (McNemar, Holm over the six cascade tests). Raw: [`results/cascade/`](../../results/cascade/).
+
+| Split | E4B | E4B thinking | Cascade → E2B thinking | Cascade → E4B thinking | Defer: coverage, accuracy on kept |
+|---|---|---|---|---|---|
+| test_ua | 66.7%, 7.1 J | 72.8%, 280 J | 68.9%, 60 J (p 0.21) | 70.9%, 109 J (**p 0.004**) | 65%, 71.9% at 11 J |
+| test_uq | 67.3%, 6.9 J | 79.8%, 270 J | 75.0%, 61 J (**p < 0.001**) | 75.8%, 109 J (**p < 0.001**) | 63%, 76.1% at 11 J |
+| test_ud | 70.1%, 6.8 J | 73.1%, 274 J | 71.7%, 53 J (**p 0.003**) | 72.5%, 95 J (**p < 0.001**) | 69%, 75.0% at 11 J |
+
+1. **The cascades fill the gap between 7 J and 270 J.**
+   - E2B and E4B disagree on 31–37% of answers, so only those are escalated.
+   - Escalating to E4B thinking keeps 92–99% of thinking's gain over E4B on test_ua and test_ud, at about 35% of its energy. On test_uq it keeps 68% of the gain.
+   - Escalating to E2B thinking costs a fifth of always-on E4B thinking. It loses 1.4–4.8 points against E4B thinking.
+   - Every cascade lies on the accuracy–energy front. Always-on E2B thinking lies on it on none of the three splits.
+2. **Agreement is a usable confidence signal.**
+   - On the 63–69% of answers where the two baselines agree, E4B's accuracy is 72–76%. That is close to E4B thinking's accuracy on all answers, at 11 J instead of 270 J.
+   - The other third goes to the teacher. Report this as coverage and accuracy on kept answers, beside plain accuracy.
+3. **Caveats:**
+   - The cascade's latency is the sum of its stages: a mean of 5–10 s per answer, against 25 s for E4B thinking.
+   - Apportioning energy by latency assumes power is flat within a run.
+   - test_ua's baselines are from 2026-09-30 (stage 1). Their server flags are the same, but the run has no `board-state.txt`.
+   - These are untuned models. The Oct 28 adapters reach 75–80% on Kaggle at about baseline token cost, and if their Jetson cost is near the baseline's they beat every cascade here. That cost is still to be measured (stage 4). The same agreement cascade can run on the adapters once their Jetson runs exist.
