@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/chart'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Toggle } from '@/components/ui/toggle'
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { useApi } from '@/lib/api'
 import {
   BENCH_LABEL, BENCH_ORDER, BOARD_LABEL, BOARD_ORDER, CONDITION_LABEL, CONDITION_ORDER, MODEL_LABEL, deltaPts,
@@ -29,12 +29,28 @@ const METRICS: [Metric, string][] = [
 const isPct = (m: Metric) => m === 'accuracy' || m === 'two_way_accuracy'
 const showMetric = (m: Metric, v: number | null | undefined) => (isPct(m) ? pct(v) : fixed(v))
 
-function MetricToggle({ value, onChange }: { value: Metric; onChange: (m: Metric) => void }) {
+/** A labelled dropdown: "Metric  Accuracy ▾". */
+function Pick({ label, value, onChange, options }: {
+  label: string
+  value: string
+  onChange: (v: string) => void
+  options: [string, string][]
+}) {
   return (
-    <ToggleGroup type="single" size="sm" variant="outline" value={value} onValueChange={(v) => v && onChange(v as Metric)} aria-label="Metric">
-      {METRICS.map(([m, label]) => <ToggleGroupItem key={m} value={m}>{label}</ToggleGroupItem>)}
-    </ToggleGroup>
+    <Select value={value} onValueChange={onChange}>
+      <SelectTrigger size="sm" aria-label={label} className="min-w-36">
+        <span className="text-muted-foreground">{label}</span>
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        {options.map(([v, l]) => <SelectItem key={v} value={v}>{l}</SelectItem>)}
+      </SelectContent>
+    </Select>
   )
+}
+
+function MetricToggle({ value, onChange }: { value: Metric; onChange: (m: Metric) => void }) {
+  return <Pick label="Metric" value={value} onChange={(v) => onChange(v as Metric)} options={METRICS} />
 }
 const boardConfig = Object.fromEntries(
   BOARD_ORDER.map((b) => [b, { label: BOARD_LABEL[b], color: `var(--${b})` }]),
@@ -90,13 +106,13 @@ function GradingByCondition({ runs }: { runs: Run[] }) {
       description="The newest run per board for each condition and split. A missing bar means that board has no run of that condition yet; Beetle and SAF were graded on Kaggle only. 2-way accuracy scores the same answers as correct or not."
       actions={
         <>
-          <ToggleGroup type="single" size="sm" variant="outline" value={bench} onValueChange={(v) => v && setBench(v as Benchmark)} aria-label="Benchmark">
-            {GRADING.map((b) => <ToggleGroupItem key={b} value={b}>{BENCH_LABEL[b]}</ToggleGroupItem>)}
-          </ToggleGroup>
-          <ToggleGroup type="single" size="sm" variant="outline" value={splitPick === ALL_SPLITS ? ALL_SPLITS : shownSplits[0]} onValueChange={(v) => v && setSplit(v)} aria-label="Split">
-            <ToggleGroupItem value={ALL_SPLITS}>All splits</ToggleGroupItem>
-            {splits.map((s) => <ToggleGroupItem key={s} value={s}>{s}</ToggleGroupItem>)}
-          </ToggleGroup>
+          <Pick label="Benchmark" value={bench} onChange={(v) => setBench(v as Benchmark)} options={GRADING.map((b) => [b, BENCH_LABEL[b]])} />
+          <Pick
+            label="Split"
+            value={splitPick === ALL_SPLITS ? ALL_SPLITS : shownSplits[0]}
+            onChange={setSplit}
+            options={[[ALL_SPLITS, 'All'], ...splits.map((sp): [string, string] => [sp, sp])]}
+          />
           <MetricToggle value={metric} onChange={setMetric} />
           <Toggle size="sm" variant="outline" pressed={asTable} onPressedChange={setAsTable} aria-label="Show as table">
             <TableProperties /> Table
