@@ -1,0 +1,62 @@
+{
+  "kind": "label-prior-check",
+  "label": "e2b-kaggle-t4-ft",
+  "dataset": "saf",
+  "split": "train",
+  "n_requested": 500,
+  "seed": 0,
+  "server": {
+    "model_path": "/tmp/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a3a1c47"
+  },
+  "top_logprobs": 20,
+  "prior": {
+    "contradictory": 0.1004,
+    "correct": 0.4041,
+    "incorrect": 0.4955
+  },
+  "prior_counts": {
+    "incorrect": 2462,
+    "correct": 2008,
+    "contradictory": 499
+  },
+  "not_a_label": 0,
+  "time": "2026-11-04T16:38:26+00:00",
+  "metrics": {
+    "plain": {
+      "three_way": {
+        "n": 500,
+        "accuracy": 0.686,
+        "macro_f1": 0.6441,
+        "weighted_f1": 0.6934,
+        "unparsed": 0
+      },
+      "two_way": {
+        "n": 500,
+        "accuracy": 0.728,
+        "macro_f1": 0.6905,
+        "weighted_f1": 0.725,
+        "unparsed": 0
+      },
+      "lenient": 0.4412
+    },
+    "corrected": {
+      "three_way": {
+        "n": 500,
+        "accuracy": 0.62,
+        "macro_f1": 0.5665,
+        "weighted_f1": 0.6378,
+        "unparsed": 0
+      },
+      "two_way": {
+        "n": 500,
+        "accuracy": 0.716,
+        "macro_f1": 0.6769,
+        "weighted_f1": 0.7129,
+        "unparsed": 0
+      },
+      "lenient": 0.4588
+    }
+  }
+}

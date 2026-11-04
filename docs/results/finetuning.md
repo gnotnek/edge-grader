@@ -237,6 +237,27 @@ This matches the validation numbers: reasons don't help on the dataset the adapt
 
 **Read with care:** one seed; the gate passed in one of four cells; Kaggle accuracy only, no board runs yet. The teacher prompt was changed once, after reading training answers only (pilot 1 → pilot 2), and the epoch was chosen on validation, never on test or held-out data.
 
+## Choosing the next method: is the leniency SciEntsBank's label mix? (2026-11-05)
+
+**Why:** on the held-out sets the Oct 28 E2B adapter's main real error is calling wrong answers "correct" (Beetle test_uq: 45% of contradictory and 34% of incorrect answers; SAF test_ua: 53% of incorrect ones). Missing "contradictory" is mostly contradictory → incorrect, which costs nothing 2-way. Balanced training was the cheapest candidate, so it was checked first, without training.
+
+**How** ([`label_prior.py`](../../src/edge_grader/label_prior.py)): the Oct 28 E2B adapter (Kaggle T4, `a3a1c47`, `--lora e2b-ft.gguf`) grades 500 answers each from **Beetle train and SAF train** (seed 0), which are never trained or tested on, so the test splits stay unseen. It reads the first reply token's top-20 logprobs. *Plain* takes the most likely label. *Corrected* first divides by each label's share in SciEntsBank train (incorrect 49.6%, correct 40.4%, contradictory 10.0%), a fixed rule with nothing tuned. Every reply's first token was a label.
+
+| | Beetle train 3-way | macro-F1 | 2-way | Wrong answers called correct | SAF train 2-way | Wrong answers called correct |
+|---|---|---|---|---|---|---|
+| Plain | 60.6% | 0.540 | 75.4% | 29.4% | 72.8% | 44.1% |
+| Corrected for the label mix | 61.6% | 0.571 | 74.6% | 30.5% | 71.6% | 45.9% |
+
+([Beetle](../../results/assess/beetle-label-prior-e2b-kaggle-t4-ft-train-20261104-163640.json), [SAF](../../results/assess/saf-label-prior-e2b-kaggle-t4-ft-train-20261104-163826.json))
+
+- **The label mix explains the missing "contradictory", not the leniency.** Correcting brings "contradictory" back on Beetle (recall 28 → 43 of 125), but it takes from "incorrect" (95 → 86 of 154). Leniency rises slightly on both sets, and 2-way accuracy falls by about a point.
+- **SciEntsBank train has more incorrect than correct answers**, so balancing can't make the adapter stricter. It shifts weight toward "correct" relative to "incorrect".
+- **The lenient errors are confident.** On Beetle, wrong answers called "correct" have a median p(correct) of 0.90, against 0.97 for right ones. The model believes them, so no threshold separates them well. On SAF, the gap is wider (0.73 against 0.85).
+
+**Decision:** no balanced-training run. It would buy about a point of 3-way accuracy on Beetle at a small cost in 2-way, and the leniency would stay.
+
+The leniency looks like a judging problem on new subjects, not a label-frequency problem. The candidates that act on it are training on more than one grading set, and a reward on the grade (GRPO). Only the first keeps the 2-token reply, so only it costs the device nothing extra (RQ4). Both are optional under the 2026-11-04 focus on edge cost.
+
 ## Not done yet
 
 - **Cost on the Jetson.** Latency and energy per answer for the tuned models, against the re-run baselines in the same clock state. Kaggle times aren't board cost, so no cost number is quoted here.
