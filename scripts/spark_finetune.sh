@@ -6,6 +6,7 @@
 #
 #   docker compose up -d finetune-e4b-lf     # runs: scripts/spark_finetune.sh e4b label-first
 #   docker logs -f edge-grader-finetune-e4b-lf
+#   SMOKE=1 scripts/spark_finetune.sh e4b label-first   # minutes: 20 steps, 10 answers, all output in data/smoke
 #
 # Guide: docs/guides/spark-docker.md
 set -euo pipefail
@@ -24,8 +25,12 @@ case $MODEL in
   *) echo "model must be e2b or e4b, not $MODEL" >&2; exit 1 ;;
 esac
 RUN=$MODEL$TAG
+TRAIN_ARGS=() N=100 RESULTS=results/finetune GRADED=results/spark
+if [ "${SMOKE:-0}" = 1 ]; then  # the Day 1 check: does it train, convert and load? Nothing goes in results/
+  RUN=$RUN-smoke TRAIN_ARGS=(--max-steps 20 --val-n 20) N=10 RESULTS=data/smoke GRADED=data/smoke
+fi
 ADAPTER=data/adapters/$RUN
-FT_GGUF=data/adapters/$MODEL-ft$TAG.gguf
+FT_GGUF=data/adapters/${RUN/$MODEL/$MODEL-ft}.gguf  # e4b-ft-lf.gguf, as on Kaggle
 LLAMA_CPP=/opt/llama.cpp
 mkdir -p data/logs data/adapters data/models
 LOG=data/logs/finetune-$RUN-$(date -u +%Y%m%d-%H%M%S).log
@@ -38,7 +43,8 @@ echo "== 1. train"
 rm -rf "$ADAPTER"  # a re-run must not find the last run's adapter
 REPLY_ARGS=()
 [ "$REPLY" = label ] || REPLY_ARGS=(--reply "$REPLY" --reasons results/finetune/raw/reasons-qwen3-14b-q4_k_m.jsonl)
-uv run --frozen --group finetune edge-grader-finetune --model "$MODEL" --out "$ADAPTER" "${REPLY_ARGS[@]}"
+uv run --frozen --group finetune edge-grader-finetune --model "$MODEL" --out "$ADAPTER" --results "$RESULTS" \
+  "${TRAIN_ARGS[@]}" "${REPLY_ARGS[@]}"
 test -f "$ADAPTER/adapter/adapter_model.safetensors"
 
 echo "== 2. convert to GGUF"
@@ -60,7 +66,7 @@ uv pip install -q --python "$CONVERT_VENV/bin/python" -r $LLAMA_CPP/requirements
   --outfile "$FT_GGUF" --outtype f16
 sha256sum "$FT_GGUF"
 
-echo "== 3. grade 100 test_ua answers with the adapter"
+echo "== 3. grade $N test_ua answers with the adapter"
 [ -f "data/models/$BASE_GGUF" ] || uv run --frozen python -c \
   "from huggingface_hub import hf_hub_download; hf_hub_download('$GGUF_REPO', '$BASE_GGUF', local_dir='data/models')"
 SERVER_LOG=data/logs/server-$RUN.log
@@ -75,5 +81,5 @@ for _ in $(seq 150); do
   sleep 2
 done
 uv run --frozen edge-grader-baseline --base-url http://127.0.0.1:8080/v1 --label "$MODEL-spark-gb10-ft$TAG" \
-  --split test_ua --n 100 --out results/spark --reply "$REPLY"
-echo "== $(date -u +%FT%TZ) done: $FT_GGUF, summary in results/finetune, sanity run in results/spark"
+  --split test_ua --n "$N" --out "$GRADED" --reply "$REPLY"
+echo "== $(date -u +%FT%TZ) done: $FT_GGUF, summary in $RESULTS, graded run in $GRADED"

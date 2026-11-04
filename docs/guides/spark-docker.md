@@ -101,6 +101,7 @@ picks one), convert the adapter to GGUF, then grade 100 SciEntsBank test_ua answ
 as a sanity check. The recipe is unchanged from Kaggle (QLoRA, nf4, fp16 compute); only the hardware differs.
 
 ```bash
+docker compose run --rm -e SMOKE=1 dev scripts/spark_finetune.sh e4b label-first   # first: a few minutes, output in data/smoke
 docker compose up -d finetune-e4b-lf               # start (one run at a time: the GPU is shared)
 docker ps --filter name=edge-grader                # what is running
 docker logs -f edge-grader-finetune-e4b-lf         # follow it (also in data/logs/finetune-e4b-lf-*.log)
