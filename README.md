@@ -68,6 +68,10 @@ scripts/board_grade.sh e2b test_ud 200      # split and count are optional
   - It refuses to start while an `agentic-edge` run has the board (one job per board), so check the lab's queue first. The lab's queue in turn waits while this script runs.
   - Runs from before 2026-10-05 that went through the queue were moved out of `agentic-edge`'s folders on the boards to `<root>/external/edge-grader/` (`~/Research` on the Pi, `~/research` on the Jetson). Their telemetry is already committed under `results/board/`.
 
+### On the lab's DGX Spark (Docker)
+
+The Spark runs everything in Docker (lab rule): one image with the uv environment and `llama-server` at the pinned commit. See [`docs/guides/spark-docker.md`](docs/guides/spark-docker.md).
+
 ### Anywhere else
 
 Start a `llama-server` yourself, e.g. `llama-server -m <model.gguf> -c 8192 --port 8080 -rea off --reasoning-budget -1 --cache-ram 0`, then:
