@@ -51,6 +51,8 @@
   - test_uq 733 (unseen questions)
   - test_ud 4,562 (unseen domains)
   - Labels: 5-way, collapsible to 3-way or 2-way
+- **ASAP 2.0** (Crossley et al. 2025; Kaggle dataset `lburleigh/asap-2-0`, CC BY 4.0, version 8, sha256 pinned): ~24.7k source-based argumentative essays, 7 prompts, holistic score 1–6. Graded on a fixed 600-essay sample in `results/reference/asap2/` with the prompts' source texts ("Facial action coding system" has none: "Copyright Restricted"). Supervisor, 2026-11-05
+- **ASAP-SAS** (Kaggle `asap-sas`, 2012): 10 short-answer items, scores 0–3 with rubrics. Supervisor, 2026-11-05; not downloaded yet
 - **MMLU-Pro:** the lab's fixed 100-question subset (`agentic-edge/benchmark/mmlupro_subset.py`, seed 20260918). Its physics and maths subsets are an option if a subject-specific benchmark is needed.
 - **Topic benchmarks (planned 2026-10-07, beside SciEntsBank, not replacing it, confirmed by the supervisor):**
   - Math: GSM8K test set, with GSM-Symbolic (the same questions with names and numbers changed) as a memorisation check
@@ -60,6 +62,7 @@
 ## Metrics
 
 - **Grading:** accuracy and macro/weighted F1, the SemEval-2013 metrics. SciEntsBank labels are categories, not an ordered scale, so QWK doesn't apply.
+- **ASAP 2.0 / ASAP-SAS:** scores are ordinal, so quadratic weighted kappa (the competitions' metric), over parsed replies; exact accuracy (unparsed = wrong) and adjacent agreement (within 1) beside it.
 - **MMLU-Pro:** accuracy, from the lab harness.
 - **Edge cost (the main result since 2026-11-04),** all from the Jetson's telemetry (`telemetry-*/summary.json`, 1 Hz PMIC rails) and `edge-grader-board-check`, over the grading window:
   - **Speed:** median latency per answer (s); prefill and decode tokens/s; prompt and completion tokens per answer (what drives the time)
@@ -103,6 +106,7 @@
 | 2026-10-31 | Look for published work that fine-tunes Gemma, or otherwise makes it grade better | Closest match: Faza et al. 2025 (IJECBE, doi 10.62146/ijecbe.v3i3.148), Gemma-3-1B trained on teacher-written reasons before the score, which beat label-only tuning. Saur & Toth 2026 and ASAG2024 also find single-dataset tuning transfers poorly. Next: reasoning-guided fine-tuning ([spec](superpowers/specs/2026-11-01-reasoning-finetune-design.md)) |
 | 2026-11-04 | Time is short: focus on the edge device. Measure power consumption, generation speed and similar metrics: "if the accuracy is high what is the trade off" | RQ4 becomes the main question and stage 4 the main result: every version that raises accuracy gets its speed, power and energy cost on the Jetson against the same-board baseline (Metrics, Stages). The tuned models, the most accurate versions, are costed first. Images (RQ7) and B3 become optional (own decisions) |
 | 2026-11-05 | On the cascade and defer-to-teacher simulation: the concept isn't far from **Jev** (TypeSafe AI's "System One" model, which returns fast decisions with calibrated probabilities: [blog](https://typesafe.ai/blog/introducing-system-one-models-and-jev)). Focus instead on **tweaking the model's settings, one configuration at a time**, the way the baseline was extended (thinking on/off), to reach the goals | Cascade and defer set aside. Their simulation stays recorded as done, but it isn't developed further or run on the board. The next versions are single-model setting tweaks, chosen from what `agentic-edge` varied (thinking, engine, prefix reuse, speculative decoding, quantization, KV cache) and not yet run for grading. See [`methods-review.md`](methods-review.md#model-setting-tweaks-from-agentic-edge-2026-11-05) |
+| 2026-11-05 | SciEntsBank is mostly a dataset rather than a benchmark: use **ASAP 2.0** or **ASAP-SAS** and run the baseline again on them | Baseline re-run on both, untouched E2B/E4B, thinking off, Jetson (owner's choice). **ASAP 2.0:** a fixed 600-essay sample (seed 0, 85–86 per prompt over its 7 prompts), scored 1–6 on the official source-based holistic rubric, QWK as the headline (`edge_grader/asap.py`, `BENCH=asap2`). **ASAP-SAS:** blocked until the Kaggle competition download works. SciEntsBank results stay as recorded |
 
 ## Own decisions
 

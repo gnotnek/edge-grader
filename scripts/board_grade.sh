@@ -9,6 +9,7 @@
 #   BENCH=gsm INSTANCES=1 scripts/board_grade.sh e2b symbolic   # first GSM-Symbolic variant set
 #   BENCH=news scripts/board_grade.sh e4b       # LiveNewsBench, 200 (judge on Kaggle afterwards)
 #   BENCH=mmlupro scripts/board_grade.sh e2b    # MMLU-Pro, the lab's 300 questions (s1-s3; or one subset: s2)
+#   BENCH=asap2 scripts/board_grade.sh e2b      # ASAP 2.0 essay scores 1-6 (QWK), the fixed 600-essay sample
 #   BENCH=news RAG=results/rag/retrieval-news-en.bge-small-en-k5.json scripts/board_grade.sh e4b
 #                                               # with RAG-en: top 3 passages (any benchmark)
 #   LORA=$HOME/research/models/adapters/e2b-ft.gguf scripts/board_grade.sh e2b test_uq
@@ -44,14 +45,15 @@
 set -uo pipefail
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
 SELF="$HERE/scripts/$(basename "$0")"  # absolute: run_measured.sh cd's to its own dir
-MODEL_KEY="${1:?usage: [BENCH=scientsbank|gsm|news|mmlupro] [INSTANCES=n] $0 e2b|e4b [split|set] [n]}"
+MODEL_KEY="${1:?usage: [BENCH=scientsbank|gsm|news|mmlupro|asap2] [INSTANCES=n] $0 e2b|e4b [split|set] [n]}"
 BENCH="${BENCH:-scientsbank}"
 case "$BENCH" in
   scientsbank) SETS="test_ua test_uq test_ud" ;;
   gsm) SETS="gsm8k symbolic" ;;
   news) SETS="test" ;;
   mmlupro) SETS="all s1 s2 s3" ;;   # all: the three 100-question subsets in one run
-  *) echo "unknown BENCH: $BENCH (scientsbank|gsm|news|mmlupro)" >&2; exit 1 ;;
+  asap2) SETS="sample" ;;           # ASAP 2.0 essays, the fixed 600 in results/reference/asap2/
+  *) echo "unknown BENCH: $BENCH (scientsbank|gsm|news|mmlupro|asap2)" >&2; exit 1 ;;
 esac
 SPLIT="${2:-${SETS%% *}}"
 case " $SETS " in
@@ -82,6 +84,7 @@ if [ "$VARIANT" != base ]; then
   [ "$BENCH" = scientsbank ] || { echo "VARIANT is for BENCH=scientsbank only" >&2; exit 1; }
 fi
 if [ -n "$RAG" ]; then
+  [ "$BENCH" = asap2 ] && { echo "RAG isn't a condition for BENCH=asap2" >&2; exit 1; }
   case "$(basename "$RAG")" in
     retrieval-"$BENCH"-*.json) ;;
     *) echo "RAG file $RAG is not a $BENCH retrieval file (retrieval-$BENCH-*.json)" >&2; exit 1 ;;
@@ -192,6 +195,8 @@ runner() {
            $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) ;;
     news) $run uv run edge-grader-news --base-url "$url" --label "$label" \
             --n "$N" --out "$RUN_DIR" $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) ;;
+    asap2) $run uv run edge-grader-asap run --base-url "$url" --label "$label" \
+             --n "$N" --out "$RUN_DIR" ;;
     mmlupro) $run uv run edge-grader-mmlupro --base-url "$url" --label "$label" \
                --subset $( [ "$SPLIT" = all ] && echo s1 s2 s3 || echo "$SPLIT" ) --n "$N" --out "$RUN_DIR" \
                $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) ;;

@@ -37,7 +37,7 @@ ESTIMATES = "results/estimates"
 KAGGLE = "results/kaggle"
 BOARDS = {"pi5": "pi", "jetson": "jetson"}  # run label -> board name in the estimate
 SUMMARY_GLOBS = ("baseline-*.json", "think-*.json", "rag-*.json", "gsm-*.json", "news-*.json",
-                 "mmlupro-*.json")
+                 "mmlupro-*.json", "asap2-*.json")
 JUDGE = "qwen3-14b-q4_k_m"  # the news judge's file tag (docs/results/topics.md)
 CPU_STATE = re.compile(r"^cpu0: governor (\S+) min (\d+) max (\d+)")
 STATE_LINE = re.compile(r"^(variant|engine): (.*)$")

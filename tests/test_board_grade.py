@@ -80,10 +80,21 @@ def test_mmlupro_one_subset_and_n():
     assert "--subset s2 --n 5 " in f["runner"]
 
 
+def test_asap2():
+    f = fields(dry("e4b", BENCH="asap2"))
+    assert re.fullmatch(rf"{REPO}/results/board/asap2-e4b-jetson-sample-{STAMP}", f["run_dir"])
+    assert f["runner"] == (
+        "uv run edge-grader-asap run --base-url http://127.0.0.1:8080/v1 --label e4b-jetson "
+        f"--n 0 --out {f['run_dir']}"
+    )
+    rag = dry("e2b", BENCH="asap2", RAG="results/rag/retrieval-asap2-en.json")
+    assert rag.returncode != 0 and "RAG isn't a condition" in rag.stderr
+
+
 def test_server_flags_are_the_same_for_every_benchmark():
     for board, extra in (("jetson", "-ngl 99"), ("pi5", "-t 3")):
         servers = {fields(dry("e2b", board=board, BENCH=b))["server"]
-                   for b in ("scientsbank", "gsm", "news", "mmlupro")}
+                   for b in ("scientsbank", "gsm", "news", "mmlupro", "asap2")}
         assert len(servers) == 1
         (server,) = servers
         assert extra in server
