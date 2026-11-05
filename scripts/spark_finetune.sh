@@ -48,7 +48,8 @@ nvidia-smi --query-gpu=name,driver_version --format=csv,noheader
 echo "== 1. train"
 rm -rf "$ADAPTER"  # a re-run must not find the last run's adapter
 REPLY_ARGS=()
-[ "$REPLY" = label ] || REPLY_ARGS=(--reply "$REPLY" --reasons results/finetune/raw/reasons-qwen3-14b-q4_k_m.jsonl)
+REASONS=results/finetune/raw/reasons-qwen3-14b-q4_k_m${TRAIN_SETS:+-${TRAIN_SETS// /-}}.jsonl
+[ "$REPLY" = label ] || REPLY_ARGS=(--reply "$REPLY" --reasons "$REASONS")
 uv run --frozen --group finetune edge-grader-finetune --model "$MODEL" --out "$ADAPTER" --results "$RESULTS" \
   "${TRAIN_ARGS[@]}" "${REPLY_ARGS[@]}" "${SETS_ARGS[@]}"
 test -f "$ADAPTER/adapter/adapter_model.safetensors"

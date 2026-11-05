@@ -120,8 +120,6 @@ def main(argv: list[str] | None = None) -> None:
     if (args.reply == "label") != (args.reasons is None):
         ap.error("--reasons goes with --reply reason-first / label-first, and only with them")
     default_set = args.train_sets == ["scientsbank"]
-    if args.reasons and not default_set:
-        ap.error("the teacher's reasons cover SciEntsBank only")
 
     labels = data.labels_for("3way")
     # SAF's ids are random, so another set's questions are told apart by their text.

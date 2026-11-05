@@ -99,14 +99,6 @@ def test_other_sets_split_by_question_text(tmp_path, monkeypatch, capsys):
     assert "train 27 answers / 9 questions, validation 3 answers / 1 questions" in capsys.readouterr().out
 
 
-def test_reasons_are_for_scientsbank_only(tmp_path):
-    from edge_grader import finetune
-
-    with pytest.raises(SystemExit):
-        finetune.main(["--model", "e2b", "--out", str(tmp_path), "--reply", "label-first",
-                       "--reasons", "r.jsonl", "--train-sets", "beetle"])
-
-
 def test_training_arguments_construct(tmp_path):
     transformers = pytest.importorskip("transformers")
     from edge_grader.finetune import RECIPE, training_kwargs

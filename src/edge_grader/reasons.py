@@ -2,6 +2,7 @@
 
     uv run edge-grader-reasons --base-url http://127.0.0.1:8080/v1 --n 50   # the pilot
     uv run edge-grader-reasons --base-url http://127.0.0.1:8080/v1          # all 4,969
+    uv run edge-grader-reasons --sets beetle saf                            # other sets' train splits
 
 Design: docs/superpowers/specs/2026-11-01-reasoning-finetune-design.md §5.1. The teacher
 (Qwen3-14B in llama-server, thinking off) is given the gold 3-way label and explains it; it
@@ -67,15 +68,19 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--model", default="local", help="model name sent to the server")
     ap.add_argument("--n", type=int, default=0, help="answers (0 = the whole train split; a pilot: 50)")
     ap.add_argument("--out", type=Path, default=Path("results/finetune"))
+    ap.add_argument("--sets", nargs="+", choices=list(data.DATASETS), default=["scientsbank"],
+                    help="the grading sets whose train splits get reasons")
     args = ap.parse_args(argv)
 
     server = server_info(args.base_url)
     teacher = Path(server["model_path"] or "teacher").stem.lower()
     sha = prompt_sha256()
     # a pilot carries the prompt sha, so trials of different prompts keep their own files
-    name = f"reasons-{teacher}" + (f"-n{args.n}-{sha[:8]}" if args.n else "")
+    sets = "" if args.sets == ["scientsbank"] else "-" + "-".join(args.sets)
+    name = f"reasons-{teacher}{sets}" + (f"-n{args.n}-{sha[:8]}" if args.n else "")
     labels = data.labels_for("3way")
-    items = data.load(split="train", scheme="3way", n=args.n or None, seed=0)
+    items = [i for s in args.sets for i in data.load(split="train", scheme="3way", n=args.n or None,
+                                                     seed=0, dataset=s)]
     raw = args.out / "raw"
     raw.mkdir(parents=True, exist_ok=True)
     part = raw / f"{name}.jsonl.part"
@@ -122,7 +127,7 @@ def main(argv: list[str] | None = None) -> None:
         "teacher": server,
         "model": args.model,
         "settings": {"temperature": 0, "max_tokens": MAX_TOKENS, "split": "train", "scheme": "3way",
-                     "n_requested": args.n, "seed": 0},
+                     "sets": args.sets, "n_requested": args.n, "seed": 0},
         "prompt": str(PROMPT.relative_to(Path(__file__).parent)),
         "prompt_sha256": sha,
         "n": len(rows),

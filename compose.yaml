@@ -63,6 +63,42 @@ services:
       TRAIN_SETS: "beetle saf"
     command: scripts/spark_finetune.sh e4b label
 
+  # Qwen3-14B writes the reasons the Beetle + SAF label-first and reason-first adapters train on.
+  reasons-beetle-saf:
+    <<: *finetune
+    container_name: edge-grader-reasons-beetle-saf
+    environment:
+      TRAIN_SETS: "beetle saf"
+    command: scripts/spark_reasons.sh
+
+  finetune-e2b-lf-beetle-saf:
+    <<: *finetune
+    container_name: edge-grader-finetune-e2b-lf-beetle-saf
+    environment:
+      TRAIN_SETS: "beetle saf"
+    command: scripts/spark_finetune.sh e2b label-first
+
+  finetune-e2b-rf-beetle-saf:
+    <<: *finetune
+    container_name: edge-grader-finetune-e2b-rf-beetle-saf
+    environment:
+      TRAIN_SETS: "beetle saf"
+    command: scripts/spark_finetune.sh e2b reason-first
+
+  finetune-e4b-lf-beetle-saf:
+    <<: *finetune
+    container_name: edge-grader-finetune-e4b-lf-beetle-saf
+    environment:
+      TRAIN_SETS: "beetle saf"
+    command: scripts/spark_finetune.sh e4b label-first
+
+  finetune-e4b-rf-beetle-saf:
+    <<: *finetune
+    container_name: edge-grader-finetune-e4b-rf-beetle-saf
+    environment:
+      TRAIN_SETS: "beetle saf"
+    command: scripts/spark_finetune.sh e4b reason-first
+
   # SciEntsBank, all three test splits, on every version: docs/guides/spark-docker.md
   bench-scientsbank:
     <<: *finetune

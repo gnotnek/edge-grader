@@ -114,13 +114,22 @@ When it finishes, the container stays (exited) with its log until it is recreate
 
 ## Trained on Beetle and SAF, tested on SciEntsBank
 
-The adapters never see SciEntsBank, so all three of its test splits are held out. Same recipe and label-only reply as the Oct 28 adapters; only the training data changes. Run them one at a time:
+The adapters never see SciEntsBank, so all three of its test splits are held out. Same recipe as the Oct 28 adapters; only the training data changes. Label-first and reason-first train on reasons from Qwen3-14B, which `reasons-beetle-saf` writes first, and the owner spot-checks them before those trainings start. Run everything one at a time:
 
 | Service | Container | Runs |
 |---|---|---|
 | `finetune-e2b-beetle-saf` | `edge-grader-finetune-e2b-beetle-saf` | trains `data/adapters/e2b-ft-beetle-saf.gguf` |
 | `finetune-e4b-beetle-saf` | `edge-grader-finetune-e4b-beetle-saf` | trains `data/adapters/e4b-ft-beetle-saf.gguf` |
-| `bench-scientsbank` | `edge-grader-bench-scientsbank` | grades test_ua, test_uq and test_ud with every version: E2B and E4B untouched, their Oct 28 adapters, and the two above |
+| `reasons-beetle-saf` | `edge-grader-reasons-beetle-saf` | writes `results/finetune/raw/reasons-qwen3-14b-q4_k_m-beetle-saf.jsonl` |
+| `finetune-{e2b,e4b}-{lf,rf}-beetle-saf` | `edge-grader-finetune-e2b-lf-beetle-saf` and so on | train label-first and reason-first on those reasons |
+| `bench-scientsbank` | `edge-grader-bench-scientsbank` | grades test_ua, test_uq and test_ud with every version that has an adapter file, and skips what's already graded |
+
+`scripts/spark_queue.sh` runs services one after the other on the host and stops at the first that fails:
+
+```bash
+AFTER=edge-grader-bench-asap2-think nohup scripts/spark_queue.sh reasons-beetle-saf finetune-e2b-beetle-saf \
+  finetune-e4b-beetle-saf bench-scientsbank > data/logs/queue.log 2>&1 &
+```
 
 Grading the untouched models and Oct 28 adapters here too keeps the comparison on one machine, and those runs can be checked against Kaggle's. Summaries land in `results/spark/`.
 
