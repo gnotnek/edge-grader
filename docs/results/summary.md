@@ -147,6 +147,52 @@ Grading, test_ua (thinking off unless stated):
 - Can n-gram drafting cut thinking's decode cost on grading, as it did on MMLU-Pro?
 - Does a better embedder (B3) or a cleaner corpus change the RAG picture?
 
+## Accuracy as the target: the caveats (2026-11-05)
+
+The research target is grading accuracy (owner, 2026-11-05). These are the caveats of chasing it on the Jetson, from runs already recorded. The tuned models have no Jetson cost yet, so that part is still open.
+
+### The 5-point bar
+
+A tweak counts if it adds **at least 5 points** of accuracy over the same model without it, per split, **and** the gain is significant: paired McNemar, p < 0.05 after Holm within its family (owner, 2026-11-05). The bar was set after most of these results were in. Gains below are against the untouched model. Bold passes both; "n.s." reaches 5 points but isn't significant.
+
+| Version | SciEntsBank test_ua / uq / ud | Beetle ua / uq, SAF ua / uq (held out) |
+|---|---|---|
+| E2B, Oct 28 adapter | **+24.2 / +16.9 / +14.6** | +5.5 n.s. / **+6.4** / +6.9 n.s. / +3.1 |
+| E4B, Oct 28 adapter | **+12.4 / +12.4 / +6.0** | +3.4 / +1.7 / +1.1 / +0.6 |
+| E2B, label-first adapter | not graded / +16.6 / +12.9, not tested | **+11.4 / +6.7** / +5.3 n.s. / −1.7 |
+| E2B, reason-first adapter | not graded / +15.4 / +10.7, not tested | **+11.4** / +5.0 n.s. / +3.2 / +4.6 |
+| E2B, thinking on | **+11.9 / +16.0 / +9.9** | not run |
+| E4B, thinking on | **+6.1 / +12.6** / +3.0 | not run |
+| RAG-en, either model | best +2.9 | not run |
+
+- Thinking's p values are ≤ 0.004 across the 10 B1 runs, which stays below 0.05 under Holm over those 10.
+- Stage 3b's SciEntsBank gains were described, not tested (its 16 tests were fixed before grading), so they don't count as passing.
+- Engine and prefix reuse stay within ±0.9. They're cost settings, so the bar doesn't apply to them.
+- Stage 3b E4B has only 100 test_ua answers so far, so it isn't judged here.
+- Against the Oct 28 adapter rather than the untouched model, stage 3b passes in one held-out cell: Beetle test_ua, +5.9 (Holm p 0.031 reason-first, 0.009 label-first).
+
+### Caveats
+
+**1. The next points cost far more than the last ones.** Grading on the Jetson, 612 MHz runs, each step against its own baseline:
+
+| Step | Points gained (test_ua / test_uq / test_ud) | × energy | × median latency | J per extra correct answer |
+|---|---|---|---|---|
+| E2B → E4B | +11.5 / +7.5 / +9.9 | 1.8× | 1.7× | 28–41 |
+| E2B, thinking on | +11.9 / +16.0 / +9.9 | 35–36× | 33–34× | 830–1,340 |
+| E4B, thinking on | +6.1 / +12.6 / +3.0 | 39–40× | 37–38× | 2,100–8,900 |
+
+**2. The price is mostly waiting, not power.** Thinking raises E4B's mean draw only from about 9.7 to 10.7 W, but a reply goes from 0.7 s to 27 s. On test_ud's 4,562 answers that's 53 minutes against 32 hours, so a batch that fits a free period becomes an overnight job or longer. Higher clocks don't change this: 612 → 1,020 MHz made E4B about 1.6× faster at about 1.6× the power, and energy per answer rose 4–5%.
+
+**3. Tokens the model writes are the cost driver, and they don't always buy accuracy.** Stage 3b's reason-first adapter writes 63–72 tokens against label-first's 2, for about the same accuracy. RAG makes the prompt 6.3× longer and gave grading no gain (E2B −5.1 on test_ud).
+
+**4. A high accuracy on one dataset can be fit, not skill.** The adapters reach 75–80% on SciEntsBank, and thinking needs ~270 J for the same on test_uq. But they add only +2 to +7 points on Beetle and SAF, one comparison of 8 survives Holm, and E4B gains nothing that holds up. Thinking hasn't been run on Beetle or SAF, so whether its gain transfers better is unknown.
+
+**5. Accuracy hides which errors remain.** On Beetle the adapters gain on "correct" and lose on "contradictory", so macro-F1 stays flat or falls. E2B's adapter also calls 29% (Beetle) to 44% (SAF) of wrong answers correct on train samples, often confidently (median p 0.90 on Beetle). For a student, that's a wrong answer marked right.
+
+**6. The board limits the ways up.** Eight GB of shared memory rules out much larger models: even E4B at Q8_0 (7.6 GiB) likely won't fit (not tested). That leaves training, which moves the cost off the device, or more tokens per answer, which keeps it on.
+
+**Read with care:** the table's accuracy and energy come from single runs at 612 MHz, so thinking isn't yet measured at the stage 4 clocks. The tuned models' accuracy comes from Kaggle, with one seed.
+
 ## Limitations
 
 **Scope: what the project doesn't answer**

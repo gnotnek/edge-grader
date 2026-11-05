@@ -3,6 +3,8 @@
 *Written 2026-11-05 by Claude, at the owner's request, after the outline's 2026-11-04 change (RQ4, the cost of accuracy on the Jetson, is now the main result). These are **proposals, not decisions.** Any method that's adopted gets a row in the outline's "Own decisions" table with the RQ it serves. Sources were found by web search. For most of them only the abstract or a summary was read, not the full paper, so check the figures marked "(abstract)" before you cite them.*
 
 > **2026-11-05, supervisor:** the cascade concept isn't far from Jev (TypeSafe AI's "System One" model, fast decisions with calibrated probabilities). Focus on tweaking the model's settings, one configuration at a time, as the baseline was extended with thinking on/off. So methods 1 and 2 are set aside, and their simulation stays recorded in [variations.md](results/variations.md#cascade-and-defer-to-teacher-simulated-from-b1-2026-11-05). The setting tweaks are listed at the end.
+>
+> **Later on 2026-11-05, supervisor:** the thinking budget sweep isn't significant, and the lab doesn't really use MTP. Both are dropped (method 5; the MTP and n-gram rows of the tweak table). **Owner:** the research target is grading accuracy, with its edge-device caveats explained ([summary](results/summary.md#accuracy-as-the-target-the-caveats-2026-11-05)).
 
 ## What the outline needs
 
@@ -30,7 +32,7 @@ Fine-tuning is excluded here because RQ3 already covers it.
 | 2 | ~~Defer to the teacher: grade only confident answers, hand the rest back~~ **set aside (supervisor, 2026-11-05)** | (a) | simulated 2026-11-05 | RQ4 |
 | 3 | Read the label from logprobs, then calibrate the label bias | (b) | one re-run per split at baseline cost | RQ4, RQ6 |
 | 4 | Retrieve graded **example answers** (not textbook passages) as few-shot examples | (b) | prompt grows; same as RAG-en's cost runs | RQ2, RQ4 |
-| 5 | Thinking budget sweep (e.g. 0 / 64 / 128 / 320 tokens) | (a) | heavy: thinking runs are 14–27 s per answer | RQ6, RQ4 |
+| 5 | ~~Thinking budget sweep (e.g. 0 / 64 / 128 / 320 tokens)~~ **dropped (supervisor, 2026-11-05)** | (a) | heavy: thinking runs are 14–27 s per answer | RQ6, RQ4 |
 | 6 | Jetson power modes (`nvpmodel`) | (c) | one baseline run per mode | RQ4 |
 | 7 | Parallel slots (batching a class's answers) | (c) | one baseline run per slot count | RQ4 |
 | — | Not recommended: self-consistency voting, MatFormer slicing, speculative decoding (see the end) | | | |
@@ -159,11 +161,11 @@ Each tweak below is one model with one setting changed, compared with the same b
 
 | Tweak | What `agentic-edge` found | Done here for grading? | Worth running for grading? |
 |---|---|---|---|
-| Thinking on/off (budget 320) | MMLU-Pro unchanged; +20–27% energy | **Done** (B1): +3.0 to +18.8 points at 35–40× energy | **Yes, as a budget sweep** (e.g. 0 / 64 / 128 / 320 tokens): the only tweak that has moved grading accuracy. It fills the 7 J to 270 J gap with one model |
+| Thinking on/off (budget 320) | MMLU-Pro unchanged; +20–27% energy | **Done** (B1): +3.0 to +18.8 points at 35–40× energy | No: the budget sweep was dropped (supervisor, 2026-11-05) |
 | Engine: little-gemma vs llama.cpp (S3) | Same accuracy, −4% to −17% energy | **Done** (B2): accuracy ±0.4 | No: done |
 | Prefix reuse: little-gemma `-reuse` (S9), llama.cpp `--swa-full` | Byte-identical output, less time | **Done** (B2): `--swa-full` halves E2B's energy | Only combined with the best version (adapter + `--swa-full`, already stage 4 item 4) |
-| MTP draft (speculative decoding) | **Byte-identical output**, 1.5–1.7× faster; **2.1× faster with thinking on** (Pi 5) | No: dropped 2026-10-08 because a label is 1–2 tokens | **Yes, with thinking on only.** Thinking is decode-bound (25 s, 270 J per answer for E4B), and the output doesn't change, so it's a pure cost cut on the most accurate setting. First check that the Jetson's llama.cpp build has `draft-mtp` |
-| n-gram speculation (S9 full, S10) | Same accuracy, −6% to −31% energy on MMLU-Pro | No: dropped 2026-10-08 | Maybe, with thinking on. A thought block repeats less than a 5-shot MMLU-Pro answer, so the gain is likely smaller than MTP's |
+| MTP draft (speculative decoding) | **Byte-identical output**, 1.5–1.7× faster; **2.1× faster with thinking on** (Pi 5) | No: dropped 2026-10-08 because a label is 1–2 tokens | No: the lab doesn't really use it (supervisor, 2026-11-05) |
+| n-gram speculation (S9 full, S10) | Same accuracy, −6% to −31% energy on MMLU-Pro | No: dropped 2026-10-08 | No: dropped with MTP (2026-11-05) |
 | Weight quantization (Q4_K_M / Q4_K_XL QAT / Q5_K_M / Q8_0, Pi 5, E4B) | The QAT Q4 is the smallest, fastest and most accurate | No: Q5_K_M dropped 2026-10-08 | Optional: E2B Q8_0 against the QAT Q4. A non-QAT build changes the weights, which is the outline's QAT caveat. E4B Q8_0 (7.6 GiB) likely doesn't fit the Jetson's 8 GB |
 | KV cache quantization (TurboQuant `turbo3`, S8) | E4B −3 to −5 points (MMLU-Pro); n.s. on tool calls | No: dropped 2026-10-08 | No. Grading prompts are ~160 tokens, so the KV cache is tiny and there's little to save |
 | Output format (JSON vs Code Mode, tool calls) | Code Mode +6.6 points for E4B | The grading analogue is the reply format: stage 3b label-first vs reason-first | Already covered by stage 3b |
@@ -171,12 +173,10 @@ Each tweak below is one model with one setting changed, compared with the same b
 
 ## Suggested order
 
-Since 2026-11-05 (supervisor), the order is one model's settings at a time. Stage 4's own order stays first.
+Since 2026-11-05 (supervisor), the order is one model's settings at a time, toward the accuracy target: at least 5 points over the same model without the tweak, and significant after Holm (owner, 2026-11-05). Stage 4's own order stays first.
 
 1. **The adapters on the Jetson** (stage 4 items 1–2, already planned).
-2. **Thinking budget sweep** on E2B and E4B, test_uq first. This is the direct extension of "thinking on/off".
-3. **MTP (or n-gram) drafting with thinking on**, if the Jetson build supports it. It costs nothing in accuracy (byte-identical) and targets the most expensive setting.
-4. **Method 3: logprob labels with calibration**. It changes how the label is read, not the model. Close to the Jev idea, so ask the supervisor before running it.
-5. Optional: E2B Q8_0, method 4 (graded examples), method 6 (power modes).
+2. **Method 3: logprob labels with calibration**. It changes how the label is read, not the model. Close to the Jev idea, so ask the supervisor before running it.
+3. Optional: E2B Q8_0, method 4 (graded examples), method 6 (power modes).
 
-Methods 1 and 2 are set aside.
+Methods 1, 2 and 5 are set aside.
