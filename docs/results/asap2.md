@@ -32,3 +32,20 @@ Paired against the same model untouched, Holm over the 5 comparisons shown. Exac
 - **Against the 5-point bar:** no version adds 5 points of exact accuracy. Whether the E4B adapter's +0.153 QWK passes depends on how the bar reads on ASAP, which the outline leaves open.
 
 **Read with care:** one training seed per adapter, one prompt, 600 of ~24.7k essays. The E4B adapter's gain is a change in how it spreads scores, and why training on three short-answer labels would do that isn't known. No adapter was trained on ASAP.
+
+## Thinking on (2026-11-06)
+
+The same 600 essays, E2B and E4B untouched, with the lab's thinking flags (`-rea on --reasoning-budget 320 --reasoning-format none`, container `edge-grader-bench-asap2-think`, repo `5774bf0`). The score is read after the thought block; a cut or unclosed reply is unparsed. Paired against thinking off on the same essays; Holm over the 2 models, per metric; QWK by paired bootstrap over the essays both runs parsed.
+
+| Version | QWK | Exact | Within 1 | Unparsed | Exact change (better / worse) | Holm p | QWK change [95% CI] | Holm p |
+|---|---|---|---|---|---|---|---|---|
+| E2B, thinking on | 0.461 | 39.3% | 87.8% | 0 | −7.7 (66 / 112) | **0.001** | −0.107 [−0.146, −0.068] | **< 0.001** |
+| E4B, thinking on | 0.549 | 42.5% | 92.0% | 8 | +0.3 (50 / 48) | 0.92 | +0.078 [+0.038, +0.120] | **0.001** |
+
+- **Thinking hurts E2B and helps E4B only on QWK.** E2B falls below its thinking-off score on both metrics. E4B's exact accuracy doesn't move.
+- **Neither reaches the E4B Oct 28 adapter's QWK of 0.619**, which replies in one token.
+- **Thinking costs about 25× the time here:** a median of 5.6 s per essay against 0.22 s for E2B, and 9.5 s against 0.35 s for E4B.
+- **The budget was probably too small:** every reply used about 325 tokens, so the server closed the thinking at the 320-token budget. 8 of E4B's 600 replies were cut before a score. The budget stays 320, as for every other thinking run, and this is a limit of the result.
+
+ASAP 2.0 was set aside on 2026-11-06, so these runs are kept as recorded and nothing follows from them.
+

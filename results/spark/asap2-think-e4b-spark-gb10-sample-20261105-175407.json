@@ -1,0 +1,199 @@
+{
+  "benchmark": "asap2",
+  "stage": "think",
+  "label": "e4b-spark-gb10",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "data/models/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a3a1c47"
+  },
+  "split": "sample",
+  "sample": "results/reference/asap2/sample-600-seed0.jsonl",
+  "n_requested": 0,
+  "max_tokens": 336,
+  "time": "2026-11-05T17:54:07+00:00",
+  "metrics": {
+    "n": 600,
+    "qwk": 0.5489,
+    "accuracy": 0.425,
+    "adjacent": 0.92,
+    "unparsed": 8,
+    "pred_counts": {
+      "1": 11,
+      "2": 69,
+      "3": 345,
+      "4": 141,
+      "5": 26
+    },
+    "gold_counts": {
+      "1": 41,
+      "2": 171,
+      "3": 219,
+      "4": 130,
+      "5": 32,
+      "6": 7
+    },
+    "per_prompt": {
+      "\"A Cowboy Who Rode the Waves\"": {
+        "n": 86,
+        "qwk": 0.5113,
+        "accuracy": 0.4419,
+        "adjacent": 0.9535,
+        "unparsed": 0,
+        "pred_counts": {
+          "1": 4,
+          "2": 15,
+          "3": 51,
+          "4": 14,
+          "5": 2
+        },
+        "gold_counts": {
+          "1": 7,
+          "2": 39,
+          "3": 32,
+          "4": 8
+        }
+      },
+      "Car-free cities": {
+        "n": 86,
+        "qwk": 0.5076,
+        "accuracy": 0.4186,
+        "adjacent": 0.907,
+        "unparsed": 0,
+        "pred_counts": {
+          "1": 2,
+          "2": 5,
+          "3": 38,
+          "4": 33,
+          "5": 8
+        },
+        "gold_counts": {
+          "1": 4,
+          "2": 19,
+          "3": 37,
+          "4": 21,
+          "5": 5
+        }
+      },
+      "Does the electoral college work?": {
+        "n": 86,
+        "qwk": 0.4253,
+        "accuracy": 0.4186,
+        "adjacent": 0.8837,
+        "unparsed": 1,
+        "pred_counts": {
+          "2": 8,
+          "3": 51,
+          "4": 25,
+          "5": 1
+        },
+        "gold_counts": {
+          "1": 6,
+          "2": 26,
+          "3": 30,
+          "4": 18,
+          "5": 5,
+          "6": 1
+        }
+      },
+      "Driverless cars": {
+        "n": 86,
+        "qwk": 0.522,
+        "accuracy": 0.4651,
+        "adjacent": 0.9419,
+        "unparsed": 3,
+        "pred_counts": {
+          "1": 2,
+          "2": 10,
+          "3": 57,
+          "4": 13,
+          "5": 1
+        },
+        "gold_counts": {
+          "1": 3,
+          "2": 12,
+          "3": 36,
+          "4": 31,
+          "5": 4
+        }
+      },
+      "Exploring Venus": {
+        "n": 86,
+        "qwk": 0.5724,
+        "accuracy": 0.5,
+        "adjacent": 0.8837,
+        "unparsed": 4,
+        "pred_counts": {
+          "1": 1,
+          "2": 16,
+          "3": 53,
+          "4": 11,
+          "5": 1
+        },
+        "gold_counts": {
+          "1": 9,
+          "2": 25,
+          "3": 32,
+          "4": 15,
+          "5": 3,
+          "6": 2
+        }
+      },
+      "Facial action coding system": {
+        "n": 85,
+        "qwk": 0.6037,
+        "accuracy": 0.3765,
+        "adjacent": 0.9294,
+        "unparsed": 0,
+        "pred_counts": {
+          "1": 1,
+          "2": 7,
+          "3": 43,
+          "4": 22,
+          "5": 12
+        },
+        "gold_counts": {
+          "1": 4,
+          "2": 15,
+          "3": 27,
+          "4": 27,
+          "5": 8,
+          "6": 4
+        }
+      },
+      "The Face on Mars": {
+        "n": 85,
+        "qwk": 0.5441,
+        "accuracy": 0.3529,
+        "adjacent": 0.9412,
+        "unparsed": 0,
+        "pred_counts": {
+          "1": 1,
+          "2": 8,
+          "3": 52,
+          "4": 23,
+          "5": 1
+        },
+        "gold_counts": {
+          "1": 8,
+          "2": 35,
+          "3": 25,
+          "4": 10,
+          "5": 7
+        }
+      }
+    },
+    "errors": 0,
+    "median_latency_s": 9.5095,
+    "wall_s": 6063.0,
+    "prompt_tokens": 1722778,
+    "completion_tokens": 195088,
+    "cut": 8
+  },
+  "thinking": {
+    "server_flags": "-rea on --reasoning-budget 320 --reasoning-format none",
+    "parse": "score after the thought block; unclosed or cut replies unparsed"
+  }
+}
