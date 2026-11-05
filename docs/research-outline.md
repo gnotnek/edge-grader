@@ -1,10 +1,10 @@
 # Research outline
 
-*Last updated 2026-11-05. The source of truth for what this project is trying to answer. Update it when the supervisor changes direction, and log the reason in the decisions table below.*
+*Last updated 2026-11-06. The source of truth for what this project is trying to answer. Update it when the supervisor changes direction, and log the reason in the decisions table below.*
 
 ## One-line summary
 
-**What does a higher grading accuracy cost on an edge device?** A small LLM (Gemma 4 E2B/E4B) grades students' short answers on the **Jetson**. Each way of raising its accuracy (a bigger model, thinking on, RAG, fine-tuning, reasons in the reply) is measured against the untouched model on the same board for **speed** (latency per answer, generation tokens/s), **power** (mean and peak W) and **energy per answer** (J), plus memory and temperature. The result is the accuracy–cost trade-off: which versions are worth their cost, and which cost settings (engine, prefix reuse) cut cost without losing accuracy. Focus since 2026-11-04 (supervisor); accuracy-only work (RAG variants, images, the cloud reference) is optional from here. **The target is grading accuracy; what it costs on the device is the caveat reported beside it** (owner, 2026-11-05; [caveats](results/summary.md#accuracy-as-the-target-the-caveats-2026-11-05)). **ASAP 2.0, scored with QWK, is the grading benchmark from 2026-11-05 (supervisor);** SciEntsBank, Beetle and SAF results stay as recorded.
+**What does a higher grading accuracy cost on an edge device?** A small LLM (Gemma 4 E2B/E4B) grades students' short answers on the **Jetson**. Each way of raising its accuracy (a bigger model, thinking on, RAG, fine-tuning, reasons in the reply) is measured against the untouched model on the same board for **speed** (latency per answer, generation tokens/s), **power** (mean and peak W) and **energy per answer** (J), plus memory and temperature. The result is the accuracy–cost trade-off: which versions are worth their cost, and which cost settings (engine, prefix reuse) cut cost without losing accuracy. Focus since 2026-11-04 (supervisor); accuracy-only work (RAG variants, images, the cloud reference) is optional from here. **The target is grading accuracy; what it costs on the device is the caveat reported beside it** (owner, 2026-11-05; [caveats](results/summary.md#accuracy-as-the-target-the-caveats-2026-11-05)). **SciEntsBank, scored with accuracy and F1, is the main grading benchmark** (owner, 2026-11-06, back from ASAP 2.0 because the project grades short answers); ASAP 2.0, Beetle and SAF results stay as recorded.
 
 ## Why
 
@@ -38,7 +38,7 @@
 | **B. Variations** | Thinking on (grading); little-gemma and prefix reuse (Jetson); EmbeddingGemma 2 (gated on its retrieval check) | B1 done 2026-10-13 (both boards): thinking on adds +3.0 to +18.8 points on all 10 runs (p ≤ 0.004) at 11× (Pi) / 35–40× (Jetson) the energy; MMLU-Pro unchanged (`agentic-edge`). B2 done 2026-10-13 (Jetson): engine and prefix reuse don't change accuracy; little-gemma or `--swa-full` cut energy 21–50%. B3 not started, optional since 2026-11-04 (an embedder swap changes retrieval, not edge cost). See [`results/variations.md`](results/variations.md) |
 | **C. Images** | *Optional since 2026-11-04, not started.* (1) the student's answer as an image; (2) a question with a figure, if a dataset qualifies | Image vs text accuracy, reading errors, cost on the Jetson |
 | **4. Edge cost (main)** | Every version on the **Jetson** with `scripts/board_grade.sh` (agentic-edge's `run_measured.sh` telemetry), each against the re-run baseline in the same clock state (2026-10-21). Measured already: baseline, thinking on, little-gemma / `--swa-full`, RAG-en (SciEntsBank, GSM, news). **Still to run**, most accurate first: (1) the Oct 28 adapters, E2B + E4B, test_uq + test_ud; (2) stage 3b E2B label-first and reason-first, test_uq (the same accuracy at ~2 against ~65 tokens per answer); (3) MMLU-Pro RAG-en; (4) optional: the best adapter with `--swa-full`, the cheapest setting at the best accuracy | One trade-off table (Δ accuracy against × latency, × energy, mean/peak W per version) and two charts: accuracy vs J per answer, accuracy vs latency |
-| **5. ASAP 2.0 (DGX Spark)** | Agreed with the supervisor 2026-11-05. On the lab's DGX Spark, in this order: baseline, fine-tuned E2B, fine-tuned E4B. Scored on the fixed 600-essay sample, which must stay out of the training data | QWK per version, with exact and adjacent accuracy beside it. The Spark gives accuracy only, so Jetson cost comes after |
+| **5. ASAP 2.0 (DGX Spark)** | *Set aside 2026-11-06 (owner): SciEntsBank is the main benchmark again.* Agreed with the supervisor 2026-11-05: baseline, fine-tuned E2B, fine-tuned E4B on the fixed 600-essay sample. No ASAP fine-tune or Jetson cost run follows | First runs done 2026-11-05 and kept as recorded: QWK per version, with exact and adjacent accuracy beside it ([results](results/asap2.md)) |
 
 **Rule:** don't start a stage until the one before it gives a number you trust.
 
@@ -46,13 +46,13 @@
 
 ## Datasets
 
-- **SciEntsBank** (SemEval-2013 Task 7), HF mirror `nkazi/SciEntsBank`
+- **SciEntsBank** (SemEval-2013 Task 7), HF mirror `nkazi/SciEntsBank`. **The main grading benchmark** (back from 2026-11-06, owner)
   - train 4,969
   - test_ua 540 (unseen answers)
   - test_uq 733 (unseen questions)
   - test_ud 4,562 (unseen domains)
   - Labels: 5-way, collapsible to 3-way or 2-way
-- **ASAP 2.0** (Crossley et al. 2025; Kaggle dataset `lburleigh/asap-2-0`, CC BY 4.0, version 8, sha256 pinned): ~24.7k source-based argumentative essays, 7 prompts, holistic score 1–6. Graded on a fixed 600-essay sample in `results/reference/asap2/` with the prompts' source texts ("Facial action coding system" has none: "Copyright Restricted"). Supervisor, 2026-11-05. **The grading benchmark from 2026-11-05 (agreed with the supervisor), preferred over SciEntsBank, Beetle and SAF;** first runs on the DGX Spark 2026-11-05: [`results/asap2.md`](results/asap2.md)
+- **ASAP 2.0** (Crossley et al. 2025; Kaggle dataset `lburleigh/asap-2-0`, CC BY 4.0, version 8, sha256 pinned): ~24.7k source-based argumentative essays, 7 prompts, holistic score 1–6. Graded on a fixed 600-essay sample in `results/reference/asap2/` with the prompts' source texts ("Facial action coding system" has none: "Copyright Restricted"). Supervisor, 2026-11-05. The main grading benchmark on 2026-11-05 (agreed with the supervisor), set aside 2026-11-06 (owner). First runs on the DGX Spark 2026-11-05 stay as recorded: [`results/asap2.md`](results/asap2.md)
 - **ASAP-SAS** (Kaggle `asap-sas`, 2012): 10 short-answer items, scores 0–3 with rubrics. Suggested by the supervisor 2026-11-05; skipped (owner), the download was refused
 - **MMLU-Pro:** the lab's fixed 100-question subset (`agentic-edge/benchmark/mmlupro_subset.py`, seed 20260918). Its physics and maths subsets are an option if a subject-specific benchmark is needed.
 - **Topic benchmarks (planned 2026-10-07, beside SciEntsBank, not replacing it, confirmed by the supervisor):**
@@ -62,8 +62,8 @@
 
 ## Metrics
 
-- **Grading:** accuracy and macro/weighted F1, the SemEval-2013 metrics. SciEntsBank labels are categories, not an ordered scale, so QWK doesn't apply.
-- **ASAP 2.0 / ASAP-SAS (the headline grading metric from 2026-11-05):** scores are ordinal, so quadratic weighted kappa (the competitions' metric), over parsed replies; exact accuracy (unparsed = wrong) and adjacent agreement (within 1) beside it.
+- **Grading (the headline metric):** accuracy and macro/weighted F1, the SemEval-2013 metrics. SciEntsBank labels are categories, not an ordered scale, so QWK doesn't apply.
+- **ASAP 2.0 / ASAP-SAS (the recorded ASAP 2.0 runs only, since 2026-11-06):** scores are ordinal, so quadratic weighted kappa (the competitions' metric), over parsed replies; exact accuracy (unparsed = wrong) and adjacent agreement (within 1) beside it.
 - **MMLU-Pro:** accuracy, from the lab harness.
 - **Edge cost (the main result since 2026-11-04),** all from the Jetson's telemetry (`telemetry-*/summary.json`, 1 Hz PMIC rails) and `edge-grader-board-check`, over the grading window:
   - **Speed:** median latency per answer (s); prefill and decode tokens/s; prompt and completion tokens per answer (what drives the time)
@@ -159,13 +159,14 @@ Decisions made while doing the work, not from the supervisor. Each has to serve 
 | 2026-11-05 | **The research target is grading accuracy, and the write-up explains the caveats of chasing it on an edge device** (owner). Cost is reported beside every accuracy gain as its caveat, not as a separate goal. Stage 4's run list doesn't change | It answers the supervisor's "if the accuracy is high what is the trade off" directly, and the one-model-at-a-time direction needs a clear goal to tweak toward. **The bar: a tweak counts if it adds at least 5 points of accuracy** over the same model without it, per split, **and the gain is significant** (paired McNemar, p < 0.05 after Holm) (owner). Set after most results were in, so recorded as such. It replaces the 65% / 75% targets as the pass mark, since those are already met on SciEntsBank, where the adapters were trained. Not settled: how the bar reads on ASAP 2.0, whose headline is QWK ([which versions pass](results/summary.md#the-5-point-bar)) | RQ3, RQ4 |
 | 2026-11-05 | **ASAP 2.0 becomes the main grading benchmark** (owner), following the supervisor's point that SciEntsBank is more a dataset than a benchmark, which applies to Beetle and SAF too. Their results stay as recorded. Agreed with the supervisor the same day (feedback table) | ASAP 2.0 is newer and larger, with one official rubric and QWK as its standard metric. What the move changes: ASAP 2.0 is essays (median 350 words), not short answers, so the task differs from the short-answer wording in the summary and RQs, which isn't rewritten yet. The adapters can't score it (trained on three labels, not 1–6). Prompts grow from ~160 to an estimated ~2,700 tokens. The 600 essays come from the public file, so scores aren't comparable with the Kaggle leaderboard | RQ1, RQ3, RQ4 |
 | 2026-11-05 | **ASAP 2.0 first runs (DGX Spark):** E2B and E4B untouched, then the Oct 28 and label-first adapters, 600 essays each. Corrects the row above: the adapters do score it (0 unparsed), since the rubric prompt is nothing like their training prompt. Reason-first left out: it writes a reason first and ASAP stops at 8 tokens | QWK: E2B 0.568, E4B 0.466; the E4B Oct 28 adapter reaches 0.619 (+0.153, Holm p < 0.001), the only gain, with exact accuracy not significantly changed; nothing helps E2B. These adapters weren't trained on ASAP, so this is transfer, not a fine-tune for it. [Results](results/asap2.md) | RQ1, RQ3 |
+| 2026-11-06 | **SciEntsBank is the main grading benchmark again; ASAP 2.0 is set aside** (owner). This reverses the 2026-11-05 move. Its runs stay as recorded, no ASAP fine-tune follows, and Beetle and SAF results stay as recorded. The headline is accuracy and F1, so the 5-point bar reads in accuracy points. The supervisor's agreement isn't recorded yet | The project grades short answers and ASAP 2.0 is essay scoring. In a sample of 35 short-answer grading papers from 2024–2026, SciEntsBank was the most used set (12 papers) and ASAP 2.0 appeared once, inside S-GRADES with the essay sets ([review](../reports/Recent%20short%20answer%20grading%20benchmarks.md); a sample, not a census). The adapters, the Jetson runs and the title and RQs are already on SciEntsBank. Not answered by this: the supervisor's point that it is more a dataset than a benchmark, its age, and whether the models saw it in training | RQ1, RQ3, RQ4 |
 
 ## Open questions
 
 - Robustness section: dropped or not? Waiting on the supervisor.
-- ASAP 2.0: how should the title and RQs word the move from short answers to essays? Is the 5-point bar read in exact accuracy or as a QWK gain?
+- Does the supervisor accept SciEntsBank as the main benchmark, given their point that it is more a dataset than a benchmark?
 - Which course material matches SciEntsBank topics well enough for RAG?
-- Is SciEntsBank in the models' training data? A newer dataset (e.g. SAS-Bench 2025) could serve as a check.
+- Is SciEntsBank in the models' training data? A newer dataset could serve as a check: JorGPT (2026) has answers written after Gemma 4's cutoff, while SAS-Bench's responses turned out to be LLM-simulated ([review](../reports/Recent%20short%20answer%20grading%20benchmarks.md)).
 - How this relates to the lab's existing cascade analysis (`agentic-edge/benchmark/analyze_cascade.py`).
 
 ## Related notes
