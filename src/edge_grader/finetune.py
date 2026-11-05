@@ -9,6 +9,8 @@ Stage 3b (spec 2026-11-01-reasoning-finetune-design.md): --reply reason-first / 
 the same prompt on a reply with a teacher's reason (edge-grader-reasons). Answers whose reason was
 dropped are left out of training only; the split and the validation answers stay as above.
 
+--train-sets trains on other grading sets instead, e.g. beetle saf, so SciEntsBank stays unseen.
+
     uv run --group finetune edge-grader-finetune --model e2b --out /kaggle/working/adapters/e2b
     uv run --group finetune edge-grader-finetune --model e2b --out ... --reply reason-first \\
         --reasons results/finetune/raw/reasons-qwen3-14b-q4_k_m.jsonl
@@ -44,13 +46,13 @@ RECIPE = {"rank": 16, "alpha": 32, "dropout": 0.05, "lr": 2e-4, "batch": 1, "gra
           "val_frac": 0.1, "max_new_tokens": 16}
 
 
-def split_by_question(items: list[Item], frac: float = 0.1, seed: int = 0) -> tuple[list[Item], list[Item]]:
+def split_by_question(items: list[Item], frac: float = 0.1, seed: int = 0,
+                      key=lambda i: question_id(i.id)) -> tuple[list[Item], list[Item]]:
     """(train, validation): every answer to a held-out question goes to validation."""
-    questions = sorted({question_id(i.id) for i in items})
+    questions = sorted({key(i) for i in items})
     random.Random(seed).shuffle(questions)
     held = set(questions[:max(1, round(frac * len(questions)))])
-    return ([i for i in items if question_id(i.id) not in held],
-            [i for i in items if question_id(i.id) in held])
+    return [i for i in items if key(i) not in held], [i for i in items if key(i) in held]
 
 
 def to_messages(item: Item, labels: list[str], reply: str = "label", reason: str | None = None) -> list[dict]:
@@ -112,13 +114,22 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--dry-run", action="store_true", help="show the split and one example, no torch")
     ap.add_argument("--reply", choices=REPLY_FORMATS, default="label", help="what the adapter learns to reply")
     ap.add_argument("--reasons", type=Path, default=None, help="edge-grader-reasons JSONL (reason formats)")
+    ap.add_argument("--train-sets", nargs="+", choices=list(data.DATASETS), default=["scientsbank"],
+                    help="the grading sets whose train splits to learn from")
     args = ap.parse_args(argv)
     if (args.reply == "label") != (args.reasons is None):
         ap.error("--reasons goes with --reply reason-first / label-first, and only with them")
+    default_set = args.train_sets == ["scientsbank"]
+    if args.reasons and not default_set:
+        ap.error("the teacher's reasons cover SciEntsBank only")
 
     labels = data.labels_for("3way")
-    train, val = split_by_question(data.load(split="train", scheme="3way"), RECIPE["val_frac"], args.seed)
-    tq, vq = sorted({question_id(i.id) for i in train}), sorted({question_id(i.id) for i in val})
+    # SAF's ids are random, so another set's questions are told apart by their text.
+    key = (lambda i: question_id(i.id)) if default_set else (lambda i: i.question)
+    items = (data.load(split="train", scheme="3way") if default_set else
+             [i for s in args.train_sets for i in data.load(split="train", scheme="3way", dataset=s)])
+    train, val = split_by_question(items, RECIPE["val_frac"], args.seed, key)
+    tq, vq = sorted({key(i) for i in train}), sorted({key(i) for i in val})
     print(f"train {len(train)} answers / {len(tq)} questions, "
           f"validation {len(val)} answers / {len(vq)} questions")
     reasons, reasons_sha = load_reasons(args.reasons) if args.reasons else ({}, None)
@@ -234,7 +245,7 @@ def main(argv: list[str] | None = None) -> None:
                              "max_new_tokens": max_new},
                 history, chosen, tq, vq, sha, versions)
     args.results.mkdir(parents=True, exist_ok=True)
-    tag = "" if args.reply == "label" else f"-{args.reply}"
+    tag = ("" if default_set else "-" + "-".join(args.train_sets)) + ("" if args.reply == "label" else f"-{args.reply}")
     path = args.results / f"finetune-{args.model}{tag}-{datetime.now(UTC):%Y%m%d-%H%M%S}.json"
     path.write_text(json.dumps(s, indent=2) + "\n")
     print(f"chosen epoch {chosen}; adapter {args.out / 'adapter'} sha256 {sha}; summary {path}")

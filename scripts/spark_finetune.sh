@@ -7,6 +7,7 @@
 #   docker compose up -d finetune-e4b-lf     # runs: scripts/spark_finetune.sh e4b label-first
 #   docker logs -f edge-grader-finetune-e4b-lf
 #   SMOKE=1 scripts/spark_finetune.sh e4b label-first   # minutes: 20 steps, 10 answers, all output in data/smoke
+#   TRAIN_SETS="beetle saf" scripts/spark_finetune.sh e4b label   # other sets' train splits: e4b-ft-beetle-saf.gguf
 #
 # Guide: docs/guides/spark-docker.md
 set -euo pipefail
@@ -24,6 +25,11 @@ case $MODEL in
   e4b) GGUF_REPO=unsloth/gemma-4-E4B-it-qat-GGUF; BASE_GGUF=gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf ;;
   *) echo "model must be e2b or e4b, not $MODEL" >&2; exit 1 ;;
 esac
+SETS_ARGS=()
+if [ -n "${TRAIN_SETS:-}" ]; then
+  SETS_ARGS=(--train-sets $TRAIN_SETS)
+  TAG=$TAG-${TRAIN_SETS// /-}
+fi
 RUN=$MODEL$TAG
 TRAIN_ARGS=() N=100 RESULTS=results/finetune GRADED=results/spark
 if [ "${SMOKE:-0}" = 1 ]; then  # the Day 1 check: does it train, convert and load? Nothing goes in results/
@@ -44,7 +50,7 @@ rm -rf "$ADAPTER"  # a re-run must not find the last run's adapter
 REPLY_ARGS=()
 [ "$REPLY" = label ] || REPLY_ARGS=(--reply "$REPLY" --reasons results/finetune/raw/reasons-qwen3-14b-q4_k_m.jsonl)
 uv run --frozen --group finetune edge-grader-finetune --model "$MODEL" --out "$ADAPTER" --results "$RESULTS" \
-  "${TRAIN_ARGS[@]}" "${REPLY_ARGS[@]}"
+  "${TRAIN_ARGS[@]}" "${REPLY_ARGS[@]}" "${SETS_ARGS[@]}"
 test -f "$ADAPTER/adapter/adapter_model.safetensors"
 
 echo "== 2. convert to GGUF"
