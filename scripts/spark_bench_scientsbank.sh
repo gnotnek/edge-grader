@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # SciEntsBank on the lab's DGX Spark, inside the edge-grader:spark image: every version on all three
 # test splits, one after the other, each with its own llama-server and the lab's baseline flags:
-# E2B and E4B untouched, then their adapters, trained on SciEntsBank or on Beetle and SAF only, with
-# the label, label-first and reason-first replies. A version with no adapter file yet is skipped, and
-# a split already in $OUT isn't graded again, so running this again picks up what's new.
+# the adapters, trained on SciEntsBank or on Beetle and SAF only, with the label, label-first and
+# reason-first replies, or with BASELINE=1 E2B and E4B untouched. A version with no adapter file yet
+# is skipped, and a split already in $OUT isn't graded again, so running this again picks up what's new.
 #
 #   docker compose up -d bench-scientsbank
 #   docker logs -f edge-grader-bench-scientsbank
@@ -49,13 +49,16 @@ run() {  # run <e2b|e4b> <label suffix> [adapter gguf] [reply]
   kill $server; wait $server 2>/dev/null
 }
 
-run e2b ""
-run e4b ""
-for m in e2b e4b; do
-  for trained in "" -beetle-saf; do  # on SciEntsBank, or on Beetle and SAF only
-    run $m -ft$trained data/adapters/$m-ft$trained.gguf
-    run $m -ft-lf$trained data/adapters/$m-ft-lf$trained.gguf label-first
-    run $m -ft-rf$trained data/adapters/$m-ft-rf$trained.gguf reason-first
+if [ "${BASELINE:-0}" = 1 ]; then
+  run e2b ""
+  run e4b ""
+else
+  for m in e2b e4b; do
+    for trained in "" -beetle-saf; do  # on SciEntsBank, or on Beetle and SAF only
+      run $m -ft$trained data/adapters/$m-ft$trained.gguf
+      run $m -ft-lf$trained data/adapters/$m-ft-lf$trained.gguf label-first
+      run $m -ft-rf$trained data/adapters/$m-ft-rf$trained.gguf reason-first
+    done
   done
-done
+fi
 echo "== $(date -u +%FT%TZ) done, summaries in $OUT"

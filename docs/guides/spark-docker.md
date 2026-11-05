@@ -122,7 +122,8 @@ The adapters never see SciEntsBank, so all three of its test splits are held out
 | `finetune-e4b-beetle-saf` | `edge-grader-finetune-e4b-beetle-saf` | trains `data/adapters/e4b-ft-beetle-saf.gguf` |
 | `reasons-beetle-saf` | `edge-grader-reasons-beetle-saf` | writes `results/finetune/raw/reasons-qwen3-14b-q4_k_m-beetle-saf.jsonl` |
 | `finetune-{e2b,e4b}-{lf,rf}-beetle-saf` | `edge-grader-finetune-e2b-lf-beetle-saf` and so on | train label-first and reason-first on those reasons |
-| `bench-scientsbank` | `edge-grader-bench-scientsbank` | grades test_ua, test_uq and test_ud with every version that has an adapter file, and skips what's already graded |
+| `bench-scientsbank` | `edge-grader-bench-scientsbank` | grades test_ua, test_uq and test_ud with every adapter that has a file, and skips what's already graded |
+| `bench-scientsbank-baseline` | `edge-grader-bench-scientsbank-baseline` | the same with E2B and E4B untouched, queued last |
 
 `scripts/spark_queue.sh` runs services one after the other on the host and stops at the first that fails:
 

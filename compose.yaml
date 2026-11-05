@@ -105,6 +105,14 @@ services:
     container_name: edge-grader-bench-scientsbank
     command: scripts/spark_bench_scientsbank.sh
 
+  # The same with E2B and E4B untouched, queued last.
+  bench-scientsbank-baseline:
+    <<: *finetune
+    container_name: edge-grader-bench-scientsbank-baseline
+    environment:
+      BASELINE: "1"
+    command: scripts/spark_bench_scientsbank.sh
+
   # Stage 5, ASAP 2.0: the untouched models, then the adapters, one at a time.
   bench-asap2:
     <<: *finetune
