@@ -111,3 +111,15 @@ docker compose up -d --force-recreate finetune-e4b-lf   # run it again after it 
 When it finishes, the container stays (exited) with its log until it is recreated or removed with
 `docker compose rm finetune-e4b-lf`. Outputs: `data/adapters/e4b-ft-lf.gguf`, the training summary in
 `results/finetune/`, and the 100-answer run in `results/spark/`.
+
+## ASAP 2.0 (stage 5)
+
+One container, `edge-grader-bench-asap2`, runs the fixed 600-essay sample on each version in turn: E2B and E4B untouched, then `e2b-ft`, `e2b-ft-lf`, `e4b-ft` and `e4b-ft-lf`. Adapters are read from `data/adapters/`; a missing one is logged and skipped.
+
+```bash
+docker compose run --rm -e N=5 -e OUT=data/smoke dev scripts/spark_bench_asap2.sh   # first: 5 essays each
+docker compose up -d bench-asap2
+docker logs -f edge-grader-bench-asap2      # also in data/logs/bench-asap2-*.log
+```
+
+Summaries land in `results/spark/`, named `asap2-baseline-<label>-sample-*.json`. The adapters were trained on SciEntsBank's three labels, not 1–6 scores, so read `unparsed` before QWK.

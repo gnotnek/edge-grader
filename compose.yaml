@@ -47,3 +47,9 @@ services:
     <<: *finetune
     container_name: edge-grader-finetune-e4b-rf
     command: scripts/spark_finetune.sh e4b reason-first
+
+  # Stage 5, ASAP 2.0: the untouched models, then the adapters, one at a time.
+  bench-asap2:
+    <<: *finetune
+    container_name: edge-grader-bench-asap2
+    command: scripts/spark_bench_asap2.sh
