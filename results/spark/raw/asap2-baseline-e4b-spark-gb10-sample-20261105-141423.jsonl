@@ -1,0 +1,600 @@
+{"id": "AAAOPP13416000001647_cleaned", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 4, "raw": "4", "latency_s": 1.262, "prompt_tokens": 2202, "completion_tokens": 2}
+{"id": "AAAOPP13416000002169", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.267, "prompt_tokens": 2114, "completion_tokens": 2}
+{"id": "AAAOPP13416000008265", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.255, "prompt_tokens": 2045, "completion_tokens": 2}
+{"id": "AAAOPP13416000008462", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.246, "prompt_tokens": 2059, "completion_tokens": 2}
+{"id": "AAAOPP13416000009279", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 1, "pred": 2, "raw": "2", "latency_s": 0.287, "prompt_tokens": 2147, "completion_tokens": 2}
+{"id": "AAAOPP13416000009988", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.423, "prompt_tokens": 2326, "completion_tokens": 2}
+{"id": "AAAOPP13416000014181", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.297, "prompt_tokens": 2164, "completion_tokens": 2}
+{"id": "AAAOPP13416000019783", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.231, "prompt_tokens": 2060, "completion_tokens": 2}
+{"id": "AAAOPP13416000019835", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.272, "prompt_tokens": 2120, "completion_tokens": 2}
+{"id": "AAAOPP13416000019956", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.254, "prompt_tokens": 2058, "completion_tokens": 2}
+{"id": "AAAOPP13416000020137", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.239, "prompt_tokens": 2024, "completion_tokens": 2}
+{"id": "AAAOPP13416000020333", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.221, "prompt_tokens": 2026, "completion_tokens": 2}
+{"id": "AAAOPP13416000020526", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.246, "prompt_tokens": 2112, "completion_tokens": 2}
+{"id": "AAAOPP13416000020580", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.333, "prompt_tokens": 2221, "completion_tokens": 2}
+{"id": "AAAOPP13416000020635", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.214, "prompt_tokens": 2011, "completion_tokens": 2}
+{"id": "AAAOPP13416000021929", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.235, "prompt_tokens": 2048, "completion_tokens": 2}
+{"id": "AAAOPP13416000022087", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 4, "pred": 5, "raw": "5", "latency_s": 0.336, "prompt_tokens": 2265, "completion_tokens": 2}
+{"id": "AAAOPP13416000028416", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.34, "prompt_tokens": 2296, "completion_tokens": 2}
+{"id": "AAAOPP13416000029034", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.275, "prompt_tokens": 2133, "completion_tokens": 2}
+{"id": "AAAOPP13416000029481", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.275, "prompt_tokens": 2133, "completion_tokens": 2}
+{"id": "AAAOPP13416000029595", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.303, "prompt_tokens": 2159, "completion_tokens": 2}
+{"id": "AAAOPP13416000031088", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.353, "prompt_tokens": 2251, "completion_tokens": 2}
+{"id": "AAAOPP13416000031276", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 2, "raw": "2", "latency_s": 0.306, "prompt_tokens": 2205, "completion_tokens": 2}
+{"id": "AAAOPP13416000037053", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.226, "prompt_tokens": 2049, "completion_tokens": 2}
+{"id": "AAAOPP13416000041776", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.259, "prompt_tokens": 2099, "completion_tokens": 2}
+{"id": "AAAOPP13416000042008", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.255, "prompt_tokens": 2097, "completion_tokens": 2}
+{"id": "AAAOPP13416000042069", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.251, "prompt_tokens": 2072, "completion_tokens": 2}
+{"id": "AAAOPP13416000046979", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.483, "prompt_tokens": 2499, "completion_tokens": 2}
+{"id": "AAAOPP13416000047241", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 1, "pred": 3, "raw": "3", "latency_s": 0.344, "prompt_tokens": 2294, "completion_tokens": 2}
+{"id": "AAAOPP13416000047573", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.232, "prompt_tokens": 2046, "completion_tokens": 2}
+{"id": "AAAOPP13416000049971", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.218, "prompt_tokens": 2017, "completion_tokens": 2}
+{"id": "AAAOPP13416000050069", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.252, "prompt_tokens": 2116, "completion_tokens": 2}
+{"id": "AAAOPP13416000054284", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 1, "pred": 3, "raw": "3", "latency_s": 0.247, "prompt_tokens": 2092, "completion_tokens": 2}
+{"id": "AAAOPP13416000055139", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.241, "prompt_tokens": 2067, "completion_tokens": 2}
+{"id": "AAAOPP13416000055385", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.291, "prompt_tokens": 2073, "completion_tokens": 2}
+{"id": "AAAOPP13416000055391", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.235, "prompt_tokens": 2066, "completion_tokens": 2}
+{"id": "AAAOPP13416000055483", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.216, "prompt_tokens": 2022, "completion_tokens": 2}
+{"id": "AAAOPP13416000056907", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.25, "prompt_tokens": 2094, "completion_tokens": 2}
+{"id": "AAAOPP13416000059959", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 1, "pred": 1, "raw": "1", "latency_s": 0.244, "prompt_tokens": 2072, "completion_tokens": 2}
+{"id": "AAAOPP13416000060176", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.232, "prompt_tokens": 2058, "completion_tokens": 2}
+{"id": "AAAOPP13416000061740", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.252, "prompt_tokens": 2108, "completion_tokens": 2}
+{"id": "AAAOPP13416000068733", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.267, "prompt_tokens": 2153, "completion_tokens": 2}
+{"id": "AAAOPP13416000068836", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.3, "prompt_tokens": 2161, "completion_tokens": 2}
+{"id": "AAAOPP13416000068976", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.313, "prompt_tokens": 2210, "completion_tokens": 2}
+{"id": "AAAOPP13416000069163", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.249, "prompt_tokens": 2069, "completion_tokens": 2}
+{"id": "AAAOPP13416000071602", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.233, "prompt_tokens": 2068, "completion_tokens": 2}
+{"id": "AAAOPP13416000071902", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.329, "prompt_tokens": 2247, "completion_tokens": 2}
+{"id": "AAAOPP13416000072005", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.384, "prompt_tokens": 2323, "completion_tokens": 2}
+{"id": "AAAOPP13416000072046", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.272, "prompt_tokens": 2149, "completion_tokens": 2}
+{"id": "AAAOPP13416000072091", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.352, "prompt_tokens": 2271, "completion_tokens": 2}
+{"id": "AAAOPP13416000072132", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.232, "prompt_tokens": 2070, "completion_tokens": 2}
+{"id": "AAAOPP13416000072200", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.267, "prompt_tokens": 2058, "completion_tokens": 2}
+{"id": "AAAOPP13416000072389", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.255, "prompt_tokens": 2077, "completion_tokens": 2}
+{"id": "AAAOPP13416000072397", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.311, "prompt_tokens": 2194, "completion_tokens": 2}
+{"id": "AAAOPP13416000072546", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.23, "prompt_tokens": 2061, "completion_tokens": 2}
+{"id": "AAAOPP13416000072720", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.251, "prompt_tokens": 2108, "completion_tokens": 2}
+{"id": "AAAOPP13416000072744", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.327, "prompt_tokens": 2179, "completion_tokens": 2}
+{"id": "AAAOPP13416000072835", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.263, "prompt_tokens": 2125, "completion_tokens": 2}
+{"id": "AAAOPP13416000072877", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 1, "pred": 3, "raw": "3", "latency_s": 0.249, "prompt_tokens": 2117, "completion_tokens": 2}
+{"id": "AAAOPP13416000074450", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.208, "prompt_tokens": 1994, "completion_tokens": 2}
+{"id": "AAAOPP13416000074545", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.258, "prompt_tokens": 2074, "completion_tokens": 2}
+{"id": "AAAOPP13416000074619", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 4, "raw": "4", "latency_s": 0.219, "prompt_tokens": 2029, "completion_tokens": 2}
+{"id": "AAAOPP13416000077149", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.33, "prompt_tokens": 2253, "completion_tokens": 2}
+{"id": "AAAOPP13416000080894", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.277, "prompt_tokens": 2156, "completion_tokens": 2}
+{"id": "AAAOPP13416000081113", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 2, "raw": "2", "latency_s": 0.259, "prompt_tokens": 2052, "completion_tokens": 2}
+{"id": "AAAOPP13416000081159", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.253, "prompt_tokens": 2110, "completion_tokens": 2}
+{"id": "AAAOPP13416000082535", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.271, "prompt_tokens": 2145, "completion_tokens": 2}
+{"id": "AAAOPP13416000086510", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.227, "prompt_tokens": 2040, "completion_tokens": 2}
+{"id": "AAAOPP13416000087926", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.333, "prompt_tokens": 2269, "completion_tokens": 2}
+{"id": "AAAOPP13416000087940", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.419, "prompt_tokens": 2399, "completion_tokens": 2}
+{"id": "AAAOPP13416000087964", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.247, "prompt_tokens": 2058, "completion_tokens": 2}
+{"id": "AAAOPP13416000087972", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.278, "prompt_tokens": 2080, "completion_tokens": 2}
+{"id": "AAAOPP13416000098174", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.279, "prompt_tokens": 2167, "completion_tokens": 2}
+{"id": "AAAOPP13416000099205", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.3, "prompt_tokens": 2199, "completion_tokens": 2}
+{"id": "AAAOPP13416000103030", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.276, "prompt_tokens": 2158, "completion_tokens": 2}
+{"id": "AAAOPP13416000103901", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.225, "prompt_tokens": 2025, "completion_tokens": 2}
+{"id": "AAAOPP13416000106598", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.25, "prompt_tokens": 2058, "completion_tokens": 2}
+{"id": "AAAOPP13416000107132", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.272, "prompt_tokens": 2027, "completion_tokens": 2}
+{"id": "AAAOPP13416000115058", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.288, "prompt_tokens": 2002, "completion_tokens": 2}
+{"id": "AAAOPP13416000148200", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.32, "prompt_tokens": 2043, "completion_tokens": 2}
+{"id": "AAAOPP13416000148216", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.339, "prompt_tokens": 2092, "completion_tokens": 2}
+{"id": "AAAOPP13416000148237", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 1, "pred": 1, "raw": "1", "latency_s": 0.333, "prompt_tokens": 2136, "completion_tokens": 2}
+{"id": "AAAOPP13416000181252", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.271, "prompt_tokens": 2009, "completion_tokens": 2}
+{"id": "AAAOPP13416000207756", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.365, "prompt_tokens": 2270, "completion_tokens": 2}
+{"id": "AAAOPP13416000208925", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.322, "prompt_tokens": 2199, "completion_tokens": 2}
+{"id": "AAAOPP13416000292172", "prompt": "\"A Cowboy Who Rode the Waves\"", "gold": 1, "pred": 1, "raw": "1", "latency_s": 0.28, "prompt_tokens": 2136, "completion_tokens": 2}
+{"id": "5021978", "prompt": "Car-free cities", "gold": 4, "pred": 4, "raw": "4", "latency_s": 2.02, "prompt_tokens": 4412, "completion_tokens": 2}
+{"id": "5023156", "prompt": "Car-free cities", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.678, "prompt_tokens": 4653, "completion_tokens": 2}
+{"id": "5023806", "prompt": "Car-free cities", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.614, "prompt_tokens": 4605, "completion_tokens": 2}
+{"id": "5026813", "prompt": "Car-free cities", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.666, "prompt_tokens": 4677, "completion_tokens": 2}
+{"id": "5028639", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.504, "prompt_tokens": 4427, "completion_tokens": 2}
+{"id": "5030488", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.361, "prompt_tokens": 4386, "completion_tokens": 2}
+{"id": "5035062", "prompt": "Car-free cities", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.361, "prompt_tokens": 4205, "completion_tokens": 2}
+{"id": "5035679", "prompt": "Car-free cities", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.414, "prompt_tokens": 4217, "completion_tokens": 2}
+{"id": "5054284", "prompt": "Car-free cities", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.47, "prompt_tokens": 4412, "completion_tokens": 2}
+{"id": "5054349", "prompt": "Car-free cities", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.391, "prompt_tokens": 4206, "completion_tokens": 2}
+{"id": "5057363", "prompt": "Car-free cities", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.405, "prompt_tokens": 4408, "completion_tokens": 2}
+{"id": "5057618", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.497, "prompt_tokens": 4420, "completion_tokens": 2}
+{"id": "5057624", "prompt": "Car-free cities", "gold": 1, "pred": 2, "raw": "2", "latency_s": 0.224, "prompt_tokens": 4094, "completion_tokens": 2}
+{"id": "5057994", "prompt": "Car-free cities", "gold": 2, "pred": 1, "raw": "1", "latency_s": 0.527, "prompt_tokens": 4571, "completion_tokens": 2}
+{"id": "5059874", "prompt": "Car-free cities", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.412, "prompt_tokens": 4447, "completion_tokens": 2}
+{"id": "5060230", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.349, "prompt_tokens": 4355, "completion_tokens": 2}
+{"id": "5074814", "prompt": "Car-free cities", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.389, "prompt_tokens": 4253, "completion_tokens": 2}
+{"id": "5076847", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.415, "prompt_tokens": 4397, "completion_tokens": 2}
+{"id": "5076913", "prompt": "Car-free cities", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.536, "prompt_tokens": 4476, "completion_tokens": 2}
+{"id": "5076968", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.358, "prompt_tokens": 4391, "completion_tokens": 2}
+{"id": "5077069", "prompt": "Car-free cities", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.486, "prompt_tokens": 4615, "completion_tokens": 2}
+{"id": "5077494", "prompt": "Car-free cities", "gold": 5, "pred": 4, "raw": "4", "latency_s": 0.632, "prompt_tokens": 4622, "completion_tokens": 2}
+{"id": "5083522", "prompt": "Car-free cities", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.525, "prompt_tokens": 4687, "completion_tokens": 2}
+{"id": "5087344", "prompt": "Car-free cities", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.286, "prompt_tokens": 4256, "completion_tokens": 2}
+{"id": "5087448", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.321, "prompt_tokens": 4310, "completion_tokens": 2}
+{"id": "5149222", "prompt": "Car-free cities", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.425, "prompt_tokens": 4489, "completion_tokens": 2}
+{"id": "5153580", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.282, "prompt_tokens": 4223, "completion_tokens": 2}
+{"id": "5153649", "prompt": "Car-free cities", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.52, "prompt_tokens": 4648, "completion_tokens": 2}
+{"id": "5154118", "prompt": "Car-free cities", "gold": 4, "pred": 5, "raw": "5", "latency_s": 0.451, "prompt_tokens": 4536, "completion_tokens": 2}
+{"id": "5154241", "prompt": "Car-free cities", "gold": 3, "pred": 5, "raw": "5", "latency_s": 0.323, "prompt_tokens": 4326, "completion_tokens": 2}
+{"id": "5161731", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.286, "prompt_tokens": 4254, "completion_tokens": 2}
+{"id": "5165538", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.342, "prompt_tokens": 4339, "completion_tokens": 2}
+{"id": "5165791", "prompt": "Car-free cities", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.442, "prompt_tokens": 4443, "completion_tokens": 2}
+{"id": "5172189", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.358, "prompt_tokens": 4372, "completion_tokens": 2}
+{"id": "5172256", "prompt": "Car-free cities", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.514, "prompt_tokens": 4672, "completion_tokens": 2}
+{"id": "5174160", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.429, "prompt_tokens": 4481, "completion_tokens": 2}
+{"id": "5174278", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.43, "prompt_tokens": 4446, "completion_tokens": 2}
+{"id": "5174303", "prompt": "Car-free cities", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.324, "prompt_tokens": 4280, "completion_tokens": 2}
+{"id": "5174402", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.32, "prompt_tokens": 4267, "completion_tokens": 2}
+{"id": "5174626", "prompt": "Car-free cities", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.416, "prompt_tokens": 4449, "completion_tokens": 2}
+{"id": "5176203", "prompt": "Car-free cities", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.471, "prompt_tokens": 4567, "completion_tokens": 2}
+{"id": "5179218", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.421, "prompt_tokens": 4413, "completion_tokens": 2}
+{"id": "5179241", "prompt": "Car-free cities", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.361, "prompt_tokens": 4303, "completion_tokens": 2}
+{"id": "5181036", "prompt": "Car-free cities", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.329, "prompt_tokens": 4299, "completion_tokens": 2}
+{"id": "5181167", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.475, "prompt_tokens": 4562, "completion_tokens": 2}
+{"id": "5181408", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.43, "prompt_tokens": 4489, "completion_tokens": 2}
+{"id": "5185060", "prompt": "Car-free cities", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.336, "prompt_tokens": 4292, "completion_tokens": 2}
+{"id": "5185185", "prompt": "Car-free cities", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.524, "prompt_tokens": 4643, "completion_tokens": 2}
+{"id": "5188856", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.318, "prompt_tokens": 4269, "completion_tokens": 2}
+{"id": "5188952", "prompt": "Car-free cities", "gold": 5, "pred": 4, "raw": "4", "latency_s": 0.52, "prompt_tokens": 4677, "completion_tokens": 2}
+{"id": "5189310", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.362, "prompt_tokens": 4384, "completion_tokens": 2}
+{"id": "5196967", "prompt": "Car-free cities", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.367, "prompt_tokens": 4385, "completion_tokens": 2}
+{"id": "5201768", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.439, "prompt_tokens": 4433, "completion_tokens": 2}
+{"id": "5206464", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.429, "prompt_tokens": 4455, "completion_tokens": 2}
+{"id": "5213226", "prompt": "Car-free cities", "gold": 2, "pred": 4, "raw": "4", "latency_s": 0.292, "prompt_tokens": 4263, "completion_tokens": 2}
+{"id": "5214981", "prompt": "Car-free cities", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.466, "prompt_tokens": 4572, "completion_tokens": 2}
+{"id": "5216089", "prompt": "Car-free cities", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.419, "prompt_tokens": 4423, "completion_tokens": 2}
+{"id": "5267552", "prompt": "Car-free cities", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.808, "prompt_tokens": 5165, "completion_tokens": 2}
+{"id": "5297867", "prompt": "Car-free cities", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.428, "prompt_tokens": 4466, "completion_tokens": 2}
+{"id": "5299124", "prompt": "Car-free cities", "gold": 2, "pred": 4, "raw": "4", "latency_s": 0.446, "prompt_tokens": 4521, "completion_tokens": 2}
+{"id": "5299476", "prompt": "Car-free cities", "gold": 3, "pred": 2, "raw": "2", "latency_s": 0.377, "prompt_tokens": 4359, "completion_tokens": 2}
+{"id": "5303142", "prompt": "Car-free cities", "gold": 1, "pred": 3, "raw": "3", "latency_s": 0.302, "prompt_tokens": 4204, "completion_tokens": 2}
+{"id": "5303158", "prompt": "Car-free cities", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.249, "prompt_tokens": 4111, "completion_tokens": 2}
+{"id": "5303285", "prompt": "Car-free cities", "gold": 3, "pred": 5, "raw": "5", "latency_s": 0.469, "prompt_tokens": 4593, "completion_tokens": 2}
+{"id": "5307569", "prompt": "Car-free cities", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.652, "prompt_tokens": 4918, "completion_tokens": 2}
+{"id": "5308062", "prompt": "Car-free cities", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.272, "prompt_tokens": 4096, "completion_tokens": 2}
+{"id": "5308156", "prompt": "Car-free cities", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.486, "prompt_tokens": 4326, "completion_tokens": 2}
+{"id": "5308390", "prompt": "Car-free cities", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.259, "prompt_tokens": 4140, "completion_tokens": 2}
+{"id": "5342344", "prompt": "Car-free cities", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.492, "prompt_tokens": 4414, "completion_tokens": 2}
+{"id": "5342454", "prompt": "Car-free cities", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.424, "prompt_tokens": 4459, "completion_tokens": 2}
+{"id": "5344279", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.508, "prompt_tokens": 4289, "completion_tokens": 2}
+{"id": "5347374", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.703, "prompt_tokens": 4729, "completion_tokens": 2}
+{"id": "5349422", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.342, "prompt_tokens": 4349, "completion_tokens": 2}
+{"id": "5350787", "prompt": "Car-free cities", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.354, "prompt_tokens": 4359, "completion_tokens": 2}
+{"id": "5354097", "prompt": "Car-free cities", "gold": 1, "pred": 3, "raw": "3", "latency_s": 0.312, "prompt_tokens": 4244, "completion_tokens": 2}
+{"id": "5355123", "prompt": "Car-free cities", "gold": 5, "pred": 4, "raw": "4", "latency_s": 0.732, "prompt_tokens": 4762, "completion_tokens": 2}
+{"id": "5365569", "prompt": "Car-free cities", "gold": 5, "pred": 4, "raw": "4", "latency_s": 0.914, "prompt_tokens": 5056, "completion_tokens": 2}
+{"id": "5366942", "prompt": "Car-free cities", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.364, "prompt_tokens": 4388, "completion_tokens": 2}
+{"id": "5375848", "prompt": "Car-free cities", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.512, "prompt_tokens": 4432, "completion_tokens": 2}
+{"id": "5377183", "prompt": "Car-free cities", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.612, "prompt_tokens": 4897, "completion_tokens": 2}
+{"id": "5378032", "prompt": "Car-free cities", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.276, "prompt_tokens": 4135, "completion_tokens": 2}
+{"id": "5378663", "prompt": "Car-free cities", "gold": 4, "pred": 5, "raw": "5", "latency_s": 0.5, "prompt_tokens": 4418, "completion_tokens": 2}
+{"id": "5415513", "prompt": "Car-free cities", "gold": 5, "pred": 5, "raw": "5", "latency_s": 0.744, "prompt_tokens": 5079, "completion_tokens": 2}
+{"id": "5415978", "prompt": "Car-free cities", "gold": 1, "pred": 1, "raw": "1", "latency_s": 0.282, "prompt_tokens": 4208, "completion_tokens": 2}
+{"id": "5417932", "prompt": "Car-free cities", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.49, "prompt_tokens": 4646, "completion_tokens": 2}
+{"id": "5420622", "prompt": "Car-free cities", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.477, "prompt_tokens": 4610, "completion_tokens": 2}
+{"id": "5022701", "prompt": "Does the electoral college work?", "gold": 4, "pred": 3, "raw": "3", "latency_s": 2.474, "prompt_tokens": 4751, "completion_tokens": 2}
+{"id": "5024135", "prompt": "Does the electoral college work?", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.687, "prompt_tokens": 4868, "completion_tokens": 2}
+{"id": "5024322", "prompt": "Does the electoral college work?", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.398, "prompt_tokens": 4559, "completion_tokens": 2}
+{"id": "5025578", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.337, "prompt_tokens": 4419, "completion_tokens": 2}
+{"id": "5025615", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.384, "prompt_tokens": 4512, "completion_tokens": 2}
+{"id": "5026389", "prompt": "Does the electoral college work?", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.354, "prompt_tokens": 4306, "completion_tokens": 2}
+{"id": "5027379", "prompt": "Does the electoral college work?", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.456, "prompt_tokens": 4670, "completion_tokens": 2}
+{"id": "5028326", "prompt": "Does the electoral college work?", "gold": 5, "pred": 4, "raw": "4", "latency_s": 0.745, "prompt_tokens": 5167, "completion_tokens": 2}
+{"id": "5029768", "prompt": "Does the electoral college work?", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.491, "prompt_tokens": 4709, "completion_tokens": 2}
+{"id": "5029937", "prompt": "Does the electoral college work?", "gold": 2, "pred": 4, "raw": "4", "latency_s": 0.5, "prompt_tokens": 4548, "completion_tokens": 2}
+{"id": "5030046", "prompt": "Does the electoral college work?", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.363, "prompt_tokens": 4307, "completion_tokens": 2}
+{"id": "5030366", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.313, "prompt_tokens": 4431, "completion_tokens": 2}
+{"id": "5030622", "prompt": "Does the electoral college work?", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.285, "prompt_tokens": 4308, "completion_tokens": 2}
+{"id": "5030684", "prompt": "Does the electoral college work?", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.435, "prompt_tokens": 4360, "completion_tokens": 2}
+{"id": "5030896", "prompt": "Does the electoral college work?", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.447, "prompt_tokens": 4412, "completion_tokens": 2}
+{"id": "5031037", "prompt": "Does the electoral college work?", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.24, "prompt_tokens": 4275, "completion_tokens": 2}
+{"id": "5053766", "prompt": "Does the electoral college work?", "gold": 1, "pred": 3, "raw": "3", "latency_s": 0.229, "prompt_tokens": 4244, "completion_tokens": 2}
+{"id": "5054046", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.259, "prompt_tokens": 4313, "completion_tokens": 2}
+{"id": "5060271", "prompt": "Does the electoral college work?", "gold": 1, "pred": 3, "raw": "3", "latency_s": 0.214, "prompt_tokens": 4221, "completion_tokens": 2}
+{"id": "5060987", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.283, "prompt_tokens": 4384, "completion_tokens": 2}
+{"id": "5061353", "prompt": "Does the electoral college work?", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.264, "prompt_tokens": 4316, "completion_tokens": 2}
+{"id": "5062454", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.456, "prompt_tokens": 4610, "completion_tokens": 2}
+{"id": "5069238", "prompt": "Does the electoral college work?", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.372, "prompt_tokens": 4431, "completion_tokens": 2}
+{"id": "5074440", "prompt": "Does the electoral college work?", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.42, "prompt_tokens": 4593, "completion_tokens": 2}
+{"id": "5074764", "prompt": "Does the electoral college work?", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.638, "prompt_tokens": 4711, "completion_tokens": 2}
+{"id": "5076280", "prompt": "Does the electoral college work?", "gold": 1, "pred": 3, "raw": "3", "latency_s": 0.328, "prompt_tokens": 4341, "completion_tokens": 2}
+{"id": "5079793", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.41, "prompt_tokens": 4402, "completion_tokens": 2}
+{"id": "5079951", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.354, "prompt_tokens": 4350, "completion_tokens": 2}
+{"id": "5080065", "prompt": "Does the electoral college work?", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.216, "prompt_tokens": 4233, "completion_tokens": 2}
+{"id": "5084872", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.344, "prompt_tokens": 4501, "completion_tokens": 2}
+{"id": "5085008", "prompt": "Does the electoral college work?", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.442, "prompt_tokens": 4602, "completion_tokens": 2}
+{"id": "5147886", "prompt": "Does the electoral college work?", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.24, "prompt_tokens": 4221, "completion_tokens": 2}
+{"id": "5150017_cleaned", "prompt": "Does the electoral college work?", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.447, "prompt_tokens": 4613, "completion_tokens": 2}
+{"id": "5150088", "prompt": "Does the electoral college work?", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.508, "prompt_tokens": 4499, "completion_tokens": 2}
+{"id": "5152908", "prompt": "Does the electoral college work?", "gold": 5, "pred": 4, "raw": "4", "latency_s": 0.653, "prompt_tokens": 5080, "completion_tokens": 2}
+{"id": "5154286", "prompt": "Does the electoral college work?", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.308, "prompt_tokens": 4333, "completion_tokens": 2}
+{"id": "5157868", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.412, "prompt_tokens": 4455, "completion_tokens": 2}
+{"id": "5161314", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.387, "prompt_tokens": 4540, "completion_tokens": 2}
+{"id": "5164201", "prompt": "Does the electoral college work?", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.25, "prompt_tokens": 4286, "completion_tokens": 2}
+{"id": "5164273", "prompt": "Does the electoral college work?", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.364, "prompt_tokens": 4517, "completion_tokens": 2}
+{"id": "5164725", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.262, "prompt_tokens": 4291, "completion_tokens": 2}
+{"id": "5165376", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.388, "prompt_tokens": 4489, "completion_tokens": 2}
+{"id": "5170008", "prompt": "Does the electoral college work?", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.51, "prompt_tokens": 4778, "completion_tokens": 2}
+{"id": "5171607", "prompt": "Does the electoral college work?", "gold": 1, "pred": 3, "raw": "3", "latency_s": 0.262, "prompt_tokens": 4267, "completion_tokens": 2}
+{"id": "5171667", "prompt": "Does the electoral college work?", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.473, "prompt_tokens": 4654, "completion_tokens": 2}
+{"id": "5171922", "prompt": "Does the electoral college work?", "gold": 3, "pred": 2, "raw": "2", "latency_s": 0.296, "prompt_tokens": 4362, "completion_tokens": 2}
+{"id": "5173942_cleaned", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.293, "prompt_tokens": 4341, "completion_tokens": 2}
+{"id": "5176738", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.362, "prompt_tokens": 4488, "completion_tokens": 2}
+{"id": "5176813", "prompt": "Does the electoral college work?", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.258, "prompt_tokens": 4291, "completion_tokens": 2}
+{"id": "5178282", "prompt": "Does the electoral college work?", "gold": 2, "pred": 4, "raw": "4", "latency_s": 0.261, "prompt_tokens": 4250, "completion_tokens": 2}
+{"id": "5178361", "prompt": "Does the electoral college work?", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.475, "prompt_tokens": 4654, "completion_tokens": 2}
+{"id": "5178534", "prompt": "Does the electoral college work?", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.581, "prompt_tokens": 4854, "completion_tokens": 2}
+{"id": "5184419", "prompt": "Does the electoral college work?", "gold": 5, "pred": 3, "raw": "3", "latency_s": 0.633, "prompt_tokens": 4877, "completion_tokens": 2}
+{"id": "5184635", "prompt": "Does the electoral college work?", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.495, "prompt_tokens": 4768, "completion_tokens": 2}
+{"id": "5188225", "prompt": "Does the electoral college work?", "gold": 1, "pred": 2, "raw": "2", "latency_s": 0.29, "prompt_tokens": 4363, "completion_tokens": 2}
+{"id": "5188339", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.461, "prompt_tokens": 4702, "completion_tokens": 2}
+{"id": "5188400", "prompt": "Does the electoral college work?", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.295, "prompt_tokens": 4322, "completion_tokens": 2}
+{"id": "5188668", "prompt": "Does the electoral college work?", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.376, "prompt_tokens": 4500, "completion_tokens": 2}
+{"id": "5196164", "prompt": "Does the electoral college work?", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.26, "prompt_tokens": 4281, "completion_tokens": 2}
+{"id": "5196194", "prompt": "Does the electoral college work?", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.366, "prompt_tokens": 4512, "completion_tokens": 2}
+{"id": "5196414", "prompt": "Does the electoral college work?", "gold": 5, "pred": 3, "raw": "3", "latency_s": 0.419, "prompt_tokens": 4607, "completion_tokens": 2}
+{"id": "5196645", "prompt": "Does the electoral college work?", "gold": 1, "pred": 3, "raw": "3", "latency_s": 0.32, "prompt_tokens": 4401, "completion_tokens": 2}
+{"id": "5198119", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.431, "prompt_tokens": 4574, "completion_tokens": 2}
+{"id": "5205601", "prompt": "Does the electoral college work?", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.332, "prompt_tokens": 4441, "completion_tokens": 2}
+{"id": "5212817", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.32, "prompt_tokens": 4395, "completion_tokens": 2}
+{"id": "5214442", "prompt": "Does the electoral college work?", "gold": 3, "pred": 2, "raw": "2", "latency_s": 0.265, "prompt_tokens": 4335, "completion_tokens": 2}
+{"id": "5267795", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.324, "prompt_tokens": 4419, "completion_tokens": 2}
+{"id": "5298042", "prompt": "Does the electoral college work?", "gold": 5, "pred": 3, "raw": "3", "latency_s": 0.524, "prompt_tokens": 4778, "completion_tokens": 2}
+{"id": "5299363", "prompt": "Does the electoral college work?", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.424, "prompt_tokens": 4575, "completion_tokens": 2}
+{"id": "5299490", "prompt": "Does the electoral college work?", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.22, "prompt_tokens": 4215, "completion_tokens": 2}
+{"id": "5299581", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.279, "prompt_tokens": 4336, "completion_tokens": 2}
+{"id": "5301688", "prompt": "Does the electoral college work?", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.3, "prompt_tokens": 4354, "completion_tokens": 2}
+{"id": "5303379", "prompt": "Does the electoral college work?", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.361, "prompt_tokens": 4468, "completion_tokens": 2}
+{"id": "5341863", "prompt": "Does the electoral college work?", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.22, "prompt_tokens": 4200, "completion_tokens": 2}
+{"id": "5344300", "prompt": "Does the electoral college work?", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.413, "prompt_tokens": 4526, "completion_tokens": 2}
+{"id": "5348103", "prompt": "Does the electoral college work?", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.432, "prompt_tokens": 4565, "completion_tokens": 2}
+{"id": "5348973", "prompt": "Does the electoral college work?", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.407, "prompt_tokens": 4552, "completion_tokens": 2}
+{"id": "5353244", "prompt": "Does the electoral college work?", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.27, "prompt_tokens": 4318, "completion_tokens": 2}
+{"id": "5353742", "prompt": "Does the electoral college work?", "gold": 4, "pred": 5, "raw": "5", "latency_s": 0.434, "prompt_tokens": 4618, "completion_tokens": 2}
+{"id": "5354179", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.364, "prompt_tokens": 4432, "completion_tokens": 2}
+{"id": "5359201", "prompt": "Does the electoral college work?", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.505, "prompt_tokens": 4669, "completion_tokens": 2}
+{"id": "5370806", "prompt": "Does the electoral college work?", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.394, "prompt_tokens": 4440, "completion_tokens": 2}
+{"id": "5376970", "prompt": "Does the electoral college work?", "gold": 6, "pred": 3, "raw": "3", "latency_s": 0.756, "prompt_tokens": 5246, "completion_tokens": 2}
+{"id": "5378685", "prompt": "Does the electoral college work?", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.485, "prompt_tokens": 4681, "completion_tokens": 2}
+{"id": "5416236", "prompt": "Does the electoral college work?", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.346, "prompt_tokens": 4457, "completion_tokens": 2}
+{"id": "6984602", "prompt": "Does the electoral college work?", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.259, "prompt_tokens": 4277, "completion_tokens": 2}
+{"id": "AAAOPP13416000000164", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 1.427, "prompt_tokens": 2660, "completion_tokens": 2}
+{"id": "AAAOPP13416000000271", "prompt": "Driverless cars", "gold": 3, "pred": 2, "raw": "2", "latency_s": 0.396, "prompt_tokens": 2852, "completion_tokens": 2}
+{"id": "AAAOPP13416000000487", "prompt": "Driverless cars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.417, "prompt_tokens": 2809, "completion_tokens": 2}
+{"id": "AAAOPP13416000000750", "prompt": "Driverless cars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.264, "prompt_tokens": 2527, "completion_tokens": 2}
+{"id": "AAAOPP13416000000957", "prompt": "Driverless cars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.461, "prompt_tokens": 2965, "completion_tokens": 2}
+{"id": "AAAOPP13416000001853", "prompt": "Driverless cars", "gold": 1, "pred": 3, "raw": "3", "latency_s": 0.27, "prompt_tokens": 2553, "completion_tokens": 2}
+{"id": "AAAOPP13416000002244", "prompt": "Driverless cars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.274, "prompt_tokens": 2574, "completion_tokens": 2}
+{"id": "AAAOPP13416000004712", "prompt": "Driverless cars", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.589, "prompt_tokens": 3114, "completion_tokens": 2}
+{"id": "AAAOPP13416000005063", "prompt": "Driverless cars", "gold": 3, "pred": 2, "raw": "2", "latency_s": 0.268, "prompt_tokens": 2588, "completion_tokens": 2}
+{"id": "AAAOPP13416000005541", "prompt": "Driverless cars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.416, "prompt_tokens": 2839, "completion_tokens": 2}
+{"id": "AAAOPP13416000006398", "prompt": "Driverless cars", "gold": 5, "pred": 4, "raw": "4", "latency_s": 0.478, "prompt_tokens": 2927, "completion_tokens": 2}
+{"id": "AAAOPP13416000006431", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.382, "prompt_tokens": 2721, "completion_tokens": 2}
+{"id": "AAAOPP13416000007029", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.236, "prompt_tokens": 2535, "completion_tokens": 2}
+{"id": "AAAOPP13416000007330", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.317, "prompt_tokens": 2719, "completion_tokens": 2}
+{"id": "AAAOPP13416000008246", "prompt": "Driverless cars", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.249, "prompt_tokens": 2519, "completion_tokens": 2}
+{"id": "AAAOPP13416000010600", "prompt": "Driverless cars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.497, "prompt_tokens": 3020, "completion_tokens": 2}
+{"id": "AAAOPP13416000010650", "prompt": "Driverless cars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.513, "prompt_tokens": 2993, "completion_tokens": 2}
+{"id": "AAAOPP13416000011102", "prompt": "Driverless cars", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.355, "prompt_tokens": 2760, "completion_tokens": 2}
+{"id": "AAAOPP13416000011271", "prompt": "Driverless cars", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.484, "prompt_tokens": 2962, "completion_tokens": 2}
+{"id": "AAAOPP13416000011406", "prompt": "Driverless cars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.406, "prompt_tokens": 2854, "completion_tokens": 2}
+{"id": "AAAOPP13416000011468", "prompt": "Driverless cars", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.359, "prompt_tokens": 2768, "completion_tokens": 2}
+{"id": "AAAOPP13416000011479", "prompt": "Driverless cars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.446, "prompt_tokens": 2878, "completion_tokens": 2}
+{"id": "AAAOPP13416000011557", "prompt": "Driverless cars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.288, "prompt_tokens": 2635, "completion_tokens": 2}
+{"id": "AAAOPP13416000012366", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.292, "prompt_tokens": 2639, "completion_tokens": 2}
+{"id": "AAAOPP13416000019562", "prompt": "Driverless cars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.439, "prompt_tokens": 2949, "completion_tokens": 2}
+{"id": "AAAOPP13416000022502", "prompt": "Driverless cars", "gold": 3, "pred": 2, "raw": "2", "latency_s": 0.341, "prompt_tokens": 2762, "completion_tokens": 2}
+{"id": "AAAOPP13416000022736", "prompt": "Driverless cars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.276, "prompt_tokens": 2583, "completion_tokens": 2}
+{"id": "AAAOPP13416000024806", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.348, "prompt_tokens": 2669, "completion_tokens": 2}
+{"id": "AAAOPP13416000025279", "prompt": "Driverless cars", "gold": 5, "pred": 3, "raw": "3", "latency_s": 0.365, "prompt_tokens": 2804, "completion_tokens": 2}
+{"id": "AAAOPP13416000025366", "prompt": "Driverless cars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.347, "prompt_tokens": 2763, "completion_tokens": 2}
+{"id": "AAAOPP13416000026264", "prompt": "Driverless cars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.315, "prompt_tokens": 2573, "completion_tokens": 2}
+{"id": "AAAOPP13416000027801", "prompt": "Driverless cars", "gold": 3, "pred": 2, "raw": "2", "latency_s": 0.381, "prompt_tokens": 2708, "completion_tokens": 2}
+{"id": "AAAOPP13416000030533", "prompt": "Driverless cars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.277, "prompt_tokens": 2579, "completion_tokens": 2}
+{"id": "AAAOPP13416000032740", "prompt": "Driverless cars", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.421, "prompt_tokens": 2907, "completion_tokens": 2}
+{"id": "AAAOPP13416000035571", "prompt": "Driverless cars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.549, "prompt_tokens": 2848, "completion_tokens": 2}
+{"id": "AAAOPP13416000036482", "prompt": "Driverless cars", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.413, "prompt_tokens": 2866, "completion_tokens": 2}
+{"id": "AAAOPP13416000037470", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.348, "prompt_tokens": 2798, "completion_tokens": 2}
+{"id": "AAAOPP13416000037973", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.393, "prompt_tokens": 2805, "completion_tokens": 2}
+{"id": "AAAOPP13416000038151", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.349, "prompt_tokens": 2749, "completion_tokens": 2}
+{"id": "AAAOPP13416000038805", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.425, "prompt_tokens": 2687, "completion_tokens": 2}
+{"id": "AAAOPP13416000039129", "prompt": "Driverless cars", "gold": 5, "pred": 4, "raw": "4", "latency_s": 0.621, "prompt_tokens": 3078, "completion_tokens": 2}
+{"id": "AAAOPP13416000039209", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.5, "prompt_tokens": 2839, "completion_tokens": 2}
+{"id": "AAAOPP13416000039418", "prompt": "Driverless cars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.333, "prompt_tokens": 2673, "completion_tokens": 2}
+{"id": "AAAOPP13416000039781", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.308, "prompt_tokens": 2735, "completion_tokens": 2}
+{"id": "AAAOPP13416000044343", "prompt": "Driverless cars", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.42, "prompt_tokens": 2909, "completion_tokens": 2}
+{"id": "AAAOPP13416000044368", "prompt": "Driverless cars", "gold": 3, "pred": 2, "raw": "2", "latency_s": 0.398, "prompt_tokens": 2730, "completion_tokens": 2}
+{"id": "AAAOPP13416000044674", "prompt": "Driverless cars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.437, "prompt_tokens": 2761, "completion_tokens": 2}
+{"id": "AAAOPP13416000045040", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.36, "prompt_tokens": 2648, "completion_tokens": 2}
+{"id": "AAAOPP13416000045138", "prompt": "Driverless cars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.399, "prompt_tokens": 2774, "completion_tokens": 2}
+{"id": "AAAOPP13416000045912", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.34, "prompt_tokens": 2778, "completion_tokens": 2}
+{"id": "AAAOPP13416000048331", "prompt": "Driverless cars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.243, "prompt_tokens": 2568, "completion_tokens": 2}
+{"id": "AAAOPP13416000050755", "prompt": "Driverless cars", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.354, "prompt_tokens": 2775, "completion_tokens": 2}
+{"id": "AAAOPP13416000052106", "prompt": "Driverless cars", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.411, "prompt_tokens": 2800, "completion_tokens": 2}
+{"id": "AAAOPP13416000052337", "prompt": "Driverless cars", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.424, "prompt_tokens": 2872, "completion_tokens": 2}
+{"id": "AAAOPP13416000100062", "prompt": "Driverless cars", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.443, "prompt_tokens": 2952, "completion_tokens": 2}
+{"id": "AAAOPP13416000100681", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.282, "prompt_tokens": 2640, "completion_tokens": 2}
+{"id": "AAAOPP13416000102238", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.384, "prompt_tokens": 2813, "completion_tokens": 2}
+{"id": "AAAOPP13416000102418", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.413, "prompt_tokens": 2835, "completion_tokens": 2}
+{"id": "AAAOPP13416000102497", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.394, "prompt_tokens": 2801, "completion_tokens": 2}
+{"id": "AAAOPP13416000103837", "prompt": "Driverless cars", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.325, "prompt_tokens": 2551, "completion_tokens": 2}
+{"id": "AAAOPP13416000107771", "prompt": "Driverless cars", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.316, "prompt_tokens": 2735, "completion_tokens": 2}
+{"id": "AAAOPP13416000108072", "prompt": "Driverless cars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.308, "prompt_tokens": 2690, "completion_tokens": 2}
+{"id": "AAAOPP13416000109315", "prompt": "Driverless cars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.464, "prompt_tokens": 3007, "completion_tokens": 2}
+{"id": "AAAOPP13416000111493", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.454, "prompt_tokens": 2825, "completion_tokens": 2}
+{"id": "AAAOPP13416000111555", "prompt": "Driverless cars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.606, "prompt_tokens": 3069, "completion_tokens": 2}
+{"id": "AAAOPP13416000113387", "prompt": "Driverless cars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.44, "prompt_tokens": 2923, "completion_tokens": 2}
+{"id": "AAAOPP13416000115165", "prompt": "Driverless cars", "gold": 2, "pred": 1, "raw": "1", "latency_s": 0.258, "prompt_tokens": 2587, "completion_tokens": 2}
+{"id": "AAAOPP13416000120187", "prompt": "Driverless cars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.406, "prompt_tokens": 2846, "completion_tokens": 2}
+{"id": "AAAOPP13416000123154", "prompt": "Driverless cars", "gold": 5, "pred": 4, "raw": "4", "latency_s": 0.599, "prompt_tokens": 3086, "completion_tokens": 2}
+{"id": "AAAOPP13416000136542", "prompt": "Driverless cars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.229, "prompt_tokens": 2541, "completion_tokens": 2}
+{"id": "AAAOPP13416000137080", "prompt": "Driverless cars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.413, "prompt_tokens": 2869, "completion_tokens": 2}
+{"id": "AAAOPP13416000137197", "prompt": "Driverless cars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.418, "prompt_tokens": 2792, "completion_tokens": 2}
+{"id": "AAAOPP13416000139307", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.361, "prompt_tokens": 2735, "completion_tokens": 2}
+{"id": "AAAOPP13416000140210", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.351, "prompt_tokens": 2684, "completion_tokens": 2}
+{"id": "AAAOPP13416000140321", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.347, "prompt_tokens": 2788, "completion_tokens": 2}
+{"id": "AAAOPP13416000143947", "prompt": "Driverless cars", "gold": 1, "pred": 2, "raw": "2", "latency_s": 0.232, "prompt_tokens": 2485, "completion_tokens": 2}
+{"id": "AAAOPP13416000147279", "prompt": "Driverless cars", "gold": 3, "pred": 2, "raw": "2", "latency_s": 0.298, "prompt_tokens": 2648, "completion_tokens": 2}
+{"id": "AAAOPP13416000147600", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.349, "prompt_tokens": 2775, "completion_tokens": 2}
+{"id": "AAAOPP13416000147864", "prompt": "Driverless cars", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.358, "prompt_tokens": 2777, "completion_tokens": 2}
+{"id": "AAAOPP13416000178926", "prompt": "Driverless cars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.411, "prompt_tokens": 2848, "completion_tokens": 2}
+{"id": "AAAOPP13416000181607", "prompt": "Driverless cars", "gold": 1, "pred": 2, "raw": "2", "latency_s": 0.22, "prompt_tokens": 2493, "completion_tokens": 2}
+{"id": "AAAOPP13416000192996", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.384, "prompt_tokens": 2810, "completion_tokens": 2}
+{"id": "AAAOPP13416000199877", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.284, "prompt_tokens": 2637, "completion_tokens": 2}
+{"id": "AAAOPP13416000218528", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.39, "prompt_tokens": 2840, "completion_tokens": 2}
+{"id": "AAAOPP13416000219677", "prompt": "Driverless cars", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.32, "prompt_tokens": 2690, "completion_tokens": 2}
+{"id": "AAAOPP13416000233149", "prompt": "Driverless cars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.309, "prompt_tokens": 2639, "completion_tokens": 2}
+{"id": "AAAVUP14319000005818", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 1.297, "prompt_tokens": 2558, "completion_tokens": 2}
+{"id": "AAAVUP14319000017236", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.333, "prompt_tokens": 2475, "completion_tokens": 2}
+{"id": "AAAVUP14319000025773", "prompt": "Exploring Venus", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.264, "prompt_tokens": 2286, "completion_tokens": 2}
+{"id": "AAAVUP14319000031933", "prompt": "Exploring Venus", "gold": 1, "pred": 3, "raw": "3", "latency_s": 0.218, "prompt_tokens": 2235, "completion_tokens": 2}
+{"id": "AAAVUP14319000032722", "prompt": "Exploring Venus", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.535, "prompt_tokens": 2882, "completion_tokens": 2}
+{"id": "AAAVUP14319000033435", "prompt": "Exploring Venus", "gold": 5, "pred": 3, "raw": "3", "latency_s": 0.449, "prompt_tokens": 2684, "completion_tokens": 2}
+{"id": "AAAVUP14319000033500", "prompt": "Exploring Venus", "gold": 1, "pred": 2, "raw": "2", "latency_s": 0.245, "prompt_tokens": 2299, "completion_tokens": 2}
+{"id": "AAAVUP14319000033619", "prompt": "Exploring Venus", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.274, "prompt_tokens": 2392, "completion_tokens": 2}
+{"id": "AAAVUP14319000033688", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.331, "prompt_tokens": 2462, "completion_tokens": 2}
+{"id": "AAAVUP14319000034625", "prompt": "Exploring Venus", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.211, "prompt_tokens": 2237, "completion_tokens": 2}
+{"id": "AAAVUP14319000035840", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.257, "prompt_tokens": 2353, "completion_tokens": 2}
+{"id": "AAAVUP14319000036088", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.253, "prompt_tokens": 2295, "completion_tokens": 2}
+{"id": "AAAVUP14319000037267", "prompt": "Exploring Venus", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.265, "prompt_tokens": 2342, "completion_tokens": 2}
+{"id": "AAAVUP14319000040196", "prompt": "Exploring Venus", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.448, "prompt_tokens": 2699, "completion_tokens": 2}
+{"id": "AAAVUP14319000041857", "prompt": "Exploring Venus", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.245, "prompt_tokens": 2243, "completion_tokens": 2}
+{"id": "AAAVUP14319000041897", "prompt": "Exploring Venus", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.424, "prompt_tokens": 2605, "completion_tokens": 2}
+{"id": "AAAVUP14319000043983", "prompt": "Exploring Venus", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.227, "prompt_tokens": 2262, "completion_tokens": 2}
+{"id": "AAAVUP14319000044678", "prompt": "Exploring Venus", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.333, "prompt_tokens": 2477, "completion_tokens": 2}
+{"id": "AAAVUP14319000045384", "prompt": "Exploring Venus", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.387, "prompt_tokens": 2572, "completion_tokens": 2}
+{"id": "AAAVUP14319000046444", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.322, "prompt_tokens": 2423, "completion_tokens": 2}
+{"id": "AAAVUP14319000048823", "prompt": "Exploring Venus", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.478, "prompt_tokens": 2732, "completion_tokens": 2}
+{"id": "AAAVUP14319000049103", "prompt": "Exploring Venus", "gold": 5, "pred": 4, "raw": "4", "latency_s": 0.475, "prompt_tokens": 2668, "completion_tokens": 2}
+{"id": "AAAVUP14319000049868", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.52, "prompt_tokens": 2509, "completion_tokens": 2}
+{"id": "AAAVUP14319000050738", "prompt": "Exploring Venus", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.351, "prompt_tokens": 2269, "completion_tokens": 2}
+{"id": "AAAVUP14319000051189", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.462, "prompt_tokens": 2482, "completion_tokens": 2}
+{"id": "AAAVUP14319000051240", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.425, "prompt_tokens": 2452, "completion_tokens": 2}
+{"id": "AAAVUP14319000052222", "prompt": "Exploring Venus", "gold": 1, "pred": 3, "raw": "3", "latency_s": 0.247, "prompt_tokens": 2323, "completion_tokens": 2}
+{"id": "AAAVUP14319000052586", "prompt": "Exploring Venus", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.228, "prompt_tokens": 2241, "completion_tokens": 2}
+{"id": "AAAVUP14319000053406", "prompt": "Exploring Venus", "gold": 1, "pred": 3, "raw": "3", "latency_s": 0.345, "prompt_tokens": 2445, "completion_tokens": 2}
+{"id": "AAAVUP14319000056889", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.343, "prompt_tokens": 2474, "completion_tokens": 2}
+{"id": "AAAVUP14319000059668", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.309, "prompt_tokens": 2407, "completion_tokens": 2}
+{"id": "AAAVUP14319000060528", "prompt": "Exploring Venus", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.375, "prompt_tokens": 2472, "completion_tokens": 2}
+{"id": "AAAVUP14319000065899", "prompt": "Exploring Venus", "gold": 5, "pred": 4, "raw": "4", "latency_s": 0.458, "prompt_tokens": 2727, "completion_tokens": 2}
+{"id": "AAAVUP14319000069999", "prompt": "Exploring Venus", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.317, "prompt_tokens": 2283, "completion_tokens": 2}
+{"id": "AAAVUP14319000071346", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.271, "prompt_tokens": 2314, "completion_tokens": 2}
+{"id": "AAAVUP14319000074758", "prompt": "Exploring Venus", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.476, "prompt_tokens": 2604, "completion_tokens": 2}
+{"id": "AAAVUP14319000074769", "prompt": "Exploring Venus", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.514, "prompt_tokens": 2553, "completion_tokens": 2}
+{"id": "AAAVUP14319000078863", "prompt": "Exploring Venus", "gold": 1, "pred": 2, "raw": "2", "latency_s": 0.308, "prompt_tokens": 2289, "completion_tokens": 2}
+{"id": "AAAVUP14319000079185", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.314, "prompt_tokens": 2388, "completion_tokens": 2}
+{"id": "AAAVUP14319000079330", "prompt": "Exploring Venus", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.398, "prompt_tokens": 2598, "completion_tokens": 2}
+{"id": "AAAVUP14319000079712", "prompt": "Exploring Venus", "gold": 1, "pred": 3, "raw": "3", "latency_s": 0.379, "prompt_tokens": 2538, "completion_tokens": 2}
+{"id": "AAAVUP14319000080565", "prompt": "Exploring Venus", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.234, "prompt_tokens": 2284, "completion_tokens": 2}
+{"id": "AAAVUP14319000081529", "prompt": "Exploring Venus", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.374, "prompt_tokens": 2314, "completion_tokens": 2}
+{"id": "AAAVUP14319000081848", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.337, "prompt_tokens": 2355, "completion_tokens": 2}
+{"id": "AAAVUP14319000082572", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.271, "prompt_tokens": 2356, "completion_tokens": 2}
+{"id": "AAAVUP14319000083458", "prompt": "Exploring Venus", "gold": 6, "pred": 3, "raw": "3", "latency_s": 0.537, "prompt_tokens": 2741, "completion_tokens": 2}
+{"id": "AAAVUP14319000093560", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.384, "prompt_tokens": 2549, "completion_tokens": 2}
+{"id": "AAAVUP14319000093929", "prompt": "Exploring Venus", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.291, "prompt_tokens": 2365, "completion_tokens": 2}
+{"id": "AAAVUP14319000095864", "prompt": "Exploring Venus", "gold": 1, "pred": 2, "raw": "2", "latency_s": 0.289, "prompt_tokens": 2354, "completion_tokens": 2}
+{"id": "AAAVUP14319000097284", "prompt": "Exploring Venus", "gold": 1, "pred": 2, "raw": "2", "latency_s": 0.216, "prompt_tokens": 2220, "completion_tokens": 2}
+{"id": "AAAVUP14319000097991", "prompt": "Exploring Venus", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.448, "prompt_tokens": 2714, "completion_tokens": 2}
+{"id": "AAAVUP14319000098211", "prompt": "Exploring Venus", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.262, "prompt_tokens": 2334, "completion_tokens": 2}
+{"id": "AAAVUP14319000100037", "prompt": "Exploring Venus", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.438, "prompt_tokens": 2661, "completion_tokens": 2}
+{"id": "AAAVUP14319000100834", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.37, "prompt_tokens": 2512, "completion_tokens": 2}
+{"id": "AAAVUP14319000105532", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.292, "prompt_tokens": 2273, "completion_tokens": 2}
+{"id": "AAAVUP14319000107964", "prompt": "Exploring Venus", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.526, "prompt_tokens": 2784, "completion_tokens": 2}
+{"id": "AAAVUP14319000108247", "prompt": "Exploring Venus", "gold": 6, "pred": 4, "raw": "4", "latency_s": 0.416, "prompt_tokens": 2610, "completion_tokens": 2}
+{"id": "AAAVUP14319000109952", "prompt": "Exploring Venus", "gold": 3, "pred": 2, "raw": "2", "latency_s": 0.338, "prompt_tokens": 2489, "completion_tokens": 2}
+{"id": "AAAVUP14319000111211", "prompt": "Exploring Venus", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.344, "prompt_tokens": 2503, "completion_tokens": 2}
+{"id": "AAAVUP14319000114809", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.323, "prompt_tokens": 2299, "completion_tokens": 2}
+{"id": "AAAVUP14319000117842", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.388, "prompt_tokens": 2308, "completion_tokens": 2}
+{"id": "AAAVUP14319000119348", "prompt": "Exploring Venus", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.443, "prompt_tokens": 2631, "completion_tokens": 2}
+{"id": "AAAVUP14319000119670", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.224, "prompt_tokens": 2255, "completion_tokens": 2}
+{"id": "AAAVUP14319000121146", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.349, "prompt_tokens": 2487, "completion_tokens": 2}
+{"id": "AAAVUP14319000123385", "prompt": "Exploring Venus", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.258, "prompt_tokens": 2344, "completion_tokens": 2}
+{"id": "AAAVUP14319000126541", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.346, "prompt_tokens": 2478, "completion_tokens": 2}
+{"id": "AAAVUP14319000127637", "prompt": "Exploring Venus", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.239, "prompt_tokens": 2287, "completion_tokens": 2}
+{"id": "AAAVUP14319000129783", "prompt": "Exploring Venus", "gold": 1, "pred": 2, "raw": "2", "latency_s": 0.218, "prompt_tokens": 2268, "completion_tokens": 2}
+{"id": "AAAVUP14319000131056", "prompt": "Exploring Venus", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.289, "prompt_tokens": 2264, "completion_tokens": 2}
+{"id": "AAAVUP14319000132188", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.328, "prompt_tokens": 2465, "completion_tokens": 2}
+{"id": "AAAVUP14319000134527", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.324, "prompt_tokens": 2464, "completion_tokens": 2}
+{"id": "AAAVUP14319000134641", "prompt": "Exploring Venus", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.406, "prompt_tokens": 2545, "completion_tokens": 2}
+{"id": "AAAVUP14319000136294", "prompt": "Exploring Venus", "gold": 2, "pred": 4, "raw": "4", "latency_s": 0.361, "prompt_tokens": 2350, "completion_tokens": 2}
+{"id": "AAAVUP14319000139802", "prompt": "Exploring Venus", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.36, "prompt_tokens": 2260, "completion_tokens": 2}
+{"id": "AAAVUP14319000141935", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.394, "prompt_tokens": 2359, "completion_tokens": 2}
+{"id": "AAAVUP14319000144615", "prompt": "Exploring Venus", "gold": 3, "pred": 2, "raw": "2", "latency_s": 0.45, "prompt_tokens": 2445, "completion_tokens": 2}
+{"id": "AAAVUP14319000144846", "prompt": "Exploring Venus", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.472, "prompt_tokens": 2512, "completion_tokens": 2}
+{"id": "AAAVUP14319000147209", "prompt": "Exploring Venus", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.409, "prompt_tokens": 2507, "completion_tokens": 2}
+{"id": "AAAVUP14319000148170", "prompt": "Exploring Venus", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.225, "prompt_tokens": 2261, "completion_tokens": 2}
+{"id": "AAAVUP14319000149272", "prompt": "Exploring Venus", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.359, "prompt_tokens": 2493, "completion_tokens": 2}
+{"id": "AAAVUP14319000152591", "prompt": "Exploring Venus", "gold": 3, "pred": 2, "raw": "2", "latency_s": 0.419, "prompt_tokens": 2400, "completion_tokens": 2}
+{"id": "AAAVUP14319000156196", "prompt": "Exploring Venus", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.334, "prompt_tokens": 2246, "completion_tokens": 2}
+{"id": "AAAVUP14319000157098", "prompt": "Exploring Venus", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.362, "prompt_tokens": 2222, "completion_tokens": 2}
+{"id": "AAAVUP14319000157856", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.485, "prompt_tokens": 2452, "completion_tokens": 2}
+{"id": "AAAVUP14319000158058", "prompt": "Exploring Venus", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.454, "prompt_tokens": 2471, "completion_tokens": 2}
+{"id": "AAAVUP14319000158687", "prompt": "Exploring Venus", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.423, "prompt_tokens": 2448, "completion_tokens": 2}
+{"id": "AAATRP14318000026084", "prompt": "Facial action coding system", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.728, "prompt_tokens": 1185, "completion_tokens": 2}
+{"id": "AAATRP14318000061494", "prompt": "Facial action coding system", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.408, "prompt_tokens": 1338, "completion_tokens": 2}
+{"id": "AAATRP14318000072767", "prompt": "Facial action coding system", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.216, "prompt_tokens": 1120, "completion_tokens": 2}
+{"id": "AAATRP14318000121099", "prompt": "Facial action coding system", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.427, "prompt_tokens": 1580, "completion_tokens": 2}
+{"id": "AAATRP14318000166104", "prompt": "Facial action coding system", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.471, "prompt_tokens": 1534, "completion_tokens": 2}
+{"id": "AAATRP14318000188112", "prompt": "Facial action coding system", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.545, "prompt_tokens": 1717, "completion_tokens": 2}
+{"id": "AAATRP14318000190111", "prompt": "Facial action coding system", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.299, "prompt_tokens": 1318, "completion_tokens": 2}
+{"id": "AAATRP14318000197138", "prompt": "Facial action coding system", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.257, "prompt_tokens": 1211, "completion_tokens": 2}
+{"id": "AAATRP14318000200828", "prompt": "Facial action coding system", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.367, "prompt_tokens": 1379, "completion_tokens": 2}
+{"id": "AAATRP14318000202876", "prompt": "Facial action coding system", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.495, "prompt_tokens": 1718, "completion_tokens": 2}
+{"id": "AAATRP14318000205960", "prompt": "Facial action coding system", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.6, "prompt_tokens": 1854, "completion_tokens": 2}
+{"id": "AAATRP14318000206120", "prompt": "Facial action coding system", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.401, "prompt_tokens": 1488, "completion_tokens": 2}
+{"id": "AAATRP14318000207325", "prompt": "Facial action coding system", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.388, "prompt_tokens": 1463, "completion_tokens": 2}
+{"id": "AAATRP14318000214294", "prompt": "Facial action coding system", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.213, "prompt_tokens": 1113, "completion_tokens": 2}
+{"id": "AAATRP14318000270320", "prompt": "Facial action coding system", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.427, "prompt_tokens": 1556, "completion_tokens": 2}
+{"id": "AAATRP14318000276132", "prompt": "Facial action coding system", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.392, "prompt_tokens": 1402, "completion_tokens": 2}
+{"id": "AAATRP14318000285382", "prompt": "Facial action coding system", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.314, "prompt_tokens": 1219, "completion_tokens": 2}
+{"id": "AAATRP14318000292325", "prompt": "Facial action coding system", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.332, "prompt_tokens": 1355, "completion_tokens": 2}
+{"id": "AAATRP14318000293824", "prompt": "Facial action coding system", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.252, "prompt_tokens": 1141, "completion_tokens": 2}
+{"id": "AAATRP14318000311523", "prompt": "Facial action coding system", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.402, "prompt_tokens": 1410, "completion_tokens": 2}
+{"id": "AAATRP14318000319106", "prompt": "Facial action coding system", "gold": 5, "pred": 5, "raw": "5", "latency_s": 0.549, "prompt_tokens": 1539, "completion_tokens": 2}
+{"id": "AAATRP14318000340318", "prompt": "Facial action coding system", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.384, "prompt_tokens": 1372, "completion_tokens": 2}
+{"id": "AAATRP14318000340410", "prompt": "Facial action coding system", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.309, "prompt_tokens": 1311, "completion_tokens": 2}
+{"id": "AAATRP14318000354571", "prompt": "Facial action coding system", "gold": 4, "pred": 2, "raw": "2", "latency_s": 0.488, "prompt_tokens": 1700, "completion_tokens": 2}
+{"id": "AAATRP14318000361263", "prompt": "Facial action coding system", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.334, "prompt_tokens": 1108, "completion_tokens": 2}
+{"id": "AAATRP14318000361288", "prompt": "Facial action coding system", "gold": 6, "pred": 5, "raw": "5", "latency_s": 0.524, "prompt_tokens": 1629, "completion_tokens": 2}
+{"id": "AAATRP14318000361328", "prompt": "Facial action coding system", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.427, "prompt_tokens": 1332, "completion_tokens": 2}
+{"id": "AAATRP14318000363605", "prompt": "Facial action coding system", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.433, "prompt_tokens": 1501, "completion_tokens": 2}
+{"id": "AAATRP14318000363767", "prompt": "Facial action coding system", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.514, "prompt_tokens": 1428, "completion_tokens": 2}
+{"id": "AAATRP14318000363931", "prompt": "Facial action coding system", "gold": 6, "pred": 5, "raw": "5", "latency_s": 0.867, "prompt_tokens": 2026, "completion_tokens": 2}
+{"id": "AAATRP14318000364119", "prompt": "Facial action coding system", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.297, "prompt_tokens": 1288, "completion_tokens": 2}
+{"id": "AAATRP14318000382468", "prompt": "Facial action coding system", "gold": 5, "pred": 4, "raw": "4", "latency_s": 0.657, "prompt_tokens": 1896, "completion_tokens": 2}
+{"id": "AAATRP14318000383855", "prompt": "Facial action coding system", "gold": 5, "pred": 3, "raw": "3", "latency_s": 0.461, "prompt_tokens": 1587, "completion_tokens": 2}
+{"id": "AAATRP14318000386242", "prompt": "Facial action coding system", "gold": 3, "pred": 5, "raw": "5", "latency_s": 0.291, "prompt_tokens": 1253, "completion_tokens": 2}
+{"id": "AAATRP14318000392730", "prompt": "Facial action coding system", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.389, "prompt_tokens": 1402, "completion_tokens": 2}
+{"id": "AAATRP14318000408002", "prompt": "Facial action coding system", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.488, "prompt_tokens": 1447, "completion_tokens": 2}
+{"id": "AAATRP14318000414887", "prompt": "Facial action coding system", "gold": 1, "pred": 2, "raw": "2", "latency_s": 0.24, "prompt_tokens": 1128, "completion_tokens": 2}
+{"id": "AAATRP14318000416383", "prompt": "Facial action coding system", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.356, "prompt_tokens": 1294, "completion_tokens": 2}
+{"id": "AAATRP14318000418506", "prompt": "Facial action coding system", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.257, "prompt_tokens": 1139, "completion_tokens": 2}
+{"id": "AAATRP14318000421772", "prompt": "Facial action coding system", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.45, "prompt_tokens": 1270, "completion_tokens": 2}
+{"id": "AAATRP14318000427182", "prompt": "Facial action coding system", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.324, "prompt_tokens": 1187, "completion_tokens": 2}
+{"id": "AAATRP14318000433324", "prompt": "Facial action coding system", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.49, "prompt_tokens": 1470, "completion_tokens": 2}
+{"id": "AAATRP14318000438593", "prompt": "Facial action coding system", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.224, "prompt_tokens": 1114, "completion_tokens": 2}
+{"id": "AAATRP14318000451102", "prompt": "Facial action coding system", "gold": 5, "pred": 3, "raw": "3", "latency_s": 0.437, "prompt_tokens": 1553, "completion_tokens": 2}
+{"id": "AAATRP14318000468068", "prompt": "Facial action coding system", "gold": 6, "pred": 5, "raw": "5", "latency_s": 0.522, "prompt_tokens": 1519, "completion_tokens": 2}
+{"id": "AAATRP14318000473748", "prompt": "Facial action coding system", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.312, "prompt_tokens": 1167, "completion_tokens": 2}
+{"id": "AAATRP14318000537850", "prompt": "Facial action coding system", "gold": 4, "pred": 5, "raw": "5", "latency_s": 0.292, "prompt_tokens": 1318, "completion_tokens": 2}
+{"id": "AAATRP14318000616432", "prompt": "Facial action coding system", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.236, "prompt_tokens": 1201, "completion_tokens": 2}
+{"id": "AAATRP14318000616846", "prompt": "Facial action coding system", "gold": 2, "pred": 4, "raw": "4", "latency_s": 0.234, "prompt_tokens": 1184, "completion_tokens": 2}
+{"id": "AAATRP14318000623774", "prompt": "Facial action coding system", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.205, "prompt_tokens": 1115, "completion_tokens": 2}
+{"id": "AAATRP14318000625526", "prompt": "Facial action coding system", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.255, "prompt_tokens": 1143, "completion_tokens": 2}
+{"id": "AAATRP14318000633963", "prompt": "Facial action coding system", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.199, "prompt_tokens": 1074, "completion_tokens": 2}
+{"id": "AAATRP14318000634813", "prompt": "Facial action coding system", "gold": 5, "pred": 5, "raw": "5", "latency_s": 0.665, "prompt_tokens": 1889, "completion_tokens": 2}
+{"id": "AAATRP14318000636638", "prompt": "Facial action coding system", "gold": 3, "pred": 5, "raw": "5", "latency_s": 0.31, "prompt_tokens": 1268, "completion_tokens": 2}
+{"id": "AAATRP14318000637024", "prompt": "Facial action coding system", "gold": 1, "pred": 3, "raw": "3", "latency_s": 0.207, "prompt_tokens": 1114, "completion_tokens": 2}
+{"id": "AAATRP14318000648577", "prompt": "Facial action coding system", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.291, "prompt_tokens": 1320, "completion_tokens": 2}
+{"id": "AAATRP14318000664916", "prompt": "Facial action coding system", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.287, "prompt_tokens": 1289, "completion_tokens": 2}
+{"id": "AAATRP14318000670199", "prompt": "Facial action coding system", "gold": 1, "pred": 2, "raw": "2", "latency_s": 0.243, "prompt_tokens": 1211, "completion_tokens": 2}
+{"id": "AAATRP14318000711034", "prompt": "Facial action coding system", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.262, "prompt_tokens": 1117, "completion_tokens": 2}
+{"id": "AAATRP14318000714732", "prompt": "Facial action coding system", "gold": 5, "pred": 3, "raw": "3", "latency_s": 0.511, "prompt_tokens": 1623, "completion_tokens": 2}
+{"id": "AAATRP14318000715225", "prompt": "Facial action coding system", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.368, "prompt_tokens": 1414, "completion_tokens": 2}
+{"id": "AAATRP14318000724002", "prompt": "Facial action coding system", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.374, "prompt_tokens": 1396, "completion_tokens": 2}
+{"id": "AAATRP14318000726805", "prompt": "Facial action coding system", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.284, "prompt_tokens": 1235, "completion_tokens": 2}
+{"id": "AAATRP14318000734751", "prompt": "Facial action coding system", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.279, "prompt_tokens": 1247, "completion_tokens": 2}
+{"id": "AAATRP14318000740718", "prompt": "Facial action coding system", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.361, "prompt_tokens": 1356, "completion_tokens": 2}
+{"id": "AAATRP14318000745701", "prompt": "Facial action coding system", "gold": 5, "pred": 4, "raw": "4", "latency_s": 0.487, "prompt_tokens": 1603, "completion_tokens": 2}
+{"id": "AAATRP14318000751280", "prompt": "Facial action coding system", "gold": 6, "pred": 4, "raw": "4", "latency_s": 0.534, "prompt_tokens": 1664, "completion_tokens": 2}
+{"id": "AAATRP14318000771012", "prompt": "Facial action coding system", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.211, "prompt_tokens": 1106, "completion_tokens": 2}
+{"id": "AAATRP14318000783686", "prompt": "Facial action coding system", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.495, "prompt_tokens": 1673, "completion_tokens": 2}
+{"id": "AAATRP14318000788503", "prompt": "Facial action coding system", "gold": 4, "pred": 5, "raw": "5", "latency_s": 0.566, "prompt_tokens": 1562, "completion_tokens": 2}
+{"id": "AAATRP14318000789772", "prompt": "Facial action coding system", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.298, "prompt_tokens": 1149, "completion_tokens": 2}
+{"id": "AAATRP14318000794667", "prompt": "Facial action coding system", "gold": 1, "pred": 3, "raw": "3", "latency_s": 0.285, "prompt_tokens": 1271, "completion_tokens": 2}
+{"id": "AAATRP14318000797855", "prompt": "Facial action coding system", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.415, "prompt_tokens": 1535, "completion_tokens": 2}
+{"id": "AAATRP14318000818435", "prompt": "Facial action coding system", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.427, "prompt_tokens": 1462, "completion_tokens": 2}
+{"id": "AAATRP14318000833281", "prompt": "Facial action coding system", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.22, "prompt_tokens": 1136, "completion_tokens": 2}
+{"id": "AAATRP14318000843346", "prompt": "Facial action coding system", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.386, "prompt_tokens": 1396, "completion_tokens": 2}
+{"id": "AAATRP14318000857698", "prompt": "Facial action coding system", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.432, "prompt_tokens": 1359, "completion_tokens": 2}
+{"id": "AAATRP14318000876932", "prompt": "Facial action coding system", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.302, "prompt_tokens": 1280, "completion_tokens": 2}
+{"id": "AAATRP14318000912969", "prompt": "Facial action coding system", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.286, "prompt_tokens": 1262, "completion_tokens": 2}
+{"id": "AAATRP14318000917032", "prompt": "Facial action coding system", "gold": 5, "pred": 5, "raw": "5", "latency_s": 0.633, "prompt_tokens": 1825, "completion_tokens": 2}
+{"id": "AAATRP14318000940207", "prompt": "Facial action coding system", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.24, "prompt_tokens": 1203, "completion_tokens": 2}
+{"id": "AAATRP14318000973616", "prompt": "Facial action coding system", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.191, "prompt_tokens": 1085, "completion_tokens": 2}
+{"id": "AAATRP14318000994409", "prompt": "Facial action coding system", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.388, "prompt_tokens": 1450, "completion_tokens": 2}
+{"id": "AAATRP14318001018997", "prompt": "Facial action coding system", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.258, "prompt_tokens": 1214, "completion_tokens": 2}
+{"id": "AAATRP14318001046820", "prompt": "Facial action coding system", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.28, "prompt_tokens": 1262, "completion_tokens": 2}
+{"id": "AAAOPP13416000005738", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.861, "prompt_tokens": 2321, "completion_tokens": 2}
+{"id": "AAAOPP13416000007415", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.338, "prompt_tokens": 2310, "completion_tokens": 2}
+{"id": "AAAOPP13416000013573", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.38, "prompt_tokens": 2529, "completion_tokens": 2}
+{"id": "AAAOPP13416000014568", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.244, "prompt_tokens": 2243, "completion_tokens": 2}
+{"id": "AAAOPP13416000014695", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.286, "prompt_tokens": 2309, "completion_tokens": 2}
+{"id": "AAAOPP13416000017310", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.346, "prompt_tokens": 2403, "completion_tokens": 2}
+{"id": "AAAOPP13416000018140", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.315, "prompt_tokens": 2367, "completion_tokens": 2}
+{"id": "AAAOPP13416000023574", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.233, "prompt_tokens": 2220, "completion_tokens": 2}
+{"id": "AAAOPP13416000023594", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.263, "prompt_tokens": 2272, "completion_tokens": 2}
+{"id": "AAAOPP13416000028219", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.357, "prompt_tokens": 2349, "completion_tokens": 2}
+{"id": "AAAOPP13416000032141", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.264, "prompt_tokens": 2290, "completion_tokens": 2}
+{"id": "AAAOPP13416000039188", "prompt": "The Face on Mars", "gold": 5, "pred": 3, "raw": "3", "latency_s": 0.487, "prompt_tokens": 2685, "completion_tokens": 2}
+{"id": "AAAOPP13416000039411", "prompt": "The Face on Mars", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.33, "prompt_tokens": 2351, "completion_tokens": 2}
+{"id": "AAAOPP13416000042193", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.318, "prompt_tokens": 2412, "completion_tokens": 2}
+{"id": "AAAOPP13416000043918", "prompt": "The Face on Mars", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.409, "prompt_tokens": 2500, "completion_tokens": 2}
+{"id": "AAAOPP13416000045009", "prompt": "The Face on Mars", "gold": 5, "pred": 4, "raw": "4", "latency_s": 0.432, "prompt_tokens": 2619, "completion_tokens": 2}
+{"id": "AAAOPP13416000045896", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.305, "prompt_tokens": 2384, "completion_tokens": 2}
+{"id": "AAAOPP13416000046569_cleaned", "prompt": "The Face on Mars", "gold": 1, "pred": 2, "raw": "2", "latency_s": 0.395, "prompt_tokens": 2427, "completion_tokens": 2}
+{"id": "AAAOPP13416000046764_cleaned", "prompt": "The Face on Mars", "gold": 1, "pred": 1, "raw": "1", "latency_s": 0.319, "prompt_tokens": 2252, "completion_tokens": 2}
+{"id": "AAAOPP13416000047106", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.234, "prompt_tokens": 2208, "completion_tokens": 2}
+{"id": "AAAOPP13416000049630", "prompt": "The Face on Mars", "gold": 1, "pred": 2, "raw": "2", "latency_s": 0.338, "prompt_tokens": 2244, "completion_tokens": 2}
+{"id": "AAAOPP13416000049899", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.429, "prompt_tokens": 2324, "completion_tokens": 2}
+{"id": "AAAOPP13416000050279", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.354, "prompt_tokens": 2205, "completion_tokens": 2}
+{"id": "AAAOPP13416000050489", "prompt": "The Face on Mars", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.373, "prompt_tokens": 2323, "completion_tokens": 2}
+{"id": "AAAOPP13416000053247", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.267, "prompt_tokens": 2297, "completion_tokens": 2}
+{"id": "AAAOPP13416000053764", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.339, "prompt_tokens": 2251, "completion_tokens": 2}
+{"id": "AAAOPP13416000060314", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.463, "prompt_tokens": 2422, "completion_tokens": 2}
+{"id": "AAAOPP13416000060723", "prompt": "The Face on Mars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.46, "prompt_tokens": 2555, "completion_tokens": 2}
+{"id": "AAAOPP13416000060754", "prompt": "The Face on Mars", "gold": 5, "pred": 4, "raw": "4", "latency_s": 0.492, "prompt_tokens": 2667, "completion_tokens": 2}
+{"id": "AAAOPP13416000063647", "prompt": "The Face on Mars", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.251, "prompt_tokens": 2276, "completion_tokens": 2}
+{"id": "AAAOPP13416000064232", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.342, "prompt_tokens": 2445, "completion_tokens": 2}
+{"id": "AAAOPP13416000064889", "prompt": "The Face on Mars", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.354, "prompt_tokens": 2319, "completion_tokens": 2}
+{"id": "AAAOPP13416000071054", "prompt": "The Face on Mars", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.44, "prompt_tokens": 2638, "completion_tokens": 2}
+{"id": "AAAOPP13416000071160", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.319, "prompt_tokens": 2376, "completion_tokens": 2}
+{"id": "AAAOPP13416000071214", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.263, "prompt_tokens": 2282, "completion_tokens": 2}
+{"id": "AAAOPP13416000071235", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.284, "prompt_tokens": 2357, "completion_tokens": 2}
+{"id": "AAAOPP13416000071250", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.283, "prompt_tokens": 2320, "completion_tokens": 2}
+{"id": "AAAOPP13416000071264", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.53, "prompt_tokens": 2775, "completion_tokens": 2}
+{"id": "AAAOPP13416000071413", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.407, "prompt_tokens": 2419, "completion_tokens": 2}
+{"id": "AAAOPP13416000071452", "prompt": "The Face on Mars", "gold": 1, "pred": 3, "raw": "3", "latency_s": 0.397, "prompt_tokens": 2507, "completion_tokens": 2}
+{"id": "AAAOPP13416000074634", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.253, "prompt_tokens": 2295, "completion_tokens": 2}
+{"id": "AAAOPP13416000074708", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.242, "prompt_tokens": 2248, "completion_tokens": 2}
+{"id": "AAAOPP13416000075173", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.251, "prompt_tokens": 2221, "completion_tokens": 2}
+{"id": "AAAOPP13416000075359", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.297, "prompt_tokens": 2212, "completion_tokens": 2}
+{"id": "AAAOPP13416000079416", "prompt": "The Face on Mars", "gold": 1, "pred": 2, "raw": "2", "latency_s": 0.349, "prompt_tokens": 2448, "completion_tokens": 2}
+{"id": "AAAOPP13416000079599", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.341, "prompt_tokens": 2472, "completion_tokens": 2}
+{"id": "AAAOPP13416000079710", "prompt": "The Face on Mars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.37, "prompt_tokens": 2466, "completion_tokens": 2}
+{"id": "AAAOPP13416000079793", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.248, "prompt_tokens": 2295, "completion_tokens": 2}
+{"id": "AAAOPP13416000079992", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.264, "prompt_tokens": 2272, "completion_tokens": 2}
+{"id": "AAAOPP13416000080051", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.242, "prompt_tokens": 2241, "completion_tokens": 2}
+{"id": "AAAOPP13416000080126", "prompt": "The Face on Mars", "gold": 1, "pred": 3, "raw": "3", "latency_s": 0.229, "prompt_tokens": 2258, "completion_tokens": 2}
+{"id": "AAAOPP13416000080545", "prompt": "The Face on Mars", "gold": 1, "pred": 2, "raw": "2", "latency_s": 0.198, "prompt_tokens": 2176, "completion_tokens": 2}
+{"id": "AAAOPP13416000081189", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.327, "prompt_tokens": 2455, "completion_tokens": 2}
+{"id": "AAAOPP13416000081953", "prompt": "The Face on Mars", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.354, "prompt_tokens": 2472, "completion_tokens": 2}
+{"id": "AAAOPP13416000090294", "prompt": "The Face on Mars", "gold": 5, "pred": 3, "raw": "3", "latency_s": 0.556, "prompt_tokens": 2914, "completion_tokens": 2}
+{"id": "AAAOPP13416000095273", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.333, "prompt_tokens": 2308, "completion_tokens": 2}
+{"id": "AAAOPP13416000095278", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.397, "prompt_tokens": 2461, "completion_tokens": 2}
+{"id": "AAAOPP13416000105982", "prompt": "The Face on Mars", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.225, "prompt_tokens": 2229, "completion_tokens": 2}
+{"id": "AAAOPP13416000106341", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.401, "prompt_tokens": 2501, "completion_tokens": 2}
+{"id": "AAAOPP13416000106555", "prompt": "The Face on Mars", "gold": 5, "pred": 4, "raw": "4", "latency_s": 0.59, "prompt_tokens": 2702, "completion_tokens": 2}
+{"id": "AAAOPP13416000106590", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.225, "prompt_tokens": 2211, "completion_tokens": 2}
+{"id": "AAAOPP13416000106794", "prompt": "The Face on Mars", "gold": 5, "pred": 4, "raw": "4", "latency_s": 0.386, "prompt_tokens": 2543, "completion_tokens": 2}
+{"id": "AAAOPP13416000107795", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.311, "prompt_tokens": 2417, "completion_tokens": 2}
+{"id": "AAAOPP13416000107976", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.227, "prompt_tokens": 2259, "completion_tokens": 2}
+{"id": "AAAOPP13416000109297", "prompt": "The Face on Mars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.428, "prompt_tokens": 2584, "completion_tokens": 2}
+{"id": "AAAOPP13416000110549", "prompt": "The Face on Mars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.374, "prompt_tokens": 2504, "completion_tokens": 2}
+{"id": "AAAOPP13416000110606", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.309, "prompt_tokens": 2321, "completion_tokens": 2}
+{"id": "AAAOPP13416000110678", "prompt": "The Face on Mars", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.31, "prompt_tokens": 2265, "completion_tokens": 2}
+{"id": "AAAOPP13416000110802", "prompt": "The Face on Mars", "gold": 3, "pred": 4, "raw": "4", "latency_s": 0.299, "prompt_tokens": 2318, "completion_tokens": 2}
+{"id": "AAAOPP13416000110887", "prompt": "The Face on Mars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.539, "prompt_tokens": 2637, "completion_tokens": 2}
+{"id": "AAAOPP13416000110897", "prompt": "The Face on Mars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.519, "prompt_tokens": 2506, "completion_tokens": 2}
+{"id": "AAAOPP13416000111021", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.232, "prompt_tokens": 2249, "completion_tokens": 2}
+{"id": "AAAOPP13416000111252", "prompt": "The Face on Mars", "gold": 4, "pred": 4, "raw": "4", "latency_s": 0.378, "prompt_tokens": 2523, "completion_tokens": 2}
+{"id": "AAAOPP13416000111281", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.249, "prompt_tokens": 2285, "completion_tokens": 2}
+{"id": "AAAOPP13416000114748", "prompt": "The Face on Mars", "gold": 5, "pred": 4, "raw": "4", "latency_s": 0.513, "prompt_tokens": 2815, "completion_tokens": 2}
+{"id": "AAAOPP13416000114913", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.236, "prompt_tokens": 2224, "completion_tokens": 2}
+{"id": "AAAOPP13416000116724", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.298, "prompt_tokens": 2259, "completion_tokens": 2}
+{"id": "AAAOPP13416000116788", "prompt": "The Face on Mars", "gold": 2, "pred": 4, "raw": "4", "latency_s": 0.245, "prompt_tokens": 2295, "completion_tokens": 2}
+{"id": "AAAOPP13416000116881", "prompt": "The Face on Mars", "gold": 1, "pred": 3, "raw": "3", "latency_s": 0.218, "prompt_tokens": 2218, "completion_tokens": 2}
+{"id": "AAAOPP13416000133985", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.296, "prompt_tokens": 2378, "completion_tokens": 2}
+{"id": "AAAOPP13416000147931", "prompt": "The Face on Mars", "gold": 4, "pred": 3, "raw": "3", "latency_s": 0.356, "prompt_tokens": 2475, "completion_tokens": 2}
+{"id": "AAAOPP13416000148136", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.375, "prompt_tokens": 2360, "completion_tokens": 2}
+{"id": "AAAOPP13416000180992", "prompt": "The Face on Mars", "gold": 2, "pred": 2, "raw": "2", "latency_s": 0.275, "prompt_tokens": 2306, "completion_tokens": 2}
+{"id": "AAAOPP13416000214108", "prompt": "The Face on Mars", "gold": 2, "pred": 3, "raw": "3", "latency_s": 0.214, "prompt_tokens": 2207, "completion_tokens": 2}
+{"id": "AAAOPP13416000218336", "prompt": "The Face on Mars", "gold": 3, "pred": 3, "raw": "3", "latency_s": 0.344, "prompt_tokens": 2458, "completion_tokens": 2}
