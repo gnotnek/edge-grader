@@ -3,6 +3,7 @@
     uv run edge-grader-asap sample                      # on the Mac, once: the fixed 600-essay sample
     uv run edge-grader-asap run --label e2b-jetson      # grade it (board_grade.sh: BENCH=asap2)
     uv run edge-grader-asap run --n 5                   # a quick pilot
+    uv run edge-grader-asap run --thinking --label e2b  # thinking on: the server's flags change too
 
 ASAP 2.0 (Crossley et al., Assessing Writing 2025; Kaggle "Learning Agency Lab - Automated Essay
 Scoring 2.0") is ~24k source-based argumentative essays on 7 prompts, scored 1-6. The full file is
@@ -37,6 +38,7 @@ from openai import APIError, OpenAI
 from sklearn.metrics import cohen_kappa_score
 
 from .baseline import server_info
+from .grader import THINK_MAX_TOKENS, answer_part
 
 DATA_CSV = Path("data/asap2/ASAP2_train_sourcetexts.csv")
 CSV_SHA256 = "df6b816dfe2c764ecd135fccda62aca9a04483b354a15c16ffdfa6c4234a3dea"  # dataset version 8
@@ -88,6 +90,12 @@ def parse_score(text: str) -> int | None:
     return int(m.group()) if m else None
 
 
+def thinking_score(text: str, finish: str | None) -> int | None:
+    """The score after the thought block; cut or unclosed replies are unparsed, as in grader.grade."""
+    part = None if finish == "length" else answer_part(text)
+    return parse_score(part) if part is not None else None
+
+
 def score(gold: list[int], pred: list[int | None]) -> dict:
     pairs = [(g, p) for g, p in zip(gold, pred, strict=True) if p is not None]
     n = len(gold)
@@ -130,11 +138,13 @@ def cmd_run(args) -> None:
         try:
             t0 = time.perf_counter()
             resp = client.chat.completions.create(
-                model=args.model, temperature=0, max_tokens=MAX_TOKENS,
+                model=args.model, temperature=0, max_tokens=THINK_MAX_TOKENS if args.thinking else MAX_TOKENS,
                 messages=[{"role": "user", "content": build_prompt(e, prompts[e["prompt"]], rubric)}])
-            text = resp.choices[0].message.content or ""
+            choice = resp.choices[0]
+            text = choice.message.content or ""
             rows.append({"id": e["id"], "prompt": e["prompt"], "gold": e["score"],
-                         "pred": parse_score(text), "raw": text,
+                         "pred": thinking_score(text, choice.finish_reason) if args.thinking else parse_score(text),
+                         "raw": text, "finish": choice.finish_reason,
                          "latency_s": round(time.perf_counter() - t0, 3),
                          "prompt_tokens": getattr(resp.usage, "prompt_tokens", None),
                          "completion_tokens": getattr(resp.usage, "completion_tokens", None)})
@@ -155,14 +165,19 @@ def cmd_run(args) -> None:
     summary["wall_s"] = round(wall, 1)
     summary["prompt_tokens"] = sum(r["prompt_tokens"] or 0 for r in ok)
     summary["completion_tokens"] = sum(r["completion_tokens"] or 0 for r in ok)
+    summary["cut"] = sum(r.get("finish") == "length" for r in ok)
+    stage = "think" if args.thinking else "baseline"
     now = datetime.now(UTC)
     run = {
-        "benchmark": "asap2", "stage": "baseline", "label": args.label or args.model,
+        "benchmark": "asap2", "stage": stage, "label": args.label or args.model,
         "model": args.model, "base_url": args.base_url, "server": server,
         "split": "sample", "sample": str(SAMPLE), "n_requested": args.n,
-        "max_tokens": MAX_TOKENS, "time": now.isoformat(timespec="seconds"), "metrics": summary,
+        "max_tokens": THINK_MAX_TOKENS if args.thinking else MAX_TOKENS, "time": now.isoformat(timespec="seconds"), "metrics": summary,
     }
-    name = f"asap2-baseline-{run['label']}-sample-{now.strftime('%Y%m%d-%H%M%S')}"
+    if args.thinking:
+        run["thinking"] = {"server_flags": "-rea on --reasoning-budget 320 --reasoning-format none",
+                           "parse": "score after the thought block; unclosed or cut replies unparsed"}
+    name = f"asap2-{stage}-{run['label']}-sample-{now.strftime('%Y%m%d-%H%M%S')}"
     out = Path(args.out)
     (out / "raw").mkdir(parents=True, exist_ok=True)
     (out / f"{name}.json").write_text(json.dumps(run, indent=2))
@@ -183,6 +198,8 @@ def main(argv: list[str] | None = None) -> None:
     r.add_argument("--label", default=None, help="run label, e.g. e2b-jetson")
     r.add_argument("--n", type=int, default=0, help="essays to score (0 = the whole sample)")
     r.add_argument("--out", default="results/local")
+    r.add_argument("--thinking", action="store_true",
+                   help="the server runs with -rea on --reasoning-budget 320 --reasoning-format none")
     args = ap.parse_args(argv)
     (cmd_sample if args.cmd == "sample" else cmd_run)(args)
 

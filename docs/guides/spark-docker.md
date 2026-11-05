@@ -120,6 +120,7 @@ One container, `edge-grader-bench-asap2`, runs the fixed 600-essay sample on eac
 docker compose run --rm -e N=5 -e OUT=data/smoke dev scripts/spark_bench_asap2.sh   # first: 5 essays each
 docker compose up -d bench-asap2
 docker logs -f edge-grader-bench-asap2      # also in data/logs/bench-asap2-*.log
+docker compose up -d bench-asap2-think      # thinking on: E2B and E4B untouched, container edge-grader-bench-asap2-think
 ```
 
 Summaries land in `results/spark/`, named `asap2-baseline-<label>-sample-*.json`. The adapters were trained on SciEntsBank's three labels, not 1–6 scores, so read `unparsed` before QWK.

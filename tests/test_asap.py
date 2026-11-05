@@ -15,6 +15,13 @@ def test_parse_score_takes_the_first_whole_number_1_to_6():
     assert asap.parse_score("0") is None
 
 
+def test_thinking_score_reads_after_the_thought_block():
+    assert asap.thinking_score("<|channel>thought\nmaybe 2<channel|>4", "stop") == 4
+    assert asap.thinking_score("<|channel>thought\nmaybe 2", "stop") is None  # never closed
+    assert asap.thinking_score("<|channel>thought\nmaybe 2<channel|>4", "length") is None  # cut
+    assert asap.thinking_score("3", "stop") == 3  # no thought block
+
+
 def test_score_qwk_over_parsed_accuracy_counts_unparsed_as_wrong():
     s = asap.score([1, 2, 3, 4], [1, 2, 3, None])
     assert s["unparsed"] == 1 and s["accuracy"] == 0.75 and s["qwk"] == 1.0

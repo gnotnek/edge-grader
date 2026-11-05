@@ -53,3 +53,11 @@ services:
     <<: *finetune
     container_name: edge-grader-bench-asap2
     command: scripts/spark_bench_asap2.sh
+
+  # ASAP 2.0 with thinking on: E2B and E4B untouched.
+  bench-asap2-think:
+    <<: *finetune
+    container_name: edge-grader-bench-asap2-think
+    environment:
+      THINKING: "1"
+    command: scripts/spark_bench_asap2.sh
