@@ -6,7 +6,12 @@
 #     > data/logs/queue.log 2>&1 &
 set -u
 cd "$(dirname "$0")/.."
-[ -z "${AFTER:-}" ] || { echo "$(date -u +%FT%TZ) waiting for $AFTER"; docker wait "$AFTER"; }
+if [ -n "${AFTER:-}" ]; then
+  echo "$(date -u +%FT%TZ) waiting for $AFTER"
+  code=$(docker wait "$AFTER")
+  echo "$(date -u +%FT%TZ) $AFTER exited $code"
+  [ "$code" = 0 ] || exit "$code"
+fi
 for service in "$@"; do
   echo "$(date -u +%FT%TZ) start $service"
   docker compose up -d --force-recreate "$service" || exit 1

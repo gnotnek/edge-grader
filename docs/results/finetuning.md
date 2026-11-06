@@ -258,6 +258,18 @@ This matches the validation numbers: reasons don't help on the dataset the adapt
 
 The leniency looks like a judging problem on new subjects, not a label-frequency problem. The candidates that act on it are training on more than one grading set, and a reward on the grade (GRPO). Only the first keeps the 2-token reply, so only it costs the device nothing extra (RQ4). Both are optional under the 2026-11-04 focus on edge cost.
 
+## Trained on Beetle and SAF, tested on SciEntsBank (2026-11-06, running)
+
+**Why:** SciEntsBank is the main benchmark again, and adapters trained only on other grading sets test whether fine-tuning teaches grading that transfers. No SciEntsBank question appears in Beetle or SAF, and 5 of its 5,835 test answers match a training answer word for word.
+
+**Teacher reasons** (for the label-first and reason-first adapters): Qwen3-14B on the DGX Spark, prompt `e73e9afc`, 5.7 h. 5,575 of 5,641 kept; 66 dropped (1.2%): 57 `wrong_label`, 9 `cut`. Mean 56 words, longest 103 ([summary](../../results/finetune/reasons-qwen3-14b-q4_k_m-beetle-saf-20261105-233653.json)).
+
+**Owner spot check (2026-11-06): 29 of 30, passed** (gate 25; 30 kept reasons by `random.Random(0)`: 22 Beetle, 8 SAF).
+
+- The one left unmarked, `SC.Q12.SBJ26.L1`, is a disagreement with the dataset's grade, not with the reason. The student's "it closes the pathway" is graded contradictory, and the owner would call it incorrect.
+- Two ticked items carry the same note: both are graded contradictory, and the owner would grade them differently.
+- So all three of the owner's doubts are about Beetle's contradictory label. Where "contradictory" ends and "incorrect" begins is unclear to a person too, which fits the adapters' trouble with that grade.
+
 ## Not done yet
 
 - **Cost on the Jetson.** Latency and energy per answer for the tuned models, against the re-run baselines in the same clock state. Kaggle times aren't board cost, so no cost number is quoted here.
