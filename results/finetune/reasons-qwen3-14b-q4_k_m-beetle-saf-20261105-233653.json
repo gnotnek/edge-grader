@@ -1,0 +1,34 @@
+{
+  "kind": "reasons",
+  "teacher": {
+    "model_path": "data/models/Qwen3-14B-Q4_K_M.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a3a1c47"
+  },
+  "model": "local",
+  "settings": {
+    "temperature": 0,
+    "max_tokens": 128,
+    "split": "train",
+    "scheme": "3way",
+    "sets": [
+      "beetle",
+      "saf"
+    ],
+    "n_requested": 0,
+    "seed": 0
+  },
+  "prompt": "prompts/reason_teacher.txt",
+  "prompt_sha256": "e73e9afc3e918036b3ed8a6ba0aab82ce770f61682ae9918eae74aa83633d3a0",
+  "n": 5641,
+  "kept": 5575,
+  "drops": {
+    "cut": 9,
+    "wrong_label": 57
+  },
+  "drop_share": 0.0117,
+  "reasons": "results/finetune/raw/reasons-qwen3-14b-q4_k_m-beetle-saf.jsonl",
+  "reasons_sha256": "3cf532f201c36553b84fbddaddf086613d2197c53c077c8490e0ffbd4b8ae6b4",
+  "wall_s": 20532.8,
+  "time": "2026-11-05T23:36:53+00:00"
+}
