@@ -1,0 +1,39 @@
+{
+  "benchmark": "scientsbank",
+  "stage": "baseline",
+  "label": "e2b-kaggle-t4-ft-rf-beetle-saf",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "/tmp/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a3a1c47"
+  },
+  "split": "test_ud",
+  "scheme": "3way",
+  "reply": "reason-first",
+  "n_requested": 0,
+  "seed": 0,
+  "time": "2026-11-08T07:26:53+00:00",
+  "metrics": {
+    "n": 4562,
+    "accuracy": 0.5947,
+    "macro_f1": 0.5251,
+    "weighted_f1": 0.6075,
+    "unparsed": 0,
+    "two_way": {
+      "n": 4562,
+      "accuracy": 0.7411,
+      "macro_f1": 0.7366,
+      "weighted_f1": 0.7421,
+      "unparsed": 0
+    },
+    "errors": 0,
+    "cut": 0,
+    "median_latency_s": 1.021,
+    "wall_s": 4697.4,
+    "prompt_tokens": 709243,
+    "completion_tokens": 297324,
+    "median_completion_tokens": 65.0
+  }
+}
