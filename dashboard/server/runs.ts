@@ -10,7 +10,7 @@ const MODELS = new Set(['e2b', 'e4b'])
 const METRIC_KEYS = [
   'n', 'accuracy', 'macro_f1', 'weighted_f1', 'strict_accuracy', 'unparsed', 'errors',
   'no_answer', 'no_number', 'hit_token_cap', 'answered', 'median_latency_s', 'wall_s',
-  'prompt_tokens', 'completion_tokens', 'median_completion_tokens',
+  'prompt_tokens', 'completion_tokens', 'median_completion_tokens', 'qwk', 'adjacent',
 ]
 
 function splitStamp(name: string): { tokens: string[]; stamp: string } | null {
@@ -54,22 +54,28 @@ export function parseRunFolder(name: string): RunKey | null {
   return { condition, benchmark, model: tokens[m] as Model, board, split, stamp }
 }
 
-/** A Kaggle summary file name. Null for judge files and anything unrecognised. */
+/** A Kaggle or DGX Spark summary file name. Null for judge and comparison files and anything unrecognised. */
 export function parseKaggleFile(file: string): RunKey | null {
   if (!file.endsWith('.json') || file.includes('.judged-')) return null
   const s = splitStamp(file.slice(0, -'.json'.length))
   if (!s) return null
   const { tokens, stamp } = s
   const m = tokens.findIndex((t) => MODELS.has(t))
-  if (m < 0 || tokens[m + 1] !== 'kaggle') return null
+  const device = `${tokens[m + 1]}-${tokens[m + 2]}`
+  const board: Board | undefined = ({ 'kaggle-t4': 'kaggle', 'spark-gb10': 'spark' } as const)[device as 'kaggle-t4']
+  if (m < 0 || !board) return null
   const pre = tokens.slice(0, m)
-  const post = tokens.slice(m + 3) // after <model>-kaggle-t4
+  const post = tokens.slice(m + 3) // after <model>-kaggle-t4 or <model>-spark-gb10
   const rag = (): Condition => (post.includes('id') ? 'rag-id' : 'rag-en')
   // A LoRA adapter on the baseline prompt: -ft, and -ft-rf / -ft-lf for the reply formats of stage 3b.
-  const base = (): Condition =>
-    !post.includes('ft') ? 'baseline' : post.includes('rf') ? 'ft-rf' : post.includes('lf') ? 'ft-lf' : 'ft'
+  // A -beetle-saf train tag marks an adapter trained on Beetle+SAF instead of SciEntsBank.
+  const base = (): Condition => {
+    if (!post.includes('ft')) return 'baseline'
+    const reply = post.includes('rf') ? 'ft-rf' : post.includes('lf') ? 'ft-lf' : 'ft'
+    return (post.includes('beetle') && post.includes('saf') ? `${reply}-bs` : reply) as Condition
+  }
   const key = (benchmark: Benchmark, condition: Condition, split: string): RunKey => ({
-    condition, benchmark, model: tokens[m] as Model, board: 'kaggle', split, stamp,
+    condition, benchmark, model: tokens[m] as Model, board, split, stamp,
   })
 
   switch (pre[0]) {
@@ -85,6 +91,9 @@ export function parseKaggleFile(file: string): RunKey | null {
       if (!split || pre[1] !== 'baseline') return null
       return key(pre[0], base(), split)
     }
+    case 'asap2':
+      if (pre[1] !== 'baseline' && pre[1] !== 'think') return null
+      return key('asap2', pre[1] === 'think' ? 'think' : base(), post[post.length - 1] ?? '')
     case 'mmlupro':
       return key('mmlupro', pre[1] === 'rag' ? rag() : base(), post[post.length - 1] ?? '')
     case 'gsm':
@@ -218,15 +227,17 @@ export function loadRuns(repo: string): Run[] {
     }
   }
 
-  const kdir = path.join(repo, 'results/kaggle')
-  const kfiles = listDir(kdir)
-  for (const f of kfiles) {
-    const key = parseKaggleFile(f)
-    if (!key) continue
-    const run: Run = { ...key, id: f, location: 'results', source: `results/kaggle/${f}`, metrics: {} }
-    const judged = kfiles.find((g) => g.startsWith(f.slice(0, -'.json'.length) + '.judged-'))
-    fillFromSummary(run, path.join(kdir, f), judged && path.join(kdir, judged))
-    runs.push(run)
+  for (const sub of ['results/kaggle', 'results/spark']) {
+    const kdir = path.join(repo, sub)
+    const kfiles = listDir(kdir)
+    for (const f of kfiles) {
+      const key = parseKaggleFile(f)
+      if (!key) continue
+      const run: Run = { ...key, id: f, location: 'results', source: `${sub}/${f}`, metrics: {} }
+      const judged = kfiles.find((g) => g.startsWith(f.slice(0, -'.json'.length) + '.judged-'))
+      fillFromSummary(run, path.join(kdir, f), judged && path.join(kdir, judged))
+      runs.push(run)
+    }
   }
 
   const checks = boardChecks(repo)
@@ -235,4 +246,4 @@ export function loadRuns(repo: string): Run[] {
   return runs.sort((a, b) => b.stamp.localeCompare(a.stamp))
 }
 
-export const BOARDS: Board[] = ['pi5', 'jetson', 'kaggle']
+export const BOARDS: Board[] = ['pi5', 'jetson', 'kaggle', 'spark']

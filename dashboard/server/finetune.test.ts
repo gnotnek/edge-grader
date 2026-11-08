@@ -17,6 +17,17 @@ describe('loadFinetune on the real repo', () => {
     expect(a).toMatchObject({ model: 'e2b', reply: 'label', chosenEpoch: 2, rank: 16, lr: 0.0002, trainQuestions: 121 })
     expect(a.epochs[1]).toEqual({ epoch: 2, trainLoss: 0.08749613761901856, valAccuracy: 0.7875751503006012 })
   })
+  test('adapters name what they were trained on', () => {
+    expect(ft.adapters.find((x) => x.file.endsWith('finetune-e2b-beetle-saf-20261106-021644.json'))?.trainSets).toEqual(['beetle', 'saf'])
+    expect(ft.adapters.find((x) => x.file.endsWith('finetune-e2b-20261027-111124.json'))?.trainSets).toEqual(['scientsbank'])
+  })
+  test('the newest 5-point bar comparison, every adapter against its untouched model', () => {
+    expect(ft.bar?.file).toMatch(/^results\/kaggle\/compare-bar-scientsbank-/)
+    expect(ft.bar?.rule).toMatch(/5 accuracy points/)
+    expect(ft.bar?.tests.find((t) => t.adapter === 'e2b-kaggle-t4-ft' && t.split === 'test_uq')).toMatchObject({
+      trained_on: 'scientsbank', first_accuracy: 0.5975, second_accuracy: 0.7667, passes: true,
+    })
+  })
   test('stage 3b adapters name their reply format', () => {
     expect(ft.adapters.find((x) => x.file.includes('reason-first'))?.reply).toBe('reason-first')
   })

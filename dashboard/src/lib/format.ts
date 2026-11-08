@@ -1,18 +1,20 @@
 import type { Benchmark, Board, Condition, Model } from '@server/types'
 
-export const BOARD_LABEL: Record<Board, string> = { jetson: 'Jetson', pi5: 'Pi 5', kaggle: 'Kaggle T4' }
+export const BOARD_LABEL: Record<Board, string> = { jetson: 'Jetson', pi5: 'Pi 5', kaggle: 'Kaggle T4', spark: 'DGX Spark' }
 export const MODEL_LABEL: Record<Model, string> = { e2b: 'E2B', e4b: 'E4B' }
 export const BENCH_LABEL: Record<Benchmark, string> = {
-  scientsbank: 'SciEntsBank', beetle: 'Beetle', saf: 'SAF', gsm: 'GSM', news: 'News', mmlupro: 'MMLU-Pro',
+  scientsbank: 'SciEntsBank', beetle: 'Beetle', saf: 'SAF', asap2: 'ASAP 2.0', gsm: 'GSM', news: 'News', mmlupro: 'MMLU-Pro',
 }
 export const CONDITION_LABEL: Record<Condition, string> = {
   baseline: 'Baseline', 'rag-en': 'RAG-en', 'rag-id': 'RAG-id', think: 'Thinking on',
   lg: 'little-gemma', 'lg-reuse': 'little-gemma + reuse', swafull: 'SWA full',
   ft: 'Fine-tuned', 'ft-rf': 'Fine-tuned, reason first', 'ft-lf': 'Fine-tuned, label first',
+  'ft-bs': 'Fine-tuned on Beetle+SAF', 'ft-rf-bs': 'Fine-tuned on Beetle+SAF, reason first',
+  'ft-lf-bs': 'Fine-tuned on Beetle+SAF, label first',
 }
-export const CONDITION_ORDER: Condition[] = ['baseline', 'ft', 'ft-rf', 'ft-lf', 'think', 'rag-en', 'rag-id', 'swafull', 'lg', 'lg-reuse']
-export const BENCH_ORDER: Benchmark[] = ['scientsbank', 'beetle', 'saf', 'gsm', 'news', 'mmlupro']
-export const BOARD_ORDER: Board[] = ['jetson', 'pi5', 'kaggle']
+export const CONDITION_ORDER: Condition[] = ['baseline', 'ft', 'ft-rf', 'ft-lf', 'ft-bs', 'ft-rf-bs', 'ft-lf-bs', 'think', 'rag-en', 'rag-id', 'swafull', 'lg', 'lg-reuse']
+export const BENCH_ORDER: Benchmark[] = ['scientsbank', 'beetle', 'saf', 'asap2', 'gsm', 'news', 'mmlupro']
+export const BOARD_ORDER: Board[] = ['jetson', 'pi5', 'kaggle', 'spark']
 
 export function pct(v: number | null | undefined, digits = 1): string {
   return v == null ? '—' : `${(v * 100).toFixed(digits)}%`

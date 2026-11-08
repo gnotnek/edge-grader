@@ -1,4 +1,4 @@
-import type { Benchmark, Board, BoardPair, Condition, Finetune, Model, Reference, Run } from '@server/types'
+import type { Benchmark, Board, BoardPair, Cascade, Condition, Finetune, Model, Reference, Run } from '@server/types'
 import { ArrowDown, ArrowUp, CircleAlert, Minus, TableProperties } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { Bar, BarChart, CartesianGrid, Scatter, ScatterChart, XAxis, YAxis, ZAxis } from 'recharts'
@@ -18,13 +18,13 @@ import {
 } from '@/lib/format'
 
 const MODELS: Model[] = ['e2b', 'e4b']
-const GRADING: Benchmark[] = ['scientsbank', 'beetle', 'saf']
+const GRADING: Benchmark[] = ['scientsbank', 'beetle', 'saf', 'asap2']
 const ALL_SPLITS = 'all'
 
 // What a grading run stores, all on the same answers. Accuracy-like ones read as %, F1 as 0-1.
-type Metric = 'accuracy' | 'macro_f1' | 'weighted_f1' | 'two_way_accuracy'
+type Metric = 'accuracy' | 'macro_f1' | 'weighted_f1' | 'two_way_accuracy' | 'qwk'
 const METRICS: [Metric, string][] = [
-  ['accuracy', 'Accuracy'], ['macro_f1', 'Macro F1'], ['weighted_f1', 'Weighted F1'], ['two_way_accuracy', '2-way accuracy'],
+  ['accuracy', 'Accuracy'], ['macro_f1', 'Macro F1'], ['weighted_f1', 'Weighted F1'], ['two_way_accuracy', '2-way accuracy'], ['qwk', 'QWK (ASAP 2.0)'],
 ]
 const isPct = (m: Metric) => m === 'accuracy' || m === 'two_way_accuracy'
 const showMetric = (m: Metric, v: number | null | undefined) => (isPct(m) ? pct(v) : fixed(v))
@@ -181,37 +181,56 @@ function GradingByCondition({ runs }: { runs: Run[] }) {
   )
 }
 
-const TUNED: Condition[] = ['ft', 'ft-rf', 'ft-lf']
+// The three reply formats, per training set: SciEntsBank train, or Beetle+SAF train.
+const TUNED: Record<string, [Condition, string][]> = {
+  scientsbank: [['ft', 'Label only'], ['ft-rf', 'Reason first'], ['ft-lf', 'Label first']],
+  bs: [['ft-bs', 'Label only'], ['ft-rf-bs', 'Reason first'], ['ft-lf-bs', 'Label first']],
+}
+const ALL_TUNED = Object.values(TUNED).flat().map(([c]) => c)
 
-/** "e2b-kaggle-t4-ft-rf" → "E2B Fine-tuned, reason first"; the label the stage 3b comparison uses. */
+/** "e2b-kaggle-t4-ft-lf-beetle-saf" → "E2B Fine-tuned on Beetle+SAF, label first"; the labels the comparisons use. */
 function adapterName(label: string): string {
   const [model, , , ...rest] = label.split('-')
-  const cond = (rest.join('-') || 'baseline') as Condition
+  const cond = ((rest.join('-') || 'baseline').replace(/-beetle-saf$/, '-bs')) as Condition
   return `${MODEL_LABEL[model as Model] ?? model} ${CONDITION_LABEL[cond] ?? cond}`
 }
 
 // 2. Fine-tuning: base against the LoRA adapters, how they trained, and the stage 3b gate.
 function Finetuning({ runs }: { runs: Run[] }) {
   const [metric, setMetric] = useState<Metric>('accuracy')
+  const [machine, setMachine] = useState<Board>('kaggle')
+  const [trained, setTrained] = useState('scientsbank')
   const ft = useApi<Finetune>('/finetune')
-  const kaggle = runs.filter((r) => r.board === 'kaggle' && r.metrics.accuracy != null)
-  const latest = newestBy(kaggle, (r) => `${r.benchmark}|${r.split}|${r.model}|${r.condition}`)
-  const cell = (b: string, s: string, m: Model, c: Condition) => latest.get(`${b}|${s}|${m}|${c}`)
+  const tuned = TUNED[trained]
+  const graded = runs.filter((r) => (r.board === 'kaggle' || r.board === 'spark') && r.metrics.accuracy != null)
+  const latest = newestBy(graded, (r) => `${r.board}|${r.benchmark}|${r.split}|${r.model}|${r.condition}`)
+  const cell = (b: string, s: string, m: Model, c: Condition, on: Board = machine) => latest.get(`${on}|${b}|${s}|${m}|${c}`)
+  // The Spark has few untouched-model runs; borrow Kaggle's then, and say so.
+  const baseOf = (b: string, s: string, m: Model) => cell(b, s, m, 'baseline') ?? cell(b, s, m, 'baseline', 'kaggle')
+  const mine = graded.filter((r) => r.board === machine && tuned.some(([c]) => c === r.condition))
   const rows = BENCH_ORDER.flatMap((bench) => {
-    const splits = [...new Set(kaggle.filter((r) => r.benchmark === bench && TUNED.includes(r.condition)).map((r) => r.split))].sort()
+    const splits = [...new Set(mine.filter((r) => r.benchmark === bench).map((r) => r.split))].sort()
     return splits.flatMap((split) =>
-      MODELS.filter((m) => TUNED.some((c) => cell(bench, split, m, c))).map((model) => ({ bench, split, model })),
+      MODELS.filter((m) => tuned.some(([c]) => cell(bench, split, m, c))).map((model) => ({ bench, split, model })),
     )
   })
-  if (!rows.length && !ft.data?.adapters.length) return null
+  if (!graded.some((r) => ALL_TUNED.includes(r.condition)) && !ft.data?.adapters.length) return null
 
   return (
     <Section
       i={1}
       title="Fine-tuning"
-      description="LoRA adapters trained on the SciEntsBank train split, graded on Kaggle T4: SciEntsBank, the held-out Beetle and SAF sets, and GSM and MMLU-Pro as no-harm checks. The newest run per cell; change is against the base model on the same split. A smaller n marks a partial run."
-      actions={<MetricToggle value={metric} onChange={setMetric} />}
+      description="LoRA adapters, trained on SciEntsBank or on Beetle+SAF, in three reply formats. Graded on SciEntsBank, Beetle, SAF and ASAP 2.0, with GSM and MMLU-Pro as no-harm checks. The newest run per cell; change is against the untouched model on the same split. A smaller n marks a partial run."
+      actions={
+        <>
+          <Pick label="Trained on" value={trained} onChange={setTrained} options={[['scientsbank', 'SciEntsBank'], ['bs', 'Beetle+SAF']]} />
+          <Pick label="Graded on" value={machine} onChange={(v) => setMachine(v as Board)} options={[['kaggle', 'Kaggle T4'], ['spark', 'DGX Spark']]} />
+          <MetricToggle value={metric} onChange={setMetric} />
+        </>
+      }
     >
+      {!rows.length && <p className="text-sm text-muted-foreground">No adapter of this kind was graded on the {BOARD_LABEL[machine]} yet.</p>}
+      {rows.length > 0 && (
       <Card className="table-inset py-0">
         <Table className="tabular">
           <TableHeader>
@@ -220,20 +239,24 @@ function Finetuning({ runs }: { runs: Run[] }) {
               <TableHead>Split</TableHead>
               <TableHead>Model</TableHead>
               <TableHead className="text-right">Base</TableHead>
-              {TUNED.map((c) => <TableHead key={c} className="text-right">{CONDITION_LABEL[c]}</TableHead>)}
+              {tuned.map(([c, label]) => <TableHead key={c} className="text-right">{label}</TableHead>)}
             </TableRow>
           </TableHeader>
           <TableBody>
             {rows.map(({ bench, split, model }) => {
-              const base = cell(bench, split, model, 'baseline')
+              const base = baseOf(bench, split, model)
               const b = base?.metrics[metric]
+              const borrowed = base && base.board !== machine
               return (
                 <TableRow key={`${bench}${split}${model}`}>
                   <TableCell>{BENCH_LABEL[bench]}</TableCell>
                   <TableCell className="font-mono text-xs text-muted-foreground">{split}</TableCell>
                   <TableCell>{MODEL_LABEL[model]}</TableCell>
-                  <TableCell className="text-right">{showMetric(metric, b)}</TableCell>
-                  {TUNED.map((c) => {
+                  <TableCell className="text-right">
+                    <span className="block">{showMetric(metric, b)}</span>
+                    {borrowed && <span className="block text-xs text-muted-foreground">from {BOARD_LABEL[base.board]}</span>}
+                  </TableCell>
+                  {tuned.map(([c]) => {
                     const r = cell(bench, split, model, c)
                     if (!r) return <TableCell key={c} className="text-right text-muted-foreground">—</TableCell>
                     const partial = base?.metrics.n != null && r.metrics.n != null && r.metrics.n !== base.metrics.n
@@ -251,6 +274,9 @@ function Finetuning({ runs }: { runs: Run[] }) {
           </TableBody>
         </Table>
       </Card>
+      )}
+
+      {ft.data?.bar && <BarCard bar={ft.data.bar} />}
 
       {ft.error && <ErrorNote message={ft.error} />}
       {ft.data?.errors.map((e) => <ErrorNote key={e} message={e} />)}
@@ -267,6 +293,7 @@ function Finetuning({ runs }: { runs: Run[] }) {
               <TableHeader>
                 <TableRow>
                   <TableHead>Adapter</TableHead>
+                  <TableHead>Trained on</TableHead>
                   <TableHead>Trained</TableHead>
                   <TableHead className="text-right">Validation accuracy</TableHead>
                   <TableHead className="hidden text-right md:table-cell">Train loss</TableHead>
@@ -284,6 +311,7 @@ function Finetuning({ runs }: { runs: Run[] }) {
                         <span className="text-[var(--heading)]">{MODEL_LABEL[a.model] ?? a.model}</span>{' '}
                         <span className="text-muted-foreground">{a.reply === 'label' ? 'label only' : a.reply}</span>
                       </TableCell>
+                      <TableCell className="whitespace-nowrap">{a.trainSets.map((t) => BENCH_LABEL[t as Benchmark] ?? t).join(' + ')}</TableCell>
                       <TableCell className="font-mono text-xs whitespace-nowrap text-muted-foreground">{a.created ? dateLabel(a.created) : '—'}</TableCell>
                       <TableCell className="text-right whitespace-nowrap">
                         {a.epochs.map((e, i) => (
@@ -645,6 +673,108 @@ function MmluProReference() {
   )
 }
 
+// The 5-point bar: every adapter against the same untouched model, on SciEntsBank.
+function BarCard({ bar }: { bar: NonNullable<Finetune['bar']> }) {
+  const passed = bar.tests.filter((t) => t.passes).length
+  return (
+    <Card className="gap-2">
+      <CardHeader>
+        <CardTitle className="flex flex-wrap items-center gap-2 font-serif text-xl font-medium">
+          5-point bar on SciEntsBank
+          <Tag tone={passed ? 'green' : 'red'}>{passed} of {bar.tests.length} pass</Tag>
+        </CardTitle>
+        <p className="max-w-prose text-sm text-muted-foreground">Rule: {bar.rule}. From {bar.file}.</p>
+      </CardHeader>
+      <CardContent className="table-inset px-0">
+        <Table className="tabular">
+          <TableHeader>
+            <TableRow>
+              <TableHead>Adapter</TableHead>
+              <TableHead>Split</TableHead>
+              <TableHead className="text-right">Untouched</TableHead>
+              <TableHead className="text-right">Adapter</TableHead>
+              <TableHead className="text-right">Change</TableHead>
+              <TableHead className="hidden text-right lg:table-cell">Macro F1</TableHead>
+              <TableHead className="hidden text-right md:table-cell">Holm p</TableHead>
+              <TableHead>Bar</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {bar.tests.map((t) => (
+              <TableRow key={`${t.adapter}${t.split}`}>
+                <TableCell className="whitespace-nowrap">{adapterName(t.adapter)}</TableCell>
+                <TableCell className="font-mono text-xs text-muted-foreground">{t.split}</TableCell>
+                <TableCell className="text-right">{pct(t.first_accuracy)}</TableCell>
+                <TableCell className="text-right">{pct(t.second_accuracy)}</TableCell>
+                <TableCell className="text-right"><Delta pts={t.diff * 100} /></TableCell>
+                <TableCell className="hidden text-right whitespace-nowrap lg:table-cell">
+                  {fixed(t.base_macro_f1)} → {fixed(t.adapter_macro_f1)}
+                </TableCell>
+                <TableCell className="hidden text-right md:table-cell"><PValue p={t.p_holm} /></TableCell>
+                <TableCell>{t.passes ? <Tag tone="green">Passes</Tag> : <Tag tone="neutral">Misses</Tag>}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
+  )
+}
+
+// 6. Cascade: cheap models first, a thinking model only for the answers they disagree on.
+function CascadeSection() {
+  const { data: c, error } = useApi<Cascade | null>('/cascade')
+  const [splitPick, setSplit] = useState('')
+  if (error) return <ErrorNote message={error} />
+  if (!c) return null
+  const splits = Object.keys(c.splits).sort()
+  const split = splits.includes(splitPick) ? splitPick : splits[0]
+  return (
+    <Section
+      i={4}
+      title="Cascade, simulated"
+      description={
+        <>
+          Policies built from existing {BOARD_LABEL[c.board as Board] ?? c.board} runs, with no new board time: each
+          answer goes to E2B and E4B first and moves up only when they disagree. Energy per answer is the run's
+          measured energy shared out by latency{c.clockState ? `; clocks at ${c.clockState}` : ''}. Coverage below
+          100% means the rest is left to a teacher. From <code className="font-mono text-xs">{c.file}</code>.
+        </>
+      }
+      actions={<Pick label="Split" value={split} onChange={setSplit} options={splits.map((s): [string, string] => [s, s])} />}
+    >
+      <Card className="table-inset py-0">
+        <Table className="tabular">
+          <TableHeader>
+            <TableRow>
+              <TableHead>Policy</TableHead>
+              <TableHead className="text-right">Accuracy</TableHead>
+              <TableHead className="text-right">J / answer</TableHead>
+              <TableHead className="text-right">Sent up</TableHead>
+              <TableHead className="hidden text-right md:table-cell">Coverage</TableHead>
+              <TableHead className="hidden text-right lg:table-cell">Mean s</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {(c.splits[split] ?? []).map((p) => (
+              <TableRow key={p.policy}>
+                <TableCell className="whitespace-nowrap">
+                  {p.policy} {p.on_front && <Tag tone="blue" className="ml-1">Best trade-off</Tag>}
+                </TableCell>
+                <TableCell className="text-right">{pct(p.accuracy ?? p.accuracy_on_kept)}{p.accuracy == null && p.accuracy_on_kept != null ? ' on kept' : ''}</TableCell>
+                <TableCell className="text-right">{fixed(p.j_per_answer, 2)}</TableCell>
+                <TableCell className="text-right">{pct(p.escalated)}</TableCell>
+                <TableCell className="hidden text-right md:table-cell">{pct(p.coverage)}</TableCell>
+                <TableCell className="hidden text-right lg:table-cell">{fixed(p.mean_latency_s, 2)}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Card>
+    </Section>
+  )
+}
+
 export function ResultsPage() {
   const { data: runs, error } = useApi<Run[]>('/runs')
   const [open, setOpen] = useState<Run | null>(null)
@@ -655,6 +785,7 @@ export function ResultsPage() {
       <GradingByCondition runs={runs} />
       <Finetuning runs={runs} />
       <AccuracyVsEnergy runs={runs} onOpen={setOpen} />
+      <CascadeSection />
       <BaselineVsRag runs={runs} />
       <MmluProReference />
       <BoardAgreement runs={runs} onOpen={setOpen} />

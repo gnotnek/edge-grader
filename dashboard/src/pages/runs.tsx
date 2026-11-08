@@ -26,6 +26,7 @@ const COLUMNS: { key: string; label: string; get: (r: Run) => number | null | un
   { key: 'macro_f1', label: 'Macro F1', get: (r) => r.metrics.macro_f1, show: (v) => fixed(v) },
   { key: 'weighted_f1', label: 'Weighted F1', get: (r) => r.metrics.weighted_f1, show: (v) => fixed(v) },
   { key: 'two_way_accuracy', label: '2-way acc.', get: (r) => r.metrics.two_way_accuracy, show: (v) => pct(v) },
+  { key: 'qwk', label: 'QWK', get: (r) => r.metrics.qwk, show: (v) => fixed(v) },
   { key: 'strict_accuracy', label: 'Strict acc.', get: (r) => r.metrics.strict_accuracy, show: (v) => pct(v) },
   { key: 'unparsed', label: 'Unparsed', get: (r) => r.metrics.unparsed ?? r.metrics.no_answer ?? r.metrics.no_number, show: count },
   { key: 'energy', label: 'J / answer', get: (r) => r.energy?.jPerAnswer, show: (v) => fixed(v, 2) },

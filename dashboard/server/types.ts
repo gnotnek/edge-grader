@@ -1,9 +1,9 @@
 // Shapes the /api routes return. Shared by the server parsers and the React pages.
 
-export type Board = 'pi5' | 'jetson' | 'kaggle'
+export type Board = 'pi5' | 'jetson' | 'kaggle' | 'spark'
 export type Model = 'e2b' | 'e4b'
-export type Benchmark = 'scientsbank' | 'beetle' | 'saf' | 'gsm' | 'news' | 'mmlupro'
-export type Condition = 'baseline' | 'rag-en' | 'rag-id' | 'think' | 'lg' | 'lg-reuse' | 'swafull' | 'ft' | 'ft-rf' | 'ft-lf'
+export type Benchmark = 'scientsbank' | 'beetle' | 'saf' | 'asap2' | 'gsm' | 'news' | 'mmlupro'
+export type Condition = 'baseline' | 'rag-en' | 'rag-id' | 'think' | 'lg' | 'lg-reuse' | 'swafull' | 'ft' | 'ft-rf' | 'ft-lf' | 'ft-bs' | 'ft-rf-bs' | 'ft-lf-bs'
 
 export interface RunKey {
   condition: Condition
@@ -148,6 +148,7 @@ export interface Adapter {
   file: string
   model: Model
   reply: string
+  trainSets: string[]
   created?: string
   chosenEpoch?: number
   epochs: { epoch: number; trainLoss: number; valAccuracy: number }[]
@@ -172,8 +173,46 @@ export interface FinetuneTest {
   p_holm: number
 }
 
+/** One adapter against its untouched model, from the 5-point bar (results/kaggle/compare-bar-*.json). */
+export interface BarTest {
+  model: Model
+  trained_on: string
+  adapter: string
+  split: string
+  n: number
+  first_accuracy: number
+  second_accuracy: number
+  diff: number
+  base_macro_f1?: number
+  adapter_macro_f1?: number
+  p_holm: number
+  passes: boolean
+}
+
+export interface CascadePoint {
+  policy: string
+  n: number
+  coverage: number
+  accuracy: number | null
+  accuracy_on_kept?: number | null
+  escalated: number
+  j_per_answer: number
+  mean_latency_s?: number
+  on_front?: boolean
+}
+
+/** Cascade and defer-to-teacher, simulated from existing board runs (results/cascade/). */
+export interface Cascade {
+  file: string
+  board: string
+  clockState?: string
+  energyNote?: string
+  splits: Record<string, CascadePoint[]>
+}
+
 export interface Finetune {
   adapters: Adapter[]
+  bar?: { file: string; rule: string; tests: BarTest[] }
   compare?: {
     file: string
     passed: boolean

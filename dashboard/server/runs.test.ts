@@ -106,8 +106,28 @@ describe('parseKaggleFile', () => {
       benchmark: 'gsm', condition: 'ft', split: 'gsm8k',
     })
   })
+  test('DGX Spark files parse like Kaggle ones, on their own board', () => {
+    expect(parseKaggleFile('baseline-e4b-spark-gb10-ft-test_ud-3way-20261108-055232.json')).toMatchObject({
+      board: 'spark', benchmark: 'scientsbank', condition: 'ft', split: 'test_ud', model: 'e4b',
+    })
+  })
+  test('adapters trained on Beetle+SAF are their own conditions', () => {
+    expect(parseKaggleFile('baseline-e2b-kaggle-t4-ft-beetle-saf-test_ua-3way-20261108-122403.json')?.condition).toBe('ft-bs')
+    expect(parseKaggleFile('baseline-e2b-kaggle-t4-ft-lf-beetle-saf-test_ud-3way-20261108-124141.json')?.condition).toBe('ft-lf-bs')
+    expect(parseKaggleFile('baseline-e2b-spark-gb10-ft-rf-beetle-saf-test_uq-3way-20261107-234952.json')).toMatchObject({
+      board: 'spark', condition: 'ft-rf-bs',
+    })
+  })
+  test('ASAP 2.0 essays: baseline, thinking and adapters', () => {
+    expect(parseKaggleFile('asap2-baseline-e2b-spark-gb10-sample-20261105-141028.json')).toMatchObject({
+      board: 'spark', benchmark: 'asap2', condition: 'baseline', split: 'sample',
+    })
+    expect(parseKaggleFile('asap2-think-e4b-spark-gb10-sample-20261105-175407.json')?.condition).toBe('think')
+    expect(parseKaggleFile('asap2-baseline-e2b-spark-gb10-ft-lf-sample-20261105-142248.json')?.condition).toBe('ft-lf')
+  })
   test('the comparison file is not a run', () => {
     expect(parseKaggleFile('compare-reason-ft-20261102-200813.json')).toBeNull()
+    expect(parseKaggleFile('compare-bar-scientsbank-20261108-135709.json')).toBeNull()
   })
   test('judge files are not runs', () => {
     expect(parseKaggleFile('news-rag-e4b-kaggle-t4-en-k3-20261008-065226.judged-qwen3-14b-q4_k_m.json')).toBeNull()
@@ -117,7 +137,7 @@ describe('parseKaggleFile', () => {
 describe('loadRuns on the real repo', () => {
   const runs = loadRuns(REPO)
   test('every fetched board folder becomes at least one run', () => {
-    const ids = new Set(runs.filter((r) => r.board !== 'kaggle' && r.location === 'results').map((r) => r.id.split('/')[0]))
+    const ids = new Set(runs.filter((r) => (r.board === 'jetson' || r.board === 'pi5') && r.location === 'results').map((r) => r.id.split('/')[0]))
     expect([...ids].sort()).toEqual(fs.readdirSync(path.join(REPO, 'results/board')).sort())
   })
   test('a board MMLU-Pro folder holds one run per subset', () => {
@@ -127,6 +147,11 @@ describe('loadRuns on the real repo', () => {
       ['mmlupro-e2b-jetson-all-20261021-145638/s2', 's2', 'mmlupro'],
       ['mmlupro-e2b-jetson-all-20261021-145638/s3', 's3', 'mmlupro'],
     ])
+  })
+  test('Spark runs are loaded from results/spark, with QWK for ASAP 2.0', () => {
+    const r = runs.find((x) => x.id === 'asap2-baseline-e2b-spark-gb10-sample-20261105-141028.json')!
+    expect(r).toMatchObject({ board: 'spark', source: 'results/spark/asap2-baseline-e2b-spark-gb10-sample-20261105-141028.json' })
+    expect(r.metrics.qwk).toBe(0.5677)
   })
   test('tuned Kaggle runs are fine-tuned, not baseline', () => {
     const r = runs.find((x) => x.id === 'baseline-e2b-kaggle-t4-ft-rf-test_ua-3way-20261102-145733.json')!

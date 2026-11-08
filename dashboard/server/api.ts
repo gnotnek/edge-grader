@@ -4,6 +4,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import type { Plugin } from 'vite'
 import { loadBoards } from './boards.ts'
+import { loadCascade } from './cascade.ts'
 import { loadFinetune } from './finetune.ts'
 import { parsePlan } from './plan.ts'
 import { loadReference } from './reference.ts'
@@ -108,6 +109,7 @@ function route(repo: string, url: string): unknown {
   if (p === '/pairs') return loadPairs(repo)
   if (p === '/reference') return loadReference(repo)
   if (p === '/finetune') return loadFinetune(repo)
+  if (p === '/cascade') return loadCascade(repo)
   throw Object.assign(new Error(`no route ${p}`), { status: 404 })
 }
 

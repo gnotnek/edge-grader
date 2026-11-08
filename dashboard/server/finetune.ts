@@ -25,6 +25,7 @@ export function loadFinetune(repo: string): Finetune {
         file: rel,
         model: d.model as Model,
         reply: typeof s.reply === 'string' ? s.reply : 'label',
+        trainSets: Array.isArray(s.train_sets) ? s.train_sets : ['scientsbank'],
         epochs: (d.history ?? []).map((h: Obj) => ({ epoch: h.epoch, trainLoss: h.train_loss, valAccuracy: h.val_accuracy })),
       }
       if (typeof d.created === 'string') a.created = d.created
@@ -38,7 +39,19 @@ export function loadFinetune(repo: string): Finetune {
     }
   }
 
-  const cmp = list(path.join(repo, 'results/kaggle')).filter((f) => /^compare-reason-ft-.*\.json$/.test(f)).at(-1)
+  const kaggle = list(path.join(repo, 'results/kaggle'))
+  const bar = kaggle.filter((f) => /^compare-bar-.*\.json$/.test(f)).at(-1)
+  if (bar) {
+    const rel = `results/kaggle/${bar}`
+    try {
+      const d: Obj = JSON.parse(fs.readFileSync(path.join(repo, rel), 'utf8'))
+      out.bar = { file: rel, rule: d.rule ?? '', tests: d.tests ?? [] }
+    } catch (e) {
+      out.errors.push(`${rel}: ${(e as Error).message}`)
+    }
+  }
+
+  const cmp = kaggle.filter((f) => /^compare-reason-ft-.*\.json$/.test(f)).at(-1)
   if (cmp) {
     const rel = `results/kaggle/${cmp}`
     try {

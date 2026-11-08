@@ -25,6 +25,7 @@
     --color-jetson: var(--jetson);
     --color-pi5: var(--pi5);
     --color-kaggle: var(--kaggle);
+    --color-spark: var(--spark);
     --color-good: var(--good);
     --color-warning: var(--warning);
     --color-serious: var(--serious);
@@ -101,6 +102,8 @@
     --jetson: #2a78d6;
     --pi5: #eb6834;
     --kaggle: #1baf7a;
+    /* Slot 4 (yellow): adjacent-pair safe beside slots 1-3; below 3:1 on light, so tables back it up. */
+    --spark: #eda100;
     /* Status for the coverage map; tags use the pastels below. */
     --good: #346538;
     --warning: #956400;
@@ -157,6 +160,7 @@
     --jetson: #3987e5;
     --pi5: #d95926;
     --kaggle: #199e70;
+    --spark: #c98500;
     --good: #8fc79a;
     --warning: #e5c27a;
     --serious: #e8916f;
