@@ -159,16 +159,21 @@ A tweak counts if it adds **at least 5 points** of accuracy over the same model 
 |---|---|---|
 | E2B, Oct 28 adapter | **+24.2 / +16.9 / +14.6** | +5.5 n.s. / **+6.4** / +6.9 n.s. / +3.1 |
 | E4B, Oct 28 adapter | **+12.4 / +12.4 / +6.0** | +3.4 / +1.7 / +1.1 / +0.6 |
-| E2B, label-first adapter | not graded / +16.6 / +12.9, not tested | **+11.4 / +6.7** / +5.3 n.s. / −1.7 |
-| E2B, reason-first adapter | not graded / +15.4 / +10.7, not tested | **+11.4** / +5.0 n.s. / +3.2 / +4.6 |
+| E2B, label-first adapter | not graded / **+16.7 / +13.0** | **+11.4 / +6.7** / +5.3 n.s. / −1.7 |
+| E2B, reason-first adapter | not graded / **+15.4 / +10.7** | **+11.4** / +5.0 n.s. / +3.2 / +4.6 |
+| E4B, label-first adapter | not graded / **+11.1** / +2.7 | not run |
+| E4B, reason-first adapter | not graded / **+8.9** / −0.8 | not run |
+| E2B, Beetle + SAF label-only adapter | **+14.1 / +16.7 / +8.2** | trained on them |
+| E2B, Beetle + SAF label-first adapter | +4.4 / **+8.9** / −2.8 | trained on them |
+| E2B, Beetle + SAF reason-first adapter | +0.9 / **+7.6** / −0.8 | trained on them |
+| E4B, Beetle + SAF adapters (all three) | −1.3 to −8.7 / +0.3 to +3.7 / −2.9 to −9.1 | trained on them |
 | E2B, thinking on | **+11.9 / +16.0 / +9.9** | not run |
 | E4B, thinking on | **+6.1 / +12.6** / +3.0 | not run |
 | RAG-en, either model | best +2.9 | not run |
 
 - Thinking's p values are ≤ 0.004 across the 10 B1 runs, which stays below 0.05 under Holm over those 10.
-- Stage 3b's SciEntsBank gains were described, not tested (its 16 tests were fixed before grading), so they don't count as passing.
+- Stage 3b's SciEntsBank gains were described, not tested, in its own family (16 tests fixed before grading). They were tested on 2026-11-08 in a separate family of 30 (every adapter against its untouched model, SciEntsBank only, set after grading), with the E4B and Beetle + SAF rows ([details](finetuning.md#result-transfer-helps-e2b-not-e4b-2026-11-08)).
 - Engine and prefix reuse stay within ±0.9. They're cost settings, so the bar doesn't apply to them.
-- Stage 3b E4B has only 100 test_ua answers so far, so it isn't judged here.
 - Against the Oct 28 adapter rather than the untouched model, stage 3b passes in one held-out cell: Beetle test_ua, +5.9 (Holm p 0.031 reason-first, 0.009 label-first).
 
 ### Caveats

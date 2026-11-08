@@ -289,6 +289,38 @@ The Spark runs in `results/spark/` (E2B's six adapters and E4B `-ft` on all spli
 - Spark and Kaggle agree. E2B `-ft`, `-ft-lf`, `-ft-rf` on test_uq and test_ud: same label on 98.3–99.3% of answers (95.4–96.0% for reason-first), accuracy within 0.3 points.
 - Spark timings (latency, wall time) are inflated by the sharing and aren't comparable; cost comes from the Jetson anyway.
 
+### Result: transfer helps E2B, not E4B (2026-11-08)
+
+**In short:** E2B's label-only Beetle + SAF adapter passes the 5-point bar on all three SciEntsBank splits, with no SciEntsBank answer in its training. On test_uq it matches the adapter trained on SciEntsBank itself (76.4 vs 76.7%). None of E4B's Beetle + SAF adapters passes anywhere, and the ones that write reasons make it significantly worse on test_ud.
+
+Kaggle T4, the whole split each time, build `a3a1c47`. The 15 new runs (Nov 8: E4B `-ft-lf`, `-ft-rf`, the six Beetle + SAF adapters) had 0 errors, 0 unparsed, 0 cut. The others are the Oct 5, Oct 28 and Nov 2 runs on the same build. Each adapter is paired with its own untouched model on the same answers: McNemar on the 3-way labels, Holm over all 30 tests at once. The test_ua cells of the SciEntsBank-trained adapters are left out, since they trained on its questions. **This family was set after the runs were graded** (2026-11-08), so it's recorded as such ([comparison](../../results/kaggle/compare-bar-scientsbank-20261108-135709.json), `uv run python -m edge_grader.compare_bar`).
+
+Accuracy, change against the untouched model, and Holm p. **Bold** passes the bar (+5 points, Holm p < 0.05).
+
+| Adapter | test_ua | test_uq | test_ud |
+|---|---|---|---|
+| *E2B untouched* | *55.2%* | *59.8%* | *60.3%* |
+| E2B, SciEntsBank, label-only (Oct 28) | trained on its questions | **76.7%, +16.9** (<0.001) | **74.9%, +14.6** (<0.001) |
+| E2B, SciEntsBank, label-first | trained on its questions | **76.4%, +16.7** (<0.001) | **73.2%, +13.0** (<0.001) |
+| E2B, SciEntsBank, reason-first | trained on its questions | **75.2%, +15.4** (<0.001) | **71.0%, +10.7** (<0.001) |
+| E2B, Beetle + SAF, label-only | **69.3%, +14.1** (<0.001) | **76.4%, +16.7** (<0.001) | **68.4%, +8.2** (<0.001) |
+| E2B, Beetle + SAF, label-first | 59.6%, +4.4 (0.29) | **68.6%, +8.9** (<0.001) | 57.5%, −2.8 (0.003) |
+| E2B, Beetle + SAF, reason-first | 56.1%, +0.9 (1) | **67.4%, +7.6** (0.006) | 59.5%, −0.8 (1) |
+| *E4B untouched* | *66.7%* | *67.5%* | *70.4%* |
+| E4B, SciEntsBank, label-only (Oct 28) | trained on its questions | **80.0%, +12.4** (<0.001) | **76.4%, +6.0** (<0.001) |
+| E4B, SciEntsBank, label-first | trained on its questions | **78.6%, +11.1** (<0.001) | 73.1%, +2.7 (<0.001) |
+| E4B, SciEntsBank, reason-first | trained on its questions | **76.4%, +8.9** (<0.001) | 69.6%, −0.8 (1) |
+| E4B, Beetle + SAF, label-only | 65.4%, −1.3 (1) | 71.2%, +3.7 (0.23) | 67.5%, −2.9 (<0.001) |
+| E4B, Beetle + SAF, label-first | 61.7%, −5.0 (0.14) | 67.8%, +0.3 (1) | 63.4%, −7.0 (<0.001) |
+| E4B, Beetle + SAF, reason-first | 58.0%, −8.7 (0.007) | 68.8%, +1.2 (1) | 61.3%, −9.1 (<0.001) |
+
+- **15 of 30 pass.** All six SciEntsBank-trained E2B cells, E4B's Oct 28 adapter on both splits, E4B label-first and reason-first on test_uq only, and five of nine E2B Beetle + SAF cells.
+- **Grading learned on other sets carries over for E2B, mostly through the label-only adapter.** The unseen domains (test_ud) are where transfer is weakest: +8.2 from Beetle + SAF against +14.6 from SciEntsBank's own train split.
+- **E4B loses from Beetle + SAF training.** It already starts higher, and the adapters pull test_ud down 3–9 points. Macro-F1 falls further than accuracy (test_ud: 0.705 untouched, 0.587 label-only, 0.548 reason-first), so the drop is uneven across the three labels.
+- **Writing a reason doesn't help here either.** Label-only scores highest of the three replies in all 15 model × training set × split cells. The same held for the SciEntsBank-trained adapters on Beetle and SAF (stage 3b).
+- **E4B's SciEntsBank label-first and reason-first** (graded in full for the first time) pass on test_uq and fall short on test_ud, where label-first gains a significant +2.7, below the bar.
+- One seed per adapter, and the validation sets are small (6 questions for Beetle + SAF), so the label-only vs reason gap is a single comparison, not a measured spread.
+
 ## Not done yet
 
 - **Cost on the Jetson.** Latency and energy per answer for the tuned models, against the re-run baselines in the same clock state. Kaggle times aren't board cost, so no cost number is quoted here.
