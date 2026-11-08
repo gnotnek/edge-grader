@@ -1,0 +1,38 @@
+{
+  "benchmark": "scientsbank",
+  "stage": "baseline",
+  "label": "e4b-spark-gb10-ft-beetle-saf",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "data/models/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a3a1c47"
+  },
+  "split": "test_ua",
+  "scheme": "3way",
+  "reply": "label",
+  "n_requested": 100,
+  "seed": 0,
+  "time": "2026-11-06T05:58:36+00:00",
+  "metrics": {
+    "n": 100,
+    "accuracy": 0.65,
+    "macro_f1": 0.5709,
+    "weighted_f1": 0.6586,
+    "unparsed": 0,
+    "two_way": {
+      "n": 100,
+      "accuracy": 0.81,
+      "macro_f1": 0.7835,
+      "weighted_f1": 0.7986,
+      "unparsed": 0
+    },
+    "errors": 0,
+    "median_latency_s": 0.2415,
+    "wall_s": 25.3,
+    "prompt_tokens": 16059,
+    "completion_tokens": 230,
+    "median_completion_tokens": 2.0
+  }
+}

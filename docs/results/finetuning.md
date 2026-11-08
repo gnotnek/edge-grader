@@ -258,7 +258,7 @@ This matches the validation numbers: reasons don't help on the dataset the adapt
 
 The leniency looks like a judging problem on new subjects, not a label-frequency problem. The candidates that act on it are training on more than one grading set, and a reward on the grade (GRPO). Only the first keeps the 2-token reply, so only it costs the device nothing extra (RQ4). Both are optional under the 2026-11-04 focus on edge cost.
 
-## Trained on Beetle and SAF, tested on SciEntsBank (2026-11-06, running)
+## Trained on Beetle and SAF, tested on SciEntsBank (2026-11-06, grading on Kaggle)
 
 **Why:** SciEntsBank is the main benchmark again, and adapters trained only on other grading sets test whether fine-tuning teaches grading that transfers. No SciEntsBank question appears in Beetle or SAF, and 5 of its 5,835 test answers match a training answer word for word.
 
@@ -269,6 +269,25 @@ The leniency looks like a judging problem on new subjects, not a label-frequency
 - The one left unmarked, `SC.Q12.SBJ26.L1`, is a disagreement with the dataset's grade, not with the reason. The student's "it closes the pathway" is graded contradictory, and the owner would call it incorrect.
 - Two ticked items carry the same note: both are graded contradictory, and the owner would grade them differently.
 - So all three of the owner's doubts are about Beetle's contradictory label. Where "contradictory" ends and "incorrect" begins is unclear to a person too, which fits the adapters' trouble with that grade.
+
+**Training (DGX Spark, 2026-11-05 → 11-07):** all six adapters trained and converted; validation on 6 held-out questions (491 answers) picked the epoch.
+
+| Adapter | Validation by epoch | Chosen |
+|---|---|---|
+| E2B label-only | 65.8 / 64.2 / 65.6% | 1 |
+| E2B label-first | 62.1 / 61.1 / 61.5% | 1 |
+| E2B reason-first | 53.4 / 57.0 / 57.2% | 3 |
+| E4B label-only | 64.8 / 68.4 / 67.4% | 2 |
+| E4B label-first | 67.2 / 65.6 / 68.2% | 3 |
+| E4B reason-first | 61.1 / 61.7 / 60.7% | 2 |
+
+**Grading moved from the Spark to Kaggle (owner, 2026-11-08).** From 22:50 on Nov 6 another lab job shared the Spark's GPU, and steps took 2–2.5× longer. The owner stopped the Spark benchmark after E4B's SciEntsBank adapter and moved the rest to Kaggle T4s, so the comparison runs on one unshared machine type. Kaggle already had untouched E2B and E4B (Oct 5) and E2B `-ft`, `-ft-lf`, `-ft-rf` and E4B `-ft` (Oct 28, Nov 2) on all three splits, same llama.cpp `a3a1c47` and flags: those are reused, not re-run. Kaggle grades the missing eight: E4B `-ft-lf` and `-ft-rf`, and the six Beetle + SAF adapters (labels `…-ft-beetle-saf`, `…-ft-lf-beetle-saf`, `…-ft-rf-beetle-saf`).
+
+The Spark runs in `results/spark/` (E2B's six adapters and E4B `-ft` on all splits, 100-answer checks of the rest) stay as a cross-check, not the comparison:
+
+- Sharing didn't change grades. Two adapters graded the same 100 answers before the sharing (Nov 6) and during it (Nov 7): 99 of 100 identical replies each.
+- Spark and Kaggle agree. E2B `-ft`, `-ft-lf`, `-ft-rf` on test_uq and test_ud: same label on 98.3–99.3% of answers (95.4–96.0% for reason-first), accuracy within 0.3 points.
+- Spark timings (latency, wall time) are inflated by the sharing and aren't comparable; cost comes from the Jetson anyway.
 
 ## Not done yet
 

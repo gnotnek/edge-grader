@@ -1,0 +1,39 @@
+{
+  "benchmark": "scientsbank",
+  "stage": "baseline",
+  "label": "e2b-spark-gb10-ft-rf",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "data/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a3a1c47"
+  },
+  "split": "test_ud",
+  "scheme": "3way",
+  "reply": "reason-first",
+  "n_requested": 0,
+  "seed": 0,
+  "time": "2026-11-07T21:00:45+00:00",
+  "metrics": {
+    "n": 4562,
+    "accuracy": 0.7065,
+    "macro_f1": 0.677,
+    "weighted_f1": 0.7052,
+    "unparsed": 0,
+    "two_way": {
+      "n": 4562,
+      "accuracy": 0.7562,
+      "macro_f1": 0.7526,
+      "weighted_f1": 0.7574,
+      "unparsed": 0
+    },
+    "errors": 0,
+    "cut": 0,
+    "median_latency_s": 4.206,
+    "wall_s": 19216.6,
+    "prompt_tokens": 709243,
+    "completion_tokens": 290497,
+    "median_completion_tokens": 63.0
+  }
+}
