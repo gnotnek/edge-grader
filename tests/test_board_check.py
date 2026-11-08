@@ -187,6 +187,7 @@ def test_kaggle_run_finds_each_benchmark(tmp_path):
         "news-baseline-e2b-kaggle-t4-20261007-1.json",
         "news-baseline-e2b-kaggle-t4-20261007-1.judged-qwen3-14b-q4_k_m.json",
         "news-rag-e2b-kaggle-t4-en-k3-20261008-1.json",
+        "baseline-e2b-kaggle-t4-ft-beetle-saf-test_uq-3way-20261108-1.json",  # an adapter: never paired
     ]
     for n in names:
         (tmp_path / n).write_text(json.dumps({"metrics": {"n": 733}}))

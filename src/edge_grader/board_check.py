@@ -279,8 +279,10 @@ def kaggle_run(directory: str, bench: str, model: str, split: str, n: int,
     if bench == "scientsbank":
         prefix = "think" if thinking else stage
         tag = "-en-k3" if prefix == "rag" else ""
+        # [^-]+ is the hardware ("t4"): adapter runs (…-kaggle-t4-ft-…) aren't untouched baselines
+        same = re.compile(rf"{prefix}-{model}-kaggle-[^-]+{tag}-{split}-")
         for path in sorted(d.glob(f"{prefix}-{model}-kaggle-*{tag}-{split}-*.json")):
-            if json.loads(path.read_text())["metrics"]["n"] == n:
+            if same.match(path.name) and json.loads(path.read_text())["metrics"]["n"] == n:
                 return path
         return None
     rag = stage == "rag"
