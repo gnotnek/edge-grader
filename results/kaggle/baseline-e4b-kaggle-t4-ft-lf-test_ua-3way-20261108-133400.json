@@ -1,0 +1,39 @@
+{
+  "benchmark": "scientsbank",
+  "stage": "baseline",
+  "label": "e4b-kaggle-t4-ft-lf",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "/tmp/models/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a3a1c47"
+  },
+  "split": "test_ua",
+  "scheme": "3way",
+  "reply": "label-first",
+  "n_requested": 0,
+  "seed": 0,
+  "time": "2026-11-08T13:34:00+00:00",
+  "metrics": {
+    "n": 540,
+    "accuracy": 0.7722,
+    "macro_f1": 0.7512,
+    "weighted_f1": 0.7716,
+    "unparsed": 0,
+    "two_way": {
+      "n": 540,
+      "accuracy": 0.8259,
+      "macro_f1": 0.8181,
+      "weighted_f1": 0.8233,
+      "unparsed": 0
+    },
+    "errors": 0,
+    "cut": 0,
+    "median_latency_s": 0.197,
+    "wall_s": 112.0,
+    "prompt_tokens": 89766,
+    "completion_tokens": 1184,
+    "median_completion_tokens": 2.0
+  }
+}
