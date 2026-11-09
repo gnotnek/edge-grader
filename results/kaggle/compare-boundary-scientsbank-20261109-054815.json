@@ -1,0 +1,909 @@
+{
+  "kind": "compare-boundary",
+  "post_hoc": true,
+  "rule": "Beetle + SAF adapter vs the same untouched model, paired McNemar on 2-way labels (contradictory merged into incorrect), Holm over these tests; exploratory, set 2026-11-09",
+  "family": 18,
+  "tests": [
+    {
+      "model": "e2b",
+      "adapter": "e2b-kaggle-t4-ft-beetle-saf",
+      "split": "test_ua",
+      "base_file": "baseline-e2b-kaggle-t4-test_ua-3way-20261005-100102.json",
+      "adapter_file": "baseline-e2b-kaggle-t4-ft-beetle-saf-test_ua-3way-20261108-122403.json",
+      "diff_3way": 0.1407,
+      "n": 540,
+      "first_accuracy": 0.7148,
+      "second_accuracy": 0.7889,
+      "diff": 0.0741,
+      "only_first_right": 31,
+      "only_second_right": 71,
+      "p": 9.307650827247333e-05,
+      "base_labels": {
+        "correct": {
+          "recall": 0.4421,
+          "pred_share": 0.2352,
+          "gold_share": 0.4315
+        },
+        "contradictory": {
+          "recall": 0.6552,
+          "pred_share": 0.2685,
+          "gold_share": 0.1074
+        },
+        "incorrect": {
+          "recall": 0.6305,
+          "pred_share": 0.4963,
+          "gold_share": 0.4611
+        }
+      },
+      "adapter_labels": {
+        "correct": {
+          "recall": 0.7039,
+          "pred_share": 0.387,
+          "gold_share": 0.4315
+        },
+        "contradictory": {
+          "recall": 0.3793,
+          "pred_share": 0.0907,
+          "gold_share": 0.1074
+        },
+        "incorrect": {
+          "recall": 0.755,
+          "pred_share": 0.5222,
+          "gold_share": 0.4611
+        }
+      },
+      "p_holm": 0.0009307650827247334
+    },
+    {
+      "model": "e2b",
+      "adapter": "e2b-kaggle-t4-ft-beetle-saf",
+      "split": "test_uq",
+      "base_file": "baseline-e2b-kaggle-t4-test_uq-3way-20261005-100230.json",
+      "adapter_file": "baseline-e2b-kaggle-t4-ft-beetle-saf-test_uq-3way-20261108-122543.json",
+      "diff_3way": 0.1665,
+      "n": 733,
+      "first_accuracy": 0.7544,
+      "second_accuracy": 0.839,
+      "diff": 0.0846,
+      "only_first_right": 31,
+      "only_second_right": 93,
+      "p": 2.2005721799037115e-08,
+      "base_labels": {
+        "correct": {
+          "recall": 0.4817,
+          "pred_share": 0.2306,
+          "gold_share": 0.4106
+        },
+        "contradictory": {
+          "recall": 0.7812,
+          "pred_share": 0.2769,
+          "gold_share": 0.0873
+        },
+        "incorrect": {
+          "recall": 0.6603,
+          "pred_share": 0.4925,
+          "gold_share": 0.502
+        }
+      },
+      "adapter_labels": {
+        "correct": {
+          "recall": 0.7774,
+          "pred_share": 0.3888,
+          "gold_share": 0.4106
+        },
+        "contradictory": {
+          "recall": 0.4688,
+          "pred_share": 0.0764,
+          "gold_share": 0.0873
+        },
+        "incorrect": {
+          "recall": 0.8043,
+          "pred_share": 0.5348,
+          "gold_share": 0.502
+        }
+      },
+      "p_holm": 3.7409727058363094e-07
+    },
+    {
+      "model": "e2b",
+      "adapter": "e2b-kaggle-t4-ft-beetle-saf",
+      "split": "test_ud",
+      "base_file": "baseline-e2b-kaggle-t4-test_ud-3way-20261005-101102.json",
+      "adapter_file": "baseline-e2b-kaggle-t4-ft-beetle-saf-test_ud-3way-20261108-123527.json",
+      "diff_3way": 0.0817,
+      "n": 4562,
+      "first_accuracy": 0.7345,
+      "second_accuracy": 0.772,
+      "diff": 0.0375,
+      "only_first_right": 347,
+      "only_second_right": 518,
+      "p": 6.6919465544973925e-09,
+      "base_labels": {
+        "correct": {
+          "recall": 0.6035,
+          "pred_share": 0.3525,
+          "gold_share": 0.4202
+        },
+        "contradictory": {
+          "recall": 0.7914,
+          "pred_share": 0.2422,
+          "gold_share": 0.0914
+        },
+        "incorrect": {
+          "recall": 0.5664,
+          "pred_share": 0.4053,
+          "gold_share": 0.4884
+        }
+      },
+      "adapter_labels": {
+        "correct": {
+          "recall": 0.7939,
+          "pred_share": 0.475,
+          "gold_share": 0.4202
+        },
+        "contradictory": {
+          "recall": 0.4077,
+          "pred_share": 0.0901,
+          "gold_share": 0.0914
+        },
+        "incorrect": {
+          "recall": 0.6418,
+          "pred_share": 0.4349,
+          "gold_share": 0.4884
+        }
+      },
+      "p_holm": 1.2045503798095307e-07
+    },
+    {
+      "model": "e2b",
+      "adapter": "e2b-kaggle-t4-ft-lf-beetle-saf",
+      "split": "test_ua",
+      "base_file": "baseline-e2b-kaggle-t4-test_ua-3way-20261005-100102.json",
+      "adapter_file": "baseline-e2b-kaggle-t4-ft-lf-beetle-saf-test_ua-3way-20261108-122901.json",
+      "diff_3way": 0.0444,
+      "n": 540,
+      "first_accuracy": 0.7148,
+      "second_accuracy": 0.7519,
+      "diff": 0.0371,
+      "only_first_right": 32,
+      "only_second_right": 52,
+      "p": 0.03752953363441315,
+      "base_labels": {
+        "correct": {
+          "recall": 0.4421,
+          "pred_share": 0.2352,
+          "gold_share": 0.4315
+        },
+        "contradictory": {
+          "recall": 0.6552,
+          "pred_share": 0.2685,
+          "gold_share": 0.1074
+        },
+        "incorrect": {
+          "recall": 0.6305,
+          "pred_share": 0.4963,
+          "gold_share": 0.4611
+        }
+      },
+      "adapter_labels": {
+        "correct": {
+          "recall": 0.6223,
+          "pred_share": 0.3537,
+          "gold_share": 0.4315
+        },
+        "contradictory": {
+          "recall": 0.5862,
+          "pred_share": 0.2426,
+          "gold_share": 0.1074
+        },
+        "incorrect": {
+          "recall": 0.5743,
+          "pred_share": 0.4037,
+          "gold_share": 0.4611
+        }
+      },
+      "p_holm": 0.19886380672503262
+    },
+    {
+      "model": "e2b",
+      "adapter": "e2b-kaggle-t4-ft-lf-beetle-saf",
+      "split": "test_uq",
+      "base_file": "baseline-e2b-kaggle-t4-test_uq-3way-20261005-100230.json",
+      "adapter_file": "baseline-e2b-kaggle-t4-ft-lf-beetle-saf-test_uq-3way-20261108-123050.json",
+      "diff_3way": 0.0887,
+      "n": 733,
+      "first_accuracy": 0.7544,
+      "second_accuracy": 0.8281,
+      "diff": 0.0737,
+      "only_first_right": 33,
+      "only_second_right": 87,
+      "p": 8.680495331686947e-07,
+      "base_labels": {
+        "correct": {
+          "recall": 0.4817,
+          "pred_share": 0.2306,
+          "gold_share": 0.4106
+        },
+        "contradictory": {
+          "recall": 0.7812,
+          "pred_share": 0.2769,
+          "gold_share": 0.0873
+        },
+        "incorrect": {
+          "recall": 0.6603,
+          "pred_share": 0.4925,
+          "gold_share": 0.502
+        }
+      },
+      "adapter_labels": {
+        "correct": {
+          "recall": 0.7641,
+          "pred_share": 0.3888,
+          "gold_share": 0.4106
+        },
+        "contradictory": {
+          "recall": 0.75,
+          "pred_share": 0.2087,
+          "gold_share": 0.0873
+        },
+        "incorrect": {
+          "recall": 0.6114,
+          "pred_share": 0.4025,
+          "gold_share": 0.502
+        }
+      },
+      "p_holm": 1.2630020726576277e-05
+    },
+    {
+      "model": "e2b",
+      "adapter": "e2b-kaggle-t4-ft-lf-beetle-saf",
+      "split": "test_ud",
+      "base_file": "baseline-e2b-kaggle-t4-test_ud-3way-20261005-101102.json",
+      "adapter_file": "baseline-e2b-kaggle-t4-ft-lf-beetle-saf-test_ud-3way-20261108-124141.json",
+      "diff_3way": -0.0281,
+      "n": 4562,
+      "first_accuracy": 0.7345,
+      "second_accuracy": 0.7635,
+      "diff": 0.029,
+      "only_first_right": 307,
+      "only_second_right": 439,
+      "p": 1.5231563993621458e-06,
+      "base_labels": {
+        "correct": {
+          "recall": 0.6035,
+          "pred_share": 0.3525,
+          "gold_share": 0.4202
+        },
+        "contradictory": {
+          "recall": 0.7914,
+          "pred_share": 0.2422,
+          "gold_share": 0.0914
+        },
+        "incorrect": {
+          "recall": 0.5664,
+          "pred_share": 0.4053,
+          "gold_share": 0.4884
+        }
+      },
+      "adapter_labels": {
+        "correct": {
+          "recall": 0.7814,
+          "pred_share": 0.473,
+          "gold_share": 0.4202
+        },
+        "contradictory": {
+          "recall": 0.6643,
+          "pred_share": 0.2552,
+          "gold_share": 0.0914
+        },
+        "incorrect": {
+          "recall": 0.3797,
+          "pred_share": 0.2718,
+          "gold_share": 0.4884
+        }
+      },
+      "p_holm": 1.9801033191707896e-05
+    },
+    {
+      "model": "e2b",
+      "adapter": "e2b-kaggle-t4-ft-rf-beetle-saf",
+      "split": "test_ua",
+      "base_file": "baseline-e2b-kaggle-t4-test_ua-3way-20261005-100102.json",
+      "adapter_file": "baseline-e2b-kaggle-t4-ft-rf-beetle-saf-test_ua-3way-20261108-055537.json",
+      "diff_3way": 0.0092,
+      "n": 540,
+      "first_accuracy": 0.7148,
+      "second_accuracy": 0.7167,
+      "diff": 0.0019,
+      "only_first_right": 57,
+      "only_second_right": 58,
+      "p": 1.0,
+      "base_labels": {
+        "correct": {
+          "recall": 0.4421,
+          "pred_share": 0.2352,
+          "gold_share": 0.4315
+        },
+        "contradictory": {
+          "recall": 0.6552,
+          "pred_share": 0.2685,
+          "gold_share": 0.1074
+        },
+        "incorrect": {
+          "recall": 0.6305,
+          "pred_share": 0.4963,
+          "gold_share": 0.4611
+        }
+      },
+      "adapter_labels": {
+        "correct": {
+          "recall": 0.618,
+          "pred_share": 0.3852,
+          "gold_share": 0.4315
+        },
+        "contradictory": {
+          "recall": 0.4655,
+          "pred_share": 0.2037,
+          "gold_share": 0.1074
+        },
+        "incorrect": {
+          "recall": 0.5301,
+          "pred_share": 0.4111,
+          "gold_share": 0.4611
+        }
+      },
+      "p_holm": 1.0
+    },
+    {
+      "model": "e2b",
+      "adapter": "e2b-kaggle-t4-ft-rf-beetle-saf",
+      "split": "test_uq",
+      "base_file": "baseline-e2b-kaggle-t4-test_uq-3way-20261005-100230.json",
+      "adapter_file": "baseline-e2b-kaggle-t4-ft-rf-beetle-saf-test_uq-3way-20261108-060831.json",
+      "diff_3way": 0.0764,
+      "n": 733,
+      "first_accuracy": 0.7544,
+      "second_accuracy": 0.7913,
+      "diff": 0.0369,
+      "only_first_right": 72,
+      "only_second_right": 99,
+      "p": 0.04646442599480428,
+      "base_labels": {
+        "correct": {
+          "recall": 0.4817,
+          "pred_share": 0.2306,
+          "gold_share": 0.4106
+        },
+        "contradictory": {
+          "recall": 0.7812,
+          "pred_share": 0.2769,
+          "gold_share": 0.0873
+        },
+        "incorrect": {
+          "recall": 0.6603,
+          "pred_share": 0.4925,
+          "gold_share": 0.502
+        }
+      },
+      "adapter_labels": {
+        "correct": {
+          "recall": 0.7741,
+          "pred_share": 0.4338,
+          "gold_share": 0.4106
+        },
+        "contradictory": {
+          "recall": 0.6094,
+          "pred_share": 0.1678,
+          "gold_share": 0.0873
+        },
+        "incorrect": {
+          "recall": 0.6033,
+          "pred_share": 0.3984,
+          "gold_share": 0.502
+        }
+      },
+      "p_holm": 0.19886380672503262
+    },
+    {
+      "model": "e2b",
+      "adapter": "e2b-kaggle-t4-ft-rf-beetle-saf",
+      "split": "test_ud",
+      "base_file": "baseline-e2b-kaggle-t4-test_ud-3way-20261005-101102.json",
+      "adapter_file": "baseline-e2b-kaggle-t4-ft-rf-beetle-saf-test_ud-3way-20261108-072653.json",
+      "diff_3way": -0.0079,
+      "n": 4562,
+      "first_accuracy": 0.7345,
+      "second_accuracy": 0.7411,
+      "diff": 0.0066,
+      "only_first_right": 434,
+      "only_second_right": 464,
+      "p": 0.33317588392178754,
+      "base_labels": {
+        "correct": {
+          "recall": 0.6035,
+          "pred_share": 0.3525,
+          "gold_share": 0.4202
+        },
+        "contradictory": {
+          "recall": 0.7914,
+          "pred_share": 0.2422,
+          "gold_share": 0.0914
+        },
+        "incorrect": {
+          "recall": 0.5664,
+          "pred_share": 0.4053,
+          "gold_share": 0.4884
+        }
+      },
+      "adapter_labels": {
+        "correct": {
+          "recall": 0.7256,
+          "pred_share": 0.4485,
+          "gold_share": 0.4202
+        },
+        "contradictory": {
+          "recall": 0.4388,
+          "pred_share": 0.1881,
+          "gold_share": 0.0914
+        },
+        "incorrect": {
+          "recall": 0.5112,
+          "pred_share": 0.3634,
+          "gold_share": 0.4884
+        }
+      },
+      "p_holm": 0.6663517678435751
+    },
+    {
+      "model": "e4b",
+      "adapter": "e4b-kaggle-t4-ft-beetle-saf",
+      "split": "test_ua",
+      "base_file": "baseline-e4b-kaggle-t4-test_ua-3way-20261005-094349.json",
+      "adapter_file": "baseline-e4b-kaggle-t4-ft-beetle-saf-test_ua-3way-20261108-123738.json",
+      "diff_3way": -0.013,
+      "n": 540,
+      "first_accuracy": 0.7278,
+      "second_accuracy": 0.7593,
+      "diff": 0.0315,
+      "only_first_right": 20,
+      "only_second_right": 37,
+      "p": 0.03314396778750544,
+      "base_labels": {
+        "correct": {
+          "recall": 0.4506,
+          "pred_share": 0.2296,
+          "gold_share": 0.4315
+        },
+        "contradictory": {
+          "recall": 0.6379,
+          "pred_share": 0.0926,
+          "gold_share": 0.1074
+        },
+        "incorrect": {
+          "recall": 0.8755,
+          "pred_share": 0.6778,
+          "gold_share": 0.4611
+        }
+      },
+      "adapter_labels": {
+        "correct": {
+          "recall": 0.4979,
+          "pred_share": 0.2389,
+          "gold_share": 0.4315
+        },
+        "contradictory": {
+          "recall": 0.431,
+          "pred_share": 0.0963,
+          "gold_share": 0.1074
+        },
+        "incorrect": {
+          "recall": 0.8514,
+          "pred_share": 0.6648,
+          "gold_share": 0.4611
+        }
+      },
+      "p_holm": 0.19886380672503262
+    },
+    {
+      "model": "e4b",
+      "adapter": "e4b-kaggle-t4-ft-beetle-saf",
+      "split": "test_uq",
+      "base_file": "baseline-e4b-kaggle-t4-test_uq-3way-20261005-094608.json",
+      "adapter_file": "baseline-e4b-kaggle-t4-ft-beetle-saf-test_uq-3way-20261108-124011.json",
+      "diff_3way": 0.0368,
+      "n": 733,
+      "first_accuracy": 0.7258,
+      "second_accuracy": 0.7913,
+      "diff": 0.0655,
+      "only_first_right": 28,
+      "only_second_right": 76,
+      "p": 2.736780589985052e-06,
+      "base_labels": {
+        "correct": {
+          "recall": 0.402,
+          "pred_share": 0.1937,
+          "gold_share": 0.4106
+        },
+        "contradictory": {
+          "recall": 0.6719,
+          "pred_share": 0.0873,
+          "gold_share": 0.0873
+        },
+        "incorrect": {
+          "recall": 0.8995,
+          "pred_share": 0.719,
+          "gold_share": 0.502
+        }
+      },
+      "adapter_labels": {
+        "correct": {
+          "recall": 0.5615,
+          "pred_share": 0.2592,
+          "gold_share": 0.4106
+        },
+        "contradictory": {
+          "recall": 0.5156,
+          "pred_share": 0.0846,
+          "gold_share": 0.0873
+        },
+        "incorrect": {
+          "recall": 0.8696,
+          "pred_share": 0.6562,
+          "gold_share": 0.502
+        }
+      },
+      "p_holm": 3.010458648983557e-05
+    },
+    {
+      "model": "e4b",
+      "adapter": "e4b-kaggle-t4-ft-beetle-saf",
+      "split": "test_ud",
+      "base_file": "baseline-e4b-kaggle-t4-test_ud-3way-20261005-095948.json",
+      "adapter_file": "baseline-e4b-kaggle-t4-ft-beetle-saf-test_ud-3way-20261108-125514.json",
+      "diff_3way": -0.0294,
+      "n": 4562,
+      "first_accuracy": 0.7466,
+      "second_accuracy": 0.7714,
+      "diff": 0.0248,
+      "only_first_right": 218,
+      "only_second_right": 331,
+      "p": 1.617523804619777e-06,
+      "base_labels": {
+        "correct": {
+          "recall": 0.5707,
+          "pred_share": 0.3128,
+          "gold_share": 0.4202
+        },
+        "contradictory": {
+          "recall": 0.7002,
+          "pred_share": 0.0851,
+          "gold_share": 0.0914
+        },
+        "incorrect": {
+          "recall": 0.82,
+          "pred_share": 0.6021,
+          "gold_share": 0.4884
+        }
+      },
+      "adapter_labels": {
+        "correct": {
+          "recall": 0.6202,
+          "pred_share": 0.3297,
+          "gold_share": 0.4202
+        },
+        "contradictory": {
+          "recall": 0.3141,
+          "pred_share": 0.0686,
+          "gold_share": 0.0914
+        },
+        "incorrect": {
+          "recall": 0.7895,
+          "pred_share": 0.6017,
+          "gold_share": 0.4884
+        }
+      },
+      "p_holm": 1.9801033191707896e-05
+    },
+    {
+      "model": "e4b",
+      "adapter": "e4b-kaggle-t4-ft-lf-beetle-saf",
+      "split": "test_ua",
+      "base_file": "baseline-e4b-kaggle-t4-test_ua-3way-20261005-094349.json",
+      "adapter_file": "baseline-e4b-kaggle-t4-ft-lf-beetle-saf-test_ua-3way-20261108-124408.json",
+      "diff_3way": -0.05,
+      "n": 540,
+      "first_accuracy": 0.7278,
+      "second_accuracy": 0.7667,
+      "diff": 0.0389,
+      "only_first_right": 14,
+      "only_second_right": 35,
+      "p": 0.003801654409748778,
+      "base_labels": {
+        "correct": {
+          "recall": 0.4506,
+          "pred_share": 0.2296,
+          "gold_share": 0.4315
+        },
+        "contradictory": {
+          "recall": 0.6379,
+          "pred_share": 0.0926,
+          "gold_share": 0.1074
+        },
+        "incorrect": {
+          "recall": 0.8755,
+          "pred_share": 0.6778,
+          "gold_share": 0.4611
+        }
+      },
+      "adapter_labels": {
+        "correct": {
+          "recall": 0.5494,
+          "pred_share": 0.2759,
+          "gold_share": 0.4315
+        },
+        "contradictory": {
+          "recall": 0.6552,
+          "pred_share": 0.2,
+          "gold_share": 0.1074
+        },
+        "incorrect": {
+          "recall": 0.6707,
+          "pred_share": 0.5241,
+          "gold_share": 0.4611
+        }
+      },
+      "p_holm": 0.028067920170629087
+    },
+    {
+      "model": "e4b",
+      "adapter": "e4b-kaggle-t4-ft-lf-beetle-saf",
+      "split": "test_uq",
+      "base_file": "baseline-e4b-kaggle-t4-test_uq-3way-20261005-094608.json",
+      "adapter_file": "baseline-e4b-kaggle-t4-ft-lf-beetle-saf-test_uq-3way-20261108-124659.json",
+      "diff_3way": 0.0027,
+      "n": 733,
+      "first_accuracy": 0.7258,
+      "second_accuracy": 0.7954,
+      "diff": 0.0696,
+      "only_first_right": 28,
+      "only_second_right": 79,
+      "p": 8.420013817717518e-07,
+      "base_labels": {
+        "correct": {
+          "recall": 0.402,
+          "pred_share": 0.1937,
+          "gold_share": 0.4106
+        },
+        "contradictory": {
+          "recall": 0.6719,
+          "pred_share": 0.0873,
+          "gold_share": 0.0873
+        },
+        "incorrect": {
+          "recall": 0.8995,
+          "pred_share": 0.719,
+          "gold_share": 0.502
+        }
+      },
+      "adapter_labels": {
+        "correct": {
+          "recall": 0.598,
+          "pred_share": 0.2851,
+          "gold_share": 0.4106
+        },
+        "contradictory": {
+          "recall": 0.7969,
+          "pred_share": 0.1883,
+          "gold_share": 0.0873
+        },
+        "incorrect": {
+          "recall": 0.7228,
+          "pred_share": 0.5266,
+          "gold_share": 0.502
+        }
+      },
+      "p_holm": 1.2630020726576277e-05
+    },
+    {
+      "model": "e4b",
+      "adapter": "e4b-kaggle-t4-ft-lf-beetle-saf",
+      "split": "test_ud",
+      "base_file": "baseline-e4b-kaggle-t4-test_ud-3way-20261005-095948.json",
+      "adapter_file": "baseline-e4b-kaggle-t4-ft-lf-beetle-saf-test_ud-3way-20261108-130400.json",
+      "diff_3way": -0.0701,
+      "n": 4562,
+      "first_accuracy": 0.7466,
+      "second_accuracy": 0.7615,
+      "diff": 0.0149,
+      "only_first_right": 230,
+      "only_second_right": 298,
+      "p": 0.003508490021328636,
+      "base_labels": {
+        "correct": {
+          "recall": 0.5707,
+          "pred_share": 0.3128,
+          "gold_share": 0.4202
+        },
+        "contradictory": {
+          "recall": 0.7002,
+          "pred_share": 0.0851,
+          "gold_share": 0.0914
+        },
+        "incorrect": {
+          "recall": 0.82,
+          "pred_share": 0.6021,
+          "gold_share": 0.4884
+        }
+      },
+      "adapter_labels": {
+        "correct": {
+          "recall": 0.6348,
+          "pred_share": 0.3518,
+          "gold_share": 0.4202
+        },
+        "contradictory": {
+          "recall": 0.693,
+          "pred_share": 0.1861,
+          "gold_share": 0.0914
+        },
+        "incorrect": {
+          "recall": 0.6225,
+          "pred_share": 0.4621,
+          "gold_share": 0.4884
+        }
+      },
+      "p_holm": 0.028067920170629087
+    },
+    {
+      "model": "e4b",
+      "adapter": "e4b-kaggle-t4-ft-rf-beetle-saf",
+      "split": "test_ua",
+      "base_file": "baseline-e4b-kaggle-t4-test_ua-3way-20261005-094349.json",
+      "adapter_file": "baseline-e4b-kaggle-t4-ft-rf-beetle-saf-test_ua-3way-20261108-074434.json",
+      "diff_3way": -0.0871,
+      "n": 540,
+      "first_accuracy": 0.7278,
+      "second_accuracy": 0.7574,
+      "diff": 0.0296,
+      "only_first_right": 41,
+      "only_second_right": 57,
+      "p": 0.12929258395357313,
+      "base_labels": {
+        "correct": {
+          "recall": 0.4506,
+          "pred_share": 0.2296,
+          "gold_share": 0.4315
+        },
+        "contradictory": {
+          "recall": 0.6379,
+          "pred_share": 0.0926,
+          "gold_share": 0.1074
+        },
+        "incorrect": {
+          "recall": 0.8755,
+          "pred_share": 0.6778,
+          "gold_share": 0.4611
+        }
+      },
+      "adapter_labels": {
+        "correct": {
+          "recall": 0.6395,
+          "pred_share": 0.363,
+          "gold_share": 0.4315
+        },
+        "contradictory": {
+          "recall": 0.6379,
+          "pred_share": 0.2667,
+          "gold_share": 0.1074
+        },
+        "incorrect": {
+          "recall": 0.51,
+          "pred_share": 0.3704,
+          "gold_share": 0.4611
+        }
+      },
+      "p_holm": 0.3878777518607194
+    },
+    {
+      "model": "e4b",
+      "adapter": "e4b-kaggle-t4-ft-rf-beetle-saf",
+      "split": "test_uq",
+      "base_file": "baseline-e4b-kaggle-t4-test_uq-3way-20261005-094608.json",
+      "adapter_file": "baseline-e4b-kaggle-t4-ft-rf-beetle-saf-test_uq-3way-20261108-080630.json",
+      "diff_3way": 0.0123,
+      "n": 733,
+      "first_accuracy": 0.7258,
+      "second_accuracy": 0.8172,
+      "diff": 0.0914,
+      "only_first_right": 40,
+      "only_second_right": 107,
+      "p": 3.03966953813857e-08,
+      "base_labels": {
+        "correct": {
+          "recall": 0.402,
+          "pred_share": 0.1937,
+          "gold_share": 0.4106
+        },
+        "contradictory": {
+          "recall": 0.6719,
+          "pred_share": 0.0873,
+          "gold_share": 0.0873
+        },
+        "incorrect": {
+          "recall": 0.8995,
+          "pred_share": 0.719,
+          "gold_share": 0.502
+        }
+      },
+      "adapter_labels": {
+        "correct": {
+          "recall": 0.7276,
+          "pred_share": 0.3697,
+          "gold_share": 0.4106
+        },
+        "contradictory": {
+          "recall": 0.6562,
+          "pred_share": 0.1869,
+          "gold_share": 0.0873
+        },
+        "incorrect": {
+          "recall": 0.6603,
+          "pred_share": 0.4434,
+          "gold_share": 0.502
+        }
+      },
+      "p_holm": 4.863471261021712e-07
+    },
+    {
+      "model": "e4b",
+      "adapter": "e4b-kaggle-t4-ft-rf-beetle-saf",
+      "split": "test_ud",
+      "base_file": "baseline-e4b-kaggle-t4-test_ud-3way-20261005-095948.json",
+      "adapter_file": "baseline-e4b-kaggle-t4-ft-rf-beetle-saf-test_ud-3way-20261108-101857.json",
+      "diff_3way": -0.0914,
+      "n": 4562,
+      "first_accuracy": 0.7466,
+      "second_accuracy": 0.7668,
+      "diff": 0.0202,
+      "only_first_right": 310,
+      "only_second_right": 402,
+      "p": 0.0006386695000365646,
+      "base_labels": {
+        "correct": {
+          "recall": 0.5707,
+          "pred_share": 0.3128,
+          "gold_share": 0.4202
+        },
+        "contradictory": {
+          "recall": 0.7002,
+          "pred_share": 0.0851,
+          "gold_share": 0.0914
+        },
+        "incorrect": {
+          "recall": 0.82,
+          "pred_share": 0.6021,
+          "gold_share": 0.4884
+        }
+      },
+      "adapter_labels": {
+        "correct": {
+          "recall": 0.7235,
+          "pred_share": 0.4211,
+          "gold_share": 0.4202
+        },
+        "contradictory": {
+          "recall": 0.506,
+          "pred_share": 0.2043,
+          "gold_share": 0.0914
+        },
+        "incorrect": {
+          "recall": 0.5377,
+          "pred_share": 0.3746,
+          "gold_share": 0.4884
+        }
+      },
+      "p_holm": 0.0057480255003290815
+    }
+  ],
+  "time": "2026-11-09T05:48:15+00:00"
+}

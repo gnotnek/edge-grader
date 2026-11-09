@@ -321,6 +321,27 @@ Accuracy, change against the untouched model, and Holm p. **Bold** passes the ba
 - **E4B's SciEntsBank label-first and reason-first** (graded in full for the first time) pass on test_uq and fall short on test_ud, where label-first gains a significant +2.7, below the bar.
 - One seed per adapter, and the validation sets are small (6 questions for Beetle + SAF), so the label-only vs reason gap is a single comparison, not a measured spread.
 
+### Why E4B loses: the contradictory/incorrect boundary (2026-11-09, post hoc)
+
+**Question (owner):** would a stronger teacher for the reasons fix E4B? The reasons already come from Qwen3-14B and passed the spot check (29 of 30), and E4B's label-only adapter, which sees no reasons, loses too. So the check was where E4B's points go: per-label recall, and the same runs scored as correct vs not-correct (contradictory merged into incorrect). No new grading; the 18 Beetle + SAF tests from the table above. **Set after the results were known**, so it explains the result and doesn't count toward the 5-point bar ([comparison](../../results/kaggle/compare-boundary-scientsbank-20261109-054815.json), `uv run python -m edge_grader.compare_boundary`).
+
+**In short:** E4B learned to grade from Beetle + SAF. It also learned Beetle's idea of "contradictory", which doesn't match SciEntsBank's, and that costs more than it gains. A stronger teacher explains the gold grades it's given, so it wouldn't change this.
+
+Change against untouched E4B, 3-way → 2-way accuracy points (2-way Holm p over the 18 tests):
+
+| E4B, Beetle + SAF | test_ua | test_uq | test_ud |
+|---|---|---|---|
+| label-only | −1.3 → +3.1 (0.20) | +3.7 → **+6.6** (<0.001) | −2.9 → +2.5 (<0.001) |
+| label-first | −5.0 → +3.9 (0.03) | +0.3 → **+7.0** (<0.001) | −7.0 → +1.5 (0.03) |
+| reason-first | −8.7 → +3.0 (0.39) | +1.2 → **+9.1** (<0.001) | −9.1 → +2.0 (0.006) |
+
+- **All nine E4B cells go up on 2-way,** seven significantly. Untouched E4B's 2-way accuracy is 72.8 / 72.6 / 74.7%.
+- **The label-only adapter under-calls "contradictory".** On test_ud it predicts the label as often as before (7%, gold 9%) but finds 31% of the real ones, against 70% untouched.
+- **The adapters that write reasons over-call it.** About 20% of answers predicted contradictory against 9–11% gold, and "incorrect" recall falls (test_ud: 0.82 → 0.62 label-first, 0.54 reason-first).
+- **E2B shows the same over-calling with reasons** (19–26% predicted contradictory), but it starts from a lower base (its untouched model calls 24–27% contradictory), so it loses less.
+- **Matches the owner's spot check,** where all three doubts were about Beetle's contradictory label. SAF is 2-way, so the training set's only contradictory answers are Beetle's.
+- **What would act on it:** training with Beetle's contradictory merged into incorrect, or on SciEntsBank directly (E4B's SciEntsBank label-only adapter already passes). Not planned; noted for the owner's choice.
+
 ## Not done yet
 
 - **Cost on the Jetson.** Latency and energy per answer for the tuned models, against the re-run baselines in the same clock state. Kaggle times aren't board cost, so no cost number is quoted here.
