@@ -321,6 +321,32 @@ Accuracy, change against the untouched model, and Holm p. **Bold** passes the ba
 - **E4B's SciEntsBank label-first and reason-first** (graded in full for the first time) pass on test_uq and fall short on test_ud, where label-first gains a significant +2.7, below the bar.
 - One seed per adapter, and the validation sets are small (6 questions for Beetle + SAF), so the label-only vs reason gap is a single comparison, not a measured spread.
 
+**2-way, beside it (added 2026-11-09, after grading; owner).** SciEntsBank papers usually report 2-way (correct vs not-correct) beside 3-way, so the same 30 pairs are also scored with "contradictory" merged into "incorrect": paired McNemar, its own Holm over the 30. A secondary score for comparison with other work; **the bar stays on 3-way** ([comparison](../../results/kaggle/compare-bar-scientsbank-20261109-065502.json), the `two_way` block of each test).
+
+| Adapter | test_ua | test_uq | test_ud |
+|---|---|---|---|
+| *E2B untouched* | *71.5%* | *75.4%* | *73.5%* |
+| E2B, SciEntsBank, label-only | trained on its questions | 80.6%, +5.2 (0.013) | 78.6%, +5.1 (<0.001) |
+| E2B, SciEntsBank, label-first | trained on its questions | 82.4%, +7.0 (<0.001) | 78.6%, +5.1 (<0.001) |
+| E2B, SciEntsBank, reason-first | trained on its questions | 79.0%, +3.5 (0.28) | 75.7%, +2.2 (0.0087) |
+| E2B, Beetle + SAF, label-only | 78.9%, +7.4 (0.0014) | 83.9%, +8.5 (<0.001) | 77.2%, +3.8 (<0.001) |
+| E2B, Beetle + SAF, label-first | 75.2%, +3.7 (0.27) | 82.8%, +7.4 (<0.001) | 76.3%, +2.9 (<0.001) |
+| E2B, Beetle + SAF, reason-first | 71.7%, +0.2 (1) | 79.1%, +3.7 (0.28) | 74.1%, +0.7 (1) |
+| *E4B untouched* | *72.8%* | *72.6%* | *74.7%* |
+| E4B, SciEntsBank, label-only | trained on its questions | 83.1%, +10.5 (<0.001) | 79.0%, +4.4 (<0.001) |
+| E4B, SciEntsBank, label-first | trained on its questions | 82.8%, +10.2 (<0.001) | 76.8%, +2.1 (0.0068) |
+| E4B, SciEntsBank, reason-first | trained on its questions | 80.9%, +8.3 (<0.001) | 74.9%, +0.2 (1) |
+| E4B, Beetle + SAF, label-only | 75.9%, +3.1 (0.27) | 79.1%, +6.6 (<0.001) | 77.1%, +2.5 (<0.001) |
+| E4B, Beetle + SAF, label-first | 76.7%, +3.9 (0.035) | 79.5%, +7.0 (<0.001) | 76.1%, +1.5 (0.035) |
+| E4B, Beetle + SAF, reason-first | 75.7%, +3.0 (0.52) | 81.7%, +9.1 (<0.001) | 76.7%, +2.0 (0.0083) |
+
+2-way macro-F1, untouched E2B / E4B: test_ua 0.679 / 0.693, test_uq 0.718 / 0.675, test_ud 0.720 / 0.727; per adapter in the comparison file.
+
+- **No adapter is worse on 2-way.** All 30 changes are 0 or above, including every cell where 3-way fell.
+- **Untouched E2B and E4B are about level on 2-way** (within 3 points, E2B ahead on test_uq), where E4B leads by 8–12 points on 3-way. Most of E4B's lead is in telling "contradictory" from "incorrect".
+- **E2B's SciEntsBank-trained adapters gain much less on 2-way:** +11 to +17 points on 3-way become +2 to +7. Much of what they learn is SciEntsBank's own contradictory/incorrect line, worth 3-way points but not 2-way ones. E4B's shrink less (test_uq +12.4 → +10.5 for label-only).
+- **Best 2-way:** E2B's Beetle + SAF label-only adapter on test_uq (83.9%) and E4B's SciEntsBank label-only adapter (83.1 / 79.0% on test_uq / test_ud). Reason-first is lowest of the three replies for E2B in every cell; for E4B's Beetle + SAF adapters it's highest on test_uq.
+
 ### Why E4B loses: the contradictory/incorrect boundary (2026-11-09, post hoc)
 
 **Question (owner):** would a stronger teacher for the reasons fix E4B? The reasons already come from Qwen3-14B and passed the spot check (29 of 30), and E4B's label-only adapter, which sees no reasons, loses too. So the check was where E4B's points go: per-label recall, and the same runs scored as correct vs not-correct (contradictory merged into incorrect). No new grading; the 18 Beetle + SAF tests from the table above. **Set after the results were known**, so it explains the result and doesn't count toward the 5-point bar ([comparison](../../results/kaggle/compare-boundary-scientsbank-20261109-054815.json), `uv run python -m edge_grader.compare_boundary`).

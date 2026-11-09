@@ -173,6 +173,7 @@ A tweak counts if it adds **at least 5 points** of accuracy over the same model 
 
 - Thinking's p values are ≤ 0.004 across the 10 B1 runs, which stays below 0.05 under Holm over those 10.
 - Stage 3b's SciEntsBank gains were described, not tested, in its own family (16 tests fixed before grading). They were tested on 2026-11-08 in a separate family of 30 (every adapter against its untouched model, SciEntsBank only, set after grading), with the E4B and Beetle + SAF rows ([details](finetuning.md#result-transfer-helps-e2b-not-e4b-2026-11-08)).
+- 2-way (correct vs not-correct), reported beside 3-way since 2026-11-09 and not part of the bar: no adapter is worse on any SciEntsBank split, untouched E2B and E4B are within 3 points of each other, and E4B's Beetle + SAF adapters gain +1.5 to +9.1. Their 3-way losses come from the contradictory/incorrect line ([2-way table](finetuning.md#result-transfer-helps-e2b-not-e4b-2026-11-08), [why E4B loses](finetuning.md#why-e4b-loses-the-contradictoryincorrect-boundary-2026-11-09-post-hoc)).
 - Engine and prefix reuse stay within ±0.9. They're cost settings, so the bar doesn't apply to them.
 - Against the Oct 28 adapter rather than the untouched model, stage 3b passes in one held-out cell: Beetle test_ua, +5.9 (Holm p 0.031 reason-first, 0.009 label-first).
 

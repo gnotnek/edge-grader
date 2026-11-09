@@ -7,6 +7,10 @@ significant: paired McNemar (3-way labels), Holm p < 0.05 (owner, 2026-11-05). T
 every test below at once: the Beetle + SAF adapters on all three splits, the SciEntsBank-trained
 ones on test_uq and test_ud only (test_ua shares its questions with their training set). The
 family was set after the runs were graded (2026-11-08), so it's recorded as such.
+
+Each test also carries a secondary 2-way score (correct vs not-correct, "contradictory" merged
+into "incorrect"), which SciEntsBank papers usually report beside 3-way: accuracy, macro-F1 and
+McNemar with its own Holm over the same tests. Added 2026-11-09, after grading; the bar stays 3-way.
 """
 
 import json
@@ -14,7 +18,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from .board_check import read_answers
-from .compare import holm, latest, paired
+from .compare import holm, latest, paired, two
+from .metrics import score
 
 SPLITS = ("test_ua", "test_uq", "test_ud")
 REPLIES = ("", "-lf", "-rf")  # label-only, label-first, reason-first
@@ -35,18 +40,27 @@ def main(kaggle: Path = Path("results/kaggle")) -> None:
         files = [latest(kaggle, "scientsbank", lab, split) for lab in (f"{model}-kaggle-t4", label)]
         sums = [json.loads(f.read_text()) for f in files]
         builds |= {s["server"]["build_info"] for s in sums}
-        p = paired(*(read_answers(f) for f in files), two_way=False)
+        answers = [read_answers(f) for f in files]
+        p = paired(*answers, two_way=False)
+        p2 = paired(*answers, two_way=True)
+        f2 = [score([two(r["gold"]) for r in a.values()], [two(r["pred"]) for r in a.values()])["macro_f1"]
+              for a in answers]
         tests.append({"model": model, "trained_on": trained, "adapter": label, "split": split,
                       "base_file": files[0].name, "adapter_file": files[1].name,
                       "base_macro_f1": sums[0]["metrics"]["macro_f1"],
-                      "adapter_macro_f1": sums[1]["metrics"]["macro_f1"], **p})
+                      "adapter_macro_f1": sums[1]["metrics"]["macro_f1"], **p,
+                      "two_way": {**p2, "base_macro_f1": f2[0], "adapter_macro_f1": f2[1]}})
     for t, ph in zip(tests, holm([t["p"] for t in tests])):
         t["p_holm"] = ph
         t["passes"] = bool(t["diff"] >= BAR and ph < 0.05)  # numpy bool otherwise
+    for t, ph in zip(tests, holm([t["two_way"]["p"] for t in tests])):
+        t["two_way"]["p_holm"] = ph
     out = kaggle / f"compare-bar-scientsbank-{datetime.now(UTC):%Y%m%d-%H%M%S}.json"
     out.write_text(json.dumps({
         "kind": "compare-bar", "rule": "diff >= +5 accuracy points and Holm p < 0.05, "
         "adapter vs the same untouched model, paired McNemar on 3-way labels (owner 2026-11-05)",
+        "two_way": "secondary, not part of the bar: contradictory merged into incorrect, McNemar, "
+        "own Holm over the same tests (added 2026-11-09, after grading)",
         "family": len(tests), "builds": sorted(builds), "tests": tests,
         "time": datetime.now(UTC).isoformat(timespec="seconds")}, indent=2) + "\n")
 
@@ -56,7 +70,10 @@ def main(kaggle: Path = Path("results/kaggle")) -> None:
         print(f"{t['adapter']:32} {t['split']} {t['first_accuracy']:.1%} -> {t['second_accuracy']:.1%} "
               f"({t['diff']:+.1%}) mF1 {t['base_macro_f1']:.3f} -> {t['adapter_macro_f1']:.3f} "
               f"fixed/broken {t['only_second_right']}/{t['only_first_right']} "
-              f"Holm {t['p_holm']:.3g} {'PASS' if t['passes'] else ''}")
+              f"Holm {t['p_holm']:.3g} {'PASS' if t['passes'] else '    '} | 2-way "
+              f"{t['two_way']['first_accuracy']:.1%} -> {t['two_way']['second_accuracy']:.1%} "
+              f"({t['two_way']['diff']:+.1%}) mF1 {t['two_way']['base_macro_f1']:.3f} -> "
+              f"{t['two_way']['adapter_macro_f1']:.3f} Holm {t['two_way']['p_holm']:.3g}")
     print(f"{sum(t['passes'] for t in tests)} of {len(tests)} pass -> {out}")
 
 
