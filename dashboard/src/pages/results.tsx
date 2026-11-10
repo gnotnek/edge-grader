@@ -2,7 +2,7 @@ import type { Benchmark, Board, BoardPair, Cascade, Condition, Finetune, Model, 
 import { ArrowDown, ArrowUp, CircleAlert, Minus, TableProperties } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { Bar, BarChart, CartesianGrid, Scatter, ScatterChart, XAxis, YAxis, ZAxis } from 'recharts'
-import { BoardName, ErrorNote, Loading, Section, Tag } from '@/components/bits'
+import { BoardName, ErrorNote, Loading, Pick, Section, Tag } from '@/components/bits'
 import { RunSheet } from '@/components/run-sheet'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/chart'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Toggle } from '@/components/ui/toggle'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { useApi } from '@/lib/api'
 import {
   BENCH_LABEL, BENCH_ORDER, BOARD_LABEL, BOARD_ORDER, CONDITION_LABEL, CONDITION_ORDER, MODEL_LABEL, deltaPts,
@@ -28,26 +27,6 @@ const METRICS: [Metric, string][] = [
 ]
 const isPct = (m: Metric) => m === 'accuracy' || m === 'two_way_accuracy'
 const showMetric = (m: Metric, v: number | null | undefined) => (isPct(m) ? pct(v) : fixed(v))
-
-/** A labelled dropdown: "Metric  Accuracy ▾". */
-function Pick({ label, value, onChange, options }: {
-  label: string
-  value: string
-  onChange: (v: string) => void
-  options: [string, string][]
-}) {
-  return (
-    <Select value={value} onValueChange={onChange}>
-      <SelectTrigger size="sm" aria-label={label} className="min-w-36">
-        <span className="text-muted-foreground">{label}</span>
-        <SelectValue />
-      </SelectTrigger>
-      <SelectContent>
-        {options.map(([v, l]) => <SelectItem key={v} value={v}>{l}</SelectItem>)}
-      </SelectContent>
-    </Select>
-  )
-}
 
 function MetricToggle({ value, onChange }: { value: Metric; onChange: (m: Metric) => void }) {
   return <Pick label="Metric" value={value} onChange={(v) => onChange(v as Metric)} options={METRICS} />

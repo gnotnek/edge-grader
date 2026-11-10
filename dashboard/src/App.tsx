@@ -1,5 +1,5 @@
 import type { Overview } from '@server/types'
-import { ChartScatter, Cpu, LayoutDashboard, ListChecks, RefreshCw, Rows3 } from 'lucide-react'
+import { BookOpen, ChartScatter, Cpu, LayoutDashboard, ListChecks, RefreshCw, Rows3 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { ThemeToggle } from '@/components/theme'
 import { Button } from '@/components/ui/button'
@@ -14,9 +14,11 @@ import { OverviewPage } from '@/pages/overview'
 import { PlanPage } from '@/pages/plan'
 import { ResultsPage } from '@/pages/results'
 import { RunsPage } from '@/pages/runs'
+import { SummaryPage } from '@/pages/summary'
 
 const PAGES = {
   overview: { title: 'Overview', icon: LayoutDashboard, Page: OverviewPage },
+  summary: { title: 'Summary', icon: BookOpen, Page: SummaryPage },
   plan: { title: 'Plan', icon: ListChecks, Page: PlanPage },
   runs: { title: 'Runs', icon: Rows3, Page: RunsPage },
   results: { title: 'Results', icon: ChartScatter, Page: ResultsPage },

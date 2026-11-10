@@ -2,6 +2,7 @@
 import type { Board, Status } from '@server/types'
 import { CircleAlert, CircleCheck, CircleDashed, Clock, HardDriveDownload, LoaderCircle } from 'lucide-react'
 import { type CSSProperties, type ReactNode, useEffect, useRef } from 'react'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Skeleton } from '@/components/ui/skeleton'
 import { BOARD_LABEL } from '@/lib/format'
 import { cn } from '@/lib/utils'
@@ -144,5 +145,25 @@ export function Section({ title, description, actions, children, i = 0 }: {
         {children}
       </section>
     </Reveal>
+  )
+}
+
+/** A labelled dropdown: "Metric  Accuracy ▾". */
+export function Pick({ label, value, onChange, options }: {
+  label: string
+  value: string
+  onChange: (v: string) => void
+  options: [string, string][]
+}) {
+  return (
+    <Select value={value} onValueChange={onChange}>
+      <SelectTrigger size="sm" aria-label={label} className="min-w-36">
+        <span className="text-muted-foreground">{label}</span>
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        {options.map(([v, l]) => <SelectItem key={v} value={v}>{l}</SelectItem>)}
+      </SelectContent>
+    </Select>
   )
 }

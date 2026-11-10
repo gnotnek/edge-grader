@@ -5,6 +5,7 @@ import path from 'node:path'
 import type { Plugin } from 'vite'
 import { loadBoards } from './boards.ts'
 import { loadCascade } from './cascade.ts'
+import { docFile, listDocs, readDoc } from './docs.ts'
 import { loadFinetune } from './finetune.ts'
 import { parsePlan } from './plan.ts'
 import { loadReference } from './reference.ts'
@@ -110,6 +111,8 @@ function route(repo: string, url: string): unknown {
   if (p === '/reference') return loadReference(repo)
   if (p === '/finetune') return loadFinetune(repo)
   if (p === '/cascade') return loadCascade(repo)
+  if (p === '/docs') return listDocs(repo)
+  if (p.startsWith('/docs/')) return { name: p.slice('/docs/'.length), markdown: readDoc(repo, p.slice('/docs/'.length)) }
   throw Object.assign(new Error(`no route ${p}`), { status: 404 })
 }
 
@@ -130,6 +133,14 @@ export function apiPlugin(repo: string): Plugin {
           return
         }
         try {
+          // Figures go out as files, not JSON.
+          const p = decodeURIComponent((req.url ?? '/').split('?')[0])
+          if (p.startsWith('/doc-file/')) {
+            const f = docFile(repo, p.slice('/doc-file/'.length))
+            res.setHeader('Content-Type', f.type)
+            res.end(f.body)
+            return
+          }
           res.end(JSON.stringify(route(repo, req.url ?? '/')))
         } catch (e) {
           res.statusCode = (e as { status?: number }).status ?? 500
