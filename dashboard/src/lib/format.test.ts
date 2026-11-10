@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { deltaPts, localToday, pct, plainMarkdown, splitGroup, stampLabel } from './format'
+import { deltaPts, localToday, pct, plainMarkdown, splitGroup, stampLabel, trainedOn } from './format'
 
 describe('format', () => {
   test('stampLabel reads the run folder stamp', () => {
@@ -27,5 +27,12 @@ describe('format', () => {
   })
   test('localToday uses the local calendar date, not UTC', () => {
     expect(localToday(new Date(2026, 9, 17, 1, 30))).toBe('2026-10-17')
+  })
+  test('trainedOn names the adapter\'s training set, and nothing for an untouched model', () => {
+    expect(trainedOn('ft')).toBe('SciEntsBank')
+    expect(trainedOn('ft-lf')).toBe('SciEntsBank')
+    expect(trainedOn('ft-rf-bs')).toBe('Beetle + SAF')
+    expect(trainedOn('baseline')).toBeNull()
+    expect(trainedOn('think')).toBeNull()
   })
 })

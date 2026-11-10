@@ -8,11 +8,17 @@ export const BENCH_LABEL: Record<Benchmark, string> = {
 export const CONDITION_LABEL: Record<Condition, string> = {
   baseline: 'Baseline', 'rag-en': 'RAG-en', 'rag-id': 'RAG-id', think: 'Thinking on',
   lg: 'little-gemma', 'lg-reuse': 'little-gemma + reuse', swafull: 'SWA full',
-  ft: 'Fine-tuned', 'ft-rf': 'Fine-tuned, reason first', 'ft-lf': 'Fine-tuned, label first',
+  ft: 'Fine-tuned on SciEntsBank', 'ft-rf': 'Fine-tuned on SciEntsBank, reason first',
+  'ft-lf': 'Fine-tuned on SciEntsBank, label first',
   'ft-bs': 'Fine-tuned on Beetle+SAF', 'ft-rf-bs': 'Fine-tuned on Beetle+SAF, reason first',
   'ft-lf-bs': 'Fine-tuned on Beetle+SAF, label first',
 }
 export const CONDITION_ORDER: Condition[] = ['baseline', 'ft', 'ft-rf', 'ft-lf', 'ft-bs', 'ft-rf-bs', 'ft-lf-bs', 'think', 'rag-en', 'rag-id', 'swafull', 'lg', 'lg-reuse']
+/** The training set of a fine-tuned run's adapter; null for anything not fine-tuned. */
+export function trainedOn(c: Condition): string | null {
+  return c.startsWith('ft') ? (c.endsWith('-bs') ? 'Beetle + SAF' : 'SciEntsBank') : null
+}
+
 export const BENCH_ORDER: Benchmark[] = ['scientsbank', 'beetle', 'saf', 'asap2', 'gsm', 'news', 'mmlupro']
 export const BOARD_ORDER: Board[] = ['jetson', 'pi5', 'kaggle', 'spark']
 

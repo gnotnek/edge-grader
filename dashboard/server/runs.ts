@@ -2,10 +2,12 @@
 // ones not fetched yet) and Kaggle summary files (results/kaggle/). Read-only.
 import fs from 'node:fs'
 import path from 'node:path'
+import { twoWayFromRaw } from './metrics.ts'
 import type { Benchmark, Board, Condition, Model, Run, RunKey, VsKaggle } from './types.ts'
 
 const STAMP = /^\d{8}-\d{6}$/
 const MODELS = new Set(['e2b', 'e4b'])
+const GRADING = new Set<Benchmark>(['scientsbank', 'beetle', 'saf'])
 // Copied as stored; the pages only round them for display.
 const METRIC_KEYS = [
   'n', 'accuracy', 'macro_f1', 'weighted_f1', 'strict_accuracy', 'unparsed', 'errors',
@@ -125,8 +127,8 @@ function pickMetrics(summary: unknown): Record<string, number | null> {
     if (typeof v === 'number') out[k] = v
   }
   // The 3-way grading runs also score the same answers 2-way (correct vs not).
-  const twoWay = (metrics.two_way as { accuracy?: unknown } | undefined)?.accuracy
-  if (typeof twoWay === 'number') out.two_way_accuracy = twoWay
+  const two = (metrics.two_way ?? {}) as Record<string, unknown>
+  for (const k of ['accuracy', 'macro_f1', 'weighted_f1']) if (typeof two[k] === 'number') out[`two_way_${k}`] = two[k] as number
   return out
 }
 
@@ -147,6 +149,11 @@ function fillFromSummary(run: Run, summaryFile: string | undefined, judgedFile: 
     if (typeof time === 'string') run.time = time
     // News has no accuracy of its own: the judge grades the answers.
     if (run.benchmark === 'news') run.metrics.accuracy = judgedAccuracy(judgedFile)
+    // Runs from before 2-way was stored: derive it from the per-answer predictions, as recap_figures.py does.
+    if (GRADING.has(run.benchmark) && run.metrics.two_way_accuracy == null) {
+      const two = twoWayFromRaw(summaryFile)
+      if (two) for (const k of ['accuracy', 'macro_f1', 'weighted_f1'] as const) run.metrics[`two_way_${k}`] = two[k]
+    }
   } catch (e) {
     run.error = `${path.basename(summaryFile)}: ${(e as Error).message}`
   }

@@ -11,30 +11,30 @@ type Doc = { name: string; title: string }
 
 function components(open: (name: string, anchor?: string) => void): Components {
   return {
-    h1: ({ children }) => <h1 className="font-serif text-4xl font-medium text-balance">{children}</h1>,
-    h2: ({ children, id }) => <h2 id={id} className="mt-12 scroll-mt-20 font-serif text-2xl font-medium">{children}</h2>,
-    h3: ({ children, id }) => <h3 id={id} className="mt-8 scroll-mt-20 text-lg font-semibold text-[var(--heading)]">{children}</h3>,
-    h4: ({ children, id }) => <h4 id={id} className="mt-6 scroll-mt-20 font-semibold text-[var(--heading)]">{children}</h4>,
-    p: ({ children }) => <p className="mt-4 max-w-prose">{children}</p>,
-    ul: ({ children }) => <ul className="mt-3 max-w-prose list-disc space-y-1.5 pl-5">{children}</ul>,
-    ol: ({ children }) => <ol className="mt-3 max-w-prose list-decimal space-y-1.5 pl-5">{children}</ol>,
+    h1: ({ children }) => <h1 className="font-serif text-3xl font-medium text-balance">{children}</h1>,
+    h2: ({ children, id }) => <h2 id={id} className="mt-8 scroll-mt-20 border-t pt-5 font-serif text-xl font-medium">{children}</h2>,
+    h3: ({ children, id }) => <h3 id={id} className="mt-5 scroll-mt-20 font-semibold text-[var(--heading)]">{children}</h3>,
+    h4: ({ children, id }) => <h4 id={id} className="mt-4 scroll-mt-20 font-semibold text-[var(--heading)]">{children}</h4>,
+    p: ({ children }) => <p className="mt-2 max-w-4xl">{children}</p>,
+    ul: ({ children }) => <ul className="mt-1.5 max-w-4xl list-disc space-y-0.5 pl-5">{children}</ul>,
+    ol: ({ children }) => <ol className="mt-1.5 max-w-4xl list-decimal space-y-0.5 pl-5">{children}</ol>,
     strong: ({ children }) => <strong className="font-semibold text-[var(--heading)]">{children}</strong>,
-    blockquote: ({ children }) => <blockquote className="mt-4 border-l-2 pl-4 text-muted-foreground">{children}</blockquote>,
-    hr: () => <hr className="my-10" />,
+    blockquote: ({ children }) => <blockquote className="mt-2 border-l-2 pl-3 text-muted-foreground">{children}</blockquote>,
+    hr: () => <hr className="my-6" />,
     code: ({ children }) => <code className="rounded bg-muted px-1 py-0.5 font-mono text-[0.85em]">{children}</code>,
-    pre: ({ children }) => <pre className="mt-4 overflow-x-auto rounded-md border bg-muted p-3 text-xs">{children}</pre>,
+    pre: ({ children }) => <pre className="mt-2 overflow-x-auto rounded-md border bg-muted p-3 text-xs">{children}</pre>,
     table: ({ children }) => (
-      <div className="mt-4 overflow-x-auto rounded-lg border">
-        <table className="tabular w-full text-sm">{children}</table>
+      <div className="mt-2 overflow-x-auto rounded-md border">
+        <table className="tabular w-full text-xs">{children}</table>
       </div>
     ),
-    th: ({ children, style }) => <th style={style} className="border-b bg-muted px-3 py-2 text-left font-medium whitespace-nowrap">{children}</th>,
-    td: ({ children, style }) => <td style={style} className="border-b px-3 py-2 align-top">{children}</td>,
+    th: ({ children, style }) => <th style={style} className="border-b bg-muted px-2 py-1.5 text-left font-medium whitespace-nowrap">{children}</th>,
+    td: ({ children, style }) => <td style={style} className="border-b px-2 py-1 align-top">{children}</td>,
     img: ({ src, alt }) => (
       <img
         src={typeof src === 'string' && !/^https?:/.test(src) ? `/api/doc-file/${src}` : src}
         alt={alt ?? ''}
-        className="mt-4 w-full max-w-3xl rounded-lg border bg-white"
+        className="mt-2 w-full max-w-2xl rounded-md border bg-white"
       />
     ),
     a: ({ href = '', children }) => {
@@ -89,7 +89,7 @@ export function SummaryPage() {
         <span className="font-mono text-xs text-muted-foreground">docs/results/{current}</span>
       </div>
       <Card>
-        <CardContent className="leading-relaxed">
+        <CardContent className="text-sm leading-relaxed">
           <Markdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeSlug]} components={components(open)}>
             {doc.data.markdown}
           </Markdown>

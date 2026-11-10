@@ -4,7 +4,7 @@ import { BoardName, ErrorNote, Loading } from '@/components/bits'
 import { Badge } from '@/components/ui/badge'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import { useApi } from '@/lib/api'
-import { BENCH_LABEL, CONDITION_LABEL, MODEL_LABEL, count, fixed, pct, stampLabel } from '@/lib/format'
+import { BENCH_LABEL, CONDITION_LABEL, MODEL_LABEL, count, fixed, pct, stampLabel, trainedOn } from '@/lib/format'
 
 function Row({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -28,6 +28,7 @@ function Details({ id }: { id: string }) {
         <Row label="Board"><BoardName board={run.board} /></Row>
         <Row label="Benchmark">{BENCH_LABEL[run.benchmark]} · {run.split}</Row>
         <Row label="Condition">{CONDITION_LABEL[run.condition]}</Row>
+        {trainedOn(run.condition) && <Row label="Adapter trained on">{trainedOn(run.condition)}</Row>}
         <Row label="Started">{stampLabel(run.stamp)}</Row>
         <Row label="Where">{run.location === 'results' ? 'Fetched into results/' : 'Only on the board backup'}</Row>
         {server?.build_info && <Row label="llama.cpp build">{server.build_info}</Row>}
@@ -43,6 +44,8 @@ function Details({ id }: { id: string }) {
             {m.macro_f1 != null && <Row label="Macro F1">{fixed(m.macro_f1)}</Row>}
             {m.weighted_f1 != null && <Row label="Weighted F1">{fixed(m.weighted_f1)}</Row>}
             {m.two_way_accuracy != null && <Row label="2-way accuracy">{pct(m.two_way_accuracy)}</Row>}
+            {m.two_way_macro_f1 != null && <Row label="2-way macro F1">{fixed(m.two_way_macro_f1)}</Row>}
+            {m.two_way_weighted_f1 != null && <Row label="2-way weighted F1">{fixed(m.two_way_weighted_f1)}</Row>}
             {m.strict_accuracy != null && <Row label="Strict accuracy">{pct(m.strict_accuracy)}</Row>}
             {m.unparsed != null && <Row label="Unparsed">{count(m.unparsed)}</Row>}
             {m.errors != null && <Row label="Errors">{count(m.errors)}</Row>}

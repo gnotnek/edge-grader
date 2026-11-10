@@ -21,9 +21,11 @@ const GRADING: Benchmark[] = ['scientsbank', 'beetle', 'saf', 'asap2']
 const ALL_SPLITS = 'all'
 
 // What a grading run stores, all on the same answers. Accuracy-like ones read as %, F1 as 0-1.
-type Metric = 'accuracy' | 'macro_f1' | 'weighted_f1' | 'two_way_accuracy' | 'qwk'
+type Metric = 'accuracy' | 'macro_f1' | 'weighted_f1' | 'two_way_accuracy' | 'two_way_macro_f1' | 'two_way_weighted_f1' | 'qwk'
 const METRICS: [Metric, string][] = [
-  ['accuracy', 'Accuracy'], ['macro_f1', 'Macro F1'], ['weighted_f1', 'Weighted F1'], ['two_way_accuracy', '2-way accuracy'], ['qwk', 'QWK (ASAP 2.0)'],
+  ['accuracy', '3-way accuracy'], ['macro_f1', '3-way macro F1'], ['weighted_f1', '3-way weighted F1'],
+  ['two_way_accuracy', '2-way accuracy'], ['two_way_macro_f1', '2-way macro F1'], ['two_way_weighted_f1', '2-way weighted F1'],
+  ['qwk', 'QWK (ASAP 2.0)'],
 ]
 const isPct = (m: Metric) => m === 'accuracy' || m === 'two_way_accuracy'
 const showMetric = (m: Metric, v: number | null | undefined) => (isPct(m) ? pct(v) : fixed(v))
@@ -662,7 +664,10 @@ function BarCard({ bar }: { bar: NonNullable<Finetune['bar']> }) {
           5-point bar on SciEntsBank
           <Tag tone={passed ? 'green' : 'red'}>{passed} of {bar.tests.length} pass</Tag>
         </CardTitle>
-        <p className="max-w-prose text-sm text-muted-foreground">Rule: {bar.rule}. From {bar.file}.</p>
+        <p className="max-w-prose text-sm text-muted-foreground">
+          Rule: {bar.rule}. The bar is decided on 3-way labels; 2-way (correct or not) is shown beside it, with its own
+          Holm correction, and decides nothing. From {bar.file}.
+        </p>
       </CardHeader>
       <CardContent className="table-inset px-0">
         <Table className="tabular">
@@ -676,6 +681,9 @@ function BarCard({ bar }: { bar: NonNullable<Finetune['bar']> }) {
               <TableHead className="hidden text-right lg:table-cell">Macro F1</TableHead>
               <TableHead className="hidden text-right md:table-cell">Holm p</TableHead>
               <TableHead>Bar</TableHead>
+              <TableHead className="border-l text-right">2-way</TableHead>
+              <TableHead className="text-right">2-way change</TableHead>
+              <TableHead className="hidden text-right md:table-cell">2-way Holm p</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -691,6 +699,11 @@ function BarCard({ bar }: { bar: NonNullable<Finetune['bar']> }) {
                 </TableCell>
                 <TableCell className="hidden text-right md:table-cell"><PValue p={t.p_holm} /></TableCell>
                 <TableCell>{t.passes ? <Tag tone="green">Passes</Tag> : <Tag tone="neutral">Misses</Tag>}</TableCell>
+                <TableCell className="border-l text-right whitespace-nowrap">
+                  {t.two_way ? `${pct(t.two_way.first_accuracy)} → ${pct(t.two_way.second_accuracy)}` : '—'}
+                </TableCell>
+                <TableCell className="text-right">{t.two_way ? <Delta pts={t.two_way.diff * 100} /> : '—'}</TableCell>
+                <TableCell className="hidden text-right md:table-cell"><PValue p={t.two_way?.p_holm} /></TableCell>
               </TableRow>
             ))}
           </TableBody>

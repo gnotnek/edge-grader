@@ -187,6 +187,7 @@ export interface BarTest {
   adapter_macro_f1?: number
   p_holm: number
   passes: boolean
+  two_way?: { first_accuracy: number; second_accuracy: number; diff: number; p_holm: number }
 }
 
 export interface CascadePoint {

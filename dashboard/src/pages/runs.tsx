@@ -12,7 +12,7 @@ import { useApi } from '@/lib/api'
 import { cn } from '@/lib/utils'
 import {
   BENCH_LABEL, BENCH_ORDER, BOARD_LABEL, BOARD_ORDER, CONDITION_LABEL, CONDITION_ORDER, MODEL_LABEL, count, fixed,
-  pct, stampLabel,
+  pct, stampLabel, trainedOn,
 } from '@/lib/format'
 
 type Filters = { board: string; model: string; benchmark: string; split: string; condition: string; location: string; q: string }
@@ -20,19 +20,23 @@ const ALL = 'all'
 const NO_FILTERS: Filters = { board: ALL, model: ALL, benchmark: ALL, split: ALL, condition: ALL, location: ALL, q: '' }
 
 // Every result a run can store, as columns; a run without one shows a dash.
-const COLUMNS: { key: string; label: string; get: (r: Run) => number | null | undefined; show: (v: number | null | undefined) => string }[] = [
-  { key: 'n', label: 'n', get: (r) => r.metrics.n, show: count },
-  { key: 'accuracy', label: 'Accuracy', get: (r) => r.metrics.accuracy, show: (v) => pct(v) },
-  { key: 'macro_f1', label: 'Macro F1', get: (r) => r.metrics.macro_f1, show: (v) => fixed(v) },
-  { key: 'weighted_f1', label: 'Weighted F1', get: (r) => r.metrics.weighted_f1, show: (v) => fixed(v) },
-  { key: 'two_way_accuracy', label: '2-way acc.', get: (r) => r.metrics.two_way_accuracy, show: (v) => pct(v) },
-  { key: 'qwk', label: 'QWK', get: (r) => r.metrics.qwk, show: (v) => fixed(v) },
-  { key: 'strict_accuracy', label: 'Strict acc.', get: (r) => r.metrics.strict_accuracy, show: (v) => pct(v) },
-  { key: 'unparsed', label: 'Unparsed', get: (r) => r.metrics.unparsed ?? r.metrics.no_answer ?? r.metrics.no_number, show: count },
-  { key: 'energy', label: 'J / answer', get: (r) => r.energy?.jPerAnswer, show: (v) => fixed(v, 2) },
-  { key: 'latency', label: 'Median s', get: (r) => r.metrics.median_latency_s, show: (v) => fixed(v, 2) },
-  { key: 'wall', label: 'Wall h', get: (r) => (r.metrics.wall_s == null ? null : r.metrics.wall_s / 3600), show: (v) => fixed(v, 2) },
-  { key: 'tokens', label: 'Output tokens', get: (r) => r.metrics.completion_tokens, show: count },
+// Grouped under a header row: the 3-way labels (correct / contradictory / incorrect), the same
+// answers 2-way (correct / not), then everything else.
+const COLUMNS: { key: string; group: string; label: string; get: (r: Run) => number | null | undefined; show: (v: number | null | undefined) => string }[] = [
+  { key: 'n', group: '', label: 'n', get: (r) => r.metrics.n, show: count },
+  { key: 'accuracy', group: '3-way', label: 'Accuracy', get: (r) => r.metrics.accuracy, show: (v) => pct(v) },
+  { key: 'macro_f1', group: '3-way', label: 'Macro F1', get: (r) => r.metrics.macro_f1, show: (v) => fixed(v) },
+  { key: 'weighted_f1', group: '3-way', label: 'Weighted F1', get: (r) => r.metrics.weighted_f1, show: (v) => fixed(v) },
+  { key: 'two_way_accuracy', group: '2-way', label: 'Accuracy', get: (r) => r.metrics.two_way_accuracy, show: (v) => pct(v) },
+  { key: 'two_way_macro_f1', group: '2-way', label: 'Macro F1', get: (r) => r.metrics.two_way_macro_f1, show: (v) => fixed(v) },
+  { key: 'two_way_weighted_f1', group: '2-way', label: 'Weighted F1', get: (r) => r.metrics.two_way_weighted_f1, show: (v) => fixed(v) },
+  { key: 'qwk', group: 'Other', label: 'QWK', get: (r) => r.metrics.qwk, show: (v) => fixed(v) },
+  { key: 'strict_accuracy', group: 'Other', label: 'Strict acc.', get: (r) => r.metrics.strict_accuracy, show: (v) => pct(v) },
+  { key: 'unparsed', group: 'Other', label: 'Unparsed', get: (r) => r.metrics.unparsed ?? r.metrics.no_answer ?? r.metrics.no_number, show: count },
+  { key: 'energy', group: 'Other', label: 'J / answer', get: (r) => r.energy?.jPerAnswer, show: (v) => fixed(v, 2) },
+  { key: 'latency', group: 'Other', label: 'Median s', get: (r) => r.metrics.median_latency_s, show: (v) => fixed(v, 2) },
+  { key: 'wall', group: 'Other', label: 'Wall h', get: (r) => (r.metrics.wall_s == null ? null : r.metrics.wall_s / 3600), show: (v) => fixed(v, 2) },
+  { key: 'tokens', group: 'Other', label: 'Output tokens', get: (r) => r.metrics.completion_tokens, show: count },
 ]
 type SortKey = string
 
@@ -143,9 +147,26 @@ export function RunsPage() {
       <Card className="table-inset py-0">
         <Table className="tabular">
           <TableHeader>
+            <TableRow className="hover:bg-transparent">
+              <TableHead className="sticky left-0 z-[1] bg-card" />
+              <TableHead />
+              <TableHead />
+              {COLUMNS.reduce<{ group: string; span: number }[]>((acc, c) => {
+                const last = acc.at(-1)
+                if (last && last.group === c.group) last.span++
+                else acc.push({ group: c.group, span: 1 })
+                return acc
+              }, []).map((g, i) => (
+                <TableHead key={i} colSpan={g.span} className={cn('h-8 text-center text-xs', g.group && 'border-x')}>
+                  {g.group === '3-way' ? '3-way labels' : g.group === '2-way' ? '2-way (correct or not)' : g.group}
+                </TableHead>
+              ))}
+              <TableHead />
+            </TableRow>
             <TableRow>
               <TableHead className="sticky left-0 z-[1] bg-card pl-6">Run</TableHead>
               <TableHead>Board</TableHead>
+              <TableHead className="whitespace-nowrap">Trained on</TableHead>
               {COLUMNS.map((c) => <SortHead key={c.key} label={c.label} k={c.key} sort={sort} setSort={setSort} className="text-right" />)}
               <SortHead label="Started" k="stamp" sort={sort} setSort={setSort} className="pr-6" />
             </TableRow>
@@ -164,6 +185,9 @@ export function RunsPage() {
                   </div>
                 </TableCell>
                 <TableCell><BoardName board={r.board} /></TableCell>
+                <TableCell className={cn('whitespace-nowrap', !trainedOn(r.condition) && 'text-muted-foreground')}>
+                  {trainedOn(r.condition) ?? '—'}
+                </TableCell>
                 {COLUMNS.map((c) => {
                   const v = c.get(r)
                   return <TableCell key={c.key} className={cn('text-right', v == null && 'text-muted-foreground')}>{c.show(v)}</TableCell>
@@ -173,7 +197,7 @@ export function RunsPage() {
             ))}
             {!shown.length && (
               <TableRow>
-                <TableCell colSpan={COLUMNS.length + 3} className="py-8 text-center text-muted-foreground">No run matches these filters.</TableCell>
+                <TableCell colSpan={COLUMNS.length + 4} className="py-8 text-center text-muted-foreground">No run matches these filters.</TableCell>
               </TableRow>
             )}
           </TableBody>

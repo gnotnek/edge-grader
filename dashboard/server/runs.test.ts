@@ -153,10 +153,22 @@ describe('loadRuns on the real repo', () => {
     expect(r).toMatchObject({ board: 'spark', source: 'results/spark/asap2-baseline-e2b-spark-gb10-sample-20261105-141028.json' })
     expect(r.metrics.qwk).toBe(0.5677)
   })
+  test('2-way scores come from the raw predictions when the summary has none, as Python computes them', () => {
+    // compare-bar-scientsbank-20261109 holds edge_grader's own 2-way numbers for this base run.
+    const r = runs.find((x) => x.id === 'baseline-e2b-kaggle-t4-test_uq-3way-20261005-100230.json')!
+    expect(r.metrics.two_way_accuracy).toBe(0.7544)
+    expect(r.metrics.two_way_macro_f1).toBe(0.7181)
+  })
+  test('a board run gets its 2-way scores too', () => {
+    const r = runs.find((x) => x.id === 'e2b-jetson-test_ua-20260930-224702')!
+    expect(r.metrics.two_way_accuracy).toBeGreaterThan(r.metrics.accuracy!)
+  })
   test('tuned Kaggle runs are fine-tuned, not baseline', () => {
     const r = runs.find((x) => x.id === 'baseline-e2b-kaggle-t4-ft-rf-test_ua-3way-20261102-145733.json')!
     expect(r.condition).toBe('ft-rf')
     expect(r.metrics.two_way_accuracy).toBe(0.76)
+    expect(r.metrics.two_way_macro_f1).toBe(0.7453)
+    expect(r.metrics.two_way_weighted_f1).toBe(0.7576)
     expect(r.metrics.weighted_f1).toBe(0.6679)
   })
   test('news accuracy is the judge\'s, read from the judged file', () => {
