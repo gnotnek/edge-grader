@@ -8,6 +8,7 @@
 #   docker compose up -d bench-scientsbank
 #   docker logs -f edge-grader-bench-scientsbank
 #   N=5 OUT=data/smoke scripts/spark_bench_scientsbank.sh   # minutes: 5 answers per split, nothing in results/
+#   SOUP="0 1 2 3 4" scripts/spark_bench_scientsbank.sh     # E4B untouched, those seeds' adapters and their soup
 #
 # Guide: docs/guides/spark-docker.md
 set -uo pipefail
@@ -52,6 +53,10 @@ run() {  # run <e2b|e4b> <label suffix> [adapter gguf] [reply]
 if [ "${BASELINE:-0}" = 1 ]; then
   run e2b ""
   run e4b ""
+elif [ -n "${SOUP:-}" ]; then  # adapter soup, spec 2026-11-10 §5.4
+  run e4b ""
+  for s in $SOUP; do run e4b -ft-s$s data/adapters/e4b-ft-s$s.gguf; done
+  run e4b -ft-soup data/adapters/e4b-ft-soup.gguf
 else
   for m in e2b e4b; do
     for trained in "" -beetle-saf; do  # on SciEntsBank, or on Beetle and SAF only

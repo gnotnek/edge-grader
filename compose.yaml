@@ -113,6 +113,53 @@ services:
       BASELINE: "1"
     command: scripts/spark_bench_scientsbank.sh
 
+  # Adapter soup (spec 2026-11-10): E4B label-only on SciEntsBank with seeds 0-4, then their average,
+  # then all of them graded with E4B untouched. Queue them one after the other with scripts/spark_queue.sh.
+  finetune-e4b-s0: &seed
+    <<: *finetune
+    container_name: edge-grader-finetune-e4b-s0
+    environment:
+      SEED: "0"
+    command: scripts/spark_finetune.sh e4b label
+
+  finetune-e4b-s1:
+    <<: *seed
+    container_name: edge-grader-finetune-e4b-s1
+    environment:
+      SEED: "1"
+
+  finetune-e4b-s2:
+    <<: *seed
+    container_name: edge-grader-finetune-e4b-s2
+    environment:
+      SEED: "2"
+
+  finetune-e4b-s3:
+    <<: *seed
+    container_name: edge-grader-finetune-e4b-s3
+    environment:
+      SEED: "3"
+
+  finetune-e4b-s4:
+    <<: *seed
+    container_name: edge-grader-finetune-e4b-s4
+    environment:
+      SEED: "4"
+
+  soup-e4b:
+    <<: *finetune
+    container_name: edge-grader-soup-e4b
+    environment:
+      SOUP: "0 1 2 3 4"
+    command: scripts/spark_finetune.sh e4b label
+
+  bench-scientsbank-soup:
+    <<: *finetune
+    container_name: edge-grader-bench-scientsbank-soup
+    environment:
+      SOUP: "0 1 2 3 4"
+    command: scripts/spark_bench_scientsbank.sh
+
   # Stage 5, ASAP 2.0: the untouched models, then the adapters, one at a time.
   bench-asap2:
     <<: *finetune

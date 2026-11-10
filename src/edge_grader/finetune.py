@@ -43,7 +43,10 @@ TARGET_MODULES = r".*language_model.*\.(q_proj|k_proj|v_proj|o_proj|gate_proj|up
 # batch 4 ran a T4 out of memory there (Day 1, 2026-10-22). Same effective batch of 16.
 RECIPE = {"rank": 16, "alpha": 32, "dropout": 0.05, "lr": 2e-4, "batch": 1, "grad_accum": 16,
           "scheduler": "cosine", "warmup_ratio": 0.03, "quant": "nf4, double quant, fp16 compute",
-          "val_frac": 0.1, "max_new_tokens": 16}
+          "val_frac": 0.1, "max_new_tokens": 16,
+          # Fixed, so --seed varies only the answer order and dropout (spec 2026-11-10 §5.1): every
+          # seed validates on the same questions, and LoRA's A starts the same (B starts at 0).
+          "split_seed": 0, "init_seed": 0}
 
 
 def split_by_question(items: list[Item], frac: float = 0.1, seed: int = 0,
@@ -126,7 +129,7 @@ def main(argv: list[str] | None = None) -> None:
     key = (lambda i: question_id(i.id)) if default_set else (lambda i: i.question)
     items = (data.load(split="train", scheme="3way") if default_set else
              [i for s in args.train_sets for i in data.load(split="train", scheme="3way", dataset=s)])
-    train, val = split_by_question(items, RECIPE["val_frac"], args.seed, key)
+    train, val = split_by_question(items, RECIPE["val_frac"], RECIPE["split_seed"], key)
     tq, vq = sorted({key(i) for i in train}), sorted({key(i) for i in val})
     print(f"train {len(train)} answers / {len(tq)} questions, "
           f"validation {len(val)} answers / {len(vq)} questions")
@@ -165,6 +168,7 @@ def main(argv: list[str] | None = None) -> None:
                                                bnb_4bit_use_double_quant=True,
                                                bnb_4bit_compute_dtype=torch.float16))
     prepare_for_lora(model)
+    torch.manual_seed(RECIPE["init_seed"])  # the Trainer seeds itself only after this
     model = peft.get_peft_model(model, peft.LoraConfig(
         r=RECIPE["rank"], lora_alpha=RECIPE["alpha"], lora_dropout=RECIPE["dropout"],
         target_modules=TARGET_MODULES, task_type="CAUSAL_LM"))

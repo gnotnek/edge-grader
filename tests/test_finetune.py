@@ -174,3 +174,15 @@ def test_a_reason_format_needs_reasons(tmp_path):
 
     with pytest.raises(SystemExit):
         finetune.main(["--model", "e2b", "--out", str(tmp_path), "--dry-run", "--reply", "label-first"])
+
+
+def test_seed_does_not_change_the_validation_split(tmp_path, monkeypatch):
+    from edge_grader import data, finetune
+
+    monkeypatch.setattr(data, "load", lambda split, scheme: items())
+    seen = []
+    real = finetune.split_by_question
+    monkeypatch.setattr(finetune, "split_by_question", lambda *a: seen.append(a[2]) or real(*a))
+    for seed in ("0", "3"):
+        finetune.main(["--model", "e4b", "--out", str(tmp_path), "--dry-run", "--seed", seed])
+    assert seen == [0, 0] == [finetune.RECIPE["split_seed"]] * 2
