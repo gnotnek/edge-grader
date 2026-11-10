@@ -1,6 +1,6 @@
 # Design: adapter averaging ("model soup") for E4B on SciEntsBank
 
-*2026-11-10. Approved as a method by the supervisor on 2026-11-10, together with graded examples in the prompt (a separate session). Calls marked **(Claude's call)** were not discussed and can be changed. Once approved, the decision goes into [`research-outline.md`](../../research-outline.md), which stays the source of truth.*
+*2026-11-10. Approved as a method by the supervisor on 2026-11-10, together with graded examples in the prompt (a separate session). **Spec approved by the owner on 2026-11-10, as written.** Calls marked **(Claude's call)** were not discussed and can be changed. Once approved, the decision goes into [`research-outline.md`](../../research-outline.md), which stays the source of truth.*
 
 ## 1. Why
 
