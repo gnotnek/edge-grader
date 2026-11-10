@@ -2,6 +2,7 @@
 
     uv run edge-grader-baseline --base-url http://127.0.0.1:8080/v1 --n 100
     uv run edge-grader-baseline --rag results/rag/retrieval-<index>-k5.json --k 3 ...
+    uv run edge-grader-baseline --examples results/examples/examples-knn-bge-small-en-k4.json --k 4 ...
 
 --rag takes a retrieval file from `python -m edge_grader.rag.index retrieve`; the passage text
 comes from the chunks file it names, which must be unchanged (sha256 checked).
@@ -18,7 +19,7 @@ from pathlib import Path
 import httpx
 from openai import APIError, OpenAI
 
-from . import data, grader, metrics
+from . import data, examples, grader, metrics
 from .data import question_id
 
 
@@ -76,7 +77,9 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--out", default="results/local", help="directory for this run's files")
     ap.add_argument("--rag", default=None, help="retrieval file: add course material to the prompt")
-    ap.add_argument("--k", type=int, default=3, help="passages per prompt with --rag")
+    ap.add_argument("--examples", default=None,
+                    help="examples file (edge_grader.examples): graded train answers in the prompt")
+    ap.add_argument("--k", type=int, default=3, help="passages or examples per prompt")
     ap.add_argument("--thinking", action="store_true",
                     help="the server runs with -rea on --reasoning-budget 320 --reasoning-format none: "
                          "read the label after the thoughts")
@@ -87,11 +90,15 @@ def main(argv: list[str] | None = None) -> None:
         sys.exit("--thinking with --rag isn't a condition in this study")
     if args.reply != "label" and (args.thinking or args.rag):
         sys.exit(f"--reply {args.reply} with --thinking or --rag isn't a condition in this study")
+    if args.examples and (args.rag or args.thinking or args.reply != "label" or args.dataset != "scientsbank"):
+        sys.exit("--examples: SciEntsBank, label replies, no --rag or --thinking (spec 2026-11-10)")
     if args.dataset != "scientsbank" and (args.rag or args.split == "test_ud"):
         sys.exit(f"{args.dataset}: test_ua or test_uq, without --rag")
 
     passages, rag = load_passages(args.rag, args.k) if args.rag else ({}, None)
-    stage = "think" if args.thinking else ("rag" if args.rag else "baseline")
+    shots, shots_run = (examples.load(args.examples, args.k, data.load("train"))
+                        if args.examples else ({}, None))
+    stage = "think" if args.thinking else ("rag" if args.rag else ("examples" if shots_run else "baseline"))
     server = server_info(args.base_url)
     items = data.load(args.split, args.scheme, n=args.n or None, seed=args.seed, dataset=args.dataset)
     labels = data.labels_for(args.scheme)
@@ -103,11 +110,15 @@ def main(argv: list[str] | None = None) -> None:
         hits = passages.get(question_id(item.id), []) if rag else []
         if rag and not hits:
             sys.exit(f"no retrieved passages for question {question_id(item.id)}")
+        if shots_run and item.id not in shots:
+            sys.exit(f"no examples for answer {item.id}")
         try:
             row = grader.grade(client, args.model, item, labels, passages=[t for _, t in hits],
-                               thinking=args.thinking, reply=args.reply)
+                               thinking=args.thinking, reply=args.reply, examples=shots.get(item.id))
             if rag:
                 row["passages"] = [cid for cid, _ in hits]
+            if shots_run:
+                row["examples"] = [e.id for e in shots[item.id]]
             rows.append(row)
         except (APIError, httpx.HTTPError) as e:  # one failed request must not lose a long run
             rows.append({"id": item.id, "gold": item.label, "pred": None, "error": repr(e)})
@@ -128,6 +139,9 @@ def main(argv: list[str] | None = None) -> None:
     summary["median_latency_s"] = statistics.median(r["latency_s"] for r in ok) if ok else None
     summary["wall_s"] = round(wall, 1)
     summary["prompt_tokens"] = sum(r["prompt_tokens"] or 0 for r in ok)
+    # A longer prompt costs the device energy (examples, RAG), so its spread is kept too.
+    summary["median_prompt_tokens"] = statistics.median(r["prompt_tokens"] or 0 for r in ok) if ok else None
+    summary["max_prompt_tokens"] = max((r["prompt_tokens"] or 0 for r in ok), default=None)
     summary["completion_tokens"] = sum(r["completion_tokens"] or 0 for r in ok)
     summary["median_completion_tokens"] = (
         statistics.median(r["completion_tokens"] or 0 for r in ok) if ok else None)
@@ -149,6 +163,8 @@ def main(argv: list[str] | None = None) -> None:
     }
     if rag:
         run["rag"] = rag
+    if shots_run:
+        run["examples"] = shots_run
     if args.thinking:
         run["thinking"] = {"server_flags": "-rea on --reasoning-budget 320 --reasoning-format none",
                            "max_tokens": grader.THINK_MAX_TOKENS,

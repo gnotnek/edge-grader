@@ -160,6 +160,15 @@ services:
       SOUP: "0 1 2 3 4"
     command: scripts/spark_bench_scientsbank.sh
 
+  # Graded examples in the prompt (spec 2026-11-10): E4B untouched, + examples, adapter + examples,
+  # + random examples, all three splits.
+  bench-scientsbank-examples:
+    <<: *finetune
+    container_name: edge-grader-bench-scientsbank-examples
+    environment:
+      EXAMPLES: "1"
+    command: scripts/spark_bench_scientsbank.sh
+
   # Stage 5, ASAP 2.0: the untouched models, then the adapters, one at a time.
   bench-asap2:
     <<: *finetune

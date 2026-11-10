@@ -24,10 +24,10 @@ CELLS = [(d, s) for d in HEADLINE for s in ("test_ua", "test_uq")]
 DESCRIBED = [("scientsbank", "test_uq"), ("scientsbank", "test_ud")]
 
 
-def latest(kaggle: Path, dataset: str, label: str, split: str) -> Path:
+def latest(kaggle: Path, dataset: str, label: str, split: str, stage: str = "baseline") -> Path:
     """The newest whole-split 3-way run of exactly this label (not a smoke run of 100)."""
     prefix = "" if dataset == "scientsbank" else f"{dataset}-"
-    files = [f for f in sorted(kaggle.glob(f"{prefix}baseline-{label}-{split}-3way-*.json"))
+    files = [f for f in sorted(kaggle.glob(f"{prefix}{stage}-{label}-{split}-3way-*.json"))
              if json.loads(f.read_text())["n_requested"] == 0]
     if not files:
         raise SystemExit(f"no whole-split run of {label} on {dataset} {split} in {kaggle}")

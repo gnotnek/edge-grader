@@ -2,7 +2,8 @@
 # SciEntsBank on the lab's DGX Spark, inside the edge-grader:spark image: every version on all three
 # test splits, one after the other, each with its own llama-server and the lab's baseline flags:
 # the adapters, trained on SciEntsBank or on Beetle and SAF only, with the label, label-first and
-# reason-first replies, or with BASELINE=1 E2B and E4B untouched. A version with no adapter file yet
+# reason-first replies, or with BASELINE=1 E2B and E4B untouched, or with EXAMPLES=1 the graded-examples
+# runs (spec 2026-11-10: E4B untouched, + kNN examples, + random examples, adapter + kNN examples). A version with no adapter file yet
 # is skipped, and a split already in $OUT isn't graded again, so running this again picks up what's new.
 #
 #   docker compose up -d bench-scientsbank
@@ -20,14 +21,15 @@ LOG=data/logs/bench-scientsbank-$(date -u +%Y%m%d-%H%M%S).log
 exec > >(tee -a "$LOG") 2>&1
 echo "== $(date -u +%FT%TZ) SciEntsBank: repo $(git rev-parse --short HEAD), llama.cpp $(cat /opt/llama.cpp/bin/COMMIT), n $N, out $OUT"
 
-run() {  # run <e2b|e4b> <label suffix> [adapter gguf] [reply]
-  local model=$1 suffix=$2 adapter=${3:-} reply=${4:-label} label="$1-spark-gb10$2" gguf server server_log split
+run() {  # run <e2b|e4b> <label suffix> [adapter gguf] [reply] [examples file]
+  local model=$1 suffix=$2 adapter=${3:-} reply=${4:-label} examples=${5:-} label="$1-spark-gb10$2" gguf server server_log split
+  local stage=${examples:+examples}; stage=${stage:-baseline}
   echo "== $(date -u +%FT%TZ) $label ${adapter:-(no adapter)}"
   if [ -n "$adapter" ] && [ ! -f "$adapter" ]; then echo "SKIPPED $label: no $adapter"; return; fi
   todo=()
   for split in test_ua test_uq test_ud; do
     # a whole-split run counts as done; the 100-answer checks after training don't
-    grep -qs '"n_requested": 0' "$OUT"/baseline-"$label"-"$split"-3way-*.json || todo+=("$split")
+    grep -qs '"n_requested": 0' "$OUT"/"$stage"-"$label"-"$split"-3way-*.json || todo+=("$split")
   done
   if [ ${#todo[@]} = 0 ]; then echo "already graded: $label"; return; fi
   case $model in
@@ -45,12 +47,18 @@ run() {  # run <e2b|e4b> <label suffix> [adapter gguf] [reply]
   done
   for split in "${todo[@]}"; do
     uv run --frozen edge-grader-baseline --base-url http://127.0.0.1:8080/v1 --label "$label" --split "$split" \
-      --n "$N" --out "$OUT" --reply "$reply" || echo "FAILED $label $split"
+      --n "$N" --out "$OUT" --reply "$reply" ${examples:+--examples "$examples" --k 4} || echo "FAILED $label $split"
   done
   kill $server; wait $server 2>/dev/null
 }
 
-if [ "${BASELINE:-0}" = 1 ]; then
+if [ "${EXAMPLES:-0}" = 1 ]; then  # main pair first, the random control last
+  knn=results/examples/examples-knn-bge-small-en-k4.json
+  run e4b ""
+  run e4b -ex4 "" label $knn
+  run e4b -ft-ex4 data/adapters/e4b-ft.gguf label $knn
+  run e4b -rand4 "" label results/examples/examples-random-k4.json
+elif [ "${BASELINE:-0}" = 1 ]; then
   run e2b ""
   run e4b ""
 elif [ -n "${SOUP:-}" ]; then  # adapter soup, spec 2026-11-10 §5.4
