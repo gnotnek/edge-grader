@@ -8,6 +8,8 @@
 #   docker logs -f edge-grader-finetune-e4b-lf
 #   SMOKE=1 scripts/spark_finetune.sh e4b label-first   # minutes: 20 steps, 10 answers, all output in data/smoke
 #   TRAIN_SETS="beetle saf" scripts/spark_finetune.sh e4b label   # other sets' train splits: e4b-ft-beetle-saf.gguf
+#   SEED=3 scripts/spark_finetune.sh e4b label                     # seed 3: data/adapters/e4b-s3, e4b-ft-s3.gguf
+#   SOUP="0 1 2 3 4" scripts/spark_finetune.sh e4b label           # average those seeds instead of training: e4b-ft-soup.gguf
 #
 # Guide: docs/guides/spark-docker.md
 set -euo pipefail
@@ -30,6 +32,14 @@ if [ -n "${TRAIN_SETS:-}" ]; then
   SETS_ARGS=(--train-sets $TRAIN_SETS)
   TAG=$TAG-${TRAIN_SETS// /-}
 fi
+# Adapter soup (spec 2026-11-10): SEED trains one ingredient, SOUP averages the named seeds' adapters.
+SEED_ARGS=() SMOKE_SFX=""
+[ "${SMOKE:-0}" = 1 ] && SMOKE_SFX=-smoke
+[ -n "${SEED:-}" ] && [ -n "${SOUP:-}" ] && { echo "SEED trains, SOUP averages: set one" >&2; exit 1; }
+[ -n "${SEED:-}" ] && { SEED_ARGS=(--seed "$SEED"); TAG=$TAG-s$SEED; }
+INGREDIENTS=()
+for s in ${SOUP:-}; do INGREDIENTS+=("data/adapters/$MODEL$TAG-s$s$SMOKE_SFX/adapter"); done
+[ -n "${SOUP:-}" ] && TAG=$TAG-soup
 RUN=$MODEL$TAG
 TRAIN_ARGS=() N=100 RESULTS=results/finetune GRADED=results/spark
 if [ "${SMOKE:-0}" = 1 ]; then  # the Day 1 check: does it train, convert and load? Nothing goes in results/
@@ -45,13 +55,19 @@ exec > >(tee -a "$LOG") 2>&1
 echo "== $(date -u +%FT%TZ) $MODEL $REPLY: repo $(git rev-parse --short HEAD), llama.cpp $(cat $LLAMA_CPP/bin/COMMIT), log $LOG"
 nvidia-smi --query-gpu=name,driver_version --format=csv,noheader
 
-echo "== 1. train"
 rm -rf "$ADAPTER"  # a re-run must not find the last run's adapter
-REPLY_ARGS=()
-REASONS=results/finetune/raw/reasons-qwen3-14b-q4_k_m${TRAIN_SETS:+-${TRAIN_SETS// /-}}.jsonl
-[ "$REPLY" = label ] || REPLY_ARGS=(--reply "$REPLY" --reasons "$REASONS")
-uv run --frozen --group finetune edge-grader-finetune --model "$MODEL" --out "$ADAPTER" --results "$RESULTS" \
-  "${TRAIN_ARGS[@]}" "${REPLY_ARGS[@]}" "${SETS_ARGS[@]}"
+if [ -n "${SOUP:-}" ]; then
+  echo "== 1. average seeds $SOUP"
+  uv run --frozen --group finetune python -m edge_grader.soup "$ADAPTER/adapter" "${INGREDIENTS[@]}" \
+    --results "$RESULTS"
+else
+  echo "== 1. train"
+  REPLY_ARGS=()
+  REASONS=results/finetune/raw/reasons-qwen3-14b-q4_k_m${TRAIN_SETS:+-${TRAIN_SETS// /-}}.jsonl
+  [ "$REPLY" = label ] || REPLY_ARGS=(--reply "$REPLY" --reasons "$REASONS")
+  uv run --frozen --group finetune edge-grader-finetune --model "$MODEL" --out "$ADAPTER" --results "$RESULTS" \
+    "${TRAIN_ARGS[@]}" "${REPLY_ARGS[@]}" "${SETS_ARGS[@]}" "${SEED_ARGS[@]}"
+fi
 test -f "$ADAPTER/adapter/adapter_model.safetensors"
 
 echo "== 2. convert to GGUF"

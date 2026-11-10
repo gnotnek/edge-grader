@@ -134,6 +134,26 @@ AFTER=edge-grader-bench-asap2-think nohup scripts/spark_queue.sh reasons-beetle-
 
 Grading the untouched models and Oct 28 adapters here too keeps the comparison on one machine, and those runs can be checked against Kaggle's. Summaries land in `results/spark/`.
 
+## Adapter soup (E4B, SciEntsBank)
+
+Five E4B label-only adapters, the same recipe with seeds 0–4, then one adapter that is their exact average, then all of them graded on the three test splits beside untouched E4B ([spec](../superpowers/specs/2026-11-10-adapter-soup-design.md)):
+
+| Service | Container | Runs |
+|---|---|---|
+| `finetune-e4b-s0` … `-s4` | `edge-grader-finetune-e4b-s0` and so on | `SEED=<n> scripts/spark_finetune.sh e4b label`: `data/adapters/e4b-ft-s<n>.gguf` |
+| `soup-e4b` | `edge-grader-soup-e4b` | `SOUP="0 1 2 3 4" scripts/spark_finetune.sh e4b label`: stacks the five adapters into `data/adapters/e4b-ft-soup.gguf` |
+| `bench-scientsbank-soup` | `edge-grader-bench-scientsbank-soup` | grades E4B untouched, the five seeds and the soup; skips what's already graded |
+
+```bash
+docker compose run --rm -e SMOKE=1 -e SEED=0 dev scripts/spark_finetune.sh e4b label   # smoke: two seeds,
+docker compose run --rm -e SMOKE=1 -e SEED=1 dev scripts/spark_finetune.sh e4b label   # then their soup,
+docker compose run --rm -e SMOKE=1 -e SOUP="0 1" dev scripts/spark_finetune.sh e4b label  # all in data/smoke
+AFTER=<the container running now> nohup scripts/spark_queue.sh finetune-e4b-s0 finetune-e4b-s1 finetune-e4b-s2 \
+  finetune-e4b-s3 finetune-e4b-s4 soup-e4b bench-scientsbank-soup > data/logs/queue-soup.log 2>&1 &
+```
+
+Then, on the Mac with the results pulled: `uv run python -m edge_grader.compare_soup`.
+
 ## ASAP 2.0 (stage 5)
 
 One container, `edge-grader-bench-asap2`, runs the fixed 600-essay sample on each version in turn: E2B and E4B untouched, then `e2b-ft`, `e2b-ft-lf`, `e4b-ft` and `e4b-ft-lf`. Adapters are read from `data/adapters/`; a missing one is logged and skipped.
