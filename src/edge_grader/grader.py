@@ -36,8 +36,10 @@ def answer_part(text: str) -> str | None:
     return None if THOUGHT_OPEN_RE.search(text) else text
 
 
-def build_prompt(item: Item, labels: list[str], passages: list[str] | None = None) -> str:
-    """The stage-1 prompt; with passages (RAG), course material goes before the question."""
+def build_prompt(item: Item, labels: list[str], passages: list[str] | None = None,
+                 examples: list[Item] | None = None) -> str:
+    """The stage-1 prompt; with passages (RAG), course material goes before the question; with
+    examples (spec 2026-11-10), graded train answers do, in the order given."""
     options = "\n".join(f"- {name}: {LABEL_HELP[name]}" for name in labels)
     material = ""
     if passages:
@@ -46,6 +48,11 @@ def build_prompt(item: Item, labels: list[str], passages: list[str] | None = Non
             "Course material, for background only (the reference answer decides the grade):\n"
             f"{numbered}\n\n"
         )
+    if examples:
+        graded = "\n".join(
+            f"[{i}] Question: {e.question}\nReference answer: {e.reference_answer}\n"
+            f"Student answer: {e.student_answer}\nLabel: {e.label}" for i, e in enumerate(examples, 1))
+        material += f"Graded examples (other students' answers, graded by experts):\n{graded}\n\n"
     return (
         "You are grading a student's answer to a science question.\n\n"
         f"{material}"
@@ -89,10 +96,11 @@ def parse_reply(text: str, labels: list[str], fmt: str) -> str | None:
 
 
 def grade(client, model: str, item: Item, labels: list[str], max_tokens: int = 16,
-          passages: list[str] | None = None, thinking: bool = False, reply: str = "label") -> dict:
+          passages: list[str] | None = None, thinking: bool = False, reply: str = "label",
+          examples: list[Item] | None = None) -> dict:
     if thinking and reply != "label":
         raise ValueError("thinking with a reason format isn't a condition in this study")
-    prompt = build_prompt(item, labels, passages)
+    prompt = build_prompt(item, labels, passages, examples)
     if thinking and max_tokens == 16:
         max_tokens = THINK_MAX_TOKENS
     if reply == "reason-first" and max_tokens == 16:
