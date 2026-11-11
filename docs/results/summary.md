@@ -79,6 +79,7 @@ QLoRA on the SciEntsBank train split, served with `--lora` on the unchanged Q4 G
 2. **It fixes the baseline's weak spot.** Recall on *correct* answers rose from 0.40–0.60 to 0.73–0.78, and E2B stopped overusing "contradictory".
 3. **E2B catches up with E4B** (within 3 points on every split). Both are at or near the best published SciEntsBank numbers (Claude 3.5 Sonnet + RAG: 78.7 / 76.9 / 73.4%).
 4. **No harm to general ability:** no significant drop on MMLU-Pro or math (Holm p = 1.0 for all six). One E2B MMLU-Pro subset fell 10 points, mostly from more answers hitting the token cap.
+5. **A prompt doesn't replace it** (2026-11-10, DGX Spark): 4 expert-graded train answers in E4B's prompt raise test_ua (+7.2, passes the bar) but not test_uq (+4.4, n.s.), and cost 3.8 points on test_ud; random examples do as well as similar ones, and the adapter stays 6–10 points ahead ([graded examples](examples.md)).
 
 ## RQ6: do inference-time settings matter?
 

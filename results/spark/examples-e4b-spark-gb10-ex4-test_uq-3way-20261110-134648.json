@@ -1,0 +1,47 @@
+{
+  "benchmark": "scientsbank",
+  "stage": "examples",
+  "label": "e4b-spark-gb10-ex4",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "data/models/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a3a1c47"
+  },
+  "split": "test_uq",
+  "scheme": "3way",
+  "reply": "label",
+  "n_requested": 0,
+  "seed": 0,
+  "time": "2026-11-10T13:46:48+00:00",
+  "metrics": {
+    "n": 733,
+    "accuracy": 0.734,
+    "macro_f1": 0.6782,
+    "weighted_f1": 0.7309,
+    "unparsed": 0,
+    "two_way": {
+      "n": 733,
+      "accuracy": 0.7995,
+      "macro_f1": 0.795,
+      "weighted_f1": 0.8004,
+      "unparsed": 0
+    },
+    "errors": 0,
+    "median_latency_s": 0.864,
+    "wall_s": 637.8,
+    "prompt_tokens": 400716,
+    "median_prompt_tokens": 531,
+    "max_prompt_tokens": 1017,
+    "completion_tokens": 1556,
+    "median_completion_tokens": 2
+  },
+  "examples": {
+    "file": "results/examples/examples-knn-bge-small-en-k4.json",
+    "k": 4,
+    "kind": "knn",
+    "embedder": "BAAI/bge-small-en-v1.5",
+    "order": "least similar first, most similar last"
+  }
+}

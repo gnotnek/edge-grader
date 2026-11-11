@@ -1,0 +1,47 @@
+{
+  "benchmark": "scientsbank",
+  "stage": "examples",
+  "label": "e4b-spark-gb10-rand4",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "data/models/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a3a1c47"
+  },
+  "split": "test_ud",
+  "scheme": "3way",
+  "reply": "label",
+  "n_requested": 0,
+  "seed": 0,
+  "time": "2026-11-10T18:30:03+00:00",
+  "metrics": {
+    "n": 4562,
+    "accuracy": 0.6773,
+    "macro_f1": 0.6453,
+    "weighted_f1": 0.6758,
+    "unparsed": 0,
+    "two_way": {
+      "n": 4562,
+      "accuracy": 0.7427,
+      "macro_f1": 0.738,
+      "weighted_f1": 0.7436,
+      "unparsed": 0
+    },
+    "errors": 0,
+    "median_latency_s": 1.012,
+    "wall_s": 4602.8,
+    "prompt_tokens": 2711912,
+    "median_prompt_tokens": 586.0,
+    "max_prompt_tokens": 1045,
+    "completion_tokens": 9780,
+    "median_completion_tokens": 2.0
+  },
+  "examples": {
+    "file": "results/examples/examples-random-k4.json",
+    "k": 4,
+    "kind": "random",
+    "embedder": null,
+    "order": "as drawn"
+  }
+}
