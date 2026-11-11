@@ -40,6 +40,8 @@ class FakeLlamaServer(BaseHTTPRequestHandler):
         prompt = body["messages"][0]["content"]
         # Grades "right" answers correct and everything else incorrect.
         reply = "correct" if "Student answer: right" in prompt else "incorrect"
+        if "Student answer: half" in prompt:  # a 5-way reply, for --prompt-scheme 5way
+            reply = "partially_correct_incomplete"
         if body.get("max_tokens") == REASON_FIRST_MAX_TOKENS:  # reason-first: a reason naming labels
             reply = f"Not contradictory, nor correct in full.\nLabel: {reply}"
         elif body.get("max_tokens", 16) > 16:  # a thinking-on request: thoughts first, naming labels
@@ -191,3 +193,27 @@ def test_label_run_records_the_default_reply(server, tmp_path, monkeypatch):
 def test_reason_formats_refuse_thinking_and_rag(extra, tmp_path):
     with pytest.raises(SystemExit, match="--reply"):
         baseline.main(["--out", str(tmp_path), "--reply", "reason-first", *extra])
+
+
+def test_five_way_prompt_is_scored_three_way(server, tmp_path, monkeypatch):
+    items = [data.Item("a", "Q1?", "ref", "right answer", "correct"),
+             data.Item("b", "Q2?", "ref", "half answer", "incorrect")]
+    monkeypatch.setattr(data, "load", lambda *a, **k: items)
+    FakeLlamaServer.requests.clear()
+    baseline.main(["--base-url", server, "--label", "fake-5w", "--out", str(tmp_path),
+                   "--prompt-scheme", "5way"])
+
+    assert "- partially_correct_incomplete:" in FakeLlamaServer.requests[0]["messages"][0]["content"]
+    [summary_file] = tmp_path.glob("baseline-fake-5w-test_ua-3way-*.json")
+    run = json.loads(summary_file.read_text())
+    assert run["prompt_scheme"] == "5way" and run["scheme"] == "3way"
+    assert run["metrics"]["accuracy"] == 1.0  # partially_correct_incomplete -> incorrect
+    [raw_file] = (tmp_path / "raw").glob("*.jsonl")
+    rows = [json.loads(line) for line in raw_file.read_text().splitlines()]
+    assert [(r["pred5"], r["pred"]) for r in rows] == [("correct", "correct"),
+                                                       ("partially_correct_incomplete", "incorrect")]
+
+
+def test_five_way_prompt_refuses_other_conditions(tmp_path):
+    with pytest.raises(SystemExit, match="prompt-scheme"):
+        baseline.main(["--out", str(tmp_path), "--prompt-scheme", "5way", "--dataset", "beetle"])

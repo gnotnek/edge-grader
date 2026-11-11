@@ -186,3 +186,36 @@ def test_seed_does_not_change_the_validation_split(tmp_path, monkeypatch):
     for seed in ("0", "3"):
         finetune.main(["--model", "e4b", "--out", str(tmp_path), "--dry-run", "--seed", seed])
     assert seen == [0, 0] == [finetune.RECIPE["split_seed"]] * 2
+
+
+def test_five_way_trains_on_five_labels_with_the_same_split(tmp_path, monkeypatch, capsys):
+    from edge_grader import data, finetune
+
+    five = labels_for("5way")
+    seen, splits = [], []
+    monkeypatch.setattr(data, "load", lambda split, scheme: seen.append(scheme) or
+                        [Item(i.id, i.question, i.reference_answer, i.student_answer, five[n % 5])
+                         for n, i in enumerate(items())])
+    real = finetune.split_by_question
+    monkeypatch.setattr(finetune, "split_by_question", lambda *a: splits.append(real(*a)) or splits[-1])
+    for scheme in ("3way", "5way"):
+        finetune.main(["--model", "e4b", "--out", str(tmp_path), "--dry-run", "--scheme", scheme])
+    assert seen == ["3way", "5way"]
+    assert [i.id for i in splits[0][1]] == [i.id for i in splits[1][1]]  # same validation answers
+    assert "- partially_correct_incomplete:" in capsys.readouterr().out
+
+
+@pytest.mark.parametrize("extra", [["--train-sets", "beetle"], ["--reply", "label-first", "--reasons", "r.jsonl"]])
+def test_five_way_is_scientsbank_label_only(tmp_path, extra):
+    from edge_grader import finetune
+
+    with pytest.raises(SystemExit):
+        finetune.main(["--model", "e4b", "--out", str(tmp_path), "--dry-run", "--scheme", "5way", *extra])
+
+
+def test_to_3way_maps_five_way_and_keeps_three_way():
+    from edge_grader.data import to_3way
+
+    assert [to_3way(x) for x in ("partially_correct_incomplete", "irrelevant", "non_domain")] == ["incorrect"] * 3
+    assert [to_3way(x) for x in ("correct", "contradictory", "incorrect", None)] == [
+        "correct", "contradictory", "incorrect", None]

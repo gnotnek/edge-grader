@@ -4,6 +4,9 @@
     uv run edge-grader-baseline --rag results/rag/retrieval-<index>-k5.json --k 3 ...
     uv run edge-grader-baseline --examples results/examples/examples-knn-bge-small-en-k4.json --k 4 ...
 
+--prompt-scheme 5way (spec 2026-11-12-fiveway-training-design.md) offers the five SciEntsBank labels,
+for an adapter trained on them; each reply is scored after mapping it to 3-way, and kept as pred5.
+
 --rag takes a retrieval file from `python -m edge_grader.rag.index retrieve`; the passage text
 comes from the chunks file it names, which must be unchanged (sha256 checked).
 """
@@ -85,7 +88,12 @@ def main(argv: list[str] | None = None) -> None:
                          "read the label after the thoughts")
     ap.add_argument("--reply", default="label", choices=grader.REPLY_FORMATS,
                     help="stage 3b: the reply format the adapter was trained on (default: the label only)")
+    ap.add_argument("--prompt-scheme", default=None, choices=["5way"],
+                    help="offer these labels in the prompt (an adapter trained on them); score 3-way")
     args = ap.parse_args(argv)
+    if args.prompt_scheme and (args.scheme != "3way" or args.dataset != "scientsbank" or args.reply != "label"
+                               or args.rag or args.thinking or args.examples):
+        sys.exit("--prompt-scheme 5way: SciEntsBank, --scheme 3way, label replies, no --rag/--thinking/--examples")
     if args.thinking and args.rag:
         sys.exit("--thinking with --rag isn't a condition in this study")
     if args.reply != "label" and (args.thinking or args.rag):
@@ -101,7 +109,7 @@ def main(argv: list[str] | None = None) -> None:
     stage = "think" if args.thinking else ("rag" if args.rag else ("examples" if shots_run else "baseline"))
     server = server_info(args.base_url)
     items = data.load(args.split, args.scheme, n=args.n or None, seed=args.seed, dataset=args.dataset)
-    labels = data.labels_for(args.scheme)
+    labels = data.labels_for(args.prompt_scheme or args.scheme)  # what the prompt offers
     client = OpenAI(base_url=args.base_url, api_key="not-needed", timeout=600, max_retries=3)
 
     rows = []
@@ -119,6 +127,8 @@ def main(argv: list[str] | None = None) -> None:
                 row["passages"] = [cid for cid, _ in hits]
             if shots_run:
                 row["examples"] = [e.id for e in shots[item.id]]
+            if args.prompt_scheme:  # scored 3-way, the 5-way reply kept beside it
+                row["pred5"], row["pred"] = row["pred"], data.to_3way(row["pred"])
             rows.append(row)
         except (APIError, httpx.HTTPError) as e:  # one failed request must not lose a long run
             rows.append({"id": item.id, "gold": item.label, "pred": None, "error": repr(e)})
@@ -168,6 +178,8 @@ def main(argv: list[str] | None = None) -> None:
         "time": now.isoformat(timespec="seconds"),
         "metrics": summary,
     }
+    if args.prompt_scheme:
+        run["prompt_scheme"] = args.prompt_scheme
     if rag:
         run["rag"] = rag
     if shots_run:

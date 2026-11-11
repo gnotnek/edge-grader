@@ -160,6 +160,23 @@ services:
       SOUP: "0 1 2 3 4"
     command: scripts/spark_bench_scientsbank.sh
 
+  # 5-way labels (spec 2026-11-12): E4B label-only, seed 0, trained on SciEntsBank's 5-way labels and
+  # scored 3-way; then graded on all three splits. Runs beside the soup queue (owner's OK).
+  finetune-e4b-5w-s0:
+    <<: *finetune
+    container_name: edge-grader-finetune-e4b-5w-s0
+    environment:
+      SCHEME: "5way"
+      SEED: "0"
+    command: scripts/spark_finetune.sh e4b label
+
+  bench-scientsbank-5w:
+    <<: *finetune
+    container_name: edge-grader-bench-scientsbank-5w
+    environment:
+      FIVEWAY: "1"
+    command: scripts/spark_bench_scientsbank.sh
+
   # Graded examples in the prompt (spec 2026-11-10): E4B untouched, + examples, adapter + examples,
   # + random examples, all three splits.
   bench-scientsbank-examples:

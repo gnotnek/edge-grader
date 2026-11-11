@@ -11,6 +11,9 @@ dropped are left out of training only; the split and the validation answers stay
 
 --train-sets trains on other grading sets instead, e.g. beetle saf, so SciEntsBank stays unseen.
 
+--scheme 5way (spec 2026-11-12-fiveway-training-design.md) trains on SciEntsBank's 5-way labels
+with the 5-label prompt; the epoch is still picked on 3-way validation accuracy, the reported metric.
+
     uv run --group finetune edge-grader-finetune --model e2b --out /kaggle/working/adapters/e2b
     uv run --group finetune edge-grader-finetune --model e2b --out ... --reply reason-first \\
         --reasons results/finetune/raw/reasons-qwen3-14b-q4_k_m.jsonl
@@ -119,15 +122,19 @@ def main(argv: list[str] | None = None) -> None:
     ap.add_argument("--reasons", type=Path, default=None, help="edge-grader-reasons JSONL (reason formats)")
     ap.add_argument("--train-sets", nargs="+", choices=list(data.DATASETS), default=["scientsbank"],
                     help="the grading sets whose train splits to learn from")
+    ap.add_argument("--scheme", choices=["3way", "5way"], default="3way",
+                    help="the labels the adapter learns to reply (5way: SciEntsBank, label replies)")
     args = ap.parse_args(argv)
     if (args.reply == "label") != (args.reasons is None):
         ap.error("--reasons goes with --reply reason-first / label-first, and only with them")
     default_set = args.train_sets == ["scientsbank"]
+    if args.scheme == "5way" and (not default_set or args.reply != "label"):
+        ap.error("--scheme 5way: SciEntsBank only, label replies only (Beetle and SAF have no 5-way labels)")
 
-    labels = data.labels_for("3way")
+    labels = data.labels_for(args.scheme)
     # SAF's ids are random, so another set's questions are told apart by their text.
     key = (lambda i: question_id(i.id)) if default_set else (lambda i: i.question)
-    items = (data.load(split="train", scheme="3way") if default_set else
+    items = (data.load(split="train", scheme=args.scheme) if default_set else
              [i for s in args.train_sets for i in data.load(split="train", scheme="3way", dataset=s)])
     train, val = split_by_question(items, RECIPE["val_frac"], RECIPE["split_seed"], key)
     tq, vq = sorted({key(i) for i in train}), sorted({key(i) for i in val})
@@ -206,7 +213,7 @@ def main(argv: list[str] | None = None) -> None:
 
     def validate(epoch: float) -> None:
         model.eval()
-        right = unparsed = 0
+        right = right3 = unparsed = 0
         with torch.no_grad():
             for item in val:
                 enc = tok(prompt_text(item), add_special_tokens=False, return_tensors="pt").to(0)
@@ -216,14 +223,19 @@ def main(argv: list[str] | None = None) -> None:
                 pred = None if cut else parse_reply(tok.decode(new, skip_special_tokens=True),
                                                     labels, args.reply)
                 right += pred == item.label
+                right3 += pred is not None and data.to_3way(pred) == data.to_3way(item.label)
                 unparsed += pred is None
         model.train()
         loss = next((h["loss"] for h in reversed(trainer.state.log_history) if "loss" in h), None)
         k = len(history) + 1
+        # val_accuracy is 3-way, the reported metric, so it picks the epoch under either scheme
+        # (for 3-way it equals the exact-match accuracy, as before).
         history.append({"epoch": k, "at_epoch": round(epoch, 3), "train_loss": loss,
-                        "val_accuracy": right / len(val), "val_unparsed": unparsed})
+                        "val_accuracy": right3 / len(val), "val_unparsed": unparsed,
+                        **({"val_accuracy_5way": right / len(val)} if args.scheme == "5way" else {})})
         model.save_pretrained(args.out / f"epoch-{k}")
-        print(f"epoch {k} ({epoch:.2f}): loss {loss}, validation {right}/{len(val)}, unparsed {unparsed}")
+        print(f"epoch {k} ({epoch:.2f}): loss {loss}, validation {right3}/{len(val)} (3-way), "
+              f"{right}/{len(val)} ({args.scheme}), unparsed {unparsed}")
 
     class Validate(TrainerCallback):
         def on_epoch_end(self, _args, state, _control, **_kw):
@@ -247,7 +259,8 @@ def main(argv: list[str] | None = None) -> None:
                              "max_new_tokens": max_new},
                 history, chosen, tq, vq, sha, versions)
     args.results.mkdir(parents=True, exist_ok=True)
-    tag = ("" if default_set else "-" + "-".join(args.train_sets)) + ("" if args.reply == "label" else f"-{args.reply}")
+    tag = (("" if default_set else "-" + "-".join(args.train_sets)) + ("" if args.reply == "label" else f"-{args.reply}")
+           + ("-5way" if args.scheme == "5way" else ""))
     path = args.results / f"finetune-{args.model}{tag}-{datetime.now(UTC):%Y%m%d-%H%M%S}.json"
     path.write_text(json.dumps(s, indent=2) + "\n")
     print(f"chosen epoch {chosen}; adapter {args.out / 'adapter'} sha256 {sha}; summary {path}")

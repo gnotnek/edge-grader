@@ -10,6 +10,7 @@
 #   docker logs -f edge-grader-bench-scientsbank
 #   N=5 OUT=data/smoke scripts/spark_bench_scientsbank.sh   # minutes: 5 answers per split, nothing in results/
 #   SOUP="0 1 2 3 4" scripts/spark_bench_scientsbank.sh     # E4B untouched, those seeds' adapters and their soup
+#   FIVEWAY=1 scripts/spark_bench_scientsbank.sh            # the 5-way-trained adapter, 5-label prompt (spec 2026-11-12)
 #
 # Guide: docs/guides/spark-docker.md
 set -uo pipefail
@@ -21,8 +22,8 @@ LOG=data/logs/bench-scientsbank-$(date -u +%Y%m%d-%H%M%S).log
 exec > >(tee -a "$LOG") 2>&1
 echo "== $(date -u +%FT%TZ) SciEntsBank: repo $(git rev-parse --short HEAD), llama.cpp $(cat /opt/llama.cpp/bin/COMMIT), n $N, out $OUT"
 
-run() {  # run <e2b|e4b> <label suffix> [adapter gguf] [reply] [examples file]
-  local model=$1 suffix=$2 adapter=${3:-} reply=${4:-label} examples=${5:-} label="$1-spark-gb10$2" gguf server server_log split
+run() {  # run <e2b|e4b> <label suffix> [adapter gguf] [reply] [examples file] [prompt scheme]
+  local model=$1 suffix=$2 adapter=${3:-} reply=${4:-label} examples=${5:-} prompt_scheme=${6:-} label="$1-spark-gb10$2" gguf server server_log split
   local stage=${examples:+examples}; stage=${stage:-baseline}
   echo "== $(date -u +%FT%TZ) $label ${adapter:-(no adapter)}"
   if [ -n "$adapter" ] && [ ! -f "$adapter" ]; then echo "SKIPPED $label: no $adapter"; return; fi
@@ -47,7 +48,8 @@ run() {  # run <e2b|e4b> <label suffix> [adapter gguf] [reply] [examples file]
   done
   for split in "${todo[@]}"; do
     uv run --frozen edge-grader-baseline --base-url http://127.0.0.1:8080/v1 --label "$label" --split "$split" \
-      --n "$N" --out "$OUT" --reply "$reply" ${examples:+--examples "$examples" --k 4} || echo "FAILED $label $split"
+      --n "$N" --out "$OUT" --reply "$reply" ${examples:+--examples "$examples" --k 4} \
+      ${prompt_scheme:+--prompt-scheme "$prompt_scheme"} || echo "FAILED $label $split"
   done
   kill $server; wait $server 2>/dev/null
 }
@@ -58,6 +60,8 @@ if [ "${EXAMPLES:-0}" = 1 ]; then  # main pair first, the random control last
   run e4b -ex4 "" label $knn
   run e4b -ft-ex4 data/adapters/e4b-ft.gguf label $knn
   run e4b -rand4 "" label results/examples/examples-random-k4.json
+elif [ "${FIVEWAY:-0}" = 1 ]; then  # spec 2026-11-12; untouched and the 3-way seeds come from the soup's grading
+  run e4b -ft-5w-s0 data/adapters/e4b-ft-5w-s0.gguf label "" 5way
 elif [ "${BASELINE:-0}" = 1 ]; then
   run e2b ""
   run e4b ""

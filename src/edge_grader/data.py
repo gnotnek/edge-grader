@@ -27,6 +27,11 @@ TO_3WAY = {
     "non_domain": "incorrect",
 }
 TO_2WAY = {k: ("correct" if v == "correct" else "incorrect") for k, v in TO_3WAY.items()}
+
+
+def to_3way(label: str | None) -> str | None:
+    """A 5-way or 3-way label as 3-way; None (unparsed) stays None."""
+    return None if label is None else TO_3WAY.get(label, label)
 SCHEMES = {
     "5way": {k: k for k in TO_3WAY},
     "3way": TO_3WAY,
