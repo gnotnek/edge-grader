@@ -71,6 +71,9 @@ def test_baseline_writes_summary_and_raw(server, tmp_path, monkeypatch):
     assert m["n"] == 3 and m["errors"] == 0 and m["unparsed"] == 0
     assert m["accuracy"] == pytest.approx(2 / 3, abs=1e-3)  # misses the contradictory one
     assert m["prompt_tokens"] == 300 and m["completion_tokens"] == 6
+    lo, hi = m["ci95"]["accuracy"]
+    assert lo <= m["accuracy"] <= hi and m["ci95"]["groups"] == 3
+    assert run["temperature"] == 0 and run["max_tokens"] == 16 and len(run["prompt_sha256"]) == 64
 
     [raw_file] = (tmp_path / "raw").glob("*.jsonl")
     assert len(raw_file.read_text().splitlines()) == 3

@@ -1,0 +1,762 @@
+{
+  "time": "2026-11-11T05:33:46+00:00",
+  "method": "95% percentile bootstrap, whole questions resampled (data.question_id), 2000 resamples, seed 0; unparsed replies count as wrong",
+  "runs": [
+    {
+      "run": "results/kaggle/baseline-e2b-kaggle-t4-test_ua-3way-20260929-102126.json",
+      "label": "e2b-kaggle-t4",
+      "split": "test_ua",
+      "scheme": "3way",
+      "three_way": {
+        "n": 540,
+        "accuracy": 0.5519,
+        "macro_f1": 0.518,
+        "weighted_f1": 0.5672,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.5,
+            0.6037
+          ],
+          "macro_f1": [
+            0.4625,
+            0.572
+          ],
+          "groups": 135,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "two_way": {
+        "n": 540,
+        "accuracy": 0.7148,
+        "macro_f1": 0.6792,
+        "weighted_f1": 0.6938,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.6685,
+            0.7611
+          ],
+          "macro_f1": [
+            0.6278,
+            0.729
+          ],
+          "groups": 135,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "majority": {
+        "label": "incorrect",
+        "n": 540,
+        "accuracy": 0.4611,
+        "macro_f1": 0.2104,
+        "weighted_f1": 0.291,
+        "unparsed": 0,
+        "two_way": {
+          "n": 540,
+          "accuracy": 0.5685,
+          "macro_f1": 0.3625,
+          "weighted_f1": 0.4121,
+          "unparsed": 0
+        }
+      }
+    },
+    {
+      "run": "results/kaggle/baseline-e2b-kaggle-t4-test_uq-3way-20260929-102250.json",
+      "label": "e2b-kaggle-t4",
+      "split": "test_uq",
+      "scheme": "3way",
+      "three_way": {
+        "n": 733,
+        "accuracy": 0.5975,
+        "macro_f1": 0.5527,
+        "weighted_f1": 0.6208,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.4982,
+            0.6967
+          ],
+          "macro_f1": [
+            0.4383,
+            0.6488
+          ],
+          "groups": 15,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "two_way": {
+        "n": 733,
+        "accuracy": 0.7544,
+        "macro_f1": 0.7181,
+        "weighted_f1": 0.7362,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.67,
+            0.8372
+          ],
+          "macro_f1": [
+            0.5868,
+            0.8199
+          ],
+          "groups": 15,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "majority": {
+        "label": "incorrect",
+        "n": 733,
+        "accuracy": 0.502,
+        "macro_f1": 0.2228,
+        "weighted_f1": 0.3356,
+        "unparsed": 0,
+        "two_way": {
+          "n": 733,
+          "accuracy": 0.5894,
+          "macro_f1": 0.3708,
+          "weighted_f1": 0.4371,
+          "unparsed": 0
+        }
+      }
+    },
+    {
+      "run": "results/kaggle/baseline-e2b-kaggle-t4-test_ud-3way-20260929-103120.json",
+      "label": "e2b-kaggle-t4",
+      "split": "test_ud",
+      "scheme": "3way",
+      "three_way": {
+        "n": 4562,
+        "accuracy": 0.6026,
+        "macro_f1": 0.5697,
+        "weighted_f1": 0.6178,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.5494,
+            0.6517
+          ],
+          "macro_f1": [
+            0.5105,
+            0.6254
+          ],
+          "groups": 46,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "two_way": {
+        "n": 4562,
+        "accuracy": 0.7345,
+        "macro_f1": 0.7201,
+        "weighted_f1": 0.7302,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.6829,
+            0.7802
+          ],
+          "macro_f1": [
+            0.6651,
+            0.7688
+          ],
+          "groups": 46,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "majority": {
+        "label": "incorrect",
+        "n": 4562,
+        "accuracy": 0.4884,
+        "macro_f1": 0.2188,
+        "weighted_f1": 0.3205,
+        "unparsed": 0,
+        "two_way": {
+          "n": 4562,
+          "accuracy": 0.5798,
+          "macro_f1": 0.367,
+          "weighted_f1": 0.4256,
+          "unparsed": 0
+        }
+      }
+    },
+    {
+      "run": "results/kaggle/baseline-e4b-kaggle-t4-test_ua-3way-20260929-100720.json",
+      "label": "e4b-kaggle-t4",
+      "split": "test_ua",
+      "scheme": "3way",
+      "three_way": {
+        "n": 540,
+        "accuracy": 0.6704,
+        "macro_f1": 0.6637,
+        "weighted_f1": 0.6582,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.6204,
+            0.7204
+          ],
+          "macro_f1": [
+            0.604,
+            0.7176
+          ],
+          "groups": 135,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "two_way": {
+        "n": 540,
+        "accuracy": 0.7315,
+        "macro_f1": 0.6966,
+        "weighted_f1": 0.7107,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.6852,
+            0.776
+          ],
+          "macro_f1": [
+            0.6444,
+            0.7455
+          ],
+          "groups": 135,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "majority": {
+        "label": "incorrect",
+        "n": 540,
+        "accuracy": 0.4611,
+        "macro_f1": 0.2104,
+        "weighted_f1": 0.291,
+        "unparsed": 0,
+        "two_way": {
+          "n": 540,
+          "accuracy": 0.5685,
+          "macro_f1": 0.3625,
+          "weighted_f1": 0.4121,
+          "unparsed": 0
+        }
+      }
+    },
+    {
+      "run": "results/kaggle/baseline-e4b-kaggle-t4-test_uq-3way-20260929-100913.json",
+      "label": "e4b-kaggle-t4",
+      "split": "test_uq",
+      "scheme": "3way",
+      "three_way": {
+        "n": 733,
+        "accuracy": 0.6753,
+        "macro_f1": 0.6546,
+        "weighted_f1": 0.6549,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.5921,
+            0.7714
+          ],
+          "macro_f1": [
+            0.5821,
+            0.7316
+          ],
+          "groups": 15,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "two_way": {
+        "n": 733,
+        "accuracy": 0.7258,
+        "macro_f1": 0.6757,
+        "weighted_f1": 0.6985,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.646,
+            0.814
+          ],
+          "macro_f1": [
+            0.6011,
+            0.7636
+          ],
+          "groups": 15,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "majority": {
+        "label": "incorrect",
+        "n": 733,
+        "accuracy": 0.502,
+        "macro_f1": 0.2228,
+        "weighted_f1": 0.3356,
+        "unparsed": 0,
+        "two_way": {
+          "n": 733,
+          "accuracy": 0.5894,
+          "macro_f1": 0.3708,
+          "weighted_f1": 0.4371,
+          "unparsed": 0
+        }
+      }
+    },
+    {
+      "run": "results/kaggle/baseline-e4b-kaggle-t4-test_ud-3way-20260929-102019.json",
+      "label": "e4b-kaggle-t4",
+      "split": "test_ud",
+      "scheme": "3way",
+      "three_way": {
+        "n": 4562,
+        "accuracy": 0.7043,
+        "macro_f1": 0.7052,
+        "weighted_f1": 0.6998,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.6516,
+            0.7463
+          ],
+          "macro_f1": [
+            0.6475,
+            0.7502
+          ],
+          "groups": 46,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "two_way": {
+        "n": 4562,
+        "accuracy": 0.7457,
+        "macro_f1": 0.7261,
+        "weighted_f1": 0.7378,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.6945,
+            0.7871
+          ],
+          "macro_f1": [
+            0.6685,
+            0.7694
+          ],
+          "groups": 46,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "majority": {
+        "label": "incorrect",
+        "n": 4562,
+        "accuracy": 0.4884,
+        "macro_f1": 0.2188,
+        "weighted_f1": 0.3205,
+        "unparsed": 0,
+        "two_way": {
+          "n": 4562,
+          "accuracy": 0.5798,
+          "macro_f1": 0.367,
+          "weighted_f1": 0.4256,
+          "unparsed": 0
+        }
+      }
+    },
+    {
+      "run": "results/board/e2b-jetson-test_ua-20261021-010205/baseline-e2b-jetson-test_ua-3way-20261020-170635.json",
+      "label": "e2b-jetson",
+      "split": "test_ua",
+      "scheme": "3way",
+      "three_way": {
+        "n": 540,
+        "accuracy": 0.5519,
+        "macro_f1": 0.5221,
+        "weighted_f1": 0.5701,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.5,
+            0.6019
+          ],
+          "macro_f1": [
+            0.4694,
+            0.5753
+          ],
+          "groups": 135,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "two_way": {
+        "n": 540,
+        "accuracy": 0.7204,
+        "macro_f1": 0.6859,
+        "weighted_f1": 0.7001,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.6741,
+            0.7667
+          ],
+          "macro_f1": [
+            0.6328,
+            0.7362
+          ],
+          "groups": 135,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "majority": {
+        "label": "incorrect",
+        "n": 540,
+        "accuracy": 0.4611,
+        "macro_f1": 0.2104,
+        "weighted_f1": 0.291,
+        "unparsed": 0,
+        "two_way": {
+          "n": 540,
+          "accuracy": 0.5685,
+          "macro_f1": 0.3625,
+          "weighted_f1": 0.4121,
+          "unparsed": 0
+        }
+      }
+    },
+    {
+      "run": "results/board/e2b-jetson-test_ud-20261021-012132/baseline-e2b-jetson-test_ud-3way-20261020-174308.json",
+      "label": "e2b-jetson",
+      "split": "test_ud",
+      "scheme": "3way",
+      "three_way": {
+        "n": 4562,
+        "accuracy": 0.6021,
+        "macro_f1": 0.5695,
+        "weighted_f1": 0.6171,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.5495,
+            0.6498
+          ],
+          "macro_f1": [
+            0.5109,
+            0.6244
+          ],
+          "groups": 46,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "two_way": {
+        "n": 4562,
+        "accuracy": 0.733,
+        "macro_f1": 0.7188,
+        "weighted_f1": 0.7289,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.6818,
+            0.779
+          ],
+          "macro_f1": [
+            0.6639,
+            0.7669
+          ],
+          "groups": 46,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "majority": {
+        "label": "incorrect",
+        "n": 4562,
+        "accuracy": 0.4884,
+        "macro_f1": 0.2188,
+        "weighted_f1": 0.3205,
+        "unparsed": 0,
+        "two_way": {
+          "n": 4562,
+          "accuracy": 0.5798,
+          "macro_f1": 0.367,
+          "weighted_f1": 0.4256,
+          "unparsed": 0
+        }
+      }
+    },
+    {
+      "run": "results/board/e2b-jetson-test_uq-20261021-011529/baseline-e2b-jetson-test_uq-3way-20261020-172039.json",
+      "label": "e2b-jetson",
+      "split": "test_uq",
+      "scheme": "3way",
+      "three_way": {
+        "n": 733,
+        "accuracy": 0.5975,
+        "macro_f1": 0.5482,
+        "weighted_f1": 0.6205,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.5015,
+            0.6915
+          ],
+          "macro_f1": [
+            0.4395,
+            0.6389
+          ],
+          "groups": 15,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "two_way": {
+        "n": 733,
+        "accuracy": 0.7558,
+        "macro_f1": 0.72,
+        "weighted_f1": 0.7379,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.6717,
+            0.8365
+          ],
+          "macro_f1": [
+            0.591,
+            0.82
+          ],
+          "groups": 15,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "majority": {
+        "label": "incorrect",
+        "n": 733,
+        "accuracy": 0.502,
+        "macro_f1": 0.2228,
+        "weighted_f1": 0.3356,
+        "unparsed": 0,
+        "two_way": {
+          "n": 733,
+          "accuracy": 0.5894,
+          "macro_f1": 0.3708,
+          "weighted_f1": 0.4371,
+          "unparsed": 0
+        }
+      }
+    },
+    {
+      "run": "results/board/e4b-jetson-test_ua-20261021-010729/baseline-e4b-jetson-test_ua-3way-20261020-171435.json",
+      "label": "e4b-jetson",
+      "split": "test_ua",
+      "scheme": "3way",
+      "three_way": {
+        "n": 540,
+        "accuracy": 0.6667,
+        "macro_f1": 0.6576,
+        "weighted_f1": 0.6541,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.6167,
+            0.7185
+          ],
+          "macro_f1": [
+            0.5989,
+            0.713
+          ],
+          "groups": 135,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "two_way": {
+        "n": 540,
+        "accuracy": 0.7296,
+        "macro_f1": 0.6941,
+        "weighted_f1": 0.7084,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.6851,
+            0.7741
+          ],
+          "macro_f1": [
+            0.6417,
+            0.7437
+          ],
+          "groups": 135,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "majority": {
+        "label": "incorrect",
+        "n": 540,
+        "accuracy": 0.4611,
+        "macro_f1": 0.2104,
+        "weighted_f1": 0.291,
+        "unparsed": 0,
+        "two_way": {
+          "n": 540,
+          "accuracy": 0.5685,
+          "macro_f1": 0.3625,
+          "weighted_f1": 0.4121,
+          "unparsed": 0
+        }
+      }
+    },
+    {
+      "run": "results/board/e4b-jetson-test_ud-20261021-051933/baseline-e4b-jetson-test_ud-3way-20261020-215558.json",
+      "label": "e4b-jetson",
+      "split": "test_ud",
+      "scheme": "3way",
+      "three_way": {
+        "n": 4562,
+        "accuracy": 0.7006,
+        "macro_f1": 0.7007,
+        "weighted_f1": 0.6963,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.6491,
+            0.7434
+          ],
+          "macro_f1": [
+            0.6433,
+            0.746
+          ],
+          "groups": 46,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "two_way": {
+        "n": 4562,
+        "accuracy": 0.7429,
+        "macro_f1": 0.7235,
+        "weighted_f1": 0.7352,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.6922,
+            0.7842
+          ],
+          "macro_f1": [
+            0.6668,
+            0.7655
+          ],
+          "groups": 46,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "majority": {
+        "label": "incorrect",
+        "n": 4562,
+        "accuracy": 0.4884,
+        "macro_f1": 0.2188,
+        "weighted_f1": 0.3205,
+        "unparsed": 0,
+        "two_way": {
+          "n": 4562,
+          "accuracy": 0.5798,
+          "macro_f1": 0.367,
+          "weighted_f1": 0.4256,
+          "unparsed": 0
+        }
+      }
+    },
+    {
+      "run": "results/board/e4b-jetson-test_uq-20261021-050938/baseline-e4b-jetson-test_uq-3way-20261020-211839.json",
+      "label": "e4b-jetson",
+      "split": "test_uq",
+      "scheme": "3way",
+      "three_way": {
+        "n": 733,
+        "accuracy": 0.6726,
+        "macro_f1": 0.6505,
+        "weighted_f1": 0.6514,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.5847,
+            0.7727
+          ],
+          "macro_f1": [
+            0.5762,
+            0.7332
+          ],
+          "groups": 15,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "two_way": {
+        "n": 733,
+        "accuracy": 0.7244,
+        "macro_f1": 0.6729,
+        "weighted_f1": 0.6961,
+        "unparsed": 0,
+        "ci95": {
+          "accuracy": [
+            0.6395,
+            0.8148
+          ],
+          "macro_f1": [
+            0.5919,
+            0.7644
+          ],
+          "groups": 15,
+          "resamples": 2000,
+          "seed": 0,
+          "by": "question"
+        }
+      },
+      "majority": {
+        "label": "incorrect",
+        "n": 733,
+        "accuracy": 0.502,
+        "macro_f1": 0.2228,
+        "weighted_f1": 0.3356,
+        "unparsed": 0,
+        "two_way": {
+          "n": 733,
+          "accuracy": 0.5894,
+          "macro_f1": 0.3708,
+          "weighted_f1": 0.4371,
+          "unparsed": 0
+        }
+      }
+    }
+  ]
+}

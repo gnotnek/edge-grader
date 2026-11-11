@@ -1,5 +1,6 @@
 """Grade one answer by prompting a model behind an OpenAI-compatible server (llama-server)."""
 
+import hashlib
 import re
 import time
 
@@ -14,6 +15,8 @@ LABEL_HELP = {
     "non_domain": "not about the subject at all",
 }
 
+TEMPERATURE = 0  # greedy: one run per split is the record, as in the SciEntsBank papers
+LABEL_MAX_TOKENS = 16
 THINK_MAX_TOKENS = 336  # the 320-token thought budget (agentic-edge's) plus the usual 16 for the label
 # Thought-block markers as llama-server returns them with --reasoning-format none. Gemma 4's
 # channel markers first; <think> as a fallback. The pilot (phase B1 Task 2) pins the real one.
@@ -95,23 +98,33 @@ def parse_reply(text: str, labels: list[str], fmt: str) -> str | None:
     return parse_label(text, labels)
 
 
-def grade(client, model: str, item: Item, labels: list[str], max_tokens: int = 16,
+def max_tokens_for(thinking: bool, reply: str) -> int:
+    if thinking:
+        return THINK_MAX_TOKENS
+    return REASON_FIRST_MAX_TOKENS if reply == "reason-first" else LABEL_MAX_TOKENS
+
+
+def prompt_sha256(labels: list[str]) -> str:
+    """Fingerprint of the prompt template (placeholders for the item), so a later prompt change
+    shows in the summary. RAG passages and examples are recorded by the run separately."""
+    blank = Item("", "{question}", "{reference_answer}", "{student_answer}", "")
+    return hashlib.sha256(build_prompt(blank, labels).encode()).hexdigest()
+
+
+def grade(client, model: str, item: Item, labels: list[str], max_tokens: int | None = None,
           passages: list[str] | None = None, thinking: bool = False, reply: str = "label",
           examples: list[Item] | None = None) -> dict:
     if thinking and reply != "label":
         raise ValueError("thinking with a reason format isn't a condition in this study")
     prompt = build_prompt(item, labels, passages, examples)
-    if thinking and max_tokens == 16:
-        max_tokens = THINK_MAX_TOKENS
-    if reply == "reason-first" and max_tokens == 16:
-        max_tokens = REASON_FIRST_MAX_TOKENS
+    max_tokens = max_tokens or max_tokens_for(thinking, reply)
     # label-first: stop where the trained reply's label line ends, so the reason costs nothing.
     extra = {"stop": ["\n"]} if reply == "label-first" else {}
     start = time.perf_counter()
     resp = client.chat.completions.create(
         model=model,
         messages=[{"role": "user", "content": prompt}],
-        temperature=0,
+        temperature=TEMPERATURE,
         max_tokens=max_tokens,
         **extra,
     )

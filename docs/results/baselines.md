@@ -54,6 +54,39 @@ Re-run 2026-10-05 on llama.cpp `a3a1c47` (the RAG build): same accuracy, with E2
 
 (Accuracy / macro-F1. 0 unparsed replies, 0 errors.)
 
+### How it compares with published results (recorded 2026-11-11)
+
+SciEntsBank papers grade the **full official splits**, once, and report accuracy, macro-F1 and weighted-F1 per split, next to the **majority-class** floor and earlier systems. SemEval-2013 tested differences with an approximate randomisation test; recent LLM papers add a confidence range or repeat runs only when the output is random (sampling above temperature 0, or training seeds). This project already did the core. What was missing is added here: a 95% range for each number, the 2-way score, the majority floor and published numbers. Made by `uv run edge-grader-baseline-ci <run>.json ...` from the raw predictions, no new runs: [`baseline-ci-20261111-053346.json`](../../results/ci/baseline-ci-20261111-053346.json).
+
+**This project, 3-way, Jetson baseline of record (2026-10-21 clocks).** Accuracy and macro-F1 with the 95% range in brackets. The Kaggle runs above are within 0.4 points and their ranges overlap almost exactly (same file).
+
+| Split (answers / questions) | E2B accuracy | E4B accuracy | E2B macro-F1 | E4B macro-F1 | 2-way accuracy, E2B / E4B | Majority floor: accuracy / macro-F1 |
+|---|---|---|---|---|---|---|
+| test_ua (540 / 135) | 55.2% [50.0–60.2] | 66.7% [61.7–71.9] | 0.522 [0.469–0.575] | 0.658 [0.599–0.713] | 72.0% / 73.0% | 46.1% / 0.210 |
+| test_uq (733 / 15) | 59.8% [50.2–69.2] | 67.3% [58.5–77.3] | 0.548 [0.440–0.639] | 0.650 [0.576–0.733] | 75.6% / 72.4% | 50.2% / 0.223 |
+| test_ud (4,562 / 46) | 60.2% [55.0–65.0] | 70.1% [64.9–74.3] | 0.570 [0.511–0.624] | 0.701 [0.643–0.746] | 73.3% / 74.3% | 48.8% / 0.219 |
+
+- **The range is a bootstrap over questions** (2,000 resamples, seed 0): whole questions are drawn with replacement, because answers to one question are graded alike. That is why test_uq, with 733 answers but only 15 questions, has a range of about ±10 points, wider than test_ua's ±5 with fewer answers.
+- **Read the ranges as "how sure is this one number", not as a test between two versions.** Two versions graded on the same answers are compared with the paired McNemar test, as the 5-point bar does; that is far tighter than checking whether two ranges overlap.
+- **Both models clear the majority floor on every split**, by 9–21 points of accuracy and 0.31–0.48 of macro-F1. The floor is the share of "incorrect" answers, the most common label in train and in every test split.
+- **2-way** merges contradictory into incorrect (SemEval-2013's 2-way task). It is in each new run's summary since 2026-11-09; for these runs it was computed from the raw files.
+
+**Published, 3-way SciEntsBank.** All of these learned from SciEntsBank's training answers (trained systems, fine-tuned models, or retrieved training answers in the prompt); this project's baseline is zero-shot, with only the reference answer.
+
+| System | Uses train | test_ua acc / macro-F1 | test_uq acc / macro-F1 | test_ud acc / macro-F1 | Source |
+|---|---|---|---|---|---|
+| Majority class | | – / 0.201 | – / 0.194 | – / 0.197 | SemEval-2013 Table 5 |
+| Lexical overlap baseline | yes | – / 0.405 | – / 0.390 | – / 0.416 | SemEval-2013 Table 5 |
+| Best participating system per split | yes | – / 0.643 (ETS2) | – / 0.469 (SoftCardinality1) | – / 0.487 (UKP-BIU1) | SemEval-2013 Table 5 |
+| BERT base, fine-tuned | yes | 72.6% / 0.622 | 70.8% / 0.528 | 67.2% / 0.528 | Wang & Ormerod 2024, Table 2 |
+| Sung et al. (BERT, domain pre-training) | yes | 75.9% / 0.720 | 65.3% / 0.575 | 63.8% / 0.579 | Wang & Ormerod 2024, Table 2 |
+| Claude 3.5 Sonnet + RAG over train answers | yes | 78.7% / 0.785 | 76.9% / 0.744 | 73.4% / 0.733 | Wang & Ormerod 2024, Table 2 (average of three runs) |
+
+- Sources: Dzikovska et al., [SemEval-2013 Task 7](https://aclanthology.org/S13-2045/), Table 5 (three-way macro-average F1); Wang & Ormerod, [arXiv 2408.03811](https://arxiv.org/abs/2408.03811), Table 2. Both read from the PDF text on 2026-11-11.
+- **Zero-shot E4B's macro-F1 is above SemEval-2013's best systems and fine-tuned BERT on test_uq and test_ud**, and the lower end of its range (0.576, 0.643) is above them too, just (0.576 against 0.575) for Sung et al. on test_uq. It is below Claude 3.5 Sonnet with retrieved training answers on every split. The published numbers have no ranges, so these comparisons only allow for this project's uncertainty.
+- Our majority macro-F1 (0.210–0.223) is a little above SemEval's (0.194–0.201) for the same rule; the paper's way of averaging F1 over classes probably differs slightly from scikit-learn's. Accuracy isn't given there.
+- **Settings now recorded in every new run's summary:** `temperature` (0), `max_tokens` (16 for a label reply) and `prompt_sha256`, a fingerprint of the prompt template, so a later prompt change can't pass as the same run. Each new run also stores `ci95` for 3-way and 2-way. Older summaries are left as they are.
+
 ### Cost on the boards (measured, test_ua)
 
 *Measured 2026-09-30 (Jetson) and 2026-10-04 (Pi 5) with `scripts/board_grade.sh` through the lab job queue: the full test_ua split (540 answers), the same GGUF files and flags as the Kaggle runs, and the Pi at `-t 3` like every agentic-edge Pi run. Run folders: [`results/board/`](../../results/board/). Check file: [`board-check-20261005-042603.json`](../../results/estimates/board-check-20261005-042603.json), made by `uv run edge-grader-board-check results/board/<run>/ ...`.*

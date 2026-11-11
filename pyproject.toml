@@ -24,6 +24,7 @@ edge-grader-asap = "edge_grader.asap:main"
 edge-grader-news-judge = "edge_grader.news:judge_main"
 edge-grader-finetune = "edge_grader.finetune:main"
 edge-grader-reasons = "edge_grader.reasons:main"
+edge-grader-baseline-ci = "edge_grader.baseline_ci:main"
 
 [dependency-groups]
 dev = [

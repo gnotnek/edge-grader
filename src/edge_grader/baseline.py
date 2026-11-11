@@ -126,13 +126,17 @@ def main(argv: list[str] | None = None) -> None:
     print()
     wall = time.perf_counter() - start
 
-    summary = metrics.score([r["gold"] for r in rows], [r["pred"] for r in rows])
+    gold, pred = [r["gold"] for r in rows], [r["pred"] for r in rows]
+    groups = [question_id(r["id"]) for r in rows]
+    summary = metrics.score(gold, pred)
+    summary["ci95"] = metrics.ci95(gold, pred, groups)
     ok = [r for r in rows if "error" not in r]
     if args.scheme != "2way":
         # Correct vs not: SAF's headline (it has no "contradictory"), and Beetle's published 2-way.
         two = [None if p is None else ("correct" if p == "correct" else "incorrect")
                for r in rows for p in (r["gold"], r["pred"])]
         summary["two_way"] = metrics.score(two[0::2], two[1::2])
+        summary["two_way"]["ci95"] = metrics.ci95(two[0::2], two[1::2], groups)
     summary["errors"] = len(rows) - len(ok)
     if args.reply != "label":
         summary["cut"] = sum(r.get("finish") == "length" for r in ok)
@@ -158,6 +162,9 @@ def main(argv: list[str] | None = None) -> None:
         "reply": args.reply,
         "n_requested": args.n,
         "seed": args.seed,
+        "temperature": grader.TEMPERATURE,
+        "max_tokens": grader.max_tokens_for(args.thinking, args.reply),
+        "prompt_sha256": grader.prompt_sha256(labels),
         "time": now.isoformat(timespec="seconds"),
         "metrics": summary,
     }
