@@ -10,6 +10,7 @@
 #   TRAIN_SETS="beetle saf" scripts/spark_finetune.sh e4b label   # other sets' train splits: e4b-ft-beetle-saf.gguf
 #   SEED=3 scripts/spark_finetune.sh e4b label                     # seed 3: data/adapters/e4b-s3, e4b-ft-s3.gguf
 #   SOUP="0 1 2 3 4" scripts/spark_finetune.sh e4b label           # average those seeds instead of training: e4b-ft-soup.gguf
+#   SCHEME=5way SEED=0 scripts/spark_finetune.sh e4b label         # 5-way labels (spec 2026-11-12): e4b-ft-5w-s0.gguf
 #
 # Guide: docs/guides/spark-docker.md
 set -euo pipefail
@@ -32,6 +33,14 @@ if [ -n "${TRAIN_SETS:-}" ]; then
   SETS_ARGS=(--train-sets $TRAIN_SETS)
   TAG=$TAG-${TRAIN_SETS// /-}
 fi
+# 5-way labels (spec 2026-11-12): trained and graded with the 5-label prompt, scored 3-way.
+SCHEME_ARGS=() PROMPT_ARGS=()
+case ${SCHEME:-3way} in
+  3way) ;;
+  5way) SCHEME_ARGS=(--scheme 5way) PROMPT_ARGS=(--prompt-scheme 5way) TAG=$TAG-5w ;;
+  *) echo "SCHEME must be 3way or 5way, not $SCHEME" >&2; exit 1 ;;
+esac
+[ -n "${SOUP:-}" ] && [ ${#SCHEME_ARGS[@]} -gt 0 ] && { echo "SOUP with SCHEME=5way isn't a condition" >&2; exit 1; }
 # Adapter soup (spec 2026-11-10): SEED trains one ingredient, SOUP averages the named seeds' adapters.
 SEED_ARGS=() SMOKE_SFX=""
 [ "${SMOKE:-0}" = 1 ] && SMOKE_SFX=-smoke
@@ -66,7 +75,7 @@ else
   REASONS=results/finetune/raw/reasons-qwen3-14b-q4_k_m${TRAIN_SETS:+-${TRAIN_SETS// /-}}.jsonl
   [ "$REPLY" = label ] || REPLY_ARGS=(--reply "$REPLY" --reasons "$REASONS")
   uv run --frozen --group finetune edge-grader-finetune --model "$MODEL" --out "$ADAPTER" --results "$RESULTS" \
-    "${TRAIN_ARGS[@]}" "${REPLY_ARGS[@]}" "${SETS_ARGS[@]}" "${SEED_ARGS[@]}"
+    "${TRAIN_ARGS[@]}" "${REPLY_ARGS[@]}" "${SETS_ARGS[@]}" "${SEED_ARGS[@]}" "${SCHEME_ARGS[@]}"
 fi
 test -f "$ADAPTER/adapter/adapter_model.safetensors"
 
@@ -104,5 +113,5 @@ for _ in $(seq 150); do
   sleep 2
 done
 uv run --frozen edge-grader-baseline --base-url http://127.0.0.1:8080/v1 --label "$MODEL-spark-gb10-ft$TAG" \
-  --split test_ua --n "$N" --out "$GRADED" --reply "$REPLY"
+  --split test_ua --n "$N" --out "$GRADED" --reply "$REPLY" "${PROMPT_ARGS[@]}"
 echo "== $(date -u +%FT%TZ) done: $FT_GGUF, summary in $RESULTS, graded run in $GRADED"
