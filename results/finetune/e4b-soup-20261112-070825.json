@@ -1,0 +1,31 @@
+{
+  "kind": "soup",
+  "method": "uniform soup, LoRA stacked along the rank (exact mean of the updates)",
+  "ingredients": [
+    {
+      "adapter": "data/adapters/e4b-s0/adapter",
+      "adapter_sha256": "af0468cdbc73020febdc45290af176e353434ded1f0e7f62185015e5f1248f37"
+    },
+    {
+      "adapter": "data/adapters/e4b-s1/adapter",
+      "adapter_sha256": "b7a3887aafac1271114743b294d9512429f0c5acf801bd35aa427ae2fd606ecd"
+    },
+    {
+      "adapter": "data/adapters/e4b-s2/adapter",
+      "adapter_sha256": "489925e575c508df18c8920dfd3fed66a09b9ce458212ba4643ae935a7abfb78"
+    },
+    {
+      "adapter": "data/adapters/e4b-s3/adapter",
+      "adapter_sha256": "325da405d2c1bf1d2c626571eaefc731d3d792d402d2c0620318d1437375fa18"
+    },
+    {
+      "adapter": "data/adapters/e4b-s4/adapter",
+      "adapter_sha256": "6b69b151d47c5f7fd0d05959f80a2e67245b8dddc3e0def1a935bca2116e322a"
+    }
+  ],
+  "rank": 80,
+  "lora_alpha": 32,
+  "out": "data/adapters/e4b-soup/adapter",
+  "adapter_sha256": "619d237b3a8603fa5e5b5e364a56f56debf31029bdc6f229748c7f80a9fbd71a",
+  "created": "2026-11-12T07:08:28+00:00"
+}
