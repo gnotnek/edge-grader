@@ -80,6 +80,7 @@ QLoRA on the SciEntsBank train split, served with `--lora` on the unchanged Q4 G
 3. **E2B catches up with E4B** (within 3 points on every split). Both are at or near the best published SciEntsBank numbers (Claude 3.5 Sonnet + RAG: 78.7 / 76.9 / 73.4%).
 4. **No harm to general ability:** no significant drop on MMLU-Pro or math (Holm p = 1.0 for all six). One E2B MMLU-Pro subset fell 10 points, mostly from more answers hitting the token cap.
 5. **A prompt doesn't replace it** (2026-11-10, DGX Spark): 4 expert-graded train answers in E4B's prompt raise test_ua (+7.2, passes the bar) but not test_uq (+4.4, n.s.), and cost 3.8 points on test_ud; random examples do as well as similar ones, and the adapter stays 6–10 points ahead ([graded examples](examples.md)).
+6. **Finer training labels don't help** (2026-11-12, DGX Spark). E4B was trained on SciEntsBank's 5 labels and scored 3-way. It is better than the 3-way seed-0 adapter on test_ua (+4.3) and worse on test_ud (−2.6), both significant, so it is not adopted. It lands inside the five 3-way seeds' range, and its one clear change is more "contradictory" replies ([5-way labels](finetuning.md#5-way-labels-as-the-training-target-e4b-on-scientsbank-2026-11-12-dgx-spark)).
 
 ## RQ6: do inference-time settings matter?
 

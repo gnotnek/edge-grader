@@ -409,6 +409,52 @@ The soup against each version, accuracy points (Holm p over the 18; **bold** = s
 - **Cost.** The soup is one rank-80 adapter instead of rank-16, so it adds 5× the LoRA weights at inference. Since it isn't adopted, it isn't measured on the Jetson.
 - Timings: each seed took about 6 h on the shared Spark (about 2× the estimate: another person's job and the 5-way training shared the GPU); grading about 7 h. Not cost numbers.
 
+## 5-way labels as the training target, E4B on SciEntsBank (2026-11-12, DGX Spark)
+
+**In short:** **not adopted.** Training E4B to reply with SciEntsBank's 5 labels, then mapping them to 3-way, did not beat the same recipe trained on 3-way labels. Under the rule fixed before grading it fails: it is better than the 3-way seed-0 adapter on test_ua (+4.3) and worse on test_ud (−2.6), both significant. Compared with all five 3-way seeds (described, not tested), it sits inside their range on test_ua and test_ud and just above it on test_uq. So it grades like one more 3-way seed. Its one clear difference is that it says "contradictory" more often.
+
+What was run ([spec](../superpowers/specs/2026-11-12-fiveway-training-design.md)):
+- **Training:** the Oct 27 E4B label-only recipe, seed 0, unchanged except the labels. The adapter learns correct, partially_correct_incomplete, contradictory, irrelevant and non_domain. The epoch was picked on 3-way validation accuracy: 75.6 / 74.5 / 76.8% at epochs 1 / 2 / 3, so epoch 3.
+- **Grading:** the prompt lists the 5 labels. Each reply is mapped to 3-way (the last three become "incorrect") and scored 3-way and 2-way. Nothing is scored 5-way, per the 2026-11-11 decision.
+- **Runs:** whole splits, build `a3a1c47`, 0 unparsed.
+- **Rule and tests,** fixed before grading. Six McNemar tests with Holm: on each split, the 5-way adapter against the soup queue's 3-way seed 0 and against untouched E4B. The labels help only if the 5-way adapter is significantly better than seed 0 on at least one split and significantly worse on none ([comparison](../../results/spark/compare-fiveway-scientsbank-20261112-162034.json), `uv run python -m edge_grader.compare_fiveway`).
+
+3-way accuracy (macro-F1):
+
+| Version | test_ua | test_uq | test_ud |
+|---|---|---|---|
+| *E4B untouched* | *65.9% (0.654)* | *69.0% (0.668)* | *70.7% (0.709)* |
+| 3-way seed 0 (epoch 1) | 77.8% (0.762) | 80.5% (0.783) | 79.2% (0.783) |
+| 3-way seeds 0–4: mean ± SD (min–max) | 80.9 ± 1.8% (77.8–82.2) | 78.4 ± 1.6% (76.1–80.5) | 76.5 ± 1.6% (74.8–79.2) |
+| **5-way seed 0 (epoch 3)** | **82.0%** (0.804) | **80.9%** (0.804) | **76.6%** (0.773) |
+
+2-way accuracy, 3-way seed 0 → 5-way: test_ua 82.2 → 86.9%, test_uq 83.5 → 83.8%, test_ud 82.2 → 79.6%.
+
+The 5-way adapter against each, accuracy points (answers fixed / newly broken; Holm p over the 6; **bold** = significant):
+
+| 5-way vs | test_ua | test_uq | test_ud |
+|---|---|---|---|
+| 3-way seed 0 | **+4.3** (44/21, 0.01) | +0.4 (38/35, 0.82) | **−2.6** (216/334, <0.001) |
+| Untouched E4B | **+16.1** (<0.001), passes the bar | **+11.9** (<0.001), passes the bar | **+5.9** (<0.001), passes the bar |
+
+The 2-way tests agree on every comparison (seed 0: +4.6, +0.3, −2.7).
+
+- **Why not adopted:** on test_ud it is 2.6 points below seed 0, which is significant after Holm, and that alone fails the rule.
+- **The gap to seed 0 is mostly seed 0 itself (seen after grading, not tested).**
+  - Seed 0 is the only 3-way seed whose validation picked epoch 1. It is the worst seed on test_ua and the best on test_ud ([soup results](#adapter-averaging-model-soup-e4b-on-scientsbank-2026-11-12-dgx-spark)).
+  - The soup shows the same pattern against seed 0 (+3.9 on test_ua, −2.9 on test_ud).
+  - Against the seeds' mean, the 5-way adapter is +1.1 / +2.5 / +0.1 points, all within 1.6 SD of the seed-to-seed spread.
+  - The planned control, "same seed, only the labels differ", didn't hold up: the two runs also ended at different epochs. A fair label effect would need several 5-way seeds.
+- **What did change: more "contradictory".**
+  - Contradictory recall is the highest of any E4B adapter on test_uq and test_ud: 0.75 and 0.81, against 0.61–0.70 and 0.63–0.75 for the five 3-way seeds. On test_ua it is 0.74, tied with the best seed.
+  - The cost falls on "incorrect" on test_ua and test_ud. Recall there is 0.84 and 0.74, against the seeds' 0.85–0.88 and 0.74–0.84. On test_uq it is 0.85, mid-range for the seeds.
+  - This fits training that separates contradictory from the other wrong answers more sharply. It doesn't add up to higher accuracy.
+- **Completeness errors,** the target of the method (seed 0 → 5-way): test_ua 86 → 65, test_uq 102 → 99, test_ud 697 → 776.
+  - On test_ud, "correct called incorrect" fell (446 → 375), but "partly correct called correct" rose (251 → 401).
+  - The finer labels traded one completeness error for the other on unseen domains rather than removing them.
+- **5-way replies,** test_ud: correct 2,050, partially correct 1,098, irrelevant 960, contradictory 430, non-domain 24. All replies were valid labels.
+- **Timings:** training took about 10 h (840 steps at about 43 s each), sharing the GPU with the soup queue and another person's job. Grading took about 2 h. These are not cost numbers.
+
 ## Not done yet
 
 - **Cost on the Jetson.** Latency and energy per answer for the tuned models, against the re-run baselines in the same clock state. Kaggle times aren't board cost, so no cost number is quoted here.
