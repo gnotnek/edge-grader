@@ -368,9 +368,50 @@ Change against untouched E4B, 3-way → 2-way accuracy points (2-way Holm p over
 - **Matches the owner's spot check,** where all three doubts were about Beetle's contradictory label. SAF is 2-way, so the training set's only contradictory answers are Beetle's.
 - **What would act on it:** training with Beetle's contradictory merged into incorrect, or on SciEntsBank directly (E4B's SciEntsBank label-only adapter already passes). Not planned; noted for the owner's choice.
 
+## Adapter averaging ("model soup"), E4B on SciEntsBank (2026-11-12, DGX Spark)
+
+**In short:** the soup is **not adopted**. Averaging five E4B adapters gives an adapter that grades about like the average single adapter, not better: +0.8, +0.4 and −0.2 points against the seeds' mean on test_ua, test_uq and test_ud. On test_ud one seed (seed 0) is significantly better than the soup. The useful result is the spread: **re-training the same recipe with another seed moves accuracy by about ±1.7 points (SD)**, up to 4.4 points between the best and worst seed.
+
+What was run ([spec](../superpowers/specs/2026-11-10-adapter-soup-design.md)): the Oct 27 E4B label-only recipe, trained five times on the DGX Spark with seeds 0–4. Only the answer order and dropout change between seeds; the validation split and LoRA starting weights are the same. Each seed picks its own epoch on validation. The five adapters are averaged exactly (stacked into one rank-80 adapter, served with `--lora`) and graded on the whole of each split beside untouched E4B and each seed. All runs on build `a3a1c47`, 0 unparsed. The 18 tests and the adoption rule were fixed before grading: on every split the soup's accuracy is at least the seeds' mean, and no seed is significantly better (McNemar, Holm over the 18) ([comparison](../../results/spark/compare-soup-scientsbank-20261112-161722.json), `uv run python -m edge_grader.compare_soup`).
+
+3-way accuracy (macro-F1):
+
+| Version | test_ua | test_uq | test_ud |
+|---|---|---|---|
+| *E4B untouched* | *65.9% (0.654)* | *69.0% (0.668)* | *70.7% (0.709)* |
+| Seed 0 (epoch 1) | 77.8% (0.762) | 80.5% (0.783) | 79.2% (0.783) |
+| Seed 1 (epoch 3) | 81.3% (0.802) | 78.6% (0.772) | 76.6% (0.770) |
+| Seed 2 (epoch 3) | 81.9% (0.809) | 78.0% (0.780) | 76.0% (0.768) |
+| Seed 3 (epoch 3) | 82.2% (0.816) | 78.6% (0.782) | 76.1% (0.771) |
+| Seed 4 (epoch 2) | 81.5% (0.797) | 76.1% (0.758) | 74.8% (0.752) |
+| **Seeds: mean ± SD** | **80.9 ± 1.8%** (0.797 ± 0.021) | **78.4 ± 1.6%** (0.775 ± 0.011) | **76.5 ± 1.6%** (0.769 ± 0.011) |
+| **Soup** | **81.7%** (0.801) | **78.8%** (0.779) | **76.3%** (0.770) |
+| *Oct 27 Kaggle adapter, graded on the Spark* | *79.1% (0.769)* | *80.2% (0.788)* | *76.5% (0.774)* |
+
+2-way accuracy (contradictory merged into incorrect), seeds' mean ± SD → soup: test_ua 84.9 ± 1.5 → 85.9%, test_uq 81.3 ± 1.7 → 81.9%, test_ud 79.5 ± 1.7 → 79.1%. 2-way macro-F1 in the comparison file.
+
+The soup against each version, accuracy points (Holm p over the 18; **bold** = significant):
+
+| Soup vs | test_ua | test_uq | test_ud |
+|---|---|---|---|
+| Untouched E4B | **+15.7** (<0.001), passes the bar | **+9.8** (<0.001), passes the bar | **+5.6** (<0.001), passes the bar |
+| Seed 0 | **+3.9** (0.03) | −1.6 (1) | **−2.9** (<0.001) |
+| Seed 1 | +0.4 (1) | +0.3 (1) | −0.3 (1) |
+| Seed 2 | −0.2 (1) | +0.8 (1) | +0.4 (1) |
+| Seed 3 | −0.5 (1) | +0.3 (1) | +0.2 (1) |
+| Seed 4 | +0.2 (1) | +2.7 (0.11) | **+1.5** (<0.001) |
+
+- **Why not adopted:** on test_ud the soup is 0.2 points below the seeds' mean (76.3 vs 76.5%), and seed 0 beats it by 2.9 points (Holm p < 0.001). Either one alone fails the rule. On test_ua and test_uq it is a little above the mean but within the seeds' range.
+- **The soup lands on the average, not above it.** Its per-class recall is within about 3 points of the seeds' mean on every split (test_ud: correct 0.77 vs 0.77, contradictory 0.70 vs 0.69, incorrect 0.77 vs 0.77). A likely reading (not tested): Wortsman et al.'s gain shows up when the averaged models agree on what to do and differ in noise. Here the seeds disagree about where to put the line between labels, and averaging them gives the middle line.
+- **Seed 0 behaves differently (seen after grading, not tested).** It is the only seed whose validation picked epoch 1 (77.6% at epoch 1, 75.8% at epochs 2 and 3); the others picked 2 or 3. It is the worst seed on test_ua and the best on test_uq and test_ud. A less-trained adapter keeps more of untouched E4B and generalizes better to new questions and domains, and loses on the questions it trained on. One seed, so it's a hint, not a finding.
+- **What the spread means for earlier results.** Every adapter compared so far was one seed. With an SD of about 1.6–1.8 points per split, two adapters trained the same way can differ by 3–4 points. A gap of that size between two single-seed adapters (for example E4B's SciEntsBank label-only vs label-first on test_ud, 76.4 vs 73.1%) could be seed noise. Gaps against untouched E4B are far larger (+6 to +16) and stand.
+- **Kaggle vs Spark training agree.** The Oct 27 adapter, trained on a Kaggle T4, sits inside the Spark seeds' range on every split (79.1 / 80.2 / 76.5%). The earlier E4B results don't depend on where training ran.
+- **Cost.** The soup is one rank-80 adapter instead of rank-16, so it adds 5× the LoRA weights at inference. Since it isn't adopted, it isn't measured on the Jetson.
+- Timings: each seed took about 6 h on the shared Spark (about 2× the estimate: another person's job and the 5-way training shared the GPU); grading about 7 h. Not cost numbers.
+
 ## Not done yet
 
 - **Cost on the Jetson.** Latency and energy per answer for the tuned models, against the re-run baselines in the same clock state. Kaggle times aren't board cost, so no cost number is quoted here.
   - Also the adapter's load check on the Jetson's build (`a894dae`). The Day 1 check on Kaggle passed; the Jetson half of it is still open.
 - **The optional news run** (design §5.3), which was the first cut.
-- **One seed.** Training was re-run once (2026-10-23 → 2026-10-27, same settings), and test_ua moved by 1 point (E2B 75 → 76%, E4B 72 → 73% on 100 answers). That gives a rough sense of run-to-run spread, not a measure of it.
+- **One seed, for everything except E4B label-only.** Training was re-run once (2026-10-23 → 2026-10-27, same settings), and test_ua moved by 1 point (E2B 75 → 76%, E4B 72 → 73% on 100 answers). E4B label-only now has five seeds (adapter soup, 2026-11-12): SD 1.6–1.8 points per split. E2B and the other replies are still single seeds.
