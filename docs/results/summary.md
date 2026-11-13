@@ -14,6 +14,8 @@
 - Phase C, image answers (RQ7)
 - RAG on the boards (stage 4)
 
+**Main question since 2026-11-13 (supervisor):** three graders, E2B untouched vs E2B tweaked vs E4B untouched (RQ8 in the [outline](../research-outline.md)). So far the E2B SciEntsBank adapter (79.4 / 76.7 / 74.9%, test_ua / test_uq / test_ud) beats untouched E4B (66.7 / 67.5 / 70.4%) on every split, and on the two splits whose questions it never trained on (test_uq, test_ud, the headline for fine-tuned versions since 2026-11-13) by 9.2 and 4.5 points; untouched E2B trails both (55.2 / 59.8 / 60.3%), all Kaggle T4 ([recap](recap.md)). The E4B methods (graded examples, adapter soup, 5-way labels) are set up to run on E2B to find its best version. "Tweaked" means fine-tuned variants only (owner, 2026-11-13); whether the three get Jetson cost is pending. The sections below were written under the earlier focus.
+
 **Optional:** the cloud reference (RQ5), since 2026-10-19. The focus is small models on the edge, so it runs only if time allows, and it's listed under [limitations](#limitations) until then.
 
 ## RQ1: how good are the untouched models?

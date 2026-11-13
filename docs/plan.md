@@ -1,6 +1,6 @@
 # Plan: steps and timeline
 
-*Last updated 2026-11-04. Tick steps off as they're done, and move dates when reality changes, noting why at the bottom. The research questions and the reasoning for each stage are in [`research-outline.md`](research-outline.md).*
+*Last updated 2026-11-13. Tick steps off as they're done, and move dates when reality changes, noting why at the bottom. The research questions and the reasoning for each stage are in [`research-outline.md`](research-outline.md).*
 
 **Weeks are counted from the internship start**, taken as the week of 2026-09-14 (two weeks had passed by 2026-09-26). The internship ends around mid-December.
 
@@ -14,7 +14,7 @@
 | 6 | Oct 19 – 25 | B. Variations + C + 4 | little-gemma + prefix reuse on the Jetson (B2) ✅; thinking-on cost on the boards ✅; **RAG-en for all four benchmarks on the Jetson** (stage 4 brought forward, supervisor 2026-10-19): SciEntsBank, news, GSM ✅, MMLU-Pro to run; answer-as-image rendering, reading check, Kaggle runs (C1); figure-question data search (C2) | Variations vs baseline table ✅; baseline vs RAG on the Jetson |
 | 7 | Oct 26 – Nov 1 | 3. Fine-tuning | Week 1 (from Oct 21): adapters for E2B and E4B on Kaggle, sanity check on test_ua; week 2 (Oct 28 – Nov 3): tuned runs on Kaggle ✅ (accuracy), on the Jetson (cost), analysis. Phase C (images) waits until this is done | Tuned vs baseline table ✅, no-harm check ✅; cost on the Jetson |
 | 8 | Nov 2 – 8 | 4. Edge cost (main, supervisor 2026-11-04) + 3b | The accuracy–cost trade-off on the Jetson: tuned adapters first, then stage 3b label-first vs reason-first, MMLU-Pro RAG-en; every remaining version on the Jetson (the Pi 5 is dropped, 2026-10-19); cloud reference (RQ5) only if time allows (optional since 2026-10-19). **On Kaggle alongside** (owner, 2026-11-01): reasoning-guided fine-tuning of E2B (stage 3b) | Trade-off table; accuracy vs energy and vs latency charts |
-| 9 | Nov 9 – 15 | Buffer | Catch up; analysis and charts; stage 3b done by Nov 15 (E4B / Jetson / no-harm only if its gate passes and time is left) | All numbers final |
+| 9 | Nov 9 – 15 | Buffer + three graders | Catch up; analysis and charts; stage 3b done by Nov 15 (E4B / Jetson / no-harm only if its gate passes and time is left). **From Nov 13 (supervisor): E2B untouched vs E2B tweaked vs E4B untouched (RQ8)**; the E4B methods run on E2B on the DGX Spark to find E2B's best version | Three-grader table; all numbers final |
 | 10–11 | Nov 16 – 29 | Write-up | Report draft with figures; supervisor review | Draft sent to supervisor |
 | 12 | Nov 30 – Dec 6 | Wrap-up | Revisions, final report, repo cleanup | Final report |
 
@@ -150,6 +150,14 @@
 - [ ] Trade-off table, every Jetson version against its same-board baseline: Δ accuracy (McNemar), × latency, × energy, mean/peak W, decode tok/s, peak RSS, max temperature, extra J per extra correct answer (metrics in the outline)
 - [ ] Main charts: accuracy vs J per answer and accuracy vs latency, for every version on the Jetson, with the front marked (the Pi 5's baseline and thinking-on points for reference)
 
+### Three graders: E2B untouched, E2B tweaked, E4B untouched (week 9, supervisor 2026-11-13)
+- [x] Owner: "E2B tweaked" means fine-tuned variants only, not thinking on (2026-11-13)
+- [ ] Owner: do the three graders get Jetson cost?
+- [x] Spark services and comparisons take E2B (`MODEL=e2b`): [`guides/spark-docker.md`](guides/spark-docker.md#the-same-methods-on-e2b-decision-2026-11-13)
+- [ ] Smoke test on the Spark, then queue: graded examples, seeds 0–4 and their soup, the 5-way seed-0 adapter (owner's OK first; the Spark is shared)
+- [ ] `MODEL=e2b` comparisons (`compare_examples`, `compare_soup`, `compare_fiveway`), then pick E2B's best version
+- [ ] Three-grader table, 3-way and 2-way, with 95% ranges; Jetson cost beside it if confirmed
+
 ### Write-up (weeks 10–12)
 - [ ] Figures: the main chart, per-split tables, confusion matrices
 - [ ] Report: motivation, setup, results per RQ, limitations (dataset age and possible memorisation, one dataset, quantization caveat)
@@ -207,3 +215,4 @@
 | 2026-11-06 | SciEntsBank is the main grading benchmark again; ASAP 2.0 is set aside and stage 5 stops at its first runs, which stay as recorded | Owner: the project grades short answers, ASAP 2.0 is essays, and SciEntsBank is the most used set in a sample of recent papers. The supervisor's agreement isn't recorded yet. Outline, own decisions |
 | 2026-11-06 | Adapters trained on Beetle and SAF only (E2B, E4B, label reply, Oct 28 recipe, on the DGX Spark), tested on all three SciEntsBank splits; the untouched models and Oct 28 adapters graded there too, so everything compares on one machine | Owner. SciEntsBank is the main benchmark again, and this makes it fully held out: no SciEntsBank question appears in Beetle or SAF. It tests whether fine-tuning teaches grading that transfers, the reverse of the Oct 28 test |
 | 2026-11-08 | Grading of the Beetle + SAF adapters and E4B's label-first and reason-first moves from the Spark to Kaggle T4s; the Spark runs stay as a cross-check | Owner: another lab job shared the Spark's GPU from Nov 6, and hardware use matters for the comparison. Kaggle's quota had reset; the untouched and existing adapter runs there are reused (same build and flags) |
+| 2026-11-13 | Main question becomes three graders: E2B untouched, E2B tweaked, E4B untouched (RQ8). The methods tried on E4B (graded examples, adapter soup, 5-way labels) run on E2B on the DGX Spark to find its best version | Supervisor 2026-11-13: none of those methods beat the E4B adapter, so compare the graders instead of chasing small-model accuracy. "Tweaked" = fine-tuned variants (owner); Jetson cost pending. Outline, supervisor feedback and own decisions |

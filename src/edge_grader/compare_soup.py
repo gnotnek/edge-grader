@@ -13,6 +13,7 @@ seed is significantly better than it after Holm.
 """
 
 import json
+import os
 import statistics
 from datetime import UTC, datetime
 from pathlib import Path
@@ -23,7 +24,9 @@ from .metrics import score
 
 SPLITS = ("test_ua", "test_uq", "test_ud")
 SEEDS = (0, 1, 2, 3, 4)
-BASE = "e4b-spark-gb10"
+# E2B runs the same methods (decision 2026-11-13): MODEL=e2b uv run python -m edge_grader.compare_soup
+MODEL = os.environ.get("MODEL", "e4b")
+BASE = f"{MODEL}-spark-gb10"
 SEED_LABELS = tuple(f"{BASE}-ft-s{n}" for n in SEEDS)
 SOUP = f"{BASE}-ft-soup"
 KAGGLE = f"{BASE}-ft"  # the Oct 27 Kaggle adapter, graded on the Spark on Nov 8
@@ -79,7 +82,7 @@ def main(spark: Path = Path("results/spark")) -> None:
         t["two_way"]["p_holm"] = ph
     adopted = decide(splits, tests)
 
-    out = spark / f"compare-soup-scientsbank-{datetime.now(UTC):%Y%m%d-%H%M%S}.json"
+    out = spark / f"compare-soup-scientsbank{'' if MODEL == 'e4b' else '-' + MODEL}-{datetime.now(UTC):%Y%m%d-%H%M%S}.json"
     out.write_text(json.dumps({
         "kind": "compare-soup", "spec": "docs/superpowers/specs/2026-11-10-adapter-soup-design.md",
         "family": f"{len(tests)} tests fixed before grading: per split, soup vs untouched and vs each "

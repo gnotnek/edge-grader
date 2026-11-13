@@ -154,6 +154,27 @@ AFTER=<the container running now> nohup scripts/spark_queue.sh finetune-e4b-s0 f
 
 Then, on the Mac with the results pulled: `uv run python -m edge_grader.compare_soup`.
 
+## The same methods on E2B (decision 2026-11-13)
+
+The supervisor's three-grader comparison (E2B untouched, E2B tweaked, E4B untouched) needs E2B's best version, so the soup seeds, the 5-way adapter and the graded examples run on E2B too, unchanged except for the model. The bench script takes `MODEL=e2b` (default `e4b`) for its `EXAMPLES`, `FIVEWAY` and `SOUP` runs, and the comparisons take the same variable.
+
+| Service | Runs |
+|---|---|
+| `bench-scientsbank-examples-e2b` | E2B untouched, + kNN examples, `e2b-ft` (Oct 28) + kNN examples, + random examples. No training, so it can go first |
+| `finetune-e2b-s0` … `-s4`, `soup-e2b` | five E2B label-only seeds, then their soup: `data/adapters/e2b-ft-s<n>.gguf`, `e2b-ft-soup.gguf` |
+| `bench-scientsbank-soup-e2b` | E2B untouched, the five seeds and the soup |
+| `finetune-e2b-5w-s0`, `bench-scientsbank-5w-e2b` | the 5-way seed-0 adapter, then its grading (compared with seed 0 from the soup queue) |
+
+```bash
+docker compose run --rm -e SMOKE=1 -e SEED=0 dev scripts/spark_finetune.sh e2b label    # smoke, output in data/smoke
+docker compose run --rm -e N=5 -e OUT=data/smoke -e MODEL=e2b -e EXAMPLES=1 dev scripts/spark_bench_scientsbank.sh
+AFTER=<the container running now> nohup scripts/spark_queue.sh bench-scientsbank-examples-e2b \
+  finetune-e2b-s0 finetune-e2b-s1 finetune-e2b-s2 finetune-e2b-s3 finetune-e2b-s4 soup-e2b \
+  bench-scientsbank-soup-e2b finetune-e2b-5w-s0 bench-scientsbank-5w-e2b > data/logs/queue-e2b.log 2>&1 &
+```
+
+Then, on the Mac with the results pulled: `MODEL=e2b uv run python -m edge_grader.compare_examples` (and `compare_soup`, `compare_fiveway`). Their summaries are named `compare-<kind>-scientsbank-e2b-*.json`.
+
 ## ASAP 2.0 (stage 5)
 
 One container, `edge-grader-bench-asap2`, runs the fixed 600-essay sample on each version in turn: E2B and E4B untouched, then `e2b-ft`, `e2b-ft-lf`, `e4b-ft` and `e4b-ft-lf`. Adapters are read from `data/adapters/`; a missing one is logged and skipped.

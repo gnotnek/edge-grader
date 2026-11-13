@@ -8,6 +8,7 @@ each test with its own Holm over the same 12, secondary as in compare_bar.
 """
 
 import json
+import os
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -17,7 +18,10 @@ from .compare_bar import BAR, SPLITS
 from .data import question_id
 from .metrics import score
 
-BASE, FT = "e4b-spark-gb10", "e4b-spark-gb10-ft"
+# E2B runs the same methods (decision 2026-11-13): MODEL=e2b uv run python -m edge_grader.compare_examples
+MODEL = os.environ.get("MODEL", "e4b")
+BASE = f"{MODEL}-spark-gb10"
+FT = f"{BASE}-ft"
 EX, FT_EX, RAND = f"{BASE}-ex4", f"{FT}-ex4", f"{BASE}-rand4"
 # (first, second, bar applies): second - first is the difference tested.
 PAIRS = [(BASE, EX, True), (FT, FT_EX, True), (FT, EX, False), (RAND, EX, False)]
@@ -70,7 +74,7 @@ def main(spark: Path = Path("results/spark")) -> None:
                                                   / sum(map(len, shots)), 4) if shots else None})
     described = [test(a, b, s) for a, b in DESCRIBED for s in SPLITS]
 
-    out = spark / f"compare-examples-scientsbank-{datetime.now(UTC):%Y%m%d-%H%M%S}.json"
+    out = spark / f"compare-examples-scientsbank{'' if MODEL == 'e4b' else '-' + MODEL}-{datetime.now(UTC):%Y%m%d-%H%M%S}.json"
     out.write_text(json.dumps({
         "kind": "compare-examples", "spec": "docs/superpowers/specs/2026-11-10-graded-examples-design.md",
         "rule": "bar rows: diff >= +5 accuracy points and Holm p < 0.05, paired McNemar on 3-way labels; "

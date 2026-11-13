@@ -13,6 +13,7 @@ split after Holm and significantly worse on none.
 """
 
 import json
+import os
 from collections import Counter
 from collections.abc import Callable
 from datetime import UTC, datetime
@@ -22,7 +23,9 @@ from .board_check import read_answers
 from .compare import holm, latest, paired
 from .compare_soup import BAR, SEED_LABELS, SPLITS, scores, spread
 
-BASE = "e4b-spark-gb10"
+# E2B runs the same methods (decision 2026-11-13): MODEL=e2b uv run python -m edge_grader.compare_fiveway
+MODEL = os.environ.get("MODEL", "e4b")
+BASE = f"{MODEL}-spark-gb10"
 THREE = f"{BASE}-ft-s0"  # the soup queue's 3-way seed 0: same seed, only the labels differ
 FIVE = f"{BASE}-ft-5w-s0"
 
@@ -89,7 +92,7 @@ def main(spark: Path = Path("results/spark"), gold5: Callable[[str], dict[str, s
         t["two_way"]["p_holm"] = ph
     helps = decide(tests)
 
-    out = spark / f"compare-fiveway-scientsbank-{datetime.now(UTC):%Y%m%d-%H%M%S}.json"
+    out = spark / f"compare-fiveway-scientsbank{'' if MODEL == 'e4b' else '-' + MODEL}-{datetime.now(UTC):%Y%m%d-%H%M%S}.json"
     out.write_text(json.dumps({
         "kind": "compare-fiveway", "spec": "docs/superpowers/specs/2026-11-12-fiveway-training-design.md",
         "family": f"{len(tests)} tests fixed before grading: per split, the 5-way adapter vs the 3-way "
