@@ -11,11 +11,14 @@
 #   N=5 OUT=data/smoke scripts/spark_bench_scientsbank.sh   # minutes: 5 answers per split, nothing in results/
 #   SOUP="0 1 2 3 4" scripts/spark_bench_scientsbank.sh     # E4B untouched, those seeds' adapters and their soup
 #   FIVEWAY=1 scripts/spark_bench_scientsbank.sh            # the 5-way-trained adapter, 5-label prompt (spec 2026-11-12)
+#   MODEL=e2b SOUP="0 1 2 3 4" scripts/spark_bench_scientsbank.sh   # EXAMPLES, FIVEWAY and SOUP on E2B (decision 2026-11-13)
 #
 # Guide: docs/guides/spark-docker.md
 set -uo pipefail
 
 N=${N:-0}
+M=${MODEL:-e4b}  # model for the EXAMPLES, FIVEWAY and SOUP runs
+case $M in e2b|e4b) ;; *) echo "MODEL must be e2b or e4b, not $M" >&2; exit 1 ;; esac
 OUT=${OUT:-results/spark}
 mkdir -p data/logs data/models
 LOG=data/logs/bench-scientsbank-$(date -u +%Y%m%d-%H%M%S).log
@@ -56,19 +59,19 @@ run() {  # run <e2b|e4b> <label suffix> [adapter gguf] [reply] [examples file] [
 
 if [ "${EXAMPLES:-0}" = 1 ]; then  # main pair first, the random control last
   knn=results/examples/examples-knn-bge-small-en-k4.json
-  run e4b ""
-  run e4b -ex4 "" label $knn
-  run e4b -ft-ex4 data/adapters/e4b-ft.gguf label $knn
-  run e4b -rand4 "" label results/examples/examples-random-k4.json
+  run $M ""
+  run $M -ex4 "" label $knn
+  run $M -ft-ex4 data/adapters/$M-ft.gguf label $knn
+  run $M -rand4 "" label results/examples/examples-random-k4.json
 elif [ "${FIVEWAY:-0}" = 1 ]; then  # spec 2026-11-12; untouched and the 3-way seeds come from the soup's grading
-  run e4b -ft-5w-s0 data/adapters/e4b-ft-5w-s0.gguf label "" 5way
+  run $M -ft-5w-s0 data/adapters/$M-ft-5w-s0.gguf label "" 5way
 elif [ "${BASELINE:-0}" = 1 ]; then
   run e2b ""
   run e4b ""
 elif [ -n "${SOUP:-}" ]; then  # adapter soup, spec 2026-11-10 §5.4
-  run e4b ""
-  for s in $SOUP; do run e4b -ft-s$s data/adapters/e4b-ft-s$s.gguf; done
-  run e4b -ft-soup data/adapters/e4b-ft-soup.gguf
+  run $M ""
+  for s in $SOUP; do run $M -ft-s$s data/adapters/$M-ft-s$s.gguf; done
+  run $M -ft-soup data/adapters/$M-ft-soup.gguf
 else
   for m in e2b e4b; do
     for trained in "" -beetle-saf; do  # on SciEntsBank, or on Beetle and SAF only

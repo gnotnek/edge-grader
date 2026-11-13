@@ -186,6 +186,78 @@ services:
       EXAMPLES: "1"
     command: scripts/spark_bench_scientsbank.sh
 
+  # The same three methods on E2B (decision 2026-11-13): seeds 0-4 and their soup, a 5-way seed-0
+  # adapter, and graded examples. Queue them one after the other with scripts/spark_queue.sh.
+  finetune-e2b-s0: &seed-e2b
+    <<: *finetune
+    container_name: edge-grader-finetune-e2b-s0
+    environment:
+      SEED: "0"
+    command: scripts/spark_finetune.sh e2b label
+
+  finetune-e2b-s1:
+    <<: *seed-e2b
+    container_name: edge-grader-finetune-e2b-s1
+    environment:
+      SEED: "1"
+
+  finetune-e2b-s2:
+    <<: *seed-e2b
+    container_name: edge-grader-finetune-e2b-s2
+    environment:
+      SEED: "2"
+
+  finetune-e2b-s3:
+    <<: *seed-e2b
+    container_name: edge-grader-finetune-e2b-s3
+    environment:
+      SEED: "3"
+
+  finetune-e2b-s4:
+    <<: *seed-e2b
+    container_name: edge-grader-finetune-e2b-s4
+    environment:
+      SEED: "4"
+
+  soup-e2b:
+    <<: *finetune
+    container_name: edge-grader-soup-e2b
+    environment:
+      SOUP: "0 1 2 3 4"
+    command: scripts/spark_finetune.sh e2b label
+
+  bench-scientsbank-soup-e2b:
+    <<: *finetune
+    container_name: edge-grader-bench-scientsbank-soup-e2b
+    environment:
+      MODEL: e2b
+      SOUP: "0 1 2 3 4"
+    command: scripts/spark_bench_scientsbank.sh
+
+  finetune-e2b-5w-s0:
+    <<: *finetune
+    container_name: edge-grader-finetune-e2b-5w-s0
+    environment:
+      SCHEME: "5way"
+      SEED: "0"
+    command: scripts/spark_finetune.sh e2b label
+
+  bench-scientsbank-5w-e2b:
+    <<: *finetune
+    container_name: edge-grader-bench-scientsbank-5w-e2b
+    environment:
+      MODEL: e2b
+      FIVEWAY: "1"
+    command: scripts/spark_bench_scientsbank.sh
+
+  bench-scientsbank-examples-e2b:
+    <<: *finetune
+    container_name: edge-grader-bench-scientsbank-examples-e2b
+    environment:
+      MODEL: e2b
+      EXAMPLES: "1"
+    command: scripts/spark_bench_scientsbank.sh
+
   # Stage 5, ASAP 2.0: the untouched models, then the adapters, one at a time.
   bench-asap2:
     <<: *finetune
