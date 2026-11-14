@@ -36,7 +36,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 # The settings a job may carry: board_grade.sh's own switches (later phases add the last ones).
 JOB_ENV = ("BENCH", "INSTANCES", "MEASURE", "THINKING", "VARIANT", "RAG", "IMAGES", "MMPROJ",
-           "LG_ENGINE", "LORA")
+           "LG_ENGINE", "LORA", "REPLY")
 # Never inherited by a real run: the worker's shell may have any of these set.
 STRIP_ENV = (*JOB_ENV, "DRY_RUN", "EG_BOARD", "EG_RUN_DIR", "EG_INNER")
 BUSY = "refusing: the board is busy"

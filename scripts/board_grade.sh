@@ -14,6 +14,8 @@
 #                                               # with RAG-en: top 3 passages (any benchmark)
 #   LORA=$HOME/research/models/adapters/e2b-ft.gguf scripts/board_grade.sh e2b test_uq
 #                                               # stage 3: the fine-tuned adapter (any benchmark)
+#   LORA=.../e2b-ft-lf.gguf REPLY=label-first scripts/board_grade.sh e2b test_uq
+#                                               # stage 3b: the reply format that adapter was trained on
 #   MEASURE=0 scripts/board_grade.sh e4b        # no telemetry (a quick check)
 #   DRY_RUN=1 EG_BOARD=pi5 BENCH=gsm scripts/board_grade.sh e2b symbolic
 #                                               # print the run folder and commands, touch nothing
@@ -96,6 +98,16 @@ if [ -n "$LORA" ]; then
   case "$LORA" in *.gguf) ;; *) echo "LORA must be a .gguf adapter: $LORA" >&2; exit 1 ;; esac
   case "$VARIANT" in lg|lg-reuse) echo "LORA needs llama.cpp; little-gemma can't load it (VARIANT=$VARIANT)" >&2; exit 1 ;; esac
 fi
+# Stage 3b: REPLY is the reply format a LORA adapter was trained on (SciEntsBank only).
+REPLY="${REPLY:-label}"
+case "$REPLY" in label|label-first|reason-first) ;; *) echo "REPLY must be label, label-first or reason-first: $REPLY" >&2; exit 1 ;; esac
+if [ "$REPLY" != label ]; then
+  [ -n "$LORA" ] || { echo "REPLY=$REPLY needs the LORA adapter trained on it" >&2; exit 1; }
+  [ "$BENCH" = scientsbank ] || { echo "REPLY=$REPLY is a SciEntsBank condition only (BENCH=$BENCH)" >&2; exit 1; }
+  if [ "$THINKING" = on ] || [ -n "$RAG" ]; then
+    echo "REPLY=$REPLY with THINKING or RAG isn't a condition in this study" >&2; exit 1
+  fi
+fi
 MEASURE="${MEASURE:-1}"
 PORT="${PORT:-8080}"
 # deploy.sh installs uv here; non-interactive ssh shells do not have it on PATH.
@@ -157,6 +169,7 @@ if [ "$BENCH" = scientsbank ]; then
   [ "$THINKING" = on ] && NAME="think-$NAME"
   [ "$VARIANT" != base ] && NAME="$VARIANT-$NAME"
   [ -n "$LORA" ] && NAME="ft-$NAME"
+  case "$REPLY" in label-first) NAME="ft-lf-${NAME#ft-}" ;; reason-first) NAME="ft-rf-${NAME#ft-}" ;; esac
   [ -n "$RAG" ] && NAME="rag-$NAME"
 elif [ "$SPLIT" = symbolic ]; then
   NAME="$BENCH$( [ -n "$RAG" ] && echo -rag )$( [ -n "$LORA" ] && echo -ft )-$MODEL_KEY-$BOARD-symbolic-i$INSTANCES"
@@ -189,7 +202,7 @@ runner() {
   case "$BENCH" in
     scientsbank) $run uv run edge-grader-baseline --base-url "$url" --label "$label" \
                    --split "$SPLIT" --n "$N" --out "$RUN_DIR" $( [ "$THINKING" = on ] && echo --thinking ) \
-                   $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) ;;
+                   $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) $( [ "$REPLY" != label ] && echo "--reply $REPLY" ) ;;
     gsm) $run uv run edge-grader-gsm --base-url "$url" --label "$label" \
            --set "$SPLIT" --instances "$INSTANCES" --n "$N" --out "$RUN_DIR" \
            $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) ;;
@@ -327,6 +340,7 @@ board_state() {
   [ -f "$HERE/DEPLOYED.json" ] && echo "deployed: $(cat "$HERE/DEPLOYED.json")"
   [ "$BOARD" = pi5 ] && echo "va-llm: ${VA_LLM_WAS:-unknown}"
   echo "variant: $VARIANT"
+  [ "$REPLY" != label ] && echo "reply: $REPLY"
   [ -n "$LORA" ] && echo "lora: $LORA sha256 $(sha256sum "$LORA" | cut -d' ' -f1)"
   case "$VARIANT" in
     lg|lg-reuse) echo "engine: $LG_ENGINE ($(head -1 "$(dirname "$LG_ENGINE")/BUILD_INFO" 2>/dev/null))" ;;
