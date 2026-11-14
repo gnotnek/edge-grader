@@ -15,7 +15,7 @@ def dry(*args: str, board: str = "jetson", **env: str) -> subprocess.CompletedPr
     """Run the script with DRY_RUN=1 on a pretend board; BENCH etc. only if given."""
     e = {k: v for k, v in os.environ.items()
          if k not in {"BENCH", "INSTANCES", "THINKING", "VARIANT", "RAG", "LG_ENGINE", "EG_RUN_DIR", "EG_INNER",
-                       "MEASURE", "LORA"}}
+                       "MEASURE", "LORA", "REPLY"}}
     e |= {"DRY_RUN": "1", "EG_BOARD": board, **env}
     return subprocess.run(["bash", str(SCRIPT), *args], env=e, capture_output=True, text=True,
                           check=False)
@@ -222,3 +222,22 @@ def test_lora_refused_with_little_gemma():
 def test_lora_must_be_a_gguf():
     p = dry("e2b", LORA="/m/a.safetensors")
     assert p.returncode != 0 and "LORA" in p.stderr, p.stderr
+
+
+def test_reply_passes_through_with_its_adapter():
+    base = fields(dry("e2b", "test_uq", LORA=ADAPTER))
+    for reply, prefix in (("label-first", "ft-lf"), ("reason-first", "ft-rf")):
+        f = fields(dry("e2b", "test_uq", LORA=ADAPTER, REPLY=reply))
+        assert re.fullmatch(rf"{REPO}/results/board/{prefix}-e2b-jetson-test_uq-{STAMP}", f["run_dir"]), f["run_dir"]
+        assert f["server"] == base["server"]
+        assert f["runner"] == base["runner"].replace(base["run_dir"], f["run_dir"]) + f" --reply {reply}"
+    assert fields(dry("e2b", "test_uq", LORA=ADAPTER, REPLY="label")).keys() == base.keys()
+
+
+def test_reply_refused_outside_its_condition():
+    for env in ({"REPLY": "label-first"},                                  # no adapter
+                {"REPLY": "reason-first", "LORA": ADAPTER, "BENCH": "gsm"},
+                {"REPLY": "reason-first", "LORA": ADAPTER, "THINKING": "on"},
+                {"REPLY": "reasons", "LORA": ADAPTER}):
+        p = dry("e2b", **env)
+        assert p.returncode != 0 and "REPLY" in p.stderr, (env, p.stderr)
