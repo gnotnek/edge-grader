@@ -15,7 +15,7 @@ def dry(*args: str, board: str = "jetson", **env: str) -> subprocess.CompletedPr
     """Run the script with DRY_RUN=1 on a pretend board; BENCH etc. only if given."""
     e = {k: v for k, v in os.environ.items()
          if k not in {"BENCH", "INSTANCES", "THINKING", "VARIANT", "RAG", "LG_ENGINE", "EG_RUN_DIR", "EG_INNER",
-                       "MEASURE", "LORA", "REPLY"}}
+                       "MEASURE", "LORA", "REPLY", "EXAMPLES", "PROMPT_SCHEME"}}
     e |= {"DRY_RUN": "1", "EG_BOARD": board, **env}
     return subprocess.run(["bash", str(SCRIPT), *args], env=e, capture_output=True, text=True,
                           check=False)
@@ -241,3 +241,41 @@ def test_reply_refused_outside_its_condition():
                 {"REPLY": "reasons", "LORA": ADAPTER}):
         p = dry("e2b", **env)
         assert p.returncode != 0 and "REPLY" in p.stderr, (env, p.stderr)
+
+
+KNN = "results/examples/examples-knn-bge-small-en-k4.json"
+RANDOM = "results/examples/examples-random-k4.json"
+
+
+def test_adapter_tag_names_seeds_soup_and_5way_apart():
+    for adapter, prefix in (("/m/adapters/e2b-ft-s3.gguf", "ft-s3"), ("/m/adapters/e2b-ft-soup.gguf", "ft-soup"),
+                            ("/m/adapters/e2b-ft-lf.gguf", "ft-lf")):
+        f = fields(dry("e2b", "test_uq", LORA=adapter))
+        assert re.fullmatch(rf"{REPO}/results/board/{prefix}-e2b-jetson-test_uq-{STAMP}", f["run_dir"]), f["run_dir"]
+    f = fields(dry("e2b", "gsm8k", BENCH="gsm", LORA="/m/adapters/e2b-ft-s0.gguf"))
+    assert re.fullmatch(rf"{REPO}/results/board/gsm-ft-s0-e2b-jetson-gsm8k-{STAMP}", f["run_dir"]), f["run_dir"]
+
+
+def test_examples_pass_through_with_or_without_adapter():
+    base = fields(dry("e2b", "test_uq"))
+    for env, prefix in (({"EXAMPLES": KNN}, "ex4-e2b"), ({"EXAMPLES": RANDOM}, "rand4-e2b"),
+                        ({"EXAMPLES": KNN, "LORA": ADAPTER}, "ex4-ft-e2b")):
+        f = fields(dry("e2b", "test_uq", **env))
+        assert re.fullmatch(rf"{REPO}/results/board/{prefix}-jetson-test_uq-{STAMP}", f["run_dir"]), f["run_dir"]
+        assert f["runner"].endswith(f" --examples {env['EXAMPLES']} --k 4"), f["runner"]
+    assert "--examples" not in base["runner"]
+
+
+def test_fiveway_passes_through_with_its_adapter():
+    f = fields(dry("e2b", "test_uq", LORA="/m/adapters/e2b-ft-5w-s0.gguf", PROMPT_SCHEME="5way"))
+    assert re.fullmatch(rf"{REPO}/results/board/ft-5w-s0-e2b-jetson-test_uq-{STAMP}", f["run_dir"]), f["run_dir"]
+    assert f["runner"].endswith(" --prompt-scheme 5way"), f["runner"]
+
+
+def test_examples_and_fiveway_refused_outside_their_condition():
+    for env in ({"EXAMPLES": "results/rag/x.json"}, {"EXAMPLES": KNN, "BENCH": "gsm"},
+                {"EXAMPLES": KNN, "THINKING": "on"}, {"EXAMPLES": KNN, "LORA": ADAPTER, "REPLY": "label-first"},
+                {"PROMPT_SCHEME": "5way"}, {"PROMPT_SCHEME": "4way", "LORA": ADAPTER},
+                {"PROMPT_SCHEME": "5way", "LORA": ADAPTER, "EXAMPLES": KNN}):
+        p = dry("e2b", **env)
+        assert p.returncode != 0 and ("EXAMPLES" in p.stderr or "PROMPT_SCHEME" in p.stderr), (env, p.stderr)

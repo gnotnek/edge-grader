@@ -16,6 +16,10 @@
 #                                               # stage 3: the fine-tuned adapter (any benchmark)
 #   LORA=.../e2b-ft-lf.gguf REPLY=label-first scripts/board_grade.sh e2b test_uq
 #                                               # stage 3b: the reply format that adapter was trained on
+#   EXAMPLES=results/examples/examples-knn-bge-small-en-k4.json scripts/board_grade.sh e2b test_uq
+#                                               # 4 graded train answers in the prompt (with or without LORA)
+#   LORA=.../e2b-ft-5w-s0.gguf PROMPT_SCHEME=5way scripts/board_grade.sh e2b test_uq
+#                                               # the 5-way-trained adapter, 5-label prompt, scored 3-way
 #   MEASURE=0 scripts/board_grade.sh e4b        # no telemetry (a quick check)
 #   DRY_RUN=1 EG_BOARD=pi5 BENCH=gsm scripts/board_grade.sh e2b symbolic
 #                                               # print the run folder and commands, touch nothing
@@ -108,6 +112,29 @@ if [ "$REPLY" != label ]; then
     echo "REPLY=$REPLY with THINKING or RAG isn't a condition in this study" >&2; exit 1
   fi
 fi
+# Graded examples (spec 2026-11-10) and the 5-way prompt (spec 2026-11-12), as on the Spark: SciEntsBank only.
+EXAMPLES="${EXAMPLES:-}"
+PROMPT_SCHEME="${PROMPT_SCHEME:-}"
+if [ -n "$EXAMPLES" ]; then
+  case "$(basename "$EXAMPLES")" in
+    examples-knn-*.json) EXKIND=ex4 ;;
+    examples-random-*.json) EXKIND=rand4 ;;
+    *) echo "EXAMPLES must be an examples-knn-*.json or examples-random-*.json file: $EXAMPLES" >&2; exit 1 ;;
+  esac
+  if [ "$BENCH" != scientsbank ] || [ "$REPLY" != label ] || [ "$THINKING" = on ] || [ -n "$RAG" ]; then
+    echo "EXAMPLES is a SciEntsBank condition with the label reply, no THINKING or RAG" >&2; exit 1
+  fi
+fi
+if [ -n "$PROMPT_SCHEME" ]; then
+  [ "$PROMPT_SCHEME" = 5way ] || { echo "PROMPT_SCHEME must be 5way: $PROMPT_SCHEME" >&2; exit 1; }
+  if [ -z "$LORA" ] || [ "$BENCH" != scientsbank ] || [ "$REPLY" != label ] || [ "$THINKING" = on ] \
+     || [ -n "$RAG" ] || [ -n "$EXAMPLES" ]; then
+    echo "PROMPT_SCHEME=5way needs its LORA adapter, SciEntsBank, the label reply, no THINKING, RAG or EXAMPLES" >&2; exit 1
+  fi
+fi
+# The adapter's tag in run names: e2b-ft.gguf -> ft, e2b-ft-s0.gguf -> ft-s0, e2b-ft-soup.gguf -> ft-soup.
+FT=ft
+case "$(basename "$LORA" .gguf)" in "$MODEL_KEY"-ft-*) FT="ft-${LORA##*/"$MODEL_KEY"-ft-}"; FT=${FT%.gguf} ;; esac
 MEASURE="${MEASURE:-1}"
 PORT="${PORT:-8080}"
 # deploy.sh installs uv here; non-interactive ssh shells do not have it on PATH.
@@ -168,13 +195,15 @@ if [ "$BENCH" = scientsbank ]; then
   NAME="$MODEL_KEY-$BOARD-$SPLIT"
   [ "$THINKING" = on ] && NAME="think-$NAME"
   [ "$VARIANT" != base ] && NAME="$VARIANT-$NAME"
-  [ -n "$LORA" ] && NAME="ft-$NAME"
-  case "$REPLY" in label-first) NAME="ft-lf-${NAME#ft-}" ;; reason-first) NAME="ft-rf-${NAME#ft-}" ;; esac
+  [ -n "$LORA" ] && NAME="$FT-$NAME"
+  # a plain e2b-ft.gguf with REPLY still says which reply it was graded with
+  [ "$FT" = ft ] && case "$REPLY" in label-first) NAME="ft-lf-${NAME#ft-}" ;; reason-first) NAME="ft-rf-${NAME#ft-}" ;; esac
+  [ -n "$EXAMPLES" ] && NAME="$EXKIND-$NAME"
   [ -n "$RAG" ] && NAME="rag-$NAME"
 elif [ "$SPLIT" = symbolic ]; then
-  NAME="$BENCH$( [ -n "$RAG" ] && echo -rag )$( [ -n "$LORA" ] && echo -ft )-$MODEL_KEY-$BOARD-symbolic-i$INSTANCES"
+  NAME="$BENCH$( [ -n "$RAG" ] && echo -rag )$( [ -n "$LORA" ] && echo "-$FT" )-$MODEL_KEY-$BOARD-symbolic-i$INSTANCES"
 else
-  NAME="$BENCH$( [ -n "$RAG" ] && echo -rag )$( [ -n "$LORA" ] && echo -ft )-$MODEL_KEY-$BOARD-$SPLIT"
+  NAME="$BENCH$( [ -n "$RAG" ] && echo -rag )$( [ -n "$LORA" ] && echo "-$FT" )-$MODEL_KEY-$BOARD-$SPLIT"
 fi
 RUN_DIR="${EG_RUN_DIR:-$HERE/results/board/$NAME-$(date +%Y%m%d-%H%M%S)}"
 SRVLOG=$RUN_DIR/server.log
@@ -202,7 +231,8 @@ runner() {
   case "$BENCH" in
     scientsbank) $run uv run edge-grader-baseline --base-url "$url" --label "$label" \
                    --split "$SPLIT" --n "$N" --out "$RUN_DIR" $( [ "$THINKING" = on ] && echo --thinking ) \
-                   $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) $( [ "$REPLY" != label ] && echo "--reply $REPLY" ) ;;
+                   $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) $( [ "$REPLY" != label ] && echo "--reply $REPLY" ) \
+                   $( [ -n "$EXAMPLES" ] && echo "--examples $EXAMPLES --k 4" ) $( [ -n "$PROMPT_SCHEME" ] && echo "--prompt-scheme $PROMPT_SCHEME" ) ;;
     gsm) $run uv run edge-grader-gsm --base-url "$url" --label "$label" \
            --set "$SPLIT" --instances "$INSTANCES" --n "$N" --out "$RUN_DIR" \
            $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) ;;
@@ -341,6 +371,8 @@ board_state() {
   [ "$BOARD" = pi5 ] && echo "va-llm: ${VA_LLM_WAS:-unknown}"
   echo "variant: $VARIANT"
   [ "$REPLY" != label ] && echo "reply: $REPLY"
+  [ -n "$EXAMPLES" ] && echo "examples: $EXAMPLES sha256 $(cd "$HERE" && sha256sum "$EXAMPLES" | cut -d' ' -f1)"
+  [ -n "$PROMPT_SCHEME" ] && echo "prompt scheme: $PROMPT_SCHEME"
   [ -n "$LORA" ] && echo "lora: $LORA sha256 $(sha256sum "$LORA" | cut -d' ' -f1)"
   case "$VARIANT" in
     lg|lg-reuse) echo "engine: $LG_ENGINE ($(head -1 "$(dirname "$LG_ENGINE")/BUILD_INFO" 2>/dev/null))" ;;
