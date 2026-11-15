@@ -59,3 +59,31 @@ The untouched Spark runs match Kaggle's (66.7 / 67.5 / 70.4%) within 1.5 points.
 - One k (4), one embedder (bge-small, not fine-tuned) and one prompt layout. None of them was tuned, by design, so a tuned retriever as in Wang & Ormerod might do better on test_ua. Nothing here suggests it would rescue test_uq or test_ud, since random examples do as well as similar ones.
 - The random draw comes from the whole pool, so on test_ua it also differs from kNN in using other questions' answers.
 - E4B only; E2B and thinking on weren't run.
+
+## E2B (2026-11-13, DGX Spark)
+
+**In plain words:** the same four runs with E2B in place of E4B (decision 2026-11-13). **Graded examples lift untouched E2B on every split and pass the 5-point bar on all three (+15.2 / +10.6 / +5.6 points), unlike E4B. They still don't help the E2B adapter (no split differs), and the adapter stays 7–9 points ahead of E2B with examples.** So for the three-grader question, examples are not E2B's best version; the adapter is.
+
+Same setup as above: E2B QAT `UD-Q4_K_XL`, `a3a1c47`, the same retrieval files, the same 12 tests and Holm family. The adapter is the Kaggle-trained E2B label-only adapter (`e2b-ft`), graded on the Spark. All runs on the whole splits, 0 unparsed. Comparison: `MODEL=e2b uv run python -m edge_grader.compare_examples` → [`results/spark/compare-examples-scientsbank-e2b-20261115-041133.json`](../../results/spark/compare-examples-scientsbank-e2b-20261115-041133.json).
+
+| Version | test_ua | test_uq | test_ud |
+|---|---|---|---|
+| E2B untouched | 55.2% / 0.521 | 59.5% / 0.548 | 60.7% / 0.574 |
+| E2B + kNN examples | 70.4% / 0.674 | 70.1% / 0.606 | 66.3% / 0.551 |
+| E2B + random examples | 65.0% / 0.561 | 68.1% / 0.568 | 65.0% / 0.546 |
+| label-only adapter (`e2b-ft`) | **79.4% / 0.790** | **76.9% / 0.755** | 74.8% / 0.747 |
+| adapter + kNN examples | 77.0% / 0.763 | 76.0% / 0.744 | **75.3% / 0.741** |
+
+| Second vs first | test_ua | test_uq | test_ud |
+|---|---|---|---|
+| E2B + kNN vs E2B (bar) | **+15.2** (135/53, <0.001) **pass** | **+10.6** (147/69, <0.001) **pass** | **+5.6** (691/435, <0.001) **pass** |
+| adapter + kNN vs adapter (bar) | −2.4 (31/44, 0.66) | −0.9 (31/38, 0.66) | +0.5 (241/216, 0.66) |
+| E2B + kNN vs adapter | **−9.1** (<0.001) | **−6.8** (<0.001) | **−8.4** (<0.001) |
+| E2B + kNN vs E2B + random | +5.4 (0.11) | +2.0 (0.66) | **+1.3** (0.04) |
+
+Accuracy points, (fixed / broken, Holm p over the 12); **bold** = significant. Described, not tested: random examples against untouched E2B, +9.8 / +8.6 / +4.3. 2-way, untouched → kNN: 72.0 → 77.4%, 75.6 → 77.5%, 73.5 → 74.3%.
+
+What it means:
+1. **For E2B the examples fix a different fault than for E4B.** Untouched E2B overuses "contradictory": its recall on "incorrect" is only 0.61 / 0.66 / 0.58, against 0.69–0.78 on "contradictory". With examples, "incorrect" recall rises to 0.80 / 0.88 / 0.79 and "contradictory" falls to 0.57 / 0.30 / 0.21. "Correct" recall moves less (0.45 → 0.64 on test_ua, 0.61 → 0.62 on test_ud). E4B, by contrast, was too strict on "correct", and examples made it lenient. Seen after grading, not tested.
+2. **Similar examples beat random ones only slightly,** and only on test_ud (+1.3, Holm p = 0.04). As with E4B, most of the gain comes from seeing any graded answers.
+3. **Training still wins.** The adapter beats E2B with examples by 6.8–9.1 points on every split, without the 3.5–4× longer prompt (median 531–618 tokens against 144–160). Adding examples to the adapter changes nothing significant.
