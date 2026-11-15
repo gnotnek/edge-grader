@@ -455,9 +455,53 @@ The 2-way tests agree on every comparison (seed 0: +4.6, +0.3, −2.7).
 - **5-way replies,** test_ud: correct 2,050, partially correct 1,098, irrelevant 960, contradictory 430, non-domain 24. All replies were valid labels.
 - **Timings:** training took about 10 h (840 steps at about 43 s each), sharing the GPU with the soup queue and another person's job. Grading took about 2 h. These are not cost numbers.
 
+## Adapter soup and 5-way labels, E2B on SciEntsBank (2026-11-14, DGX Spark)
+
+**In short:** **neither is adopted for E2B.** The same two set-ups as for E4B (decision 2026-11-13), with E2B in place of E4B: five label-only seeds and their soup, and one 5-way seed-0 adapter. All runs on the whole splits, build `a3a1c47`, 0 unparsed. Comparisons: `MODEL=e2b uv run python -m edge_grader.compare_soup` → [`compare-soup-scientsbank-e2b-20261115-041135.json`](../../results/spark/compare-soup-scientsbank-e2b-20261115-041135.json), and `compare_fiveway` → [`compare-fiveway-scientsbank-e2b-20261115-041143.json`](../../results/spark/compare-fiveway-scientsbank-e2b-20261115-041143.json).
+
+3-way accuracy (macro-F1):
+
+| Version | test_ua | test_uq | test_ud |
+|---|---|---|---|
+| *E2B untouched* | *55.2% (0.521)* | *59.5% (0.548)* | *60.7% (0.574)* |
+| Kaggle adapter (`e2b-ft`, Oct 27) | 79.4% (0.790) | 76.9% (0.755) | 74.8% (0.747) |
+| 3-way seeds 0–4: mean ± SD (min–max) | 80.3 ± 1.4% (78.7–81.5) | 76.8 ± 1.0% (75.4–78.2) | 75.2 ± 1.0% (74.2–76.5) |
+| **Soup of seeds 0–4** | **82.8%** (0.820) | **78.2%** (0.778) | 75.3% (0.752) |
+| 3-way seed 0 (epoch 3) | 81.5% (0.812) | 78.2% (0.774) | 74.3% (0.747) |
+| **5-way seed 0 (epoch 3)** | 82.4% (0.815) | **78.6%** (0.773) | 74.5% (0.742) |
+
+Validation picked epoch 3 for every seed except seed 1 (epoch 2), and epoch 3 for the 5-way adapter too.
+
+**Soup** against each seed, accuracy points (Holm p over the 18; **bold** = significant). Against untouched E2B it is +27.6 / +18.7 / +14.5, passing the bar on every split.
+
+| Soup vs | test_ua | test_uq | test_ud |
+|---|---|---|---|
+| seed 0 | +1.3 (1.0) | +0.0 (1.0) | **+1.0** (0.03) |
+| seed 1 | **+3.9** (0.01) | **+2.7** (0.02) | **−1.2** (0.01) |
+| seed 2 | **+4.1** (<0.001) | +1.1 (1.0) | −0.3 (1.0) |
+| seed 3 | +1.3 (1.0) | +1.4 (0.85) | **+1.1** (0.02) |
+| seed 4 | +1.7 (0.44) | +1.6 (0.65) | −0.1 (1.0) |
+
+- **Why not adopted:** seed 1 is significantly better than the soup on test_ud (−1.2), which fails the rule fixed before grading. The other half of the rule holds: the soup is at or above the seeds' mean on every split.
+- **Unlike E4B, the E2B soup lands at the top of the seed range, not the middle,** on test_ua (+2.5 over the mean, above the best seed) and test_uq (+1.4, tied with the best seed). On test_ud it sits on the mean (+0.1). 2-way, seeds' mean → soup: 84.3 → 86.3%, 80.2 → 81.0%, 78.4 → 78.7%. Seen after grading, not tested: averaging may suit E2B's seeds better because they disagree less (SD 1.0–1.4 points, against E4B's 1.6–1.8).
+- **Seed spread:** retraining E2B with another seed moves accuracy by 1.0–1.4 points (SD), up to 2.8 points best to worst. The Kaggle adapter sits inside that range on every split.
+
+**5-way labels** against the 3-way seed 0, accuracy points (answers fixed / broken, Holm p over the 6):
+
+| 5-way vs | test_ua | test_uq | test_ud |
+|---|---|---|---|
+| 3-way seed 0 | +0.9 (17/12, 1.0) | +0.4 (24/21, 1.0) | +0.2 (199/189, 1.0) |
+| Untouched E2B | **+27.2** (<0.001), passes the bar | **+19.1** (<0.001), passes the bar | **+13.8** (<0.001), passes the bar |
+
+- **Why not adopted:** it is not significantly better than seed 0 on any split, so the rule ("better on at least one split, worse on none") fails on its first half. The 2-way tests agree (+1.5 / +0.7 / +0.7, all n.s.).
+- **This time the control held:** seed 0 and the 5-way adapter both stopped at epoch 3, so labels are the only difference. With E4B the two ended at different epochs.
+- **Completeness errors,** seed 0 → 5-way: 76 → 70, 114 → 111, 876 → 803. As with E4B, on test_ud "correct called incorrect" fell (519 → 416) and "partly correct called correct" rose (357 → 387), so the finer labels trade one completeness error for the other. Contradictory recall rose a little on test_uq and test_ud (0.69 → 0.72, 0.75 → 0.79).
+
+**For the three-grader question (RQ8):** every E2B adapter here, the Kaggle one, each seed, the soup and the 5-way one, beats untouched E4B on test_uq and test_ud. None of the methods is adopted under its own rule, so "E2B tweaked" stays a plain label-only adapter. The best-scoring E2B version on the headline splits is the soup or the 5-way adapter (78.2–78.6% on test_uq), but neither is significantly better than the plain adapter.
+
 ## Not done yet
 
 - **Cost on the Jetson.** Latency and energy per answer for the tuned models, against the re-run baselines in the same clock state. Kaggle times aren't board cost, so no cost number is quoted here.
   - Also the adapter's load check on the Jetson's build (`a894dae`). The Day 1 check on Kaggle passed; the Jetson half of it is still open.
 - **The optional news run** (design §5.3), which was the first cut.
-- **One seed, for everything except E4B label-only.** Training was re-run once (2026-10-23 → 2026-10-27, same settings), and test_ua moved by 1 point (E2B 75 → 76%, E4B 72 → 73% on 100 answers). E4B label-only now has five seeds (adapter soup, 2026-11-12): SD 1.6–1.8 points per split. E2B and the other replies are still single seeds.
+- **One seed, for everything except E4B label-only.** Training was re-run once (2026-10-23 → 2026-10-27, same settings), and test_ua moved by 1 point (E2B 75 → 76%, E4B 72 → 73% on 100 answers). E4B label-only now has five seeds (adapter soup, 2026-11-12): SD 1.6–1.8 points per split. E2B label-only has five too (2026-11-14): SD 1.0–1.4. The other replies are still single seeds.
