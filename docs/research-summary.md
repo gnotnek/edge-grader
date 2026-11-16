@@ -1,6 +1,6 @@
 # Research summary: where the project stands
 
-*Written 2026-11-16, in plain words. The full outline, with every decision and its reason, is [`research-outline.md`](research-outline.md). The numbers and their tests are on the [results pages](results/summary.md).*
+*Written 2026-11-16, in plain words. The full outline, with every decision and its reason, is [`research-outline.md`](research-outline.md). The numbers and their tests are on the [results pages](results/summary.md). Every E2B version in one table: [jetson-graders](results/jetson-graders.md#e2b-tweaked-every-version-in-one-table).*
 
 ## The question
 
