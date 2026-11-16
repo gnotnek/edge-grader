@@ -206,3 +206,15 @@ def test_thinking_with_each_reply_format_reads_the_reply_after_the_thoughts():
         row = grade(client, "m", item, LABELS, thinking=True, reply=reply)
         assert row["pred"] == "correct", reply
         assert seen["max_tokens"] == budget and "stop" not in seen, reply  # no newline stop inside thoughts
+
+
+def test_thinking_label_first_keeps_its_label_when_the_reason_is_cut():
+    item = Item("1", "Q?", "ref", "ans", "correct")
+    closed = "<|channel>thought\nIt matches.\n<channel|>correct\nThe student's answer correctly ide"
+    client, _ = fake_client(closed, finish="length")
+    assert grade(client, "m", item, LABELS, thinking=True, reply="label-first")["pred"] == "correct"
+    unclosed = "<|channel>thought\nThe answer relates to correct ideas but"
+    client, _ = fake_client(unclosed, finish="length")
+    assert grade(client, "m", item, LABELS, thinking=True, reply="label-first")["pred"] is None
+    client, _ = fake_client(closed, finish="length")  # the other formats still drop a cut reply
+    assert grade(client, "m", item, LABELS, thinking=True, reply="label")["pred"] is None

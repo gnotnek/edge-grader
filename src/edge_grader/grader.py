@@ -131,7 +131,10 @@ def grade(client, model: str, item: Item, labels: list[str], max_tokens: int | N
     choice = resp.choices[0]
     text = choice.message.content or ""
     if thinking:
-        part = None if choice.finish_reason == "length" else answer_part(text)
+        part = answer_part(text)
+        # cut by length: unparsed, unless label-first, whose label line comes before the cut reason
+        if choice.finish_reason == "length" and reply != "label-first":
+            part = None
         pred = parse_reply(part.strip(), labels, reply) if part is not None else None
     elif reply == "reason-first" and choice.finish_reason == "length":
         pred = None  # cut before its label line, or inside it
