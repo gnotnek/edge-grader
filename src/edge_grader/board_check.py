@@ -37,10 +37,10 @@ ESTIMATES = "results/estimates"
 KAGGLE = "results/kaggle"
 BOARDS = {"pi5": "pi", "jetson": "jetson"}  # run label -> board name in the estimate
 SUMMARY_GLOBS = ("baseline-*.json", "think-*.json", "rag-*.json", "gsm-*.json", "news-*.json",
-                 "mmlupro-*.json", "asap2-*.json")
+                 "mmlupro-*.json", "asap2-*.json", "examples-*.json")
 JUDGE = "qwen3-14b-q4_k_m"  # the news judge's file tag (docs/results/topics.md)
 CPU_STATE = re.compile(r"^cpu0: governor (\S+) min (\d+) max (\d+)")
-STATE_LINE = re.compile(r"^(variant|engine): (.*)$")
+STATE_LINE = re.compile(r"^(variant|engine|lora): (.*)$")
 
 TIMING = re.compile(
     r"^(\S+) .*print_timing: id\s+\d+ \| task (\d+) \|\s+(prompt eval|eval) time =\s+"
@@ -294,7 +294,10 @@ def kaggle_run(directory: str, bench: str, model: str, split: str, n: int,
 
 def kaggle_runs(directory: str, run: dict) -> list[Path]:
     """kaggle_run() as a list; MMLU-Pro: the latest Kaggle run of each of the board run's
-    subsets with the same stage, or none if a subset has no Kaggle run."""
+    subsets with the same stage, or none if a subset has no Kaggle run. An adapter run (LORA) has
+    no Kaggle run to check against: the Kaggle names don't say which adapter they served."""
+    if (run.get("board_state") or {}).get("lora"):
+        return []
     if run["benchmark"] != "mmlupro":
         k = kaggle_run(directory, run["benchmark"], run["model"], run["split"], run["n"],
                        thinking=run["thinking"], stage=run["stage"])

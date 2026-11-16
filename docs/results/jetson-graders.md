@@ -1,0 +1,78 @@
+# Every SciEntsBank grader on the Jetson (2026-11-14 to 11-16)
+
+*Written 2026-11-16. RQ8 (three graders) with RQ4's device cost beside it, plus every other E2B method and the E4B adapter. 32 runs, all rc = 0, in `results/board/*-jetson-test_u{q,d}-2026111{4,5,6}-*`. Table and tests: `uv run python -m edge_grader.compare_jetson` (reads the latest `edge-grader-board-check` JSON; this page's numbers come from `results/estimates/compare-jetson-scientsbank-20261116-052730.json` and `board-check-20261116-052532.json`).*
+
+## Setup
+
+- **Board:** Jetson Orin Nano, llama.cpp `a894dae`, the lab's flags (`-c 8192 -ngl 99 -rea off --reasoning-budget -1 --cache-ram 0`), plus `--lora` for adapters.
+- **Clocks:** GPU max 612 MHz, memory 2,133 MHz on all 32 runs (`board-state.txt`). This is the clock state of phase 0 and B1, **not** the 1,020 MHz of the Oct 21 baselines. The clocks had gone back to the nvpmodel defaults by Nov 14, probably at a reboot. So the two untouched graders were re-run first in the same queue, and every comparison here is within one clock state.
+- **Code:** deployed clean, `702ba6f` (Nov 14), `15deed9` (stage 3b, which adds `REPLY`), `a4ee089` (examples, 5-way and adapter tags in run names).
+- **Splits:** test_uq (733 answers, 15 questions) and test_ud (4,562 answers, 46 questions), the headline splits for fine-tuned versions (decision 2026-11-13). test_ua isn't run: its questions are in train.
+- **Cost:** `edge-grader-board-check`, energy over the grading window only (first request to last), board DC power. Decode tok/s is llama-server's own timing.
+- **Adapters:** sha256 recorded in each run's `board-state.txt`. The Oct 28 adapters (`e2b-ft.gguf` `6507078a…`, `e4b-ft.gguf` `53e507cb…`), the stage 3b adapters (`e2b-ft-lf.gguf` `282075cb…`, `e2b-ft-rf.gguf` `190b81da…`), and the Spark-trained seeds, soup and 5-way adapter (copied from the Spark, checked against its hashes).
+
+## The three graders
+
+| Grader | test_uq accuracy (95% range) | test_ud accuracy (95% range) | Macro-F1 uq / ud | Median latency | J per answer | × E2B untouched energy |
+|---|---|---|---|---|---|---|
+| E2B untouched | 59.8% (50.1–69.2) | 60.2% (54.9–65.0) | 0.548 / 0.570 | 0.40–0.41 s | 3.7–3.8 | 1.00 |
+| **E2B tweaked** (Oct 28 adapter) | **76.7%** (68.3–84.9) | **74.8%** (69.5–79.4) | 0.755 / 0.746 | 0.56–0.58 s | 5.3–5.4 | 1.42 |
+| E4B untouched | 67.3% (58.5–77.3) | 70.1% (64.9–74.3) | 0.650 / 0.701 | 0.70–0.71 s | 6.8–6.9 | 1.82 |
+| *E4B Oct 28 adapter, for reference* | 80.0% (73.0–86.3) | 76.7% (72.0–81.2) | 0.786 / 0.775 | 0.93–0.97 s | 9.3–9.5 | 2.50 |
+
+Family of 8 tests, chosen 2026-11-16 **after** the runs: paired McNemar on 3-way labels, Holm over the 8. The 2-way score is beside it, with its own Holm.
+
+| Comparison | test_uq | test_ud | 2-way uq / ud |
+|---|---|---|---|
+| E2B tweaked vs E2B untouched | **+16.9** (163 vs 39, p < 10⁻¹⁷) | **+14.6** (912 vs 248, p < 10⁻⁸⁷) | +4.9 / +5.2 (both p < 0.01) |
+| **E2B tweaked vs E4B untouched** | **+9.4** (127 vs 58, p = 8.5 × 10⁻⁷) | **+4.7** (584 vs 369, p = 1.3 × 10⁻¹¹) | +8.1 / +4.2 (both p < 10⁻⁴) |
+| E4B untouched vs E2B untouched | **+7.5** (140 vs 85, p = 0.0003) | **+9.8** (820 vs 371, p < 10⁻³⁷) | −3.1 / +1.0 (n.s.) |
+| E4B adapter vs E4B untouched | **+12.7** (138 vs 45, p < 10⁻¹⁰) | **+6.6** (663 vs 361, p < 10⁻¹⁹) | +10.6 / +5.0 (both p < 10⁻⁷) |
+
+"163 vs 39" means 163 answers only the first-named grader got right, and 39 only the second.
+
+1. **E2B tweaked replaces E4B untouched on the Jetson, on every count.**
+   - Accuracy: 4.7–9.4 points higher on both unseen splits, significant after Holm, in 3-way and in 2-way.
+   - Speed: about 20% faster per answer (0.57 s against 0.70 s).
+   - Energy: about 22% less per answer (5.3–5.4 J against 6.8–6.9 J).
+   - So the answer to RQ8 is yes: tweaking the smaller model passes the bigger untouched one, and it is cheaper to run.
+2. **The adapter costs E2B 42% more energy per answer**, at the same prompt and the same 2-token reply. llama.cpp serves the adapter beside the weights (`--lora`), so every token pays for the extra matrices: decode drops from 40.7 to 26.9 tok/s, and prefill slows the same way, from 1.4 to 2.1 ms per prompt token. Merging the adapter into the GGUF would likely remove most of this, but it isn't tested; see [open questions](#open-questions).
+3. **Energy per extra correct answer:** 9–11 J for E2B's adapter, against 31–41 J for moving from E2B to E4B. Fine-tuning is the cheapest grading gain measured on the Jetson so far. Thinking on cost 830–1,340 J per extra correct answer for E2B ([summary](summary.md#caveats)).
+4. **E4B with its own adapter is the most accurate grader** (80.0 / 76.7%), but it costs 1.8× tweaked E2B's energy for +3.3 / +1.9 points. That's 126–210 J per extra correct answer, which isn't tested against tweaked E2B in this family.
+5. **Untouched E4B's lead over untouched E2B is only on the 3-way line.** In 2-way (correct against not correct) the two are within 3 points and not significantly different. E4B's gain is in telling "contradictory" from "incorrect".
+
+## Every E2B version
+
+Described, not tested here. Each method's accuracy was tested on the DGX Spark with families fixed before grading ([examples](examples.md#e2b-2026-11-13-dgx-spark), [soup and 5-way](finetuning.md#adapter-soup-and-5-way-labels-e2b-on-scientsbank-2026-11-14-dgx-spark), [stage 3b](finetuning.md#reasoning-guided-fine-tuning-e2b-stage-3b)). The Jetson gives the same label as the Spark on 97.4–99.9% of answers per run, so those tests hold here.
+
+| E2B version | test_uq | test_ud | Median latency | J per answer | × untouched | Prompt / reply tokens |
+|---|---|---|---|---|---|---|
+| untouched | 59.8% | 60.2% | 0.41 s | 3.7–3.8 | 1.00 | 156–164 / 2 |
+| Oct 28 adapter (Kaggle) | 76.7% | 74.8% | 0.57 s | 5.3–5.4 | 1.42 | same / 2 |
+| seeds s0–s4 (Spark), range | 75.4–78.0% (mean 76.8 ± 1.0) | 74.4–76.4% (mean 75.2 ± 0.8) | 0.56–0.58 s | 5.3–5.4 | 1.42–1.43 | same / 2 |
+| soup of s0–s4 | 78.3% | 75.3% | 0.57–0.60 s | 5.5–5.6 | 1.48 | same / 2 |
+| 5-way s0 | 78.2% | 74.7% | 0.69–0.74 s | 6.8–6.9 | 1.81 | 178–186 / 3 |
+| label-first (stage 3b) | 76.1% | 73.1% | 0.56–0.59 s | 5.3–5.4 | 1.43 | same / 2 |
+| reason-first (stage 3b) | 75.7% | 70.7% | 4.3–4.4 s | 38.8–39.2 | 10.3–10.4 | same / 63–64 |
+| + kNN examples | 69.4% | 66.3% | 0.93 s | 8.6–9.1 | 2.26–2.42 | 547–627 / 2 |
+| + random examples | 68.1% | 64.9% | 1.07 s | 9.9–10.1 | 2.66 | 594–602 / 2 |
+| adapter + kNN examples | 76.3% | 75.3% | 1.33–1.35 s | 13.3–14.1 | 3.49–3.76 | 547–627 / 2 |
+
+1. **Every plain adapter grades within one band, at one price.** The Oct 28 adapter, the five seeds and the soup all land at 75–78% on test_uq and 74–76% on test_ud, for 5.3–5.6 J. Training randomness alone spans about 2–3 points. So which adapter is "E2B tweaked" changes neither the RQ8 answer nor the cost. The Oct 28 adapter sits mid-range on both splits.
+2. **The soup costs only 4% more than one adapter.** That holds although it is the five seeds stacked into one rank-80 adapter (a 242 MB file against 48 MB). Its decode is 25.6 against 26.9 tok/s.
+3. **The 5-way adapter costs 28% more than a 3-way one for no accuracy.** The prompt lists five labels (+22 tokens), and the 5-way label names take a third token. Its decode is also slower (19.5 tok/s), presumably from the longer context.
+4. **A written reason is the most expensive way to say the same thing.** Reason-first writes 63–64 tokens per answer against label-first's 2. It takes 7.3× the energy and 7.6× the time (4.3 s per answer, so 5.5 hours for test_ud), and it is no more accurate. It's 2.4 points lower on test_ud, though that isn't tested here.
+5. **Graded examples are the expensive way to tweak without training.** They lift untouched E2B by 6–10 points at 2.3–2.4× the energy (on the Spark the same runs passed the 5-point bar on every split), about 50–87 J per extra correct answer. The adapter gets 15–17 points at 1.42× the energy. On the adapter, examples add nothing and cost 2.5–2.7× its energy. The prompt grows from ~160 to 550–630 tokens, and prefill pays for every token.
+
+## Caveats
+
+- **The test family was chosen after the runs.** Every test passes with a wide margin (largest Holm p = 0.0003), so a different family wouldn't change the conclusion. It is still recorded as post hoc.
+- **The 95% ranges are wide on test_uq** (15 questions, resampled by question) and overlap between graders. The paired tests are the stronger evidence, since they compare the same answers.
+- **One board, one clock state, one llama.cpp build.** These costs are at 612 MHz. At 1,020 MHz, earlier runs were about 1.6× faster for about the same energy per answer ([summary, caveat 2](summary.md#caveats)).
+- **Unmerged adapters only.** The adapter overhead (42% for E2B, 37% for E4B) is llama.cpp's `--lora` path. A merged GGUF should cost the device about what the untouched model does. Not measured.
+- **Job 56's run folder** (E4B adapter, test_uq) was first fetched while its telemetry was still being written. It was re-synced from the board's finished files, and on 2026-11-16 all 32 folders were checked file by file against the board (288 files, every sha256 identical).
+
+## Open questions
+
+- Does a merged adapter (`llama-export-lora` into the GGUF) remove the 42% overhead? If so, E2B tweaked would cost about what untouched E2B does, about half of untouched E4B.
+- Does `--swa-full` (prefix reuse, −42 to −44% energy on the untouched models in B2) cut the adapters' cost the same way?
