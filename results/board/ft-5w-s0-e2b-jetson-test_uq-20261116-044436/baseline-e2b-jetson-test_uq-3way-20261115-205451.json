@@ -1,0 +1,72 @@
+{
+  "benchmark": "scientsbank",
+  "stage": "baseline",
+  "label": "e2b-jetson",
+  "model": "local",
+  "base_url": "http://127.0.0.1:8080/v1",
+  "server": {
+    "model_path": "/home/ari/research/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf",
+    "n_ctx": 8192,
+    "build_info": "b1-a894dae"
+  },
+  "split": "test_uq",
+  "scheme": "3way",
+  "reply": "label",
+  "n_requested": 0,
+  "seed": 0,
+  "temperature": 0,
+  "max_tokens": 16,
+  "prompt_sha256": "48ea54166e7f8f0f2a326ab9b1cc50cd4d04c7be5b9d0de00e255fc87bf868cb",
+  "time": "2026-11-15T20:54:51+00:00",
+  "metrics": {
+    "n": 733,
+    "accuracy": 0.7817,
+    "macro_f1": 0.7696,
+    "weighted_f1": 0.7812,
+    "unparsed": 0,
+    "ci95": {
+      "accuracy": [
+        0.6981,
+        0.8653
+      ],
+      "macro_f1": [
+        0.6717,
+        0.8548
+      ],
+      "groups": 15,
+      "resamples": 2000,
+      "seed": 0,
+      "by": "question"
+    },
+    "two_way": {
+      "n": 733,
+      "accuracy": 0.8145,
+      "macro_f1": 0.8067,
+      "weighted_f1": 0.8136,
+      "unparsed": 0,
+      "ci95": {
+        "accuracy": [
+          0.7404,
+          0.8868
+        ],
+        "macro_f1": [
+          0.7148,
+          0.8849
+        ],
+        "groups": 15,
+        "resamples": 2000,
+        "seed": 0,
+        "by": "question"
+      }
+    },
+    "errors": 0,
+    "median_latency_s": 0.736,
+    "wall_s": 545.1,
+    "prompt_tokens": 136073,
+    "median_prompt_tokens": 182,
+    "max_prompt_tokens": 296,
+    "completion_tokens": 2895,
+    "median_completion_tokens": 3
+  },
+  "prompt_scheme": "5way"
+}

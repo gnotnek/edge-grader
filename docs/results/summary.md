@@ -5,7 +5,8 @@
 **Done:**
 - RQ1, the baseline: four benchmarks, Kaggle and both boards
 - RQ2, RAG-en: all four benchmarks, on Kaggle
-- RQ3, fine-tuning: accuracy and the no-harm check, on Kaggle (2026-10-28); cost on the Jetson still to do
+- RQ3, fine-tuning: accuracy and the no-harm check, on Kaggle (2026-10-28); cost on the Jetson (2026-11-14 to 11-16, [jetson-graders](jetson-graders.md))
+- RQ8, three graders: accuracy and Jetson cost (2026-11-16, [jetson-graders](jetson-graders.md))
 - RQ6 B1, thinking on: both boards
 - RQ6 B2, engine and prefix reuse: Jetson
 
@@ -14,7 +15,7 @@
 - Phase C, image answers (RQ7)
 - RAG on the boards (stage 4)
 
-**Main question since 2026-11-13 (supervisor):** three graders, E2B untouched vs E2B tweaked vs E4B untouched (RQ8 in the [outline](../research-outline.md)). So far the E2B SciEntsBank adapter (79.4 / 76.7 / 74.9%, test_ua / test_uq / test_ud) beats untouched E4B (66.7 / 67.5 / 70.4%) on every split, and on the two splits whose questions it never trained on (test_uq, test_ud, the headline for fine-tuned versions since 2026-11-13) by 9.2 and 4.5 points; untouched E2B trails both (55.2 / 59.8 / 60.3%), all Kaggle T4 ([recap](recap.md)). The E4B methods were run on E2B too (DGX Spark, 2026-11-13 to 11-14), and none is adopted: graded examples lift untouched E2B on every split (+15.2 / +10.6 / +5.6, passing the bar) but not the adapter; the soup (82.8 / 78.2 / 75.3%) and the 5-way adapter (82.4 / 78.6 / 74.5%) score at the top of the five seeds' range but aren't significantly better than a plain seed ([examples](examples.md#e2b-2026-11-13-dgx-spark), [soup and 5-way](finetuning.md#adapter-soup-and-5-way-labels-e2b-on-scientsbank-2026-11-14-dgx-spark)). So "E2B tweaked" stays a plain label-only adapter; every E2B adapter beats untouched E4B on test_uq and test_ud. "Tweaked" means fine-tuned variants only (owner, 2026-11-13); whether the three get Jetson cost is pending. The sections below were written under the earlier focus.
+**Main question since 2026-11-13 (supervisor):** three graders, E2B untouched vs E2B tweaked vs E4B untouched (RQ8 in the [outline](../research-outline.md)). So far the E2B SciEntsBank adapter (79.4 / 76.7 / 74.9%, test_ua / test_uq / test_ud) beats untouched E4B (66.7 / 67.5 / 70.4%) on every split, and on the two splits whose questions it never trained on (test_uq, test_ud, the headline for fine-tuned versions since 2026-11-13) by 9.2 and 4.5 points; untouched E2B trails both (55.2 / 59.8 / 60.3%), all Kaggle T4 ([recap](recap.md)). The E4B methods were run on E2B too (DGX Spark, 2026-11-13 to 11-14), and none is adopted: graded examples lift untouched E2B on every split (+15.2 / +10.6 / +5.6, passing the bar) but not the adapter; the soup (82.8 / 78.2 / 75.3%) and the 5-way adapter (82.4 / 78.6 / 74.5%) score at the top of the five seeds' range but aren't significantly better than a plain seed ([examples](examples.md#e2b-2026-11-13-dgx-spark), [soup and 5-way](finetuning.md#adapter-soup-and-5-way-labels-e2b-on-scientsbank-2026-11-14-dgx-spark)). So "E2B tweaked" stays a plain label-only adapter; every E2B adapter beats untouched E4B on test_uq and test_ud. "Tweaked" means fine-tuned variants only (owner, 2026-11-13). **On the Jetson (2026-11-14 to 11-16), E2B tweaked beats E4B untouched by 9.4 / 4.7 points on test_uq / test_ud (Holm p < 10⁻⁶) and is cheaper to run: 5.3–5.4 J and 0.57 s per answer against 6.8–6.9 J and 0.70 s.** The adapter costs E2B 42% more energy than untouched E2B (llama.cpp's unmerged `--lora`), 9–11 J per extra correct answer. Every plain E2B adapter (Oct 28, five seeds, soup) grades in the same 2–3-point band at the same cost; graded examples cost 2.3–3.8× and reason-first 10.4× ([jetson-graders](jetson-graders.md)). The sections below were written under the earlier focus.
 
 **Optional:** the cloud reference (RQ5), since 2026-10-19. The focus is small models on the edge, so it runs only if time allows, and it's listed under [limitations](#limitations) until then.
 
@@ -138,7 +139,7 @@ Grading, test_ua (thinking off unless stated):
 
 ## What it adds up to
 
-- **Fine-tuning is what makes the small models good graders:** +6 to +24 points on SciEntsBank, at no measured cost to general ability (accuracy on Kaggle; cost on the Jetson to come).
+- **Fine-tuning is what makes the small models good graders:** +6 to +24 points on SciEntsBank, at no measured cost to general ability. On the Jetson the E2B adapter costs 1.42× untouched E2B's energy and still less than untouched E4B ([jetson-graders](jetson-graders.md)).
 - **For grading on the device, how the model is run matters more than what it's given.**
   - Thinking raised grading accuracy on every split and board.
   - Course material didn't, and it hurt E2B.
@@ -153,7 +154,7 @@ Grading, test_ua (thinking off unless stated):
 
 ## Accuracy as the target: the caveats (2026-11-05)
 
-The research target is grading accuracy (owner, 2026-11-05). These are the caveats of chasing it on the Jetson, from runs already recorded. The tuned models have no Jetson cost yet, so that part is still open.
+The research target is grading accuracy (owner, 2026-11-05). These are the caveats of chasing it on the Jetson, from runs already recorded. The tuned models' Jetson cost was added on 2026-11-16 ([jetson-graders](jetson-graders.md)).
 
 ### The 5-point bar
 
@@ -188,6 +189,8 @@ A tweak counts if it adds **at least 5 points** of accuracy over the same model 
 | Step | Points gained (test_ua / test_uq / test_ud) | × energy | × median latency | J per extra correct answer |
 |---|---|---|---|---|
 | E2B → E4B | +11.5 / +7.5 / +9.9 | 1.8× | 1.7× | 28–41 |
+| E2B → E2B Oct 28 adapter (2026-11-14, test_uq / test_ud only) | — / +16.9 / +14.6 | 1.42× | 1.4× | 9–11 |
+| E4B → E4B Oct 28 adapter (2026-11-14, test_uq / test_ud only) | — / +12.7 / +6.6 | 1.37× | 1.3× | 21–38 |
 | E2B, thinking on | +11.9 / +16.0 / +9.9 | 35–36× | 33–34× | 830–1,340 |
 | E4B, thinking on | +6.1 / +12.6 / +3.0 | 39–40× | 37–38× | 2,100–8,900 |
 
@@ -201,7 +204,7 @@ A tweak counts if it adds **at least 5 points** of accuracy over the same model 
 
 **6. The board limits the ways up.** Eight GB of shared memory rules out much larger models: even E4B at Q8_0 (7.6 GiB) likely won't fit (not tested). That leaves training, which moves the cost off the device, or more tokens per answer, which keeps it on.
 
-**Read with care:** the table's accuracy and energy come from single runs at 612 MHz, so thinking isn't yet measured at the stage 4 clocks. The tuned models' accuracy comes from Kaggle, with one seed.
+**Read with care:** the table's accuracy and energy come from single runs at 612 MHz, so thinking isn't yet measured at the stage 4 clocks. The adapter rows are from 2026-11-14, the same 612 MHz state, on test_uq and test_ud only; five E2B seeds since then span 2–3 points ([jetson-graders](jetson-graders.md#every-e2b-version)).
 
 ## Limitations
 

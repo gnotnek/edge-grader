@@ -1,6 +1,6 @@
 # Plan: steps and timeline
 
-*Last updated 2026-11-13. Tick steps off as they're done, and move dates when reality changes, noting why at the bottom. The research questions and the reasoning for each stage are in [`research-outline.md`](research-outline.md).*
+*Last updated 2026-11-16. Tick steps off as they're done, and move dates when reality changes, noting why at the bottom. The research questions and the reasoning for each stage are in [`research-outline.md`](research-outline.md).*
 
 **Weeks are counted from the internship start**, taken as the week of 2026-09-14 (two weeks had passed by 2026-09-26). The internship ends around mid-December.
 
@@ -144,19 +144,22 @@
 - [ ] Board-check every RAG run against the Jetson's own baseline (paired McNemar; by template for GSM-Symbolic) and add a Jetson column to the four-benchmark table in `results/rag.md`. SciEntsBank + math done 2026-10-20: same as Kaggle (E2B down on every cell, significant after Holm on test_ud and GSM-Symbolic; E4B no significant change), board matches Kaggle on every cell ([`results/rag.md`](results/rag.md#jetson-baseline-against-rag-en-stage-4-2026-10-20)); news (after the judge) and MMLU-Pro to add
 - [x] Jetson clocks changed between 2026-10-13 and 2026-10-19 (GPU max 612 → 1,020 MHz, memory 2,133 → 3,199 MHz, same nvpmodel): RAG cost isn't comparable with phase 0. Ask the supervisor whether it was deliberate; then either re-run the baselines in the new state or restore the old limits before stage 4's cost runs. Resolved 2026-10-21: baselines re-run in the new state (owner)
 - [ ] RAG on the board: include embedding and retrieval time in the latency
-- [ ] Oct 28 adapters on the Jetson, E2B + E4B, test_uq + test_ud, against the 2026-10-21 baselines (the stage 3 Jetson item; first, as the most accurate versions)
-- [ ] Stage 3b E2B label-first and reason-first on the Jetson, test_uq: same accuracy, ~2 against ~65 tokens per answer, so the cost of a written reason on the device
+- [x] Oct 28 adapters on the Jetson, E2B + E4B, test_uq + test_ud. Done 2026-11-14, against untouched E2B/E4B re-run in the same queue, since the clocks were back at 612 MHz (not the 2026-10-21 baselines' 1,020): E2B 76.7 / 74.8%, E4B 80.0 / 76.7%, at 1.42× and 1.37× their untouched model's energy ([`results/jetson-graders.md`](results/jetson-graders.md))
+- [x] Stage 3b E2B label-first and reason-first on the Jetson, test_uq and test_ud (`REPLY`, PR 7). Done 2026-11-15: reason-first writes 63–64 tokens per answer against 2, costs 7.3× the energy and 4.3 s per answer, for no more accuracy ([`results/jetson-graders.md`](results/jetson-graders.md))
 - [ ] Optional: the best adapter with `--swa-full` (the cheapest setting at the best accuracy)
 - [ ] Trade-off table, every Jetson version against its same-board baseline: Δ accuracy (McNemar), × latency, × energy, mean/peak W, decode tok/s, peak RSS, max temperature, extra J per extra correct answer (metrics in the outline)
 - [ ] Main charts: accuracy vs J per answer and accuracy vs latency, for every version on the Jetson, with the front marked (the Pi 5's baseline and thinking-on points for reference)
 
 ### Three graders: E2B untouched, E2B tweaked, E4B untouched (week 9, supervisor 2026-11-13)
 - [x] Owner: "E2B tweaked" means fine-tuned variants only, not thinking on (2026-11-13)
-- [ ] Owner: do the three graders get Jetson cost?
+- [x] Owner: do the three graders get Jetson cost? Yes (2026-11-14), and every other E2B method too (2026-11-15)
 - [x] Spark services and comparisons take E2B (`MODEL=e2b`): [`guides/spark-docker.md`](guides/spark-docker.md#the-same-methods-on-e2b-decision-2026-11-13)
-- [ ] Smoke test on the Spark, then queue: graded examples, seeds 0–4 and their soup, the 5-way seed-0 adapter (owner's OK first; the Spark is shared)
-- [ ] `MODEL=e2b` comparisons (`compare_examples`, `compare_soup`, `compare_fiveway`), then pick E2B's best version
-- [ ] Three-grader table, 3-way and 2-way, with 95% ranges; Jetson cost beside it if confirmed
+- [x] Smoke test on the Spark, then queue: graded examples, seeds 0–4 and their soup, the 5-way seed-0 adapter (owner's OK first; the Spark is shared). Queue done 2026-11-14
+- [x] `MODEL=e2b` comparisons (`compare_examples`, `compare_soup`, `compare_fiveway`), then pick E2B's best version. Done 2026-11-15 (PR 8): none adopted, "E2B tweaked" stays a plain label-only adapter
+- [x] Three-grader table, 3-way and 2-way, with 95% ranges and Jetson cost (2026-11-16, `compare_jetson`): E2B tweaked beats E4B untouched by 9.4 / 4.7 points (Holm p < 10⁻⁶) at 22% less energy and 20% less time per answer ([`results/jetson-graders.md`](results/jetson-graders.md))
+- [x] Every other E2B method on the Jetson (seeds, soup, 5-way, graded examples; 20 jobs, 2026-11-15 to 11-16, PR 9): all plain adapters at 75–78 / 74–76% for 5.3–5.6 J; examples cost 2.3–3.8×, 5-way 1.8× ([`results/jetson-graders.md`](results/jetson-graders.md))
+- [ ] Owner: which adapter is "E2B tweaked" in the write-up (the Oct 28 Kaggle adapter sits mid-range of the five seeds on both splits)
+- [ ] Optional: a merged adapter (`llama-export-lora`) on the Jetson, to see whether the adapters' 37–42% energy overhead goes away
 
 ### Write-up (weeks 10–12)
 - [ ] Figures: the main chart, per-split tables, confusion matrices
@@ -216,3 +219,5 @@
 | 2026-11-06 | Adapters trained on Beetle and SAF only (E2B, E4B, label reply, Oct 28 recipe, on the DGX Spark), tested on all three SciEntsBank splits; the untouched models and Oct 28 adapters graded there too, so everything compares on one machine | Owner. SciEntsBank is the main benchmark again, and this makes it fully held out: no SciEntsBank question appears in Beetle or SAF. It tests whether fine-tuning teaches grading that transfers, the reverse of the Oct 28 test |
 | 2026-11-08 | Grading of the Beetle + SAF adapters and E4B's label-first and reason-first moves from the Spark to Kaggle T4s; the Spark runs stay as a cross-check | Owner: another lab job shared the Spark's GPU from Nov 6, and hardware use matters for the comparison. Kaggle's quota had reset; the untouched and existing adapter runs there are reused (same build and flags) |
 | 2026-11-13 | Main question becomes three graders: E2B untouched, E2B tweaked, E4B untouched (RQ8). The methods tried on E4B (graded examples, adapter soup, 5-way labels) run on E2B on the DGX Spark to find its best version | Supervisor 2026-11-13: none of those methods beat the E4B adapter, so compare the graders instead of chasing small-model accuracy. "Tweaked" = fine-tuned variants (owner); Jetson cost pending. Outline, supervisor feedback and own decisions |
+| 2026-11-14 | The three graders, the E4B adapter and stage 3b get Jetson cost; untouched E2B and E4B re-run first in the same queue | Owner. The Jetson's clocks were back at 612 MHz, so the 2026-10-21 baselines (1,020 MHz) aren't a same-state pair |
+| 2026-11-15 | Every other E2B method from the Spark (seeds, soup, 5-way, graded examples) runs on the Jetson too, 20 jobs | Owner: cost for every E2B version, although none was adopted on accuracy |

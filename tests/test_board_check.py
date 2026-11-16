@@ -8,6 +8,7 @@ from edge_grader.board_check import (
     compare,
     find_summary,
     kaggle_run,
+    kaggle_runs,
     main,
     mcnemar,
     outcomes,
@@ -176,6 +177,23 @@ def test_find_summary_ignores_judged_files_and_wants_exactly_one(tmp_path):
     (tmp_path / "gsm-gsm8k-e2b-pi5-1.json").write_text("{}")
     with pytest.raises(SystemExit):
         find_summary(tmp_path)
+
+
+def test_find_summary_reads_graded_examples_runs(tmp_path):
+    (tmp_path / "examples-e2b-jetson-test_uq-3way-20261115-1.json").write_text("{}")
+    assert find_summary(tmp_path).name == "examples-e2b-jetson-test_uq-3way-20261115-1.json"
+
+
+def test_adapter_board_runs_are_not_paired_with_untouched_kaggle_runs(tmp_path):
+    (tmp_path / "baseline-e2b-kaggle-t4-test_uq-3way-20261005-1.json").write_text('{"metrics": {"n": 733}}')
+    run = {"benchmark": "scientsbank", "model": "e2b", "split": "test_uq", "n": 733, "thinking": False,
+           "stage": "baseline", "board_state": None}
+    assert len(kaggle_runs(str(tmp_path), run)) == 1
+    state = tmp_path / "board-state.txt"
+    state.write_text("variant: base\nlora: /m/adapters/e2b-ft-s0.gguf sha256 abc\n")
+    run["board_state"] = read_board_state(state)
+    assert run["board_state"]["lora"].startswith("/m/adapters/e2b-ft-s0.gguf")
+    assert kaggle_runs(str(tmp_path), run) == []
 
 
 def test_kaggle_run_finds_each_benchmark(tmp_path):
