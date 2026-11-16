@@ -189,10 +189,9 @@ def test_label_run_records_the_default_reply(server, tmp_path, monkeypatch):
     assert run["reply"] == "label" and "cut" not in run["metrics"]
 
 
-@pytest.mark.parametrize("extra", [["--thinking"], ["--rag", "x.json"]])
-def test_reason_formats_refuse_thinking_and_rag(extra, tmp_path):
+def test_reason_formats_refuse_rag(tmp_path):
     with pytest.raises(SystemExit, match="--reply"):
-        baseline.main(["--out", str(tmp_path), "--reply", "reason-first", *extra])
+        baseline.main(["--out", str(tmp_path), "--reply", "reason-first", "--rag", "x.json"])
 
 
 def test_five_way_prompt_is_scored_three_way(server, tmp_path, monkeypatch):

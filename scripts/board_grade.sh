@@ -108,9 +108,7 @@ case "$REPLY" in label|label-first|reason-first) ;; *) echo "REPLY must be label
 if [ "$REPLY" != label ]; then
   [ -n "$LORA" ] || { echo "REPLY=$REPLY needs the LORA adapter trained on it" >&2; exit 1; }
   [ "$BENCH" = scientsbank ] || { echo "REPLY=$REPLY is a SciEntsBank condition only (BENCH=$BENCH)" >&2; exit 1; }
-  if [ "$THINKING" = on ] || [ -n "$RAG" ]; then
-    echo "REPLY=$REPLY with THINKING or RAG isn't a condition in this study" >&2; exit 1
-  fi
+  [ -n "$RAG" ] && { echo "REPLY=$REPLY with RAG isn't a condition in this study" >&2; exit 1; }
 fi
 # Graded examples (spec 2026-11-10) and the 5-way prompt (spec 2026-11-12), as on the Spark: SciEntsBank only.
 EXAMPLES="${EXAMPLES:-}"
@@ -127,9 +125,9 @@ if [ -n "$EXAMPLES" ]; then
 fi
 if [ -n "$PROMPT_SCHEME" ]; then
   [ "$PROMPT_SCHEME" = 5way ] || { echo "PROMPT_SCHEME must be 5way: $PROMPT_SCHEME" >&2; exit 1; }
-  if [ -z "$LORA" ] || [ "$BENCH" != scientsbank ] || [ "$REPLY" != label ] || [ "$THINKING" = on ] \
+  if [ -z "$LORA" ] || [ "$BENCH" != scientsbank ] || [ "$REPLY" != label ] \
      || [ -n "$RAG" ] || [ -n "$EXAMPLES" ]; then
-    echo "PROMPT_SCHEME=5way needs its LORA adapter, SciEntsBank, the label reply, no THINKING, RAG or EXAMPLES" >&2; exit 1
+    echo "PROMPT_SCHEME=5way needs its LORA adapter, SciEntsBank, the label reply, no RAG or EXAMPLES" >&2; exit 1
   fi
 fi
 # The adapter's tag in run names: e2b-ft.gguf -> ft, e2b-ft-s0.gguf -> ft-s0, e2b-ft-soup.gguf -> ft-soup.

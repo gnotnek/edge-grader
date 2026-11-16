@@ -160,6 +160,7 @@
 - [x] Every other E2B method on the Jetson (seeds, soup, 5-way, graded examples; 20 jobs, 2026-11-15 to 11-16, PR 9): all plain adapters at 75–78 / 74–76% for 5.3–5.6 J; examples cost 2.3–3.8×, 5-way 1.8× ([`results/jetson-graders.md`](results/jetson-graders.md))
 - [ ] Owner: which adapter is "E2B tweaked" in the write-up (the Oct 28 Kaggle adapter sits mid-range of the five seeds on both splits)
 - [ ] Optional: a merged adapter (`llama-export-lora`) on the Jetson, to see whether the adapters' 37–42% energy overhead goes away
+- [ ] Supervisor 2026-11-16: every fine-tuning method with thinking on. E2B's 8 methods on the Jetson, test_uq, against B1's untouched thinking-on run (~30 h); smoke test (20 answers) per reply format first. test_ud and E4B after
 
 ### Write-up (weeks 10–12)
 - [ ] Figures: the main chart, per-split tables, confusion matrices

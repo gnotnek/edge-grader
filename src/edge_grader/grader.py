@@ -99,9 +99,9 @@ def parse_reply(text: str, labels: list[str], fmt: str) -> str | None:
 
 
 def max_tokens_for(thinking: bool, reply: str) -> int:
-    if thinking:
-        return THINK_MAX_TOKENS
-    return REASON_FIRST_MAX_TOKENS if reply == "reason-first" else LABEL_MAX_TOKENS
+    reply_tokens = REASON_FIRST_MAX_TOKENS if reply == "reason-first" else LABEL_MAX_TOKENS
+    # thinking: the 320-token thought budget first, then the reply's own room
+    return THINK_MAX_TOKENS - LABEL_MAX_TOKENS + reply_tokens if thinking else reply_tokens
 
 
 def prompt_sha256(labels: list[str]) -> str:
@@ -114,12 +114,11 @@ def prompt_sha256(labels: list[str]) -> str:
 def grade(client, model: str, item: Item, labels: list[str], max_tokens: int | None = None,
           passages: list[str] | None = None, thinking: bool = False, reply: str = "label",
           examples: list[Item] | None = None) -> dict:
-    if thinking and reply != "label":
-        raise ValueError("thinking with a reason format isn't a condition in this study")
     prompt = build_prompt(item, labels, passages, examples)
     max_tokens = max_tokens or max_tokens_for(thinking, reply)
-    # label-first: stop where the trained reply's label line ends, so the reason costs nothing.
-    extra = {"stop": ["\n"]} if reply == "label-first" else {}
+    # label-first: stop where the trained reply's label line ends, so the reason costs nothing. With
+    # thinking a newline comes inside the thoughts, so there is no stop, and max_tokens caps the reason.
+    extra = {"stop": ["\n"]} if reply == "label-first" and not thinking else {}
     start = time.perf_counter()
     resp = client.chat.completions.create(
         model=model,
@@ -133,7 +132,7 @@ def grade(client, model: str, item: Item, labels: list[str], max_tokens: int | N
     text = choice.message.content or ""
     if thinking:
         part = None if choice.finish_reason == "length" else answer_part(text)
-        pred = parse_label(part, labels) if part is not None else None
+        pred = parse_reply(part.strip(), labels, reply) if part is not None else None
     elif reply == "reason-first" and choice.finish_reason == "length":
         pred = None  # cut before its label line, or inside it
     else:

@@ -92,12 +92,12 @@ def main(argv: list[str] | None = None) -> None:
                     help="offer these labels in the prompt (an adapter trained on them); score 3-way")
     args = ap.parse_args(argv)
     if args.prompt_scheme and (args.scheme != "3way" or args.dataset != "scientsbank" or args.reply != "label"
-                               or args.rag or args.thinking or args.examples):
-        sys.exit("--prompt-scheme 5way: SciEntsBank, --scheme 3way, label replies, no --rag/--thinking/--examples")
+                               or args.rag or args.examples):
+        sys.exit("--prompt-scheme 5way: SciEntsBank, --scheme 3way, label replies, no --rag/--examples")
     if args.thinking and args.rag:
         sys.exit("--thinking with --rag isn't a condition in this study")
-    if args.reply != "label" and (args.thinking or args.rag):
-        sys.exit(f"--reply {args.reply} with --thinking or --rag isn't a condition in this study")
+    if args.reply != "label" and args.rag:
+        sys.exit(f"--reply {args.reply} with --rag isn't a condition in this study")
     if args.examples and (args.rag or args.thinking or args.reply != "label" or args.dataset != "scientsbank"):
         sys.exit("--examples: SciEntsBank, label replies, no --rag or --thinking (spec 2026-11-10)")
     if args.dataset != "scientsbank" and (args.rag or args.split == "test_ud"):

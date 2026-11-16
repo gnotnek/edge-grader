@@ -237,7 +237,6 @@ def test_reply_passes_through_with_its_adapter():
 def test_reply_refused_outside_its_condition():
     for env in ({"REPLY": "label-first"},                                  # no adapter
                 {"REPLY": "reason-first", "LORA": ADAPTER, "BENCH": "gsm"},
-                {"REPLY": "reason-first", "LORA": ADAPTER, "THINKING": "on"},
                 {"REPLY": "reasons", "LORA": ADAPTER}):
         p = dry("e2b", **env)
         assert p.returncode != 0 and "REPLY" in p.stderr, (env, p.stderr)
@@ -279,3 +278,17 @@ def test_examples_and_fiveway_refused_outside_their_condition():
                 {"PROMPT_SCHEME": "5way", "LORA": ADAPTER, "EXAMPLES": KNN}):
         p = dry("e2b", **env)
         assert p.returncode != 0 and ("EXAMPLES" in p.stderr or "PROMPT_SCHEME" in p.stderr), (env, p.stderr)
+
+
+def test_thinking_runs_with_every_adapter_reply_and_the_5way_prompt():
+    for env, prefix, tail in (({"LORA": ADAPTER}, "ft-think", " --thinking"),
+                              ({"LORA": ADAPTER, "REPLY": "reason-first"}, "ft-rf-think",
+                               " --thinking --reply reason-first"),
+                              ({"LORA": "/m/adapters/e2b-ft-lf-beetle-saf.gguf", "REPLY": "label-first"},
+                               "ft-lf-beetle-saf-think", " --thinking --reply label-first"),
+                              ({"LORA": "/m/adapters/e2b-ft-5w-s0.gguf", "PROMPT_SCHEME": "5way"},
+                               "ft-5w-s0-think", " --thinking --prompt-scheme 5way")):
+        f = fields(dry("e2b", "test_uq", THINKING="on", **env))
+        assert re.fullmatch(rf"{REPO}/results/board/{prefix}-e2b-jetson-test_uq-{STAMP}", f["run_dir"]), f["run_dir"]
+        assert " ".join(f["runner"].split()).endswith(tail), f["runner"]
+        assert "-rea on --reasoning-budget 320" in f["server"] and "--lora" in f["server"]

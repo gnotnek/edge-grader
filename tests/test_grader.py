@@ -195,8 +195,14 @@ def test_reason_first_cut_by_length_is_unparsed():
     assert row["pred"] is None and row["finish"] == "length"
 
 
-def test_thinking_with_a_reason_format_is_refused():
-    client, _ = fake_client("correct")
-    with pytest.raises(ValueError):
-        grade(client, "m", Item("1", "Q?", "ref", "ans", "correct"), LABELS, thinking=True,
-              reply="label-first")
+def test_thinking_with_each_reply_format_reads_the_reply_after_the_thoughts():
+    thought = "<|channel>thought\nNot contradictory, maybe incorrect.\n<channel|>"
+    item = Item("1", "Q?", "ref", "ans", "correct")
+    for reply, text, budget in (("label", "correct", THINK_MAX_TOKENS),
+                                ("label-first", "\ncorrect\nIt matches the reference", THINK_MAX_TOKENS),
+                                ("reason-first", "\nIt says incorrect things? No.\nLabel: correct",
+                                 THINK_MAX_TOKENS - 16 + REASON_FIRST_MAX_TOKENS)):
+        client, seen = fake_client(thought + text)
+        row = grade(client, "m", item, LABELS, thinking=True, reply=reply)
+        assert row["pred"] == "correct", reply
+        assert seen["max_tokens"] == budget and "stop" not in seen, reply  # no newline stop inside thoughts
