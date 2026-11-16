@@ -64,6 +64,58 @@ Described, not tested here. Each method's accuracy was tested on the DGX Spark w
 4. **A written reason is the most expensive way to say the same thing.** Reason-first writes 63–64 tokens per answer against label-first's 2. It takes 7.3× the energy and 7.6× the time (4.3 s per answer, so 5.5 hours for test_ud), and it is no more accurate. It's 2.4 points lower on test_ud, though that isn't tested here.
 5. **Graded examples are the expensive way to tweak without training.** They lift untouched E2B by 6–10 points at 2.3–2.4× the energy (on the Spark the same runs passed the 5-point bar on every split), about 50–87 J per extra correct answer. The adapter gets 15–17 points at 1.42× the energy. On the adapter, examples add nothing and cost 2.5–2.7× its energy. The prompt grows from ~160 to 550–630 tokens, and prefill pays for every token.
 
+## E2B tweaked: every version in one table
+
+*Added 2026-11-16 (owner's request).* Sources:
+- **test_uq / test_ud:** the Jetson, Nov 14–16, wherever the version ran there.
+- **test_ua:** the DGX Spark's whole-split runs (`results/spark/`). The SciEntsBank adapters trained on its questions, so for them it reads as "seen questions" (\*).
+- **Beetle + SAF adapters:** the Spark on all three splits; they didn't run on the Jetson.
+- **Cost:** the Jetson's, over the grading window.
+
+Untouched E4B, the bar to beat, scores 67.3% on test_uq and 70.1% on test_ud at 6.8–6.9 J.
+
+**Fine-tuned on SciEntsBank (what "E2B tweaked" means, owner 2026-11-13)**
+
+| Version | test_ua\* | test_uq | test_ud | Macro-F1 uq / ud | J per answer | Median s | Beats E4B untouched? |
+|---|---|---|---|---|---|---|---|
+| E2B untouched (reference) | 55.2% | 59.8% | 60.2% | 0.548 / 0.570 | 3.7–3.8 | 0.41 | no |
+| **Oct 28 adapter** (Kaggle) | 79.4% | **76.7%** | **74.8%** | 0.755 / 0.746 | 5.3–5.4 | 0.57 | **yes** |
+| seed s0 (Spark) | 81.5% | 78.0% | 74.4% | 0.773 / 0.747 | 5.3–5.4 | 0.57 | yes |
+| seed s1 | 78.9% | 75.4% | 76.4% | 0.734 / 0.765 | 5.3–5.4 | 0.57 | yes |
+| seed s2 | 78.7% | 76.9% | 75.4% | 0.758 / 0.756 | 5.3–5.4 | 0.57 | yes |
+| seed s3 | 81.5% | 77.3% | 74.4% | 0.767 / 0.746 | 5.3–5.4 | 0.57 | yes |
+| seed s4 | 81.1% | 76.4% | 75.5% | 0.752 / 0.757 | 5.3–5.4 | 0.57 | yes |
+| soup of s0–s4 | 82.8% | 78.3% | 75.3% | 0.779 / 0.751 | 5.5–5.6 | 0.59 | yes |
+| 5-way labels, s0 | 82.4% | 78.2% | 74.7% | 0.770 / 0.743 | 6.8–6.9 | 0.72 | yes |
+| label-first (stage 3b) | 76.3% | 76.1% | 73.1% | 0.725 / 0.716 | 5.3–5.4 | 0.58 | yes |
+| reason-first (stage 3b) | 72.6% | 75.7% | 70.7% | 0.730 / 0.680 | 38.8–39.2 | 4.3 | yes, barely on test_ud |
+| adapter + kNN examples | 77.0% | 76.3% | 75.3% | 0.744 / 0.740 | 13.3–14.1 | 1.34 | yes |
+
+**Fine-tuned on Beetle + SAF only (never saw SciEntsBank; Spark, not run on the Jetson)**
+
+Each is one more adapter of the same size, so expect about 5.4 J per answer (not measured).
+
+| Version | test_ua | test_uq | test_ud | Macro-F1 uq / ud | Beats E4B untouched? |
+|---|---|---|---|---|---|
+| label-only | 68.5% | 76.7% | 68.2% | 0.699 / 0.610 | test_uq only |
+| label-first | 60.2% | 68.6% | 57.6% | 0.634 / 0.527 | no |
+| reason-first | 56.7% | 67.4% | 58.5% | 0.615 / 0.517 | no |
+
+**Not fine-tuning, so not "tweaked" by the owner's definition (context)**
+
+| Version | test_ua | test_uq | test_ud | J per answer | Beats E4B untouched? |
+|---|---|---|---|---|---|
+| + kNN graded examples in the prompt | 70.4% | 69.4% | 66.3% | 8.6–9.1 | test_uq only |
+| + random graded examples | 65.0% | 68.1% | 64.9% | 9.9–10.1 | test_uq only |
+| thinking on (B1, Jetson 2026-10-11/12) | 67.0% | 75.7% | 70.1% | 136.7–136.9 | test_uq only (ties on test_ud), at 20× E4B's energy |
+
+1. **Every SciEntsBank adapter beats untouched E4B on both headline splits.** They all land in one band (75–78% on test_uq, 73–76% on test_ud) at 5.3–5.6 J, apart from reason-first and the examples. The five seeds alone span 2–3 points, so differences inside the band are training noise. That's why the soup and the 5-way adapter weren't adopted on the Spark: neither is significantly better than a single seed.
+2. **Extras only add cost:** 5-way labels +28% energy, examples on the adapter 2.5×, a written reason 7×, for the same or lower accuracy.
+3. **Training on other datasets transfers only partly.** The Beetle + SAF label-only adapter matches the SciEntsBank adapters on test_uq (76.7%) but drops to 68% on test_ud. It remains the leak-free check that the gain isn't only memorised questions.
+4. **The Oct 28 adapter is a sensible "E2B tweaked"** (the owner's call). It sits mid-band and is the cheapest version tied for best accuracy. The soup (78.3 / 75.3%) and seed s0 (78.0 / 74.4%) have the highest test_uq, but within noise of it.
+
+The thinking row is from the B1 runs on the Jetson at the same 612 MHz clocks, all three splits ([variations](variations.md)); its median latency is 13.7 s per answer. Unlike the other rows, its test_ua is from the Jetson too.
+
 ## Caveats
 
 - **The test family was chosen after the runs.** Every test passes with a wide margin (largest Holm p = 0.0003), so a different family wouldn't change the conclusion. It is still recorded as post hoc.
