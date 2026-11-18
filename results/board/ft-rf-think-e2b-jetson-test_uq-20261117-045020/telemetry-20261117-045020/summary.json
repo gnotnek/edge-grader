@@ -1,0 +1,97 @@
+{
+ "label": "telemetry",
+ "model": "",
+ "command": "env EG_INNER=1 EG_RUN_DIR=/mnt/ssd-ex/research/edge-grader/results/board/ft-rf-think-e2b-jetson-test_uq-20261117-045020 MEASURE=1 BENCH=scientsbank INSTANCES=10 THINKING=on VARIANT=base RAG= LG_ENGINE=/home/ari/build/little-gemma-ae/build/run-cuda-i8 /mnt/ssd-ex/research/edge-grader/scripts/board_grade.sh e2b test_uq 0",
+ "samples": 5470,
+ "wall_s": 5568.3,
+ "work_s": 5507.9,
+ "power": {
+  "idle_w": 5.53,
+  "idle_post_w": 5.66,
+  "work_mean_w": 15.05,
+  "work_peak_w": 16.18,
+  "generation_mean_w": 15.11,
+  "energy_wh": 23.028,
+  "energy_j": 82901.3,
+  "energy_above_idle_j": 52442.7,
+  "_method": "sum of PMIC per-rail V*I, trapezoidal over 1Hz samples; board DC power, excludes PSU conversion loss"
+ },
+ "tokens": {
+  "requests": 733,
+  "prompt_tokens": 119118,
+  "generated_tokens": 142084,
+  "prefill_s": 245.1,
+  "decode_s": 5217.0,
+  "prefill_tok_s": 486.02,
+  "decode_tok_s": 27.23
+ },
+ "efficiency": {
+  "j_per_generated_token": 0.58,
+  "j_per_generated_token_above_idle": 0.37,
+  "j_per_token_all": 0.317,
+  "decode_tok_s_per_w": 1.802,
+  "tokens_per_wh": 6170.0
+ },
+ "thermal": {
+  "temp_c": {
+   "mean": 71.05,
+   "median": 71.2,
+   "min": 60.7,
+   "max": 72.5,
+   "n": 5412
+  },
+  "throttled_nonzero_samples": 0,
+  "cpu_mhz_mean": 888.8
+ },
+ "utilisation": {
+  "cpu_pct": {
+   "mean": 3.16,
+   "median": 2.5,
+   "min": 1.3,
+   "max": 25.9,
+   "n": 5412
+  },
+  "gpu_pct": {
+   "mean": 93.45,
+   "median": 97.7,
+   "min": 0.0,
+   "max": 100.0,
+   "n": 5412
+  },
+  "gpu_mhz": {
+   "mean": 1020.0,
+   "median": 1020.0,
+   "min": 1020.0,
+   "max": 1020.0,
+   "n": 5412
+  },
+  "proc_cpu_pct": {
+   "mean": 9.85,
+   "median": 5.9,
+   "min": 0.0,
+   "max": 100.7,
+   "n": 5407
+  },
+  "proc_rss_mb": {
+   "mean": 3651.0,
+   "median": 3647.0,
+   "min": 4.0,
+   "max": 3675.7,
+   "n": 5407
+  },
+  "mem_used_mb": {
+   "mean": 4417.74,
+   "median": 4417.0,
+   "min": 1605.0,
+   "max": 4602.0,
+   "n": 5412
+  },
+  "swap_used_mb": {
+   "mean": 0.0,
+   "median": 0.0,
+   "min": 0.0,
+   "max": 0.0,
+   "n": 5412
+  }
+ }
+}

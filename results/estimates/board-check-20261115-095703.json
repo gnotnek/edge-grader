@@ -1,0 +1,240 @@
+{
+  "stage": "baseline",
+  "kind": "board-check",
+  "time": "2026-11-15T09:57:03+00:00",
+  "settings": {
+    "estimate": "results/estimates/board-cost-estimate-20260930-051813.json",
+    "method": "energy = trapezoid of telemetry power_w over the grading window (first request start to last request end, from server.log); board DC draw, not wall power. Prefill fit: prompt_ms = a + b*prompt tokens processed, every request. Accuracy: same-grade count and exact McNemar on correctness, same answer ids. GSM/news: paired with Kaggle and between boards on the question ids both runs have; news correctness is the judge's grade."
+  },
+  "runs": [
+    {
+      "run": "ft-lf-e2b-jetson-test_ud-20261114-222103",
+      "model": "e2b",
+      "board": "jetson",
+      "benchmark": "scientsbank",
+      "split": "test_ud",
+      "thinking": false,
+      "stage": "baseline",
+      "instances": null,
+      "threads": null,
+      "server_args": "/home/ari/build/llama.cpp/build/bin/llama-server -m /home/ari/research/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf -c 8192 --host 127.0.0.1 --port 8080 -ngl 99 -rea off --reasoning-budget -1 --cache-ram 0 --lora /home/ari/research/models/adapters/e2b-ft-lf.gguf",
+      "n": 4562,
+      "accuracy": 0.7313,
+      "macro_f1": 0.716,
+      "unparsed": 0,
+      "errors": 0,
+      "requests_in_log": 4562,
+      "window_from": "server.log",
+      "median_latency_s": 0.56,
+      "grading_window_s": 2619.4,
+      "mean_w": 9.31,
+      "idle_w": 4.56,
+      "j_per_answer": 5.34,
+      "j_per_answer_above_idle": 2.73,
+      "wh_per_1000_answers": 1.48,
+      "mean_prompt_tokens_processed": 153.3,
+      "mean_prompt_tokens_sent": 155.5,
+      "prefill_fixed_ms": 140.3,
+      "prefill_ms_per_token": 2.124,
+      "decode_ms_per_token": 37.3,
+      "board_state": {
+        "governor": "schedutil",
+        "cpu_min_khz": 729600,
+        "cpu_max_khz": 1497600,
+        "cpu_clock_locked": false,
+        "variant": "base",
+        "engine": "/home/ari/build/llama.cpp/build/bin/llama-server"
+      },
+      "estimate": {
+        "median_latency_s": 0.48,
+        "j_per_answer": 5.06,
+        "measured_over_estimate_latency": 1.17,
+        "measured_over_estimate_energy": 1.06
+      },
+      "vs_kaggle": {
+        "kaggle_run": "baseline-e2b-kaggle-t4-test_ud-3way-20260929-103120.json",
+        "kaggle_accuracy": 0.6026,
+        "board_accuracy_paired": 0.7313,
+        "n": 4562,
+        "same_grade": 3352,
+        "mcnemar": {
+          "only_first_right": 834,
+          "only_second_right": 247,
+          "p": 0.0
+        }
+      }
+    },
+    {
+      "run": "ft-lf-e2b-jetson-test_uq-20261114-221107",
+      "model": "e2b",
+      "board": "jetson",
+      "benchmark": "scientsbank",
+      "split": "test_uq",
+      "thinking": false,
+      "stage": "baseline",
+      "instances": null,
+      "threads": null,
+      "server_args": "/home/ari/build/llama.cpp/build/bin/llama-server -m /home/ari/research/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf -c 8192 --host 127.0.0.1 --port 8080 -ngl 99 -rea off --reasoning-budget -1 --cache-ram 0 --lora /home/ari/research/models/adapters/e2b-ft-lf.gguf",
+      "n": 733,
+      "accuracy": 0.7613,
+      "macro_f1": 0.7254,
+      "unparsed": 0,
+      "errors": 0,
+      "requests_in_log": 733,
+      "window_from": "server.log",
+      "median_latency_s": 0.59,
+      "grading_window_s": 427.9,
+      "mean_w": 9.29,
+      "idle_w": 4.53,
+      "j_per_answer": 5.42,
+      "j_per_answer_above_idle": 2.78,
+      "wh_per_1000_answers": 1.51,
+      "mean_prompt_tokens_processed": 161.5,
+      "mean_prompt_tokens_sent": 163.6,
+      "prefill_fixed_ms": 140.1,
+      "prefill_ms_per_token": 2.082,
+      "decode_ms_per_token": 37.1,
+      "board_state": {
+        "governor": "schedutil",
+        "cpu_min_khz": 729600,
+        "cpu_max_khz": 1497600,
+        "cpu_clock_locked": false,
+        "variant": "base",
+        "engine": "/home/ari/build/llama.cpp/build/bin/llama-server"
+      },
+      "estimate": {
+        "median_latency_s": 0.51,
+        "j_per_answer": 5.24,
+        "measured_over_estimate_latency": 1.16,
+        "measured_over_estimate_energy": 1.03
+      },
+      "vs_kaggle": {
+        "kaggle_run": "baseline-e2b-kaggle-t4-test_uq-3way-20260929-102250.json",
+        "kaggle_accuracy": 0.5975,
+        "board_accuracy_paired": 0.7613,
+        "n": 733,
+        "same_grade": 522,
+        "mcnemar": {
+          "only_first_right": 153,
+          "only_second_right": 33,
+          "p": 0.0
+        }
+      }
+    },
+    {
+      "run": "ft-rf-e2b-jetson-test_ud-20261115-000328",
+      "model": "e2b",
+      "board": "jetson",
+      "benchmark": "scientsbank",
+      "split": "test_ud",
+      "thinking": false,
+      "stage": "baseline",
+      "instances": null,
+      "threads": null,
+      "server_args": "/home/ari/build/llama.cpp/build/bin/llama-server -m /home/ari/research/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf -c 8192 --host 127.0.0.1 --port 8080 -ngl 99 -rea off --reasoning-budget -1 --cache-ram 0 --lora /home/ari/research/models/adapters/e2b-ft-rf.gguf",
+      "n": 4562,
+      "accuracy": 0.7067,
+      "macro_f1": 0.6798,
+      "unparsed": 0,
+      "errors": 0,
+      "requests_in_log": 4562,
+      "window_from": "server.log",
+      "median_latency_s": 4.31,
+      "grading_window_s": 19915.8,
+      "mean_w": 8.89,
+      "idle_w": 4.56,
+      "j_per_answer": 38.82,
+      "j_per_answer_above_idle": 18.91,
+      "wh_per_1000_answers": 10.78,
+      "mean_prompt_tokens_processed": 153.3,
+      "mean_prompt_tokens_sent": 155.5,
+      "prefill_fixed_ms": 142.8,
+      "prefill_ms_per_token": 2.121,
+      "decode_ms_per_token": 60.9,
+      "board_state": {
+        "governor": "schedutil",
+        "cpu_min_khz": 729600,
+        "cpu_max_khz": 1497600,
+        "cpu_clock_locked": false,
+        "variant": "base",
+        "engine": "/home/ari/build/llama.cpp/build/bin/llama-server"
+      },
+      "estimate": {
+        "median_latency_s": 0.48,
+        "j_per_answer": 5.06,
+        "measured_over_estimate_latency": 8.98,
+        "measured_over_estimate_energy": 7.67
+      },
+      "vs_kaggle": {
+        "kaggle_run": "baseline-e2b-kaggle-t4-test_ud-3way-20260929-103120.json",
+        "kaggle_accuracy": 0.6026,
+        "board_accuracy_paired": 0.7067,
+        "n": 4562,
+        "same_grade": 3053,
+        "mcnemar": {
+          "only_first_right": 902,
+          "only_second_right": 427,
+          "p": 0.0
+        }
+      }
+    },
+    {
+      "run": "ft-rf-e2b-jetson-test_uq-20261114-230732",
+      "model": "e2b",
+      "board": "jetson",
+      "benchmark": "scientsbank",
+      "split": "test_uq",
+      "thinking": false,
+      "stage": "baseline",
+      "instances": null,
+      "threads": null,
+      "server_args": "/home/ari/build/llama.cpp/build/bin/llama-server -m /home/ari/research/models/gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf -c 8192 --host 127.0.0.1 --port 8080 -ngl 99 -rea off --reasoning-budget -1 --cache-ram 0 --lora /home/ari/research/models/adapters/e2b-ft-rf.gguf",
+      "n": 733,
+      "accuracy": 0.7572,
+      "macro_f1": 0.7303,
+      "unparsed": 0,
+      "errors": 0,
+      "requests_in_log": 733,
+      "window_from": "server.log",
+      "median_latency_s": 4.38,
+      "grading_window_s": 3237.4,
+      "mean_w": 8.87,
+      "idle_w": 4.55,
+      "j_per_answer": 39.17,
+      "j_per_answer_above_idle": 19.08,
+      "wh_per_1000_answers": 10.88,
+      "mean_prompt_tokens_processed": 161.5,
+      "mean_prompt_tokens_sent": 163.6,
+      "prefill_fixed_ms": 137.2,
+      "prefill_ms_per_token": 2.102,
+      "decode_ms_per_token": 60.7,
+      "board_state": {
+        "governor": "schedutil",
+        "cpu_min_khz": 729600,
+        "cpu_max_khz": 1497600,
+        "cpu_clock_locked": false,
+        "variant": "base",
+        "engine": "/home/ari/build/llama.cpp/build/bin/llama-server"
+      },
+      "estimate": {
+        "median_latency_s": 0.51,
+        "j_per_answer": 5.24,
+        "measured_over_estimate_latency": 8.59,
+        "measured_over_estimate_energy": 7.48
+      },
+      "vs_kaggle": {
+        "kaggle_run": "baseline-e2b-kaggle-t4-test_uq-3way-20260929-102250.json",
+        "kaggle_accuracy": 0.5975,
+        "board_accuracy_paired": 0.7572,
+        "n": 733,
+        "same_grade": 459,
+        "mcnemar": {
+          "only_first_right": 177,
+          "only_second_right": 60,
+          "p": 0.0
+        }
+      }
+    }
+  ],
+  "board_pairs": []
+}
