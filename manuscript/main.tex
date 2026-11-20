@@ -36,7 +36,8 @@ On SciEntsBank (3-way labels), we compare Gemma~4 E2B untouched, E2B with a QLoR
 On unseen questions and unseen domains, the fine-tuned E2B scores 76.7\% and 74.8\%, beating untouched E4B by 9.4 and 4.7 points (paired McNemar, Holm $p<10^{-6}$),
 while using about 22\% less energy (5.3--5.4~J against 6.8--6.9~J per answer) and answering about 20\% faster (0.57~s against 0.70~s).
 Fine-tuning costs 9--11~J per extra correct answer, against 31--41~J for moving to the larger model and 830--1{,}340~J for turning thinking on.
-% TODO: thinking-on adapter runs (2026-11-17), Beetle/SAF transfer, one closing sentence for teachers.
+Turning thinking on lifts the untouched model by 16.0 and 9.8 points but adds nothing significant to any fine-tuned version.
+% TODO: Beetle/SAF transfer, one closing sentence for teachers.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -48,11 +49,23 @@ Automatic short answer grading, small language models, fine-tuning, edge computi
 % Sources: docs/research-outline.md ("Why", RQ4, RQ8); research_notes/Recent short answer grading benchmarks/usage_in_papers.md (gap).
 \IEEEPARstart{S}{hort-answer} questions ask students to explain an idea in their own words, which shows understanding better than a choice among options, but every answer has to be read and graded.
 That work falls on teachers, and it grows with every class and every test.
+It also delays feedback, one of the most powerful influences on learning~\cite{hattie2007feedback}: a grader that returns results in seconds lets a teacher spend their own time on the answers that need it.
 Automatic short-answer grading has been studied for over a decade~\cite{dzikovska2013semeval}, and large language models now match or beat the best earlier systems on its benchmarks~\cite{wang2024rag,funayama2025crossprompt}.
 
 The strongest of these results, however, come from large models reached through a cloud service.
-For a school, that means a fee for every graded answer, student work leaving school hardware, a dependence on a network connection, and a model that can change without notice; earlier work raises the same concerns about transparency, security, privacy and hardware cost~\cite{ormerod2024gpupoor,saur2026grading}.
+For a school, that means a fee for every graded answer, student work leaving school hardware, a dependence on a network connection, and a model that can change without notice, as the same cloud model has been measured to do within three months~\cite{chen2024drift}, so the same answer could be graded differently from one term to the next; earlier work raises the same concerns about transparency, security, privacy and hardware cost~\cite{ormerod2024gpupoor,saur2026grading}.
 A small model running on a board inside the school avoids all four.
+A model fine-tuned for one task is also far cheaper to run: task-specific models use orders of magnitude less energy per inference than general-purpose generative ones, even at the same size~\cite{luccioni2024power}.
+
+% Indonesia as the motivating case (owner, 2026-11-20). Sources fetched 2026-11-20; see refs.bib.
+These constraints are concrete in school systems such as Indonesia's.
+In 2021 about 19\% of Indonesian schools had no internet connection, rising to an estimated 71\% in Papua~\cite{giga2021indonesia}, and in 2026 the government still counted about 23\% of educational institutions without internet access~\cite{antara2026internet}.
+Teachers' time is short as well: across the OECD's 2024 survey of teachers, extra time on administrative tasks and on marking lowered teachers' well-being the most~\cite{oecd2025talis}, and in Indonesia, 79.1\% of 211 teachers surveyed across 27 provinces said the national teaching platform had added to their administrative burden~\cite{haeri2024pmm}, while novice public-school teachers followed for two years reported administrative tasks taking precedence over preparing lessons~\cite{alifia2022novice}.
+Budgets favour a one-off purchase over a recurring fee: a cloud service charges for every answer, usually in a foreign currency, whereas a developer kit of the board we use costs about US\$249~\cite{siliconangle2024orinnano} and, at the energy we measure (about 5~J per answer), uses about 1.5~Wh to grade a thousand answers.
+Indonesia already equips its schools this way: the ministry distributed 288,865 interactive flat panels to schools in 2025 and plans about 800,000 more in 2026, with running costs payable from schools' operational funds~\cite{antara2026panels}.
+Student data matter too: Indonesia's Personal Data Protection Law treats children's data as a specific category of personal data and sets conditions on transferring personal data abroad~\cite{uupdp2022}; answers graded on school hardware never leave it.
+Our experiments use an English benchmark, so they show what such a device can do rather than how it performs on Indonesian answers; we return to this in Section~V.
+
 Small open models, fine-tuned and often with low-rank adapters, are already common in grading research~\cite{ormerod2024gpupoor,aggarwal2024engsaf,walsh2025finetuning,funayama2025crossprompt}, yet they are evaluated for accuracy, mostly on server GPUs.
 The closest on-device study we found times models of up to about one billion parameters on a laptop CPU~\cite{saur2026grading}; studies of language models on edge accelerators measure power and latency, but not on grading~\cite{arya2025edgepower}.
 To our knowledge, no grading study has reported energy per graded answer, or run on an edge board.
@@ -69,19 +82,38 @@ Our contributions are:
 \begin{itemize}
 \item A controlled comparison on unseen questions and unseen domains, showing that fine-tuned E2B beats untouched E4B by 9.4 and 4.7 points while using about 22\% less energy and answering about 20\% faster per answer.
 \item Measured device cost for every grader, and \textit{energy per extra correct answer} as a single price for an accuracy gain: 9--11~J for fine-tuning, against 31--41~J for the larger model and 830--1{,}340~J for thinking on.
-\item Evidence that the extras do not pay on the device: no other way of tweaking E2B beat a plain adapter, retrieved course material did not help grading, and each extra added energy per answer, from 4\% for the averaged adapter to over seven times for written reasons.
+\item Evidence that the extras do not pay on the device: no other way of tweaking E2B beat a plain adapter, thinking before answering improved no fine-tuned version, retrieved course material did not help grading, and each extra added energy per answer, from 4\% for the averaged adapter to over seven times for written reasons.
 \end{itemize}
 % TODO: last bullet or sentence on releasing code, run summaries and adapters, if the owner agrees.
 
 Section~II reviews related work, Section~III describes the data, graders and measurement, Section~IV gives the results, and Section~V discusses what they mean for schools and where they stop.
 
 \section{Related Work}
+% Claims checked against each paper's abstract (2026-11-20); survey notes in research_notes/Recent short answer grading benchmarks/.
+
 \subsection{Short-Answer Grading and SciEntsBank}
-% SemEval-2013 Task 7 \cite{dzikovska2013semeval}; splits ua/uq/ud; accuracy + macro-F1, not QWK (categorical labels). research_notes/Recent short answer grading benchmarks/.
+Automatic short-answer grading compares a student's free-text answer with a reference answer and assigns a grade.
+Burrows et~al.\ reviewed 35 such systems and found the field moving from ad hoc, non-comparable experiments towards shared evaluation~\cite{burrows2015eras}.
+SemEval-2013 Task~7 supplied that evaluation: the SciEntsBank and Beetle datasets, labels at 2-, 3- and 5-way granularity, and separate test splits for unseen answers, questions and domains~\cite{dzikovska2013semeval}.
+Fine-tuned encoders such as BERT and XLNet later matched or passed the shared-task systems without hand-engineered features~\cite{ghavidel2020bert}.
+SciEntsBank remains in common use for language-model graders~\cite{kortemeyer2024gpt4,wang2024rag,cong2026irt,deng2026rubric}, which lets our results be placed against more than a decade of published numbers on the same splits.
+
 \subsection{Language Models as Graders}
-% Prompting, graded examples, RAG, fine-tuning (LoRA/QLoRA \cite{hu2022lora,dettmers2023qlora}). research_notes/2026-11-13-llm-finetuning-on-scientsbank.md.
+Prompted general-purpose models grade reasonably but not best.
+GPT-4 without further training performs about as well as hand-engineered models on SciEntsBank and Beetle, but worse than models with specialised training~\cite{kortemeyer2024gpt4}, and zero- and few-shot prompting struggles on items that need domain knowledge~\cite{chamieh2024llms}.
+Adding retrieval lifts a large cloud model to the best published 3-way accuracy on SciEntsBank~\cite{wang2024rag}, and conditioning a 72-billion-parameter open model on a rubric gives strong agreement on 2-way labels that weakens as the labels get finer~\cite{deng2026rubric}.
+An item-response analysis of 17 open-weight models on SciEntsBank and Beetle shows that models with similar overall scores differ in how fast they fail on harder answers~\cite{cong2026irt}.
+
+Fine-tuning small open models is the other route.
+QLoRA~\cite{dettmers2023qlora} on 7--8-billion-parameter models, motivated explicitly by limited hardware, gives adequate if not state-of-the-art scores~\cite{ormerod2024gpupoor}; fine-tuned 7-billion-parameter models also grade engineering answers with feedback~\cite{aggarwal2024engsaf}; with very little labelled data, QLoRA alone moves little~\cite{walsh2025finetuning}; and pre-finetuning across prompts helps when per-item data are scarce~\cite{funayama2025crossprompt}.
+These studies each test one way of improving a grader, and on server hardware.
+We compare fine-tuning with the alternatives a practitioner would try instead (a larger model, graded examples, retrieved course material, written reasons and thinking before answering) on one benchmark and one device.
+
 \subsection{Small Models on Edge Devices}
-% On-device latency/energy studies; why a Jetson-class board fits a school budget.
+Running small language models on edge devices cuts latency and removes the dependence on a network~\cite{islam2025edgeenergy}.
+Across a Raspberry Pi~5, a Jetson Nano and a Jetson Orin Nano, the Orin Nano with its GPU gave the best energy-to-performance ratio for five small models~\cite{islam2025edgeenergy}; other studies compare CPU, GPU and NPU back ends~\cite{prieto2025edge} and characterise latency and power on Jetson Orin accelerators~\cite{arya2025edgepower}, and task-specific models are known to use far less energy than general-purpose ones~\cite{luccioni2024power}.
+These studies measure generic workloads rather than grading quality, while the grading studies above measure accuracy without device cost; the closest exception times models of up to about one billion parameters on a laptop CPU but reports no energy~\cite{saur2026grading}.
+Our work joins the two: accuracy on unseen questions and domains, and energy per graded answer, for every grader on the same board.
 
 \section{Method}
 % Sources: docs/research-outline.md (setup), docs/results/finetuning.md, examples.md, jetson-graders.md,
@@ -102,6 +134,7 @@ The graders are Gemma~4 E2B and E4B, instruction-tuned and quantization-aware-tr
 Every run uses the same settings: an 8{,}192-token context, all layers on the GPU, thinking off unless stated, temperature~0 (greedy decoding), and one run per split.
 The prompt (Fig.~\ref{fig:prompt}) gives the question, the reference answer, the student answer and a one-line description of each label, and asks for the label only.
 The first label word in the reply is taken as the grade; a reply that names no label counts as wrong.
+Where thinking is on, the model may write a thought block of up to 320 tokens before its reply, and the label is read after that block.
 
 \begin{figure}[t]
 \centering
@@ -147,7 +180,8 @@ The seeds, soup, 5-way and example runs were graded on an NVIDIA DGX Spark first
 
 \subsection{Device Measurement}
 All three graders and every E2B version were graded on one NVIDIA Jetson Orin Nano, an embedded board of the kind a school could keep on site.
-The GPU clock was 612~MHz and the memory clock 2{,}133~MHz on every run, and the untouched models were re-run in the same queue as the tweaked ones, so every comparison is within one clock state and one llama.cpp build.
+The GPU clock was 612~MHz and the memory clock 2{,}133~MHz on every thinking-off run, and the untouched models were re-run in the same queue as the tweaked ones, so every comparison is within one clock state and one llama.cpp build.
+The thinking-on runs came later at higher clocks (a 1{,}020~MHz GPU limit on test\_uq, and the board's 25~W mode with a 918~MHz GPU on test\_ud), so their accuracy compares directly with the rest but their latency and energy only approximately; untouched E2B with thinking on gave the same accuracy at these clocks as in an earlier run at 612~MHz.
 Power is the board's DC draw summed over its INA3221 rails, sampled at 1~Hz; it is not wall power.
 Energy is integrated over the grading window, from the first request to the last, and divided by the number of answers.
 We also report the median latency per answer and the decode speed (tokens/s) from \texttt{llama-server}'s own timings.
@@ -156,6 +190,7 @@ To compare a gain with its price we use the \textit{energy per extra correct ans
 \subsection{Statistics}
 Graders are compared on the same answers with a paired McNemar test~\cite{mcnemar1947}, and the $p$-values are corrected with Holm's method~\cite{holm1979} over a family of eight comparisons.
 The family was fixed after the runs; since the largest corrected $p$ in it is 0.0003, a different family would not change the conclusions.
+Thinking on is tested in a separate family of 22 comparisons (each version with thinking against without, and each fine-tuned version with thinking against untouched E2B with thinking, on both splits), also Holm-corrected and also chosen after the first split had run.
 For each accuracy we give a 95\% interval from 2{,}000 bootstrap resamples of whole questions, since answers to one question are not independent.
 
 \section{Results}
@@ -264,9 +299,36 @@ E2B lost 2.9 points on test\_uq and 5.1 on test\_ud (the latter significant, $p<
 % Kaggle T4 runs, same build and prompt (docs/results/rag.md); Jetson cost of RAG in docs/results/variations.md.
 The passages raised recall on \textit{correct} answers but lowered it on \textit{incorrect} ones: they made the model more lenient rather than more accurate.
 
-\subsection{Thinking On}
-With thinking on (a 320-token thinking budget), untouched E2B reaches 75.7\% on test\_uq and 70.1\% on test\_ud, close to the adapter on unseen questions though not on unseen domains, but at 13.7~s and 136.7--136.9~J per answer: 830--1{,}340~J per extra correct answer, roughly a hundred times the adapter's price.
-% TODO: thinking on with each adapter (Jetson runs of 2026-11-16/17, results/board/*think*).
+\subsection{Thinking On Helps Only the Untouched Model}
+% Sources: docs/results/jetson-graders.md "Thinking on with every E2B adapter"; results/estimates/compare-thinking-scientsbank-20261120-142118.json.
+Table~\ref{tab:thinking} turns thinking on for untouched E2B and for each fine-tuned version.
+For the untouched model it is a large gain, $+16.0$ points on test\_uq and $+9.8$ on test\_ud (corrected $p<10^{-13}$), which brings it to 75.7\% and 70.1\%: level with the adapters on unseen questions and with untouched E4B on unseen domains.
+With an adapter, thinking changes nothing significant on either split ($-1.7$ to $+3.4$ points); the largest gain, $+3.4$ for E2B tweaked on test\_uq, does not survive correction and is gone on test\_ud ($-0.2$), the split with six times as many answers.
+Thinking and fine-tuning thus buy the same accuracy at very different prices: in the earlier run at the same 612~MHz clock as the other graders, untouched E2B with thinking took 13.7~s and 136.7--136.9~J per answer, 830--1{,}340~J per extra correct answer, roughly a hundred times the adapter's price.
+Two adapters trained on label-only replies hardly used the thinking they were given: the 5-way adapter opened a thought block on 4 of 5{,}295 answers and the soup on 11--13\%, so their rows in Table~\ref{tab:thinking} are in effect their thinking-off grading.
+The reason-first adapter thinks and then writes its reason as well, at 105--113~J per answer, for no gain.
+
+\begin{table}[t]
+\centering
+\caption{Thinking Off $\rightarrow$ On for Each E2B Version (3-Way Accuracy, \%)}
+\label{tab:thinking}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+E2B version & test\_uq & test\_ud & J/answer, on$^\ast$ \\
+\midrule
+untouched & 59.8 $\rightarrow$ \textbf{75.7} & 60.2 $\rightarrow$ \textbf{70.1} & 144--147 \\
+adapter (E2B tweaked) & 76.7 $\rightarrow$ 80.1 & 74.8 $\rightarrow$ 74.6 & 169--171 \\
+soup of seeds 0--4 & 78.3 $\rightarrow$ 77.2 & 75.3 $\rightarrow$ 75.2 & 27--29 \\
+label-first reason & 76.1 $\rightarrow$ 78.4 & 73.1 $\rightarrow$ 71.4 & 161--168 \\
+reason-first & 75.7 $\rightarrow$ 74.2 & 70.7 $\rightarrow$ 70.1 & 105--113 \\
+5-way labels & 78.2 $\rightarrow$ 77.6 & 74.7 $\rightarrow$ 73.9 & 7.2--7.5 \\
+\bottomrule
+\end{tabular}
+\\[2pt]
+\raggedright Bold: significant after Holm correction (22 tests); no other on--off change is. $^\ast$At higher clocks than the thinking-off runs (Section~III-E), so approximate; thinking off costs 3.7--6.9~J for these versions except reason-first (38.8--39.2~J).
+\end{table}
 
 \subsection{Against Published Results}
 % Single runs with one seed and one prompt; the published systems differ in prompt, training and evaluation code.
@@ -276,7 +338,7 @@ E2B tweaked, a 4-bit model on a low-power board, is on a par with them (76.7\% a
 \section{Discussion}
 % What this means for a school: grades per hour, Wh per class set; when E4B + adapter is worth 1.8x energy.
 \subsection{Limitations}
-% SciEntsBank leakage worry (test_ua); English only; one board and one clock state; no merged adapter tested; cloud comparison (RQ5) not run.
+% SciEntsBank leakage worry (test_ua); English only: US science answers, not Indonesian classrooms (promised in the Introduction; RAG-id was the only Indonesian test); one board and one clock state; no merged adapter tested; cloud comparison (RQ5) not run.
 
 \section{Conclusion}
 % TODO
