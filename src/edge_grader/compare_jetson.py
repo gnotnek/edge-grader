@@ -3,7 +3,7 @@
     uv run edge-grader-board-check results/board/*-jetson-test_u[qd]-2026111[456]-*/
     uv run python -m edge_grader.compare_jetson
 
-Cost comes from the latest board-check JSON in results/estimates/ (energy over the grading window
+Cost comes from the board-check JSONs in results/estimates/ (energy over the grading window
 only, board DC power), accuracy from each run's own summary. All runs: one board, one clock state
 (GPU 612 MHz, memory 2,133 MHz), llama.cpp a894dae, test_uq and test_ud (the headline splits for
 fine-tuned versions, decision 2026-11-13).
@@ -43,19 +43,28 @@ VERSIONS = {
 TESTS = (("e2b", "ft-e2b"), ("e4b", "ft-e2b"), ("e2b", "e4b"), ("e4b", "ft-e4b"))  # (first, second)
 
 
+def board_check_runs(estimates: Path) -> dict[str, dict]:
+    """Every board-check entry by run folder, from all board-check JSONs (a later check of a run wins),
+    sorted by run folder so later runs of a version come last."""
+    runs = {}
+    for f in sorted(estimates.glob("board-check-*.json")):
+        runs |= {r["run"]: r for r in json.loads(f.read_text())["runs"]}
+    return dict(sorted(runs.items()))
+
+
 def prefix(run: str, split: str) -> str:
     return run.split(f"-jetson-{split}-")[0]
 
 
 def main(board: Path = Path("results/board"), estimates: Path = Path("results/estimates")) -> None:
-    check_file = max(estimates.glob("board-check-*.json"))
+    runs = board_check_runs(estimates)
     cost = {}
-    for r in json.loads(check_file.read_text())["runs"]:
+    for r in runs.values():
         if r["board"] == "jetson" and r["split"] in SPLITS and prefix(r["run"], r["split"]) in VERSIONS:
             cost[prefix(r["run"], r["split"]), r["split"]] = r  # later runs of a version replace earlier
     missing = [(v, s) for v in VERSIONS for s in SPLITS if (v, s) not in cost]
     if missing:
-        raise SystemExit(f"{check_file}: no board-check entry for {missing}")
+        raise SystemExit(f"{estimates}: no board-check entry for {missing}")
 
     rows, answers = [], {}
     for (v, split), r in cost.items():
@@ -87,7 +96,7 @@ def main(board: Path = Path("results/board"), estimates: Path = Path("results/es
 
     out = estimates / f"compare-jetson-scientsbank-{datetime.now(UTC):%Y%m%d-%H%M%S}.json"
     out.write_text(json.dumps({
-        "kind": "compare-jetson", "board_check": str(check_file),
+        "kind": "compare-jetson", "board_checks": str(estimates / "board-check-*.json"),
         "family": "8 tests chosen 2026-11-16 after the runs: per split, E2B tweaked vs E2B untouched and vs "
         "E4B untouched, E4B untouched vs E2B untouched, E4B adapter vs E4B untouched; McNemar on 3-way "
         "labels, Holm over the 8; 2-way beside it with its own Holm",

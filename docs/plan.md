@@ -160,7 +160,8 @@
 - [x] Every other E2B method on the Jetson (seeds, soup, 5-way, graded examples; 20 jobs, 2026-11-15 to 11-16, PR 9): all plain adapters at 75–78 / 74–76% for 5.3–5.6 J; examples cost 2.3–3.8×, 5-way 1.8× ([`results/jetson-graders.md`](results/jetson-graders.md))
 - [ ] Owner: which adapter is "E2B tweaked" in the write-up (the Oct 28 Kaggle adapter sits mid-range of the five seeds on both splits)
 - [ ] Optional: a merged adapter (`llama-export-lora`) on the Jetson, to see whether the adapters' 37–42% energy overhead goes away
-- [ ] Supervisor 2026-11-16: every fine-tuning method with thinking on. E2B's 8 methods on the Jetson, test_uq, against B1's untouched thinking-on run (~30 h); smoke test (20 answers) per reply format first. test_ud and E4B after
+- [x] Supervisor 2026-11-16: every fine-tuning method with thinking on. Done 2026-11-20 for E2B's six SciEntsBank versions on test_uq and test_ud (12 jobs, `compare_thinking`): thinking lifts untouched E2B by 16.0 / 9.8 points but no adapter significantly (−1.7 to +3.4), at 30–40× the energy; the soup and 5-way adapters mostly skip the thought ([`results/jetson-graders.md`](results/jetson-graders.md#thinking-on-with-every-e2b-adapter-2026-11-16-to-11-20))
+- [ ] Optional: the Beetle + SAF adapters (label-only, label-first, reason-first) with thinking on, test_uq (they're on the Spark's network); E4B's adapters with thinking (about twice E2B's time)
 
 ### Write-up (weeks 10–12)
 - [ ] Figures: the main chart, per-split tables, confusion matrices
@@ -222,3 +223,6 @@
 | 2026-11-13 | Main question becomes three graders: E2B untouched, E2B tweaked, E4B untouched (RQ8). The methods tried on E4B (graded examples, adapter soup, 5-way labels) run on E2B on the DGX Spark to find its best version | Supervisor 2026-11-13: none of those methods beat the E4B adapter, so compare the graders instead of chasing small-model accuracy. "Tweaked" = fine-tuned variants (owner); Jetson cost pending. Outline, supervisor feedback and own decisions |
 | 2026-11-14 | The three graders, the E4B adapter and stage 3b get Jetson cost; untouched E2B and E4B re-run first in the same queue | Owner. The Jetson's clocks were back at 612 MHz, so the 2026-10-21 baselines (1,020 MHz) aren't a same-state pair |
 | 2026-11-15 | Every other E2B method from the Spark (seeds, soup, 5-way, graded examples) runs on the Jetson too, 20 jobs | Owner: cost for every E2B version, although none was adopted on accuracy |
+| 2026-11-16 | Every E2B fine-tuning method with thinking on, test_uq first | Supervisor 2026-11-16 |
+| 2026-11-17 | test_ud with thinking on for the same six versions | Owner: time allowed, and test_uq alone is 15 questions |
+| 2026-11-18 | Those test_ud runs stay at the Jetson's new 25W mode | Owner, after a reboot changed the power mode; accuracy compares, cost only within the six runs |
