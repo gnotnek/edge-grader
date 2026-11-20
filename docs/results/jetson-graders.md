@@ -1,6 +1,6 @@
-# Every SciEntsBank grader on the Jetson (2026-11-14 to 11-16)
+# Every SciEntsBank grader on the Jetson (2026-11-14 to 11-20)
 
-*Written 2026-11-16. RQ8 (three graders) with RQ4's device cost beside it, plus every other E2B method and the E4B adapter. 32 runs, all rc = 0, in `results/board/*-jetson-test_u{q,d}-2026111{4,5,6}-*`. Table and tests: `uv run python -m edge_grader.compare_jetson` (reads the latest `edge-grader-board-check` JSON; this page's numbers come from `results/estimates/compare-jetson-scientsbank-20261116-052730.json` and `board-check-20261116-052532.json`).*
+*Written 2026-11-16; [thinking on with every adapter](#thinking-on-with-every-e2b-adapter-2026-11-16-to-11-20) added 2026-11-20. RQ8 (three graders) with RQ4's device cost beside it, plus every other E2B method and the E4B adapter. 32 runs, all rc = 0, in `results/board/*-jetson-test_u{q,d}-2026111{4,5,6}-*`. Table and tests: `uv run python -m edge_grader.compare_jetson` (reads every `edge-grader-board-check` JSON, the latest check of a run winning; this page's numbers come from `results/estimates/compare-jetson-scientsbank-20261116-052730.json` and `board-check-20261116-052532.json`).*
 
 ## Setup
 
@@ -116,11 +116,59 @@ Each is one more adapter of the same size, so expect about 5.4 J per answer (not
 
 The thinking row is from the B1 runs on the Jetson at the same 612 MHz clocks, all three splits ([variations](variations.md)); its median latency is 13.7 s per answer. Unlike the other rows, its test_ua is from the Jetson too.
 
+## Thinking on with every E2B adapter (2026-11-16 to 11-20)
+
+*The supervisor's question (2026-11-16): does thinking on help a fine-tuned grader? E2B only, since untouched E4B with thinking is already measured (B1). Twelve runs, all rc = 0: `results/board/*think*-jetson-test_u{q,d}-2026111[6-9]-*` and `-20261120-*`. Table and tests: `uv run python -m edge_grader.compare_thinking`, from `results/estimates/compare-thinking-scientsbank-20261120-142118.json`.*
+
+**Setup.** Thinking on as in B1 (`-rea on --reasoning-budget 320`, the label read after the thought block), deployed code `4d7e261`. Each version runs with the same adapter file as its thinking-off run above (same sha256), and the same reply format or 5-way prompt. Six versions: untouched E2B, the Oct 28 adapter, the soup, label-first, reason-first and 5-way. The three Beetle + SAF adapters aren't run yet (they're on the Spark's network).
+
+**Clocks differ between the runs, so accuracy compares and cost only roughly.**
+
+| | Thinking off (above) | Thinking on, test_uq | Thinking on, test_ud |
+|---|---|---|---|
+| Jetson power mode | 15W defaults | 15W, GPU limit raised | **25W** (after a reboot on 2026-11-17, owner's choice to keep it) |
+| GPU / CPU max | 612 / 1,498 MHz | 1,020 / 1,728 MHz | 918 / 1,344 MHz (5-way: 1,020 / 1,728) |
+
+The board gives the same grades at any clock: untouched E2B with thinking scores 75.7 / 70.1% here, exactly B1's result at 612 MHz in October.
+
+| Version | test_uq: off → on | test_ud: off → on | Answers with a thought block (uq / ud) | On: median s | On: J per answer | Off: J per answer |
+|---|---|---|---|---|---|---|
+| E2B untouched | 59.8 → **75.7%** | 60.2 → **70.1%** | 733/733 / 4,562/4,562 | 8.6–9.4 | 144–147 | 3.7–3.8 |
+| Oct 28 adapter | 76.7 → 80.1% | 74.8 → 74.6% | 733/733 / 4,539/4,562 | 12.2–13.8 | 169–171 | 5.3–5.4 |
+| Soup (s0–s4) | 78.3 → 77.2% | 75.3 → 75.2% | **83/733 / 585/4,562** | 0.42–0.44 | 27–29 | 5.5–5.6 |
+| Label-first | 76.1 → 78.4% | 73.1 → 71.4% | 726/733 / 4,511/4,562 | 11.7–12.4 | 161–168 | 5.3–5.4 |
+| Reason-first | 75.7 → 74.2% | 70.7 → 70.1% | 733/733 / 4,562/4,562 | 7.1–7.9 | 105–113 | 38.8–39.2 |
+| 5-way s0 | 78.2 → 77.6% | 74.7 → 73.9% | **0/733 / 4/4,562** | 0.46–0.50 | 7.2–7.5 | 6.8–6.9 |
+
+Macro-F1 moves the same way as accuracy (largest change +0.14 for untouched E2B; −0.03 to +0.03 for the adapters). No run left an answer unlabelled except one each for untouched E2B and reason-first on test_ud. Label-first hit the length limit on 274 (test_uq) and 1,176 (test_ud) answers, but each kept its label line (the 2026-11-16 fix).
+
+**Tests** (22, McNemar on 3-way labels, Holm over all 22, chosen after the test_uq runs):
+
+| Comparison | test_uq | test_ud |
+|---|---|---|
+| Untouched E2B: thinking on vs off | **+16.0**, Holm p 10⁻¹⁴ | **+9.8**, Holm p 10⁻³⁶ |
+| Oct 28 adapter: on vs off | +3.4, Holm p 0.23 | −0.2, 1 |
+| Soup: on vs off | −1.1, 1 | −0.1, 1 |
+| Label-first: on vs off | +2.3, 1 | −1.7, 0.11 |
+| Reason-first: on vs off | −1.5, 1 | −0.5, 1 |
+| 5-way: on vs off | −0.5, 1 | −0.8, 0.057 |
+| Oct 28 adapter + thinking vs untouched + thinking | +4.4, 0.11 | **+4.5**, 10⁻¹⁰ |
+| Soup + thinking vs untouched + thinking | +1.5, 1 | **+5.1**, 10⁻¹³ |
+| Label-first + thinking vs untouched + thinking | +2.7, 1 | +1.4, 0.64 |
+| Reason-first + thinking vs untouched + thinking | −1.5, 1 | +0.1, 1 |
+| 5-way + thinking vs untouched + thinking | +1.9, 1 | **+3.9**, 10⁻⁷ |
+
+1. **Thinking helps only the untouched model** (+16.0 / +9.8 points). With an adapter it changes nothing significant on either split: −1.7 to +3.4 points. The Oct 28 adapter's +3.4 on test_uq (raw p 0.017) doesn't survive the correction and is gone on test_ud (−0.2), the split with six times the answers.
+2. **Thinking and fine-tuning buy the same thing, at very different prices.** Untouched E2B with thinking (75.7 / 70.1%) lands at or below the adapters without it (73–78%), for 144–147 J per answer against 5.3–5.6 J, and 9 s against 0.6 s. On test_ud it ties untouched E4B without thinking (70.1%).
+3. **Adapters trained on label-only replies can switch thinking off.** The 5-way adapter never opened a thought block (4 of 5,295 answers) and the soup did on 11–13%. Their "thinking on" rows are their thinking-off grading at the same cost. The Oct 28 adapter, trained on the same kind of replies, still thinks on 99.5%. Why the soup and 5-way differ isn't known.
+4. **Reason-first thinks and then writes its reason too,** for no gain: 105–113 J, about 2.8× its own thinking-off cost.
+
 ## Caveats
 
 - **The test family was chosen after the runs.** Every test passes with a wide margin (largest Holm p = 0.0003), so a different family wouldn't change the conclusion. It is still recorded as post hoc.
 - **The 95% ranges are wide on test_uq** (15 questions, resampled by question) and overlap between graders. The paired tests are the stronger evidence, since they compare the same answers.
 - **One board, one clock state, one llama.cpp build.** These costs are at 612 MHz. At 1,020 MHz, earlier runs were about 1.6× faster for about the same energy per answer ([summary, caveat 2](summary.md#caveats)).
+- **Thinking-on cost is at other clocks** (1,020 MHz on test_uq, 25W / 918 MHz on test_ud) than the thinking-off runs (612 MHz), so its J and seconds per answer are approximate against them. The ratios (30–40× the energy) are far larger than the clock effect (at 1,020 MHz earlier runs were 1.6× faster for about the same energy).
 - **Unmerged adapters only.** The adapter overhead (42% for E2B, 37% for E4B) is llama.cpp's `--lora` path. A merged GGUF should cost the device about what the untouched model does. Not measured.
 - **Job 56's run folder** (E4B adapter, test_uq) was first fetched while its telemetry was still being written. It was re-synced from the board's finished files, and on 2026-11-16 all 32 folders were checked file by file against the board (288 files, every sha256 identical).
 
