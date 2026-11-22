@@ -4,6 +4,8 @@
 
 Fig. accuracy vs energy per answer on the Jetson, test_uq and test_ud, every grader in
 results/estimates/compare-jetson-scientsbank-20261116-052730.json (docs/results/jetson-graders.md).
+Fig. energy per answer and energy per extra correct answer, from the same file plus the thinking-on
+rows of results/estimates/compare-thinking-scientsbank-20261120-142118.json (higher clocks, marked).
 """
 
 import json
@@ -14,7 +16,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
-from matplotlib.ticker import FixedLocator, NullLocator
+from matplotlib.ticker import FixedLocator, FuncFormatter, NullLocator
 
 SRC = Path("results/estimates/compare-jetson-scientsbank-20261116-052730.json")
 OUT = Path("docs/results/figures/jetson-three-graders.pdf")
@@ -78,5 +80,83 @@ def main() -> None:
     print(OUT)
 
 
+THINK = Path("results/estimates/compare-thinking-scientsbank-20261120-142118.json")
+OUT_E = Path("docs/results/figures/jetson-energy.pdf")
+# Row label -> (name in its JSON, from the thinking file?, colour). Order = how the bars are drawn.
+ENERGY_ROWS = [
+    ("E2B untouched", "E2B untouched", False, "#1baf7a"),
+    ("E2B tweaked (adapter)", "E2B tweaked (Oct 28 adapter)", False, "#2a78d6"),
+    ("E2B soup of 5 seeds", "E2B soup (s0-s4)", False, GREY),
+    ("E2B label-first reason", "E2B label-first", False, GREY),
+    ("E2B 5-way labels", "E2B 5-way s0", False, GREY),
+    ("E4B untouched", "E4B untouched", False, "#eb6834"),
+    ("E2B + nearest examples", "E2B + kNN examples", False, GREY),
+    ("E4B tweaked (adapter)", "E4B Oct 28 adapter", False, MUTED),
+    ("E2B + random examples", "E2B + random examples", False, GREY),
+    ("E2B adapter + examples", "E2B adapter + kNN examples", False, GREY),
+    ("E2B reason-first", "E2B reason-first", False, GREY),
+    ("E2B untouched, thinking on*", "E2B untouched", True, GREY),
+    ("E2B tweaked, thinking on*", "Oct 28 adapter", True, GREY),
+]
+
+
+def energy() -> None:
+    """Two panels: J per answer, and extra J per extra correct answer against untouched E2B."""
+    off = {(r["name"], r["split"]): r for r in json.loads(SRC.read_text())["rows"]}
+    on = {(r["name"], r["split"]): r for r in json.loads(THINK.read_text())["rows"] if r["thinking"]}
+    base = {sp: off[("E2B untouched", sp)] for sp in ("test_uq", "test_ud")}
+    rows = []
+    for label, name, think, colour in ENERGY_ROWS:
+        rs = [(on if think else off)[(name, sp)] for sp in ("test_uq", "test_ud")]
+        j = [r["j_per_answer"] for r in rs]
+        per = [(r["j_per_answer"] - base[r["split"]]["j_per_answer"]) / (r["accuracy"] - base[r["split"]]["accuracy"])
+               for r in rs] if name != "E2B untouched" or think else None
+        rows.append((label, j, per, think, colour))
+    # self-check against the paper: adapter 9-11 J and E4B 31-41 J per extra correct answer
+    per = {r[0]: r[2] for r in rows}
+    assert [round(x) for x in per["E2B tweaked (adapter)"]] == [9, 11], per["E2B tweaked (adapter)"]
+    assert sorted(round(x) for x in per["E4B untouched"]) == [31, 41], per["E4B untouched"]
+
+    plt.rcParams.update({"font.size": 8, "font.family": "serif", "axes.edgecolor": GRID,
+                         "axes.labelcolor": MUTED, "xtick.color": MUTED, "ytick.color": INK})
+    fig, (a, b) = plt.subplots(1, 2, figsize=(7.16, 3.3), sharey=True)
+    ys = range(len(rows))[::-1]
+    for y, (label, j, p, think, colour) in zip(ys, rows):
+        mean = sum(j) / 2
+        a.barh(y, mean, height=0.62, color=colour, hatch="////" if think else None,
+               edgecolor="white" if not think else MUTED, lw=0.6)
+        a.text(mean * 1.08, y, f"{min(j):.1f}\u2013{max(j):.1f} J" if max(j) - min(j) >= 0.1 else f"{mean:.1f} J",
+               va="center", fontsize=6.5, color=INK)
+        if p:
+            b.plot(p, [y, y], color=GRID, lw=3, solid_capstyle="round", zorder=1)
+            b.scatter(p[0], y, s=22, marker="o", color=colour if colour != GREY else MUTED, zorder=3)
+            b.scatter(p[1], y, s=22, marker="s", color=colour if colour != GREY else MUTED, zorder=3)
+            b.text(max(p) * 1.4, y, f"{min(p):,.0f}\u2013{max(p):,.0f} J", va="center", fontsize=6.5, color=INK)
+        else:
+            b.text(1.2, y, "baseline", va="center", fontsize=6.5, color=MUTED)
+    a.set_yticks(list(ys), [r[0] for r in rows])
+    for ax, title, xlabel, lim in ((a, "(a) Energy per graded answer", "J per answer (log scale)", (2.5, 600)),
+                                   (b, "(b) Price of each accuracy gain",
+                                    "Extra J per extra correct answer (log scale)", (1, 12000))):
+        ax.set_xscale("log")
+        ax.set_xlim(*lim)
+        ax.grid(axis="x", color=GRID, lw=0.6)
+        ax.set_axisbelow(True)
+        ax.tick_params(length=0)
+        ax.set_title(title, loc="left", fontsize=8.5, color=INK)
+        ax.set_xlabel(xlabel)
+        ax.xaxis.set_major_formatter(FuncFormatter(lambda v, _: f"{v:,.0f}"))
+    b.legend(handles=[Line2D([], [], ls="", marker="o", ms=4, color=MUTED, label="test_uq"),
+                      Line2D([], [], ls="", marker="s", ms=4, color=MUTED, label="test_ud")],
+             loc="upper right", frameon=False, fontsize=7)
+    fig.text(0.01, 0.01, "*Thinking-on runs at higher GPU clocks (1,020 / 918 MHz) than the others (612 MHz); their cost is approximate.",
+             fontsize=6.5, color=MUTED)
+    fig.tight_layout(rect=(0, 0.04, 1, 1))
+    fig.savefig(OUT_E)
+    fig.savefig(OUT_E.with_suffix(".png"), dpi=200)
+    print(OUT_E)
+
+
 if __name__ == "__main__":
     main()
+    energy()
