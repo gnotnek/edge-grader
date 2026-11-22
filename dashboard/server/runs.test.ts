@@ -18,6 +18,18 @@ describe('parseRunFolder', () => {
       condition: 'baseline', benchmark: 'scientsbank', board: 'pi5', split: 'test_uq',
     })
   })
+  test('adapter, examples and thinking-on versions (Jetson, 2026-11-14 to 11-20)', () => {
+    const cond = (n: string) => parseRunFolder(`${n}-e2b-jetson-test_uq-20261115-181358`)?.condition
+    expect(cond('ft')).toBe('ft')
+    expect(cond('ft-s3')).toBe('ft-s3')
+    expect(cond('ft-soup')).toBe('ft-soup')
+    expect(cond('ft-5w-s0')).toBe('ft-5w')
+    expect(cond('ex4')).toBe('ex4')
+    expect(cond('ex4-ft')).toBe('ft-ex4')
+    expect(cond('rand4')).toBe('rand4')
+    expect(cond('ft-lf-think')).toBe('ft-lf-think')
+    expect(cond('ft-5w-s0-think')).toBe('ft-5w-think')
+  })
   test('lg-reuse is its own condition, not lg', () => {
     expect(parseRunFolder('lg-reuse-e4b-jetson-test_ua-20261013-154741')?.condition).toBe('lg-reuse')
     expect(parseRunFolder('lg-e4b-jetson-test_ua-20261013-153753')?.condition).toBe('lg')
@@ -59,6 +71,11 @@ describe('parseKaggleFile', () => {
     })
   })
   test('SciEntsBank baseline', () => {
+    expect(parseKaggleFile('baseline-e4b-spark-gb10-ft-s2-test_uq-3way-20261111-010101.json')?.condition).toBe('ft-s2')
+    expect(parseKaggleFile('baseline-e2b-spark-gb10-ft-lf-beetle-saf-test_ud-3way-20261111-010101.json')?.condition).toBe('ft-lf-bs')
+    expect(parseKaggleFile('examples-e2b-spark-gb10-ft-ex4-test_ud-3way-20261113-010101.json')).toMatchObject({
+      condition: 'ft-ex4', benchmark: 'scientsbank', board: 'spark', split: 'test_ud',
+    })
     expect(parseKaggleFile('baseline-e2b-kaggle-t4-test_uq-3way-20260929-102250.json')).toMatchObject({
       condition: 'baseline', benchmark: 'scientsbank', split: 'test_uq',
     })

@@ -12,8 +12,18 @@ export const CONDITION_LABEL: Record<Condition, string> = {
   'ft-lf': 'Fine-tuned on SciEntsBank, label first',
   'ft-bs': 'Fine-tuned on Beetle+SAF', 'ft-rf-bs': 'Fine-tuned on Beetle+SAF, reason first',
   'ft-lf-bs': 'Fine-tuned on Beetle+SAF, label first',
+  'ft-s0': 'Fine-tuned, seed 0', 'ft-s1': 'Fine-tuned, seed 1', 'ft-s2': 'Fine-tuned, seed 2',
+  'ft-s3': 'Fine-tuned, seed 3', 'ft-s4': 'Fine-tuned, seed 4', 'ft-soup': 'Adapter soup (5 seeds)',
+  'ft-5w': 'Fine-tuned on 5-way labels', ex4: 'Graded examples (nearest 4)',
+  'ft-ex4': 'Fine-tuned + graded examples', rand4: 'Graded examples (random 4)',
+  'ft-think': 'Fine-tuned, thinking on', 'ft-rf-think': 'Reason first, thinking on',
+  'ft-lf-think': 'Label first, thinking on', 'ft-soup-think': 'Adapter soup, thinking on',
+  'ft-5w-think': '5-way labels, thinking on',
 }
-export const CONDITION_ORDER: Condition[] = ['baseline', 'ft', 'ft-rf', 'ft-lf', 'ft-bs', 'ft-rf-bs', 'ft-lf-bs', 'think', 'rag-en', 'rag-id', 'swafull', 'lg', 'lg-reuse']
+export const CONDITION_ORDER: Condition[] = [
+  'baseline', 'ft', 'ft-rf', 'ft-lf', 'ft-bs', 'ft-rf-bs', 'ft-lf-bs',
+  'ft-s0', 'ft-s1', 'ft-s2', 'ft-s3', 'ft-s4', 'ft-soup', 'ft-5w', 'ex4', 'ft-ex4', 'rand4',
+  'think', 'ft-think', 'ft-rf-think', 'ft-lf-think', 'ft-soup-think', 'ft-5w-think', 'rag-en', 'rag-id', 'swafull', 'lg', 'lg-reuse']
 /** The training set of a fine-tuned run's adapter; null for anything not fine-tuned. */
 export function trainedOn(c: Condition): string | null {
   return c.startsWith('ft') ? (c.endsWith('-bs') ? 'Beetle + SAF' : 'SciEntsBank') : null

@@ -23,6 +23,22 @@ function splitStamp(name: string): { tokens: string[]; stamp: string } | null {
   return { tokens: parts.slice(0, -2), stamp }
 }
 
+/**
+ * The version a run's name tags describe, shared by board folders and Kaggle/Spark files:
+ * an adapter (ft, with rf/lf reply, s0-s4 seed, soup, 5w labels, beetle+saf training), graded
+ * examples in the prompt (ex4 nearest, rand4 random) and thinking on. Other tokens are ignored.
+ */
+export function tagCondition(tags: string[]): Condition {
+  const has = (t: string) => tags.includes(t)
+  if (has('rand4')) return 'rand4'
+  if (has('ex4')) return has('ft') ? 'ft-ex4' : 'ex4'
+  if (!has('ft')) return has('think') ? 'think' : 'baseline'
+  const seed = tags.find((t) => /^s[0-4]$/.test(t))
+  const adapter = has('soup') ? 'ft-soup' : has('5w') ? 'ft-5w' : has('rf') ? 'ft-rf' : has('lf') ? 'ft-lf' : seed ? `ft-${seed}` : 'ft'
+  if (has('think')) return `${adapter}-think` as Condition
+  return (has('beetle') && has('saf') ? `${adapter}-bs` : adapter) as Condition
+}
+
 /** A board run folder, as board_grade.sh names it. Null for pilots, interrupted runs and the like. */
 export function parseRunFolder(name: string): RunKey | null {
   const s = splitStamp(name)
@@ -44,6 +60,8 @@ export function parseRunFolder(name: string): RunKey | null {
     if (rest.length > 1 || (rest.length === 1 && rest[0] !== 'rag')) return null
     benchmark = lead
     if (rest[0] === 'rag') condition = 'rag-en'
+  } else if (/(^|-)(ft|ex4|rand4)(-|$)/.test(pre)) {
+    condition = tagCondition(pre.split('-'))
   } else if (pre !== '') {
     // SciEntsBank prefixes stack as rag-<variant>-think-; the outermost one names the condition.
     const first = pre.startsWith('lg-reuse') ? 'lg-reuse' : pre.split('-')[0]
@@ -69,19 +87,14 @@ export function parseKaggleFile(file: string): RunKey | null {
   const pre = tokens.slice(0, m)
   const post = tokens.slice(m + 3) // after <model>-kaggle-t4 or <model>-spark-gb10
   const rag = (): Condition => (post.includes('id') ? 'rag-id' : 'rag-en')
-  // A LoRA adapter on the baseline prompt: -ft, and -ft-rf / -ft-lf for the reply formats of stage 3b.
-  // A -beetle-saf train tag marks an adapter trained on Beetle+SAF instead of SciEntsBank.
-  const base = (): Condition => {
-    if (!post.includes('ft')) return 'baseline'
-    const reply = post.includes('rf') ? 'ft-rf' : post.includes('lf') ? 'ft-lf' : 'ft'
-    return (post.includes('beetle') && post.includes('saf') ? `${reply}-bs` : reply) as Condition
-  }
+  const base = (): Condition => tagCondition(post)
   const key = (benchmark: Benchmark, condition: Condition, split: string): RunKey => ({
     condition, benchmark, model: tokens[m] as Model, board, split, stamp,
   })
 
   switch (pre[0]) {
     case 'baseline':
+    case 'examples':
     case 'rag': {
       const split = post.find((t) => t.startsWith('test_'))
       if (!split) return null
@@ -97,7 +110,8 @@ export function parseKaggleFile(file: string): RunKey | null {
       if (pre[1] !== 'baseline' && pre[1] !== 'think') return null
       return key('asap2', pre[1] === 'think' ? 'think' : base(), post[post.length - 1] ?? '')
     case 'mmlupro':
-      return key('mmlupro', pre[1] === 'rag' ? rag() : base(), post[post.length - 1] ?? '')
+      // The last token is the subset (s1-s3), not an adapter seed.
+      return key('mmlupro', pre[1] === 'rag' ? rag() : tagCondition(post.slice(0, -1)), post[post.length - 1] ?? '')
     case 'gsm':
       return pre[1] === 'rag' ? key('gsm', rag(), pre[2] ?? '') : key('gsm', base(), pre[1] ?? '')
     case 'news':

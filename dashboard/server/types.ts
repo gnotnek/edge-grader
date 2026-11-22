@@ -4,6 +4,8 @@ export type Board = 'pi5' | 'jetson' | 'kaggle' | 'spark'
 export type Model = 'e2b' | 'e4b'
 export type Benchmark = 'scientsbank' | 'beetle' | 'saf' | 'asap2' | 'gsm' | 'news' | 'mmlupro'
 export type Condition = 'baseline' | 'rag-en' | 'rag-id' | 'think' | 'lg' | 'lg-reuse' | 'swafull' | 'ft' | 'ft-rf' | 'ft-lf' | 'ft-bs' | 'ft-rf-bs' | 'ft-lf-bs'
+  | 'ft-s0' | 'ft-s1' | 'ft-s2' | 'ft-s3' | 'ft-s4' | 'ft-soup' | 'ft-5w' | 'ex4' | 'ft-ex4' | 'rand4'
+  | 'ft-think' | 'ft-rf-think' | 'ft-lf-think' | 'ft-soup-think' | 'ft-5w-think'
 
 export interface RunKey {
   condition: Condition
