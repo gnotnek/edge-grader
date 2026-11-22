@@ -186,7 +186,7 @@ The questions are college level, so this material is too.
 
 ## Math (GSM8K), phase A
 
-*Added 2026-10-10 for the math RAG condition: [`../superpowers/plans/2026-10-09-phaseA-math-rag.md`](../superpowers/plans/2026-10-09-phaseA-math-rag.md).*
+*Added 2026-10-10 for the math RAG condition.*
 
 | | |
 |---|---|

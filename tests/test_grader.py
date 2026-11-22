@@ -120,7 +120,7 @@ def test_a_real_thinking_reply_parses_to_its_final_label():
     assert parse_label(answer_part(rec["raw"]), LABELS) == rec["label"]
 
 
-# Stage 3b reply formats (docs/superpowers/specs/2026-11-01-reasoning-finetune-design.md §5.2).
+# Stage 3b reply formats (docs/design/2026-11-01-reasoning-finetune-design.md §5.2).
 ALL_WORDS = "It is not correct, nor incorrect, nor contradictory."
 
 

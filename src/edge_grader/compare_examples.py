@@ -76,7 +76,7 @@ def main(spark: Path = Path("results/spark")) -> None:
 
     out = spark / f"compare-examples-scientsbank{'' if MODEL == 'e4b' else '-' + MODEL}-{datetime.now(UTC):%Y%m%d-%H%M%S}.json"
     out.write_text(json.dumps({
-        "kind": "compare-examples", "spec": "docs/superpowers/specs/2026-11-10-graded-examples-design.md",
+        "kind": "compare-examples", "spec": "docs/design/2026-11-10-graded-examples-design.md",
         "rule": "bar rows: diff >= +5 accuracy points and Holm p < 0.05, paired McNemar on 3-way labels; "
                 "Holm over all 12 tests (fixed before grading, 2026-11-10)",
         "two_way": "secondary: contradictory merged into incorrect, McNemar, own Holm over the same 12",

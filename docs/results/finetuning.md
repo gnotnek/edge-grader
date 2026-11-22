@@ -1,6 +1,6 @@
 # Fine-tuning (stage 3)
 
-*Written 2026-10-28. Accuracy on Kaggle; the Jetson runs (cost) are still to do. Design: [`../superpowers/specs/2026-10-21-finetuning-design.md`](../superpowers/specs/2026-10-21-finetuning-design.md). Raw files: [`../../results/kaggle/`](../../results/kaggle/) (`*-ft-*-20261028-*`) and [`../../results/finetune/`](../../results/finetune/).*
+*Written 2026-10-28. Accuracy on Kaggle; the Jetson runs (cost) are still to do. Design: [`../design/2026-10-21-finetuning-design.md`](../design/2026-10-21-finetuning-design.md). Raw files: [`../../results/kaggle/`](../../results/kaggle/) (`*-ft-*-20261028-*`) and [`../../results/finetune/`](../../results/finetune/).*
 
 ## Setup
 
@@ -154,7 +154,7 @@ These are single runs with one seed and one prompt. The published systems differ
 
 ## Reasoning-guided fine-tuning (E2B, stage 3b)
 
-*Design: [`../superpowers/specs/2026-11-01-reasoning-finetune-design.md`](../superpowers/specs/2026-11-01-reasoning-finetune-design.md). E2B only; E4B, the Jetson cost and the no-harm checks come next if time allows (design §6).*
+*Design: [`../design/2026-11-01-reasoning-finetune-design.md`](../design/2026-11-01-reasoning-finetune-design.md). E2B only; E4B, the Jetson cost and the no-harm checks come next if time allows (design §6).*
 
 **In short:** the gate passed, in one of the four held-out cells. On Beetle test_ua both new adapters beat the untuned E2B (+11.4 points) and the Oct 28 adapter (+5.9), each significant after Holm. The other three cells show no significant gain over the Oct 28 adapter. "Contradictory" did not recover. The reason doesn't have to come first: label-first matches or beats reason-first on 3 of 4 cells at 2 tokens per answer instead of about 65.
 
@@ -372,7 +372,7 @@ Change against untouched E4B, 3-way → 2-way accuracy points (2-way Holm p over
 
 **In short:** the soup is **not adopted**. Averaging five E4B adapters gives an adapter that grades about like the average single adapter, not better: +0.8, +0.4 and −0.2 points against the seeds' mean on test_ua, test_uq and test_ud. On test_ud one seed (seed 0) is significantly better than the soup. The useful result is the spread: **re-training the same recipe with another seed moves accuracy by about ±1.7 points (SD)**, up to 4.4 points between the best and worst seed.
 
-What was run ([spec](../superpowers/specs/2026-11-10-adapter-soup-design.md)): the Oct 27 E4B label-only recipe, trained five times on the DGX Spark with seeds 0–4. Only the answer order and dropout change between seeds; the validation split and LoRA starting weights are the same. Each seed picks its own epoch on validation. The five adapters are averaged exactly (stacked into one rank-80 adapter, served with `--lora`) and graded on the whole of each split beside untouched E4B and each seed. All runs on build `a3a1c47`, 0 unparsed. The 18 tests and the adoption rule were fixed before grading: on every split the soup's accuracy is at least the seeds' mean, and no seed is significantly better (McNemar, Holm over the 18) ([comparison](../../results/spark/compare-soup-scientsbank-20261112-161722.json), `uv run python -m edge_grader.compare_soup`).
+What was run ([spec](../design/2026-11-10-adapter-soup-design.md)): the Oct 27 E4B label-only recipe, trained five times on the DGX Spark with seeds 0–4. Only the answer order and dropout change between seeds; the validation split and LoRA starting weights are the same. Each seed picks its own epoch on validation. The five adapters are averaged exactly (stacked into one rank-80 adapter, served with `--lora`) and graded on the whole of each split beside untouched E4B and each seed. All runs on build `a3a1c47`, 0 unparsed. The 18 tests and the adoption rule were fixed before grading: on every split the soup's accuracy is at least the seeds' mean, and no seed is significantly better (McNemar, Holm over the 18) ([comparison](../../results/spark/compare-soup-scientsbank-20261112-161722.json), `uv run python -m edge_grader.compare_soup`).
 
 3-way accuracy (macro-F1):
 
@@ -413,7 +413,7 @@ The soup against each version, accuracy points (Holm p over the 18; **bold** = s
 
 **In short:** **not adopted.** Training E4B to reply with SciEntsBank's 5 labels, then mapping them to 3-way, did not beat the same recipe trained on 3-way labels. Under the rule fixed before grading it fails: it is better than the 3-way seed-0 adapter on test_ua (+4.3) and worse on test_ud (−2.6), both significant. Compared with all five 3-way seeds (described, not tested), it sits inside their range on test_ua and test_ud and just above it on test_uq. So it grades like one more 3-way seed. Its one clear difference is that it says "contradictory" more often.
 
-What was run ([spec](../superpowers/specs/2026-11-12-fiveway-training-design.md)):
+What was run ([spec](../design/2026-11-12-fiveway-training-design.md)):
 - **Training:** the Oct 27 E4B label-only recipe, seed 0, unchanged except the labels. The adapter learns correct, partially_correct_incomplete, contradictory, irrelevant and non_domain. The epoch was picked on 3-way validation accuracy: 75.6 / 74.5 / 76.8% at epochs 1 / 2 / 3, so epoch 3.
 - **Grading:** the prompt lists the 5 labels. Each reply is mapped to 3-way (the last three become "incorrect") and scored 3-way and 2-way. Nothing is scored 5-way, per the 2026-11-11 decision.
 - **Runs:** whole splits, build `a3a1c47`, 0 unparsed.

@@ -140,7 +140,7 @@ The two tasks aren't directly comparable (10-way multiple choice vs 3-way labels
 
 ## 4. Phase 0: every baseline on both boards (measured, 2026-10-09/10)
 
-*Why: the supervisor (2026-10-08) asked to finish the baseline on the edge before going further. Spec: [`../superpowers/specs/2026-10-08-baseline-variations-design.md`](../superpowers/specs/2026-10-08-baseline-variations-design.md) §4.*
+*Why: the supervisor (2026-10-08) asked to finish the baseline on the edge before going further. Spec: [`../design/2026-10-08-baseline-variations-design.md`](../design/2026-10-08-baseline-variations-design.md) §4.*
 
 **Runs:**
 - 20 folders in [`results/board/`](../../results/board/), run by the boards' own job queue (`scripts/board_queue.py`, which calls `scripts/board_grade.sh`) between 2026-10-09 00:55 and 2026-10-10 ~02:30.

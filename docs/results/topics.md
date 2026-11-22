@@ -34,7 +34,7 @@ The Gemma 4 model card ([ai.google.dev](https://ai.google.dev/gemma/docs/core/mo
 
 ### Math RAG-en (phase A): corpus and retrieval check
 
-*Phase A plan: [`../superpowers/plans/2026-10-09-phaseA-math-rag.md`](../superpowers/plans/2026-10-09-phaseA-math-rag.md). Source: [`../guides/rag-sources.md`](../guides/rag-sources.md#math-gsm8k-phase-a).*
+*Source: [`../guides/rag-sources.md`](../guides/rag-sources.md#math-gsm8k-phase-a).*
 
 **Corpus:** OpenStax *Prealgebra 2e* (CC BY-NC-SA 4.0), chapters 1–11 (pages 17–964) by the PDF's bookmarks, chunked with the frozen settings:
 - **641 chunks**, sha256 in [`chunks-gsm.json`](../../results/rag/chunks-gsm.json)

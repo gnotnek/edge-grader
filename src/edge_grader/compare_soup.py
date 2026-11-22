@@ -84,7 +84,7 @@ def main(spark: Path = Path("results/spark")) -> None:
 
     out = spark / f"compare-soup-scientsbank{'' if MODEL == 'e4b' else '-' + MODEL}-{datetime.now(UTC):%Y%m%d-%H%M%S}.json"
     out.write_text(json.dumps({
-        "kind": "compare-soup", "spec": "docs/superpowers/specs/2026-11-10-adapter-soup-design.md",
+        "kind": "compare-soup", "spec": "docs/design/2026-11-10-adapter-soup-design.md",
         "family": f"{len(tests)} tests fixed before grading: per split, soup vs untouched and vs each "
         "seed; McNemar on 3-way labels, Holm over all; 2-way beside it with its own Holm",
         "rule": "adopted if on every split the soup's accuracy >= the seeds' mean and no seed is "

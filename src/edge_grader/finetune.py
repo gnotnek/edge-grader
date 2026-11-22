@@ -1,6 +1,6 @@
 """Stage 3: a QLoRA adapter for grading, trained on the SciEntsBank train split (RQ3).
 
-Design: docs/superpowers/specs/2026-10-21-finetuning-design.md. The training text is the
+Design: docs/design/2026-10-21-finetuning-design.md. The training text is the
 baseline prompt (grader.build_prompt) in Gemma 4's chat template with thinking off, the reply
 the 3-way label, so the adapter serves through llama-server's --lora with nothing else changed.
 Validation is 10% of the train *questions*; it picks the epoch and nothing else.

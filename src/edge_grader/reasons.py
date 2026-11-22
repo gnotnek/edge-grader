@@ -4,7 +4,7 @@
     uv run edge-grader-reasons --base-url http://127.0.0.1:8080/v1          # all 4,969
     uv run edge-grader-reasons --sets beetle saf                            # other sets' train splits
 
-Design: docs/superpowers/specs/2026-11-01-reasoning-finetune-design.md §5.1. The teacher
+Design: docs/design/2026-11-01-reasoning-finetune-design.md §5.1. The teacher
 (Qwen3-14B in llama-server, thinking off) is given the gold 3-way label and explains it; it
 doesn't grade. A reason that is empty, cut at the token cap, holds a "Label:" line or names a
 label other than the gold one is kept in the file with a drop code, and isn't trained on.
