@@ -1,13 +1,13 @@
 # Design: stage 3 fine-tuning revived (QLoRA on SciEntsBank)
 
-*2026-10-21. Worked through with the owner. Once approved, this spec feeds [`research-outline.md`](../../research-outline.md) and [`plan.md`](../../plan.md); those two stay the source of truth for what is decided and when. Calls marked **(Claude's call)** were not discussed with the owner and can be changed.*
+*2026-10-21. Worked through with the owner. Once approved, this spec feeds [`research-outline.md`](../research-outline.md) and [`plan.md`](../plan.md); those two stay the source of truth for what is decided and when. Calls marked **(Claude's call)** were not discussed with the owner and can be changed.*
 
 ## 1. Why now
 
 Fine-tuning (RQ3, stage 3) was dropped on 2026-10-08 so the baseline could be finished first. The owner is bringing it back (2026-10-21) because the baseline and the RAG runs weren't promising for grading:
 
-- Baseline, 3-way accuracy, test_ua / test_uq / test_ud: E2B 55.2 / 59.8 / 60.3%, E4B 67.0 / 67.5 / 70.4% ([baselines](../../results/baselines.md)).
-- RAG-en doesn't help grading: E2B −5.1 on test_ud (p < 0.001), E4B +0.3 ([rag](../../results/rag.md)). The Jetson runs agree.
+- Baseline, 3-way accuracy, test_ua / test_uq / test_ud: E2B 55.2 / 59.8 / 60.3%, E4B 67.0 / 67.5 / 70.4% ([baselines](../results/baselines.md)).
+- RAG-en doesn't help grading: E2B −5.1 on test_ud (p < 0.001), E4B +0.3 ([rag](../results/rag.md)). The Jetson runs agree.
 
 RAG adds knowledge to the prompt; fine-tuning changes how the model judges. The supervisor said on 2026-09-29 that fine-tuning was "necessary, to compare a general model with a tweaked one", so this also answers an original request.
 

@@ -1,6 +1,6 @@
 # New methods to raise E4B's accuracy (after graded examples)
 
-*2026-11-12. Follows the six methods of 2026-11-09 and the graded-examples result ([examples.md](../docs/results/examples.md)). Every paper below was checked in IEEE Xplore (lab access), arXiv, Crossref or the ACL Anthology.*
+*2026-11-12. Follows the six methods of 2026-11-09 and the graded-examples result ([examples.md](../results/examples.md)). Every paper below was checked in IEEE Xplore (lab access), arXiv, Crossref or the ACL Anthology.*
 
 ## First: where the E4B adapter still goes wrong
 

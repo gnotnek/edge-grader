@@ -1,6 +1,6 @@
 # Design: train the E4B adapter on SciEntsBank's 5-way labels, report 3-way
 
-*2026-11-12. Method approved by the owner on 2026-11-12 ("5-way first"), chosen from five candidates in the owner's literature notes (`research_notes/2026-11-12-new-methods.md`, not in the repo). Running in parallel with the adapter-soup queue on the DGX Spark, as the owner allowed. Calls marked **(Claude's call)** were not discussed and can be changed until grading starts. The decision goes into [`research-outline.md`](../../research-outline.md).*
+*2026-11-12. Method approved by the owner on 2026-11-12 ("5-way first"), chosen from five candidates in the owner's literature notes (`docs/literature/2026-11-12-new-methods.md`, not in the repo). Running in parallel with the adapter-soup queue on the DGX Spark, as the owner allowed. Calls marked **(Claude's call)** were not discussed and can be changed until grading starts. The decision goes into [`research-outline.md`](../research-outline.md).*
 
 ## 1. Why
 

@@ -2,7 +2,7 @@
 
 **In plain words:** before E4B grades an answer, its prompt shows 4 answers from other students that experts already graded. **Result: it helps where the examples answer the same question (test_ua, +7.2 points, passes the 5-point bar), does nothing significant on unseen questions (test_uq, +4.4), and hurts on unseen domains (test_ud, −3.8, significant).** Similar examples are no better than random ones, and examples add nothing to the label-only adapter, which stays well ahead. The prompt grows about 3.5×.
 
-Design: [spec](../superpowers/specs/2026-11-10-graded-examples-design.md). Comparison: `uv run python -m edge_grader.compare_examples` → [`results/spark/compare-examples-scientsbank-20261111-052532.json`](../../results/spark/compare-examples-scientsbank-20261111-052532.json).
+Design: [spec](../design/2026-11-10-graded-examples-design.md). Comparison: `uv run python -m edge_grader.compare_examples` → [`results/spark/compare-examples-scientsbank-20261111-052532.json`](../../results/spark/compare-examples-scientsbank-20261111-052532.json).
 
 ## Setup
 

@@ -1,10 +1,10 @@
 # Design: translating Beetle's "contradictory" into SciEntsBank's definition (proposal)
 
-*2026-11-09. Draft for the supervisor and the lab, not approved yet. Written after the Nov 8 fine-tuning results were known, so this is a new experiment, not a re-reading of those results. Calls marked **(Claude's call)** were not discussed and can be changed. Once approved, the decisions go into [`research-outline.md`](../../research-outline.md) and [`plan.md`](../../plan.md).*
+*2026-11-09. Draft for the supervisor and the lab, not approved yet. Written after the Nov 8 fine-tuning results were known, so this is a new experiment, not a re-reading of those results. Calls marked **(Claude's call)** were not discussed and can be changed. Once approved, the decisions go into [`research-outline.md`](../research-outline.md) and [`plan.md`](../plan.md).*
 
 ## 1. Why
 
-The adapters trained on Beetle + SAF and tested on SciEntsBank help E2B but not E4B on the 3-way labels ([results](../../results/finetuning.md#result-transfer-helps-e2b-not-e4b-2026-11-08)). Scored 2-way (correct vs not correct), all nine E4B cells go up; on 3-way, test_ud drops 3–9 points ([boundary check](../../results/finetuning.md#why-e4b-loses-the-contradictoryincorrect-boundary-2026-11-09-post-hoc)). The loss sits on one label: "contradictory".
+The adapters trained on Beetle + SAF and tested on SciEntsBank help E2B but not E4B on the 3-way labels ([results](../results/finetuning.md#result-transfer-helps-e2b-not-e4b-2026-11-08)). Scored 2-way (correct vs not correct), all nine E4B cells go up; on 3-way, test_ud drops 3–9 points ([boundary check](../results/finetuning.md#why-e4b-loses-the-contradictoryincorrect-boundary-2026-11-09-post-hoc)). The loss sits on one label: "contradictory".
 
 The two datasets use the label **"contradictory" for two different things.** Both were labeled correctly under their own rules; the rules differ (Dzikovska et al., 2012, §2.1–2.2):
 

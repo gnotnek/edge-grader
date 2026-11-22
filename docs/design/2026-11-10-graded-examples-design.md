@@ -1,12 +1,12 @@
 # Design: graded examples in the prompt (E4B, SciEntsBank)
 
-*2026-11-10. The method was approved by the supervisor on 2026-11-10; this design was **approved by the owner on 2026-11-10, with the random-examples control added** (owner). Calls marked **(Claude's call)** were not discussed and can be changed. Once approved, the decision goes into [`research-outline.md`](../../research-outline.md), which stays the source of truth.*
+*2026-11-10. The method was approved by the supervisor on 2026-11-10; this design was **approved by the owner on 2026-11-10, with the random-examples control added** (owner). Calls marked **(Claude's call)** were not discussed and can be changed. Once approved, the decision goes into [`research-outline.md`](../research-outline.md), which stays the source of truth.*
 
 ## 1. Why
 
 **In plain words:** before asking E4B to grade an answer, show it a few answers from other students that experts already graded, picked because they look most like the one being graded. The model sees *how the experts draw the line* between correct, contradictory and incorrect, on answers close to this one. Nothing about the model changes; only the prompt gets longer.
 
-This is not the earlier RAG ([results](../../results/rag.md)): that added textbook passages (knowledge) and didn't help grading. Here the added text is graded answers (examples of the judgement itself).
+This is not the earlier RAG ([results](../results/rag.md)): that added textbook passages (knowledge) and didn't help grading. Here the added text is graded answers (examples of the judgement itself).
 
 Evidence:
 - **Wang & Ormerod 2024** (arXiv 2408.03811): retrieve similar graded train answers with a fine-tuned all-MiniLM-L6-v2, put them in Claude 3.5 Sonnet's prompt. Best published SciEntsBank 3-way: accuracy 78.71 / 76.94 / 73.35 on UA / UQ / UD. They note it helps less on UQ and UD, where train holds no answers to the same question.

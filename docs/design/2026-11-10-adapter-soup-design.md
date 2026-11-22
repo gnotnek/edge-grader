@@ -1,10 +1,10 @@
 # Design: adapter averaging ("model soup") for E4B on SciEntsBank
 
-*2026-11-10. Approved as a method by the supervisor on 2026-11-10, together with graded examples in the prompt (a separate session). **Spec approved by the owner on 2026-11-10, as written.** Calls marked **(Claude's call)** were not discussed and can be changed. Once approved, the decision goes into [`research-outline.md`](../../research-outline.md), which stays the source of truth.*
+*2026-11-10. Approved as a method by the supervisor on 2026-11-10, together with graded examples in the prompt (a separate session). **Spec approved by the owner on 2026-11-10, as written.** Calls marked **(Claude's call)** were not discussed and can be changed. Once approved, the decision goes into [`research-outline.md`](../research-outline.md), which stays the source of truth.*
 
 ## 1. Why
 
-The E4B label-only adapter trained on SciEntsBank (Kaggle T4, 2026-10-27, [results](../../results/finetuning.md)) is the most accurate E4B version so far: 79.1 / 79.9 / 76.4% on test_ua / test_uq / test_ud, against 66.7 / 67.5 / 70.4% untouched. But it is **one training run with one seed**. The one re-run with the same settings (Oct 23 → Oct 27) moved test_ua by about a point, so we don't know how much of the result is that seed's luck.
+The E4B label-only adapter trained on SciEntsBank (Kaggle T4, 2026-10-27, [results](../results/finetuning.md)) is the most accurate E4B version so far: 79.1 / 79.9 / 76.4% on test_ua / test_uq / test_ud, against 66.7 / 67.5 / 70.4% untouched. But it is **one training run with one seed**. The one re-run with the same settings (Oct 23 → Oct 27) moved test_ua by about a point, so we don't know how much of the result is that seed's luck.
 
 **The method.** Wortsman et al., ICML 2022, *Model soups: averaging weights of multiple fine-tuned models improves accuracy without increasing inference time* (arXiv 2203.05482). Several models fine-tuned from the same starting point are averaged weight by weight into one model. The average usually beats a single run, and it costs the same to run as one model. In plain words: each training run lands at a slightly different spot; averaging them cancels part of each run's noise.
 
@@ -97,7 +97,7 @@ Per split, accuracy and macro-F1, 3-way and 2-way:
 ### 5.6 Comparisons (fixed before grading)
 
 - **The family: 18 tests.** Per split: the soup against untouched E4B, and the soup against each of the five seeds. Paired McNemar on 3-way labels, **Holm over all 18 at once**. **(Claude's call)**
-- 2-way beside it: the same 18 pairs, McNemar, its own Holm over the 18, as in [`compare_bar.py`](../../../src/edge_grader/compare_bar.py). Secondary, not part of the decision.
+- 2-way beside it: the same 18 pairs, McNemar, its own Holm over the 18, as in [`compare_bar.py`](../../src/edge_grader/compare_bar.py). Secondary, not part of the decision.
 - The 5-point bar for the soup against untouched E4B, read from the same tests.
 - Not tested, only described: single seeds against untouched, the Kaggle adapter, mean ± SD.
 - The code reuses `compare.paired`, `compare.holm` and `compare.latest`, and writes `results/spark/compare-soup-scientsbank-*.json`.

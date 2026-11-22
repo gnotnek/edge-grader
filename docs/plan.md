@@ -80,7 +80,7 @@
 - [x] Analysis: math vs news, no RAG vs RAG; the GSM8K vs GSM-Symbolic gap as the memorisation check ([`results/topics.md`](results/topics.md#math-against-news-what-suits-these-models))
 
 ### Stage 3: Fine-tuning (weeks 6–7, revived 2026-10-21)
-*Dropped 2026-10-08 so the baseline came first; revived by the owner because RAG didn't improve grading. Design: [`superpowers/specs/2026-10-21-finetuning-design.md`](superpowers/specs/2026-10-21-finetuning-design.md).*
+*Dropped 2026-10-08 so the baseline came first; revived by the owner because RAG didn't improve grading. Design: [`design/2026-10-21-finetuning-design.md`](design/2026-10-21-finetuning-design.md).*
 
 - [x] Re-run every Jetson baseline at the new clocks (14 jobs, queued 2026-10-21; owner): the cost pairs for stage 4 RAG and the tuned runs. All 14 done 2026-10-21: 12 with byte-identical replies to phase 0 (`board-check-20261021-065457.json`, RAG cost table in [`results/rag.md`](results/rag.md#cost-rag-en-against-the-re-run-baseline)); MMLU-Pro (jobs 48, 49, re-queued after `a6c5066`) agrees with Kaggle (`board-check-20261021-141904.json`, [`results/rag.md`](results/rag.md#mmlu-pro-baseline-on-the-jetson-2026-10-21))
 - [ ] Day 1 risk check: a tiny E2B QLoRA run on a Kaggle T4, adapter converted to GGUF and loaded with `--lora` on Kaggle's and the Jetson's llama.cpp builds. **Kaggle half done 2026-10-22: main path.** The chat template matches `llama-server`'s; 20 steps at batch 1 × 16 (batch 4 ran out of memory at the loss, `cf54e00`), loss 0.21; `convert_lora_to_gguf.py` worked and `a3a1c47` served the adapter with `--lora`: 10 test_ua answers, 0 unparsed, 2 labels changed from the baseline's (`results/finetune/finetune-e2b-20261022-141705.json`, a smoke run, not a result). Jetson build (`a894dae`) load check still to do, with the real adapter
@@ -92,7 +92,7 @@
 - [x] `results/finetuning.md`: paired McNemar, Holm over the improvement and no-harm families; outline and summary updated (2026-10-28, accuracy; the Jetson's cost to add)
 
 ### Stage 3b: reasoning-guided fine-tuning (weeks 8–9, Kaggle)
-*Held-out check first (2026-10-30), then the supervisor's literature request (2026-10-31). Design: [`superpowers/specs/2026-11-01-reasoning-finetune-design.md`](superpowers/specs/2026-11-01-reasoning-finetune-design.md). Implementation plan: [`superpowers/plans/2026-11-01-reasoning-finetune.md`](superpowers/plans/2026-11-01-reasoning-finetune.md).*
+*Held-out check first (2026-10-30), then the supervisor's literature request (2026-10-31). Design: [`design/2026-11-01-reasoning-finetune-design.md`](design/2026-11-01-reasoning-finetune-design.md).*
 
 - [x] Held-out grading sets: Beetle and SAF in the baseline runner and Kaggle notebook; the Oct 28 adapters graded on them (2026-10-30): small gains, one significant ([`results/finetuning.md`](results/finetuning.md#held-out-grading-sets-beetle-and-saf-2026-10-31))
 - [x] Literature: published work on tuning Gemma for grading (2026-10-31); reasoning-guided QLoRA chosen
@@ -105,7 +105,6 @@
 - [ ] Jetson cost and no-harm checks for label-first (otherwise future work in the write-up)
 
 ### Phase 0: the baseline on the boards (week 5, first)
-*Implementation plan: [`superpowers/plans/2026-10-09-phase0-edge-baseline.md`](superpowers/plans/2026-10-09-phase0-edge-baseline.md).*
 - [x] `board_grade.sh` takes a benchmark (`scientsbank` | `gsm` | `news`); dry-run tests (2026-10-09). Plus the boards' own job queue, `scripts/board_queue.py` / `scripts/queue.sh` (owner's request)
 - [x] `edge-grader-board-check` pairs GSM and news board runs with Kaggle (2026-10-09; telemetry folder fix 2026-10-10)
 - [x] Jetson: SciEntsBank test_uq + test_ud, GSM8K + GSM-Symbolic (1,000), news; E2B + E4B (2026-10-09, clocks restored by a reboot first)
@@ -115,20 +114,17 @@
 - [x] Gate: 2 of 20 board-vs-Kaggle comparisons have p = 0.033 (Holm-corrected > 0.6). **Passed with the Holm correction** (owner's decision, 2026-10-10; recorded in the outline's own decisions)
 
 ### Phase A: baseline vs RAG for every benchmark (week 5, Kaggle)
-*Implementation plan: [`superpowers/plans/2026-10-09-phaseA-math-rag.md`](superpowers/plans/2026-10-09-phaseA-math-rag.md).*
 - [x] Math corpus: OpenStax *Prealgebra 2e* (CC BY-NC-SA 4.0), pinned in `sources.json`, chunked with the frozen settings: 641 chunks (2026-10-10)
 - [x] Retrieval check: 30 GSM8K **train** questions, owner's marking: **21/30** (17/30 at rank 1)
 - [x] Kaggle: math RAG-en, E2B + E4B, GSM8K + GSM-Symbolic (2026-10-10): every cell down (E2B −5.0/−4.9, E4B −4.0/−1.4); E2B GSM-Symbolic significant by template (p 0.04)
 - [x] Four-benchmark table: news, MMLU-Pro, SciEntsBank, math, baseline vs RAG ([`results/rag.md`](results/rag.md#baseline-against-rag-en-all-four-benchmarks-phase-a-2026-10-10))
 
 ### Phase B: variations on the grading baseline (weeks 5–7)
-*Implementation plans: [B1 thinking](superpowers/plans/2026-10-09-phaseB1-thinking.md), [B2 little-gemma + reuse](superpowers/plans/2026-10-09-phaseB2-little-gemma-reuse.md), [B3 EmbeddingGemma 2](superpowers/plans/2026-10-09-phaseB3-embeddinggemma2.md).*
 - [x] B1 thinking on: parser reads after the thought block (test); `max_tokens` 336; boards first (2026-10-11): Jetson all splits, Pi test_ua + test_uq, E2B + E4B, against each board's thinking-off baseline; Kaggle optional. Done 2026-10-13: +3.0 to +18.8 points on all 10 runs (p ≤ 0.004), at 11× (Pi) and 35–40× (Jetson) the energy; MMLU-Pro side copied from `agentic-edge` (no change): [`results/variations.md`](results/variations.md#b1-thinking-on)
 - [x] B2 little-gemma on the Jetson: why test_ua had no prefix reuse; `lg-base`, `lg-reuse`, `llama-sorted` on test_ua; byte-identical check. Done 2026-10-13, with `--swa-full` as the llama.cpp reuse control in place of `llama-sorted` (pilot, 2026-10-13): accuracy unchanged (p ≥ 0.38); energy −50% / −21% (little-gemma, E2B / E4B), −42% / −44% (`--swa-full`); `lg-reuse` byte-identical to `lg` and reuses nothing on grading prompts: [`results/variations.md`](results/variations.md#b2-engine-little-gemma-and-prefix-reuse)
 - [ ] B3 EmbeddingGemma 2: loads on the Mac?; retrieval check on the 30 SciEntsBank train questions; grading run only at ≥ 20/30
 
 ### Phase C: text + images (weeks 6–7)
-*Implementation plan: [`superpowers/plans/2026-10-09-phaseC-images.md`](superpowers/plans/2026-10-09-phaseC-images.md).*
 - [ ] C1: render answers (pinned font), private Kaggle dataset with sha256; matching vision projector; reading check on 100; Kaggle test_ua + test_uq; cost on the Jetson
 - [ ] C2: data search (real student answers, figures, labels, English, licence, ~300+); run or drop, recorded in the outline
 
@@ -197,7 +193,7 @@
 | 2026-10-07 | Topic narrowing added to week 5: math (GSM8K + GSM-Symbolic) against post-cutoff news, no RAG and RAG. Pending the supervisor | Supervisor asked which of logic, math, news and general knowledge suits these models. MMLU-Pro answers math only; math and news are the two ends of the knowledge-vs-skill contrast |
 | 2026-10-07 | Topic benchmarks built ahead of the supervisor's reply, at the owner's request: math runner, LiveNewsBench in place of a self-built news set, news corpus and retrieval. Kaggle runs and the judge remain | The build is cheap and doesn't touch SciEntsBank or stage 3; a published, human-verified post-cutoff set with source articles already existed |
 | 2026-10-08 | News judge: Qwen3-14B on Kaggle instead of GPT-4.1; the planned agreement checks (GPT-4.1, hand grades) dropped, owner's choice | GPT-4.1 needs paid API credit (free tier: 50 requests a day, 800 needed); the open judge is free and reproducible |
-| 2026-10-08 | **Fine-tuning dropped**; phases 0 (baseline on the boards, first), A (math RAG), B (thinking, little-gemma + prefix reuse, EmbeddingGemma 2) and C (images) take weeks 5–7 | Supervisor, 2026-10-08: the findings are in the baseline, finish it on the edge first, show baseline vs RAG for every benchmark, narrow multimodal to text + images. Design: `superpowers/specs/2026-10-08-baseline-variations-design.md` |
+| 2026-10-08 | **Fine-tuning dropped**; phases 0 (baseline on the boards, first), A (math RAG), B (thinking, little-gemma + prefix reuse, EmbeddingGemma 2) and C (images) take weeks 5–7 | Supervisor, 2026-10-08: the findings are in the baseline, finish it on the edge first, show baseline vs RAG for every benchmark, narrow multimodal to text + images. Design: [`design/2026-10-08-baseline-variations-design.md`](design/2026-10-08-baseline-variations-design.md) |
 | 2026-10-10 | Phase 0 runs done: 20 board runs, all complete; board = Kaggle on 18/20, two at p = 0.033 (opposite directions); gate decision pending | Supervisor 2026-10-08: baseline on the edge first. Results: `results/baselines.md` §4 |
 | 2026-10-10 | Phase A done: math RAG-en (Prealgebra) lowers GSM accuracy for both models; the four-benchmark baseline-vs-RAG table is in `results/rag.md` | Supervisor 2026-10-08: compare each baseline with RAG. Math and news had the same retrieval check (21/30) and went opposite ways |
 | 2026-10-11 | Edge first, cloud optional: B1 runs on the boards (Jetson all splits, Pi test_ua + test_uq), compared within each board; Kaggle thinking runs optional | Owner 2026-10-11. Outline, own decisions |

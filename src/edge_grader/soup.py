@@ -1,6 +1,6 @@
 """Adapter averaging, a "model soup" (Wortsman et al., ICML 2022), for LoRA adapters.
 
-Design: docs/superpowers/specs/2026-11-10-adapter-soup-design.md §5.2. A LoRA update is
+Design: docs/design/2026-11-10-adapter-soup-design.md §5.2. A LoRA update is
 dW = (alpha/r) B A, so averaging the As and Bs separately is not the average update. Stacking the
 As as rows and the Bs as columns gives B A = sum_i B_i A_i exactly; alpha stays, r becomes N r, and
 the scale alpha/(N r) supplies the 1/N. llama.cpp (rank from the tensor shape, a3a1c47) and PEFT

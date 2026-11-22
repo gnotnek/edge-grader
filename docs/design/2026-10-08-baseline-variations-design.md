@@ -1,6 +1,6 @@
 # Design: edge baseline first, then baseline variations (replaces fine-tuning)
 
-*2026-10-08. From the supervisor's notes of 2026-10-08, worked through with the owner. Once approved, this spec feeds [`research-outline.md`](../../research-outline.md) and [`plan.md`](../../plan.md); those two stay the source of truth for what is decided and when.*
+*2026-10-08. From the supervisor's notes of 2026-10-08, worked through with the owner. Once approved, this spec feeds [`research-outline.md`](../research-outline.md) and [`plan.md`](../plan.md); those two stay the source of truth for what is decided and when.*
 
 ## 1. What the supervisor asked (2026-10-08)
 

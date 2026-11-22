@@ -1,10 +1,10 @@
 # Design: reasoning-guided fine-tuning (stage 3, second recipe)
 
-*2026-11-01. Worked through with the owner. Calls marked **(Claude's call)** were not discussed and can be changed. Once approved, the decisions go into [`research-outline.md`](../../research-outline.md) and [`plan.md`](../../plan.md), which stay the source of truth.*
+*2026-11-01. Worked through with the owner. Calls marked **(Claude's call)** were not discussed and can be changed. Once approved, the decisions go into [`research-outline.md`](../research-outline.md) and [`plan.md`](../plan.md), which stay the source of truth.*
 
 ## 1. Why
 
-The Oct 28 adapters (label-only QLoRA on the SciEntsBank train split, [spec](2026-10-21-finetuning-design.md)) raised SciEntsBank but barely moved the held-out grading sets ([results](../../results/finetuning.md#held-out-grading-sets-beetle-and-saf-2026-10-31)):
+The Oct 28 adapters (label-only QLoRA on the SciEntsBank train split, [spec](2026-10-21-finetuning-design.md)) raised SciEntsBank but barely moved the held-out grading sets ([results](../results/finetuning.md#held-out-grading-sets-beetle-and-saf-2026-10-31)):
 
 - Gains on Beetle and SAF of +2 to +7 points; only E2B Beetle test_uq is significant after Holm. E4B gains nothing that holds up.
 - The adapters learned SciEntsBank's label mix: they over-predict "correct" and under-predict "contradictory", which is 10% of SciEntsBank train but 25–30% of Beetle.
@@ -49,7 +49,7 @@ Part of **RQ3**: *Does training on reasons, not just labels, make the tuned smal
 
 ### 5.1 Writing the reasons (teacher)
 
-- **Model:** Qwen3-14B, Qwen's official Q4_K_M GGUF, served in `llama-server` on Kaggle with the Gemma flags, thinking off, temperature 0, as in [`kaggle_news_judge.ipynb`](../../../notebooks/kaggle_news_judge.ipynb).
+- **Model:** Qwen3-14B, Qwen's official Q4_K_M GGUF, served in `llama-server` on Kaggle with the Gemma flags, thinking off, temperature 0, as in [`kaggle_news_judge.ipynb`](../../notebooks/kaggle_news_judge.ipynb).
 - **Input:** question, reference answer, student answer and the **gold 3-way label**. The teacher explains why the answer earns that label; it does not grade (owner: every training answer gets a reason).
 - **Reason:** 1–3 sentences, at most about 60 words, comparing the student answer with the reference: what it gets right, what is missing or contradicts it. Cap of 128 tokens. **(Claude's call)** The prompt is a file in `src/edge_grader/prompts/`.
 - **Automatic filter:** drop a reason that is empty, cut off at the cap, or names a label other than the gold one as the verdict. The share dropped is recorded. If more than 5% are dropped, the prompt is fixed and all reasons rewritten, before any training. **(Claude's call)**

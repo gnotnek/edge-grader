@@ -136,7 +136,7 @@ Grading the untouched models and Oct 28 adapters here too keeps the comparison o
 
 ## Adapter soup (E4B, SciEntsBank)
 
-Five E4B label-only adapters, the same recipe with seeds 0–4, then one adapter that is their exact average, then all of them graded on the three test splits beside untouched E4B ([spec](../superpowers/specs/2026-11-10-adapter-soup-design.md)):
+Five E4B label-only adapters, the same recipe with seeds 0–4, then one adapter that is their exact average, then all of them graded on the three test splits beside untouched E4B ([spec](../design/2026-11-10-adapter-soup-design.md)):
 
 | Service | Container | Runs |
 |---|---|---|

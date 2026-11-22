@@ -1,121 +1,116 @@
 # edge-grader
 
-Can a small LLM running on an edge device (Raspberry Pi 5, Jetson Orin Nano) grade students' short answers, and how much do subject knowledge (RAG) and fine-tuning improve it?
+Can a small LLM on an edge board grade students' short answers, and is a fine-tuned small model a better grader than a bigger untouched one?
 
-Part of an internship at the NTUST MIT Lab. It builds on the lab's `agentic-edge` benchmark: same models (Gemma 4 E2B/E4B), same `llama-server` setup, and the same MMLU-Pro baseline as a comparison point. Background, decisions and literature are in the separate `research-ideation` notes.
+Three graders are compared on SciEntsBank (SemEval-2013 Task 7, 3-way labels) on a Jetson Orin Nano: **Gemma 4 E2B untouched**, **E2B with a QLoRA adapter**, and **Gemma 4 E4B untouched**. Each is scored for accuracy and F1, and for latency and energy per answer on the board. Short answer so far: the E2B adapter beats untouched E4B on unseen questions and unseen domains, and it uses less energy per answer ([`docs/results/jetson-graders.md`](docs/results/jetson-graders.md)).
 
-**Research questions, stages and supervisor feedback:** [`docs/research-outline.md`](docs/research-outline.md). **Steps and timeline:** [`docs/plan.md`](docs/plan.md).
+Part of an internship at the NTUST MIT Lab. Model files, `llama-server` flags and the energy telemetry match the lab's `agentic-edge` benchmark, so the numbers are comparable with it. Research questions and every decision with its reason: [`docs/research-outline.md`](docs/research-outline.md). All findings by question: [`docs/results/summary.md`](docs/results/summary.md).
 
-## Plan
+## What you need
 
-| Stage | What | Status |
-|---|---|---|
-| 1. Baseline | Untouched model grades SciEntsBank answers; the lab's MMLU-Pro subset as a second baseline | Done: MMLU-Pro copied; grading on Kaggle (E4B 67–70%, E2B 55–60%), same accuracy on both boards; cost measured on test_ua (Jetson 4–7 J, Pi 5 28–56 J per answer) ([docs/results/baselines.md](docs/results/baselines.md)) |
-| 2. RAG | Retrieve course material (open textbooks) into the prompt | SciEntsBank done: RAG-en doesn't improve grading (E4B flat, E2B −2 to −5 points), it makes it more lenient ([docs/results/rag.md](docs/results/rag.md)). MMLU-Pro done: no significant change (E2B +0.7, E4B −2.0). Topic benchmarks (math: GSM8K/GSM-Symbolic; post-cutoff news: LiveNewsBench) built; Kaggle runs next ([docs/results/topics.md](docs/results/topics.md)) |
-| 3. Fine-tuning | QLoRA on Kaggle/Colab, converted to GGUF | — |
-| 4. Edge cost | Latency and energy per answer on the Pi 5 / Jetson, for each stage | — |
-
-## Setup
-
-Needs [uv](https://docs.astral.sh/uv/).
+| For | Needs |
+|---|---|
+| Re-checking the numbers from committed results | Any machine with [uv](https://docs.astral.sh/uv/). No GPU, no models |
+| Grading accuracy | A GPU that runs `llama-server` (we used Kaggle T4s and a DGX Spark) |
+| Training an adapter | A CUDA GPU with ~16 GB (Kaggle T4, or the Spark through Docker) |
+| Latency and energy | A Jetson Orin Nano (8 GB) with llama.cpp built, plus `agentic-edge`'s `run_measured.sh` for telemetry |
 
 ```bash
-uv sync          # creates .venv and installs everything from uv.lock
-uv run pytest    # quick check
+uv sync
+uv run pytest
 ```
 
-## Run the baseline
+## Replicate
 
-There are three ways to run it. All use the lab's model files and `llama-server` flags (thinking off), so the numbers are comparable with `agentic-edge`.
+### 0. Re-check the reported numbers (no GPU)
 
-### On Kaggle (accuracy)
-
-First time on Kaggle? Follow [`docs/guides/kaggle-setup.md`](docs/guides/kaggle-setup.md). Otherwise: open [`notebooks/kaggle_baseline.ipynb`](notebooks/kaggle_baseline.ipynb) on Kaggle. Its first cell lists the setup: GPU on, Internet on, and a read-only `GITHUB_TOKEN` secret. It builds `llama-server` with CUDA, downloads the models, and grades. Start with `N = 100`, check that `unparsed` ≈ 0, then run the full splits.
-
-### On a lab board (accuracy + latency + energy)
-
-The code sits next to `agentic-edge` on each board, using the same ssh aliases:
-
-| | Pi 5 (`MITLAB-EDGE`) | Jetson (`MITLAB-JETSON`) |
-|---|---|---|
-| repo | `~/Research/edge-grader` | `~/research/edge-grader` |
-
-Deploy from the Mac, as agentic-edge does. `deploy.sh` rsyncs the committed files, so the boards need no GitHub access. It also installs uv on first use, runs `uv sync` and the tests on the board, and records the commit in `DEPLOYED.json`:
+Every run is committed under `results/`, including per-answer replies. These commands rebuild the tables and tests from them:
 
 ```bash
-scripts/deploy.sh              # both boards (or: pi | jetson)
-scripts/fetch_results.sh       # later: pull results/board/ back here to commit
+uv run python -m edge_grader.compare_jetson      # three graders + every E2B method on the Jetson: accuracy, J/answer, McNemar + Holm
+uv run python -m edge_grader.compare_thinking    # thinking on with every E2B adapter
+uv run --with matplotlib python scripts/paper_figures.py   # manuscript figures, into docs/results/figures/
 ```
 
-Stage 1 board cost is **measured** on test_ua, both boards (`docs/results/baselines.md`); the earlier estimate (`uv run edge-grader-cost`) is kept for the other splits. After fetching runs, `uv run edge-grader-board-check results/board/<run>/ ...` compares them with Kaggle and the estimate. On the board, with `agentic-edge` deployed and the board idle:
+`compare_jetson` reads the board-check JSONs in `results/estimates/`. To rebuild those from the raw board runs first:
 
 ```bash
-ssh MITLAB-EDGE                              # or MITLAB-JETSON (~/research/...)
-cd ~/Research/edge-grader
-scripts/board_grade.sh e4b                  # test_ua, all 540 answers, with telemetry
-scripts/board_grade.sh e2b test_ud 200      # split and count are optional
+uv run edge-grader-board-check results/board/*-jetson-test_u[qd]-2026111[456]-*/
 ```
 
-- **What the script does:**
-  - detects the board
-  - stops the lab's server (on the Pi, the `va-llm` service) and starts `llama-server` with the lab's baseline flags
-  - runs the grading inside `agentic-edge`'s `run_measured.sh`, so energy is recorded the same way as MMLU-Pro
-  - **restores the board on exit**, even if the run fails
-- **Outputs:**
-  - grading results and telemetry: `results/board/<run>/` on the board; fetch them with `scripts/fetch_results.sh`
-- **Run it directly on the board, never through the lab's job queue.** edge-grader is a separate project; its runs must not mix with `agentic-edge`'s data. A queue job is wrapped in the queue's own `run_measured.sh`, which writes telemetry into `agentic-edge`'s `measured/` and needs a marker in its `stdbench/`, so the run ends up in the lab's results and on its dashboard.
-  - The script refuses to run from the queue (or under any `run_measured.sh` but its own), and refuses to write telemetry outside this repo's `results/`.
-  - It refuses to start while an `agentic-edge` run has the board (one job per board), so check the lab's queue first. The lab's queue in turn waits while this script runs.
-  - Runs from before 2026-10-05 that went through the queue were moved out of `agentic-edge`'s folders on the boards to `<root>/external/edge-grader/` (`~/Research` on the Pi, `~/research` on the Jetson). Their telemetry is already committed under `results/board/`.
+### 1. Models and server
 
-### On the lab's DGX Spark (Docker)
-
-The Spark runs everything in Docker (lab rule): one image with the uv environment and `llama-server` at the pinned commit. See [`docs/guides/spark-docker.md`](docs/guides/spark-docker.md).
-
-### Anywhere else
-
-Start a `llama-server` yourself, e.g. `llama-server -m <model.gguf> -c 8192 --port 8080 -rea off --reasoning-budget -1 --cache-ram 0`, then:
+- **Models:** `unsloth/gemma-4-E2B-it-qat-GGUF` and `unsloth/gemma-4-E4B-it-qat-GGUF`, file `*-UD-Q4_K_XL.gguf`.
+- **Server:** llama.cpp's `llama-server`. Kaggle and the Spark use commit `a3a1c47` (pinned in [`docker/Dockerfile`](docker/Dockerfile)). Each run's summary JSON records the build it actually used.
+- **Flags** (thinking off, as in `agentic-edge`):
 
 ```bash
-uv run edge-grader-baseline --label e4b-q4 --n 100                 # 100 answers, unseen-answers split
-uv run edge-grader-baseline --label e4b-q4 --split test_ud --n 0   # whole unseen-domains split
-uv run edge-grader-mmlupro --label e4b-q4 --subset s1 --n 5        # MMLU-Pro, lm-eval's prompt
-uv run edge-grader-gsm --label e4b-q4 --set gsm8k --n 5            # math: GSM8K / GSM-Symbolic
-uv run edge-grader-news --label e4b-q4 --n 5                       # post-cutoff news (LiveNewsBench)
+llama-server -m <model.gguf> -c 8192 --port 8080 -ngl 99 -rea off --reasoning-budget -1 --cache-ram 0 [--lora <adapter.gguf>]
 ```
 
-The run stops straight away if no server answers. A failed request is recorded as an error and the run continues.
+### 2. Train the adapter (stage 3)
 
-**All outputs stay in this repo and are committed:** nothing is written into `agentic-edge`. See [`results/README.md`](results/README.md) for the layout.
+QLoRA on the SciEntsBank train split; the epoch is picked on 14 held-out train questions. Run either one:
 
-**Metrics:** accuracy and macro/weighted F1, the SemEval-2013 metrics. SciEntsBank labels are categories, not scores, so QWK isn't used here.
+- **Kaggle:** [`notebooks/kaggle_finetune.ipynb`](notebooks/kaggle_finetune.ipynb). Set `MODEL`, then `SMOKE = True` for a quick check and `SMOKE = False` for the real run. It trains, converts the adapter to GGUF and grades with `--lora`. First time on Kaggle: [`docs/guides/kaggle-setup.md`](docs/guides/kaggle-setup.md).
+- **Docker (DGX Spark or any CUDA box):** `docker compose run --rm finetune-…` services in [`compose.yaml`](compose.yaml); see [`docs/guides/spark-docker.md`](docs/guides/spark-docker.md).
+
+Both call `uv run --group finetune edge-grader-finetune --model e2b --out <dir>`. Settings and per-epoch scores: [`docs/results/finetuning.md`](docs/results/finetuning.md). Our adapter files are in a private Kaggle dataset, not in git; their sha256 is in that page.
+
+### 3. Grade for accuracy (GPU)
+
+With a server running from step 1:
+
+```bash
+uv run edge-grader-baseline --label e2b --split test_uq --n 0   # whole unseen-questions split (733)
+uv run edge-grader-baseline --label e2b --split test_ud --n 0   # whole unseen-domains split (4,562)
+```
+
+Start an adapter server with `--lora` for the tweaked grader. Each run writes a summary JSON (metrics and settings) and `raw/*.jsonl` (one reply per answer). `--n 100` is a quick check: `unparsed` should be about 0. Kaggle does the same in [`notebooks/kaggle_baseline.ipynb`](notebooks/kaggle_baseline.ipynb).
+
+### 4. Measure cost on the Jetson
+
+Clone this repo next to `agentic-edge` on the board (or push it with `scripts/deploy.sh jetson` from your machine), then on the idle board:
+
+```bash
+scripts/board_grade.sh e2b test_uq                                          # E2B untouched
+LORA=$HOME/research/models/adapters/e2b-ft.gguf scripts/board_grade.sh e2b test_uq   # E2B tweaked
+scripts/board_grade.sh e4b test_uq                                          # E4B untouched
+```
+
+Repeat for `test_ud`. The script starts `llama-server` with the flags above, grades inside `run_measured.sh` so power is logged, records the clocks in `board-state.txt`, and restores the board when it exits. Without `agentic-edge`, `MEASURE=0` gives accuracy only. `DRY_RUN=1` prints what it would do. Other options (thinking, RAG, graded examples, 5-way adapters) are listed at the top of [`scripts/board_grade.sh`](scripts/board_grade.sh).
+
+- **Keep the clock state fixed.** Compare energy only between runs at the same GPU clock and power mode. Ours: GPU 612 MHz, memory 2,133 MHz for the Nov 14–16 runs (`board-state.txt` in each run).
+- **Run it directly on the board, never through `agentic-edge`'s job queue.** The script refuses if started from the queue, and it refuses to write telemetry outside this repo's `results/`.
+
+Bring the runs back with `scripts/fetch_results.sh`, then go back to step 0.
+
+## Other experiments
+
+These are in the repo with their results. Each page says how its runs were made:
+
+| | Page |
+|---|---|
+| Baselines on Kaggle, Pi 5 and Jetson; MMLU-Pro | [`baselines.md`](docs/results/baselines.md) |
+| RAG over course material (no gain for grading) | [`rag.md`](docs/results/rag.md), how-to in [`guides/rag.md`](docs/guides/rag.md) |
+| Math (GSM8K, GSM-Symbolic) and post-cutoff news | [`topics.md`](docs/results/topics.md) |
+| Thinking on, engine and prefix-reuse variations | [`variations.md`](docs/results/variations.md) |
+| Graded examples in the prompt; adapter soup; 5-way labels | [`examples.md`](docs/results/examples.md), [`finetuning.md`](docs/results/finetuning.md) |
+| ASAP 2.0 essays (set aside) | [`asap2.md`](docs/results/asap2.md) |
+
+## Metrics
+
+Accuracy and macro/weighted F1, the SemEval-2013 metrics. SciEntsBank labels are categories, so QWK isn't used for it. Two graders are compared with a paired McNemar test on the same answers, Holm-corrected within a family fixed before looking.
 
 ## Layout
 
 ```
-docs/                   index: docs/README.md
-  research-outline.md   research questions, stages, supervisor feedback
-  plan.md               step checklist and week-by-week timeline
-  results/              numbers: baselines, edge benchmarks, RAG, topic benchmarks
-  guides/               how-tos: Kaggle setup, RAG pipeline
-src/edge_grader/
-  data.py       SciEntsBank loader + 5/3/2-way label schemes
-  grader.py     prompt, model call, label parsing
-  metrics.py    accuracy, F1
-  baseline.py   stage-1 CLI
-  mmlupro.py    MMLU-Pro on the lab's 300 questions, lm-eval's prompt, with or without RAG
-  gsm.py        topic benchmark, math: GSM8K and GSM-Symbolic, lm-eval's format
-  news.py       topic benchmark, news: LiveNewsBench, with or without RAG; its LLM judge
-  cost.py       board cost estimate from agentic-edge rates (edge-grader-cost)
-  board_check.py  board runs vs Kaggle accuracy and the estimate (edge-grader-board-check)
-  rag/          stage 2: sources.json + sources.py (material, downloader), corpus.py (chunks),
-                index.py (embed, retrieve), check.py (retrieval check); see docs/guides/rag.md
-notebooks/
-  kaggle_baseline.ipynb   grading, MMLU-Pro and the topic benchmarks on a Kaggle GPU (stages 1-2)
-  kaggle_rag_index.ipynb  stage 2: embed the chunks and retrieve, on Kaggle
-  kaggle_news_judge.ipynb stage 2 topics: grade the news answers with an open judge (Qwen3-14B)
-scripts/
-  board_grade.sh          stage 1 on the Pi 5 / Jetson, with telemetry
-tests/                    includes an end-to-end run against a fake llama-server
-results/
+src/edge_grader/   the grader (grader.py), data loaders, CLIs, comparisons (compare_*.py), rag/
+scripts/           board_grade.sh (Jetson/Pi runs), deploy/fetch, Spark Docker jobs, paper figures
+notebooks/         Kaggle: baseline grading, fine-tuning, reasons, RAG index, news judge
+results/           every run, committed and never hand-edited; layout in results/README.md
+docs/              research outline, plan, results pages, guides; index in docs/README.md
+manuscript/        the paper (IEEE TLT draft)
+dashboard/         local web view of runs and board state (dashboard/README.md)
+tests/             includes an end-to-end run against a fake llama-server
 ```

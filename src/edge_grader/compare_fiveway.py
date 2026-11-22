@@ -94,7 +94,7 @@ def main(spark: Path = Path("results/spark"), gold5: Callable[[str], dict[str, s
 
     out = spark / f"compare-fiveway-scientsbank{'' if MODEL == 'e4b' else '-' + MODEL}-{datetime.now(UTC):%Y%m%d-%H%M%S}.json"
     out.write_text(json.dumps({
-        "kind": "compare-fiveway", "spec": "docs/superpowers/specs/2026-11-12-fiveway-training-design.md",
+        "kind": "compare-fiveway", "spec": "docs/design/2026-11-12-fiveway-training-design.md",
         "family": f"{len(tests)} tests fixed before grading: per split, the 5-way adapter vs the 3-way "
         "seed 0 and vs untouched; McNemar on 3-way labels, Holm over all; 2-way beside it with its own Holm",
         "rule": "helps if significantly better than the 3-way seed 0 (Holm p < 0.05) on at least one split "

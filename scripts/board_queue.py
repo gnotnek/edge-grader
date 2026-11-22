@@ -88,7 +88,7 @@ RAG_FILES = {bench: f"results/rag/retrieval-{bench}-en.bge-small-en-k5.json"
 def preset(name: str, where: str) -> list[tuple[dict, list[str]]]:
     if name not in ("phase0", "rag"):
         sys.exit(f"unknown preset: {name} (phase0, rag)")
-    # Phase 0 (docs/superpowers/plans/2026-10-09-phase0-edge-baseline.md): the Jetson runs all
+    # Phase 0: the Jetson runs all
     # 1,000 GSM-Symbolic variants, the Pi the first variant set only.
     instances = "10" if where == "jetson" else "1"
     out = []

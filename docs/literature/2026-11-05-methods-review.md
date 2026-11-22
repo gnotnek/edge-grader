@@ -2,13 +2,13 @@
 
 *Written 2026-11-05 by Claude, at the owner's request, after the outline's 2026-11-04 change (RQ4, the cost of accuracy on the Jetson, is now the main result). These are **proposals, not decisions.** Any method that's adopted gets a row in the outline's "Own decisions" table with the RQ it serves. Sources were found by web search. For most of them only the abstract or a summary was read, not the full paper, so check the figures marked "(abstract)" before you cite them.*
 
-> **2026-11-05, supervisor:** the cascade concept isn't far from Jev (TypeSafe AI's "System One" model, fast decisions with calibrated probabilities). Focus on tweaking the model's settings, one configuration at a time, as the baseline was extended with thinking on/off. So methods 1 and 2 are set aside, and their simulation stays recorded in [variations.md](results/variations.md#cascade-and-defer-to-teacher-simulated-from-b1-2026-11-05). The setting tweaks are listed at the end.
+> **2026-11-05, supervisor:** the cascade concept isn't far from Jev (TypeSafe AI's "System One" model, fast decisions with calibrated probabilities). Focus on tweaking the model's settings, one configuration at a time, as the baseline was extended with thinking on/off. So methods 1 and 2 are set aside, and their simulation stays recorded in [variations.md](../results/variations.md#cascade-and-defer-to-teacher-simulated-from-b1-2026-11-05). The setting tweaks are listed at the end.
 >
-> **Later on 2026-11-05, supervisor:** the thinking budget sweep isn't significant, and the lab doesn't really use MTP. Both are dropped (method 5; the MTP and n-gram rows of the tweak table). **Owner:** the research target is grading accuracy, with its edge-device caveats explained ([summary](results/summary.md#accuracy-as-the-target-the-caveats-2026-11-05)).
+> **Later on 2026-11-05, supervisor:** the thinking budget sweep isn't significant, and the lab doesn't really use MTP. Both are dropped (method 5; the MTP and n-gram rows of the tweak table). **Owner:** the research target is grading accuracy, with its edge-device caveats explained ([summary](../results/summary.md#accuracy-as-the-target-the-caveats-2026-11-05)).
 
 ## What the outline needs
 
-The outline asks which versions sit on the accuracy–energy and accuracy–latency front. It also asks which settings lower cost at the same accuracy. So far the grading ladder on the Jetson (test_ua, [summary](results/summary.md#rq4-what-does-it-cost-on-the-boards)) has three points:
+The outline asks which versions sit on the accuracy–energy and accuracy–latency front. It also asks which settings lower cost at the same accuracy. So far the grading ladder on the Jetson (test_ua, [summary](../results/summary.md#rq4-what-does-it-cost-on-the-boards)) has three points:
 
 | Version | Accuracy | J / answer |
 |---|---|---|
@@ -79,7 +79,7 @@ Fine-tuning is excluded here because RQ3 already covers it.
 - The diagnosed problems are label bias:
   - E2B overuses "contradictory".
   - Both untuned models under-call "correct".
-  - RAG shifted the threshold rather than the judgement ([summary](results/summary.md#rq2-does-rag-over-course-material-help)).
+  - RAG shifted the threshold rather than the judgement ([summary](../results/summary.md#rq2-does-rag-over-course-material-help)).
 - Calibration targets that bias directly at zero decode cost: it's still ~2 tokens.
 - It also gives the confidence that methods 1 and 2 need.
 - `src/edge_grader/label_prior.py` already reads the top logprobs and applies a fixed prior correction. Batch calibration is the label-free version of the same idea.
