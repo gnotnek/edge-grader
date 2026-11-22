@@ -1,0 +1,14 @@
+2026-10-21T11:30:09+0800 mitlab-orin-nano llama-server[0]: 0.00.000.787 I srv  llama_server: initializing ...
+2026-10-21T11:30:10+0800 mitlab-orin-nano llama-server[0]: 0.00.142.103 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+2026-10-21T11:30:10+0800 mitlab-orin-nano llama-server[0]: 0.00.143.326 W srv  llama_server: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+2026-10-21T11:30:10+0800 mitlab-orin-nano llama-server[0]: 0.00.145.009 I srv    load_model: loading model '/home/ari/research/models/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf'
+2026-10-21T11:30:14+0800 mitlab-orin-nano llama-server[0]: 0.04.178.030 W load: control-looking token:    212 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+2026-10-21T11:30:14+0800 mitlab-orin-nano llama-server[0]: 0.04.179.536 W load: control-looking token:     50 '<|tool_response>' was not control-type; this is probably a bug in the model. its type will be overridden
+2026-10-21T11:30:14+0800 mitlab-orin-nano llama-server[0]: 0.04.286.215 W load: special_eog_ids contains '<|tool_response>', removing '</s>' token from EOG list
+2026-10-21T11:32:19+0800 mitlab-orin-nano llama-server[0]: 2.09.634.264 I cmn          init: llama threadpool init, n_threads = 6
+2026-10-21T11:32:20+0800 mitlab-orin-nano llama-server[0]: 2.10.193.733 I srv    load_model: initializing, n_slots = 4, n_ctx_slot = 8192, kv_unified = 'true'
+2026-10-21T11:32:20+0800 mitlab-orin-nano llama-server[0]: 2.10.194.296 W srv          init: --cache-idle-slots requires --cache-ram, disabling
+2026-10-21T11:32:20+0800 mitlab-orin-nano llama-server[0]: 2.10.260.443 I srv  llama_server: model loaded
+2026-10-21T11:32:20+0800 mitlab-orin-nano llama-server[0]: 2.10.260.474 I srv  llama_server: listening on http://127.0.0.1:8080
+2026-10-21T11:32:20+0800 mitlab-orin-nano llama-server[0]: 2.10.260.476 W srv  llama_server: notice: server default port will be changed to :9931 in a future release (ref: https://github.com/ggml-org/llama.cpp/pull/26508)
+2026-10-21T11:32:38+0800 mitlab-orin-nano llama-server[0]: 2.28.275.139 I srv    operator(): operator(): cleaning up before exit...
