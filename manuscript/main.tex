@@ -73,7 +73,7 @@ A low-cost edge board such as the Jetson Orin Nano, whose developer kit costs ab
 
 A small model grades worse than a larger one, and there are two ways to close the gap on the same board: run a larger model, or fine-tune the small one for grading.
 Both cost time and energy on a device with a fixed power budget, so the choice needs accuracy and device cost measured together.
-Grading studies fine-tune small open models~\cite{ormerod2024gpupoor,aggarwal2024engsaf,walsh2025finetuning} but report accuracy on server GPUs, and edge studies measure power and latency but not grading~\cite{arya2025edgepower}; to our knowledge, no grading study has reported energy per graded answer or run on an edge board.
+Grading studies fine-tune small open models~\cite{ormerod2024gpupoor,aggarwal2024engsaf} but report accuracy on server GPUs, and edge studies measure power and latency but not grading~\cite{arya2025edgepower}; to our knowledge, no grading study has reported energy per graded answer or run on an edge board.
 
 We therefore ask: \textit{can a fine-tuned small grader replace a larger untouched one on an edge device, and what does each accuracy gain cost there?}
 We compare three graders built on Gemma~4, E2B untouched, E2B fine-tuned (``tweaked'') and E4B untouched, on an NVIDIA Jetson Orin Nano, measuring accuracy together with latency and energy per answer.
@@ -134,20 +134,20 @@ Automatic short-answer grading compares a student's free-text answer with a refe
 Burrows et~al.\ reviewed 35 such systems and found the field moving from ad hoc, non-comparable experiments towards shared evaluation~\cite{burrows2015eras}.
 SemEval-2013 Task~7 supplied that evaluation: the SciEntsBank and Beetle datasets, labels at 2-, 3- and 5-way granularity, and separate test splits for unseen answers, questions and domains~\cite{dzikovska2013semeval}.
 Fine-tuned encoders such as BERT and XLNet later matched or passed the shared-task systems without hand-engineered features~\cite{ghavidel2020bert}.
-SciEntsBank remains in common use for language-model graders~\cite{kortemeyer2024gpt4,wang2024rag,cong2026irt,deng2026rubric}, which lets our results be placed against more than a decade of published numbers on the same splits.
+SciEntsBank remains in common use for language-model graders~\cite{kortemeyer2024gpt4,wang2024rag,cong2026irt}, which lets our results be placed against more than a decade of published numbers on the same splits.
 
 \subsection{Language Models as Graders}
 Prompted general-purpose models grade reasonably but not best.
 GPT-4 without further training performs about as well as hand-engineered models on SciEntsBank and Beetle, but worse than models with specialised training~\cite{kortemeyer2024gpt4}, and zero- and few-shot prompting struggles on items that need domain knowledge~\cite{chamieh2024llms}.
-Adding retrieval lifts a large cloud model to the best published 3-way accuracy on SciEntsBank~\cite{wang2024rag}, and conditioning a 72-billion-parameter open model on a rubric gives strong agreement on 2-way labels that weakens as the labels get finer~\cite{deng2026rubric}.
+Adding retrieval lifts a large cloud model to the best published 3-way accuracy on SciEntsBank~\cite{wang2024rag}.
 An item-response analysis of 17 open-weight models on SciEntsBank and Beetle shows that models with similar overall scores differ in how fast they fail on harder answers~\cite{cong2026irt}.
 
-Fine-tuning small open models is the other route: QLoRA~\cite{dettmers2023qlora} on 7--8-billion-parameter models gives adequate if not state-of-the-art scores on limited hardware~\cite{ormerod2024gpupoor}, fine-tuned 7-billion-parameter models grade engineering answers with feedback~\cite{aggarwal2024engsaf}, QLoRA alone moves little with very little labelled data~\cite{walsh2025finetuning}, and pre-finetuning across prompts helps when per-item data are scarce~\cite{funayama2025crossprompt}.
+Fine-tuning small open models is the other route: QLoRA~\cite{dettmers2023qlora} on 7--8-billion-parameter models gives adequate if not state-of-the-art scores on limited hardware~\cite{ormerod2024gpupoor}, fine-tuned 7-billion-parameter models grade engineering answers with feedback~\cite{aggarwal2024engsaf}, and pre-finetuning across prompts helps when per-item data are scarce~\cite{funayama2025crossprompt}.
 Each of these studies tests one way of improving a grader, on server hardware; we compare fine-tuning with the alternatives a practitioner would try instead, on one benchmark and one device.
 
 \subsection{Small Models on Edge Devices}
 Running small language models on edge devices cuts latency and removes the dependence on a network~\cite{islam2025edgeenergy}.
-Across a Raspberry Pi~5, a Jetson Nano and a Jetson Orin Nano, the Orin Nano with its GPU gave the best energy-to-performance ratio for five small models~\cite{islam2025edgeenergy}; other studies compare CPU, GPU and NPU back ends~\cite{prieto2025edge} and characterise latency and power on Jetson Orin accelerators~\cite{arya2025edgepower}, and task-specific models are known to use far less energy than general-purpose ones~\cite{luccioni2024power}.
+Across a Raspberry Pi~5, a Jetson Nano and a Jetson Orin Nano, the Orin Nano with its GPU gave the best energy-to-performance ratio for five small models~\cite{islam2025edgeenergy}; other studies characterise latency and power on Jetson Orin accelerators~\cite{arya2025edgepower}, and task-specific models are known to use far less energy than general-purpose ones~\cite{luccioni2024power}.
 These studies measure generic workloads rather than grading, while grading studies measure accuracy without device cost; the closest exception times models of up to about one billion parameters on a laptop CPU but reports no energy~\cite{saur2026grading}.
 We join the two, measuring accuracy and energy per graded answer for every grader on the same board.
 
@@ -195,7 +195,7 @@ Third, the two sizes come from the same release and take the same prompt, so com
 
 We fine-tune E2B, the smaller model, because it is the grader a school can best afford to run.
 On the board, untouched E2B takes 3.7--3.8~J and 0.40--0.41~s per answer, a little over half of E4B's 6.8--6.9~J and 0.70--0.71~s (Table~\ref{tab:three}), and it leaves more of the shared memory free for longer prompts and for other software on the same device.
-Its weakness is accuracy, 7.5--9.8 points below E4B, and that is the kind of gap fine-tuning addresses: across 31 tasks, 4-bit LoRA fine-tunes of small models outperformed their base models and, on average, a much larger general model~\cite{zhao2024loraland}. Here, the adapter is trained once, off the device, on graded answers of the kind teachers already produce, and what it adds to each answer is the work of a small adapter rather than of a larger model, whose extra cost is paid on every answer for as long as it is used.
+Its weakness is accuracy, 7.5--9.8 points below E4B, and that is the kind of gap fine-tuning addresses: on SciEntsBank itself, models trained for the task grade better than GPT-4 used without training~\cite{kortemeyer2024gpt4}. Here, the adapter is trained once, off the device, on graded answers of the kind teachers already produce, and what it adds to each answer is the work of a small adapter rather than of a larger model, whose extra cost is paid on every answer for as long as it is used.
 So the three graders are E2B untouched (the starting point), E2B tweaked (the fine-tuned small model) and E4B untouched (the larger model a school would otherwise run).
 We also fine-tune E4B with the same recipe, not as a fourth contender but as a reference: it shows how much further fine-tuning the larger model would go, and at what cost.
 

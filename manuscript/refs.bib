@@ -84,18 +84,26 @@
   doi     = {10.1007/s40593-025-00474-w}
 }
 
-@misc{ormerod2024gpupoor,
-  author       = {Ormerod, Christopher Michael and Kwako, Alexander},
-  title        = {Automated Text Scoring in the Age of Generative {AI} for the {GPU}-Poor},
-  year         = {2024},
-  howpublished = {arXiv:2407.01873}
+@article{ormerod2024gpupoor,
+  author    = {Ormerod, Christopher and Kwako, Alexander},
+  title     = {Automated Text Scoring in the Age of Generative {AI} for the {GPU}-poor},
+  journal   = {Chinese/English Journal of Educational Measurement and Evaluation},
+  volume    = {5},
+  number    = {3},
+  year      = {2024},
+  publisher = {National Council on Measurement in Education (NCME)},
+  doi       = {10.59863/okuu1904}
 }
 
-@misc{aggarwal2024engsaf,
-  author       = {Aggarwal, Dishank and Sil, Pritam and Raman, Bhaskaran and Bhattacharyya, Pushpak},
-  title        = {``{I} Understand Why {I} Got This Grade'': Automatic Short Answer Grading with Feedback},
-  year         = {2024},
-  howpublished = {arXiv:2407.12818}
+@inproceedings{aggarwal2024engsaf,
+  author    = {Aggarwal, Dishank and Sil, Pritam and Raman, Bhaskaran and Bhattacharyya, Pushpak},
+  title     = {``{I} Understand Why {I} Got This Grade'': Automatic Short Answer Grading ({ASAG}) with Feedback},
+  booktitle = {Artificial Intelligence in Education (AIED)},
+  series    = {Lecture Notes in Computer Science},
+  pages     = {304--318},
+  year      = {2025},
+  publisher = {Springer},
+  doi       = {10.1007/978-3-031-98420-4_22}
 }
 
 @misc{walsh2025finetuning,
@@ -105,11 +113,14 @@
   howpublished = {arXiv:2508.04063}
 }
 
-@misc{arya2025edgepower,
-  author       = {Arya, Mayank and Simmhan, Yogesh},
-  title        = {Understanding the Performance and Power of {LLM} Inferencing on Edge Accelerators},
-  year         = {2025},
-  howpublished = {arXiv:2506.09554}
+@inproceedings{arya2025edgepower,
+  author    = {Arya, Mayank and Simmhan, Yogesh},
+  title     = {Understanding the Performance and Power of {LLM} Inferencing on Edge Accelerators},
+  booktitle = {Proc. IEEE Int. Parallel and Distributed Processing Symposium Workshops (IPDPSW)},
+  pages     = {1108--1111},
+  year      = {2025},
+  publisher = {IEEE},
+  doi       = {10.1109/IPDPSW66978.2025.00173}
 }
 
 % Indonesia background (fetched 2026-11-20). Non-peer-reviewed sources marked in note.
@@ -273,11 +284,14 @@
   howpublished = {arXiv:2601.08843}
 }
 
-@misc{islam2025edgeenergy,
-  author       = {Islam, Md Romyull and Deng, Bobin and Dhar, Nobel and Nguyen, Tu N. and He, Selena and Shi, Yong and Suo, Kun},
-  title        = {Characterizing and Understanding Energy Footprint and Efficiency of Small Language Model on Edges},
-  year         = {2025},
-  howpublished = {arXiv:2511.11624}
+@inproceedings{islam2025edgeenergy,
+  author    = {Islam, Md Romyull and Deng, Bobin and Dhar, Nobel and Nguyen, Tu N. and He, Selena and Shi, Yong and Suo, Kun},
+  title     = {Characterizing and Understanding Energy Footprint and Efficiency of Small Language Model on Edges},
+  booktitle = {Proc. IEEE 22nd Int. Conf. Mobile Ad-Hoc and Smart Systems (MASS)},
+  pages     = {363--371},
+  year      = {2025},
+  publisher = {IEEE},
+  doi       = {10.1109/MASS66014.2025.00059}
 }
 
 @misc{prieto2025edge,
@@ -287,8 +301,11 @@
   howpublished = {arXiv:2511.22334}
 }
 
-% Added 2026-11-24 to support method choices. Gemma 4, LoRA Land and Dietterich from doi.org (Accept: application/x-bibtex);
+% Added 2026-11-24 to support method choices. Gemma 4 and Dietterich from doi.org (Accept: application/x-bibtex);
 % SAF from aclanthology.org/2022.acl-long.587.bib; llama.cpp from the GitHub repository page (gh api repos/ggml-org/llama.cpp).
+% Published versions (doi.org, 2026-11-24) replaced the arXiv preprints of arya, islam, ormerod and aggarwal.
+% Uncited preprints with no published version are left unused: walsh2025finetuning, deng2026rubric, prieto2025edge.
+% Gemma 4 and wang2024rag stay arXiv: no published version exists (Crossref, 2026-11-24).
 % Gemma 4: the full author list (about 300 names) is on arXiv 2607.02770; shortened to the team name, as Gemma reports are cited.
 @misc{gemma2026gemma4,
   author = {{Gemma Team}},
@@ -299,14 +316,6 @@
   url = {https://arxiv.org/abs/2607.02770}
 }
 
-@misc{zhao2024loraland,
-  author = {Zhao, Justin and Wang, Timothy and Abid, Wael and Angus, Geoffrey and Garg, Arnav and Kinnison, Jeffery and Sherstinsky, Alex and Molino, Piero and Addair, Travis and Rishi, Devvret},
-  title = {{LoRA} Land: 310 Fine-tuned {LLMs} that Rival {GPT-4}, A Technical Report},
-  publisher = {arXiv},
-  year = {2024},
-  doi = {10.48550/arXiv.2405.00732},
-  url = {https://arxiv.org/abs/2405.00732}
-}
 
 @article{dietterich1998tests,
   author = {Dietterich, Thomas G.},
