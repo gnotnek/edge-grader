@@ -1,7 +1,7 @@
 % Only entries checked against the source. To add: export BibTeX from the DOI / arXiv page, never type it from memory.
 % Entries below wang2024rag came from doi.org (Accept: application/x-bibtex) on 2026-11-18.
-% TODO add: Faza et al. 2025, IJECBE (doi 10.62146/ijecbe.v3i3.148); Gemma 4 model card; llama.cpp;
-%   Beetle and SAF datasets; arXiv 2601.08843, 2511.11624.
+% TODO add: Faza et al. 2025, IJECBE (doi 10.62146/ijecbe.v3i3.148);
+%   arXiv 2601.08843, 2511.11624.
 
 @inproceedings{dzikovska2013semeval,
   author    = {Dzikovska, Myroslava and Nielsen, Rodney and Brew, Chris and Leacock, Claudia and Giampiccolo, Danilo and Bentivogli, Luisa and Clark, Peter and Dagan, Ido and Dang, Hoa Trang},
@@ -285,4 +285,56 @@
   title        = {Edge Deployment of Small Language Models, a Comprehensive Comparison of {CPU}, {GPU} and {NPU} Backends},
   year         = {2025},
   howpublished = {arXiv:2511.22334}
+}
+
+% Added 2026-11-24 to support method choices. Gemma 4, LoRA Land and Dietterich from doi.org (Accept: application/x-bibtex);
+% SAF from aclanthology.org/2022.acl-long.587.bib; llama.cpp from the GitHub repository page (gh api repos/ggml-org/llama.cpp).
+% Gemma 4: the full author list (about 300 names) is on arXiv 2607.02770; shortened to the team name, as Gemma reports are cited.
+@misc{gemma2026gemma4,
+  author = {{Gemma Team}},
+  title = {Gemma 4 Technical Report},
+  publisher = {arXiv},
+  year = {2026},
+  doi = {10.48550/arXiv.2607.02770},
+  url = {https://arxiv.org/abs/2607.02770}
+}
+
+@misc{zhao2024loraland,
+  author = {Zhao, Justin and Wang, Timothy and Abid, Wael and Angus, Geoffrey and Garg, Arnav and Kinnison, Jeffery and Sherstinsky, Alex and Molino, Piero and Addair, Travis and Rishi, Devvret},
+  title = {{LoRA} Land: 310 Fine-tuned {LLMs} that Rival {GPT-4}, A Technical Report},
+  publisher = {arXiv},
+  year = {2024},
+  doi = {10.48550/arXiv.2405.00732},
+  url = {https://arxiv.org/abs/2405.00732}
+}
+
+@article{dietterich1998tests,
+  author = {Dietterich, Thomas G.},
+  title = {Approximate Statistical Tests for Comparing Supervised Classification Learning Algorithms},
+  journal = {Neural Computation},
+  volume = {10},
+  number = {7},
+  pages = {1895--1923},
+  year = {1998},
+  publisher = {MIT Press},
+  doi = {10.1162/089976698300017197}
+}
+
+@inproceedings{filighera2022saf,
+  author = {Filighera, Anna and Parihar, Siddharth and Steuer, Tim and Meuser, Tobias and Ochs, Sebastian},
+  title = {Your Answer is Incorrect... Would you like to know why? Introducing a Bilingual Short Answer Feedback Dataset},
+  booktitle = {Proceedings of the 60th Annual Meeting of the {A}ssociation for {C}omputational {L}inguistics (Volume 1: Long Papers)},
+  pages = {8577--8591},
+  year = {2022},
+  address = {Dublin, Ireland},
+  publisher = {Association for Computational Linguistics},
+  doi = {10.18653/v1/2022.acl-long.587}
+}
+
+@misc{llamacpp,
+  author = {{ggml-org}},
+  title = {llama.cpp: {LLM} inference in {C/C++}},
+  howpublished = {\url{https://github.com/ggml-org/llama.cpp}},
+  note = {Build a894dae},
+  year = {2026}
 }
