@@ -73,7 +73,7 @@ A low-cost edge board such as the Jetson Orin Nano, whose developer kit costs ab
 
 A small model grades worse than a larger one, and there are two ways to close the gap on the same board: run a larger model, or fine-tune the small one for grading.
 Both cost time and energy on a device with a fixed power budget, so the choice needs accuracy and device cost measured together.
-Grading studies fine-tune small open models~\cite{ormerod2024gpupoor,aggarwal2024engsaf,walsh2025finetuning} but report accuracy on server GPUs, and edge studies measure power and latency but not grading~\cite{arya2025edgepower}; to our knowledge, no grading study has reported energy per graded answer or run on an edge board.
+Grading studies fine-tune small open models~\cite{ormerod2024gpupoor,aggarwal2024engsaf} but report accuracy on server GPUs, and edge studies measure power and latency but not grading~\cite{arya2025edgepower}; to our knowledge, no grading study has reported energy per graded answer or run on an edge board.
 
 We therefore ask: \textit{can a fine-tuned small grader replace a larger untouched one on an edge device, and what does each accuracy gain cost there?}
 We compare three graders built on Gemma~4, E2B untouched, E2B fine-tuned (``tweaked'') and E4B untouched, on an NVIDIA Jetson Orin Nano, measuring accuracy together with latency and energy per answer.
@@ -134,20 +134,20 @@ Automatic short-answer grading compares a student's free-text answer with a refe
 Burrows et~al.\ reviewed 35 such systems and found the field moving from ad hoc, non-comparable experiments towards shared evaluation~\cite{burrows2015eras}.
 SemEval-2013 Task~7 supplied that evaluation: the SciEntsBank and Beetle datasets, labels at 2-, 3- and 5-way granularity, and separate test splits for unseen answers, questions and domains~\cite{dzikovska2013semeval}.
 Fine-tuned encoders such as BERT and XLNet later matched or passed the shared-task systems without hand-engineered features~\cite{ghavidel2020bert}.
-SciEntsBank remains in common use for language-model graders~\cite{kortemeyer2024gpt4,wang2024rag,cong2026irt,deng2026rubric}, which lets our results be placed against more than a decade of published numbers on the same splits.
+SciEntsBank remains in common use for language-model graders~\cite{kortemeyer2024gpt4,wang2024rag,cong2026irt}, which lets our results be placed against more than a decade of published numbers on the same splits.
 
 \subsection{Language Models as Graders}
 Prompted general-purpose models grade reasonably but not best.
 GPT-4 without further training performs about as well as hand-engineered models on SciEntsBank and Beetle, but worse than models with specialised training~\cite{kortemeyer2024gpt4}, and zero- and few-shot prompting struggles on items that need domain knowledge~\cite{chamieh2024llms}.
-Adding retrieval lifts a large cloud model to the best published 3-way accuracy on SciEntsBank~\cite{wang2024rag}, and conditioning a 72-billion-parameter open model on a rubric gives strong agreement on 2-way labels that weakens as the labels get finer~\cite{deng2026rubric}.
+Adding retrieval lifts a large cloud model to the best published 3-way accuracy on SciEntsBank~\cite{wang2024rag}.
 An item-response analysis of 17 open-weight models on SciEntsBank and Beetle shows that models with similar overall scores differ in how fast they fail on harder answers~\cite{cong2026irt}.
 
-Fine-tuning small open models is the other route: QLoRA~\cite{dettmers2023qlora} on 7--8-billion-parameter models gives adequate if not state-of-the-art scores on limited hardware~\cite{ormerod2024gpupoor}, fine-tuned 7-billion-parameter models grade engineering answers with feedback~\cite{aggarwal2024engsaf}, QLoRA alone moves little with very little labelled data~\cite{walsh2025finetuning}, and pre-finetuning across prompts helps when per-item data are scarce~\cite{funayama2025crossprompt}.
+Fine-tuning small open models is the other route: QLoRA~\cite{dettmers2023qlora} on 7--8-billion-parameter models gives adequate if not state-of-the-art scores on limited hardware~\cite{ormerod2024gpupoor}, fine-tuned 7-billion-parameter models grade engineering answers with feedback~\cite{aggarwal2024engsaf}, and pre-finetuning across prompts helps when per-item data are scarce~\cite{funayama2025crossprompt}.
 Each of these studies tests one way of improving a grader, on server hardware; we compare fine-tuning with the alternatives a practitioner would try instead, on one benchmark and one device.
 
 \subsection{Small Models on Edge Devices}
 Running small language models on edge devices cuts latency and removes the dependence on a network~\cite{islam2025edgeenergy}.
-Across a Raspberry Pi~5, a Jetson Nano and a Jetson Orin Nano, the Orin Nano with its GPU gave the best energy-to-performance ratio for five small models~\cite{islam2025edgeenergy}; other studies compare CPU, GPU and NPU back ends~\cite{prieto2025edge} and characterise latency and power on Jetson Orin accelerators~\cite{arya2025edgepower}, and task-specific models are known to use far less energy than general-purpose ones~\cite{luccioni2024power}.
+Across a Raspberry Pi~5, a Jetson Nano and a Jetson Orin Nano, the Orin Nano with its GPU gave the best energy-to-performance ratio for five small models~\cite{islam2025edgeenergy}; other studies characterise latency and power on Jetson Orin accelerators~\cite{arya2025edgepower}, and task-specific models are known to use far less energy than general-purpose ones~\cite{luccioni2024power}.
 These studies measure generic workloads rather than grading, while grading studies measure accuracy without device cost; the closest exception times models of up to about one billion parameters on a laptop CPU but reports no energy~\cite{saur2026grading}.
 We join the two, measuring accuracy and energy per graded answer for every grader on the same board.
 
@@ -159,7 +159,7 @@ We join the two, measuring accuracy and energy per graded answer for every grade
 
 \subsection{Study Design}
 \label{sec:design}
-The research question compares two ways of improving a small grader, a larger model or a fine-tuned one, so the design holds everything else fixed: one benchmark, one model family, one runtime, one prompt and one board.
+A school whose small grader is not accurate enough has two practical options on the device it already owns: install a larger model, or fine-tune the small one. To compare them fairly, the design holds everything else fixed: one benchmark, one model family, one runtime, one prompt and one board.
 Fig.~\ref{fig:arch} shows the pipeline.
 An adapter is trained once, away from the school, on a commodity GPU; the school device then holds the quantized model and the adapter and grades every answer locally; and the board's own power sensors measure what each answer costs.
 Table~\ref{tab:setup} lists the main settings in one place; the rest of this section explains the choices behind them and gives the details.
@@ -187,13 +187,15 @@ Measures & accuracy, macro-F1, latency and energy per answer; paired McNemar tes
 
 \subsection{Model Selection}
 \label{sec:graders}
-The graders are Gemma~4 E2B and E4B, two sizes of one open-weight family, in their instruction-tuned, quantization-aware-trained releases, run as 4-bit GGUF files (\texttt{UD-Q4\_K\_XL}).
-Using one family means that comparing E2B with E4B isolates the ``larger model'' option: the two come from the same model release and take the same prompt, so they differ mainly in size.
-Open weights can be run and fine-tuned on the school's own hardware, which a cloud model cannot, and the quantization-aware-trained builds are made to keep their accuracy at 4-bit precision, the precision that lets both models fit on the board.
+The graders are Gemma~4 E2B and E4B, in their instruction-tuned, quantization-aware-trained releases, run as 4-bit GGUF files (\texttt{UD-Q4\_K\_XL}).
+Three properties led to this choice.
+First, the weights are open~\cite{gemma2026gemma4}, so a school can run and fine-tune them on its own hardware, which a cloud model does not allow.
+Second, they are the two smallest sizes of a family that ranges from 2.3 to 31 billion parameters~\cite{gemma2026gemma4}, and size is what the board limits: the Jetson Orin Nano has 8~GB of memory shared between its CPU and GPU, so even E4B at 8-bit precision (7.6~GiB) would leave almost no room, while at 4-bit it takes 3.93~GiB; the quantization-aware-trained builds are made to keep their accuracy at that precision.
+Third, the two sizes come from the same release and take the same prompt, so comparing them isolates the effect of model size, the ``larger model'' option, from differences in training data or format.
 
-We fine-tune E2B, the smaller model, because the research question is whether the cheaper model can be raised to do the larger one's job.
-Untouched, E2B is the grader a school would want to run: on the board it takes 3.7--3.8~J and 0.40--0.41~s per answer against E4B's 6.8--6.9~J and 0.70--0.71~s (Table~\ref{tab:three}), but it grades 7.5--9.8 points worse.
-If an adapter closes that gap, a school gets the larger model's accuracy at close to the smaller model's price; if it does not, the larger model is the better buy.
+We fine-tune E2B, the smaller model, because it is the grader a school can best afford to run.
+On the board, untouched E2B takes 3.7--3.8~J and 0.40--0.41~s per answer, a little over half of E4B's 6.8--6.9~J and 0.70--0.71~s (Table~\ref{tab:three}), and it leaves more of the shared memory free for longer prompts and for other software on the same device.
+Its weakness is accuracy, 7.5--9.8 points below E4B, and that is the kind of gap fine-tuning addresses: on SciEntsBank itself, models trained for the task grade better than GPT-4 used without training~\cite{kortemeyer2024gpt4}. Here, the adapter is trained once, off the device, on graded answers of the kind teachers already produce, and what it adds to each answer is the work of a small adapter rather than of a larger model, whose extra cost is paid on every answer for as long as it is used.
 So the three graders are E2B untouched (the starting point), E2B tweaked (the fine-tuned small model) and E4B untouched (the larger model a school would otherwise run).
 We also fine-tune E4B with the same recipe, not as a fourth contender but as a reference: it shows how much further fine-tuning the larger model would go, and at what cost.
 
@@ -202,7 +204,7 @@ We also fine-tune E4B with the same recipe, not as a fourth contender but as a r
 SciEntsBank is the science part of the SemEval-2013 Task~7 student response analysis challenge~\cite{dzikovska2013semeval}.
 % TODO verify against the SemEval paper: grades 3--6, ASK assessments.
 Each item gives a question, a reference answer and a student answer, with an expert label; the training split holds 4{,}969 answers.
-Its 3-way labels are categories rather than an ordered scale, so we report accuracy and macro-F1, the metrics of the shared task, rather than quadratic weighted kappa.
+We use its 3-way labels because they keep the distinction a teacher acts on: a \textit{contradictory} answer shows a misconception to correct, while an \textit{incorrect} one is incomplete or off the point. The labels are categories rather than an ordered scale, so we report accuracy and macro-F1, the metrics of the shared task, rather than quadratic weighted kappa.
 
 The benchmark has three test splits, and they test different things.
 Unseen answers (test\_ua, 540 answers) are new answers to the \textit{same} questions as the training data, so a fine-tuned grader has already learned what a correct answer to each of them looks like; a gain there can be memory of the questions rather than skill at grading.
@@ -240,7 +242,7 @@ The adapter is trained with QLoRA~\cite{dettmers2023qlora}: low-rank adapters~\c
 Training only the adapter over a 4-bit base is what makes a single T4 GPU, of the kind offered free in cloud notebooks, enough, and the result is a 48~MB file, small enough to send to a school as an update.
 The training target is the label alone, matching the prompt.
 We keep the epoch that best grades 14 held-out training questions (epoch~2 for E2B, at 78.8\%), so the choice never sees the test splits.
-The adapter is converted to GGUF and loaded beside the unchanged quantized model with llama.cpp's \texttt{--lora} option, without merging, so one base model on the device can serve any adapter; llama.cpp also runs 4-bit models on the board's GPU, and we use the same settings as our lab's other device benchmarks.
+The adapter is converted to GGUF and loaded beside the unchanged quantized model with llama.cpp's \texttt{--lora} option, without merging, so one base model on the device can serve any adapter. We use llama.cpp~\cite{llamacpp} because it is open source, runs 4-bit models on the board's GPU, and loads such adapters at run time, and we keep the same settings as our lab's other device benchmarks so that the costs are comparable.
 We call this adapter ``E2B tweaked''.
 
 \subsection{Other Ways to Improve E2B}
@@ -252,7 +254,7 @@ A plain adapter is only worth recommending if the obvious refinements and substi
 \item \textit{Reasons with the label:} adapters trained to give a short reason after the label (label-first) or before it (reason-first), since a teacher may want to know why an answer was marked down. The reasons were written by Qwen3-14B given the gold label; 4{,}819 of 4{,}969 were kept after an automatic check, and the first author judged 27 of 30 sampled reasons faithful.
 \item \textit{Graded examples in the prompt:} four graded training answers, chosen either as nearest neighbours of the item by \texttt{bge-small-en-v1.5} embeddings or at random, placed in the dashed block of Fig.~\ref{fig:prompt}; tried on the untouched model and on the adapter. This is the usual way to adapt a model without training it.
 \item \textit{Course material in the prompt (RAG):} the three most relevant passages from open school science textbooks and Wikipedia, retrieved with \texttt{bge-small-en-v1.5}. It tests the hypothesis that a small model grades poorly because it lacks subject knowledge.
-\item \textit{Thinking on:} the model may reason in a thought block of up to 320 tokens before answering, and the label is read after that block. It tests whether reasoning, rather than training, closes the gap.
+\item \textit{Thinking on:} using Gemma~4's thinking mode~\cite{gemma2026gemma4}, the model may reason in a thought block of up to 320 tokens before answering, and the label is read after that block. It tests whether reasoning, rather than training, closes the gap.
 \end{itemize}
 The seeds, soup, 5-way and example runs were graded on an NVIDIA DGX Spark first; their labels on the Jetson agree with the Spark's on 97.4--99.9\% of answers per run.
 
@@ -287,7 +289,7 @@ Energy is integrated over the grading window, from the first request to the last
 Energy per answer is the cost that matters to a school device on a fixed power budget, and latency is how long a teacher waits.
 To compare a gain with its price in one number we use the \textit{energy per extra correct answer}: the extra joules per answer divided by the gain in accuracy.
 
-Every grader grades the same answers, so we compare two graders with a paired McNemar test~\cite{mcnemar1947}, which looks only at the answers on which they disagree and is more sensitive than comparing two accuracies.
+Every grader grades the same answers, so we compare two graders with a paired McNemar test~\cite{mcnemar1947}, which looks only at the answers on which they disagree and is more sensitive than comparing two accuracies; it is also the test recommended when, as here, each model is evaluated only once, because it keeps false positives low~\cite{dietterich1998tests}.
 The $p$-values are corrected with Holm's method~\cite{holm1979} over a family of eight comparisons.
 The family was fixed after the runs; since the largest corrected $p$ in it is 0.0003, a different family would not change the conclusions.
 Thinking on is tested in a separate family of 22 comparisons (each version with thinking against without, and each fine-tuned version with thinking against untouched E2B with thinking, on both splits), also Holm-corrected and also chosen after the first split had run.
@@ -322,7 +324,7 @@ The larger model buys less on its own: untouched E4B leads untouched E2B by 7.5 
 
 Table~\ref{tab:tests} checks that these differences are not chance.
 Each cell gives the gain and, in brackets, the answers only one of the two graders got right, which is what the paired McNemar test weighs: on unseen questions, for example, E2B tweaked is right on 127 answers that E4B misses and wrong on only 58 that E4B gets.
-All eight differences hold after Holm correction, and the two that answer the research question hold at $p<10^{-6}$ on 3-way labels and $p<10^{-4}$ on 2-way labels.
+All eight differences hold after Holm correction, and the two comparing E2B tweaked with E4B untouched hold at $p<10^{-6}$ on 3-way labels and $p<10^{-4}$ on 2-way labels.
 The bootstrap intervals in Table~\ref{tab:three} overlap on test\_uq, which has only 15 questions, but the paired tests compare the same answers and are the stronger evidence.
 Fine-tuning E4B as well gives the most accurate grader (80.0\% and 76.7\%), only 3.3 and 1.9 points above E2B tweaked; whether those points are worth taking is a question of cost.
 % Single runs with one seed and one prompt; the published systems differ in prompt, training and evaluation code.
@@ -348,6 +350,14 @@ E4B tweaked vs E4B untouched & +12.7 (138/45) & +6.6 (663/361) \\
 \raggedright In brackets: answers only the first grader got right / only the second. All eight tests: corrected $p\le0.0003$.
 \end{table}
 
+% Fig. 4 (wide) sits here so it lands on the page of Section IV-C.
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{jetson-three-graders.pdf}
+\caption{Accuracy against energy per answer on the Jetson Orin Nano (612~MHz GPU clock). Up and to the left is better. Grey points are the other E2B versions of Table~\ref{tab:variants}: the unlabelled cluster beside E2B tweaked holds the five seeds, their soup, the label-first adapter and, at 6.8--6.9~J, the 5-way adapter; ``untouched + examples'' marks the nearest and the random graded examples. Drawn by \texttt{scripts/paper\_figures.py} from the run comparison file.}
+\label{fig:acc-energy}
+\end{figure*}
+
 \subsection{The Fine-Tuned Small Model Is Also Cheaper to Run}
 \label{sec:r-cost}
 \textit{Finding: E2B tweaked costs less per answer than E4B untouched, and fine-tuning is the cheapest accuracy gain.}
@@ -360,13 +370,6 @@ Panel~(b) is the price of each accuracy gain, the extra energy divided by the ex
 Going on from E2B tweaked to E4B tweaked costs 126--210~J per extra correct answer.
 So on this board the fine-tuned small model is both the more accurate grader and the cheaper way to get there.
 
-% Fig. 4 (wide) sits here so it lands on the page of Section IV-C.
-\begin{figure*}[!t]
-\centering
-\includegraphics[width=\textwidth]{jetson-three-graders.pdf}
-\caption{Accuracy against energy per answer on the Jetson Orin Nano (612~MHz GPU clock). Up and to the left is better. Grey points are the other E2B versions of Table~\ref{tab:variants}: the unlabelled cluster beside E2B tweaked holds the five seeds, their soup, the label-first adapter and, at 6.8--6.9~J, the 5-way adapter; ``untouched + examples'' marks the nearest and the random graded examples. Drawn by \texttt{scripts/paper\_figures.py} from the run comparison file.}
-\label{fig:acc-energy}
-\end{figure*}
 
 \subsection{Other Tweaks Add Cost, Not Accuracy}
 \label{sec:r-tweaks}
@@ -379,8 +382,7 @@ Every fine-tuned version lands within two points of it except reason-first on un
 What the extras change is the cost: 5-way labels add a third reply token and 28\% energy, graded examples on the adapter raise the prompt from about 160 to 550--630 tokens and cost 2.5--2.7$\times$ its energy, and a written reason before the label costs 7.3$\times$ the energy and 4.3~s per answer.
 Below the line, graded examples lift untouched E2B to 69.4\% and 66.3\%, but at 2.3--2.4$\times$ its energy and still well below the adapter.
 In Fig.~\ref{fig:acc-energy}, E2B tweaked sits above and to the left of E4B untouched on both splits, and the versions that edge above it cost the same or more.
-Nor is the gain only memory of SciEntsBank's assessments: an E2B adapter trained instead on two other grading sets, Beetle and SAF, scores 76.7\% on test\_uq, the same as ours, and 68.2\% on test\_ud, so the gain transfers fully to new questions and in part to new domains.
-% TODO cite Beetle (also SemEval-2013 Task 7) and SAF.
+Nor is the gain only memory of SciEntsBank's assessments: an E2B adapter trained instead on two other grading sets, Beetle~\cite{dzikovska2013semeval} and SAF~\cite{filighera2022saf}, scores 76.7\% on test\_uq, the same as ours, and 68.2\% on test\_ud, so the gain transfers fully to new questions and in part to new domains.
 
 \begin{table}[!t]
 \centering
@@ -487,27 +489,7 @@ For schools that cannot rely on a network, a cloud budget or sending student dat
 \bibliographystyle{IEEEtran}
 \bibliography{refs}
 
-% Author biographies (supervisor, 2026-11-24). Photos in manuscript/photos/ (git-ignored: the repo is public).
-% Leu: degrees and career from his NTUST profile (et.ntust.edu.tw, fetched 2026-11-23) and the biography in his
-% IEEE papers; photo from the ICOMPAC 2025 keynote page (icompac.its.ac.id), the largest found (1101x1357).
-% Ardiansyah: from the owner's CV. Yunanto: from the owner (2026-11-24).
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photos/yunanto.jpg}}]{Rifky Ari Yunanto}
-is pursuing the M.S. degree with the College of Electrical Engineering and Computer Science, National Taiwan University of Science and Technology (NTUST), Taipei, Taiwan, where he is a member of the Mobilizing Information Technology Laboratory (MITLab).
-% TODO: Rifky's bachelor's degree (field, university, year) and research interests.
-\end{IEEEbiography}
-
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photos/leu.jpg}}]{Jenq-Shiou Leu}
-(Senior Member, IEEE) received the B.S. degree in mathematics and the M.S. degree in computer science and information engineering from National Taiwan University, Taipei, Taiwan, and the Ph.D. degree in computer science from National Tsing Hua University, Hsinchu, Taiwan.
-From 1995 to 2007 he worked in industry, with Rising Star Technology, Mobitai Communications and Taiwan Mobile.
-He joined the Department of Electronic and Computer Engineering, National Taiwan University of Science and Technology (NTUST), Taipei, Taiwan, in 2007, where he has been a Professor since 2014, chaired the department from 2017 to 2020, and has been Dean of the College of Electrical Engineering and Computer Science since 2024.
-He leads the Mobilizing Information Technology Laboratory (MITLab).
-His research interests include B5G/6G technology, AI/ML platforms, applications of large language models and biomedical information analysis.
-\end{IEEEbiography}
-
-\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{photos/ardiansyah.jpg}}]{Dhista Dwi Nur Ardiansyah}
-received the bachelor's degree in informatics engineering education from Universitas Negeri Yogyakarta, Yogyakarta, Indonesia, in 2024.
-Since 2026, Ardiansyah has been a Research Assistant with the Mobilizing Information Technology Laboratory (MITLab), National Taiwan University of Science and Technology, Taipei, Taiwan, through the Taiwan Experience Education Program (TEEP), working on small language models on edge devices, and has worked as a software engineer in Indonesia since 2021.
-As an undergraduate, Ardiansyah won a gold medal at the 2021 Indonesian student digital innovation competition (LIDM) for an automatic question generator for teachers.
-\end{IEEEbiography}
+% Biographies and photos are asked for only after acceptance; they are in bios.tex.
+% \input{bios}
 
 \end{document}
