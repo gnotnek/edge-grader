@@ -1,6 +1,6 @@
 # Design: stage 3 fine-tuning revived (QLoRA on SciEntsBank)
 
-*2026-10-21. Worked through with the owner. Once approved, this spec feeds [`research-outline.md`](../research-outline.md) and [`plan.md`](../plan.md); those two stay the source of truth for what is decided and when. Calls marked **(Claude's call)** were not discussed with the owner and can be changed.*
+*2026-10-21. Worked through with the owner. Once approved, this spec feeds [`research-outline.md`](../research-outline.md) and [`plan.md`](https://github.com/gnotnek/edge-grader/blob/experiments/docs/plan.md); those two stay the source of truth for what is decided and when. Calls marked **(Claude's call)** were not discussed with the owner and can be changed.*
 
 ## 1. Why now
 

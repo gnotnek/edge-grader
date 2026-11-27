@@ -34,11 +34,8 @@ from .index import read_chunks, sha256_of
 CHECK_DIR = Path("data/rag/check")
 RESULTS_DIR = Path("results/rag")
 PASSAGE_RE = re.compile(r"^- \[(.)\] \*\*\d+\.\*\* `([^`]+)`")
-CHECK_SPLIT = {"scientsbank": "train", "mmlupro": "validation", "news": "test", "gsm": "train"}
-USEFUL = {"scientsbank": "would help a teacher grade answers to the question",
-          "mmlupro": "holds knowledge that helps answer the question",
-          "news": "holds information that helps answer the question",
-          "gsm": "holds a concept, formula or method that helps solve the problem"}
+CHECK_SPLIT = {"scientsbank": "train"}
+USEFUL = {"scientsbank": "would help a teacher grade answers to the question"}
 
 
 def sample_questions(questions: dict[str, dict], n: int, seed: int = 0,
@@ -104,14 +101,6 @@ def score_sheet(text: str) -> dict:
     }
 
 
-def source_hits(retrieval: dict, sources: dict[str, list[str]], ks=(1, 3, 5)) -> dict:
-    """Questions with a top-k passage from one of their own source articles (news)."""
-    def own(q, k):
-        return any(cid.rsplit(":", 1)[0] in sources[q] for cid, _ in retrieval["questions"][q]["hits"][:k])
-    return {"questions": len(retrieval["questions"]),
-            **{f"top{k}": sum(own(q, k) for q in retrieval["questions"]) for k in ks}}
-
-
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
     ap.add_argument("retrieval", type=Path)
@@ -127,11 +116,6 @@ def main(argv: list[str] | None = None) -> None:
     if args.score:
         sheet = CHECK_DIR / f"{args.retrieval.stem}.md"
         scored = score_sheet(sheet.read_text())
-        if benchmark == "news":
-            from ..news import questions as news_questions
-
-            sources = {q: v["sources"] for q, v in news_questions().items()}
-            scored["own_article_hits"] = source_hits(json.loads(args.retrieval.read_text()), sources)
         out = RESULTS_DIR / f"check-{args.retrieval.stem.removeprefix('retrieval-')}.json"
         out.write_text(json.dumps({
             "stage": "rag",
@@ -151,35 +135,14 @@ def main(argv: list[str] | None = None) -> None:
         raise SystemExit(f"local {chunks_path} differs from the one retrieval used; rebuild it with "
                          "python -m edge_grader.rag.corpus from the same sources")
     texts = {c["id"]: c["text"] for c in read_chunks(chunks_path)}
-    answers = None
-    if benchmark == "mmlupro":
-        from ..mmlupro import questions as mmlupro_questions
+    from .. import data
 
-        question_text = {q: v["question"] for q, v in mmlupro_questions().items()}
-    elif benchmark == "news":
-        from ..news import load as news_load
-        from ..news import questions as news_questions
-
-        qs = news_questions()
-        question_text = {q: v["question"] for q, v in qs.items()}
-        answers = {q["id"]: q["answer"] for q in news_load()}
-        hits = source_hits(retrieval, {q: v["sources"] for q, v in qs.items()})
-        print(f"own source article in the top 1/3/5: {hits['top1']}/{hits['top3']}/{hits['top5']} "
-              f"of {hits['questions']} questions")
-    elif benchmark == "gsm":
-        from ..gsm import questions as gsm_questions
-
-        question_text = {q: v["question"] for q, v in gsm_questions().items()}
-    else:
-        from .. import data
-
-        question_text = {data.question_id(i.id): i.question for i in data.load("train")}
+    question_text = {data.question_id(i.id): i.question for i in data.load("train")}
     picked = sample_questions(retrieval["questions"], args.n, args.seed, split)
     CHECK_DIR.mkdir(parents=True, exist_ok=True)
     out = CHECK_DIR / f"{args.retrieval.stem}.md"
-    # News passages are read whole: the answer can sit anywhere in a multi-hop article.
     out.write_text(report(retrieval, texts, question_text, picked, args.show,
-                          words=250 if answers else 80, answers=answers))
+                          words=80))
     print(f"wrote {out}: {len(picked)} questions to mark")
 
 

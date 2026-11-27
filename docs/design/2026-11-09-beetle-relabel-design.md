@@ -1,6 +1,6 @@
 # Design: translating Beetle's "contradictory" into SciEntsBank's definition (proposal)
 
-*2026-11-09. Draft for the supervisor and the lab, not approved yet. Written after the Nov 8 fine-tuning results were known, so this is a new experiment, not a re-reading of those results. Calls marked **(Claude's call)** were not discussed and can be changed. Once approved, the decisions go into [`research-outline.md`](../research-outline.md) and [`plan.md`](../plan.md).*
+*2026-11-09. Draft for the supervisor and the lab, not approved yet. Written after the Nov 8 fine-tuning results were known, so this is a new experiment, not a re-reading of those results. Calls marked **(Claude's call)** were not discussed and can be changed. Once approved, the decisions go into [`research-outline.md`](../research-outline.md) and [`plan.md`](https://github.com/gnotnek/edge-grader/blob/experiments/docs/plan.md).*
 
 ## 1. Why
 

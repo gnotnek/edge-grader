@@ -27,10 +27,11 @@ from . import data
 from .baseline import server_info
 from .data import Item
 from .grader import LABEL_HELP, LABEL_LINE_RE
-from .news import THINK_RE
 
 PROMPT = Path(__file__).parent / "prompts" / "reason_teacher.txt"
 MAX_TOKENS = 128  # about 60 words, with room; a reason cut here is dropped
+
+THINK_RE = re.compile(r"<think>.*?</think>", re.DOTALL)
 
 
 def prompt_sha256() -> str:

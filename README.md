@@ -93,10 +93,10 @@ These are in the repo with their results. Each page says how its runs were made:
 |---|---|
 | Baselines on Kaggle, Pi 5 and Jetson; MMLU-Pro | [`baselines.md`](docs/results/baselines.md) |
 | RAG over course material (no gain for grading) | [`rag.md`](docs/results/rag.md), how-to in [`guides/rag.md`](docs/guides/rag.md) |
-| Math (GSM8K, GSM-Symbolic) and post-cutoff news | [`topics.md`](docs/results/topics.md) |
+| Math (GSM8K, GSM-Symbolic) and post-cutoff news | [`topics.md`](https://github.com/gnotnek/edge-grader/blob/experiments/docs/results/topics.md) |
 | Thinking on, engine and prefix-reuse variations | [`variations.md`](docs/results/variations.md) |
 | Graded examples in the prompt; adapter soup; 5-way labels | [`examples.md`](docs/results/examples.md), [`finetuning.md`](docs/results/finetuning.md) |
-| ASAP 2.0 essays (set aside) | [`asap2.md`](docs/results/asap2.md) |
+| ASAP 2.0 essays (set aside) | [`asap2.md`](https://github.com/gnotnek/edge-grader/blob/experiments/docs/results/asap2.md) |
 
 ## Metrics
 

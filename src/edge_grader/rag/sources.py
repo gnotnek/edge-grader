@@ -2,11 +2,8 @@
 
     uv run --group rag python -m edge_grader.rag.sources           # download what's missing
     uv run --group rag python -m edge_grader.rag.sources --pin     # also record what was fetched
-    uv run --group rag python -m edge_grader.rag.sources --only mmlupro   # one benchmark's material
 
-Each book serves one benchmark: "scientsbank" (school science), "mmlupro" (college subjects) or
-"gsm" (school math, for GSM8K).
-The Wikipedia topics are for SciEntsBank.
+The books and Wikipedia topics are school-science material for SciEntsBank.
 
 Books go to data/rag/raw/<lang>/<id>.pdf and are checked against their pinned sha256.
 Wikipedia articles go to data/rag/raw/<lang>/wiki/<title>.txt; --pin records their revision ids.
@@ -22,7 +19,7 @@ from pathlib import Path
 
 MANIFEST = Path(__file__).with_name("sources.json")
 RAW_DIR = Path("data/rag/raw")
-BENCHMARKS = ("scientsbank", "mmlupro", "gsm")
+BENCHMARKS = ("scientsbank",)
 # Some hosts refuse a default client user agent.
 HEADERS = {"User-Agent": "Mozilla/5.0 (edge-grader research; RAG corpus download)"}
 # Wikimedia throttles user agents without a contact URL (HTTP 429).
