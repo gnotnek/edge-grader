@@ -423,7 +423,7 @@ adapter + nearest examples & 76.3 & 75.3 & 13.3--14.1 \\
 E2B & Thinking & test\_uq & test\_ud & J/answer \\
 \midrule
 untouched & off & 59.8 & 60.2 & 3.7--3.8 \\
-untouched & on & \textbf{75.7} & \textbf{70.1} & 144--147$^\ast$ \\
+untouched & on & \textbf{75.7} & \textbf{70.1} & 144--146$^\ast$ \\
 tweaked & off & 76.7 & 74.8 & 5.3--5.4 \\
 tweaked & on & 80.1 & 74.6 & 169--171$^\ast$ \\
 \bottomrule
@@ -444,7 +444,7 @@ The passages raised recall on \textit{correct} answers but lowered it on \textit
 Table~\ref{tab:thinking} tests whether reasoning at grading time can stand in for training.
 It compares the two E2B graders, untouched and tweaked, with thinking off and on, and gives the energy of each.
 Thinking lifts untouched E2B by 16.0 points on test\_uq and 9.8 on test\_ud (corrected $p<10^{-13}$), to 75.7\% and 70.1\%: level with the adapter on unseen questions and with untouched E4B on unseen domains.
-But it gets there by writing a thought block before every label, at 144--147~J per answer, over 25 times the adapter's energy; at the same 612~MHz clock as the other graders, it took 13.7~s and 136.7--136.9~J per answer, 830--1{,}340~J per extra correct answer, roughly a hundred times the adapter's price.
+But it gets there by writing a thought block before every label, at 144--146~J per answer, over 25 times the adapter's energy; at the same 612~MHz clock as the other graders, it took 13.7~s and 136.7--136.9~J per answer, 830--1{,}340~J per extra correct answer, roughly a hundred times the adapter's price.
 Thinking on top of the adapter adds nothing significant: $+3.4$ points on test\_uq, which does not survive correction, and $-0.2$ on test\_ud, the split with six times as many answers.
 The other fine-tuned versions behave the same way, changing by $-1.7$ to $+3.4$ points with thinking on, none significantly.
 In short, training pays once for the accuracy that thinking pays for on every answer.
