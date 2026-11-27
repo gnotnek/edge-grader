@@ -56,7 +56,8 @@ def prefix(run: str, split: str) -> str:
     return run.split(f"-jetson-{split}-")[0]
 
 
-def main(board: Path = Path("results/board"), estimates: Path = Path("results/estimates")) -> None:
+def compute(board: Path = Path("results/board"), estimates: Path = Path("results/estimates")) -> dict:
+    """The rows, paired tests and seed spread, from the committed runs; writes nothing."""
     runs = board_check_runs(estimates)
     cost = {}
     for r in runs.values():
@@ -93,7 +94,12 @@ def main(board: Path = Path("results/board"), estimates: Path = Path("results/es
     seeds = {s: [r["accuracy"] for r in rows if r["group"] == "E2B seeds" and r["split"] == s] for s in SPLITS}
     spread = {s: {"mean": round(statistics.mean(a), 4), "sd": round(statistics.stdev(a), 4),
                   "min": min(a), "max": max(a)} for s, a in seeds.items()}
+    return {"rows": rows, "tests": tests, "seed_spread": spread}
 
+
+def main(board: Path = Path("results/board"), estimates: Path = Path("results/estimates")) -> None:
+    c = compute(board, estimates)
+    rows, tests, spread = c["rows"], c["tests"], c["seed_spread"]
     out = estimates / f"compare-jetson-scientsbank-{datetime.now(UTC):%Y%m%d-%H%M%S}.json"
     out.write_text(json.dumps({
         "kind": "compare-jetson", "board_checks": str(estimates / "board-check-*.json"),

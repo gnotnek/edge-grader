@@ -36,7 +36,8 @@ OFF_SINCE, ON_SINCE = "20261114", "20261116"  # older runs of these prefixes are
 GPU_MAX = re.compile(r"17000000\.gpu: min \d+ max (\d+)")
 
 
-def main(board: Path = Path("results/board"), estimates: Path = Path("results/estimates")) -> None:
+def compute(board: Path = Path("results/board"), estimates: Path = Path("results/estimates")) -> dict:
+    """The rows and paired tests, from the committed runs; writes nothing."""
     cost = {}
     for r in board_check_runs(estimates).values():
         stamp = r["run"].rsplit("-", 2)[-2]
@@ -75,7 +76,12 @@ def main(board: Path = Path("results/board"), estimates: Path = Path("results/es
              for a, b, s in tests]
     for t, ph in zip(tests, holm([t["p"] for t in tests])):
         t["p_holm"] = ph
+    return {"rows": rows, "tests": tests}
 
+
+def main(board: Path = Path("results/board"), estimates: Path = Path("results/estimates")) -> None:
+    c = compute(board, estimates)
+    rows, tests = c["rows"], c["tests"]
     out = estimates / f"compare-thinking-scientsbank-{datetime.now(UTC):%Y%m%d-%H%M%S}.json"
     out.write_text(json.dumps({
         "kind": "compare-thinking", "board_checks": str(estimates / "board-check-*.json"),
