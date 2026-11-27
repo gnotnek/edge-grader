@@ -1,19 +1,15 @@
 #!/usr/bin/env bash
 # The baseline on a lab board (Pi 5 or Jetson), with the same llama-server
 # flags as agentic-edge's MMLU-Pro baseline, wrapped in its run_measured.sh so
-# energy is recorded the same way. BENCH picks the benchmark (default: grading).
+# energy is recorded the same way. Grades SciEntsBank.
 #
 #   scripts/board_grade.sh e4b                  # SciEntsBank test_ua, all 540 answers, measured
 #   scripts/board_grade.sh e2b test_ud 200      # 200 answers of unseen domains
-#   BENCH=gsm scripts/board_grade.sh e2b gsm8k  # the 100 GSM8K originals
-#   BENCH=gsm INSTANCES=1 scripts/board_grade.sh e2b symbolic   # first GSM-Symbolic variant set
-#   BENCH=news scripts/board_grade.sh e4b       # LiveNewsBench, 200 (judge on Kaggle afterwards)
-#   BENCH=mmlupro scripts/board_grade.sh e2b    # MMLU-Pro, the lab's 300 questions (s1-s3; or one subset: s2)
-#   BENCH=asap2 scripts/board_grade.sh e2b      # ASAP 2.0 essay scores 1-6 (QWK), the fixed 600-essay sample
-#   BENCH=news RAG=results/rag/retrieval-news-en.bge-small-en-k5.json scripts/board_grade.sh e4b
-#                                               # with RAG-en: top 3 passages (any benchmark)
+#   RAG=results/rag/retrieval-scientsbank-en.bge-small-en-k5.json scripts/board_grade.sh e4b
+#                                               # with RAG-en: top 3 passages
+#   THINKING=on scripts/board_grade.sh e2b test_uq   # thinking on (agentic-edge's thinking-on flags)
 #   LORA=$HOME/research/models/adapters/e2b-ft.gguf scripts/board_grade.sh e2b test_uq
-#                                               # stage 3: the fine-tuned adapter (any benchmark)
+#                                               # stage 3: the fine-tuned adapter
 #   LORA=.../e2b-ft-lf.gguf REPLY=label-first scripts/board_grade.sh e2b test_uq
 #                                               # stage 3b: the reply format that adapter was trained on
 #   EXAMPLES=results/examples/examples-knn-bge-small-en-k4.json scripts/board_grade.sh e2b test_uq
@@ -21,7 +17,7 @@
 #   LORA=.../e2b-ft-5w-s0.gguf PROMPT_SCHEME=5way scripts/board_grade.sh e2b test_uq
 #                                               # the 5-way-trained adapter, 5-label prompt, scored 3-way
 #   MEASURE=0 scripts/board_grade.sh e4b        # no telemetry (a quick check)
-#   DRY_RUN=1 EG_BOARD=pi5 BENCH=gsm scripts/board_grade.sh e2b symbolic
+#   DRY_RUN=1 EG_BOARD=pi5 scripts/board_grade.sh e2b test_uq
 #                                               # print the run folder and commands, touch nothing
 #
 # Run it directly on an idle board, never through agentic-edge's job queue:
@@ -33,10 +29,8 @@
 #
 # Everything a run produces stays inside this repo, never in agentic-edge's
 # folders, so it can be committed as the record of the run:
-#   results/board/<model>-<board>-<split>-<stamp>/          SciEntsBank (stage-1 names)
-#   results/board/<bench>[-rag]-<model>-<board>-<set>-<stamp>/  gsm (set gsm8k | symbolic-i<N>), news (set test),
-#                                                        mmlupro (set all | s1 | s2 | s3)
-#     <runner summary>.json  baseline-*, gsm-*, news-* or mmlupro-* (one per subset): metrics, settings, server model path
+#   results/board/[<version>-]<model>-<board>-<split>-<stamp>/
+#     baseline-*.json      the runner's summary: metrics, settings, server model path
 #     raw/*.jsonl          one line per question, including the model's raw reply
 #     server.log           llama-server log (timestamped)
 #     board-state.txt      CPU governor and clocks (and the Jetson's devfreq, nvpmodel) at the start
@@ -51,32 +45,19 @@
 set -uo pipefail
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
 SELF="$HERE/scripts/$(basename "$0")"  # absolute: run_measured.sh cd's to its own dir
-MODEL_KEY="${1:?usage: [BENCH=scientsbank|gsm|news|mmlupro|asap2] [INSTANCES=n] $0 e2b|e4b [split|set] [n]}"
-BENCH="${BENCH:-scientsbank}"
-case "$BENCH" in
-  scientsbank) SETS="test_ua test_uq test_ud" ;;
-  gsm) SETS="gsm8k symbolic" ;;
-  news) SETS="test" ;;
-  mmlupro) SETS="all s1 s2 s3" ;;   # all: the three 100-question subsets in one run
-  asap2) SETS="sample" ;;           # ASAP 2.0 essays, the fixed 600 in results/reference/asap2/
-  *) echo "unknown BENCH: $BENCH (scientsbank|gsm|news|mmlupro|asap2)" >&2; exit 1 ;;
-esac
-SPLIT="${2:-${SETS%% *}}"
-case " $SETS " in
-  *" $SPLIT "*) ;;
-  *) echo "unknown split/set for $BENCH: $SPLIT (one of: $SETS)" >&2; exit 1 ;;
+MODEL_KEY="${1:?usage: $0 e2b|e4b [test_ua|test_uq|test_ud] [n]}"
+SPLIT="${2:-test_ua}"
+case "$SPLIT" in
+  test_ua|test_uq|test_ud) ;;
+  *) echo "unknown split: $SPLIT (one of: test_ua test_uq test_ud)" >&2; exit 1 ;;
 esac
 N="${3:-0}"
 case "$N" in ''|*[!0-9]*) echo "n must be a whole number: $N" >&2; exit 1 ;; esac
-INSTANCES="${INSTANCES:-10}"
-case "$INSTANCES" in
-  ''|*[!0-9]*|0) echo "INSTANCES must be a positive whole number: $INSTANCES" >&2; exit 1 ;;
-esac
 # Phase B1: THINKING=on serves with agentic-edge's thinking-on flags (grading only).
 THINKING="${THINKING:-off}"
 case "$THINKING" in
   off) ;;
-  on) [ "$BENCH" = scientsbank ] || { echo "THINKING=on is for BENCH=scientsbank only" >&2; exit 1; } ;;
+  on) ;;
   *) echo "THINKING must be on or off: $THINKING" >&2; exit 1 ;;
 esac
 # Phase B2: VARIANT picks the engine setup (Jetson, grading only); RAG adds course material.
@@ -84,19 +65,15 @@ VARIANT="${VARIANT:-base}"
 case "$VARIANT" in base|swafull|lg|lg-reuse) ;;
   *) echo "unknown VARIANT: $VARIANT (base|swafull|lg|lg-reuse)" >&2; exit 1 ;;
 esac
-# RAG (stage 4) works for every benchmark: the runner's --rag with that benchmark's retrieval file.
+# RAG (stage 2): the runner's --rag with a SciEntsBank retrieval file.
 RAG="${RAG:-}"
-if [ "$VARIANT" != base ]; then
-  [ "$BENCH" = scientsbank ] || { echo "VARIANT is for BENCH=scientsbank only" >&2; exit 1; }
-fi
 if [ -n "$RAG" ]; then
-  [ "$BENCH" = asap2 ] && { echo "RAG isn't a condition for BENCH=asap2" >&2; exit 1; }
   case "$(basename "$RAG")" in
-    retrieval-"$BENCH"-*.json) ;;
-    *) echo "RAG file $RAG is not a $BENCH retrieval file (retrieval-$BENCH-*.json)" >&2; exit 1 ;;
+    retrieval-scientsbank-*.json) ;;
+    *) echo "RAG file $RAG is not a SciEntsBank retrieval file (retrieval-scientsbank-*.json)" >&2; exit 1 ;;
   esac
 fi
-# Stage 3: LORA serves the same GGUF plus a fine-tuned adapter (llama.cpp's --lora), any benchmark.
+# Stage 3: LORA serves the same GGUF plus a fine-tuned adapter (llama.cpp's --lora).
 LORA="${LORA:-}"
 if [ -n "$LORA" ]; then
   case "$LORA" in *.gguf) ;; *) echo "LORA must be a .gguf adapter: $LORA" >&2; exit 1 ;; esac
@@ -107,7 +84,6 @@ REPLY="${REPLY:-label}"
 case "$REPLY" in label|label-first|reason-first) ;; *) echo "REPLY must be label, label-first or reason-first: $REPLY" >&2; exit 1 ;; esac
 if [ "$REPLY" != label ]; then
   [ -n "$LORA" ] || { echo "REPLY=$REPLY needs the LORA adapter trained on it" >&2; exit 1; }
-  [ "$BENCH" = scientsbank ] || { echo "REPLY=$REPLY is a SciEntsBank condition only (BENCH=$BENCH)" >&2; exit 1; }
   [ -n "$RAG" ] && { echo "REPLY=$REPLY with RAG isn't a condition in this study" >&2; exit 1; }
 fi
 # Graded examples (spec 2026-11-10) and the 5-way prompt (spec 2026-11-12), as on the Spark: SciEntsBank only.
@@ -119,15 +95,15 @@ if [ -n "$EXAMPLES" ]; then
     examples-random-*.json) EXKIND=rand4 ;;
     *) echo "EXAMPLES must be an examples-knn-*.json or examples-random-*.json file: $EXAMPLES" >&2; exit 1 ;;
   esac
-  if [ "$BENCH" != scientsbank ] || [ "$REPLY" != label ] || [ "$THINKING" = on ] || [ -n "$RAG" ]; then
-    echo "EXAMPLES is a SciEntsBank condition with the label reply, no THINKING or RAG" >&2; exit 1
+  if [ "$REPLY" != label ] || [ "$THINKING" = on ] || [ -n "$RAG" ]; then
+    echo "EXAMPLES needs the label reply, no THINKING or RAG" >&2; exit 1
   fi
 fi
 if [ -n "$PROMPT_SCHEME" ]; then
   [ "$PROMPT_SCHEME" = 5way ] || { echo "PROMPT_SCHEME must be 5way: $PROMPT_SCHEME" >&2; exit 1; }
-  if [ -z "$LORA" ] || [ "$BENCH" != scientsbank ] || [ "$REPLY" != label ] \
+  if [ -z "$LORA" ] || [ "$REPLY" != label ] \
      || [ -n "$RAG" ] || [ -n "$EXAMPLES" ]; then
-    echo "PROMPT_SCHEME=5way needs its LORA adapter, SciEntsBank, the label reply, no RAG or EXAMPLES" >&2; exit 1
+    echo "PROMPT_SCHEME=5way needs its LORA adapter, the label reply, no RAG or EXAMPLES" >&2; exit 1
   fi
 fi
 # The adapter's tag in run names: e2b-ft.gguf -> ft, e2b-ft-s0.gguf -> ft-s0, e2b-ft-soup.gguf -> ft-soup.
@@ -188,26 +164,19 @@ case "$MODEL_KEY" in
   *) echo "unknown model key: $MODEL_KEY (e2b|e4b)" >&2; exit 1 ;;
 esac
 # The outer call picks the run directory and hands it to the inner call.
-# SciEntsBank keeps the stage-1 names; the other benchmarks lead with their name.
-if [ "$BENCH" = scientsbank ]; then
-  NAME="$MODEL_KEY-$BOARD-$SPLIT"
-  [ "$THINKING" = on ] && NAME="think-$NAME"
-  [ "$VARIANT" != base ] && NAME="$VARIANT-$NAME"
-  [ -n "$LORA" ] && NAME="$FT-$NAME"
-  # a plain e2b-ft.gguf with REPLY still says which reply it was graded with
-  [ "$FT" = ft ] && case "$REPLY" in label-first) NAME="ft-lf-${NAME#ft-}" ;; reason-first) NAME="ft-rf-${NAME#ft-}" ;; esac
-  [ -n "$EXAMPLES" ] && NAME="$EXKIND-$NAME"
-  [ -n "$RAG" ] && NAME="rag-$NAME"
-elif [ "$SPLIT" = symbolic ]; then
-  NAME="$BENCH$( [ -n "$RAG" ] && echo -rag )$( [ -n "$LORA" ] && echo "-$FT" )-$MODEL_KEY-$BOARD-symbolic-i$INSTANCES"
-else
-  NAME="$BENCH$( [ -n "$RAG" ] && echo -rag )$( [ -n "$LORA" ] && echo "-$FT" )-$MODEL_KEY-$BOARD-$SPLIT"
-fi
+NAME="$MODEL_KEY-$BOARD-$SPLIT"
+[ "$THINKING" = on ] && NAME="think-$NAME"
+[ "$VARIANT" != base ] && NAME="$VARIANT-$NAME"
+[ -n "$LORA" ] && NAME="$FT-$NAME"
+# a plain e2b-ft.gguf with REPLY still says which reply it was graded with
+[ "$FT" = ft ] && case "$REPLY" in label-first) NAME="ft-lf-${NAME#ft-}" ;; reason-first) NAME="ft-rf-${NAME#ft-}" ;; esac
+[ -n "$EXAMPLES" ] && NAME="$EXKIND-$NAME"
+[ -n "$RAG" ] && NAME="rag-$NAME"
 RUN_DIR="${EG_RUN_DIR:-$HERE/results/board/$NAME-$(date +%Y%m%d-%H%M%S)}"
 SRVLOG=$RUN_DIR/server.log
 
 # The agentic-edge baseline flags (baselines.json "mmlupro-baseline"): thinking off,
-# in the same order as the lab's command line. The same for every benchmark.
+# in the same order as the lab's command line.
 # THINKING=on swaps in "mmlupro-thinking-on"'s reasoning flags and nothing else.
 # VARIANT=swafull adds --swa-full; lg and lg-reuse serve through agentic-edge's shim instead
 # (its flags stand in for llama-server's: lg_openai_shim.py -h).
@@ -223,25 +192,13 @@ server_cmd() {
   esac
 }
 
-# The benchmark's runner. $1 is "echo" for a dry run and "" for the real one.
+# The grading runner. $1 is "echo" for a dry run and "" for the real one.
 runner() {
   local run=$1 url="http://127.0.0.1:$PORT/v1" label="$MODEL_KEY-$BOARD"
-  case "$BENCH" in
-    scientsbank) $run uv run edge-grader-baseline --base-url "$url" --label "$label" \
-                   --split "$SPLIT" --n "$N" --out "$RUN_DIR" $( [ "$THINKING" = on ] && echo --thinking ) \
-                   $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) $( [ "$REPLY" != label ] && echo "--reply $REPLY" ) \
-                   $( [ -n "$EXAMPLES" ] && echo "--examples $EXAMPLES --k 4" ) $( [ -n "$PROMPT_SCHEME" ] && echo "--prompt-scheme $PROMPT_SCHEME" ) ;;
-    gsm) $run uv run edge-grader-gsm --base-url "$url" --label "$label" \
-           --set "$SPLIT" --instances "$INSTANCES" --n "$N" --out "$RUN_DIR" \
-           $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) ;;
-    news) $run uv run edge-grader-news --base-url "$url" --label "$label" \
-            --n "$N" --out "$RUN_DIR" $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) ;;
-    asap2) $run uv run edge-grader-asap run --base-url "$url" --label "$label" \
-             --n "$N" --out "$RUN_DIR" ;;
-    mmlupro) $run uv run edge-grader-mmlupro --base-url "$url" --label "$label" \
-               --subset $( [ "$SPLIT" = all ] && echo s1 s2 s3 || echo "$SPLIT" ) --n "$N" --out "$RUN_DIR" \
-               $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) ;;
-  esac
+  $run uv run edge-grader-baseline --base-url "$url" --label "$label" \
+    --split "$SPLIT" --n "$N" --out "$RUN_DIR" $( [ "$THINKING" = on ] && echo --thinking ) \
+    $( [ -n "$RAG" ] && echo "--rag $RAG --k 3" ) $( [ "$REPLY" != label ] && echo "--reply $REPLY" ) \
+    $( [ -n "$EXAMPLES" ] && echo "--examples $EXAMPLES --k 4" ) $( [ -n "$PROMPT_SCHEME" ] && echo "--prompt-scheme $PROMPT_SCHEME" )
 }
 
 # This project's runs are not agentic-edge's. A job in agentic-edge's queue is
@@ -328,7 +285,7 @@ command -v uv >/dev/null || { echo "uv not installed on this board (run scripts/
 if [ "$MEASURE" = 1 ] && [ -z "${EG_INNER:-}" ]; then
   mkdir -p "$RUN_DIR"
   exec env MEASURED_ROOT="$RUN_DIR" SRVLOG="$SRVLOG" "$AE/run_measured.sh" telemetry -- \
-    env EG_INNER=1 EG_RUN_DIR="$RUN_DIR" MEASURE=1 BENCH="$BENCH" INSTANCES="$INSTANCES" THINKING="$THINKING" \
+    env EG_INNER=1 EG_RUN_DIR="$RUN_DIR" MEASURE=1 THINKING="$THINKING" \
     VARIANT="$VARIANT" RAG="$RAG" LG_ENGINE="$LG_ENGINE" \
     "$SELF" "$MODEL_KEY" "$SPLIT" "$N"
 fi
@@ -400,6 +357,6 @@ ps -o args= -C llama-server | head -1
 cd "$HERE" || exit 1
 runner ""
 RC=$?
-echo "$(date) $BENCH finished rc=$RC; everything for this run is in $RUN_DIR"
-echo "commit it: git add results/board && git commit -m 'Board run: $BENCH $MODEL_KEY $BOARD $SPLIT'"
+echo "$(date) grading finished rc=$RC; everything for this run is in $RUN_DIR"
+echo "commit it: git add results/board && git commit -m 'Board run: $MODEL_KEY $BOARD $SPLIT'"
 exit $RC

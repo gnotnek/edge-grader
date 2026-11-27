@@ -8,3 +8,4 @@ Research code: small LLMs grading student short answers on edge devices (baselin
 - **Keep runs separate from `../agentic-edge`:** comparable, not mixed. Board runs go through `scripts/board_grade.sh` directly, never through agentic-edge's job queue, and nothing is written into its `measured/`, `stdbench/` or `findings/`. The script enforces this.
 - **Every run writes a summary JSON to `results/`** with its settings. Don't hand-edit results.
 - **SciEntsBank metrics are accuracy and F1, not QWK:** the labels are categories.
+- **`main` is the paper; other experiments live on the `experiments` branch.** Keep `main` to what the manuscript uses. After changing a number in `manuscript/main.tex` or a run behind it, `uv run python -m edge_grader.paper_check` must pass.

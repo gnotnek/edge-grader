@@ -6,18 +6,13 @@ Runs on Kaggle: this Mac doesn't run models (CLAUDE.md).
         --chunks data/rag/chunks/scientsbank-en.jsonl --model bge-small-en
     uv run --group rag --group embed python -m edge_grader.rag.index retrieve \\
         --index data/rag/index/scientsbank-en.bge-small-en
-    uv run --group rag --group embed python -m edge_grader.rag.index retrieve \\
-        --index data/rag/index/mmlupro-en.bge-small-en --benchmark mmlupro
 
 build writes <index>.npy (unit vectors, one row per chunk) and <index>.json (settings).
 retrieve searches with the question text only and writes the top-k chunk ids and scores per
 question to results/rag/retrieval-<index>-k<k>.json. SciEntsBank: every question of every split,
-keyed like "EM.45b". MMLU-Pro: the lab's 300 subset questions and the 70 validation questions
-(for the retrieval check), keyed by question_id; the options are never part of the query. That file holds ids, never text, so it can
+keyed like "EM.45b". That file holds ids, never text, so it can
 be committed; the grader looks the text up in the chunks file, whose sha256 it checks.
 
-News (LiveNewsBench): the 200 questions, keyed news-000 ..; every chunk of every question's articles
-is in one pool, as a teacher would load all the sources at once.
 """
 
 import argparse
@@ -160,7 +155,7 @@ def main(argv: list[str] | None = None) -> None:
     r = sub.add_parser("retrieve", help="top-k chunks for every question of a benchmark")
     r.add_argument("--index", type=Path, required=True, help="index path without extension")
     r.add_argument("--benchmark", default="scientsbank",
-                   choices=["scientsbank", "mmlupro", "news", "gsm"])
+                   choices=["scientsbank"])
     r.add_argument("--k", type=int, default=5, help="stored per question; grade with --k <= this")
     r.add_argument("--out", type=Path, default=RESULTS_DIR)
     args = ap.parse_args(argv)
@@ -172,20 +167,7 @@ def main(argv: list[str] | None = None) -> None:
     meta = json.loads(with_ext(args.index, ".json").read_text())
     if sha256_of(Path(meta["chunks"])) != meta["chunks_sha256"]:
         raise SystemExit(f"{meta['chunks']} changed since the index was built; rebuild it")
-    if args.benchmark == "mmlupro":
-        from ..mmlupro import questions as mmlupro_questions
-
-        qs = mmlupro_questions()
-    elif args.benchmark == "news":
-        from ..news import questions as news_questions
-
-        qs = news_questions()
-    elif args.benchmark == "gsm":
-        from ..gsm import questions as gsm_questions
-
-        qs = gsm_questions()
-    else:
-        qs = questions()
+    qs = questions()
     result = retrieve(args.index, qs, sentence_transformer(meta["model"]), args.k, args.benchmark)
     args.out.mkdir(parents=True, exist_ok=True)
     path = args.out / f"retrieval-{args.index.name}-k{args.k}.json"

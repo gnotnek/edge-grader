@@ -2,7 +2,7 @@
 # Run compose services one after the other on the DGX Spark, on the host. Each service's container is
 # edge-grader-<service>. Stops at the first that doesn't exit 0. AFTER=<container> waits for it first.
 #
-#   AFTER=edge-grader-bench-asap2-think nohup scripts/spark_queue.sh reasons-beetle-saf bench-scientsbank \
+#   AFTER=edge-grader-finetune-e2b-s0 nohup scripts/spark_queue.sh reasons-beetle-saf bench-scientsbank \
 #     > data/logs/queue.log 2>&1 &
 set -u
 cd "$(dirname "$0")/.."

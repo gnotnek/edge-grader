@@ -1,6 +1,6 @@
 # Phase B: variations on the baseline (RQ6)
 
-*Started 2026-10-11. Spec: [`../design/2026-10-08-baseline-variations-design.md`](../design/2026-10-08-baseline-variations-design.md) §6. Edge first (owner, 2026-10-11): every grading run here is on a board and is compared with **the same board's** thinking-off llama.cpp baseline ([`baselines.md`](baselines.md) §2, §4). The MMLU-Pro side of each variation is **copied from `agentic-edge`**, not re-run, as the spec says: same GGUFs, flags and boards. Copied numbers: [`agentic-edge-mmlupro-variations.json`](../../results/reference/agentic-edge-mmlupro-variations.json) (commit `16eace9`, sections 7.2, 7.4, 7.6, 7.8).*
+*Started 2026-10-11. Spec: [`../design/2026-10-08-baseline-variations-design.md`](https://github.com/gnotnek/edge-grader/blob/experiments/docs/design/2026-10-08-baseline-variations-design.md) §6. Edge first (owner, 2026-10-11): every grading run here is on a board and is compared with **the same board's** thinking-off llama.cpp baseline ([`baselines.md`](baselines.md) §2, §4). The MMLU-Pro side of each variation is **copied from `agentic-edge`**, not re-run, as the spec says: same GGUFs, flags and boards. Copied numbers: [`agentic-edge-mmlupro-variations.json`](https://github.com/gnotnek/edge-grader/blob/experiments/results/reference/agentic-edge-mmlupro-variations.json) (commit `16eace9`, sections 7.2, 7.4, 7.6, 7.8).*
 
 **Status (2026-10-19):** B1 done on both boards. B2 done on the Jetson, test_ua, thinking off. B3 (EmbeddingGemma 2) not started.
 
@@ -161,7 +161,7 @@ No new board runs. `uv run python -m edge_grader.cascade` re-reads the Jetson ru
 
 Agreement has no threshold, so nothing is fitted on the splits reported.
 
-Energy per answer is the run's measured energy, apportioned to answers by latency. Cascade accuracy is paired with plain E4B (McNemar, Holm over the six cascade tests). Raw: [`results/cascade/`](../../results/cascade/).
+Energy per answer is the run's measured energy, apportioned to answers by latency. Cascade accuracy is paired with plain E4B (McNemar, Holm over the six cascade tests). Raw: [`results/cascade/`](https://github.com/gnotnek/edge-grader/tree/experiments/results/cascade).
 
 | Split | E4B | E4B thinking | Cascade → E2B thinking | Cascade → E4B thinking | Defer: coverage, accuracy on kept |
 |---|---|---|---|---|---|

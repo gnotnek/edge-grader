@@ -1,6 +1,6 @@
 # RAG pipeline: how it works and how to build it
 
-*Stage 2. Written 2026-09-30 for someone new to RAG. The checklist is in [`../plan.md`](../plan.md) (stage 2). Why RAG is in the study: [`../research-outline.md`](../research-outline.md).*
+*Stage 2. Written 2026-09-30 for someone new to RAG. The checklist is in [`../plan.md`](https://github.com/gnotnek/edge-grader/blob/experiments/docs/plan.md) (stage 2). Why RAG is in the study: [`../research-outline.md`](../research-outline.md).*
 
 ## The idea in one paragraph
 

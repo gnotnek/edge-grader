@@ -66,16 +66,6 @@ def test_check_samples_train_questions_only_and_spreads_units():
     assert [q.split(".")[0] for q in picked].count("EM") == 2
 
 
-def test_mmlupro_check_samples_validation_questions_by_subject():
-    from edge_grader.rag.check import sample_questions
-
-    qs = {str(i): {"splits": ["validation"], "subject": s} for i, s in enumerate(["law"] * 5 + ["math"] * 5)}
-    qs |= {str(100 + i): {"splits": ["s1"], "subject": "law"} for i in range(5)}  # test questions
-    picked = sample_questions(qs, n=4, split="validation")
-    assert all(qs[q]["splits"] == ["validation"] for q in picked)
-    assert sorted(qs[q]["subject"] for q in picked) == ["law", "law", "math", "math"]
-
-
 def test_two_models_on_one_chunks_file_keep_separate_indexes(tmp_path):
     chunks = tmp_path / "scientsbank-id.jsonl"
     chunks.write_text(json.dumps({"id": "b:0", "text": "lever fulcrum"}) + "\n")
@@ -110,14 +100,3 @@ def test_score_sheet_counts_ticks_and_keeps_no_text():
     assert out["summary"] == {"questions": 2, "top1_useful": 1, "any_useful": 1,
                               "passages_useful": 2, "passages_total": 6}
     assert "Mohs scale is ordered" not in json.dumps(out)
-
-
-def test_gsm_check_samples_train_only():
-    from edge_grader.rag.check import CHECK_SPLIT, sample_questions
-
-    qs = {"3": {"question": "q", "subject": "math", "splits": ["gsm8k"]},
-          "3/0": {"question": "q", "subject": "math", "splits": ["symbolic"]},
-          **{f"train-{i}": {"question": "q", "subject": "math", "splits": ["train"]}
-             for i in range(60)}}
-    picked = sample_questions(qs, 30, 0, CHECK_SPLIT["gsm"])
-    assert len(picked) == 30 and all(p.startswith("train-") for p in picked)

@@ -58,7 +58,7 @@ Read from the first ~20 words of each passage, stricter than the owner's marking
 | English model | `BAAI/bge-small-en-v1.5` |
 | Indonesian model | `BAAI/bge-m3` (dense vectors) |
 
-Don't change these after grading starts. A change means new retrieval files and new grading runs, and a row in the change log of [`../plan.md`](../plan.md).
+Don't change these after grading starts. A change means new retrieval files and new grading runs, and a row in the change log of [`../plan.md`](https://github.com/gnotnek/edge-grader/blob/experiments/docs/plan.md).
 
 ## Deployment framing (for stage 4)
 
@@ -159,7 +159,7 @@ Recall per class (correct / contradictory / incorrect):
 
 ## MMLU-Pro: retrieval check (owner's marking, 2026-10-06)
 
-`bge-small-en` over the 32,016 English chunks (OpenStax, cut to chapters), the top 3 passages for 30 **validation** questions (the worked-example pool, never scored), spread over the 14 subjects. A tick means the passage holds knowledge that helps answer the question. File: [`check-mmlupro-en.bge-small-en-k5.json`](../../results/rag/check-mmlupro-en.bge-small-en-k5.json); retrieval for all 370 questions: `results/rag/retrieval-mmlupro-en.bge-small-en-k5.json`.
+`bge-small-en` over the 32,016 English chunks (OpenStax, cut to chapters), the top 3 passages for 30 **validation** questions (the worked-example pool, never scored), spread over the 14 subjects. A tick means the passage holds knowledge that helps answer the question. File: [`check-mmlupro-en.bge-small-en-k5.json`](https://github.com/gnotnek/edge-grader/blob/experiments/results/rag/check-mmlupro-en.bge-small-en-k5.json); retrieval for all 370 questions: `results/rag/retrieval-mmlupro-en.bge-small-en-k5.json`.
 
 | | SciEntsBank, English | **MMLU-Pro, English** |
 |---|---|---|
@@ -253,7 +253,7 @@ Logic and news need their own benchmarks. What was chosen instead is in the outl
 
 ## MMLU-Pro RAG-id: retrieval check failed, not graded (2026-10-07)
 
-`bge-m3` over the 1,670 Indonesian chunks (13 Kurikulum Merdeka SMA books), the same 30 validation questions as the English check. Owner's marking: **0 / 30** questions with a useful passage, 0 of 90 passages. That includes biology and chemistry, where Indonesian books exist and English found useful passages for 5 of 5. File: [`check-mmlupro-id.bge-m3-k5.json`](../../results/rag/check-mmlupro-id.bge-m3-k5.json).
+`bge-m3` over the 1,670 Indonesian chunks (13 Kurikulum Merdeka SMA books), the same 30 validation questions as the English check. Owner's marking: **0 / 30** questions with a useful passage, 0 of 90 passages. That includes biology and chemistry, where Indonesian books exist and English found useful passages for 5 of 5. File: [`check-mmlupro-id.bge-m3-k5.json`](https://github.com/gnotnek/edge-grader/blob/experiments/results/rag/check-mmlupro-id.bge-m3-k5.json).
 
 - **Why:** the SMA books are a level below MMLU-Pro's college questions, there are no books for law, philosophy, psychology or engineering, and the material is small (1,670 chunks against 32,016 English).
 - **Decision: not graded.** With no useful passage for any question, a grading run would only measure how much irrelevant text distracts the models, not whether Indonesian material helps. RAG-id was optional and the first to drop. The finding stands as it is: Indonesian school material has nothing usable for college-level MMLU-Pro.
@@ -271,10 +271,10 @@ Logic and news need their own benchmarks. What was chosen instead is in the outl
 | Math, GSM-Symbolic (1,000) | the same skill, new numbers | 80.0% → 75.1% (**p 0.04** by template) | 90.5% → 89.1% (p 0.24 by template) | (same) |
 
 **Sources:**
-- **News:** [`topics.md`](topics.md#news-results-kaggle-t4-judged-by-qwen3-14b-2026-10-08), judged by Qwen3-14B
+- **News:** [`topics.md`](https://github.com/gnotnek/edge-grader/blob/experiments/docs/results/topics.md#news-results-kaggle-t4-judged-by-qwen3-14b-2026-10-08), judged by Qwen3-14B
 - **MMLU-Pro:** [above](#mmlu-pro-grading-results-kaggle-t4-2026-10-06)
 - **SciEntsBank:** [above](#grading-results-rag-en-kaggle-t4-2026-10-05). The other splits move the same way: E2B down on all three, E4B with no significant change on any.
-- **Math:** [`topics.md`](topics.md#math-rag-en-results-kaggle-t4-2026-10-10)
+- **Math:** [`topics.md`](https://github.com/gnotnek/edge-grader/blob/experiments/docs/results/topics.md#math-rag-en-results-kaggle-t4-2026-10-10)
 
 **The answer to RQ2 across benchmarks:**
 - **RAG helps only where the task is missing knowledge the passages supply:**
@@ -288,14 +288,14 @@ Logic and news need their own benchmarks. What was chosen instead is in the outl
 
 ## Jetson: baseline against RAG-en (stage 4, 2026-10-20)
 
-*Why: the supervisor (2026-10-19) asked for RAG on every benchmark on the board, and dropped the Pi 5 for new runs. Plan: stage 4 ([`../plan.md`](../plan.md)).*
+*Why: the supervisor (2026-10-19) asked for RAG on every benchmark on the board, and dropped the Pi 5 for new runs. Plan: stage 4 ([`../plan.md`](https://github.com/gnotnek/edge-grader/blob/experiments/docs/plan.md)).*
 
 **Runs:**
 - 12 folders in [`results/board/`](../../results/board/) (`rag-*`, `gsm-rag-*`, `news-rag-*`, all `-jetson-`), run by the Jetson's job queue (`scripts/board_queue.py add --preset rag`, jobs 24–35) between 2026-10-19 23:30 and 2026-10-20 11:44, all rc=0.
 - Same GGUFs and server flags as phase 0 (`-ngl 99 -rea off --cache-ram 0`); the frozen retrieval files (`bge-small-en-v1.5`, question as query, top 3), the same files the Kaggle RAG runs used.
 - **Jetson clocks:** higher limits than in phase 0 (see [Cost](#cost-rag-en-against-the-re-run-baseline)). So the baseline is the **re-run of 2026-10-21** in the same clock state (jobs 36–47, `results/board/*-jetson-*-20261021-*`), not phase 0's runs. Every re-run gives **byte-identical replies** to its phase 0 run (all 12 cells, 14,270 replies), so the accuracy below is unchanged; only cost moved.
 
-**Check file:** [`board-check-20261021-065457.json`](../../results/estimates/board-check-20261021-065457.json), from `uv run edge-grader-board-check` on these 12 runs and the 12 re-run baselines. It replaces [`board-check-20261020-064504.json`](../../results/estimates/board-check-20261020-064504.json), which paired them with phase 0's baselines (kept; its RAG rows are the same). RAG against baseline: `board_check.compare` on the two runs' raw files; GSM-Symbolic also by template (two-sided sign-flip, 20,000 draws, seed 0), as in [`topics.md`](topics.md#math-rag-en-results-kaggle-t4-2026-10-10).
+**Check file:** [`board-check-20261021-065457.json`](../../results/estimates/board-check-20261021-065457.json), from `uv run edge-grader-board-check` on these 12 runs and the 12 re-run baselines. It replaces [`board-check-20261020-064504.json`](../../results/estimates/board-check-20261020-064504.json), which paired them with phase 0's baselines (kept; its RAG rows are the same). RAG against baseline: `board_check.compare` on the two runs' raw files; GSM-Symbolic also by template (two-sided sign-flip, 20,000 draws, seed 0), as in [`topics.md`](https://github.com/gnotnek/edge-grader/blob/experiments/docs/results/topics.md#math-rag-en-results-kaggle-t4-2026-10-10).
 
 **Not in yet:**
 - **News:** RAG-en run, not judged. Judge on Kaggle (Qwen3-14B), as for phase 0. The re-run baseline needs no judging: its replies are phase 0's, which are judged.

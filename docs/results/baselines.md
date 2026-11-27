@@ -4,7 +4,7 @@ Stage 1 has two baselines for the same untouched models:
 - **Subject knowledge:** MMLU-Pro, carried over from `agentic-edge`
 - **Grading:** SciEntsBank, measured in this project
 
-Machine-readable copy: [`../results/reference/agentic-edge-mmlupro-baseline.json`](../../results/reference/agentic-edge-mmlupro-baseline.json).
+Machine-readable copy: [`../results/reference/agentic-edge-mmlupro-baseline.json`](https://github.com/gnotnek/edge-grader/blob/experiments/results/reference/agentic-edge-mmlupro-baseline.json).
 
 ## 1. MMLU-Pro (from `agentic-edge`)
 
@@ -140,7 +140,7 @@ The two tasks aren't directly comparable (10-way multiple choice vs 3-way labels
 
 ## 4. Phase 0: every baseline on both boards (measured, 2026-10-09/10)
 
-*Why: the supervisor (2026-10-08) asked to finish the baseline on the edge before going further. Spec: [`../design/2026-10-08-baseline-variations-design.md`](../design/2026-10-08-baseline-variations-design.md) §4.*
+*Why: the supervisor (2026-10-08) asked to finish the baseline on the edge before going further. Spec: [`../design/2026-10-08-baseline-variations-design.md`](https://github.com/gnotnek/edge-grader/blob/experiments/docs/design/2026-10-08-baseline-variations-design.md) §4.*
 
 **Runs:**
 - 20 folders in [`results/board/`](../../results/board/), run by the boards' own job queue (`scripts/board_queue.py`, which calls `scripts/board_grade.sh`) between 2026-10-09 00:55 and 2026-10-10 ~02:30.
@@ -178,7 +178,7 @@ The two tasks aren't directly comparable (10-way multiple choice vs 3-way labels
 | News | test | E4B | Pi 5 | 200 | 0.5% | 0.5% | 172/200 | 1.0 | 169.24 | 1311.5 |
 | News | test | E4B | Jetson | 200 | 0.5% | 0.5% | 176/200 | 1.0 | 56.89 | 648.9 |
 
-**MMLU-Pro on both boards, copied from `agentic-edge`** (not re-run; the spec's phase 0 table marks it as copied). Same GGUFs and thinking-off flags, run through lm-eval on the boards in 2026-09. Copied 2026-10-19 into [`agentic-edge-mmlupro-variations.json`](../../results/reference/agentic-edge-mmlupro-variations.json). The "Kaggle" column is this project's runner on the same 300 questions ([`rag.md`](rag.md#the-runner-reproduces-the-lab-baseline)), where "same answer" means the same right/wrong. agentic-edge reports only totals, so the time and energy columns are its totals ÷ 300: a **mean**, not a median.
+**MMLU-Pro on both boards, copied from `agentic-edge`** (not re-run; the spec's phase 0 table marks it as copied). Same GGUFs and thinking-off flags, run through lm-eval on the boards in 2026-09. Copied 2026-10-19 into [`agentic-edge-mmlupro-variations.json`](https://github.com/gnotnek/edge-grader/blob/experiments/results/reference/agentic-edge-mmlupro-variations.json). The "Kaggle" column is this project's runner on the same 300 questions ([`rag.md`](rag.md#the-runner-reproduces-the-lab-baseline)), where "same answer" means the same right/wrong. agentic-edge reports only totals, so the time and energy columns are its totals ÷ 300: a **mean**, not a median.
 
 | Benchmark | Set | Model | Board | n | Board acc. | Kaggle acc. (same questions) | Same right/wrong | McNemar p | Mean s | J / question |
 |---|---|---|---|---|---|---|---|---|---|---|

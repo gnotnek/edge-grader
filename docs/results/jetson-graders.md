@@ -133,7 +133,7 @@ The board gives the same grades at any clock: untouched E2B with thinking scores
 
 | Version | test_uq: off → on | test_ud: off → on | Answers with a thought block (uq / ud) | On: median s | On: J per answer | Off: J per answer |
 |---|---|---|---|---|---|---|
-| E2B untouched | 59.8 → **75.7%** | 60.2 → **70.1%** | 733/733 / 4,562/4,562 | 8.6–9.4 | 144–147 | 3.7–3.8 |
+| E2B untouched | 59.8 → **75.7%** | 60.2 → **70.1%** | 733/733 / 4,562/4,562 | 8.6–9.4 | 144–146 | 3.7–3.8 |
 | Oct 28 adapter | 76.7 → 80.1% | 74.8 → 74.6% | 733/733 / 4,539/4,562 | 12.2–13.8 | 169–171 | 5.3–5.4 |
 | Soup (s0–s4) | 78.3 → 77.2% | 75.3 → 75.2% | **83/733 / 585/4,562** | 0.42–0.44 | 27–29 | 5.5–5.6 |
 | Label-first | 76.1 → 78.4% | 73.1 → 71.4% | 726/733 / 4,511/4,562 | 11.7–12.4 | 161–168 | 5.3–5.4 |
@@ -159,7 +159,7 @@ Macro-F1 moves the same way as accuracy (largest change +0.14 for untouched E2B;
 | 5-way + thinking vs untouched + thinking | +1.9, 1 | **+3.9**, 10⁻⁷ |
 
 1. **Thinking helps only the untouched model** (+16.0 / +9.8 points). With an adapter it changes nothing significant on either split: −1.7 to +3.4 points. The Oct 28 adapter's +3.4 on test_uq (raw p 0.017) doesn't survive the correction and is gone on test_ud (−0.2), the split with six times the answers.
-2. **Thinking and fine-tuning buy the same thing, at very different prices.** Untouched E2B with thinking (75.7 / 70.1%) lands at or below the adapters without it (73–78%), for 144–147 J per answer against 5.3–5.6 J, and 9 s against 0.6 s. On test_ud it ties untouched E4B without thinking (70.1%).
+2. **Thinking and fine-tuning buy the same thing, at very different prices.** Untouched E2B with thinking (75.7 / 70.1%) lands at or below the adapters without it (73–78%), for 144–146 J per answer against 5.3–5.6 J, and 9 s against 0.6 s. On test_ud it ties untouched E4B without thinking (70.1%).
 3. **Adapters trained on label-only replies can switch thinking off.** The 5-way adapter never opened a thought block (4 of 5,295 answers) and the soup did on 11–13%. Their "thinking on" rows are their thinking-off grading at the same cost. The Oct 28 adapter, trained on the same kind of replies, still thinks on 99.5%. Why the soup and 5-way differ isn't known.
 4. **Reason-first thinks and then writes its reason too,** for no gain: 105–113 J, about 2.8× its own thinking-off cost.
 
