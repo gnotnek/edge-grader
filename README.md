@@ -1,116 +1,163 @@
 # edge-grader
 
-Can a small LLM on an edge board grade students' short answers, and is a fine-tuned small model a better grader than a bigger untouched one?
+The code and data behind **"Fine-Tuned Small Language Models for Short-Answer Grading on Edge Devices"** (R. A. Yunanto, J.-S. Leu, D. D. N. Ardiansyah, NTUST; draft for IEEE Transactions on Learning Technologies).
 
-Three graders are compared on SciEntsBank (SemEval-2013 Task 7, 3-way labels) on a Jetson Orin Nano: **Gemma 4 E2B untouched**, **E2B with a QLoRA adapter**, and **Gemma 4 E4B untouched**. Each is scored for accuracy and F1, and for latency and energy per answer on the board. Short answer so far: the E2B adapter beats untouched E4B on unseen questions and unseen domains, and it uses less energy per answer ([`docs/results/jetson-graders.md`](docs/results/jetson-graders.md)).
+The paper asks whether a school that wants a better grader on the device it already owns should run a larger model or fine-tune the small one. On an NVIDIA Jetson Orin Nano (GPU at 612 MHz), with SciEntsBank's 3-way labels, **Gemma 4 E2B with a QLoRA adapter grades better than untouched Gemma 4 E4B** on unseen questions and unseen domains (+9.4 and +4.7 points, Holm-corrected McNemar p < 10⁻⁶), **and costs less per answer** (5.3–5.4 J against 6.8–6.9 J):
 
-Part of an internship at the NTUST MIT Lab. Model files, `llama-server` flags and the energy telemetry match the lab's `agentic-edge` benchmark, so the numbers are comparable with it. Research questions and every decision with its reason: [`docs/research-outline.md`](docs/research-outline.md). All findings by question: [`docs/results/summary.md`](docs/results/summary.md).
+![Accuracy against energy per answer on the Jetson Orin Nano](docs/results/figures/jetson-three-graders.png)
 
-## What you need
+Every number in the paper's Tables II–V is recomputed from the raw runs committed here by one command (step 1 below).
 
-| For | Needs |
+---
+
+## Contents
+
+- [Repository map](#repository-map)
+- [Reproducing the paper](#reproducing-the-paper)
+  - [1. Check the paper against the committed data (no GPU, seconds)](#1-check-the-paper-against-the-committed-data)
+  - [2. Train the adapters (one T4 GPU)](#2-train-the-adapters)
+  - [3. Re-run the graders on a Jetson Orin Nano](#3-re-run-the-graders-on-a-jetson-orin-nano)
+  - [4. Table by table](#4-table-by-table)
+- [Other experiments](#other-experiments)
+- [Documentation](#documentation)
+
+---
+
+## Repository map
+
+| folder | what it holds |
 |---|---|
-| Re-checking the numbers from committed results | Any machine with [uv](https://docs.astral.sh/uv/). No GPU, no models |
-| Grading accuracy | A GPU that runs `llama-server` (we used Kaggle T4s and a DGX Spark) |
-| Training an adapter | A CUDA GPU with ~16 GB (Kaggle T4, or the Spark through Docker) |
-| Latency and energy | A Jetson Orin Nano (8 GB) with llama.cpp built, plus `agentic-edge`'s `run_measured.sh` for telemetry |
+| [`src/edge_grader/`](src/edge_grader/) | the grader (`grader.py`: prompt, model call, label parsing), SciEntsBank loading (`data.py`), the runner (`baseline.py`), fine-tuning (`finetune.py`, `reasons.py`, `soup.py`), graded examples (`examples.py`), RAG (`rag/`), board checks and the paper's comparisons (`board_check.py`, `compare_*.py`), and `paper_check.py` |
+| [`scripts/`](scripts/) | `board_grade.sh` (one grading run on the Jetson, with telemetry), `deploy.sh` / `fetch_results.sh` (your machine ↔ board), `spark_*.sh` (Docker jobs), `paper_figures.py` |
+| [`notebooks/`](notebooks/) | Kaggle: grading (`kaggle_baseline`), fine-tuning (`kaggle_finetune`), the teacher's reasons (`kaggle_reasons`), the RAG index (`kaggle_rag_index`) |
+| [`results/`](results/) | every run, committed and never hand-edited; the paper's Jetson runs are in `results/board/`. Layout: [`results/README.md`](results/README.md) |
+| [`docs/`](docs/) | research outline and decisions, results pages, designs, literature notes, how-to guides. Index: [`docs/README.md`](docs/README.md) |
+| [`manuscript/`](manuscript/) | the paper (`main.tex`, `refs.bib`) |
+| [`compose.yaml`](compose.yaml), [`docker/`](docker/) | the same jobs in Docker (DGX Spark or any CUDA machine) |
+
+---
+
+## Reproducing the paper
+
+### 1. Check the paper against the committed data
+
+Needs [uv](https://docs.astral.sh/uv/) and nothing else: no GPU, no models, no network after `uv sync`.
 
 ```bash
+git clone https://github.com/gnotnek/edge-grader.git
+cd edge-grader
 uv sync
-uv run pytest
+uv run python -m edge_grader.paper_check
 ```
 
-## Replicate
+It recomputes Tables II–V from the committed runs (each run's summary and per-answer replies in `results/board/`, and the energy and latency in `results/estimates/board-check-*.json`), then prints the paper's value beside the recomputed one, cell by cell:
 
-### 0. Re-check the reported numbers (no GPU)
+```
+Table II, the three graders
+  E2B untouched: test_uq acc (95%)              paper 59.8 (50.1--69.2)   here 59.8 (50.1--69.2)   ok
+  ...
+every checked number matches the manuscript
+```
 
-Every run is committed under `results/`, including per-answer replies. These commands rebuild the tables and tests from them:
+The exit status is 1 if any cell differs; `--table three|tests|variants|thinking` prints one table. The figures are drawn from the same data:
 
 ```bash
-uv run python -m edge_grader.compare_jetson      # three graders + every E2B method on the Jetson: accuracy, J/answer, McNemar + Holm
-uv run python -m edge_grader.compare_thinking    # thinking on with every E2B adapter
-uv run --with matplotlib python scripts/paper_figures.py   # manuscript figures, into docs/results/figures/
+uv run --with matplotlib python scripts/paper_figures.py   # docs/results/figures/jetson-*.pdf and .png
 ```
 
-`compare_jetson` reads the board-check JSONs in `results/estimates/`. To rebuild those from the raw board runs first:
+`uv run pytest` runs the test suite, including an end-to-end run against a fake `llama-server` and the paper check.
+
+### 2. Train the adapters
+
+QLoRA on the SciEntsBank train split (4,969 answers): rank 16, α 32, dropout 0.05 on every attention and feed-forward projection, NF4 base, learning rate 2×10⁻⁴ (cosine, 3% warm-up), effective batch 16, up to 3 epochs; the epoch is picked on 14 held-out train questions. One T4 is enough. Either:
+
+- **Kaggle:** [`notebooks/kaggle_finetune.ipynb`](notebooks/kaggle_finetune.ipynb). Set `MODEL` (`e2b` / `e4b`) and `REPLY`, run once with `SMOKE = True`, then with `SMOKE = False`. It trains, converts the adapter to GGUF with llama.cpp's `convert_lora_to_gguf.py`, and grades with `--lora`. First time on Kaggle: [`docs/guides/kaggle-setup.md`](docs/guides/kaggle-setup.md).
+- **Docker:** the `finetune-*` services in [`compose.yaml`](compose.yaml): seeds `-s0`..`-s4`, `-5w-s0`, `-lf`, `-rf`, and `soup-*`. See [`docs/guides/spark-docker.md`](docs/guides/spark-docker.md).
+
+Both call `uv run --group finetune edge-grader-finetune --model e2b --out <dir>`. Training records are in `results/finetune/`; settings, per-epoch scores and the adapters' sha256 in [`docs/results/finetuning.md`](docs/results/finetuning.md). The reason-trained adapters need the teacher's reasons, committed in `results/finetune/raw/` (or rebuilt with [`notebooks/kaggle_reasons.ipynb`](notebooks/kaggle_reasons.ipynb)). The adapter files themselves are not in git.
+
+### 3. Re-run the graders on a Jetson Orin Nano
+
+#### 3.1 What you need
+
+| | used for the paper |
+|---|---|
+| board | NVIDIA Jetson Orin Nano 8 GB developer kit, NVMe SSD |
+| clocks | GPU 612 MHz, memory 2,133 MHz for every thinking-off run (each run records them in `board-state.txt`) |
+| server | llama.cpp `llama-server` at `a894dae`, CUDA build, at `~/build/llama.cpp/build/bin/llama-server` |
+| models | `unsloth/gemma-4-E2B-it-qat-GGUF` and `unsloth/gemma-4-E4B-it-qat-GGUF`, file `*-UD-Q4_K_XL.gguf`, in `~/research/models/` |
+| adapters | the GGUF adapters from step 2, in `~/research/models/adapters/` |
+| telemetry | the lab's [`agentic-edge`](https://github.com/rifkyariy/agentic-edge) at `~/research/agentic-edge`, for `benchmark/run_measured.sh` (board power rails over the grading window) |
+
+**Keep one clock state for every run you compare.** Energy only compares within one GPU clock and power mode. The thinking-on runs (Table V) came later at higher clocks, so the paper marks their energy as approximate.
+
+#### 3.2 Run
+
+Put this repository at `~/research/edge-grader` on the board (or run `scripts/deploy.sh jetson` from your machine: it rsyncs the committed files, installs uv and runs the tests there). Then, on the idle board:
 
 ```bash
-uv run edge-grader-board-check results/board/*-jetson-test_u[qd]-2026111[456]-*/
+scripts/board_grade.sh e2b test_uq                                                  # E2B untouched
+LORA=~/research/models/adapters/e2b-ft.gguf scripts/board_grade.sh e2b test_uq      # E2B tweaked
+scripts/board_grade.sh e4b test_uq                                                  # E4B untouched
+LORA=~/research/models/adapters/e4b-ft.gguf scripts/board_grade.sh e4b test_uq      # E4B tweaked (reference)
 ```
 
-### 1. Models and server
-
-- **Models:** `unsloth/gemma-4-E2B-it-qat-GGUF` and `unsloth/gemma-4-E4B-it-qat-GGUF`, file `*-UD-Q4_K_XL.gguf`.
-- **Server:** llama.cpp's `llama-server`. Kaggle and the Spark use commit `a3a1c47` (pinned in [`docker/Dockerfile`](docker/Dockerfile)). Each run's summary JSON records the build it actually used.
-- **Flags** (thinking off, as in `agentic-edge`):
+Repeat each with `test_ud`. Every run starts its own `llama-server` with the same flags (8,192 context, all layers on the GPU, thinking off, `--cache-ram 0`), grades inside `run_measured.sh`, writes `results/board/<run>/`, and restores the board when it exits. `DRY_RUN=1` prints what it would do; `MEASURE=0` skips telemetry (accuracy only). The versions of Tables IV and V, one option each:
 
 ```bash
-llama-server -m <model.gguf> -c 8192 --port 8080 -ngl 99 -rea off --reasoning-budget -1 --cache-ram 0 [--lora <adapter.gguf>]
+LORA=.../e2b-ft-s0.gguf scripts/board_grade.sh e2b test_uq          # a seed (s0..s4), or e2b-ft-soup.gguf
+LORA=.../e2b-ft-5w-s0.gguf PROMPT_SCHEME=5way scripts/board_grade.sh e2b test_uq
+LORA=.../e2b-ft-lf.gguf REPLY=label-first scripts/board_grade.sh e2b test_uq     # or e2b-ft-rf.gguf, reason-first
+EXAMPLES=results/examples/examples-knn-bge-small-en-k4.json scripts/board_grade.sh e2b test_uq   # with or without LORA
+EXAMPLES=results/examples/examples-random-k4.json scripts/board_grade.sh e2b test_uq
+THINKING=on scripts/board_grade.sh e2b test_uq                       # with or without LORA
 ```
 
-### 2. Train the adapter (stage 3)
-
-QLoRA on the SciEntsBank train split; the epoch is picked on 14 held-out train questions. Run either one:
-
-- **Kaggle:** [`notebooks/kaggle_finetune.ipynb`](notebooks/kaggle_finetune.ipynb). Set `MODEL`, then `SMOKE = True` for a quick check and `SMOKE = False` for the real run. It trains, converts the adapter to GGUF and grades with `--lora`. First time on Kaggle: [`docs/guides/kaggle-setup.md`](docs/guides/kaggle-setup.md).
-- **Docker (DGX Spark or any CUDA box):** `docker compose run --rm finetune-…` services in [`compose.yaml`](compose.yaml); see [`docs/guides/spark-docker.md`](docs/guides/spark-docker.md).
-
-Both call `uv run --group finetune edge-grader-finetune --model e2b --out <dir>`. Settings and per-epoch scores: [`docs/results/finetuning.md`](docs/results/finetuning.md). Our adapter files are in a private Kaggle dataset, not in git; their sha256 is in that page.
-
-### 3. Grade for accuracy (GPU)
-
-With a server running from step 1:
+Bring the runs back with `scripts/fetch_results.sh`, score them, and rebuild the tables:
 
 ```bash
-uv run edge-grader-baseline --label e2b --split test_uq --n 0   # whole unseen-questions split (733)
-uv run edge-grader-baseline --label e2b --split test_ud --n 0   # whole unseen-domains split (4,562)
+uv run edge-grader-board-check results/board/<run>/ ...   # writes results/estimates/board-check-*.json
+uv run python -m edge_grader.compare_jetson               # Tables II-IV, writes compare-jetson-*.json
+uv run python -m edge_grader.compare_thinking             # Table V, writes compare-thinking-*.json
+uv run python -m edge_grader.paper_check
 ```
 
-Start an adapter server with `--lora` for the tweaked grader. Each run writes a summary JSON (metrics and settings) and `raw/*.jsonl` (one reply per answer). `--n 100` is a quick check: `unparsed` should be about 0. Kaggle does the same in [`notebooks/kaggle_baseline.ipynb`](notebooks/kaggle_baseline.ipynb).
+Without a Jetson, accuracy alone can be re-run on any GPU: start `llama-server` with the flags above and run `uv run edge-grader-baseline --label e2b --split test_uq --n 0` (or use [`notebooks/kaggle_baseline.ipynb`](notebooks/kaggle_baseline.ipynb)). Kaggle T4 and board accuracy agreed within noise when both were run ([`docs/results/baselines.md`](docs/results/baselines.md)).
 
-### 4. Measure cost on the Jetson
+### 4. Table by table
 
-Clone this repo next to `agentic-edge` on the board (or push it with `scripts/deploy.sh jetson` from your machine), then on the idle board:
+| paper | runs | recomputed by | write-up |
+|---|---|---|---|
+| Table I, setup | — | — | [`research-outline.md`](docs/research-outline.md) |
+| Table II, the three graders | `results/board/{e2b,ft-e2b,e4b,ft-e4b}-jetson-test_u{q,d}-2026111*` | `compare_jetson` | [`jetson-graders.md`](docs/results/jetson-graders.md) |
+| Table III, paired tests | same | `compare_jetson` (McNemar, Holm over 8) | [`jetson-graders.md`](docs/results/jetson-graders.md) |
+| Table IV, every E2B version | `results/board/{ft-s*,ft-soup,ft-5w-s0,ft-lf,ft-rf,ex4,ex4-ft,rand4}-e2b-jetson-*` | `compare_jetson` | [`jetson-graders.md`](docs/results/jetson-graders.md), [`finetuning.md`](docs/results/finetuning.md), [`examples.md`](docs/results/examples.md) |
+| Table V, thinking | `results/board/*think*-e2b-jetson-*` | `compare_thinking` (Holm over 22) | [`jetson-graders.md`](docs/results/jetson-graders.md#thinking-on-with-every-e2b-adapter-2026-11-16-to-11-20) |
+| Figs. 3–4 | as Tables II–V | `scripts/paper_figures.py` | — |
+| RAG paragraph | `results/kaggle/{baseline,rag}-*` | — | [`rag.md`](docs/results/rag.md) |
+| Beetle + SAF transfer | `results/kaggle/*beetle-saf*`, `results/spark/*beetle-saf*` | — | [`finetuning.md`](docs/results/finetuning.md) |
 
-```bash
-scripts/board_grade.sh e2b test_uq                                          # E2B untouched
-LORA=$HOME/research/models/adapters/e2b-ft.gguf scripts/board_grade.sh e2b test_uq   # E2B tweaked
-scripts/board_grade.sh e4b test_uq                                          # E4B untouched
-```
+`paper_check` covers the tables. The RAG and transfer numbers in the text aren't checked by it yet; their pages give the runs and tests.
 
-Repeat for `test_ud`. The script starts `llama-server` with the flags above, grades inside `run_measured.sh` so power is logged, records the clocks in `board-state.txt`, and restores the board when it exits. Without `agentic-edge`, `MEASURE=0` gives accuracy only. `DRY_RUN=1` prints what it would do. Other options (thinking, RAG, graded examples, 5-way adapters) are listed at the top of [`scripts/board_grade.sh`](scripts/board_grade.sh).
-
-- **Keep the clock state fixed.** Compare energy only between runs at the same GPU clock and power mode. Ours: GPU 612 MHz, memory 2,133 MHz for the Nov 14–16 runs (`board-state.txt` in each run).
-- **Run it directly on the board, never through `agentic-edge`'s job queue.** The script refuses if started from the queue, and it refuses to write telemetry outside this repo's `results/`.
-
-Bring the runs back with `scripts/fetch_results.sh`, then go back to step 0.
+---
 
 ## Other experiments
 
-These are in the repo with their results. Each page says how its runs were made:
+The project ran more than the paper reports. Those experiments, with their code, runs and write-ups, are on the [`experiments`](https://github.com/gnotnek/edge-grader/tree/experiments) branch (this repository as of 2026-11-27, before `main` was trimmed to the paper):
 
-| | Page |
-|---|---|
-| Baselines on Kaggle, Pi 5 and Jetson; MMLU-Pro | [`baselines.md`](docs/results/baselines.md) |
-| RAG over course material (no gain for grading) | [`rag.md`](docs/results/rag.md), how-to in [`guides/rag.md`](docs/guides/rag.md) |
-| Math (GSM8K, GSM-Symbolic) and post-cutoff news | [`topics.md`](https://github.com/gnotnek/edge-grader/blob/experiments/docs/results/topics.md) |
-| Thinking on, engine and prefix-reuse variations | [`variations.md`](docs/results/variations.md) |
-| Graded examples in the prompt; adapter soup; 5-way labels | [`examples.md`](docs/results/examples.md), [`finetuning.md`](docs/results/finetuning.md) |
-| ASAP 2.0 essays (set aside) | [`asap2.md`](https://github.com/gnotnek/edge-grader/blob/experiments/docs/results/asap2.md) |
+- ASAP 2.0 essay scoring on the DGX Spark
+- topic benchmarks: GSM8K / GSM-Symbolic (math) and LiveNewsBench (post-cutoff news), with RAG
+- MMLU-Pro on the lab's 300-question subset, and as a no-harm check after fine-tuning
+- engine variants on the Jetson: little-gemma, prefix reuse, `--swa-full`
+- the Raspberry Pi 5 baseline and thinking-on runs
+- cascade and defer-to-teacher, simulated from Jetson runs
+- the boards' job queue and a local dashboard
+- the plan and week-by-week timeline (`docs/plan.md`)
 
-## Metrics
+## Documentation
 
-Accuracy and macro/weighted F1, the SemEval-2013 metrics. SciEntsBank labels are categories, so QWK isn't used for it. Two graders are compared with a paired McNemar test on the same answers, Holm-corrected within a family fixed before looking.
+[`docs/README.md`](docs/README.md) indexes every page. Start with [`research-summary.md`](docs/research-summary.md) (plain words), then [`research-outline.md`](docs/research-outline.md) (research questions and every decision with its reason) and [`results/summary.md`](docs/results/summary.md) (every finding by research question).
 
-## Layout
+**Metrics:** accuracy and macro-F1, the SemEval-2013 metrics. SciEntsBank's labels are categories, so QWK isn't used.
 
-```
-src/edge_grader/   the grader (grader.py), data loaders, CLIs, comparisons (compare_*.py), rag/
-scripts/           board_grade.sh (Jetson/Pi runs), deploy/fetch, Spark Docker jobs, paper figures
-notebooks/         Kaggle: baseline grading, fine-tuning, reasons, RAG index, news judge
-results/           every run, committed and never hand-edited; layout in results/README.md
-docs/              research outline, plan, results pages, guides; index in docs/README.md
-manuscript/        the paper (IEEE TLT draft)
-dashboard/         local web view of runs and board state (dashboard/README.md)
-tests/             includes an end-to-end run against a fake llama-server
-```
+**Rules for new runs:** board runs go through `scripts/board_grade.sh` directly, never through `agentic-edge`'s job queue, and nothing is written into `agentic-edge`'s folders (the script enforces both). Every run writes a summary JSON with its settings to `results/`; result files are never hand-edited.
